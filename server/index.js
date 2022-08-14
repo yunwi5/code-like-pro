@@ -1,6 +1,8 @@
+// External modules
 require('colors'); // colors to highlight console output like db connection
 const passport = require('passport');
 
+// Internal modules
 const createApp = require('./config/app');
 const connectDB = require('./config/db');
 const passportStrategy = require('./config/passport');

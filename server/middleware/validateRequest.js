@@ -7,7 +7,6 @@ const validateBody = async (req, res, next, schema) => {
         await schema.validate(body);
         next();
     } catch (err) {
-        console.log(err.message);
         res.status(400).json({ message: err.message });
     }
 };

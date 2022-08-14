@@ -5,29 +5,16 @@ const User = require('../../models/User');
 // Only need to find the user that matches this email
 const postLogin = async (req, res) => {
     const { email } = req.body;
+    console.log('Log In Function Reached');
 
     const user = await User.findOne({ email });
     const userToReturn = getUserToReturn(user);
-    return res.status(200).json({ message: 'Login successful!', user: userToReturn });
+    return res.status(200).json(userToReturn);
 };
 
+// Incoming request data validation is done by the middleware.
 const postSignUp = async (req, res) => {
     const { email, name, password } = req.body;
-    let errors = [];
-
-    // check required fields
-    if (!name || !email || !password) {
-        errors.push({ message: 'Register form has missing fields' });
-    }
-
-    // password at least 6 chars
-    if (password && password.length < 6) {
-        errors.push({ message: 'Password should be at least 6 characters' });
-    }
-
-    if (errors.length > 0 || !password) {
-        return res.status(400).json(errors);
-    }
 
     // check existing user with this email (email should be unique)
     const existingUser = await User.findOne({ email });
@@ -47,7 +34,7 @@ const postSignUp = async (req, res) => {
     await newUser.save();
 
     const userToReturn = getUserToReturn(newUser);
-    res.json({ success: true, message: 'Register successful!', user: userToReturn });
+    res.json(userToReturn);
 };
 
 const getLogout = (req, res, next) => {
@@ -69,6 +56,7 @@ const getUserToReturn = (user) => {
         name: user.name,
         email: user.email,
         date: user.date,
+        createdAt: user.createdAt,
     };
     return userToReturn;
 };
