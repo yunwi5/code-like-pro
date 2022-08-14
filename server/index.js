@@ -28,9 +28,7 @@ app.use('/api', router);
 app.use('/api/auth', authRouter);
 
 // Placeholder index route
-app.get('/', (req, res) => {
-    res.send('Welcome to the index route.');
-});
+app.get('/', (req, res) => res.send('Welcome to the index route.'));
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`App serving on the port ${PORT}`));
