@@ -7,7 +7,7 @@ function App() {
     return (
         <div className="App">
             <div className="flex flex-col items-center justify-center">
-                <h1 className="text-xl text-main-500 text-center">
+                <h1 className="text-xl bg-main text-center">
                     Welcome to {AppProperty.APP_NAME}
                 </h1>
             </div>
