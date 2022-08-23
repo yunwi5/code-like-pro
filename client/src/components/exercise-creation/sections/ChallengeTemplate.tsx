@@ -1,22 +1,25 @@
 import React from 'react';
-import { CreationSection, Language } from '../../../models/enums';
+import { CreationSection } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import CodeEditor from '../../ui/editor/code-editor/CodeEditor';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
 const ChallengeTemplate: React.FC = () => {
-    const { language } = useExerciseCreationContext();
+    const { language, startingTemplate, setStartingTemplate } = useExerciseCreationContext();
 
-    const handleChange = (value: string | undefined) => {
-        console.log(value);
-    };
+    const handleChange = (value: string | undefined) => setStartingTemplate(value ?? '');
 
     return (
         <CreationSectionContainer
-            title="Starting Template"
+            title="User Starting Template"
             id={CreationSection.STARTING_TEMPLATE}
         >
-            <CodeEditor language={language} onChange={handleChange} height={'22rem'} />
+            <CodeEditor
+                language={language}
+                onChange={handleChange}
+                value={startingTemplate}
+                height={'13rem'}
+            />
         </CreationSectionContainer>
     );
 };

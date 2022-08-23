@@ -14,6 +14,7 @@ const ExerciseCreationMain = () => {
             <div className="xl:max-w-[70vw] flex-1 flex flex-col gap-12">
                 <CreationHeader />
                 <ChallengeName />
+                {/* Settings for difficulty, language, topic, and tags */}
                 <ChallengeSettings />
                 <ChallengePrompt />
                 <ChallengeSolution />

@@ -2,13 +2,25 @@ import React from 'react';
 import { CreationSection } from '../../../models/enums';
 import { ITestCaseProps } from '../../../models/interfaces';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
+import { getEmptyTestCase } from '../../../utils/exercise-creation-utils/testcase-utils';
 import Button from '../../ui/buttons/Button';
 import TestCase from '../../ui/test-cases/TestCaseInput';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
 const ChallengeTestCases: React.FC = () => {
-    const { testCases, addTestCase, updateTestCase, deleteTestCase, language } =
-        useExerciseCreationContext();
+    const { testCases, language, setTestCases } = useExerciseCreationContext();
+
+    const addTestCase = () => setTestCases((prevList) => [...prevList, getEmptyTestCase()]);
+
+    const updateTestCase = (props: ITestCaseProps, index: number) => {
+        const newList = [...testCases];
+        newList[index] = { ...newList[index], ...props };
+        setTestCases(newList);
+    };
+
+    const deleteTestCase = (targetIndex: number) => {
+        setTestCases((prevList) => prevList.filter((test, idx) => idx !== targetIndex));
+    };
 
     const title = (
         <div className="flex-between mb-5">

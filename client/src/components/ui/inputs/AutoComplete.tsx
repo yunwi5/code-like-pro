@@ -9,13 +9,15 @@ interface Props {
     label?: string;
     id?: string;
     className?: string;
+    placeholder?: string;
 }
 
 const ENTER_KEY = 'Enter';
 const UP_KEY = 'ArrowUp';
 const DOWN_KEY = 'ArrowDown';
 
-const AutoComplete: React.FC<Props> = ({ label, options, onAdd, id, className }) => {
+const AutoComplete: React.FC<Props> = (props) => {
+    const { label, options, onAdd, id, className, placeholder } = props;
     const [showDropdown, setShowDropdown] = useState(false);
     const [text, setText] = useState('');
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -73,9 +75,10 @@ const AutoComplete: React.FC<Props> = ({ label, options, onAdd, id, className })
         <ClickAwayListener onClickAway={() => setShowDropdown(false)}>
             <div className={`relative ${className ?? ''}`}>
                 <div className="relative flex flex-col gap-2">
-                    {label ?? <label htmlFor={id}>{label}</label>}
+                    {label && <label htmlFor={id}>{label}</label>}
                     <input
                         id={id}
+                        placeholder={placeholder}
                         value={text}
                         onClick={() => setShowDropdown(true)}
                         onChange={handleInputChange}

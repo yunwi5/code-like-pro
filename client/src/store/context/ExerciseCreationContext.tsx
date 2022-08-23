@@ -18,13 +18,18 @@ interface IExerciseCreationContext {
     setDifficulty: (diff: Difficulty) => void;
     setPrompt: (text: string) => void;
     testCases: ITestCase[];
-    addTestCase: () => void;
-    updateTestCase: (props: ITestCaseProps, index: number) => void;
-    deleteTestCase: (index: number) => void;
+    setTestCases: React.Dispatch<React.SetStateAction<ITestCase[]>>;
+    tags: string[];
+    setTags: React.Dispatch<React.SetStateAction<string[]>>;
+    startingTemplate: string;
+    setStartingTemplate: React.Dispatch<React.SetStateAction<string>>;
+    solutionCode: string;
+    setSolutionCode: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>({
     testCases: [],
+    tags: [],
 } as any);
 
 export const useExerciseCreationContext = () => useContext(ExerciseCreationContext);
@@ -39,19 +44,12 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
     const [language, setLanguage] = useState<Language>(Language.C);
     const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.EASY);
     const [topic, setTopic] = useState<ProgrammingTopic>(ProgrammingTopic.ARRAY);
+
+    const [solutionCode, setSolutionCode] = useState('');
+    const [startingTemplate, setStartingTemplate] = useState('');
+
+    const [tags, setTags] = useState<string[]>([]);
     const [testCases, setTestCases] = useState<ITestCase[]>(getInitialTestCaseArray());
-
-    const addTestCase = () => setTestCases((prevList) => [...prevList, getEmptyTestCase()]);
-
-    const updateTestCase = (props: ITestCaseProps, index: number) => {
-        const newList = [...testCases];
-        newList[index] = { ...newList[index], ...props };
-        setTestCases(newList);
-    };
-
-    const deleteTestCase = (targetIndex: number) => {
-        setTestCases((prevList) => prevList.filter((test, idx) => idx !== targetIndex));
-    };
 
     const runTestCases = () => {};
     const saveExercise = () => {};
@@ -68,9 +66,13 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
         prompt,
         setPrompt,
         testCases,
-        addTestCase,
-        updateTestCase,
-        deleteTestCase,
+        setTestCases,
+        tags,
+        setTags,
+        startingTemplate,
+        setStartingTemplate,
+        solutionCode,
+        setSolutionCode,
     };
 
     return (
