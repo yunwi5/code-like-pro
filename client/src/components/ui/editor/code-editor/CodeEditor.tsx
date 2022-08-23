@@ -52,7 +52,7 @@ const CodeEditor: React.FC<Props> = ({
                 <Editor
                     className="min-h-[7.5rem] pt-3"
                     language={getMonacoLanguageName(language) ?? 'python'}
-                    value={value ?? undefined}
+                    value={value}
                     onChange={onChange}
                     beforeMount={handleEditorWillMount}
                     onMount={handleMount}
@@ -64,7 +64,7 @@ const CodeEditor: React.FC<Props> = ({
     );
 };
 
-export function getMonacoLanguageName(lang: Language | undefined) {
+function getMonacoLanguageName(lang: Language | undefined) {
     switch (lang) {
         case Language.CSHARP:
             return 'csharp';
