@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800;900&family=Red+Hat+Mono:wght@300;400;500;600;700&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap');
+
+@import './abstract/variables';
+@import './abstract/mixins';
+@import './base/utils';
 
 *,
 *::before,
@@ -11,7 +16,15 @@
 }
 
 html {
-    min-height: 100vh;
+    font-family: 'Red Hat Display', sans-serif;
+    scroll-behavior: smooth;
+}
+
+// Default input styles
+input {
+    &:focus {
+        outline: 0.12rem solid #7b79f7;
+    }
 }
 
 .App {
@@ -20,4 +33,13 @@ html {
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@layer components {
+    .flex-center {
+        @apply flex justify-center items-center;
+    }
+    .flex-between {
+        @apply flex justify-between items-center;
+    }
 }

@@ -6,14 +6,10 @@ import Home from './pages/Home';
 function App() {
     return (
         <div className="App">
-            <div className="flex flex-col items-center justify-center">
-                <h1 className="text-xl bg-main text-center">
-                    Welcome to {AppProperty.APP_NAME}
-                </h1>
-            </div>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/create-exercise" element={<ExerciseCreation />} />
+                <Route path="*" element={<Home />} />
             </Routes>
         </div>
     );
