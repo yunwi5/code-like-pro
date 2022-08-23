@@ -22,15 +22,18 @@ const ChallengeTestCases: React.FC = () => {
     return (
         <CreationSectionContainer title={title} id={CreationSection.TEST_CASES}>
             <div className="flex flex-col gap-5">
-                {testCases.map((testCase, idx) => (
-                    <TestCase
-                        key={idx}
-                        language={language}
-                        testCase={{ ...testCase, name: `Test Case ${idx + 1}` }}
-                        onUpdate={(props: ITestCaseProps) => updateTestCase(props, idx)}
-                        onDelete={() => deleteTestCase(idx)}
-                    />
-                ))}
+                {testCases.map((testCase, idx) => {
+                    testCase.name = `Test Case ${idx + 1}`;
+                    return (
+                        <TestCase
+                            key={idx}
+                            language={language}
+                            testCase={testCase}
+                            onUpdate={(props: ITestCaseProps) => updateTestCase(props, idx)}
+                            onDelete={() => deleteTestCase(idx)}
+                        />
+                    );
+                })}
             </div>
         </CreationSectionContainer>
     );

@@ -43,4 +43,7 @@ code {
     .flex-between {
         @apply flex justify-between items-center;
     }
+    .focus-main {
+        @apply focus:outline focus:outline-2 focus:outline-main-300;
+    }
 }
