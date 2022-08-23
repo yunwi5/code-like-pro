@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AutoComplete from '../../ui/inputs/AutoComplete';
 
 const PredefinedTags = [
@@ -17,9 +17,18 @@ const PredefinedTags = [
 ];
 
 const ChallengeTags: React.FC = () => {
+    const [tags, setTags] = useState<string[]>([]);
+
     const handleAdd = (newTag: string) => {
-        console.log(newTag);
+        if (tags.includes(newTag)) return;
+        setTags([...tags, newTag]);
     };
+
+    const handleDelete = (tagToDelete: string) => {
+        setTags(tags.filter((tag) => tag !== tagToDelete));
+    };
+
+    console.table(tags);
 
     return (
         <div>
@@ -29,6 +38,7 @@ const ChallengeTags: React.FC = () => {
                 label={'Tags (multiple):'}
                 onAdd={handleAdd}
             />
+            <div></div>
         </div>
     );
 };

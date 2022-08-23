@@ -23,12 +23,12 @@ const ChallengeTestCases: React.FC = () => {
         <CreationSectionContainer title={title} id={CreationSection.TEST_CASES}>
             <div className="flex flex-col gap-5">
                 {testCases.map((testCase, idx) => {
-                    testCase.name = `Test Case ${idx + 1}`;
+                    // testCase.name = `Test Case ${idx + 1}`;
                     return (
                         <TestCase
                             key={idx}
                             language={language}
-                            testCase={testCase}
+                            testCase={{ ...testCase, name: `Test Case ${idx + 1}` }}
                             onUpdate={(props: ITestCaseProps) => updateTestCase(props, idx)}
                             onDelete={() => deleteTestCase(idx)}
                         />

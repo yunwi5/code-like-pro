@@ -31,7 +31,7 @@ const AutoComplete: React.FC<Props> = ({ label, options, onAdd, id, className })
         setText(newText);
         userInputRef.current = newText;
         setShowDropdown(true);
-        const filtered = filterListByString(options as string[], text);
+        const filtered = filterListByString(options as string[], newText);
         setFilteredOptions(filtered);
     };
 
@@ -43,7 +43,7 @@ const AutoComplete: React.FC<Props> = ({ label, options, onAdd, id, className })
         if (e.key === DOWN_KEY) {
             setActiveIndex((ps) => {
                 if (ps === filteredOptions.length - 1) return ps;
-                const newIndex = (ps ?? -1) + 1;
+                const newIndex = Math.min((ps ?? -1) + 1, filteredOptions.length - 1);
                 setText(filteredOptions[newIndex]);
                 return newIndex;
             });
@@ -51,11 +51,11 @@ const AutoComplete: React.FC<Props> = ({ label, options, onAdd, id, className })
 
         if (e.key === UP_KEY) {
             setActiveIndex((ps) => {
-                if (ps === 0) {
+                if (ps == null || ps <= 0) {
                     setText(userInputRef.current);
                     return null;
                 }
-                const newIndex = (ps || 0) - 1;
+                const newIndex = Math.max((ps || 0) - 1, 0);
                 setText(filteredOptions[newIndex]);
                 return newIndex;
             });
@@ -63,6 +63,9 @@ const AutoComplete: React.FC<Props> = ({ label, options, onAdd, id, className })
 
         if (e.key === ENTER_KEY) {
             onAdd(text);
+            setShowDropdown(false);
+            setText('');
+            setActiveIndex(null);
         }
     };
 
@@ -74,11 +77,11 @@ const AutoComplete: React.FC<Props> = ({ label, options, onAdd, id, className })
                     <input
                         id={id}
                         value={text}
+                        onClick={() => setShowDropdown(true)}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyboard}
                         className="px-2 py-2 border-2 border-gray-300  rounded-sm shadow-md focus-main"
                     />
-
                     <AiFillCaretDown
                         onClick={() => setShowDropdown((ps) => !ps)}
                         className="absolute hover:text-blue-500 top-[60%] right-3 cursor-pointer"
