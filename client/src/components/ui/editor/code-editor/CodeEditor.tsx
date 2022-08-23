@@ -66,20 +66,12 @@ const CodeEditor: React.FC<Props> = ({
 
 export function getMonacoLanguageName(lang: Language | undefined) {
     switch (lang) {
-        case Language.C:
-            return 'c';
-        case Language.PYTHON:
-            return 'python';
-        case Language.JAVA:
-            return 'java';
+        case Language.CSHARP:
+            return 'csharp';
         case Language.CPP:
             return 'cpp';
-        case Language.SWIFT:
-            return 'swift';
-        case Language.TYPESCRIPT:
-            return 'typescript';
-        case Language.GO:
-            return 'go';
+        default:
+            return lang?.toLowerCase();
     }
 }
 

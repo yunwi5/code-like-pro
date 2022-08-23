@@ -3,10 +3,11 @@ export enum Language {
     JAVASCRIPT = 'Javascript',
     TYPESCRIPT = 'Typescript',
     SWIFT = 'Swift',
+    KOTLIN = 'Kotlin',
     JAVA = 'Java',
     CPP = 'C++',
     CSHARP = 'C#',
-    C = 'c',
+    C = 'C',
     GO = 'Go',
 }
 
