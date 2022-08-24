@@ -20,6 +20,9 @@ module.exports = {
         grey: {
           500: "#fefefe",
         },
+        "text-main": {
+          500: "#655A5A",
+        },
       },
     },
   },
