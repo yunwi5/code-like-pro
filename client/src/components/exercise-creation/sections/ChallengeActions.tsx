@@ -15,7 +15,7 @@ const ChallengeActions: React.FC = () => {
             <Button className={btnClass} mode="empty">
                 Run Code
             </Button>
-            <Button className={btnClass}>Save Changes</Button>
+            <Button className={btnClass}>Save Challenge</Button>
             {/* <Button className={btnClass}>See Result</Button> */}
         </div>
     );
