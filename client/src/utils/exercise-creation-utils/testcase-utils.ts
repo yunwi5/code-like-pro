@@ -1,7 +1,11 @@
 import { ITestCase } from '../../models/interfaces';
 
-export function getEmptyTestCase(): ITestCase {
-    return { code: '', expectedOutput: '' };
+export function getEmptyTestCase(testCaseNumber?: number): ITestCase {
+    return {
+        id: `test-case-${testCaseNumber}`,
+        code: '',
+        expectedOutput: '',
+    };
 }
 
 export function getInitialTestCaseArray(): ITestCase[] {

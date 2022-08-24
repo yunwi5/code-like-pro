@@ -26,6 +26,7 @@ const TestCaseInput: React.FC<Props> = ({ language, testCase, onUpdate, onDelete
 
     return (
         <div
+            id={testCase?.id}
             className={`flex flex-col gap-2 px-3 py-2 bg-gray-200 rounded-sm shadow-md focus-within:shadow-md`}
         >
             <h3 className="text-lg flex items-center justify-between">
@@ -34,8 +35,8 @@ const TestCaseInput: React.FC<Props> = ({ language, testCase, onUpdate, onDelete
             </h3>
             {!isShrinked && (
                 <>
-                    <div className="flex flex-wrap gap-3 justify-between">
-                        <div className="flex-1">
+                    <div className="flex flex-col lg:flex-row flex-wrap gap-3 justify-between">
+                        <div className="flex-1 overflow-hidden">
                             <CodeEditor
                                 language={language}
                                 onChange={handleCodeChange}
@@ -53,13 +54,14 @@ const TestCaseInput: React.FC<Props> = ({ language, testCase, onUpdate, onDelete
                         />
                     </div>
                     <div className="flex-between">
-                        <p className="flex gap-2">
+                        <p className="flex">
                             <input
                                 type="checkbox"
                                 onChange={handleHidden}
                                 checked={testCase.hidden ?? false}
-                            />{' '}
-                            Hidden Test
+                            />
+                            &ensp;Hidden&nbsp;
+                            <span className="hidden md:inline">Test</span>
                         </p>
                         {onDelete && (
                             <button

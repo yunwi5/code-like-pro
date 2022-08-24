@@ -1,4 +1,5 @@
 export interface ITestCase {
+    id?: string;
     name?: string;
     code: string;
     expectedOutput: string;

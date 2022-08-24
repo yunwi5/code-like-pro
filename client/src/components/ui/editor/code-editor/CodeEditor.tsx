@@ -60,7 +60,7 @@ const CodeEditor: React.FC<Props> = ({
             )}
             {!isShrinked && (
                 <Editor
-                    className="min-h-[7.5rem] pt-3"
+                    className="min-h-[7.5rem] pt-3 max-w-[80vw] overflow-hidden"
                     language={getMonacoLanguageName(language) ?? 'python'}
                     value={value}
                     onChange={onChange}

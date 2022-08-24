@@ -18,7 +18,7 @@ const ChallengeSettings: React.FC = () => {
 
     return (
         <CreationSectionContainer title="Settings" id={CreationSection.SETTINGS}>
-            <div className="mb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[7.5%] gap-y-[10%]">
+            <div className="mb-14 md:mb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[7.5%] gap-y-[10%]">
                 <CustomSelect
                     id="difficulty"
                     value={difficulty}

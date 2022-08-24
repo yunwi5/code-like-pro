@@ -1,4 +1,5 @@
 import React from 'react';
+import useUpdateEffect from '../../../hooks/useUpdateEffect';
 import { CreationSection } from '../../../models/enums';
 import { ITestCaseProps } from '../../../models/interfaces';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
@@ -10,7 +11,9 @@ import CreationSectionContainer from '../containers/CreationSectionContainer';
 const ChallengeTestCases: React.FC = () => {
     const { testCases, language, setTestCases } = useExerciseCreationContext();
 
-    const addTestCase = () => setTestCases((prevList) => [...prevList, getEmptyTestCase()]);
+    const addTestCase = () => {
+        setTestCases((prevList) => [...prevList, getEmptyTestCase(testCases.length + 1)]);
+    };
 
     const updateTestCase = (props: ITestCaseProps, index: number) => {
         const newList = [...testCases];
@@ -21,6 +24,11 @@ const ChallengeTestCases: React.FC = () => {
     const deleteTestCase = (targetIndex: number) => {
         setTestCases((prevList) => prevList.filter((test, idx) => idx !== targetIndex));
     };
+
+    useUpdateEffect(() => {
+        const idToScroll = `test-case-${testCases.length}`;
+        document.getElementById(idToScroll)?.scrollIntoView({ behavior: 'smooth' });
+    }, [testCases]);
 
     const title = (
         <div className="flex-between mb-5">
@@ -35,7 +43,6 @@ const ChallengeTestCases: React.FC = () => {
         <CreationSectionContainer title={title} id={CreationSection.TEST_CASES}>
             <div className="flex flex-col gap-5">
                 {testCases.map((testCase, idx) => {
-                    // testCase.name = `Test Case ${idx + 1}`;
                     return (
                         <TestCase
                             key={idx}

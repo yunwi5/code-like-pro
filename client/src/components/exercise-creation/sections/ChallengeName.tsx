@@ -5,7 +5,6 @@ import CreationSectionContainer from '../containers/CreationSectionContainer';
 
 const ChallengeName: React.FC = () => {
     const { name, setName } = useExerciseCreationContext();
-
     return (
         <CreationSectionContainer
             id={CreationSection.CHALLENGE_NAME}

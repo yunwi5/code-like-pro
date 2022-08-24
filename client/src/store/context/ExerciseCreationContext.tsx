@@ -1,10 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { Difficulty, Language, ProgrammingTopic } from '../../models/enums';
-import { ITestCase, ITestCaseProps } from '../../models/interfaces';
-import {
-    getEmptyTestCase,
-    getInitialTestCaseArray,
-} from '../../utils/exercise-creation-utils/testcase-utils';
+import React, { useContext, useEffect, useState } from 'react';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import { CreationSection, Difficulty, Language, ProgrammingTopic } from '../../models/enums';
+import { IExercise, ITestCase } from '../../models/interfaces';
+import { getInitialTestCaseArray } from '../../utils/exercise-creation-utils/testcase-utils';
 
 interface IExerciseCreationContext {
     name: string;
@@ -25,9 +23,14 @@ interface IExerciseCreationContext {
     setStartingTemplate: React.Dispatch<React.SetStateAction<string>>;
     solutionCode: string;
     setSolutionCode: React.Dispatch<React.SetStateAction<string>>;
+    activeSection: CreationSection | null;
+    setActiveSection: React.Dispatch<React.SetStateAction<CreationSection | null>>;
+    saveDraft: () => void;
 }
 
 export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>({
+    setActiveSection: () => {},
+    setName: () => {},
     testCases: [],
     tags: [],
 } as any);
@@ -38,7 +41,14 @@ interface Props {
     children: React.ReactNode;
 }
 
+const LOCAL_STORATE_KEY = 'exercise_creation_draft';
+
 export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) => {
+    const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExercise | ''>(
+        LOCAL_STORATE_KEY,
+        '',
+    );
+
     const [name, setName] = useState('');
     const [prompt, setPrompt] = useState('');
     const [language, setLanguage] = useState<Language>(Language.C);
@@ -48,11 +58,50 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
     const [solutionCode, setSolutionCode] = useState('');
     const [startingTemplate, setStartingTemplate] = useState('');
 
-    const [tags, setTags] = useState<string[]>([]);
-    const [testCases, setTestCases] = useState<ITestCase[]>(getInitialTestCaseArray());
+    const [activeSection, setActiveSection] = useState<CreationSection | null>(null);
 
-    const runTestCases = () => {};
-    const saveExercise = () => {};
+    const [tags, setTags] = useState<string[]>([]);
+    const [testCases, setTestCases] = useState<ITestCase[]>(() => getInitialTestCaseArray());
+
+    // const runTestCases = () => {};
+    // const saveExercise = () => {};
+
+    const createExerciseObject = () => ({
+        name,
+        language,
+        difficulty,
+        topic,
+        prompt,
+        solutionCode,
+        startingTemplate,
+        tags,
+        // Remove id and error from test cases.
+        testCases: testCases.map((testCase) => ({
+            ...testCase,
+            id: undefined,
+            error: undefined,
+        })),
+    });
+
+    // Save currently unsaved work on exercise creation so that users do not lose their intermediate process.
+    // Svae the work in localStorage for now.
+    const saveDraft = () => {
+        setExerciseDraft(createExerciseObject());
+    };
+
+    // Runs on mount.
+    useEffect(() => {
+        if (!exerciseDraft) return;
+        setLanguage(exerciseDraft.language);
+        setTopic(exerciseDraft.topic);
+        setDifficulty(exerciseDraft.difficulty);
+        setTags(exerciseDraft.tags);
+        setPrompt(exerciseDraft.prompt);
+        setTestCases(exerciseDraft.testCases);
+        setStartingTemplate(exerciseDraft.startingTemplate);
+        setSolutionCode(exerciseDraft.solutionCode);
+        setName(exerciseDraft.name);
+    }, []);
 
     const value = {
         name,
@@ -73,6 +122,9 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
         setStartingTemplate,
         solutionCode,
         setSolutionCode,
+        activeSection,
+        setActiveSection,
+        saveDraft,
     };
 
     return (
