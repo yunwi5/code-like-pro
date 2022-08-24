@@ -40,11 +40,13 @@ const ChallengeTags: React.FC = () => {
                 placeholder="Enter predefined or your own tags"
                 onAdd={handleAdd}
             />
-            <div className="flex flex-wrap gap-x-3 gap-y-2 px-3 py-2 min-h-[2.5rem] rounded-md border-[3px] border-slate-300">
-                {tags.map((tag, idx) => (
-                    <Tag key={idx} name={tag} onDelete={() => handleDelete(tag)} />
-                ))}
-            </div>
+            {tags.length > 0 && (
+                <div className="flex flex-wrap gap-x-3 gap-y-2 px-3 py-2 rounded-md border-[3px] border-slate-300">
+                    {tags.map((tag, idx) => (
+                        <Tag key={idx} name={tag} onDelete={() => handleDelete(tag)} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

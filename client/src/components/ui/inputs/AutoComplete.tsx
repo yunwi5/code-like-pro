@@ -37,9 +37,7 @@ const AutoComplete: React.FC<Props> = (props) => {
         setFilteredOptions(filtered);
     };
 
-    const handleOption = (option: string) => {
-        setText(option);
-    };
+    const handleOption = (option: string) => setText(option);
 
     const handleKeyboard = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === DOWN_KEY) {

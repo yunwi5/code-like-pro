@@ -8,7 +8,7 @@ const ChallengeActions: React.FC = () => {
         <div className="flex flex-wrap justify-between">
             <Button className={btnClass}>Run Code</Button>
             <Button className={btnClass}>Save Changes</Button>
-            <Button className={btnClass}>Published Result</Button>
+            <Button className={btnClass}>See Result</Button>
         </div>
     );
 };

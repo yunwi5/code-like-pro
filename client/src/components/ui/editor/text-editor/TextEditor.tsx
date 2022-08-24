@@ -2,6 +2,7 @@ import React from 'react';
 import ReactQuill from 'react-quill';
 import EditorToolbar, { modules, formats } from './EditorToolbar';
 import 'react-quill/dist/quill.snow.css';
+import './TextEditor.scss';
 
 interface Props {
     onChange(value: string): void;
@@ -11,7 +12,7 @@ interface Props {
 
 export const TextEditor: React.FC<Props> = ({ onChange, value, className }) => {
     return (
-        <div className={className ?? ''}>
+        <div className={`shadow-sm ${className ?? ''}`}>
             <EditorToolbar />
             <ReactQuill
                 theme="snow"

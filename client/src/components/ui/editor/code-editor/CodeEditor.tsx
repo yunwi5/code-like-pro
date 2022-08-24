@@ -14,6 +14,7 @@ interface Props {
     value?: string;
     width?: string;
     height?: string;
+    validation?: boolean;
 }
 
 const CodeEditor: React.FC<Props> = ({
@@ -23,6 +24,7 @@ const CodeEditor: React.FC<Props> = ({
     width,
     height,
     value,
+    validation = true,
 }) => {
     const editorRef = useRef<CodeEditor>(null);
     const [isShrinked, setIsShrinked] = useState(false);
@@ -31,14 +33,22 @@ const CodeEditor: React.FC<Props> = ({
         (editorRef as any).current = editor;
     };
 
-    const handleEditorWillMount = (monaco: any) => {
+    const handleEditorWillMount = (monaco: Monaco) => {
         // here is the monaco instance
         // do some configuration before editor is mounted
         monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
+        // Skip validation if the editor settings should skip it.
+        // For examples, test cases code skips validation.
+        if (!validation) {
+            monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+                noSyntaxValidation: true,
+                noSemanticValidation: true,
+            });
+        }
     };
 
     return (
-        <div className="flex flex-col border-2 bg-white border-gray-300 shadow-sm focus-within:shadow-lg focus-within:outline focus-within:outline-2 focus-within:outline-gray-200 rounded-sm overflow-hidden">
+        <div className="flex flex-col border-2 bg-white border-gray-300 shadow-md focus-within:shadow-lg focus-within:outline focus-within:outline-2 focus-within:outline-gray-200 rounded-sm overflow-hidden">
             {showHeader && (
                 <div className="flex-between px-3 py-2 text-gray-700 bg-gray-300/90 capitalize text-lg">
                     {language ?? 'Python'}

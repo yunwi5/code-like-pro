@@ -26,7 +26,7 @@ const TestCaseInput: React.FC<Props> = ({ language, testCase, onUpdate, onDelete
 
     return (
         <div
-            className={`flex flex-col gap-2 px-3 py-2 bg-gray-200 rounded-sm shadow-sm focus-within:shadow-md`}
+            className={`flex flex-col gap-2 px-3 py-2 bg-gray-200 rounded-sm shadow-md focus-within:shadow-md`}
         >
             <h3 className="text-lg flex items-center justify-between">
                 {testCase.name}
@@ -42,6 +42,7 @@ const TestCaseInput: React.FC<Props> = ({ language, testCase, onUpdate, onDelete
                                 showHeader={false}
                                 value={testCase.code}
                                 height={'10rem'}
+                                validation={false}
                             />
                         </div>
                         <textarea
