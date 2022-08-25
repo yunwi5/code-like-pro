@@ -8,18 +8,16 @@ import Footer from './components/layout/Footer';
 
 function App() {
     return (
-        <>
-            <div className="App">
-                <Header />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/create-exercise" element={<ExerciseCreation />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                </Routes>
-                <Footer />
-            </div>
-        </>
+        <div className="App">
+            <Header />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/create-exercise" element={<ExerciseCreation />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+            </Routes>
+            <Footer />
+        </div>
     );
 }
 
