@@ -7,6 +7,8 @@ interface Props {
     className?: string;
 }
 
+// This component is used for expanding and collapsing the test caes box and code editor box.
+// Have a look at test cases on the browser to see this component visually.
 const ExpandShrinkToggler: React.FC<Props> = ({ isShrinked, setIsShrinked, className }) => {
     const icon = isShrinked ? (
         <AiOutlinePlusSquare size={27} />

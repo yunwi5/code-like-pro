@@ -7,6 +7,9 @@ interface Props {
     className?: string;
 }
 
+// Tag can optionally have onDelete prop.
+// If the onDelete prop is defined, it shows 'x' mark for delete.
+// Otherwise, it is read-only mode and 'x' mark is not shown.
 const Tag: React.FC<Props> = ({ name, onDelete, className }) => {
     return (
         <div

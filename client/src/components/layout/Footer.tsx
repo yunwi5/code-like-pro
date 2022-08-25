@@ -10,6 +10,7 @@ import {
 import HoverLabel from '../ui/labels/HoveringLabel';
 
 // Footer links do not have real links at the moment.
+// Main purpose is to avoid duplicated styles.
 const footerLinks = [
     { label: 'About', href: '#' },
     { label: 'Assessment', href: '#' },
@@ -17,7 +18,7 @@ const footerLinks = [
     { label: 'Rankings', href: '#' },
 ];
 
-// SVG icons in React nodes
+// List of social links and corresponding icons.
 const iconWidth = '42px';
 const socialIcons = [
     { icon: <InstagramIcon width={iconWidth} />, label: 'Instagram' },

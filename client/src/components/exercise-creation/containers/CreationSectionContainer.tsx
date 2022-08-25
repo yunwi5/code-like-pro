@@ -10,6 +10,7 @@ interface Props {
     className?: string;
 }
 
+// Wrapper component for each section of exercise creation.
 const CreationSectionContainer: React.FC<Props> = ({ id, title, className, children }) => {
     const { setActiveSection, activeSection } = useExerciseCreationContext();
     const sectionRef = useRef<HTMLElement>(null);

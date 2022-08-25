@@ -10,6 +10,8 @@ interface Props {
     id: string;
 }
 
+// App select with custom styles.
+// Reusable select input for consistent styling for the select.
 const CustomSelect: React.FC<Props> = (props) => {
     const { value, labelText, labelId, options, onChange, id, className } = props;
 
@@ -19,9 +21,11 @@ const CustomSelect: React.FC<Props> = (props) => {
 
     return (
         <div className={`flex flex-col gap-2 ${className}`}>
-            <label id={labelId ?? ''} className="text-[1.05rem]" htmlFor={id}>
-                {labelText}
-            </label>
+            {labelText && (
+                <label id={labelId ?? ''} className="text-[1.05rem]" htmlFor={id}>
+                    {labelText}
+                </label>
+            )}
             <select
                 id={id}
                 value={value}

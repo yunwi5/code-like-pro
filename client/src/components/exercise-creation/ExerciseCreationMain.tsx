@@ -8,6 +8,8 @@ import ChallengeSolution from './sections/ChallengeSolution';
 import ChallengeTemplate from './sections/ChallengeTemplate';
 import ChallengeTestCases from './sections/ChallengeTestCases';
 
+// Main component for rendering the exercise creation page.
+// This page defines the overall layout for the page.
 const ExerciseCreationMain = () => {
     return (
         <main className="flex justify-around px-3 md:px-5 xl:px-10 py-10 text-gray-700">
@@ -21,7 +23,7 @@ const ExerciseCreationMain = () => {
                 {/* Component for rendering user starting template code */}
                 <ChallengeTemplate />
                 <ChallengeTestCases />
-                {/* Component for buttons like 'Run Code', 'Save Changes' etc. */}
+                {/* Component for a set of buttons like 'Run Code', 'Save Changes' etc. */}
                 <div className="lg:hidden">
                     <ChallengeActions />
                 </div>

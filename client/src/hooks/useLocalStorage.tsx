@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function saveToLocalStorage(key: string, value: any) {
     localStorage.setItem(key, JSON.stringify(value));
@@ -9,6 +9,8 @@ function getFromLocalStorage(key: string) {
     return jsonValue ? JSON.parse(jsonValue) : '';
 }
 
+// Custom react hook to store the JSON object in localStorage.
+// It abstracts the process of retrieving JSON from the localStorage, and store JSON to the localStorage.
 function useLocalStorage<T>(key: string, initialValue: any): [T, (newValue: any) => void] {
     const [value, setValue] = useState<T>(() => {
         const storedValue = getFromLocalStorage(key);

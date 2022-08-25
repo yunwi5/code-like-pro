@@ -10,19 +10,26 @@ interface Props {
     testCase: ITestCase;
     onUpdate: (props: ITestCaseProps) => void;
     onDelete?: () => void;
+    readOnly?: boolean;
 }
 
-const TestCaseInput: React.FC<Props> = ({ language, testCase, onUpdate, onDelete }) => {
+const TestCaseInput: React.FC<Props> = ({
+    language,
+    testCase,
+    onUpdate,
+    onDelete,
+    readOnly,
+}) => {
     const [isShrinked, setIsShrinked] = useState(false);
 
     const handleCodeChange = (code: string) => onUpdate({ code });
+
     const handleOutputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const expectedOutput: string = e.target.value;
         onUpdate({ expectedOutput });
     };
-    const handleHidden = () => {
-        onUpdate({ hidden: !testCase.hidden });
-    };
+
+    const handleHidden = () => onUpdate({ hidden: !testCase.hidden });
 
     return (
         <div
@@ -53,26 +60,28 @@ const TestCaseInput: React.FC<Props> = ({ language, testCase, onUpdate, onDelete
                             className="min-w-[10rem] flex-1 px-3 py-2 bg-white border-2 border-slate-300 shadow-md rounded-sm focus:outline focus:outline-2 focus:outline-main-300/90"
                         />
                     </div>
-                    <div className="flex-between">
-                        <p className="flex">
-                            <input
-                                type="checkbox"
-                                onChange={handleHidden}
-                                checked={testCase.hidden ?? false}
-                            />
-                            &ensp;Hidden&nbsp;
-                            <span className="hidden md:inline">Test</span>
-                        </p>
-                        {onDelete && (
-                            <button
-                                onClick={onDelete}
-                                className="flex-center gap-2 px-3 py-1 transition-all rounded-full hover:bg-rose-500/90 hover:text-white"
-                            >
-                                <ImBin2 />
-                                Remove
-                            </button>
-                        )}
-                    </div>
+                    {readOnly && (
+                        <div className="flex-between">
+                            <p className="flex">
+                                <input
+                                    type="checkbox"
+                                    onChange={handleHidden}
+                                    checked={testCase.hidden ?? false}
+                                />
+                                &ensp;Hidden&nbsp;
+                                <span className="hidden md:inline">Test</span>
+                            </p>
+                            {onDelete && (
+                                <button
+                                    onClick={onDelete}
+                                    className="flex-center gap-2 px-3 py-1 transition-all rounded-full hover:bg-rose-500/90 hover:text-white"
+                                >
+                                    <ImBin2 />
+                                    Remove
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </>
             )}
         </div>

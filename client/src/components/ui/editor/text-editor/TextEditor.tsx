@@ -10,6 +10,7 @@ interface Props {
     className?: string;
 }
 
+// Complete text editor for users to write their prompt.
 export const TextEditor: React.FC<Props> = ({ onChange, value, className }) => {
     return (
         <div className={`shadow-sm ${className ?? ''}`}>

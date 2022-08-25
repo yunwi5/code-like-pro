@@ -8,6 +8,8 @@ interface Props {
     mode?: 'fill' | 'empty';
 }
 
+// Re-usable button component for our app theme.
+// btn class and btn-fill & btn-empty classes are defined in the index.scss file.
 const Button: React.FC<Props> = ({ className, children, onClick, mode = 'fill' }) => {
     const modeClass = mode === 'fill' ? 'btn-fill' : 'btn-empty';
 

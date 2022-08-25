@@ -43,6 +43,8 @@ interface Props {
 
 const LOCAL_STORATE_KEY = 'exercise_creation_draft';
 
+// Context for sharing and storing user exercise creation data.
+// Each exercise creation related component can use this context to receive or update the data.
 export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) => {
     const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExercise | ''>(
         LOCAL_STORATE_KEY,

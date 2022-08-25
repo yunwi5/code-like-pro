@@ -16,6 +16,9 @@ const ENTER_KEY = 'Enter';
 const UP_KEY = 'ArrowUp';
 const DOWN_KEY = 'ArrowDown';
 
+// Input for autocomplete functionality.
+// For example, the ChallengeTags component is using this AutoComplete to add tags dynamically.
+// It allows users to add their own inputs, as well as predefined inputs passed as "options" prop.
 const AutoComplete: React.FC<Props> = (props) => {
     const { label, options, onAdd, id, className, placeholder } = props;
     const [showDropdown, setShowDropdown] = useState(false);
