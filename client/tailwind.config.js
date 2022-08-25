@@ -22,6 +22,15 @@ module.exports = {
                 xs: '400px',
             },
         },
+        grey: {
+          500: "#fefefe",
+        },
+        "text-main": {
+          500: "#655A5A",
+          700: "#4a4242",
+        },
+      },
     },
-    plugins: [],
+  },
+  plugins: [],
 };
