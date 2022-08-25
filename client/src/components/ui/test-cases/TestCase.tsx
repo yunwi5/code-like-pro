@@ -57,13 +57,13 @@ const TestCase: React.FC<Props> = ({
                                 readOnly={readOnly}
                             />
                         </div>
-                        <div className="min-w-[10rem] flex-1 flex flex-col">
+                        <div className="min-w-[10rem] flex-1">
                             <p className="px-2 py-1 bg-gray-300">Expected Output</p>
                             <textarea
                                 rows={5}
                                 onChange={handleOutputChange}
                                 value={testCase.expectedOutput}
-                                className={`flex-1 px-3 py-2 bg-white border-2 border-slate-300 shadow-md rounded-sm focus:outline focus:outline-2 focus:outline-main-300/90 ${
+                                className={`text-sm min-h-[82.7%] min-w-[100%] flex-1 px-3 py-2 bg-white border-2 border-slate-300 shadow-md rounded-sm focus:outline focus:outline-2 focus:outline-main-300/90 ${
                                     readOnly && 'focus:!outline-none'
                                 }`}
                             />
