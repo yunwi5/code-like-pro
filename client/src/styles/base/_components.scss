@@ -3,3 +3,25 @@
     font-weight: 600;
     color: rgba($color-main-600, 0.9);
 }
+
+// Quill editor read-only mode styling
+// No toolbar, and no border should be shown on the prompt.
+.read-only-editor {
+    border-color: transparent;
+
+    .ql-toolbar {
+        display: none !important;
+    }
+
+    .ql-container.ql-snow {
+        border-color: transparent !important;
+    }
+
+    .ql-editor {
+        padding: 0 !important;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

@@ -5,7 +5,7 @@ import { ITestCaseProps } from '../../../models/interfaces';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import { getEmptyTestCase } from '../../../utils/exercise-creation-utils/testcase-utils';
 import Button from '../../ui/buttons/Button';
-import TestCase from '../../ui/test-cases/TestCaseInput';
+import TestCase from '../../ui/test-cases/TestCase';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
 const ChallengeTestCases: React.FC = () => {
@@ -28,7 +28,7 @@ const ChallengeTestCases: React.FC = () => {
     useUpdateEffect(() => {
         const idToScroll = `test-case-${testCases.length}`;
         document.getElementById(idToScroll)?.scrollIntoView({ behavior: 'smooth' });
-    }, [testCases]);
+    }, [testCases.length]);
 
     const title = (
         <div className="flex-between mb-5">
