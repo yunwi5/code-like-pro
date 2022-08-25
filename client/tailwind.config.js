@@ -18,6 +18,9 @@ module.exports = {
                     1000: '#040316',
                 },
             },
+            screens: {
+                xs: '400px',
+            },
         },
     },
     plugins: [],
