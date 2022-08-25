@@ -23,14 +23,12 @@ module.exports = {
             },
         },
         grey: {
-          500: "#fefefe",
+            500: '#fefefe',
         },
-        "text-main": {
-          500: "#655A5A",
-          700: "#4a4242",
+        'text-main': {
+            500: '#655A5A',
+            700: '#4a4242',
         },
-      },
     },
-  },
-  plugins: [],
+    plugins: [],
 };
