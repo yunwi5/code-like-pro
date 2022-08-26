@@ -29,26 +29,35 @@ const ExerciseSchema = new Schema({
         type: String,
         required: true,
     },
-    solution_code: {
+    solutionCode: {
         type: String,
     },
     language: {
         type: String,
         required: true,
     },
-    liked:
-        [{type: mongoose.Schema.Types.ObjectID, ref: 'User'}],
-    test_cases: {
-        type: [TestCaseSchema],
+    topic: {
+        type: String,
         required: true,
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectID, ref: "User"
     },
     createdAt: {
         type: Date,
         default: () => Date.now(),
         immutable: true,
     },
+    liked:
+        [{type: mongoose.Schema.Types.ObjectID, ref: 'User'}],
+    testCases: {
+        type: [TestCaseSchema],
+        required: true,
+    },
     submissions: 
         [{type: mongoose.Schema.Types.ObjectID, ref: 'UserSubmission'}],
+    tags:
+        [{type: String}],
 });
 
 const Exercise = mongoose.model('Exercise', ExerciseSchema);

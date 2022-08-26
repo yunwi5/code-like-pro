@@ -22,8 +22,8 @@ const UserSchema = new Schema({
         default: () => Date.now(),
         immutable: true,
     },
-    exercises: [{type: mongoose.Schema.Type.ObjectID, ref: "Exercise"}],
-    submissions: [{type: mongoose.Schema.Type.ObjectID, ref: "UserSubmission"}],
+    exercises: [{type: mongoose.Schema.Types.ObjectID, ref: "Exercise"}],
+    submissions: [{type: mongoose.Schema.Types.ObjectID, ref: "UserSubmission"}],
 });
 
 const User = mongoose.model('User', UserSchema);
