@@ -2,7 +2,7 @@ import React from "react";
 import CustomInput from "../ui/inputs/CustomInput";
 import Button from "../ui/buttons/Button";
 
-const btnClass = "min-w-[10rem] my-3";
+const btnClass = "min-w-[10rem] my-3 w-full";
 
 const AuthCard = (props: { isLogin: boolean }) => {
   return (
@@ -28,7 +28,10 @@ const AuthCard = (props: { isLogin: boolean }) => {
             {props.isLogin ? (
               <Button className={btnClass}>Login</Button>
             ) : (
-              <Button className={btnClass}>Register</Button>
+              <div>
+                <CustomInput type="text" placeholder="Name" />
+                <Button className={btnClass}>Register</Button>
+              </div>
             )}
 
             {props.isLogin ? (
