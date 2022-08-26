@@ -16,7 +16,7 @@ const ScratchPad: React.FC = () => {
         <section className="flex-1 flex flex-col overflow-y-scroll bg-white">
             <CodeEditor
                 language={'text' as any}
-                className="flex-1"
+                className="flex-1 min-h-[30rem]"
                 value={note}
                 onChange={handleChange}
                 showHeader={false}
