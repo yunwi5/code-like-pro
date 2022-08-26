@@ -4,7 +4,7 @@ const http = require('http');
 function makeRequest(data){
     const options = {
         host: '68.183.118.35',
-        path: '/jobe/index.php/restapi',
+        path: '/jobe/index.php/restapi/runs',
         method: 'POST',
         port: 80,
         headers: {
@@ -22,7 +22,7 @@ function makeRequest(data){
         });
 
         res.on('end', () => {
-            savedResult = JSON.parse(data);
+            savedResult = data;
         });
 
     }).on("error", (err) => {
@@ -52,9 +52,9 @@ const postExercise = (req, res) => {
     testCases.forEach(testCase => {
         const test = solutionCode + "\n" + testCase.testcode;
 
-        body =  {"run_spec": {"language_id": testCase.language_id, "sourcefilename": "test", "sourcecode":test}};
+        const body =  {"run_spec": {"language_id": testCase.language_id, "sourcefilename": "test", "sourcecode":test}};
 
-        result = makeRequest(body);
+        const result = makeRequest(body);
 
         if (result.stdout != testCase.expectedOutput){
             return res.status(400);
