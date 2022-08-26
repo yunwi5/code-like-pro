@@ -1,5 +1,4 @@
 const Exercise = require('../models/Exercise');
-const ensureAuthenticated = require('../middleware/auth')
 const http = require('http');
 
 function makeRequest(data){
@@ -53,9 +52,13 @@ const postExercise = (req, res) => {
     testCases.forEach(testCase => {
         const test = solutionCode + "\n" + testCase.testcode;
 
-        req.write(data);
-        req.end();
-        executeHttp
+        body =  {"run_spec": {"language_id": testCase.language_id, "sourcefilename": "test", "sourcecode":test}};
+
+        result = makeRequest(body);
+
+        if (result.stdout != testCase.expectedOutput){
+            return res.status(400);
+        }
 
     });
 
