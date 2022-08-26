@@ -64,4 +64,7 @@ code {
     .btn-empty {
         @apply text-main-600 border-2 border-main-500 bg-main-50/20 hover:bg-main-600 hover:text-main-50;
     }
+    .icon-box {
+        @apply flex-center text-2xl border-[1.5px] rounded-sm shadow-md transition-all cursor-pointer;
+    }
 }

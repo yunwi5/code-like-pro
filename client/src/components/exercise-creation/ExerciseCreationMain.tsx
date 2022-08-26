@@ -12,7 +12,7 @@ import ChallengeTestCases from './sections/ChallengeTestCases';
 // This page defines the overall layout for the page.
 const ExerciseCreationMain = () => {
     return (
-        <main className="flex justify-around px-3 md:px-5 xl:px-10 py-10 text-gray-700">
+        <main className="flex justify-around mb-6 px-3 md:px-5 xl:px-10 py-10 text-gray-700">
             <div className="xl:max-w-[70vw] flex-1 flex flex-col gap-12">
                 <CreationHeader />
                 <ChallengeName />

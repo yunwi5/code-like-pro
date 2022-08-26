@@ -22,8 +22,8 @@ export const FacebookIcon: React.FC<Props> = ({ width, height }) => {
                 y2="40.615"
                 gradientUnits="userSpaceOnUse"
             >
-                <stop offset="0" stop-color="#2aa4f4" />
-                <stop offset="1" stop-color="#007ad9" />
+                <stop offset="0" stopColor="#2aa4f4" />
+                <stop offset="1" stopColor="#007ad9" />
             </linearGradient>
             <path
                 fill="url(#Ld6sqrtcxMyckEl6xeDdMa)"
@@ -80,13 +80,13 @@ export const InstagramIcon: React.FC<Props> = ({ width, height }) => {
                 r="44.899"
                 gradientUnits="userSpaceOnUse"
             >
-                <stop offset="0" stop-color="#fd5" />
-                <stop offset=".328" stop-color="#ff543f" />
-                <stop offset=".348" stop-color="#fc5245" />
-                <stop offset=".504" stop-color="#e64771" />
-                <stop offset=".643" stop-color="#d53e91" />
-                <stop offset=".761" stop-color="#cc39a4" />
-                <stop offset=".841" stop-color="#c837ab" />
+                <stop offset="0" stopColor="#fd5" />
+                <stop offset=".328" stopColor="#ff543f" />
+                <stop offset=".348" stopColor="#fc5245" />
+                <stop offset=".504" stopColor="#e64771" />
+                <stop offset=".643" stopColor="#d53e91" />
+                <stop offset=".761" stopColor="#cc39a4" />
+                <stop offset=".841" stopColor="#c837ab" />
             </radialGradient>
             <path
                 fill="url(#yOrnnhliCrdS2gy~4tD8ma)"
@@ -100,8 +100,8 @@ export const InstagramIcon: React.FC<Props> = ({ width, height }) => {
                 gradientTransform="matrix(1 0 0 .6663 0 1.849)"
                 gradientUnits="userSpaceOnUse"
             >
-                <stop offset="0" stop-color="#4168c9" />
-                <stop offset=".999" stop-color="#4168c9" stop-opacity="0" />
+                <stop offset="0" stopColor="#4168c9" />
+                <stop offset=".999" stopColor="#4168c9" stopOpacity="0" />
             </radialGradient>
             <path
                 fill="url(#yOrnnhliCrdS2gy~4tD8mb)"
@@ -136,8 +136,8 @@ export const TwitterIcon: React.FC<Props> = ({ width, height }) => {
                 y2="38.769"
                 gradientUnits="userSpaceOnUse"
             >
-                <stop offset="0" stop-color="#2aa4f4" />
-                <stop offset="1" stop-color="#007ad9" />
+                <stop offset="0" stopColor="#2aa4f4" />
+                <stop offset="1" stopColor="#007ad9" />
             </linearGradient>
             <path
                 fill="url(#_osn9zIN2f6RhTsY8WhY4a)"
