@@ -12,7 +12,7 @@ const ExercisePromptFooter = () => {
             {exercise.tags?.length > 0 && (
                 <div className="flex flex-col gap-2">
                     <p>Related Tags:</p>
-                    <ul className="flex gap-x-3 gap-y-2">
+                    <ul className="flex flex-wrap gap-x-3 gap-y-2">
                         {exercise.tags.map((tag, idx) => (
                             <Tag key={idx} name={tag} />
                         ))}

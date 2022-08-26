@@ -15,12 +15,14 @@ const ExercisePromptHeader: React.FC = () => {
     return (
         <header>
             <div className="flex-between">
-                <h2 className="text-3xl capitalize">{exercise.name}</h2>
-                <label className={`px-3 py-1 text-xl border-2 ${colorClass} rounded-lg`}>
+                <h2 className="text-2xl lg:text-3xl capitalize">{exercise.name}</h2>
+                <label
+                    className={`px-3 py-1 text-base lg:text-lg xl:text-xl border-2 ${colorClass} rounded-lg`}
+                >
                     {exercise.difficulty}
                 </label>
             </div>
-            <ul className="text-[0.95rem] mt-2 flex flex-wrap gap-4">
+            <ul className="text-[0.95rem] mt-4 lg:mt-2 flex flex-wrap gap-x-4 gap-y-2">
                 <li className="flex gap-1">
                     <FaUserEdit className="text-main-500 text-[1.35rem]" /> Martin
                 </li>
