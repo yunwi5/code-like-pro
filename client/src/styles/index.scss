@@ -66,4 +66,7 @@ code {
   .btn-empty {
     @apply text-main-600 border-2 border-main-400 bg-main-50/20 hover:bg-main-500 hover:text-main-50;
   }
+  .btn-social {
+    @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200;
+  }
 }

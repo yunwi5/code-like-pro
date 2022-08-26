@@ -1,6 +1,13 @@
 import React from "react";
 import CustomInput from "../ui/inputs/CustomInput";
 import Button from "../ui/buttons/Button";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  GithubIcon,
+  TwitterIcon,
+  GoogleIcon,
+} from "../../assets/svg-icons/svg-components";
 
 const btnClass = "min-w-[10rem] my-3 w-full";
 
@@ -43,6 +50,14 @@ const AuthCard = (props: { isLogin: boolean }) => {
                 Already have an Account? Log in here
               </p>
             )}
+
+            <Button className="btn-social mt-10">
+              <div className="flex align-center justify-between">
+                <div className="w-[25px]"></div>
+                Sign in with Google
+                <GoogleIcon height="25" width="25" />
+              </div>
+            </Button>
           </div>
         </div>
       </div>
