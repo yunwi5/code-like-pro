@@ -24,7 +24,7 @@ const ExercisePromptHeader: React.FC = () => {
             </div>
             <ul className="text-[0.95rem] mt-4 lg:mt-2 flex flex-wrap gap-x-4 gap-y-2">
                 <li className="flex gap-1">
-                    <FaUserEdit className="text-main-500 text-[1.35rem]" /> Martin
+                    <FaUserEdit className="text-gray-600 text-[1.35rem]" /> Martin
                 </li>
                 <li className="flex gap-1">
                     <MdCategory className="text-sky-500 text-[1.4rem]" /> {exercise.topic}
