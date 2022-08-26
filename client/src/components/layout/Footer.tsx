@@ -6,7 +6,7 @@ import {
     InstagramIcon,
     GithubIcon,
     TwitterIcon,
-} from '../../assets/svg-icons/svg-components';
+} from '../../assets/svg-icons/social-svgs';
 import HoverLabel from '../ui/labels/HoveringLabel';
 
 // Footer links do not have real links at the moment.
