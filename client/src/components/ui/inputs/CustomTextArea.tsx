@@ -24,7 +24,7 @@ const CustomTextArea: React.FC<Props> = ({
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                     onChange && onChange(e.target.value)
                 }
-                className={`px-2 py-1 rounded-sm shadow-md focus:shadow-lg border-2 border-gray-300 focus:outline focus:outline-2 focus:outline-main-300 ${
+                className={`px-2 py-1 rounded-sm shadow-md focus:shadow-lg border-2 border-gray-300 focus-main ${
                     error ? 'border-rose-400 focus:outline-transparent' : ''
                 }`}
             />
