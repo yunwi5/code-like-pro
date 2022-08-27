@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import useUpdateEffect from './useUpdateEffect';
 
 // Window Scroll offset so that element can be in 'active' state then the window scroll gets closer to its height.
 const SCROLL_OFFSET = 25;
@@ -14,7 +15,7 @@ interface Props {
 // For example, when the user scolls down and reached the 'prompt' section,
 // it detects the fact that current scroll is on the 'prompt' component and it will call the callback function to signal.
 const useScrollEffect = ({ elementRef, callbackOnView }: Props) => {
-    useEffect(() => {
+    useUpdateEffect(() => {
         const scrollEffect = (e: Event) => {
             if (elementRef.current == null) return;
             const rect = elementRef.current.getBoundingClientRect();
@@ -24,7 +25,12 @@ const useScrollEffect = ({ elementRef, callbackOnView }: Props) => {
             const aboveSectionBottom = window.scrollY < distanceFromTop + rect.height;
             if (belowSectionTop && aboveSectionBottom) callbackOnView();
         };
-        window.addEventListener('scroll', scrollEffect);
+
+        // Due to performance issue, make scrollEffect as lower pripority using the timeout.
+        const timer = setTimeout(() => {
+            window.addEventListener('scroll', scrollEffect);
+            clearTimeout(timer);
+        }, 1000);
         return () => window.removeEventListener('scroll', scrollEffect);
     }, []);
 

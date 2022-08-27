@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { loginRequest } from '../../apis/auth';
+import { ToastType } from '../../models/enums';
+import { toastNotify } from '../../utils/notification/toast';
 import { invalidateEmail, invalidatePassword } from '../../utils/string-utils/validation';
 import AuthCard from './AuthCard';
 
@@ -44,9 +46,13 @@ const LoginForm = () => {
         // If any errorState is on, do not send the register request.
         if (Object.values(error).join('').trim()) return;
 
+        // Use returned data as a global user data
         const { ok, message, data } = await loginRequest(loginState);
         // If the login is success, redirect to the home page.
-        if (ok) navigate('/');
+        if (ok) {
+            navigate('/');
+            toastNotify('Login Successful!', ToastType.SUCCESS);
+        }
     };
 
     return (

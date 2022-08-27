@@ -1,7 +1,15 @@
-.link-underline-effect {
+.link-underline-effect,
+.link-underline-effect-thin {
     &:hover,
     &:focus {
         color: $color-main-500;
     }
+}
+
+.link-underline-effect {
     @include underline-from-middle($color-main-400);
+}
+
+.link-underline-effect-thin {
+    @include underline-from-middle($color-main-400, 1.5px);
 }

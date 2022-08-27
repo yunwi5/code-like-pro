@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { registerRequest } from '../../apis/auth';
+import { ToastType } from '../../models/enums';
+import { toastNotify } from '../../utils/notification/toast';
 import {
     invalidateEmail,
     invalidatePassword,
@@ -49,10 +51,13 @@ const RegisterForm = () => {
 
         // If any errorState is on, do not send the register request.
         if (Object.values(error).join('').trim()) return;
-        const { ok, data } = await registerRequest(registerState);
+        const { ok, data, message } = await registerRequest(registerState);
 
         // If register is success, redirect to the login page.
-        if (ok) navigate('/login');
+        if (ok) {
+            navigate('/login');
+            toastNotify('Register successful!', ToastType.SUCCESS);
+        }
     };
 
     return (
