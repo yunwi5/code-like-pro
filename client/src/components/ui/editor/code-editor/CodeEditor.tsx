@@ -15,6 +15,8 @@ interface Props {
     width?: string;
     height?: string;
     validation?: boolean;
+    readOnly?: boolean;
+    className?: string;
 }
 
 const CodeEditor: React.FC<Props> = ({
@@ -25,6 +27,8 @@ const CodeEditor: React.FC<Props> = ({
     height,
     value,
     validation = true,
+    readOnly = false,
+    className = '',
 }) => {
     const editorRef = useRef<CodeEditor>(null);
     const [isShrinked, setIsShrinked] = useState(false);
@@ -48,7 +52,9 @@ const CodeEditor: React.FC<Props> = ({
     };
 
     return (
-        <div className="flex flex-col border-2 bg-white border-gray-300 shadow-md focus-within:shadow-lg focus-within:outline focus-within:outline-2 focus-within:outline-gray-200 rounded-sm overflow-hidden">
+        <div
+            className={`flex flex-col border-2 bg-white border-gray-300 shadow-md focus-within:shadow-lg focus-within:outline focus-within:outline-2 focus-within:outline-gray-200 rounded-sm overflow-hidden ${className}`}
+        >
             {showHeader && (
                 <div className="flex-between px-3 py-2 text-gray-700 bg-gray-300/90 capitalize text-lg">
                     {language ?? 'Python'}
@@ -68,6 +74,7 @@ const CodeEditor: React.FC<Props> = ({
                     onMount={handleMount}
                     width={width}
                     height={height}
+                    options={{ readOnly: readOnly }}
                 />
             )}
         </div>
