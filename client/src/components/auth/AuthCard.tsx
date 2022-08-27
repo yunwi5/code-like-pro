@@ -7,7 +7,7 @@ import {
   GithubIcon,
   TwitterIcon,
   GoogleIcon,
-} from "../../assets/svg-icons/svg-components";
+} from "../../assets/svg-icons/social-svgs";
 
 const btnClass = "min-w-[10rem] my-3 w-full";
 

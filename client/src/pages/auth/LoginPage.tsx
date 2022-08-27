@@ -13,7 +13,7 @@ const LoginPage = () => {
           content={`Login page of ${AppProperty.APP_NAME} where users can log into their accounts.`}
         />
       </Helmet>
-      <main className="flex justify-center h-[80vh] px-3 md:px-5 xl:px-10 py-10 text-gray-700">
+      <main className="flex justify-center lg:gap-8 xl:gap-[7.5%] mb-6 h-[80vh] px-3 md:px-5 xl:px-10 py-10 text-gray-700">
         <AuthCard isLogin={true}></AuthCard>
       </main>
     </>
