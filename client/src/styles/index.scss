@@ -31,7 +31,9 @@ html {
 }
 
 // Default input styles
-input {
+input,
+textarea,
+select {
     &:focus {
         outline: 0.12rem solid #7b79f7;
     }
