@@ -9,6 +9,7 @@ const connectDB = require('./config/db');
 const passportStrategy = require('./config/passport');
 const router = require('./routes/index');
 const authRouter = require('./routes/auth/auth-local');
+const exerciseRouter = require('./routes/exercise');
 
 const app = createApp();
 
@@ -26,6 +27,7 @@ app.use(passport.session());
 // IMPORTANT: register routers after the passport configuration (otherwise session is not set up correctly)
 app.use('/api', router);
 app.use('/api/auth', authRouter);
+app.use('/api/exercise', exerciseRouter);
 
 // Placeholder index route
 app.get('/', (req, res) => res.send('Welcome to the index route.'));
