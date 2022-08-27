@@ -16,8 +16,10 @@ const EditorOutputSection: React.FC = () => {
         language={language}
         onChange={handleChange}
         value={solutionCode}
-        height={"22rem"}
+        height={"30rem"}
+        showHeader={false}
       />
+      <h1 className="text-xl text-text-500 py-2">Output</h1>
     </div>
   );
 };
