@@ -1,33 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800;900&family=Red+Hat+Mono:wght@300;400;500;600;700&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800;900&family=Red+Hat+Mono:wght@300;400;500;600;700&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap");
 
-@import './abstract/variables';
-@import './abstract/mixins';
-@import './base/utils';
-@import './base/components';
+@import "./abstract/variables";
+@import "./abstract/mixins";
+@import "./base/utils";
+@import "./base/components";
 
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: 'Red Hat Display', sans-serif;
-    scroll-behavior: smooth;
-    min-height: 100vh;
+  font-family: "Red Hat Display", sans-serif;
+  scroll-behavior: smooth;
+  min-height: 100vh;
 }
 
 .logo {
-    font-family: 'Red Hat Mono', monospace;
+  font-family: "Red Hat Mono", monospace;
+  font-weight: 400;
 }
 
 .main-font {
-    font-family: 'Red Hat Display', sans-serif;
+  font-family: "Red Hat Display", sans-serif;
 }
 
 // Default input styles
@@ -40,36 +41,37 @@ select {
 }
 
 .App {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 @layer components {
-    .flex-center {
-        @apply flex justify-center items-center;
-    }
-    .flex-start {
-        @apply flex justify-start items-center;
-    }
-    .flex-between {
-        @apply flex justify-between items-center;
-    }
-    .focus-main {
-        @apply focus:outline focus:outline-2 focus:outline-main-300;
-    }
-    .btn {
-        @apply px-3 py-2 text-lg transition-all rounded-md shadow-sm hover:shadow-md cursor-pointer;
-    }
-    .btn-fill {
-        @apply text-main-50 bg-main-500/90 hover:bg-main-600;
-    }
-    .btn-empty {
-        @apply text-main-600 border-2 border-main-500 bg-main-50/20 hover:bg-main-600 hover:text-main-50;
-    }
-    .icon-box {
-        @apply flex-center text-2xl border-[1.5px] rounded-sm shadow-md transition-all cursor-pointer;
-    }
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+  .focus-main {
+    @apply focus:outline focus:outline-2 focus:outline-main-300;
+  }
+  .btn {
+    @apply px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer;
+  }
+  .btn-fill {
+    @apply text-main-50 bg-main-400 hover:bg-main-500;
+  }
+  .btn-empty {
+    @apply text-main-600 border-2 border-main-400 bg-main-50/20 hover:bg-main-500 hover:text-main-50;
+  }
+  .btn-social {
+    @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200;
+  }
+  .icon-box {
+    @apply flex-center text-2xl border-[1.5px] rounded-sm shadow-md transition-all cursor-pointer;
+  }
 }
