@@ -2,18 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const TestCaseSchema = new Schema({
-   testcode: {
+    testcode: {
         type: String,
         required: true,
-   },
-   expectedOutput: {
+    },
+    expectedOutput: {
         type: String,
         required: true,
-   },
-   hidden: {
+    },
+    hidden: {
         type: Boolean,
-        default: () => False
-   }
+        default: () => False,
+    },
 });
     
 const ExerciseSchema = new Schema({
@@ -41,23 +41,21 @@ const ExerciseSchema = new Schema({
         required: true,
     },
     author: {
-        type: mongoose.Schema.Types.ObjectID, ref: "User"
+        type: mongoose.Schema.Types.ObjectID,
+        ref: 'User',
     },
     createdAt: {
         type: Date,
         default: () => Date.now(),
         immutable: true,
     },
-    liked:
-        [{type: mongoose.Schema.Types.ObjectID, ref: 'User'}],
+    liked: [{ type: mongoose.Schema.Types.ObjectID, ref: 'User' }],
     testCases: {
         type: [TestCaseSchema],
         required: true,
     },
-    submissions: 
-        [{type: mongoose.Schema.Types.ObjectID, ref: 'UserSubmission'}],
-    tags:
-        [{type: String}],
+    submissions: [{ type: mongoose.Schema.Types.ObjectID, ref: 'UserSubmission' }],
+    tags: [{ type: String }],
 });
 
 const Exercise = mongoose.model('Exercise', ExerciseSchema);

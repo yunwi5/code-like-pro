@@ -1,0 +1,21 @@
+// When hover, the underline expands from the middle to both sides.
+// Mainly used for link hovering effect.
+@mixin underline-from-middle($bg: $color-main-400) {
+    position: relative;
+
+    &::after {
+        content: '';
+        height: 2.1px;
+        width: 0;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: $bg;
+        transition: all 0.35s ease-out;
+    }
+
+    &:hover::after {
+        width: 100%;
+    }
+}

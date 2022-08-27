@@ -50,7 +50,6 @@ const getLogout = (req, res, next) => {
 // Helper function
 // Do not return password
 const getUserToReturn = (user) => {
-    // no password
     const userToReturn = {
         id: user._id,
         name: user.name,

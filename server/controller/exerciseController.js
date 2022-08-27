@@ -1,6 +1,5 @@
 const Exercise = require('../models/Exercise');
 
-
 function makeRequest(bodyData){
     fetch('http://68.183.118.35/jobe/index.php/restapi/runs', {
         method: "POST",
@@ -14,19 +13,16 @@ function makeRequest(bodyData){
             console.log(data);
             return data;
         });
-
 }
 
-
-const postExercise = (req, res) => {
-    
+const postExercise = async (req, res) => {
     const exercise = new Exercise(req.body.exercise);
     exercise.author = req.user._id;
-    
+
     // Check solutionCode works
 
     const testCases = exercise.testCases;
-    const solutionCode = exercise.solutionCode
+    const solutionCode = exercise.solutionCode;
 
     // Iterate through each test case and make request to JOBE server
 
@@ -44,14 +40,12 @@ const postExercise = (req, res) => {
         if (result.stdout != testCase.expectedOutput){
             return res.status(400).json(result);
         }
-
     });
 
     await exercise.save();
     console.log('new exercise', exercise);
 
     res.json(exercise);
-    
 }
 
 const getExercises = (req, res) => {
