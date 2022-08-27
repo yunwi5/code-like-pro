@@ -5,6 +5,7 @@ import { GoogleIcon } from '../../assets/svg-icons/social-svgs';
 import { FaUserAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { ImKey } from 'react-icons/im';
+import { Link } from 'react-router-dom';
 
 const btnClass = 'min-w-[10rem] my-3 w-full';
 
@@ -27,17 +28,16 @@ const AuthCard = (props: {
             <div className="absolute z-1 flex justify-center p-6 h-[65%] bg-grey-300 md:w-1/4 ">
                 <div className="text-center w-full">
                     <h1 className="logo text-2xl font-light">CodeLikePro</h1>
-                    {props.isLogin ? (
-                        <div>
-                            <h2 className="text-lg mt-3">Login</h2>
-                            <p className="text-xs font-light">Sign in to your account</p>
-                        </div>
-                    ) : (
-                        <div>
-                            <h2 className="text-lg mt-3">Register</h2>
-                            <p className="text-xs font-light">Create an account</p>
-                        </div>
-                    )}
+
+                    <div>
+                        <h2 className="text-lg mt-3">
+                            {props.isLogin ? 'Login' : 'Register'}
+                        </h2>
+                        <p className="text-xs font-light">
+                            {props.isLogin ? 'Sign in to your account' : 'Create an account'}
+                        </p>
+                    </div>
+
                     <form className="flex flex-col w-full" onSubmit={props.onSubmit}>
                         {!props.isLogin && (
                             <CustomInput
@@ -68,23 +68,29 @@ const AuthCard = (props: {
                             error={props.errorState?.password}
                             icon={<ImKey />}
                         />
-                        {props.isLogin ? (
-                            <Button type="submit" className={btnClass}>
-                                Login
-                            </Button>
-                        ) : (
-                            <Button type="submit" className={btnClass}>
-                                Register
-                            </Button>
-                        )}
+                        <Button type="submit" className={btnClass}>
+                            {props.isLogin ? 'Login' : 'Register'}
+                        </Button>
 
                         {props.isLogin ? (
                             <p className="text-xs font-light mr-auto m-0">
-                                Don't have an Account? Sign up here
+                                Don't have an Account?{' '}
+                                <Link
+                                    to="/register"
+                                    className="ml-1 font-semibold text-main-500 link-underline-effect-thin"
+                                >
+                                    Sign up here
+                                </Link>
                             </p>
                         ) : (
                             <p className="text-xs font-light mr-auto m-0">
-                                Already have an Account? Log in here
+                                Already have an Account?{' '}
+                                <Link
+                                    to="/login"
+                                    className="ml-1 font-semibold text-main-500 link-underline-effect-thin"
+                                >
+                                    Log in here
+                                </Link>
                             </p>
                         )}
 

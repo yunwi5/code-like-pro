@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import ExerciseAttemptPage from './pages/exercise-pages/ExerciseAttemptPage';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/exercise/:id" element={<ExerciseAttemptPage />} />
             </Routes>
             <Footer />
+            <ToastContainer />
         </div>
     );
 }
