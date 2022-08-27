@@ -32,10 +32,12 @@ html {
 }
 
 // Default input styles
-input {
-  &:focus {
-    outline: 0.12rem solid #7b79f7;
-  }
+input,
+textarea,
+select {
+    &:focus {
+        outline: 0.12rem solid #7b79f7;
+    }
 }
 
 .App {

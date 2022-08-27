@@ -1,6 +1,7 @@
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD || '';
+const MONGO_USERNAME = process.env.MONGO_USERNAME || '';
 const DB_NAME = 'code-like-pro';
-const MongodbURI = `mongodb+srv://jiady:${MONGO_PASSWORD}@cluster0.7z3ly69.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
+const MongodbURI = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.7z3ly69.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
 
 const keys = {
     // Connect to the cloud database if the password env variale exists, otherwise connect to local mongodb.
