@@ -1,32 +1,18 @@
 const express = require('express');
 const exerciseController = require('../controller/exerciseController');
+const { ensureAuthenticated } = require('../middleware/auth');
 const catchAsync = require('../middleware/catchAsync');
 
 const router = express.Router();
 
-router.post(
-    '/exercise',
-    catchAsync(exerciseController.postExercise),
-);
+router.post('/', ensureAuthenticated, catchAsync(exerciseController.postExercise));
 
-router.get(
-    '/exercise',
-    exerciseController.getExercises,
-);
+router.get('/', exerciseController.getExercises);
 
-router.get(
-    '/exercise/:id',
-    exerciseController.getExerciseByID,
-);
+router.get('/:id', exerciseController.getExerciseByID);
 
-router.put(
-    '/exercise/:id',
-    exerciseController.updateExercise,
-);
+router.put('/:id', ensureAuthenticated, exerciseController.updateExercise);
 
-router.delete(
-    '/exercise/:id',
-    exerciseController.deleteExercise,
-);
+router.delete('/:id', ensureAuthenticated, exerciseController.deleteExercise);
 
 module.exports = router;

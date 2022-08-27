@@ -8,8 +8,8 @@ type Monaco = typeof monaco;
 type CodeEditor = monaco.editor.IStandaloneCodeEditor;
 
 interface Props {
-    language?: Language;
     onChange(value: string | undefined): void;
+    language?: Language;
     showHeader?: boolean;
     value?: string;
     width?: string;

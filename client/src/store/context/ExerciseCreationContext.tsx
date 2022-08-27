@@ -66,7 +66,11 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
     const [testCases, setTestCases] = useState<ITestCase[]>(() => getInitialTestCaseArray());
 
     // const runTestCases = () => {};
-    // const saveExercise = () => {};
+
+    // Send POST request to the server.
+    const saveExercise = async () => {
+        const exercise = createExerciseObject();
+    };
 
     const createExerciseObject = () => ({
         name,
