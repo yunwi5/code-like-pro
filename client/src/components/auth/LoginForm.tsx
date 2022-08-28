@@ -11,7 +11,8 @@ type LoginState = { email: string; password: string };
 const LoginForm = () => {
     const navigate = useNavigate();
     const [loginState, setLoginState] = useState({ email: '', password: '' });
-    const [errorState, setErrorState] = useState({ email: '', password: '' });
+    const [errorState, setErrorState] = useState({ email: '', password: '', overall: '' });
+    const [isLoading, setIsLoading] = useState(false);
 
     // Check if the form is initially submitted by the user.
     const initialSubmitRef = useRef<boolean>(false);
@@ -22,7 +23,7 @@ const LoginForm = () => {
             errorState.email = invalidateEmail(state.email) || '';
         if (key === 'password' || key === 'all')
             errorState.password = invalidatePassword(state.password) || '';
-        setErrorState({ ...errorState });
+        setErrorState({ ...errorState, overall: '' });
         return errorState;
     };
 
@@ -46,12 +47,17 @@ const LoginForm = () => {
         // If any errorState is on, do not send the register request.
         if (Object.values(error).join('').trim()) return;
 
+        setIsLoading(true);
         // Use returned data as a global user data
-        const { ok, message, data } = await loginRequest(loginState);
+        const { ok, data } = await loginRequest(loginState);
+        setIsLoading(false);
+
         // If the login is success, redirect to the home page.
         if (ok) {
             navigate('/');
             toastNotify('Login Successful!', ToastType.SUCCESS);
+        } else {
+            setErrorState((prev) => ({ ...prev, overall: 'Email or password is incorrect.' }));
         }
     };
 
@@ -62,6 +68,7 @@ const LoginForm = () => {
             onChange={handleChange}
             formState={loginState}
             errorState={errorState}
+            isLoading={isLoading}
         ></AuthCard>
     );
 };

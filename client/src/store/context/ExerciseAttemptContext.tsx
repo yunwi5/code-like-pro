@@ -8,12 +8,12 @@ interface IExerciseAttemptCtx {
     runCode: () => void;
 }
 
-const CodeEditorContext = React.createContext<IExerciseAttemptCtx>({
+const ExerciseAttemptContext = React.createContext<IExerciseAttemptCtx>({
     exercise: null,
     runCode: () => {},
 });
 
-export const useExerciseAttemptCtx = () => useContext(CodeEditorContext);
+export const useExerciseAttemptCtx = () => useContext(ExerciseAttemptContext);
 
 interface Props {
     exercise: IExercise | null;
@@ -26,14 +26,17 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
 }) => {
     // At the moment, exercise APIs are not created, so the exercise data will be retrieved from the localStorage.
     // This will be replaced with real exercise data from the server. This acts as a dummy dadta.
-    const [exercise, setExercise] = useLocalStorage<IExercise>(
-        DRAFT_LOCAL_STORATE_KEY,
-        exerciseProp,
+    const [exercise, _] = useLocalStorage<IExercise>(DRAFT_LOCAL_STORATE_KEY, exerciseProp);
+
+    const runCode = () => {
+        // output of the test cases => actual output, status like correctness
+    };
+
+    const value = { exercise, runCode };
+
+    return (
+        <ExerciseAttemptContext.Provider value={value}>
+            {children}
+        </ExerciseAttemptContext.Provider>
     );
-
-    const runCode = () => {};
-
-    const value = { exercise: exercise, runCode };
-
-    return <CodeEditorContext.Provider value={value}>{children}</CodeEditorContext.Provider>;
 };

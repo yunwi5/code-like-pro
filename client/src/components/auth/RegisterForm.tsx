@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { registerRequest } from '../../apis/auth';
 import { ToastType } from '../../models/enums';
+import { IRegisterState } from '../../models/interfaces';
 import { toastNotify } from '../../utils/notification/toast';
 import {
     invalidateEmail,
@@ -11,24 +12,29 @@ import {
 } from '../../utils/string-utils/validation';
 import AuthCard from './AuthCard';
 
-type RegisterState = { email: string; name: string; password: string };
 const RegisterForm = () => {
     const navigate = useNavigate();
     const [registerState, setRegisterState] = useState({ email: '', password: '', name: '' });
-    const [errorState, setErrorState] = useState({ email: '', password: '', name: '' });
+    const [errorState, setErrorState] = useState({
+        email: '',
+        password: '',
+        name: '',
+        overall: '',
+    });
+    const [isLoading, setIsLoading] = useState(false);
 
     // Check if the form is initially submitted by the user.
     const initialSubmitRef = useRef<boolean>(false);
 
     // Handle form validation
-    const doValidation = (state: RegisterState, key: string) => {
+    const doValidation = (state: IRegisterState, key: string) => {
         if (key === 'email' || key === 'all')
             errorState.email = invalidateEmail(state.email) || '';
         if (key === 'name' || key === 'all')
             errorState.name = invalidateUsername(state.name) || '';
         if (key === 'password' || key === 'all')
             errorState.password = invalidatePassword(state.password) || '';
-        setErrorState({ ...errorState });
+        setErrorState({ ...errorState, overall: '' });
         return errorState;
     };
 
@@ -51,7 +57,10 @@ const RegisterForm = () => {
 
         // If any errorState is on, do not send the register request.
         if (Object.values(error).join('').trim()) return;
-        const { ok, data, message } = await registerRequest(registerState);
+
+        setIsLoading(true);
+        const { ok } = await registerRequest(registerState);
+        setIsLoading(false);
 
         // If register is success, redirect to the login page.
         if (ok) {
@@ -67,6 +76,7 @@ const RegisterForm = () => {
             errorState={errorState}
             onSubmit={handleSubmit}
             onChange={handleChange}
+            isLoading={isLoading}
         />
     );
 };
