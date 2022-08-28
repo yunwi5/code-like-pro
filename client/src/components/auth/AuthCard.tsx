@@ -1,26 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { ImKey } from 'react-icons/im';
+import { FaUserAlt } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+
 import CustomInput from '../ui/inputs/CustomInput';
 import Button from '../ui/buttons/Button';
 import { GoogleIcon } from '../../assets/svg-icons/social-svgs';
-import { FaUserAlt } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
-import { ImKey } from 'react-icons/im';
-import { Link } from 'react-router-dom';
+import { IAuthErrorState, IAuthFormState } from '../../models/interfaces';
 
 const btnClass = 'min-w-[10rem] my-3 w-full';
-
-type FormState = {
-    email: string;
-    password: string;
-    name?: string;
-};
 
 const AuthCard = (props: {
     isLogin: boolean;
     onSubmit: (e: React.FormEvent) => void;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    formState: FormState; // form state that stores current value for each input
-    errorState?: FormState; // form state that stores error for each input
+    formState: IAuthFormState; // form state that stores current value for each input
+    errorState?: IAuthErrorState; // form state that stores error for each input
+    isLoading?: boolean;
 }) => {
     return (
         <div className="flex justify-center">
@@ -68,8 +66,16 @@ const AuthCard = (props: {
                             error={props.errorState?.password}
                             icon={<ImKey />}
                         />
+
+                        {props.errorState?.overall && (
+                            <p className="text-rose-500 text-left">
+                                {props.errorState.overall}
+                            </p>
+                        )}
+
                         <Button type="submit" className={btnClass}>
-                            {props.isLogin ? 'Login' : 'Register'}
+                            {props.isLoading && <ClipLoader color="#fff" size={30} />}
+                            {!props.isLoading && (props.isLogin ? 'Login' : 'Register')}
                         </Button>
 
                         {props.isLogin ? (

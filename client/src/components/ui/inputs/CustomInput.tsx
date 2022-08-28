@@ -12,7 +12,7 @@ const CustomInput = (props: {
     icon?: JSX.Element;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
-    const errorClass = props.error ? 'border-rose-400 bg-rose-50 focus:outline-none' : '';
+    const errorClass = props.error ? '!border-rose-400 !bg-rose-50 focus:outline-none' : '';
 
     return (
         <div className="relative flex flex-col gap-1 my-3">

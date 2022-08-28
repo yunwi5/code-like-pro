@@ -1,22 +1,30 @@
 import React from 'react';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import Button from '../../ui/buttons/Button';
+import RingLoader from 'react-spinners/RingLoader';
 
 const btnClass = 'min-w-[10rem]';
 
 const ChallengeActions: React.FC = () => {
-    const { saveDraft } = useExerciseCreationContext();
+    const { saveDraft, saveExercise, isLoading } = useExerciseCreationContext();
 
     return (
         <div className="flex flex-col sm:flex-row lg:flex-col flex-wrap justify-between gap-2">
             <Button className={btnClass} onClick={saveDraft}>
                 Save Draft
             </Button>
-            <Button className={btnClass} mode="empty">
-                Run Code
-            </Button>
-            <Button className={btnClass}>Save Challenge</Button>
-            {/* <Button className={btnClass}>See Result</Button> */}
+            {isLoading ? (
+                <RingLoader color="#3c38e0" size={100} className="!self-center" />
+            ) : (
+                <>
+                    <Button className={btnClass} mode="empty">
+                        Run Code
+                    </Button>
+                    <Button className={btnClass} onClick={saveExercise}>
+                        Save Challenge
+                    </Button>
+                </>
+            )}
         </div>
     );
 };
