@@ -1,20 +1,24 @@
 import { Route, Routes } from 'react-router-dom';
-import { AppProperty } from './constants/app';
-import ExerciseCreation from './pages/exercise-pages/ExerciseCreation';
-import Home from './pages/Home';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import ExerciseCreationPage from './pages/exercise-pages/ExerciseCreation';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
+import ExerciseAttemptPage from './pages/exercise-pages/ExerciseAttemptPage';
 
 function App() {
     return (
         <div className="App">
-            <div className="flex flex-col items-center justify-center">
-                <h1 className="text-xl bg-main text-center">
-                    Welcome to {AppProperty.APP_NAME}
-                </h1>
-            </div>
+            <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/create-exercise" element={<ExerciseCreation />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/create-exercise" element={<ExerciseCreationPage />} />
+                <Route path="/exercise/:id" element={<ExerciseAttemptPage />} />
             </Routes>
+            <Footer />
         </div>
     );
 }

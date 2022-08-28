@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { AppProperty } from '../constants/app';
+import Header from '../components/layout/Header';
 
 const Home: React.FC = () => {
     return (

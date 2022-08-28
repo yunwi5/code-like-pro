@@ -1,6 +1,7 @@
 const Exercise = require('../models/Exercise');
 const fetch = require('axios');
 
+
 async function makeRequest(bodyData){
 
     const options = {
@@ -20,14 +21,35 @@ async function makeRequest(bodyData){
 const postExercise = async (req, res) => {
     const exerciseBody = req.body;
     const exercise = new Exercise(exerciseBody);
+
+function makeRequest(bodyData){
+    fetch('http://68.183.118.35/jobe/index.php/restapi/runs', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json; charset-utf-8'
+        },
+        body: JSON.stringify(bodyData),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            return data;
+        });
+}
+
+const postExercise = async (req, res) => {
+    const exercise = new Exercise(req.body.exercise);
+
     exercise.author = req.user._id;
 
     // Check solutionCode works
 
     const testCases = exercise.testCases;
     const solutionCode = exercise.solutionCode;
+
     let language = exercise.language;
     // Should need to make sure language_code is received from the client.
+
 
     // Iterate through each test case and make request to JOBE server
 
@@ -35,6 +57,7 @@ const postExercise = async (req, res) => {
         // Append test case to solution code and check if output is right
 
         const test = solutionCode + "\n" + testCase.testCode;
+
 
         const body = {
             run_spec: {
@@ -46,6 +69,7 @@ const postExercise = async (req, res) => {
 
         const result =  makeRequest(body);
         return result;
+
     });
 
     const testCaseResults = await Promise.all(testCasePromises);
@@ -60,8 +84,13 @@ const postExercise = async (req, res) => {
     await exercise.save();
     console.log('new exercise', exercise);
 
+
     res.status(201).json(exercise);
 };
+
+    res.json(exercise);
+}
+
 
 
 const getExercises = async (req, res) => {
