@@ -1,10 +1,10 @@
 FROM node:latest
 
 # Working directory
-WORKDIR /user/src/app
+WORKDIR /usr/app
 
 # Copying our dependencies to the container
-COPY package.json package.json
+COPY package*.json ./
 
 # Intall the dependencies we copied
 RUN npm install
