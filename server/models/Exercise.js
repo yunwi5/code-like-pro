@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const TestCaseSchema = new Schema({
-   testcode: {
+   testCode: {
         type: String,
         required: true,
    },
