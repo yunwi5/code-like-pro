@@ -1,0 +1,44 @@
+# HOW to run the whole MERN application with the docker container.
+# 1. Install docker on your machine, and docker desktop app as well.
+# 2. In the root directory, run 'docker-compose build --no-cache' to build the network and containers.
+# 3. Run 'docker-compose up' to start the services within the network 'codelikepro-network'.
+# 4. Run 'docker-compose stop' to stop services.
+
+version: "3"
+services:
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    container_name: codelikepro-client
+    networks:
+      - codelikepro-network
+    volumes:
+      - ./client/src:/usr/app/src
+      - ./client/public:/usr/app/public
+    depends_on:
+      - server
+    # docker-compose file to start in an interactive mode
+    stdin_open: true
+    tty: true
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    container_name: codelikepro-server
+    networks:
+      - codelikepro-network
+    volumes:
+      - ./server/src:/usr/app/src
+
+networks:
+  codelikepro-network:
+    driver: bridge
+
+# Volumnes for DB are on the cloud database.
