@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:18-alpine
 
 # Working directory
 WORKDIR /user/src/app
