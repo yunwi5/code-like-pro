@@ -1,5 +1,5 @@
-import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
-import TestCase from '../../../../ui/test-cases/TestCase';
+import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import TestCase from '../../../ui/test-cases/TestCase';
 
 // Displaying list of test cases for the user view.
 // Should not allow users to modify or delete any test cases.

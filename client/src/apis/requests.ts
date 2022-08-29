@@ -1,41 +1,60 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { authConfig } from './config';
 
-// Wrapper functiosn for HTTP requests
+// Helper functions for HTTP requests that abstract the request processes.
 // Reduce the amount of code for writing http requst.
 
-type ReqBodyParams = { url: string; body: any; headers?: object };
-// There can be more params in the future.
-export async function postRequest<T>({ url, body, headers }: ReqBodyParams) {
-    let response: any = null;
+// Request params for GET & DELETE requests
+type ReqParams = { url: string; headers?: AxiosRequestConfig };
+// Request params for POST & PUT requests
+type ReqBodyParams = { url: string; body: any; headers?: AxiosRequestConfig };
+
+export async function getRequest<T>({ url, headers }: ReqParams) {
+    let data: T | null = null;
     try {
-        response = await axios.post<T>(url, body, headers ?? authConfig);
-        return { ok: true, data: response.data };
+        const response = await axios.get<T>(url, headers ?? authConfig);
+        data = response.data;
+        return { ok: true, data };
     } catch (err) {
-        // If the status is 400~500 range, the returned data from the server may contain message
-        let message = response?.data?.message || (err as any).message;
+        let message = (data as any)?.message || (err as any).message;
         return { ok: false, message };
     }
 }
 
-export async function getRequest<T>({ url, headers }: { url: string; headers?: object }) {
-    let response: any = null;
+// There can be more params in the future.
+export async function postRequest<T>({ url, body, headers }: ReqBodyParams) {
+    let data: T | null = null;
     try {
-        response = await axios.get<T>(url, headers ?? authConfig);
-        return { ok: true, data: response.data };
+        const response = await axios.post<T>(url, body, headers ?? authConfig);
+        data = response.data;
+        return { ok: true, data };
     } catch (err) {
-        let message = response?.data?.message || (err as any).message;
+        // If the status is 400~500 range, the returned data from the server may contain message
+        let message = (data as any)?.message || (err as any).message;
         return { ok: false, message };
     }
 }
 
 export async function putRequest<T>({ url, body, headers }: ReqBodyParams) {
-    let response: any = null;
+    let data: T | null = null;
     try {
-        response = await axios.put<T>(url, body, headers ?? authConfig);
-        return { ok: true, data: response.data };
+        let response = await axios.put<T>(url, body, headers ?? authConfig);
+        data = response.data;
+        return { ok: true, data };
     } catch (err) {
-        let message = response?.data?.message || (err as any).message;
+        let message = (data as any)?.message || (err as any).message;
+        return { ok: false, message };
+    }
+}
+
+export async function deleteRequest<T>({ url, headers }: ReqParams) {
+    let data: T | null = null;
+    try {
+        let response = await axios.delete<T>(url, headers ?? authConfig);
+        data = response.data;
+        return { ok: true, data };
+    } catch (err) {
+        let message = (data as any)?.message || (err as any).message;
         return { ok: false, message };
     }
 }

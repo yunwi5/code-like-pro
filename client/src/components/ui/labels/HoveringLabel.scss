@@ -9,12 +9,12 @@
         left: 50%;
         border-radius: 3px;
         transform: translateX(-50%);
-        clip-path: polygon(0% 20%, 42% 20%, 50% 0, 58% 20%, 100% 20%, 100% 100%, 0 100%);
+        clip-path: polygon(0% 20%, 40% 20%, 50% 0, 60% 20%, 100% 20%, 100% 100%, 0 100%);
     }
 
     &__text {
         display: block;
-        transform: translateY(10%);
+        transform: translateY(15%);
     }
 
     &:hover {

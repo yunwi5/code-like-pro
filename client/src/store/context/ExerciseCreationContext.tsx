@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postExercise, putExercise } from '../../apis/exercise-apis/exercise';
+import { postExercise, putExercise } from '../../apis/exercise/exercise';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { Difficulty, Language, ProgrammingTopic, ToastType } from '../../models/enums';
 import { IExercise, IExerciseWithId, ITestCase } from '../../models/interfaces';
@@ -98,7 +98,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
 
         if (ok) {
             toastNotify('Challenge was saved successfully!', ToastType.SUCCESS);
-            setCreatedExercise(data);
+            if (data) setCreatedExercise(data);
         } else {
             toastNotify(message, ToastType.ERROR);
         }

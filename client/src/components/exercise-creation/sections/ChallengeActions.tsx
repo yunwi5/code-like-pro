@@ -2,7 +2,6 @@ import React from 'react';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import Button from '../../ui/buttons/Button';
 import RingLoader from 'react-spinners/RingLoader';
-import { Link } from 'react-router-dom';
 
 const btnClass = 'min-w-[10rem]';
 
@@ -33,7 +32,11 @@ const ChallengeActions: React.FC = () => {
                 </>
             )}
             {!!createdExercise && (
-                <Button onClick={() => redirectToCreatedExercisePage()} className={btnClass}>
+                <Button
+                    mode="empty"
+                    onClick={() => redirectToCreatedExercisePage()}
+                    className={btnClass}
+                >
                     Published Result
                 </Button>
             )}

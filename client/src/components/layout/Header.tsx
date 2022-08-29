@@ -19,7 +19,7 @@ const Header = () => {
                         Browse
                     </ActiveNavLink>
                     <ActiveNavLink
-                        to="/"
+                        to="/ranking"
                         activeClassName="text-main-500 font-semibold"
                         className="block mt-4 lg:inline-block lg:mt-0 text-text-main hover:text-main-700 mr-10"
                     >

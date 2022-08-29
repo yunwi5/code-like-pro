@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import ExerciseInfoNav from './nav/ExerciseInfoNav';
+import ExerciseInfoNav from './ExerciseInfoNav';
 import ExercisePrompt from './sub-sections/exercise-prompt/ExercisePrompt';
-import ScratchPad from './sub-sections/scratch-pad/ScratchPad';
-import TestCasesDisplay from './sub-sections/test-cases/TestCasesDisplay';
+import ScratchPad from './sub-sections/ScratchPad';
+import TestCasesDisplay from './sub-sections/TestCasesDisplay';
 
 export enum SubSection {
     PROMPT = 'Prompt',

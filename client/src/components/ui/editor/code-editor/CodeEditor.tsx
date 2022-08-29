@@ -85,8 +85,6 @@ const CodeEditor: React.FC<Props> = ({
 // For example, we use the name C# which should be mapped to csharp for monaco language config.
 function getMonacoLanguageName(lang: Language | undefined) {
     switch (lang) {
-        case Language.CSHARP:
-            return 'csharp';
         case Language.CPP:
             return 'cpp';
         default:

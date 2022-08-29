@@ -1,5 +1,5 @@
 import React from 'react';
-import { SubSection, SubSectionList } from '../ExerciseInfoSection';
+import { SubSection, SubSectionList } from './ExerciseInfoSection';
 
 interface Props {
     activeSubSection: SubSection;

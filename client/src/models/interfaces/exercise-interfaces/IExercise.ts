@@ -5,7 +5,7 @@ import { IUser } from '../IUser';
 export interface IExercise {
     _id?: string;
     name: string;
-    language: Language | string;
+    language: Language;
     topic: ProgrammingTopic;
     difficulty: Difficulty;
     prompt: string;

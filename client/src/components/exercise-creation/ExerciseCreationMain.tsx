@@ -1,5 +1,5 @@
 import CreationHeader from './header/CreationHeader';
-import CreationSidebar from './navigation/CreationSidebar';
+import CreationSidebar from './sidebar/CreationSidebar';
 import ChallengeActions from './sections/ChallengeActions';
 import ChallengeName from './sections/ChallengeName';
 import ChallengePrompt from './sections/ChallengePrompt';

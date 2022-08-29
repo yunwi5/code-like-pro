@@ -1,7 +1,7 @@
 import React from 'react';
-import useLocalStorage from '../../../../../hooks/useLocalStorage';
-import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
-import CodeEditor from '../../../../ui/editor/code-editor/CodeEditor';
+import useLocalStorage from '../../../../hooks/useLocalStorage';
+import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import CodeEditor from '../../../ui/editor/code-editor/CodeEditor';
 
 const ScratchPad: React.FC = () => {
     const { exercise } = useExerciseAttemptCtx();

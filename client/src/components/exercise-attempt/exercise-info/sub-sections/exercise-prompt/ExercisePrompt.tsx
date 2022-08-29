@@ -8,8 +8,6 @@ import ExercisePromptHeader from './ExercisePromptHeader';
 const ExercisePrompt: React.FC = () => {
     const { exercise } = useExerciseAttemptCtx();
 
-    console.log(exercise);
-
     return (
         <section className="flex-1 flex flex-col gap-8 overflow-y-scroll px-5 py-4 bg-white">
             <ExercisePromptHeader />
