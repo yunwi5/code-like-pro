@@ -1,11 +1,3 @@
-import React from 'react';
-import {
-    ProgrammingTopicList,
-    SortingDirectionList,
-    SortingKeyList,
-    SubmissionStatusList,
-} from '../../../models/enums';
-import CustomSelect from '../../ui/inputs/CustomSelect';
 import DifficultyFilter from './sections/DifficultyFilter';
 import ExerciseSearch from './sections/ExerciseSearch';
 import ExerciseSorter from './sections/ExerciseSorter';
@@ -14,7 +6,7 @@ import TagsFilter from './sections/TagsFilter';
 
 const BrowsingSidebar = () => {
     return (
-        <aside className="sticky top-5 flex flex-col gap-4 basis-1/3 px-3 py-4 text-gray-700 bg-gray-200/90 rounded-sm shadow-md">
+        <aside className="lg:sticky top-5 flex flex-col gap-4 lg:basis-1/3 px-3 py-4 text-gray-700 bg-gray-200/90 rounded-sm shadow-md">
             <ExerciseSearch />
             <ExerciseSorter />
             <LanguageAndStatusFilter />

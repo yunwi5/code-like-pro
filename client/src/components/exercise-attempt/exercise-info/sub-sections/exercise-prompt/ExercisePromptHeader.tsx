@@ -38,7 +38,7 @@ const ExercisePromptHeader: React.FC = () => {
                     38,239 of 60,329 (63%)
                 </li>
                 <li className="flex gap-1">
-                    <MdReportProblem className="text-rose-500 text-[1.35rem]" /> 5 reports
+                    <MdReportProblem className="text-stone-500 text-[1.35rem]" /> 5 reports
                 </li>
             </ul>
         </header>

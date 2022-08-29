@@ -16,3 +16,18 @@ export function getDifficultyColorClass(difficulty: Difficulty) {
             return 'text-main-400 border-2 border-main-400 hover:text-main-50 hover:bg-main-400';
     }
 }
+
+export function mapDifficultyToNumericValue(difficulty: Difficulty) {
+    switch (difficulty) {
+        case Difficulty.EASY:
+            return 1;
+        case Difficulty.MEDIUM:
+            return 2;
+        case Difficulty.HARD:
+            return 3;
+        case Difficulty.EXPERT:
+            return 4;
+        default:
+            return -1;
+    }
+}

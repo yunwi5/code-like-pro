@@ -1,4 +1,5 @@
 export enum SortingKey {
+    NONE = 'None',
     NAME = 'Name',
     CORRECT_RATE = 'Correct Rate',
     DIFFICULTY = 'Difficulty',

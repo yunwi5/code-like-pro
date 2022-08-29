@@ -7,7 +7,7 @@ import { BsFillTagsFill } from 'react-icons/bs';
 import { IExerciseCard } from '../../../models/interfaces';
 import { getDifficultyColorClass } from '../../../utils/difficulty';
 import { getLanguageIcon } from '../../../utils/language';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getExerciseAttemptPageLink } from '../../../utils/links';
 import HoveringLabel from '../labels/HoveringLabel';
 import styles from './ExerciseCard.module.scss';
@@ -18,16 +18,18 @@ interface Props {
 }
 
 const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
+    const navigate = useNavigate();
     const difficultyStyle = getDifficultyColorClass(exercise.difficulty);
     return (
         <article
+            onClick={() => navigate(getExerciseAttemptPageLink(exercise._id))}
             className={`card flex flex-col gap-4 px-4 py-2 text-gray-700 border-2 border-gray-200/90 cursor-pointer hover:bg-blue-500/30 ${className} ${styles.card}`}
         >
             {/* Exercise name, difficulty and language */}
             <header className="flex-start gap-3">
-                <h3 className="text-[1.13rem]">{exercise.name}</h3>
+                <h3 className="text-base sm:text-[1.13rem]">{exercise.name}</h3>
                 <div
-                    className={`flex-center px-[0.4rem] py-[2px] text-sm rounded-md ${difficultyStyle}`}
+                    className={`flex-center px-[0.4rem] py-[1.5px] sm:py-[2px] text-[0.8rem] sm:text-sm rounded-md ${difficultyStyle}`}
                 >
                     {exercise.difficulty}
                 </div>
@@ -37,7 +39,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
             </header>
 
             {/* Exercise Info */}
-            <ul className="flex-start gap-2 text-sm">
+            <ul className="flex-start flex-wrap gap-2 text-[0.82rem] sm:text-sm">
                 <li className="flex-start gap-1">
                     <FaUser className="text-gray-600 text-base" />{' '}
                     {exercise.author?.name || 'Anonymous'}
@@ -55,8 +57,9 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                 </li>
             </ul>
 
-            {/* Tags */}
-            <ul className="flex-start flex-wrap gap-2 text-[0.85rem]">
+            {/* Tags List. Tags will only be shown on the card for 640px screen size or above. */}
+            {/* On the mobile screen size, rendering tag list makes it look worse. */}
+            <ul className="hidden sm:flex-start flex-wrap gap-2 text-[0.85rem]">
                 <BsFillTagsFill className="text-lg text-slate-500" />
 
                 {/* Display maximum 5 tags. Fist 5 tags in this case. */}

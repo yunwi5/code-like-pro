@@ -42,7 +42,7 @@ const Searchbar: React.FC<Props> = ({
                 <input
                     type="search"
                     placeholder="Search your words"
-                    className="input flex-1"
+                    className="input flex-1 w-full"
                     value={textValue}
                     onChange={handleTextChange}
                 />

@@ -15,6 +15,7 @@ export function createRandomExercise(idx: number) {
         correctRate: getRandomNumber(0, 100),
         reports: getRandomNumber(0, 300),
         stars: getRandomNumber(0, 10000),
+        prompt: getRandomString(),
         // Generage a random dummy author.
         author: { _id: Math.random().toString(), name: getRandomString() },
     };

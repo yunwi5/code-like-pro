@@ -16,7 +16,7 @@ const Home: React.FC = () => {
             </Helmet>
             <section className="h-[80vh] w-full flex-center flex-col">
                 <div>Home</div>
-                <Link className="text-blue-500" to="/exercise/300">
+                <Link className="text-blue-500" to="/exercise/630c2cd2127fc69377732710">
                     Example exercise attempt page
                 </Link>
             </section>
