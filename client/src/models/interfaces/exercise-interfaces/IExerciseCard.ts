@@ -13,5 +13,7 @@ export interface IExerciseCard {
     stars: number; // favorite count
     reports: number; // report count
     tags: string[];
+    createdAt?: Date | string;
+    prompt?: string;
     author?: IUser;
 }

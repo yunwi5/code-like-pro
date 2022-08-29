@@ -47,7 +47,7 @@ const PageNavigation: React.FC<Props> = ({ currentPage, totalPages, onChangePage
             </div>
 
             {/* First Page displayed only if the currrent page is close to the last page. */}
-            {currentPageCloseToEnd && (
+            {currentPageCloseToEnd && totalPages >= 5 && (
                 <>
                     <PageLabel
                         page={0}
@@ -97,6 +97,8 @@ const PageLabel: React.FC<{
     currentPage?: number;
     onClick: () => void;
 }> = ({ page, currentPage, onClick }) => {
+    if (page < 0) return null;
+
     return (
         <span
             className={`flex-center w-[1.8rem] h-[1.8rem] rounded-md hover:bg-gray-200/90 cursor-pointer ${
