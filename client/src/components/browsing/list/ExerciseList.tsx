@@ -18,7 +18,7 @@ const ExerciseList: React.FC<{ exercises: IExerciseCard[] }> = ({ exercises }) =
     }, [page]);
 
     return (
-        <section className="basis-2/3">
+        <section className="lg:basis-2/3">
             <div className="flex flex-col gap-5 mb-8">
                 {currentPageExercises.map((ex, idx) => (
                     <ExerciseCard

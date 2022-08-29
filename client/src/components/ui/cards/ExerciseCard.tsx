@@ -55,8 +55,9 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                 </li>
             </ul>
 
-            {/* Tags */}
-            <ul className="flex-start flex-wrap gap-2 text-[0.85rem]">
+            {/* Tags List. Tags will only be shown on the card for 640px screen size or above. */}
+            {/* On the mobile screen size, rendering tag list makes it look worse. */}
+            <ul className="hidden sm:flex-start flex-wrap gap-2 text-[0.85rem]">
                 <BsFillTagsFill className="text-lg text-slate-500" />
 
                 {/* Display maximum 5 tags. Fist 5 tags in this case. */}

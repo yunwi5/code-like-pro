@@ -38,7 +38,7 @@ const BrowsingMain: React.FC<Props> = ({ exercises }) => {
             <h3 className="text-gray-500/90 font-semibold text-lg text-right">
                 {randomExercises.length} Challenges Found
             </h3>
-            <div className="flex items-start gap-6">
+            <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                 <BrowsingSidebar />
                 <ExerciseList exercises={randomExercises} />
             </div>
