@@ -1,3 +1,12 @@
+import {
+    CIcon,
+    CppIcon,
+    JavaIcon,
+    JavaScriptIcon,
+    PascalIcon,
+    PhpIcon,
+    PythonIcon,
+} from '../assets/svg-icons/language-svgs';
 import { Language } from '../models/enums';
 
 export function mapLanguageToJobeLangCode(language: Language) {
@@ -26,13 +35,33 @@ export function mapJobeLangCodeToAppLanguage(langCode: string): Language {
             return Language.JAVA;
         case 'nodejs':
             return Language.JAVASCRIPT;
-        case 'octave':
-            return Language.OCTAVE;
         case 'php':
             return Language.PHP;
         case 'pascal':
             return Language.PASCAL;
         default:
             return Language.PYTHON;
+    }
+}
+
+// Fine the icon for each language supported.
+type SvgParams = { width?: string; height?: string; className?: string };
+export function getLanguageIcon(language: Language, params?: SvgParams) {
+    switch (language) {
+        case Language.C:
+            return <CIcon {...params} />;
+        case Language.CPP:
+            return <CppIcon {...params} />;
+        case Language.PYTHON:
+            return <PythonIcon {...params} />;
+        case Language.JAVASCRIPT:
+            return <JavaScriptIcon {...params} />;
+        // All other languages codes are just our client style names in lowercase.
+        case Language.JAVA:
+            return <JavaIcon {...params} />;
+        case Language.PHP:
+            return <PhpIcon {...params} />;
+        case Language.PASCAL:
+            return <PascalIcon {...params} />;
     }
 }

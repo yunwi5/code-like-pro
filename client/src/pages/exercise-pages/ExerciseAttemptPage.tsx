@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
-import { getExerciseById } from '../../apis/exercise-apis/exercise';
+import { getExerciseById } from '../../apis/exercise/exercise';
 import ExerciseAttemptMain from '../../components/exercise-attempt/ExerciseAttemptMain';
 import { AppProperty } from '../../constants/app';
 import { IExercise } from '../../models/interfaces';
@@ -18,7 +18,7 @@ const ExerciseAttemptPage: React.FC = () => {
     useEffect(() => {
         if (exerciseId == null) return navigate('/');
         getExerciseById(exerciseId).then((res) => {
-            setExercise(res.data);
+            if (res.data) setExercise(res.data);
         });
     }, [exerciseId]);
 
@@ -32,7 +32,7 @@ const ExerciseAttemptPage: React.FC = () => {
                 />
             </Helmet>
             {!exercise && (
-                <div className="flex-center mt-16">
+                <div className="min-h-[82vh] flex-center">
                     <ClipLoader size={200} color="#3c38e0" />
                 </div>
             )}

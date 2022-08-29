@@ -1,0 +1,21 @@
+.card {
+    position: relative;
+    transition: all 1s ease-in-out;
+
+    .btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transition: all 0.35s ease-in-out;
+        transform: translateX(-50%) translateY(100%);
+        border-radius: 5px;
+        opacity: 0;
+    }
+
+    &:hover {
+        .btn {
+            transform: translateX(-50%) translateY(-50%);
+            opacity: 1;
+        }
+    }
+}

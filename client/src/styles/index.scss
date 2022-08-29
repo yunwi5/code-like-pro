@@ -67,6 +67,10 @@ code {
     .btn-fill {
         @apply text-main-50 bg-main-400 hover:bg-main-500;
     }
+    // Button in blue color (secondary theme)
+    .btn-blue-fill {
+        @apply text-main-50 bg-blue-600 hover:bg-blue-700/90;
+    }
     .btn-empty {
         @apply text-main-600 border-2 border-main-400 bg-main-50/20 hover:bg-main-500 hover:text-main-50;
     }
@@ -75,5 +79,8 @@ code {
     }
     .icon-box {
         @apply flex-center text-2xl border-[1.5px] rounded-sm shadow-md transition-all cursor-pointer;
+    }
+    .card {
+        @apply rounded-sm transition-all shadow-md hover:shadow-lg;
     }
 }

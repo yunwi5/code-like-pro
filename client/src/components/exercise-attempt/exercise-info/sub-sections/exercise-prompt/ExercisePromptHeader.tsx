@@ -3,7 +3,7 @@ import { MdReportProblem, MdCategory } from 'react-icons/md';
 import { AiFillStar, AiFillCheckCircle } from 'react-icons/ai';
 import { FaUserEdit } from 'react-icons/fa';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
-import { Difficulty } from '../../../../../models/enums';
+import { getDifficultyColorClass } from '../../../../../utils/difficulty';
 
 const ExercisePromptHeader: React.FC = () => {
     const { exercise } = useExerciseAttemptCtx();
@@ -44,21 +44,5 @@ const ExercisePromptHeader: React.FC = () => {
         </header>
     );
 };
-
-// Show different color for different difficulties.
-function getDifficultyColorClass(difficulty: Difficulty) {
-    switch (difficulty) {
-        case Difficulty.EASY:
-            return 'text-emerald-400 border-emerald-400 hover:text-emerald-50 hover:bg-emerald-400';
-        case Difficulty.MEDIUM:
-            return 'text-sky-400 border-sky-400 hover:text-sky-50 hover:bg-sky-400';
-        case Difficulty.HARD:
-            return 'text-rose-400 border-rose-400 hover:text-rose-50 hover:bg-rose-400';
-        case Difficulty.EXPERT:
-            return 'text-stone-500 border-stone-500 hover:text-stone-50 hover:bg-stone-500';
-        default:
-            return 'text-main-400 border-main-400 hover:text-main-50 hover:bg-main-400';
-    }
-}
 
 export default ExercisePromptHeader;
