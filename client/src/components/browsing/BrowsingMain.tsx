@@ -34,11 +34,11 @@ const BrowsingMain: React.FC<Props> = ({ exercises }) => {
     }, [exerciseCards]);
 
     return (
-        <main className="flex flex-col gap-2 pt-[4rem] px-7 md:px-12 xl:px-[7%] py-8 min-h-[85vh]">
+        <main className="flex flex-col gap-2 pt-[4rem] px-7 md:px-12 xl:px-[9%] py-8 min-h-[85vh]">
             <h3 className="text-gray-500/90 font-semibold text-lg text-right">
                 {randomExercises.length} Challenges Found
             </h3>
-            <div className="flex gap-6">
+            <div className="flex items-start gap-6">
                 <BrowsingSidebar />
                 <ExerciseList exercises={randomExercises} />
             </div>

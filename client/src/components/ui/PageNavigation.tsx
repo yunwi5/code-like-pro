@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    BsChevronLeft,
-    BsChevronRight,
-    BsChevronDoubleLeft,
-    BsChevronDoubleRight,
-} from 'react-icons/bs';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 interface Props {
     currentPage: number;
@@ -12,11 +7,12 @@ interface Props {
     onChangePage: (newPage: number) => void;
 }
 
-function createPageList(currentPage: number, totalPages: number) {
+function createAdjacentPageList(currentPage: number, totalPages: number) {
     let pages = [];
     if (currentPage + 4 < totalPages) {
-        let maxPage = Math.min(totalPages, currentPage + 5);
-        for (let p = currentPage; p < maxPage; p++) {
+        let startPage = currentPage < 2 ? 0 : currentPage - 2;
+        let endPage = currentPage < 2 ? 4 : currentPage + 2;
+        for (let p = startPage; p <= endPage; p++) {
             pages.push(p);
         }
         return pages;
@@ -32,9 +28,8 @@ const navBtnClass =
     'flex-center w-[2rem] h-[2rem] rounded-sm text-2xl hover:bg-gray-200/90 cursor-pointer';
 
 const PageNavigation: React.FC<Props> = ({ currentPage, totalPages, onChangePage }) => {
-    const pageList = createPageList(currentPage, totalPages);
+    const pageList = createAdjacentPageList(currentPage, totalPages);
 
-    //
     const currentPageCloseToEnd = currentPage + 4 >= totalPages;
 
     const dots = <span>...</span>;

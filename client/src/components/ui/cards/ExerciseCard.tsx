@@ -72,7 +72,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
 
             {/* Link to exercise attempt page for this exercise */}
             <Link
-                className={`${styles.btn} btn btn-blue-fill`}
+                className={`${styles.btn} btn btn-fill`}
                 to={getExerciseAttemptPageLink(exercise._id)}
             >
                 Try This!

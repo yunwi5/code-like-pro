@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-    labelText?: string;
+    labelText?: string | JSX.Element;
     labelId?: string;
     options: string[] | readonly string[];
     className?: string;

@@ -61,6 +61,9 @@ code {
     .focus-main {
         @apply focus:outline focus:outline-2 focus:outline-main-300;
     }
+    .input {
+        @apply px-2 py-2 border-2 border-gray-300 bg-gray-50 rounded-sm shadow-md focus:shadow-lg focus:outline focus:outline-2 focus:outline-main-300;
+    }
     .btn {
         @apply px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer;
     }

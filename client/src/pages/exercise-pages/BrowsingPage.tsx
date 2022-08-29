@@ -14,10 +14,8 @@ const BrowsingPage: React.FC = () => {
 
     if (error) {
         console.log(error);
-        return <h1 className="text-center">Something went wrong...</h1>;
+        return <h1 className="flex-center h-[82.5vh] text-center">Something went wrong...</h1>;
     }
-
-    console.log(data);
 
     return (
         <>
