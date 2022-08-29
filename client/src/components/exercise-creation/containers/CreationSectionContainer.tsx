@@ -16,12 +16,12 @@ const CreationSectionContainer: React.FC<Props> = ({ id, title, className, child
     const sectionRef = useRef<HTMLElement>(null);
 
     // Scroll effect on the sidebar, so that currently viewed section is highlighted on the sidebar (with our main color).
-    useScrollEffect({
-        elementRef: sectionRef,
-        callbackOnView: () => {
-            if (activeSection !== id) setActiveSection(id);
-        },
-    });
+    // useScrollEffect({
+    //     elementRef: sectionRef,
+    //     callbackOnView: () => {
+    //         if (activeSection !== id) setActiveSection(id);
+    //     },
+    // });
 
     return (
         <section className={`flex flex-col gap-3 ${className ?? ''}`} id={id} ref={sectionRef}>

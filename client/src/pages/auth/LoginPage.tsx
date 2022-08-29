@@ -1,6 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { AppProperty } from '../../constants/app';
+import AuthCard from '../../components/auth/AuthCard';
+import LoginForm from '../../components/auth/LoginForm';
 
 const LoginPage = () => {
     return (
@@ -12,7 +14,9 @@ const LoginPage = () => {
                     content={`Login page of ${AppProperty.APP_NAME} where users can log into their accounts.`}
                 />
             </Helmet>
-            <div>LoginPage</div>
+            <main className="flex justify-center lg:gap-8 xl:gap-[7.5%] mb-6 h-[80vh] px-3 md:px-5 xl:px-10 py-10 text-gray-700">
+                <LoginForm />
+            </main>
         </>
     );
 };

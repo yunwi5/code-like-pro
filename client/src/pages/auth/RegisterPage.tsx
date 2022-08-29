@@ -1,7 +1,7 @@
-import React from 'react';
-import Header from '../../components/layout/Header';
 import { Helmet } from 'react-helmet';
 import { AppProperty } from '../../constants/app';
+import AuthCard from '../../components/auth/AuthCard';
+import RegisterForm from '../../components/auth/RegisterForm';
 
 const RegisterPage = () => {
     return (
@@ -13,7 +13,9 @@ const RegisterPage = () => {
                     content={`Registration page of ${AppProperty.APP_NAME} where users can create a new account.`}
                 />
             </Helmet>
-            <div>RegisterPage</div>
+            <main className="flex justify-center min-h-[80vh] px-3 md:px-5 xl:px-10 py-10 text-gray-700">
+                <RegisterForm />
+            </main>
         </>
     );
 };

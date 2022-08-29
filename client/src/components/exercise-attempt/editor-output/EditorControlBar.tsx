@@ -15,7 +15,7 @@ const EditorControlBar: React.FC = () => {
 
     return (
         <>
-            <div className="flex items-center px-2 pr-5 py-[0.55rem] lg:py-[0.375rem] border-b-2 border-gray-300">
+            <div className="flex items-center pr-5 py-[0.55rem] lg:py-[0.375rem] border-b-2 border-gray-300">
                 {/* Language settings */}
                 <div>
                     <label className="mr-2" htmlFor="language-select">
@@ -32,7 +32,7 @@ const EditorControlBar: React.FC = () => {
 
                 {/* Favorite toggler */}
                 <HoveringLabel
-                    className="ml-auto"
+                    className="ml-auto z-50"
                     label={<span className="text-base hover:text-yellow-300">Favorite</span>}
                 >
                     <div className="icon-box ml-auto w-[2rem] h-[2rem] border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-yellow-50">
@@ -42,7 +42,7 @@ const EditorControlBar: React.FC = () => {
 
                 {/* Report button */}
                 <HoveringLabel
-                    className="ml-2"
+                    className="ml-2 z-50"
                     onClick={() => setShowReportModal(true)}
                     label={<span className="text-base hover:text-yellow-300">Report</span>}
                 >

@@ -1,8 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { CreationSection, Difficulty, Language, ProgrammingTopic } from '../../models/enums';
+import {
+    CreationSection,
+    Difficulty,
+    Language,
+    ProgrammingTopic,
+    ToastType,
+} from '../../models/enums';
 import { IExercise, ITestCase } from '../../models/interfaces';
 import { getInitialTestCaseArray } from '../../utils/exercise-creation-utils/testcase-utils';
+import { toastNotify } from '../../utils/notification/toast';
+import { sleep } from '../../utils/promise';
 
 interface IExerciseCreationContext {
     name: string;
@@ -26,6 +34,8 @@ interface IExerciseCreationContext {
     activeSection: CreationSection | null;
     setActiveSection: React.Dispatch<React.SetStateAction<CreationSection | null>>;
     saveDraft: () => void;
+    saveExercise: () => void;
+    isLoading: boolean;
 }
 
 export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>({
@@ -60,13 +70,22 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
     const [solutionCode, setSolutionCode] = useState('');
     const [startingTemplate, setStartingTemplate] = useState('');
 
-    const [activeSection, setActiveSection] = useState<CreationSection | null>(null);
-
     const [tags, setTags] = useState<string[]>([]);
     const [testCases, setTestCases] = useState<ITestCase[]>(() => getInitialTestCaseArray());
 
-    // const runTestCases = () => {};
-    // const saveExercise = () => {};
+    const [activeSection, setActiveSection] = useState<CreationSection | null>(null);
+
+    // State for loading while sending a request to the server. Loading state should not let users to click 'Run Code' or 'Save Challenge' buttons.
+    // Show some loading spinners while loading.
+    const [isLoading, setIsLoading] = useState(false);
+
+    // Send POST request to the server.
+    const saveExercise = async () => {
+        const exercise = createExerciseObject();
+        setIsLoading(true);
+        await sleep(2000);
+        setIsLoading(false);
+    };
 
     const createExerciseObject = () => ({
         name,
@@ -89,7 +108,10 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
     // Svae the work in localStorage for now.
     const saveDraft = () => {
         setExerciseDraft(createExerciseObject());
+        toastNotify('Saved Draft Locally!', ToastType.SUCCESS);
     };
+
+    console.log('isLoading:', isLoading);
 
     // Runs on mount.
     useEffect(() => {
@@ -127,6 +149,8 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
         activeSection,
         setActiveSection,
         saveDraft,
+        saveExercise,
+        isLoading,
     };
 
     return (

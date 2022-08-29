@@ -1,5 +1,7 @@
 const Exercise = require('../models/Exercise');
+
 const makeRequest = require('../utils/makeRequest');
+
 
 const postExercise = async (req, res) => {
     const exerciseBody = req.body;
@@ -69,13 +71,13 @@ const updateExercise = async (req, res) => {
     const testCases = newExercise.testCases;
     const solutionCode = newExercise.solutionCode;
 
+
     let language = newExercise.language;
 
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
 
         const test = solutionCode + "\n" + testCase.testCode;
-
 
         const body = {
             run_spec: {
@@ -85,9 +87,9 @@ const updateExercise = async (req, res) => {
             },
         };
 
+
         const result =  makeRequest(body);
         return result;
-
     });
 
     const testCaseResults = await Promise.all(testCasePromises);
@@ -104,8 +106,8 @@ const updateExercise = async (req, res) => {
 };
 
 const deleteExercise = async (req, res) => {
-    removedExercise = await Exercise.findByIdAndRemove(req.params.id);
-    res.status(204).json(removedExercise);
+    await Exercise.findByIdAndRemove(req.params.id);
+    res.status(204);
 };
 
 const controller = {

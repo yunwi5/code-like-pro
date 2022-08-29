@@ -4,8 +4,10 @@ import ActiveNavLink from '../ui/links/ActiveNavLink';
 const Header = () => {
     return (
         <nav className="flex items-center justify-between flex-wrap px-6 py-3 m-0 shadow-sm">
-            <div className="logo flex items-center flex-shrink-0 text-main-500 pl-28">
-                <a className="text-xl tracking-tight hover:cursor-pointer">CodeLikePro</a>
+            <div className="logo flex items-center flex-shrink-0 text-main-400 pl-28">
+                <NavLink to="/" className="text-xl tracking-tight hover:cursor-pointer">
+                    CodeLikePro
+                </NavLink>
             </div>
             <div className="main-font w-full flex flex-grow md:flex md:items-center md:w-auto">
                 <div className="text-md text-center	md:flex-grow">

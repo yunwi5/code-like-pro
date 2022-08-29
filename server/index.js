@@ -12,6 +12,7 @@ const authRouter = require('./routes/auth/auth-local');
 const exerciseRouter = require('./routes/exercise');
 const userSubmissionController = require('./routes/userSubmission');
 
+
 const app = createApp();
 
 // Connect to mongodb server
@@ -30,6 +31,7 @@ app.use('/api', router);
 app.use('/api/auth', authRouter);
 app.use('/api/exercise', exerciseRouter);
 app.use('/api/submission', userSubmissionController);
+
 
 // Placeholder index route
 app.get('/', (req, res) => res.send('Welcome to the index route.'));
