@@ -1,18 +1,7 @@
 const Exercise = require('../models/Exercise');
 
-async function makeRequest(bodyData) {
-    const response = await fetch('http://68.183.118.35/jobe/index.php/restapi/runs', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json; charset-utf-8',
-        },
-        body: JSON.stringify(bodyData),
-    });
-    const data = await response.json();
-    console.log(data);
+const makeRequest = require('../utils/makeRequest');
 
-    return data;
-}
 
 const postExercise = async (req, res) => {
     const exerciseBody = req.body;
@@ -31,11 +20,12 @@ const postExercise = async (req, res) => {
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
 
-        const test = solutionCode + '\n' + testCase.testcode;
+        const test = solutionCode + '\n' + testCase.testCode;
+        console.log(test);
 
         const body = {
             run_spec: {
-                language_id: testCase.language_id,
+                language_id: language,
                 sourcefilename: 'test',
                 sourcecode: test,
             },
@@ -60,6 +50,7 @@ const postExercise = async (req, res) => {
     res.status(201).json(exercise);
 };
 
+
 const getExercises = async (req, res) => {
     // populate author field with author name
     const exercises = await Exercise.find({}).populate('author', 'name');
@@ -74,29 +65,43 @@ const getExerciseByID = async (req, res) => {
 
 const updateExercise = async (req, res) => {
     // get new exercise and test solution code
-    const newExercise = new Exercise(req.body.exercise);
+    const exerciseBody = req.body;
+    const newExercise = new Exercise(exerciseBody);
+
     const testCases = newExercise.testCases;
     const solutionCode = newExercise.solutionCode;
 
-    testCases.forEach((testCase) => {
-        const test = solutionCode + '\n' + testCase.testcode;
+
+    let language = newExercise.language;
+
+    const testCasePromises = testCases.map((testCase) => {
+        // Append test case to solution code and check if output is right
+
+        const test = solutionCode + "\n" + testCase.testCode;
 
         const body = {
             run_spec: {
-                language_id: testCase.language_id,
+                language_id: language,
                 sourcefilename: 'test',
                 sourcecode: test,
             },
         };
 
-        const result = makeRequest(body);
 
-        if (result.stdout != testCase.expectedOutput) {
-            return res.status(400).json(result);
-        }
+        const result =  makeRequest(body);
+        return result;
     });
 
-    const updatedExercise = await Exercise.findByIdAndUpdate(req.params.id, newExercise);
+    const testCaseResults = await Promise.all(testCasePromises);
+
+    console.log(testCaseResults);
+    for (let i = 0; i < testCaseResults.length; i++) {
+        if (testCaseResults[i].stdout.trim() != testCases[i].expectedOutput.trim()) {
+            return res.status(400).json({ message: 'Some test cases failed.' });
+        }
+    }
+
+    const updatedExercise = await Exercise.findByIdAndUpdate(req.params.id, exerciseBody);
     res.status(201).json(updatedExercise);
 };
 

@@ -6,16 +6,19 @@ const UserSubmissionSchema = new Schema({
         type: String,
         required: true,
     },
-    status: {
+    status: [{
         type: Boolean,
-        required: true,
-    },
+    }],
+    results: [{
+        type: String,
+    }],
     postedAt: {
         type: Date,
         default: () => Date.now(),
         immutable: true,
     },
 });
+
 
 const UserSubmission = mongoose.model('UserSubmission', UserSubmissionSchema);
 
