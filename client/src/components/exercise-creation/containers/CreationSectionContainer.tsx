@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import useScrollEffect from '../../../hooks/useScrollEffect';
+// import useScrollEffect from '../../../hooks/useScrollEffect';
 import { CreationSection } from '../../../models/enums';
-import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
+// import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 
 interface Props {
     title: string | JSX.Element;
@@ -12,7 +12,7 @@ interface Props {
 
 // Wrapper component for each section of exercise creation.
 const CreationSectionContainer: React.FC<Props> = ({ id, title, className, children }) => {
-    const { setActiveSection, activeSection } = useExerciseCreationContext();
+    // const { setActiveSection, activeSection } = useExerciseCreationContext();
     const sectionRef = useRef<HTMLElement>(null);
 
     // Scroll effect on the sidebar, so that currently viewed section is highlighted on the sidebar (with our main color).

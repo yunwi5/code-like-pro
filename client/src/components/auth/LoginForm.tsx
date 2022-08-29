@@ -50,6 +50,7 @@ const LoginForm = () => {
         setIsLoading(true);
         // Use returned data as a global user data
         const { ok, data } = await loginRequest(loginState);
+        console.log(data);
         setIsLoading(false);
 
         // If the login is success, redirect to the home page.

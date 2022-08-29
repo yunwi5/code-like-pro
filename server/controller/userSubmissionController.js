@@ -3,13 +3,11 @@ const UserSubmission = require('../models/UserSubmission');
 const User = require('../models/User');
 const makeRequest = require('../utils/makeRequest');
 
-
-
 const postSubmission = async (req, res) => {
     const submission = req.body;
     const userSubmission = new UserSubmission(submission);
 
-    const exercise =  await Exercise.findById(req.params.id);
+    const exercise = await Exercise.findById(req.params.id);
     const testCases = exercise.testCases;
 
     let language = exercise.language;
@@ -17,8 +15,7 @@ const postSubmission = async (req, res) => {
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
 
-        const test = userSubmission.code + "\n" + testCase.testCode;
-
+        const test = userSubmission.code + '\n' + testCase.code;
 
         const body = {
             run_spec: {
@@ -28,16 +25,15 @@ const postSubmission = async (req, res) => {
             },
         };
 
-        const result =  makeRequest(body);
+        const result = makeRequest(body);
         return result;
-
     });
 
     const testCaseResults = await Promise.all(testCasePromises);
 
     console.log(testCaseResults);
     for (let i = 0; i < testCaseResults.length; i++) {
-        const result = testCaseResults[i].stdout.trim()
+        const result = testCaseResults[i].stdout.trim();
         if (result != testCases[i].expectedOutput.trim()) {
             userSubmission.status.push(false);
         }
@@ -54,9 +50,7 @@ const postSubmission = async (req, res) => {
     user.submissions.push(userSubmission._id);
     await user.save();
 
-
     res.status(201).json(userSubmission);
-
 };
 
 const controller = {

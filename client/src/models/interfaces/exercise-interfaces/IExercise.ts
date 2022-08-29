@@ -1,9 +1,11 @@
 import { ITestCase } from '..';
 import { Difficulty, Language, ProgrammingTopic } from '../../enums';
+import { IUser } from '../IUser';
 
 export interface IExercise {
+    _id?: string;
     name: string;
-    language: Language;
+    language: Language | string;
     topic: ProgrammingTopic;
     difficulty: Difficulty;
     prompt: string;
@@ -11,4 +13,9 @@ export interface IExercise {
     startingTemplate: string;
     tags: string[];
     testCases: ITestCase[];
+    author?: IUser;
+}
+
+export interface IExerciseWithId extends IExercise {
+    _id: string;
 }

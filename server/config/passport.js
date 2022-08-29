@@ -32,11 +32,11 @@ const passportStrategy = (passport) => {
     );
 
     passport.serializeUser((user, done) => {
-        return done(null, user);
+        done(null, user);
     });
 
     passport.deserializeUser((id, done) => {
-        return User.findById(id, (err, user) => {
+        User.findById(id, (err, user) => {
             done(err, user);
         });
     });

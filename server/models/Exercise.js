@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const TestCaseSchema = new Schema({
-
-   testCode: {
+    code: {
         type: String,
         required: true,
     },
@@ -13,10 +12,10 @@ const TestCaseSchema = new Schema({
     },
     hidden: {
         type: Boolean,
-        default: () => False,
+        default: false,
     },
 });
-    
+
 const ExerciseSchema = new Schema({
     name: {
         type: String,
@@ -26,7 +25,7 @@ const ExerciseSchema = new Schema({
         type: String,
         required: true,
     },
-    level: {
+    difficulty: {
         type: String,
         required: true,
     },

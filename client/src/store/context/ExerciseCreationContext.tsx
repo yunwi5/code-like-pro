@@ -1,16 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { postExercise, putExercise } from '../../apis/exercise-apis/exercise';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import {
-    CreationSection,
-    Difficulty,
-    Language,
-    ProgrammingTopic,
-    ToastType,
-} from '../../models/enums';
-import { IExercise, ITestCase } from '../../models/interfaces';
+import { Difficulty, Language, ProgrammingTopic, ToastType } from '../../models/enums';
+import { IExercise, IExerciseWithId, ITestCase } from '../../models/interfaces';
 import { getInitialTestCaseArray } from '../../utils/exercise-creation-utils/testcase-utils';
+import { mapLanguageToJobeLangCode } from '../../utils/language';
 import { toastNotify } from '../../utils/notification/toast';
-import { sleep } from '../../utils/promise';
 
 interface IExerciseCreationContext {
     name: string;
@@ -31,16 +27,19 @@ interface IExerciseCreationContext {
     setStartingTemplate: React.Dispatch<React.SetStateAction<string>>;
     solutionCode: string;
     setSolutionCode: React.Dispatch<React.SetStateAction<string>>;
-    activeSection: CreationSection | null;
-    setActiveSection: React.Dispatch<React.SetStateAction<CreationSection | null>>;
     saveDraft: () => void;
     saveExercise: () => void;
     isLoading: boolean;
+    redirectToCreatedExercisePage: Function;
+    createdExercise: null | IExercise;
+    // activeSection: CreationSection | null;
+    // setActiveSection: React.Dispatch<React.SetStateAction<CreationSection | null>>;
 }
 
 export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>({
     setActiveSection: () => {},
     setName: () => {},
+    redirectToCreatedExercisePage: () => {},
     testCases: [],
     tags: [],
 } as any);
@@ -56,6 +55,7 @@ export const DRAFT_LOCAL_STORATE_KEY = 'exercise_creation_draft';
 // Context for sharing and storing user exercise creation data.
 // Each exercise creation related component can use this context to receive or update the data.
 export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) => {
+    const navigate = useNavigate();
     const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExercise | ''>(
         DRAFT_LOCAL_STORATE_KEY,
         '',
@@ -73,18 +73,43 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
     const [tags, setTags] = useState<string[]>([]);
     const [testCases, setTestCases] = useState<ITestCase[]>(() => getInitialTestCaseArray());
 
-    const [activeSection, setActiveSection] = useState<CreationSection | null>(null);
+    // const [activeSection, stActiveSection] = useState<CreationSection | null>(null);
 
     // State for loading while sending a request to the server. Loading state should not let users to click 'Run Code' or 'Save Challenge' buttons.
     // Show some loading spinners while loading.
     const [isLoading, setIsLoading] = useState(false);
 
+    // Boolean value indicating whether the user submission was saved to the server successfully.
+    const [createdExercise, setCreatedExercise] = useState<null | IExerciseWithId>(null);
+
     // Send POST request to the server.
     const saveExercise = async () => {
         const exercise = createExerciseObject();
+
+        // Get jobe language code.
+        exercise.language = mapLanguageToJobeLangCode(language) as any;
+
         setIsLoading(true);
-        await sleep(2000);
+        // If the exercise already exists, send PUT request, otherwise send POST request.
+        // Returned data would be the same.
+        const { ok, data, message } = createdExercise
+            ? await putExercise(createdExercise._id, exercise)
+            : await postExercise(exercise);
+
+        if (ok) {
+            toastNotify('Challenge was saved successfully!', ToastType.SUCCESS);
+            setCreatedExercise(data);
+        } else {
+            toastNotify(message, ToastType.ERROR);
+        }
         setIsLoading(false);
+    };
+
+    const redirectToCreatedExercisePage = () => {
+        if (!createdExercise || !createdExercise._id) {
+            return;
+        }
+        navigate(`/exercise/${createdExercise._id}`);
     };
 
     const createExerciseObject = () => ({
@@ -111,12 +136,10 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
         toastNotify('Saved Draft Locally!', ToastType.SUCCESS);
     };
 
-    console.log('isLoading:', isLoading);
-
     // Runs on mount.
     useEffect(() => {
         if (!exerciseDraft) return;
-        setLanguage(exerciseDraft.language);
+        setLanguage(exerciseDraft.language as Language);
         setTopic(exerciseDraft.topic);
         setDifficulty(exerciseDraft.difficulty);
         setTags(exerciseDraft.tags);
@@ -125,7 +148,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
         setStartingTemplate(exerciseDraft.startingTemplate);
         setSolutionCode(exerciseDraft.solutionCode);
         setName(exerciseDraft.name);
-    }, []);
+    }, [exerciseDraft]);
 
     const value = {
         name,
@@ -146,11 +169,11 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
         setStartingTemplate,
         solutionCode,
         setSolutionCode,
-        activeSection,
-        setActiveSection,
         saveDraft,
         saveExercise,
         isLoading,
+        createdExercise,
+        redirectToCreatedExercisePage,
     };
 
     return (

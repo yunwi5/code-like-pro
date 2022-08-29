@@ -1,13 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
+const keys = require('./keys');
 const errorHandler = require('../middleware/errorHandler');
 
 const createApp = () => {
     const app = express();
 
+    console.log('client url:', keys.ClientBaseURL);
     // handle cors issue from client
-    app.use(cors());
+    app.use(
+        cors({
+            origin: keys.ClientBaseURL,
+            methods: 'GET,POST,PUT,DELETE',
+            credentials: true, // IMPORTANT to set to true
+        }),
+    );
 
     // Allow express to parse JSON
     app.use(express.json());
