@@ -2,7 +2,6 @@ const Exercise = require('../models/Exercise');
 
 const makeRequest = require('../utils/makeRequest');
 
-
 const postExercise = async (req, res) => {
     const exerciseBody = req.body;
     const exercise = new Exercise(exerciseBody);
@@ -20,7 +19,7 @@ const postExercise = async (req, res) => {
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
 
-        const test = solutionCode + '\n' + testCase.testCode;
+        const test = solutionCode + '\n\n' + testCase.code;
         console.log(test);
 
         const body = {
@@ -50,7 +49,6 @@ const postExercise = async (req, res) => {
     res.status(201).json(exercise);
 };
 
-
 const getExercises = async (req, res) => {
     // populate author field with author name
     const exercises = await Exercise.find({}).populate('author', 'name');
@@ -71,13 +69,12 @@ const updateExercise = async (req, res) => {
     const testCases = newExercise.testCases;
     const solutionCode = newExercise.solutionCode;
 
-
     let language = newExercise.language;
 
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
 
-        const test = solutionCode + "\n" + testCase.testCode;
+        const test = solutionCode + '\n' + testCase.code;
 
         const body = {
             run_spec: {
@@ -87,8 +84,7 @@ const updateExercise = async (req, res) => {
             },
         };
 
-
-        const result =  makeRequest(body);
+        const result = makeRequest(body);
         return result;
     });
 
@@ -101,13 +97,16 @@ const updateExercise = async (req, res) => {
         }
     }
 
-    const updatedExercise = await Exercise.findByIdAndUpdate(req.params.id, exerciseBody);
+    // Make sure the returned object is an updated object.
+    const updatedExercise = await Exercise.findByIdAndUpdate(req.params.id, exerciseBody, {
+        new: true,
+    });
     res.status(201).json(updatedExercise);
 };
 
 const deleteExercise = async (req, res) => {
-    await Exercise.findByIdAndRemove(req.params.id);
-    res.status(204);
+    await Exercise.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Delete successful.' });
 };
 
 const controller = {

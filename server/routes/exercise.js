@@ -7,12 +7,12 @@ const router = express.Router();
 
 router.post('/', ensureAuthenticated, catchAsync(exerciseController.postExercise));
 
-router.get('/', exerciseController.getExercises);
+router.get('/', catchAsync(exerciseController.getExercises));
 
-router.get('/:id', exerciseController.getExerciseByID);
+router.get('/:id', catchAsync(exerciseController.getExerciseByID));
 
-router.put('/:id', ensureAuthenticated, exerciseController.updateExercise);
+router.put('/:id', ensureAuthenticated, catchAsync(exerciseController.updateExercise));
 
-router.delete('/:id', ensureAuthenticated, exerciseController.deleteExercise);
+router.delete('/:id', ensureAuthenticated, catchAsync(exerciseController.deleteExercise));
 
 module.exports = router;

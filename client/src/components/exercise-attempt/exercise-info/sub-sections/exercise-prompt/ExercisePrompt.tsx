@@ -8,7 +8,7 @@ import ExercisePromptHeader from './ExercisePromptHeader';
 const ExercisePrompt: React.FC = () => {
     const { exercise } = useExerciseAttemptCtx();
 
-    if (exercise == null) return <div>No exercise</div>;
+    console.log(exercise);
 
     return (
         <section className="flex-1 flex flex-col gap-8 overflow-y-scroll px-5 py-4 bg-white">
@@ -16,7 +16,7 @@ const ExercisePrompt: React.FC = () => {
             <ReactQuill
                 className="read-only-editor"
                 theme="snow"
-                value={exercise.prompt}
+                value={exercise?.prompt || ''}
                 onChange={() => {}}
                 placeholder={'Write something awesome...'}
             />

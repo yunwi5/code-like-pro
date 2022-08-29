@@ -8,7 +8,7 @@ export const toastNotify = (message: string, type?: ToastType) => {
         ? toast[type](message, {
               toastId: 'toast1',
               theme: 'dark',
-              className: '!bg-gray-600', // bg color can change.
+              className: '!bg-gray-700/80', // bg color can change.
           })
         : toast(message, {
               toastId: 'toast2',

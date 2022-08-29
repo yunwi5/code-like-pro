@@ -11,11 +11,9 @@ const EditorControlBar: React.FC = () => {
     const { exercise } = useExerciseAttemptCtx();
     const [showReportModal, setShowReportModal] = useState(false);
 
-    if (exercise == null) return null;
-
     return (
         <>
-            <div className="flex items-center pr-5 py-[0.55rem] lg:py-[0.375rem] border-b-2 border-gray-300">
+            <div className="flex items-center px-3 lg:pl-1 lg:pr-5 py-[0.55rem] lg:py-[0.375rem] ">
                 {/* Language settings */}
                 <div>
                     <label className="mr-2" htmlFor="language-select">
@@ -23,10 +21,10 @@ const EditorControlBar: React.FC = () => {
                     </label>
                     <select
                         id="language-select"
-                        defaultValue={exercise.language}
+                        defaultValue={exercise?.language}
                         className="text-gray-600 border-2 border-gray-500/90 bg-gray-50 focus:outline focus:outline-2 focus:outline-main-500 focus:text-main-500 focus:border-transparent shadow-md rounded-sm px-2 py-1"
                     >
-                        <option>{exercise.language}</option>
+                        <option>{exercise?.language}</option>
                     </select>
                 </div>
 

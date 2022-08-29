@@ -4,7 +4,7 @@ import { useExerciseCreationContext } from '../../../store/context/ExerciseCreat
 import ChallengeActions from '../sections/ChallengeActions';
 
 const CreationSidebar: React.FC = () => {
-    const { activeSection } = useExerciseCreationContext();
+    // const { activeSection } = useExerciseCreationContext();
 
     return (
         <aside className="hidden lg:block ml-4 xl:min-w-[12.5rem]">
@@ -14,11 +14,7 @@ const CreationSidebar: React.FC = () => {
                     {CreationSectionList.map((section: any) => (
                         <li key={section} className="cursor-pointer text-lg">
                             <a
-                                className={`hover:text-main-500 link-underline-effect ${
-                                    activeSection === section
-                                        ? 'text-main-500/90 font-bold'
-                                        : ''
-                                }`}
+                                className={`hover:text-main-500 link-underline-effect`}
                                 href={`#${section}`}
                             >
                                 {section}

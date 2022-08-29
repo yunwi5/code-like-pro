@@ -2,13 +2,13 @@ export enum Language {
     PYTHON = 'Python',
     JAVASCRIPT = 'Javascript',
     TYPESCRIPT = 'Typescript',
-    SWIFT = 'Swift',
-    KOTLIN = 'Kotlin',
     JAVA = 'Java',
     CPP = 'C++',
     CSHARP = 'C#',
     C = 'C',
-    GO = 'Go',
+    PHP = 'Php',
+    OCTAVE = 'Octave',
+    PASCAL = 'Pascal',
 }
 
 export const LanguageList = Object.freeze(Object.values(Language).sort());

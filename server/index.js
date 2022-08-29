@@ -12,14 +12,13 @@ const authRouter = require('./routes/auth/auth-local');
 const exerciseRouter = require('./routes/exercise');
 const userSubmissionController = require('./routes/userSubmission');
 
+// Passport auth initialization
+passportStrategy(passport);
 
 const app = createApp();
 
 // Connect to mongodb server
 connectDB();
-
-// Passport auth initialization
-passportStrategy(passport);
 
 // Passport middleware
 app.use(passport.initialize());
@@ -31,7 +30,6 @@ app.use('/api', router);
 app.use('/api/auth', authRouter);
 app.use('/api/exercise', exerciseRouter);
 app.use('/api/submission', userSubmissionController);
-
 
 // Placeholder index route
 app.get('/', (req, res) => res.send('Welcome to the index route.'));
