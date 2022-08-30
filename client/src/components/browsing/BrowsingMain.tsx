@@ -36,10 +36,12 @@ const BrowsingMain: React.FC<Props> = ({ exercises }) => {
 
     return (
         <main className="flex flex-col gap-2 pt-[4rem] px-7 md:px-12 xl:px-[9%] py-8 min-h-[85vh]">
-            <div className="flex-between">
-                <h1 className="text-gray-500 font-semibold text-2xl">Browsing Challenges</h1>
-                <h3 className="text-gray-500/90 font-semibold text-lg text-right">
-                    {randomExercises.length} Challenges Found
+            <div className="flex flex-col sm:flex-row sm:justify-between">
+                <h1 className="text-gray-500 font-semibold text-xl sm:text-2xl">
+                    Browsing Challenges
+                </h1>
+                <h3 className="text-gray-500/90 font-semibold text-base sm:text-lg">
+                    {randomExercises.length} Challenges
                 </h3>
             </div>
             <div className="flex flex-col lg:flex-row lg:items-start gap-6">

@@ -56,9 +56,19 @@ const getExercises = async (req, res) => {
 };
 
 const getExerciseByID = async (req, res) => {
-    // populate author field with author name
-    const exercise = await Exercise.findById(req.params.id).populate('author', 'name');
-    res.status(200).json(exercise);
+    let exercise;
+    try {
+        // populate author field with author name
+        exercise = await Exercise.findById(req.params.id).populate('author', 'name');
+    } catch (err) {
+        console.log(err.message);
+    }
+
+    if (exercise != null) {
+        res.status(200).json(exercise);
+    } else {
+        res.status(404).json(`Exercise ${req.params.id} not found`);
+    }
 };
 
 const updateExercise = async (req, res) => {
@@ -97,16 +107,33 @@ const updateExercise = async (req, res) => {
         }
     }
 
-    // Make sure the returned object is an updated object.
-    const updatedExercise = await Exercise.findByIdAndUpdate(req.params.id, exerciseBody, {
-        new: true,
-    });
-    res.status(201).json(updatedExercise);
+    let updatedExercise;
+    try {
+        // Make sure the returned object is an updated object.
+        updatedExercise = await Exercise.findByIdAndUpdate(req.params.id, exerciseBody, {
+            new: true,
+        });
+    } catch (err) {
+        console.log(err.message);
+    }
+    if (updatedExercise) res.status(201).json(updatedExercise);
+    else res.status(404).json(`Exercise with ${req.params.id} not found`);
 };
 
 const deleteExercise = async (req, res) => {
-    await Exercise.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: 'Delete successful.' });
+    let result; // returns deletedObject if the exercise with the param id was found.
+    try {
+        result = await Exercise.findByIdAndDelete(req.params.id);
+    } catch (err) {
+        console.log(err.message);
+    }
+
+    if (result != null) {
+        return res.status(200).send('Delete successful.');
+    } else {
+        // If there is an error, or the exercise was not found.
+        res.status(404).send(`Exercise ${req.params.id} not found`);
+    }
 };
 
 const controller = {
