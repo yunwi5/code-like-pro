@@ -16,7 +16,7 @@ export async function getRequest<T>({ url, headers }: ReqParams) {
         data = response.data;
         return { ok: true, data };
     } catch (err) {
-        let message = (data as any)?.message || (err as any).message;
+        let message = extractErrorMessage(data, err as Error);
         return { ok: false, message };
     }
 }
@@ -30,7 +30,7 @@ export async function postRequest<T>({ url, body, headers }: ReqBodyParams) {
         return { ok: true, data };
     } catch (err) {
         // If the status is 400~500 range, the returned data from the server may contain message
-        let message = (data as any)?.message || (err as any).message;
+        let message = extractErrorMessage(data, err as Error);
         return { ok: false, message };
     }
 }
@@ -42,7 +42,7 @@ export async function putRequest<T>({ url, body, headers }: ReqBodyParams) {
         data = response.data;
         return { ok: true, data };
     } catch (err) {
-        let message = (data as any)?.message || (err as any).message;
+        let message = extractErrorMessage(data, err as Error);
         return { ok: false, message };
     }
 }
@@ -54,7 +54,14 @@ export async function deleteRequest<T>({ url, headers }: ReqParams) {
         data = response.data;
         return { ok: true, data };
     } catch (err) {
-        let message = (data as any)?.message || (err as any).message;
+        let message = extractErrorMessage(data, err as Error);
         return { ok: false, message };
     }
+}
+
+// Extract error meessage from the response, if the request throws an error.
+function extractErrorMessage(data: any, error: Error) {
+    if (typeof data === 'string') return data;
+    const message = data?.message || error.message;
+    return message;
 }

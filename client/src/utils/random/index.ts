@@ -36,3 +36,16 @@ export function randomMultipleChoices<T>(
 
     return Array.from(set);
 }
+
+export function shuffleList<T>(list: T[]): T[] {
+    for (let i = 0; i < list.length; i++) {
+        // Get random index between the start and the end of the list
+        const randomIndex = getRandomNumber(0, list.length - 1);
+
+        const value = list[i];
+        list[i] = list[randomIndex];
+        list[randomIndex] = value;
+    }
+
+    return [...list];
+}
