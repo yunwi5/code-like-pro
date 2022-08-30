@@ -15,7 +15,7 @@ const EditorControlBar: React.FC = () => {
 
   return (
     <>
-      <div className="flex items-center pr-5 py-[0.55rem] lg:py-[0.375rem] border-b-2 border-gray-300">
+      <div className="flex items-center pr-5 py-[0.55rem] lg:py-[0.375rem]">
         {/* Language settings */}
         <div>
           <label className="mr-2" htmlFor="language-select">

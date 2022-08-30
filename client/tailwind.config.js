@@ -27,6 +27,12 @@ module.exports = {
           500: "#655A5A",
           700: "#4a4242",
         },
+        green: {
+          500: "#D1F7BF",
+        },
+        red: {
+          500: "#F7BFBF",
+        },
       },
       screens: {
         xs: "400px",
