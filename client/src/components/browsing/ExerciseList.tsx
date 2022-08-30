@@ -1,24 +1,24 @@
 import React, { useMemo, useState } from 'react';
-import useBrowsing from '../../../hooks/useBrowsing';
-import { IExerciseCard } from '../../../models/interfaces';
-import ExerciseCard from '../../ui/cards/ExerciseCard';
-import PageNavigation from '../../ui/PageNavigation';
+import { IExerciseCard } from '../../models/interfaces';
+import ExerciseCard from '../ui/cards/ExerciseCard';
+import PageNavigation from '../ui/PageNavigation';
 
 const EXERCISE_PER_PAGE = 10;
 
 const ExerciseList: React.FC<{ exercises: IExerciseCard[] }> = ({ exercises }) => {
-    const { exercises: processedExercises } = useBrowsing(exercises);
-
-    // Pagination
+    // Pagination index based
     const [page, setPage] = useState(0);
-    const maxPage = Math.floor(processedExercises.length / EXERCISE_PER_PAGE);
+    // Last page number index based
+    const maxPage = Math.floor(Math.max(exercises.length - 1, 0) / EXERCISE_PER_PAGE);
 
     const handlePage = (newPage: number) => setPage(newPage);
 
     const currentPageExercises = useMemo(() => {
         const startIndex = page * EXERCISE_PER_PAGE;
-        return processedExercises.slice(startIndex, startIndex + EXERCISE_PER_PAGE);
-    }, [page, processedExercises]);
+        return exercises.slice(startIndex, startIndex + EXERCISE_PER_PAGE);
+    }, [page, exercises]);
+
+    console.log(currentPageExercises);
 
     return (
         <section className="lg:basis-2/3">

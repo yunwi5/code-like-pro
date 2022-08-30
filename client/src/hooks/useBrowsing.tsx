@@ -15,8 +15,6 @@ function useBrowsing(exercises: IExerciseCard[]) {
     // Do searching first
     const searchedExercises = useMemo(() => {
         const res = searchExercises(exercises, searching);
-        console.log('Search exercises!');
-        console.table(res);
         return res;
     }, [exercises, searching]);
 
@@ -29,8 +27,6 @@ function useBrowsing(exercises: IExerciseCard[]) {
     useEffect(() => {
         // Do sorting last.
         const result = sortExercises([...filteredExercises], sorting);
-        console.log('Sorting:', sorting);
-        console.log('result:', result);
         setProcessedExercises(result);
     }, [filteredExercises, sorting]);
 

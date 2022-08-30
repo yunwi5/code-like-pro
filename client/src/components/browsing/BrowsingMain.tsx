@@ -1,52 +1,40 @@
-import React, { useMemo } from 'react';
-import { IExerciseCard, IExerciseWithId } from '../../models/interfaces';
-import { mapJobeLangCodeToAppLanguage } from '../../utils/language';
-import { createRandomExercises } from '../../utils/random/random-exercise';
-import ExerciseList from './list/ExerciseList';
+import React, { useEffect, useState } from 'react';
+import useBrowsing from '../../hooks/useBrowsing';
+import { IExerciseCard } from '../../models/interfaces';
+import ExerciseList from './ExerciseList';
 import BrowsingSidebar from './sidebar/BrowsingSidebar';
 
 interface Props {
-    exercises: IExerciseWithId[];
+    exercises: IExerciseCard[];
 }
 
 const BrowsingMain: React.FC<Props> = ({ exercises }) => {
-    const exerciseCards: IExerciseCard[] = useMemo(
-        () =>
-            exercises.map((ex) => ({
-                _id: ex._id,
-                name: ex.name,
-                topic: ex.topic,
-                correctRate: 0, // for now we do not have correctness data yet
-                reports: 0, // for now we do not have issue report data yet
-                stars: 0,
-                prompt: ex.prompt,
-                language: mapJobeLangCodeToAppLanguage(ex.language), // map language code to our app language name
-                difficulty: ex.difficulty,
-                tags: ex.tags,
-                author: ex.author,
-            })),
-        [],
-    );
+    const { exercises: processedExercises } = useBrowsing(exercises);
 
-    // Combine the exercises from the server and the random exercises generated on the client.
-    const randomExercises = useMemo(() => {
-        const randomExercises = createRandomExercises(1000);
-        return exerciseCards.concat(randomExercises);
-    }, [exerciseCards]);
+    // Shuffled exercises when the user clicks the shuffle button on the sidebar
+    const [shuffledExercises, setShuffledExercises] = useState(processedExercises);
+
+    const handleSuffle = (randomized: IExerciseCard[]) => {
+        setShuffledExercises(randomized);
+    };
+
+    useEffect(() => {
+        setShuffledExercises(processedExercises);
+    }, [processedExercises]);
 
     return (
-        <main className="flex flex-col gap-2 pt-[4rem] px-7 md:px-12 xl:px-[9%] py-8 min-h-[85vh]">
-            <div className="flex flex-col sm:flex-row sm:justify-between">
+        <main className="flex flex-col gap-2 pt-[4rem] px-4 sm:px-7 md:px-12 xl:px-[9%] py-8 min-h-[85vh]">
+            <div className="mb-2 flex flex-col sm:flex-row items-center sm:justify-between">
                 <h1 className="text-gray-500 font-semibold text-xl sm:text-2xl">
                     Browsing Challenges
                 </h1>
-                <h3 className="text-gray-500/90 font-semibold text-base sm:text-lg">
-                    {randomExercises.length} Challenges
+                <h3 className="text-gray-500/90 font-semibold text-base sm:text-lg translate-y-2">
+                    {processedExercises.length} Challenges
                 </h3>
             </div>
             <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                <BrowsingSidebar />
-                <ExerciseList exercises={randomExercises} />
+                <BrowsingSidebar exercises={processedExercises} onShuffle={handleSuffle} />
+                <ExerciseList exercises={shuffledExercises} />
             </div>
         </main>
     );
