@@ -1,6 +1,6 @@
-import { AppProperty } from '../../constants/app';
-import { IExercise, IExerciseWithId } from '../../models/interfaces';
-import { deleteRequest, getRequest, postRequest, putRequest } from '../requests';
+import { AppProperty } from '../constants/app';
+import { IExercise, IExerciseWithId } from '../models/interfaces';
+import { deleteRequest, getRequest, postRequest, putRequest } from './requests';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/exercise`;
 

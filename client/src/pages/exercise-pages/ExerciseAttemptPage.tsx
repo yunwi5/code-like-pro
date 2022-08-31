@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
-import { getExerciseById } from '../../apis/exercise/exercise';
+import { getExerciseById } from '../../apis/exercise';
 import ExerciseAttemptMain from '../../components/exercise-attempt/ExerciseAttemptMain';
 import { AppProperty } from '../../constants/app';
 import { IExercise } from '../../models/interfaces';

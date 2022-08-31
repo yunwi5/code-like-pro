@@ -10,6 +10,14 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import ExerciseAttemptPage from './pages/exercise-pages/ExerciseAttemptPage';
 import BrowsingPage from './pages/exercise-pages/BrowsingPage';
+import ProfilePage from './pages/ProfilePage';
+import {
+    MyCreations,
+    MySubmission,
+    ProfileFavorites,
+    ProfileMain,
+    ProfileStatistics,
+} from './components/profile';
 
 // React Query client initialization
 const queryClient = new QueryClient();
@@ -27,6 +35,15 @@ function App() {
                     {/* Auth pages login & register */}
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+
+                    {/* User profile page */}
+                    <Route path="/profile" element={<ProfilePage />}>
+                        <Route path="" element={<ProfileMain />} />
+                        <Route path="statistics" element={<ProfileStatistics />} />
+                        <Route path="favorites" element={<ProfileFavorites />} />
+                        <Route path="my-creations" element={<MyCreations />} />
+                        <Route path="my-submissions" element={<MySubmission />} />
+                    </Route>
 
                     {/* Exercise pages */}
                     <Route path="/create-exercise" element={<ExerciseCreationPage />} />

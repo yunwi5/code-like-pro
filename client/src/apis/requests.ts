@@ -17,6 +17,7 @@ export async function getRequest<T>({ url, headers }: ReqParams) {
         return { ok: true, data };
     } catch (err) {
         let message = extractErrorMessage(data, err as Error);
+        console.log(message);
         return { ok: false, message };
     }
 }
@@ -31,6 +32,7 @@ export async function postRequest<T>({ url, body, headers }: ReqBodyParams) {
     } catch (err) {
         // If the status is 400~500 range, the returned data from the server may contain message
         let message = extractErrorMessage(data, err as Error);
+        console.log(message);
         return { ok: false, message };
     }
 }
@@ -43,6 +45,7 @@ export async function putRequest<T>({ url, body, headers }: ReqBodyParams) {
         return { ok: true, data };
     } catch (err) {
         let message = extractErrorMessage(data, err as Error);
+        console.log(message);
         return { ok: false, message };
     }
 }
@@ -55,6 +58,7 @@ export async function deleteRequest<T>({ url, headers }: ReqParams) {
         return { ok: true, data };
     } catch (err) {
         let message = extractErrorMessage(data, err as Error);
+        console.log(message);
         return { ok: false, message };
     }
 }
