@@ -10,6 +10,7 @@ import { sortExercises } from '../utils/sorting-utils/exercise-sorting';
 function useBrowsing(exercises: IExerciseCard[]) {
     const { searching, sorting, filtering } = useAppSelector((state) => state.browsing);
 
+    // Searched, filtered and sorted exercises.
     const [processedExercises, setProcessedExercises] = useState(exercises);
 
     // Do searching first

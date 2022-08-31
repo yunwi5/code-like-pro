@@ -9,7 +9,8 @@ import TestCase from '../../ui/test-cases/TestCase';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
 const ChallengeTestCases: React.FC = () => {
-    const { testCases, language, setTestCases } = useExerciseCreationContext();
+    const { testCases, language, setTestCases, testCaseOutputs } =
+        useExerciseCreationContext();
 
     const addTestCase = () => {
         setTestCases((prevList) => [...prevList, getEmptyTestCase(testCases.length + 1)]);
@@ -39,6 +40,8 @@ const ChallengeTestCases: React.FC = () => {
         </div>
     );
 
+    console.table(testCaseOutputs);
+
     return (
         <CreationSectionContainer title={title} id={CreationSection.TEST_CASES}>
             <div className="flex flex-col gap-5">
@@ -47,6 +50,7 @@ const ChallengeTestCases: React.FC = () => {
                         <TestCase
                             key={idx}
                             language={language}
+                            output={testCaseOutputs[idx]}
                             testCase={{ ...testCase, name: `Test Case ${idx + 1}` }}
                             onUpdate={(props: ITestCaseProps) => updateTestCase(props, idx)}
                             onDelete={() => deleteTestCase(idx)}

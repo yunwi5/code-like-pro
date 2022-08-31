@@ -3,11 +3,9 @@ import { IExerciseCard } from '../../models/interfaces';
 import { IFilterState } from '../../store/redux/browsing-slice';
 
 export function filterExercises<T>(exercises: IExerciseCard[], filterState: IFilterState) {
-    console.log('filterState:', filterState);
     const filtered = exercises.filter((ex) => {
         // Language filter
         if (filterState.language !== 'All' && ex.language !== filterState.language) {
-            console.log('language filtered...');
             return false;
         }
 

@@ -4,23 +4,28 @@ import { useExerciseCreationContext } from '../../../store/context/ExerciseCreat
 import ChallengeActions from '../sections/ChallengeActions';
 
 const CreationSidebar: React.FC = () => {
-    // const { activeSection } = useExerciseCreationContext();
+    const { activeSection } = useExerciseCreationContext();
 
     return (
         <aside className="hidden lg:block ml-4 xl:min-w-[12.5rem]">
             <nav className="sticky top-[7rem]">
                 <h3 className="text-main-500 text-xl">Sections</h3>
                 <ul className="flex flex-col gap-1 mt-1 pl-2 border-l-[4px] border-l-gray-400/70">
-                    {CreationSectionList.map((section: any) => (
-                        <li key={section} className="cursor-pointer text-lg">
-                            <a
-                                className={`hover:text-main-500 link-underline-effect`}
-                                href={`#${section}`}
-                            >
-                                {section}
-                            </a>
-                        </li>
-                    ))}
+                    {CreationSectionList.map((section: any) => {
+                        const activeClass =
+                            section === activeSection ? 'text-main-500 font-semibold' : '';
+
+                        return (
+                            <li key={section} className="cursor-pointer text-lg">
+                                <a
+                                    className={`hover:text-main-600 link-underline-effect ${activeClass}`}
+                                    href={`#${section}`}
+                                >
+                                    {section}
+                                </a>
+                            </li>
+                        );
+                    })}
                 </ul>
             </nav>
             <div className="sticky top-[23.5rem]">

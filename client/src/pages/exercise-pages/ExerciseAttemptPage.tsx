@@ -25,7 +25,9 @@ const ExerciseAttemptPage: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>Challenge | {AppProperty.APP_NAME}</title>
+                <title>
+                    Challenge {exercise?.name || ''} | {AppProperty.APP_NAME}
+                </title>
                 <meta
                     name="description"
                     content={`Code editor page where users can attempt the coding challenge created by other users. Users can run the code and test the code before submission.`}
