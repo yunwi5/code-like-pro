@@ -6,9 +6,9 @@ import PageNavigation from '../ui/PageNavigation';
 const EXERCISE_PER_PAGE = 10;
 
 const ExerciseList: React.FC<{ exercises: IExerciseCard[] }> = ({ exercises }) => {
-    // Pagination index based
+    // State for pagination. Pagination is index based.
     const [page, setPage] = useState(0);
-    // Last page number index based
+    // Last page number index based.
     const maxPage = Math.floor(Math.max(exercises.length - 1, 0) / EXERCISE_PER_PAGE);
 
     const handlePage = (newPage: number) => setPage(newPage);
@@ -17,8 +17,6 @@ const ExerciseList: React.FC<{ exercises: IExerciseCard[] }> = ({ exercises }) =
         const startIndex = page * EXERCISE_PER_PAGE;
         return exercises.slice(startIndex, startIndex + EXERCISE_PER_PAGE);
     }, [page, exercises]);
-
-    console.log(currentPageExercises);
 
     return (
         <section className="lg:basis-2/3">

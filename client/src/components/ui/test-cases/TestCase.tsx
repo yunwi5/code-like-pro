@@ -3,23 +3,20 @@ import { Language } from '../../../models/enums';
 import CodeEditor from '../editor/code-editor/CodeEditor';
 import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
 import { ImBin2 } from 'react-icons/im';
-import { ITestCase, ITestCaseProps } from '../../../models/interfaces';
+import { ITestCase, ITestCaseProps, ITestResult } from '../../../models/interfaces';
+import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 
 interface Props {
     language: Language;
     testCase: ITestCase;
     onUpdate?: (props: ITestCaseProps) => void;
     onDelete?: () => void;
+    output?: ITestResult | undefined;
     readOnly?: boolean;
 }
 
-const TestCase: React.FC<Props> = ({
-    language,
-    testCase,
-    onUpdate,
-    onDelete,
-    readOnly = false,
-}) => {
+const TestCase: React.FC<Props> = (props) => {
+    const { language, testCase, onUpdate, onDelete, output, readOnly = false } = props;
     const [isShrinked, setIsShrinked] = useState(false);
 
     const handleCodeChange = (code: string) => {
@@ -33,18 +30,31 @@ const TestCase: React.FC<Props> = ({
 
     const handleHidden = () => onUpdate && onUpdate({ hidden: !testCase.hidden });
 
+    const statusClass = getStatusClass(output);
+
+    const expectedOutputComponent = (
+        <ExpectedOutput
+            onOutputChange={handleOutputChange}
+            expectedOutput={testCase.expectedOutput}
+            readOnly={readOnly}
+        />
+    );
+
     return (
         <div
             id={testCase?.id}
-            className={`flex flex-col gap-2 px-3 py-2 bg-gray-200 rounded-sm shadow-md focus-within:shadow-md`}
+            className={`flex flex-col gap-2 px-3 py-2 bg-gray-200 rounded-sm shadow-md focus-within:shadow-md ${statusClass}`}
         >
-            <h3 className="text-lg flex items-center justify-between">
-                {testCase.name}
-                <ExpandShrinkToggler isShrinked={isShrinked} setIsShrinked={setIsShrinked} />
-            </h3>
+            <TestCaseHeading
+                name={testCase?.name || ''}
+                output={output}
+                isShrinked={isShrinked}
+                setIsShrinked={setIsShrinked}
+            />
             {!isShrinked && (
                 <>
                     <div className="flex flex-col lg:flex-row flex-wrap gap-3 justify-between">
+                        {/* Testcase code editor */}
                         <div className="flex-1 overflow-hidden">
                             <p className="px-2 py-1 bg-gray-300">Code</p>
                             <CodeEditor
@@ -57,43 +67,131 @@ const TestCase: React.FC<Props> = ({
                                 readOnly={readOnly}
                             />
                         </div>
-                        <div className="min-w-[10rem] flex-1">
-                            <p className="px-2 py-1 bg-gray-300">Expected Output</p>
-                            <textarea
-                                rows={5}
-                                onChange={handleOutputChange}
-                                value={testCase.expectedOutput}
-                                className={`text-sm min-h-[82.7%] min-w-[100%] flex-1 px-3 py-2 bg-white border-2 border-slate-300 shadow-md rounded-sm focus:outline focus:outline-2 focus:outline-main-300/90 ${
-                                    readOnly && 'focus:!outline-none'
-                                }`}
-                            />
-                        </div>
+                        {!output && expectedOutputComponent}
                     </div>
-                    {!readOnly && (
-                        <div className="flex-between">
-                            <p className="flex">
-                                <input
-                                    type="checkbox"
-                                    onChange={handleHidden}
-                                    checked={testCase.hidden ?? false}
-                                />
-                                &ensp;Hidden&nbsp;
-                                <span className="hidden md:inline">Test</span>
-                            </p>
-                            {onDelete && (
-                                <button
-                                    onClick={onDelete}
-                                    className="flex-center gap-2 px-3 py-1 transition-all rounded-full hover:bg-rose-500/90 hover:text-white"
-                                >
-                                    <ImBin2 />
-                                    Remove
-                                </button>
-                            )}
+
+                    {/* Actual output of the test running */}
+                    {output && (
+                        <div className="flex flex-col lg:flex-row flex-wrap gap-3 justify-between mb-2">
+                            {expectedOutputComponent}
+                            <ActualOutput actualOutput={output.actualOutput} />
                         </div>
+                    )}
+
+                    {/* Bottom control bar for hidden test and remove */}
+                    {!readOnly && (
+                        <TestCaseControl
+                            onHidden={handleHidden}
+                            hidden={testCase.hidden || false}
+                            onDelete={onDelete}
+                        />
                     )}
                 </>
             )}
         </div>
     );
 };
+
+// Header of the test case component. Name, status and shrink toggler.
+interface HeadingProps {
+    name: string;
+    output: ITestResult | undefined;
+    isShrinked: boolean;
+    setIsShrinked: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const TestCaseHeading: React.FC<HeadingProps> = (props) => {
+    const { name, output, isShrinked, setIsShrinked } = props;
+
+    return (
+        <h3 className="text-lg flex items-center justify-between">
+            {name}
+            <span className="text-2xl ml-3 mr-auto">
+                {!!output &&
+                    (output.correct ? (
+                        <AiOutlineCheck className="text-green-700" />
+                    ) : (
+                        <AiOutlineClose className="text-rose-700" />
+                    ))}
+            </span>
+            <ExpandShrinkToggler isShrinked={isShrinked} setIsShrinked={setIsShrinked} />
+        </h3>
+    );
+};
+
+// Actual output block
+interface OutputProps {
+    actualOutput: string;
+}
+const ActualOutput: React.FC<OutputProps> = ({ actualOutput }) => {
+    return (
+        <div className="flex-1">
+            <p className="px-2 py-1 bg-gray-300">Actual Output</p>
+            {/* Readonly testarea */}
+            <textarea
+                value={actualOutput}
+                onChange={() => {}}
+                className={'text-sm min-h-[82.7%] w-full px-3 py-2 input'}
+            />
+        </div>
+    );
+};
+
+// Expected output block
+interface ExpectedOutputProps {
+    onOutputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    expectedOutput: string;
+    readOnly: boolean;
+}
+const ExpectedOutput: React.FC<ExpectedOutputProps> = ({
+    onOutputChange,
+    expectedOutput,
+    readOnly,
+}) => {
+    return (
+        <div className="//min-w-[10rem] flex-1">
+            <p className="px-2 py-1 bg-gray-300">Expected Output</p>
+            <textarea
+                rows={5}
+                onChange={onOutputChange}
+                value={expectedOutput}
+                className={`text-sm min-h-[82.7%] min-w-[100%] flex-1 !px-3 py-2 input ${
+                    readOnly && 'focus:!outline-none'
+                }`}
+            />
+        </div>
+    );
+};
+
+interface ControlProps {
+    onHidden(): void;
+    hidden: boolean;
+    onDelete?: () => void;
+}
+// Controlling hidden test and remove test functionalities
+const TestCaseControl: React.FC<ControlProps> = ({ onHidden, hidden, onDelete }) => {
+    return (
+        <div className="flex-between">
+            <p className="flex">
+                <input type="checkbox" onChange={onHidden} checked={hidden ?? false} />
+                &ensp;Hidden&nbsp;
+                <span className="hidden md:inline">Test</span>
+            </p>
+            {onDelete && (
+                <button
+                    onClick={onDelete}
+                    className="flex-center gap-2 px-3 py-1 transition-all rounded-full hover:bg-rose-500/90 hover:text-white"
+                >
+                    <ImBin2 />
+                    Remove
+                </button>
+            )}
+        </div>
+    );
+};
+
+function getStatusClass(output: ITestResult | undefined) {
+    if (!output) return '';
+    return output.correct ? 'bg-green-200/70' : 'bg-rose-200/70';
+}
+
 export default TestCase;

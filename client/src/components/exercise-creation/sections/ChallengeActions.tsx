@@ -1,5 +1,6 @@
 import React from 'react';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
+import { IReadyStatus } from '../../../models/interfaces';
 import Button from '../../ui/buttons/Button';
 import RingLoader from 'react-spinners/RingLoader';
 
@@ -9,9 +10,11 @@ const ChallengeActions: React.FC = () => {
     const {
         saveDraft,
         saveExercise,
+        runCode,
         isLoading,
         createdExercise,
         redirectToCreatedExercisePage,
+        readyStatus,
     } = useExerciseCreationContext();
 
     return (
@@ -23,10 +26,15 @@ const ChallengeActions: React.FC = () => {
                 <RingLoader color="#3c38e0" size={100} className="!self-center" />
             ) : (
                 <>
-                    <Button className={btnClass} mode="empty">
+                    <Button className={btnClass} mode="empty" onClick={runCode}>
                         Run Code
                     </Button>
-                    <Button className={btnClass} onClick={saveExercise}>
+                    <Button
+                        className={`${btnClass} ${
+                            readyStatus?.status === 'error' ? 'btn-disabled' : ''
+                        }`}
+                        onClick={saveExercise}
+                    >
                         Save Challenge
                     </Button>
                 </>
@@ -40,7 +48,21 @@ const ChallengeActions: React.FC = () => {
                     Published Result
                 </Button>
             )}
+            {!!readyStatus && <StatusMessage readyStatus={readyStatus} />}
         </div>
+    );
+};
+
+// Status message display to the user.
+const StatusMessage: React.FC<{ readyStatus: IReadyStatus }> = ({ readyStatus }) => {
+    return (
+        <p
+            className={`w-full text-center ${
+                readyStatus.status === 'success' ? 'text-emerald-500' : 'text-rose-500'
+            }`}
+        >
+            {readyStatus.message}
+        </p>
     );
 };
 

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const { LanguageEnum } = require('./enums');
+
 const TestCaseSchema = new Schema({
     code: {
         type: String,
@@ -34,6 +36,7 @@ const ExerciseSchema = new Schema({
     },
     language: {
         type: String,
+        enum: LanguageEnum,
         required: true,
     },
     topic: {

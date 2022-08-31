@@ -15,7 +15,7 @@ const ExerciseSorter = () => {
         dispatch(browsingActions.setSorting({ key, direction: dir as any }));
 
     return (
-        <div className="flex-start gap-2">
+        <div className="flex-start gap-1">
             <CustomSelect
                 className="flex-1 gap-1"
                 labelText={<span className="font-semibold">Sort By</span>}

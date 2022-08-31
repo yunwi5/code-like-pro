@@ -1,60 +1,45 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postExercise, putExercise } from '../../apis/exercise/exercise';
+import { runTestCases } from '../../apis/submission';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { Difficulty, Language, ProgrammingTopic, ToastType } from '../../models/enums';
-import { IExercise, IExerciseWithId, ITestCase } from '../../models/interfaces';
+import {
+    CreationSection,
+    Difficulty,
+    Language,
+    ProgrammingTopic,
+    ToastType,
+} from '../../models/enums';
+import {
+    IExercise,
+    IExerciseCreationContext,
+    IExerciseWithId,
+    IReadyStatus,
+    ITestCase,
+    ITestResult,
+} from '../../models/interfaces';
 import { getInitialTestCaseArray } from '../../utils/exercise-creation-utils/testcase-utils';
 import { mapLanguageToJobeLangCode } from '../../utils/language';
 import { toastNotify } from '../../utils/notification/toast';
-
-interface IExerciseCreationContext {
-    name: string;
-    setName: (name: string) => void;
-    language: Language;
-    setLanguage: (lang: Language) => void;
-    topic: ProgrammingTopic;
-    setTopic: (topic: ProgrammingTopic) => void;
-    prompt: string;
-    difficulty: Difficulty;
-    setDifficulty: (diff: Difficulty) => void;
-    setPrompt: (text: string) => void;
-    testCases: ITestCase[];
-    setTestCases: React.Dispatch<React.SetStateAction<ITestCase[]>>;
-    tags: string[];
-    setTags: React.Dispatch<React.SetStateAction<string[]>>;
-    startingTemplate: string;
-    setStartingTemplate: React.Dispatch<React.SetStateAction<string>>;
-    solutionCode: string;
-    setSolutionCode: React.Dispatch<React.SetStateAction<string>>;
-    saveDraft: () => void;
-    saveExercise: () => void;
-    isLoading: boolean;
-    redirectToCreatedExercisePage: Function;
-    createdExercise: null | IExercise;
-    // activeSection: CreationSection | null;
-    // setActiveSection: React.Dispatch<React.SetStateAction<CreationSection | null>>;
-}
 
 export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>({
     setActiveSection: () => {},
     setName: () => {},
     redirectToCreatedExercisePage: () => {},
+    runCode: () => {},
     testCases: [],
     tags: [],
 } as any);
 
 export const useExerciseCreationContext = () => useContext(ExerciseCreationContext);
 
-interface Props {
-    children: React.ReactNode;
-}
-
 export const DRAFT_LOCAL_STORATE_KEY = 'exercise_creation_draft';
 
 // Context for sharing and storing user exercise creation data.
 // Each exercise creation related component can use this context to receive or update the data.
-export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) => {
+export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNode }> = ({
+    children,
+}) => {
     const navigate = useNavigate();
     const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExercise | ''>(
         DRAFT_LOCAL_STORATE_KEY,
@@ -72,18 +57,76 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
 
     const [tags, setTags] = useState<string[]>([]);
     const [testCases, setTestCases] = useState<ITestCase[]>(() => getInitialTestCaseArray());
+    const [testCaseOutputs, setTestCaseOutputs] = useState<ITestResult[]>([]);
 
-    // const [activeSection, stActiveSection] = useState<CreationSection | null>(null);
+    const [activeSection, setActiveSection] = useState<CreationSection | null>(null);
 
     // State for loading while sending a request to the server. Loading state should not let users to click 'Run Code' or 'Save Challenge' buttons.
     // Show some loading spinners while loading.
     const [isLoading, setIsLoading] = useState(false);
 
+    // Check whether the user is ready to post the exercise or not.
+    const [readyStatus, setReadyStatus] = useState<IReadyStatus | null>(null);
+
     // Boolean value indicating whether the user submission was saved to the server successfully.
     const [createdExercise, setCreatedExercise] = useState<null | IExerciseWithId>(null);
 
+    // Save currently unsaved work on exercise creation so that users do not lose their intermediate process.
+    // Svae the work in localStorage for now.
+    const saveDraft = () => {
+        setExerciseDraft(createExerciseObject());
+        toastNotify('Saved Draft Locally!', ToastType.SUCCESS);
+    };
+
+    const runCode = async () => {
+        setIsLoading(true);
+        const {
+            ok,
+            data: testCasesResult,
+            message,
+        } = await runTestCases({
+            code: solutionCode,
+            testCases,
+            language: mapLanguageToJobeLangCode(language),
+        });
+        setIsLoading(false);
+
+        if (ok && testCasesResult) {
+            const everythingCorrect = testCasesResult.every((testCase) => testCase.correct);
+            if (everythingCorrect) {
+                toastNotify('You passed all tests! Ready to submit.', ToastType.SUCCESS);
+                setReadyStatus({
+                    status: 'success',
+                    message: 'You are ready to post your exercise!',
+                });
+            } else {
+                toastNotify('You failed some tests...', ToastType.ERROR);
+                setReadyStatus({
+                    status: 'error',
+                    message: 'Please get all test cases right before posting!',
+                });
+            }
+            setTestCaseOutputs(testCasesResult);
+        } else {
+            console.log('Error on run code:', message);
+            toastNotify('Oops, something went wrong on the server.', ToastType.ERROR);
+        }
+    };
+
     // Send POST request to the server.
     const saveExercise = async () => {
+        // Check if they run the test cases before posting
+        if (readyStatus == null) {
+            setReadyStatus({ status: 'error', message: 'Please run your code first!' });
+            return;
+        } else if (readyStatus?.status === 'error') {
+            setReadyStatus({
+                status: 'error',
+                message: 'Please pass all the test cases first!',
+            });
+            return;
+        }
+
         const exercise = createExerciseObject();
 
         // Get jobe language code.
@@ -129,13 +172,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
         })),
     });
 
-    // Save currently unsaved work on exercise creation so that users do not lose their intermediate process.
-    // Svae the work in localStorage for now.
-    const saveDraft = () => {
-        setExerciseDraft(createExerciseObject());
-        toastNotify('Saved Draft Locally!', ToastType.SUCCESS);
-    };
-
     // Runs on mount.
     useEffect(() => {
         if (!exerciseDraft) return;
@@ -174,6 +210,11 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children }) =
         isLoading,
         createdExercise,
         redirectToCreatedExercisePage,
+        activeSection,
+        setActiveSection,
+        runCode,
+        testCaseOutputs,
+        readyStatus,
     };
 
     return (

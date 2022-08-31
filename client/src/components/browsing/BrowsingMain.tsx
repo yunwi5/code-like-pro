@@ -23,7 +23,7 @@ const BrowsingMain: React.FC<Props> = ({ exercises }) => {
     }, [processedExercises]);
 
     return (
-        <main className="flex flex-col gap-2 pt-[4rem] px-4 sm:px-7 md:px-12 xl:px-[9%] py-8 min-h-[85vh]">
+        <main className="flex flex-col gap-2 py-[4rem] px-4 sm:px-7 md:px-12 xl:px-[9%] min-h-[85vh]">
             <div className="mb-2 flex flex-col sm:flex-row items-center sm:justify-between">
                 <h1 className="text-gray-500 font-semibold text-xl sm:text-2xl">
                     Browsing Challenges
