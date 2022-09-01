@@ -39,7 +39,6 @@ const runTestCases = async (req, res) => {
         const feedback = { actualOutput: result, expectedOutput: testCases[i].expectedOutput };
 
         if (result !== testCases[i].expectedOutput.trim()) {
-            // userSubmission.status.push(false);
             feedback.correct = false;
         } else {
             feedback.correct = true;
@@ -56,18 +55,30 @@ Request body: {code: string}
 Response JSON: UserSubmission Object
 */
 const postSubmission = async (req, res) => {
+    const exerciseId = req.params.id;
     const submission = req.body;
 
     const user = await User.findById(req.user._id);
-    const userSubmission = new UserSubmission({ code: submission.code });
-    console.log('new submission:', userSubmission);
 
-    const exercise = await Exercise.findById(req.params.id);
+    // Prevents inserting the user submission of the same user and the same exercise multiple times.
+    // returns null if the user did not submit code for this exercise previously.
+    let userSubmission = await UserSubmission.findOne({
+        exercise: exerciseId,
+        user: req.user._id,
+    });
+
+    if (userSubmission == null) {
+        // If the existing submission is not found, create one.
+        userSubmission = new UserSubmission({ code: submission.code });
+    } else {
+        // If found, update the submission rather than creating a new one.
+        userSubmission.code = submission.code;
+        userSubmission.postedAt = Date.now();
+    }
+
+    const exercise = await Exercise.findById(exerciseId);
     const testCases = exercise.testCases;
     let language = exercise.language;
-
-    // Store the language in the submission so that it is easily to calculate the language statistics for user submissions.
-    userSubmission.language = language;
 
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
@@ -88,9 +99,7 @@ const postSubmission = async (req, res) => {
 
     const testCaseResults = await Promise.all(testCasePromises);
 
-    console.log(testCaseResults);
     let incorrectCount = 0;
-
     for (let i = 0; i < testCaseResults.length; i++) {
         const result = testCaseResults[i].stdout.trim();
         if (result != testCases[i].expectedOutput.trim()) {
@@ -98,18 +107,13 @@ const postSubmission = async (req, res) => {
         }
     }
 
-    // default correct is false.
-    if (incorrectCount === 0) {
-        userSubmission.correct = true;
-    }
+    if (incorrectCount === 0) userSubmission.correct = true;
+    else userSubmission.correct = false;
 
+    // Add exercise and user reference to the userSubmission and save it.
+    userSubmission.exercise = exercise;
+    userSubmission.user = user;
     await userSubmission.save();
-
-    exercise.submissions.push(userSubmission._id);
-    await exercise.save();
-
-    user.submissions.push(userSubmission._id);
-    await user.save();
 
     res.status(201).json(userSubmission);
 };

@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const { LanguageEnum } = require('./enums');
-
 const UserSubmissionSchema = new Schema({
     // Code that the user has written for the submission
     code: {
@@ -11,16 +9,18 @@ const UserSubmissionSchema = new Schema({
     },
     correct: {
         type: Boolean,
-        default: false,
     },
-    language: {
-        type: String,
-        enum: LanguageEnum,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
+    exercise: {
+        type: Schema.Types.ObjectId,
+        ref: 'Exercise',
     },
     postedAt: {
         type: Date,
         default: () => Date.now(),
-        immutable: true,
     },
 });
 

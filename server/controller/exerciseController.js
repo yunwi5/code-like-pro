@@ -1,4 +1,5 @@
 const Exercise = require('../models/Exercise');
+const ExerciseReport = require('../models/ExerciseReport');
 
 const makeRequest = require('../utils/makeRequest');
 
@@ -136,12 +137,38 @@ const deleteExercise = async (req, res) => {
     }
 };
 
+const reportExercise = async (req, res) => {
+    const exerciseId = req.params.id;
+    const { category, description } = req.body;
+
+    const report = new ExerciseReport({ category, description });
+    report.user = req.user._id;
+
+    let exercise;
+    try {
+        // Exercise can be null
+        exercise = await Exercise.findById(exerciseId);
+    } catch (err) {
+        console.log(err.message);
+    }
+
+    if (exercise == null) return res.status(404).json(`Exercise ${exerciseId} not found`);
+
+    exercise.reports.push(report);
+    const p1 = report.save();
+    const p2 = exercise.save();
+    await Promise.all([p1, p2]);
+
+    res.status(201).json(report);
+};
+
 const controller = {
     postExercise,
     getExercises,
     getExerciseByID,
     updateExercise,
     deleteExercise,
+    reportExercise,
 };
 
 module.exports = controller;

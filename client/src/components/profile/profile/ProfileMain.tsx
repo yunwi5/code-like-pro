@@ -33,8 +33,6 @@ const ProfileMain = () => {
                     className="grid grid-cols-1 md:grid-cols-2 gap-y-[1.75rem] mt-3"
                     onSubmit={handleProfileEdit}
                 >
-                    <div className="col-span-2"></div>
-
                     {isEditing ? (
                         <ProfileInput
                             label="Username"
@@ -70,7 +68,7 @@ const ProfileMain = () => {
 
             <div className="flex justify-end px-3 py-3 border-t-[3px] border-gray-300">
                 <Button className="rounded-sm" onClick={() => setIsEditing((ps) => !ps)}>
-                    {isEditing ? 'Confirm' : 'Edit Profile'}
+                    {isEditing ? 'Save Profile' : 'Edit Profile'}
                 </Button>
             </div>
         </section>

@@ -15,4 +15,7 @@ router.put('/:id', ensureAuthenticated, catchAsync(exerciseController.updateExer
 
 router.delete('/:id', ensureAuthenticated, catchAsync(exerciseController.deleteExercise));
 
+// User issue report for the exercise
+router.post('/:id/report', ensureAuthenticated, catchAsync(exerciseController.reportExercise));
+
 module.exports = router;

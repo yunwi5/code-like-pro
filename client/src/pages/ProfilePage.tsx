@@ -6,6 +6,7 @@ import ProfileNav from '../components/profile/ProfileNav';
 import { AppProperty } from '../constants/app';
 
 const ProfilePage: React.FC = () => {
+    // Fetch user info
     // useQuery(['user']);
 
     return (
