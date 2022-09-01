@@ -44,7 +44,7 @@ const ExerciseSchema = new Schema({
         required: true,
     },
     author: {
-        type: mongoose.Schema.Types.ObjectID,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
     createdAt: {
@@ -52,13 +52,13 @@ const ExerciseSchema = new Schema({
         default: () => Date.now(),
         immutable: true,
     },
-    liked: [{ type: mongoose.Schema.Types.ObjectID, ref: 'User' }],
+    liked: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     testCases: {
         type: [TestCaseSchema],
         required: true,
     },
-    submissions: [{ type: mongoose.Schema.Types.ObjectID, ref: 'UserSubmission' }],
     tags: [{ type: String }],
+    reports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ExerciseReport' }],
 });
 
 const Exercise = mongoose.model('Exercise', ExerciseSchema);

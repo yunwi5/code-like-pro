@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { PacmanLoader } from 'react-spinners';
 
-import { getExercises } from '../../apis/exercise/exercise';
+import { getExercises } from '../../apis/exercise';
 import BrowsingMain from '../../components/browsing/BrowsingMain';
 import { Helmet } from 'react-helmet';
 import { AppProperty } from '../../constants/app';

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postExercise, putExercise } from '../../apis/exercise/exercise';
+import { postExercise, putExercise } from '../../apis/exercise';
 import { runTestCases } from '../../apis/submission';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import {
