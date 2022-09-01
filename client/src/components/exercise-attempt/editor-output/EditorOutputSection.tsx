@@ -1,6 +1,6 @@
 import React from 'react';
 import EditorControlBar from './EditorControlBar';
-import CodeEditor from '../../ui/editor/code-editor/CodeEditor';
+import CodeEditor from '../../ui/editor/CodeEditor';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 
 const EditorOutputSection: React.FC = () => {

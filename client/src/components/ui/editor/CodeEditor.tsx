@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import monaco from 'monaco-editor';
-import { Language } from '../../../../models/enums';
-import ExpandShrinkToggler from '../../buttons/icon-buttons/ExpandShrinkToggler';
+import { Language } from '../../../models/enums';
+import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
 
 type Monaco = typeof monaco;
 type CodeEditor = monaco.editor.IStandaloneCodeEditor;

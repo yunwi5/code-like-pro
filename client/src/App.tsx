@@ -1,33 +1,31 @@
-import { Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ClimbingBoxLoader } from 'react-spinners';
 
+// Layout component imports
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import ExerciseCreationPage from './pages/exercise-pages/ExerciseCreation';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/auth/LoginPage';
-import RegisterPage from './pages/auth/RegisterPage';
-import ExerciseAttemptPage from './pages/exercise-pages/ExerciseAttemptPage';
-import BrowsingPage from './pages/exercise-pages/BrowsingPage';
-import ProfilePage from './pages/ProfilePage';
-import {
-    MyCreations,
-    MySubmission,
-    ProfileFavorites,
-    ProfileMain,
-    ProfileStatistics,
-} from './components/profile';
 
-// React Query client initialization
-const queryClient = new QueryClient();
+// Lazy loading imports. Higher performance for initial page loading.
+const ExerciseCreationPage = lazy(() => import('./pages/exercise-pages/ExerciseCreation'));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
+const RegisterPage = lazy(() => import('./pages/auth/RegisterPage'));
+const ExerciseAttemptPage = lazy(() => import('./pages/exercise-pages/ExerciseAttemptPage'));
+const BrowsingPage = lazy(() => import('./pages/exercise-pages/BrowsingPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+
+// Profile nested pages are also lazy loaded.
+import ProfilePages from './components/profile';
+const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =
+    ProfilePages;
 
 function App() {
     return (
-        // Provide ReactQuery client, so that all child components could use React Query for data fetching
-        <QueryClientProvider client={queryClient}>
-            <div className="App">
-                <Header />
+        <div className="App">
+            <Header />
+            <Suspense fallback={<LoadingFallback />}>
                 <Routes>
                     {/* Home page */}
                     <Route path="/" element={<HomePage />} />
@@ -36,7 +34,7 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
 
-                    {/* User profile page */}
+                    {/* User profile pages */}
                     <Route path="/profile" element={<ProfilePage />}>
                         <Route path="" element={<ProfileMain />} />
                         <Route path="statistics" element={<ProfileStatistics />} />
@@ -49,14 +47,25 @@ function App() {
                     <Route path="/create-exercise" element={<ExerciseCreationPage />} />
                     <Route path="/browse" element={<BrowsingPage />} />
                     <Route path="/exercise/:id" element={<ExerciseAttemptPage />} />
-                </Routes>
-                <Footer />
 
-                {/* Toast notification placement */}
-                <ToastContainer />
-            </div>
-        </QueryClientProvider>
+                    {/* Undefined routes redirect to the home page */}
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </Suspense>
+            <Footer />
+
+            {/* Toast notification placement */}
+            <ToastContainer />
+        </div>
     );
 }
+
+const LoadingFallback: React.FC = () => {
+    return (
+        <div className="min-h-[82.5vh] flex-center">
+            <ClimbingBoxLoader size={65} color="#5552e4" />
+        </div>
+    );
+};
 
 export default App;

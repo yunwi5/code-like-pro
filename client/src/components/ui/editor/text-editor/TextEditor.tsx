@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import EditorToolbar, { modules, formats } from './EditorToolbar';
+// Text editor theme
 import 'react-quill/dist/quill.snow.css';
+// Code block syntax highlight theme
 import 'highlight.js/styles/atom-one-light.css';
 
 interface Props {

@@ -19,7 +19,7 @@ const ProfilePage: React.FC = () => {
                 />
             </Helmet>
             <main className="min-h-[82.5vh] flex-center text-gray-700">
-                <div className="flex m-auto xl:max-w-[75vw] bg-gray-50 rounded-md overflow-hidden shadow-md">
+                <div className="flex m-auto w-[100vw] md:w-[90vw] lg:w-[80vw] xl:w-[77vw] md:bg-gray-50 rounded-md overflow-hidden md:shadow-md">
                     <ProfileNav />
                     <Outlet />
                 </div>

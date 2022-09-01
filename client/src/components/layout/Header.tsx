@@ -14,7 +14,7 @@ const Header = () => {
                     <ActiveNavLink
                         to="/browse"
                         className="block mt-4 lg:inline-block lg:mt-0 text-text-main hover:text-main-700 mr-10"
-                        activeClassName="text-main-500"
+                        activeClassName="text-main-500 font-semibold"
                     >
                         Browse
                     </ActiveNavLink>
@@ -36,13 +36,13 @@ const Header = () => {
                 <div className="pr-28">
                     <NavLink
                         to="/login"
-                        className="text-sm bg-transparent hover:bg-main-500 text-main-700 font-regular hover:text-white py-1 px-4 mr-3 border border-main-500 hover:border-transparent rounded"
+                        className="bg-transparent hover:bg-main-600 text-main-700 font-regular hover:text-white py-[0.35rem] px-4 mr-3 border border-main-500 hover:border-transparent rounded shadow-sm"
                     >
                         Login
                     </NavLink>
                     <NavLink
                         to="/register"
-                        className="text-sm bg-transparent hover:bg-main-500 text-main-700 font-regular hover:text-white py-1 px-4 border border-main-500 hover:border-transparent rounded"
+                        className="bg-main-500 hover:bg-main-600 text-gray-50 font-regular py-[0.35rem] px-4 border border-main-500 hover:border-transparent rounded shadow-sm"
                     >
                         Register
                     </NavLink>

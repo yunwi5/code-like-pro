@@ -5,7 +5,7 @@ import { ClipLoader } from 'react-spinners';
 import { getExerciseById } from '../../apis/exercise';
 import ExerciseAttemptMain from '../../components/exercise-attempt/ExerciseAttemptMain';
 import { AppProperty } from '../../constants/app';
-import { IExercise } from '../../models/interfaces';
+import { IExerciseWithId } from '../../models/interfaces';
 import { ExerciseAttemptCtxProvider } from '../../store/context/ExerciseAttemptContext';
 
 const ExerciseAttemptPage: React.FC = () => {
@@ -13,7 +13,7 @@ const ExerciseAttemptPage: React.FC = () => {
     const params = useParams();
     const exerciseId = params.id;
 
-    const [exercise, setExercise] = useState<IExercise | null>(null);
+    const [exercise, setExercise] = useState<IExerciseWithId | null>(null);
 
     useEffect(() => {
         if (exerciseId == null) return navigate('/');
