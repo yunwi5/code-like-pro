@@ -5,6 +5,10 @@ import Modal from '../../ui/modals/Modal';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CustomTextArea from '../../ui/inputs/CustomTextArea';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
+import { reportExercise } from '../../../apis/exercise';
+import { toastNotify } from '../../../utils/notification/toast';
+import { ToastType } from '../../../models/enums';
+import { ClipLoader } from 'react-spinners';
 
 const IssueCategories = [
     'Incorrect Difficulty',
@@ -16,28 +20,36 @@ const IssueCategories = [
     'Others',
 ];
 
-type FormState = 'category' | 'description';
-type ErrorState = {
-    [key in FormState]: null | string;
-};
-
 const IssueReportModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     const { exercise } = useExerciseAttemptCtx();
 
     const [issueCategory, setIssueCategory] = useState('Incorrect Difficulty'); // Incorrect Difficulty by default
     const [description, setDescription] = useState('');
-    const [errorState, setErrorState] = useState<ErrorState>({
-        category: null,
-        description: null,
-    });
+    const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const newErrorState = {
-            category: null,
-            description: description.trim() === '' ? 'Please write your description' : null,
-        };
-        setErrorState(newErrorState);
+        if (!exercise) return;
+        if (description.trim().length < 5) {
+            return setError('Please write description of at least 5 characters');
+        }
+
+        setIsLoading(true);
+        const { ok, data, message } = await reportExercise(exercise._id, {
+            category: issueCategory,
+            description,
+        });
+        setIsLoading(false);
+        if (ok) {
+            console.log(data);
+            setDescription('');
+            toastNotify('Sending report successful!', ToastType.SUCCESS);
+        } else {
+            console.log(message);
+            setError(message);
+            toastNotify(message, ToastType.ERROR);
+        }
     };
 
     return (
@@ -72,25 +84,30 @@ const IssueReportModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                         labelText="description"
                         value={description}
                         onChange={(val) => setDescription(val)}
-                        error={errorState.description}
+                        error={error}
                     />
 
                     {/* Action buttons for submission and closing modal */}
                     <div className="pt-2 flex-between">
-                        <button
-                            className={
-                                'px-3 py-2 text-lg rounded-sm bg-gray-700 hover:bg-gray-800 text-white shadow-md'
-                            }
-                        >
-                            Submit Issue
-                        </button>
-                        <button
-                            type="button"
-                            className="px-3 py-2 text-lg rounded-sm bg-white hover:bg-gray-700 hover:text-white shadow-md hover:shadow-lg"
-                            onClick={onClose}
-                        >
-                            Close
-                        </button>
+                        {isLoading && <ClipLoader color="#3c38e0" size={40} />}
+                        {!isLoading && (
+                            <>
+                                <button
+                                    className={
+                                        'px-3 py-2 text-lg rounded-sm bg-gray-700 hover:bg-gray-800 text-white shadow-md'
+                                    }
+                                >
+                                    Submit Issue
+                                </button>
+                                <button
+                                    type="button"
+                                    className="px-3 py-2 text-lg rounded-sm bg-white hover:bg-gray-700 hover:text-white shadow-md hover:shadow-lg"
+                                    onClick={onClose}
+                                >
+                                    Close
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
             </form>

@@ -26,6 +26,12 @@
     }
 }
 
+// Ql text editor codeblock light theme config
+.ql-snow .ql-editor pre.ql-syntax {
+    background-color: #f3f4f6 !important;
+    color: #333 !important;
+}
+
 .ql-editor {
     min-height: 8rem;
 }
