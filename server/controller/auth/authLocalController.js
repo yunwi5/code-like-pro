@@ -5,7 +5,6 @@ const User = require('../../models/User');
 // Only need to find the user that matches this email
 const postLogin = async (req, res) => {
     const { email } = req.body;
-    console.log('Log In Function Reached');
 
     const user = await User.findOne({ email });
     const userToReturn = getUserToReturn(user);

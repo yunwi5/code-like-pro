@@ -5,7 +5,6 @@ const ensureAuthenticated = (req, res, next) => {
         return next();
     }
     console.log('User NOT authenticated');
-
     // Unauthorized status code and message.
     res.status(401).json({ message: 'User not authenticated!' });
 };

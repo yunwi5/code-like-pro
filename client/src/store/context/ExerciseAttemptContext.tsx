@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { IExercise } from '../../models/interfaces';
+import { IExerciseWithId } from '../../models/interfaces';
 import { mapJobeLangCodeToAppLanguage } from '../../utils/language';
 
 interface IExerciseAttemptCtx {
-    exercise: IExercise | null;
+    exercise: IExerciseWithId | null;
     runCode: () => void;
 }
 
@@ -15,7 +15,7 @@ const ExerciseAttemptContext = React.createContext<IExerciseAttemptCtx>({
 export const useExerciseAttemptCtx = () => useContext(ExerciseAttemptContext);
 
 interface Props {
-    exercise: IExercise;
+    exercise: IExerciseWithId;
     children: React.ReactNode;
 }
 
