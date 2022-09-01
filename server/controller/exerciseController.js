@@ -8,12 +8,9 @@ const postExercise = async (req, res) => {
     const exercise = new Exercise(exerciseBody);
     exercise.author = req.user._id;
 
-    // Check solutionCode works
-
     const testCases = exercise.testCases;
     const solutionCode = exercise.solutionCode;
     let language = exercise.language;
-    // Should need to make sure language_code is received from the client.
 
     // Iterate through each test case and make request to JOBE server
 
@@ -162,6 +159,37 @@ const reportExercise = async (req, res) => {
     res.status(201).json(report);
 };
 
+/*
+When user likes the exercise,
+Exercise stores list of ids of users that like it, User stores the list of exercises he/she likes.
+*/
+const toggleLikeExercise = async (req, res) => {
+    const exerciseId = req.params.id;
+    const user = req.user;
+
+    const exercise = await Exercise.findById(exerciseId);
+
+    if (exercise.liked.includes(user._id)) {
+        const userIndex = exercise.liked.findIndex((id) => id === user._id);
+        exercise.liked.splice(userIndex, 1);
+
+        const exerciseIndex = user.liked.findIndex(
+            (exId) => exId.toString() === exercise._id.toString(),
+        );
+        if (exerciseIndex >= 0) user.liked.splice(exerciseIndex, 1);
+    } else {
+        exercise.liked.push(user._id);
+        user.liked.push(exerciseId);
+    }
+
+    await exercise.save();
+    await user.save();
+    console.log('exercise liked:', exercise.liked);
+    console.log('user liked:', user.liked);
+
+    res.json(exercise);
+};
+
 const controller = {
     postExercise,
     getExercises,
@@ -169,6 +197,7 @@ const controller = {
     updateExercise,
     deleteExercise,
     reportExercise,
+    toggleLikeExercise,
 };
 
 module.exports = controller;
