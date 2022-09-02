@@ -19,9 +19,12 @@ const ChallengeActions: React.FC = () => {
 
     return (
         <div className="flex flex-col sm:flex-row lg:flex-col flex-wrap justify-between gap-2">
-            <Button className={btnClass} onClick={saveDraft}>
-                Save Draft
-            </Button>
+            {/* Safe draft to local storage only if the user did not publish the exercise yet. */}
+            {!createdExercise && (
+                <Button className={btnClass} onClick={saveDraft}>
+                    Save Draft
+                </Button>
+            )}
             {isLoading ? (
                 <RingLoader color="#3c38e0" size={100} className="!self-center" />
             ) : (
@@ -57,7 +60,7 @@ const ChallengeActions: React.FC = () => {
 const StatusMessage: React.FC<{ readyStatus: IReadyStatus }> = ({ readyStatus }) => {
     return (
         <p
-            className={`w-full text-center ${
+            className={`w-full max-w-[14.5rem] text-center ${
                 readyStatus.status === 'success' ? 'text-emerald-500' : 'text-rose-500'
             }`}
         >

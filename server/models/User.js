@@ -1,14 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ImageSchema = new Schema({
-    type: {
-        type: String,
-        enum: ['avatar', 'url'], // either avatar image id or link to the image
-    },
-    url: { type: String },
-});
-
 const UserSchema = new Schema({
     email: {
         type: String,
@@ -30,7 +22,8 @@ const UserSchema = new Schema({
         default: () => Date.now(),
         immutable: true,
     },
-    photo: ImageSchema,
+    pictureUrl: { type: String },
+    avatarId: { type: String },
     liked: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
     exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
     // submissions: [{type: mongoose.Schema.Types.ObjectID, ref: "UserSubmission"}],

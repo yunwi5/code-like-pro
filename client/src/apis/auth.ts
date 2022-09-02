@@ -11,13 +11,16 @@ export async function registerRequest(body: RegisterProp) {
     return await postRequest<IUser>({
         url: `${API_DOMAIN}/sign-up`,
         body,
-        headers: authConfig,
     });
 }
 
 type LoginProps = { email: string; password: string };
 export async function loginRequest(body: LoginProps) {
-    return await postRequest<IUser>({ url: `${API_DOMAIN}/login`, body, headers: authConfig });
+    return await postRequest<IUser>({ url: `${API_DOMAIN}/login`, body });
+}
+
+export async function getLoginSuccess() {
+    return await getRequest({ url: `${API_DOMAIN}/login/success` });
 }
 
 export async function privateRequest() {

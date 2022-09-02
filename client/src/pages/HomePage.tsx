@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import { AppProperty } from '../constants/app';
-import { Link } from 'react-router-dom';
-import { privateRequest } from '../apis/auth';
+import { getLoginSuccess } from '../apis/auth';
 
 const Home: React.FC = () => {
     useEffect(() => {
-        privateRequest().then((data) => console.log('auth data:', data));
+        getLoginSuccess().then((data) => console.log('login success data:', data));
     }, []);
 
     return (

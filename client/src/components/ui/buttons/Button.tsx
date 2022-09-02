@@ -10,11 +10,15 @@ interface Props {
 
 // Re-usable button component for our app theme.
 // btn class and btn-fill & btn-empty classes are defined in the index.scss file.
-const Button: React.FC<Props> = ({ className, children, onClick, mode = 'fill' }) => {
+const Button: React.FC<Props> = ({ className, children, onClick, type, mode = 'fill' }) => {
     const modeClass = mode === 'fill' ? 'btn-fill' : 'btn-empty';
 
     return (
-        <button className={`btn ${modeClass} ${className ?? ''}`} onClick={onClick}>
+        <button
+            type={type}
+            className={`btn ${modeClass} ${className ?? ''}`}
+            onClick={onClick}
+        >
             {children}
         </button>
     );
