@@ -6,6 +6,8 @@ import { ClimbingBoxLoader } from 'react-spinners';
 // Layout component imports
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
+// Profile nested pages
+import ProfilePages from './components/profile';
 
 // Lazy loading imports. Higher performance for initial page loading.
 const ExerciseCreationPage = lazy(() => import('./pages/exercise-pages/ExerciseCreation'));
@@ -16,8 +18,6 @@ const ExerciseAttemptPage = lazy(() => import('./pages/exercise-pages/ExerciseAt
 const BrowsingPage = lazy(() => import('./pages/exercise-pages/BrowsingPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 
-// Profile nested pages are also lazy loaded.
-import ProfilePages from './components/profile';
 const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =
     ProfilePages;
 

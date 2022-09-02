@@ -64,8 +64,7 @@ const passportStrategy = (passport) => {
                                     name,
                                     password: sub,
                                     // googleId: id,
-                                    // provider,
-                                    photo: { type: 'url', url: picture },
+                                    pictureUrl: picture,
                                 },
                                 (err, user) => {
                                     // request.user = user;

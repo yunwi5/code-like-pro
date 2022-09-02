@@ -26,8 +26,8 @@ export function analyzeTestCasesResult(
         return { status: 'error', message: 'Please have at least 3 non-empty test cases!' };
     }
 
-    const noHiddenTests = testCases.some((test) => test.hidden);
-    const noOpenTests = testCases.some((test) => !test.hidden);
+    const noHiddenTests = testCases.every((test) => !test.hidden);
+    const noOpenTests = testCases.every((test) => test.hidden);
     if (noHiddenTests)
         return { status: 'error', message: 'Please have at least 1 hidden test(s)!' };
     if (noOpenTests)
