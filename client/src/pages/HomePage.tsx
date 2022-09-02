@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+
 import { AppProperty } from '../constants/app';
-import Header from '../components/layout/Header';
 import { Link } from 'react-router-dom';
+import { privateRequest } from '../apis/auth';
 
 const Home: React.FC = () => {
+    useEffect(() => {
+        privateRequest().then((data) => console.log('auth data:', data));
+    }, []);
+
     return (
         <>
             <Helmet>

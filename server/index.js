@@ -8,7 +8,8 @@ const createApp = require('./config/app');
 const connectDB = require('./config/db');
 const passportStrategy = require('./config/passport');
 const router = require('./routes/index');
-const authRouter = require('./routes/auth/auth-local');
+const authRouter = require('./routes/auth/auth');
+const authGoogleRouter = require('./routes/auth/authGoogle');
 const exerciseRouter = require('./routes/exercise');
 const userSubmissionController = require('./routes/userSubmission');
 
@@ -28,6 +29,8 @@ app.use(passport.session());
 // IMPORTANT: register routers after the passport configuration (otherwise session is not set up correctly)
 app.use('/api', router);
 app.use('/api/auth', authRouter);
+app.use('/api/auth/google', authGoogleRouter);
+
 app.use('/api/exercise', exerciseRouter);
 app.use('/api/submission', userSubmissionController);
 

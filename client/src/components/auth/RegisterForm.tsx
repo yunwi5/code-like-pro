@@ -59,13 +59,16 @@ const RegisterForm = () => {
         if (Object.values(error).join('').trim()) return;
 
         setIsLoading(true);
-        const { ok } = await registerRequest(registerState);
+        const { ok, message } = await registerRequest(registerState);
         setIsLoading(false);
 
         // If register is success, redirect to the login page.
         if (ok) {
             navigate('/login');
             toastNotify('Register successful!', ToastType.SUCCESS);
+        } else {
+            toastNotify(message || 'Register is unsuccessful..', ToastType.ERROR);
+            setErrorState({ ...errorState, overall: message });
         }
     };
 

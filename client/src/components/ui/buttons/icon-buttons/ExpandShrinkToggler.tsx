@@ -19,7 +19,7 @@ const ExpandShrinkToggler: React.FC<Props> = ({ isShrinked, setIsShrinked, class
     return (
         <span
             onClick={() => setIsShrinked((ps) => !ps)}
-            className={`text-xl text-gray-600 cursor-pointer ${className ?? ''}`}
+            className={`text-xl text-gray-600 cursor-pointer ${className || ''}`}
         >
             {icon}
         </span>
