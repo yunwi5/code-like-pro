@@ -6,7 +6,7 @@ import CodeEditor from '../../../ui/editor/CodeEditor';
 const ScratchPad: React.FC = () => {
     const { exercise } = useExerciseAttemptCtx();
 
-    const scatchPadKey = `${exercise?.name}ScratchPad`;
+    const scatchPadKey = `ScratchPad-${exercise?._id}`;
     // Store user note in the localStorage with a unique key. Update the note in the localStorage when the note updates.
     const [note, setNote] = useLocalStorage<string>(scatchPadKey, 'Add your note..');
 

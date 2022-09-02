@@ -60,7 +60,7 @@ const ChallengeActions: React.FC = () => {
 const StatusMessage: React.FC<{ readyStatus: IReadyStatus }> = ({ readyStatus }) => {
     return (
         <p
-            className={`w-full text-center ${
+            className={`w-full max-w-[14.5rem] text-center ${
                 readyStatus.status === 'success' ? 'text-emerald-500' : 'text-rose-500'
             }`}
         >

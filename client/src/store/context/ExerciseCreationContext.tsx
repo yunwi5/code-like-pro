@@ -18,7 +18,10 @@ import {
     ITestCase,
     ITestResult,
 } from '../../models/interfaces';
-import { getInitialTestCaseArray } from '../../utils/exercise-creation-utils/testcase-utils';
+import {
+    analyzeTestCasesResult,
+    getInitialTestCaseArray,
+} from '../../utils/exercise-creation-utils/testcase-utils';
 import { mapLanguageToJobeLangCode } from '../../utils/language';
 import { toastNotify } from '../../utils/notification/toast';
 
@@ -94,20 +97,17 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
         });
         setIsLoading(false);
 
+        console.log('testCasesResult:', testCasesResult);
+
         if (ok && testCasesResult) {
-            const everythingCorrect = testCasesResult.every((testCase) => testCase.correct);
-            if (everythingCorrect) {
-                toastNotify('You passed all tests! Ready to submit.', ToastType.SUCCESS);
-                setReadyStatus({
-                    status: 'success',
-                    message: 'You are ready to post your exercise!',
-                });
+            const { status, message } = analyzeTestCasesResult(testCases, testCasesResult);
+
+            if (status === 'error') {
+                toastNotify(message, ToastType.ERROR);
+                setReadyStatus({ status: 'error', message });
             } else {
-                toastNotify('You failed some tests...', ToastType.ERROR);
-                setReadyStatus({
-                    status: 'error',
-                    message: 'Please get all test cases right before posting!',
-                });
+                toastNotify(message, ToastType.SUCCESS);
+                setReadyStatus({ status: 'success', message });
             }
             setTestCaseOutputs(testCasesResult);
         } else {
@@ -153,9 +153,7 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
     };
 
     const redirectToCreatedExercisePage = () => {
-        if (!createdExercise || !createdExercise._id) {
-            return;
-        }
+        if (!createdExercise || !createdExercise._id) return;
         navigate(`/exercise/${createdExercise._id}`);
     };
 
@@ -171,7 +169,7 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
         // Remove id and error from test cases.
         testCases: testCases.map((testCase) => ({
             ...testCase,
-            id: undefined,
+            _id: undefined,
             error: undefined,
         })),
     });
@@ -189,8 +187,6 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
         setSolutionCode(exerciseDraft.solutionCode);
         setName(exerciseDraft.name);
     }, [exerciseDraft]);
-
-    console.log('createdExercise:', createdExercise);
 
     const value = {
         name,
