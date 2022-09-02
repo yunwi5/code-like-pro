@@ -1,10 +1,11 @@
-const express = require('express');
+const { Router } = require('express');
 const passport = require('passport');
-const authController = require('../../controller/auth/authLocalController');
+
+const authController = require('../../controller/auth/authController');
 const catchAsync = require('../../middleware/catchAsync');
 const { validateLoginBody, validateSignUpBody } = require('../../middleware/validateRequest');
 
-const router = express.Router();
+const router = Router();
 
 router.post(
     '/login',
@@ -20,5 +21,9 @@ router.post(
 router.post('/sign-up', validateSignUpBody, catchAsync(authController.postSignUp));
 
 router.get('/logout', authController.getLogout);
+
+router.get('/login/success', authController.getAuthSuccess);
+
+router.get('/login/failure', authController.getAuthFailure);
 
 module.exports = router;

@@ -18,8 +18,7 @@ const postSignUp = async (req, res) => {
     // check existing user with this email (email should be unique)
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-        errors.push({ message: 'This email is already registered.' });
-        return res.status(400).json(errors);
+        return res.status(400).json({ message: 'This email is already registered.' });
     }
 
     // encrypt password
@@ -38,11 +37,32 @@ const postSignUp = async (req, res) => {
 
 const getLogout = (req, res, next) => {
     // logout function now takes callback function
-    req.logout(function (err) {
-        if (err) {
-            return next(err);
-        }
-        res.status(200).json({ message: 'Logout successful.' });
+    req.logout((err) => {
+        if (err) next(err);
+        res.status(200).json({ message: 'Logout successful' });
+    });
+};
+
+const getAuthSuccess = (req, res) => {
+    console.log('user:', req.user);
+    // DO NOT SET HEADERS TWICE (CORS ERROR)
+    if (req.user) {
+        res.status(200).json({
+            success: true,
+            message: 'Authentication successful!',
+            user: req.user,
+            cookies: req.cookies,
+        });
+        return;
+    }
+    res.status(404).json({ success: false, message: 'User not found', cookies: req.cookies });
+};
+
+const getAuthFailure = (req, res) => {
+    const statusCode = req.statusCode ?? 401;
+    res.status(statusCode).json({
+        success: false,
+        message: 'Authentication did not work...',
     });
 };
 
@@ -63,6 +83,8 @@ const controller = {
     postLogin,
     postSignUp,
     getLogout,
+    getAuthSuccess,
+    getAuthFailure,
 };
 
 module.exports = controller;

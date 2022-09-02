@@ -7,7 +7,6 @@ const errorHandler = require('../middleware/errorHandler');
 const createApp = () => {
     const app = express();
 
-    console.log('client url:', keys.ClientBaseURL);
     // handle cors issue from client
     app.use(
         cors({
