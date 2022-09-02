@@ -24,10 +24,9 @@ export async function getRequest<T>({ url, headers }: ReqParams) {
 
 // There can be more params in the future.
 export async function postRequest<T>({ url, body, headers }: ReqBodyParams) {
-    let response: any = null;
     let data: T | null = null;
     try {
-        response = await axios.post<T>(url, body, headers ?? authConfig);
+        const response = await axios.post<T>(url, body, headers ?? authConfig);
         data = response.data;
         return { ok: true, data };
     } catch (err) {

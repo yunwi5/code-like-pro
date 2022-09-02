@@ -19,9 +19,12 @@ const ChallengeActions: React.FC = () => {
 
     return (
         <div className="flex flex-col sm:flex-row lg:flex-col flex-wrap justify-between gap-2">
-            <Button className={btnClass} onClick={saveDraft}>
-                Save Draft
-            </Button>
+            {/* Safe draft to local storage only if the user did not publish the exercise yet. */}
+            {!createdExercise && (
+                <Button className={btnClass} onClick={saveDraft}>
+                    Save Draft
+                </Button>
+            )}
             {isLoading ? (
                 <RingLoader color="#3c38e0" size={100} className="!self-center" />
             ) : (

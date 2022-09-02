@@ -40,8 +40,6 @@ const ChallengeTestCases: React.FC = () => {
         </div>
     );
 
-    console.table(testCaseOutputs);
-
     return (
         <CreationSectionContainer title={title} id={CreationSection.TEST_CASES}>
             <div className="flex flex-col gap-5">

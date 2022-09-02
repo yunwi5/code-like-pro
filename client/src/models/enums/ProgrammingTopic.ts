@@ -1,5 +1,6 @@
 export enum ProgrammingTopic {
     ARRAY = 'Array',
+    ARITHMETIC = 'Arithmetic',
     STRING = 'String',
     BINARY_TREE = 'Binary Tree',
     BINARY_SEARCH_TREE = 'Binary Search Tree',
@@ -7,6 +8,7 @@ export enum ProgrammingTopic {
     DYNAMIC_PROGRAMMING = 'Dynamic Programming',
     GRAPH = 'Graph',
     GREEDY_ALGORITHM = 'Greedy Algorithm',
+    GEOMETRY = 'Geometry',
     RECURSION = 'Recursion',
     SORTING = 'Sorting',
     SEARCHING = 'Searching',

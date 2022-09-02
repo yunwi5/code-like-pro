@@ -44,15 +44,9 @@ const getLogout = (req, res, next) => {
 };
 
 const getAuthSuccess = (req, res) => {
-    console.log('user:', req.user);
     // DO NOT SET HEADERS TWICE (CORS ERROR)
     if (req.user) {
-        res.status(200).json({
-            success: true,
-            message: 'Authentication successful!',
-            user: req.user,
-            cookies: req.cookies,
-        });
+        res.status(200).json(req.user);
         return;
     }
     res.status(404).json({ success: false, message: 'User not found', cookies: req.cookies });

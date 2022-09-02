@@ -1,22 +1,10 @@
 import React from 'react';
+import { ProgrammingTopicList } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import Tag from '../../ui/design-elements/Tag';
 import AutoComplete from '../../ui/inputs/AutoComplete';
 
-const PredefinedTags = [
-    'COMPSCI 101',
-    'COMPSCI 130',
-    'COMPSCI 230',
-    'COMPSCI 235',
-    'COMPSCI 335',
-    'COMPSCI 367',
-    'COMPSCI 373',
-    'COMPSCI 399',
-    'Binary Search Tree',
-    'Graph Algorithms',
-    'Time Complexity',
-    'Space Complexity',
-];
+const PredefinedTags = [...ProgrammingTopicList];
 
 const ChallengeTags: React.FC = () => {
     const { tags, setTags } = useExerciseCreationContext();

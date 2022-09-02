@@ -2,7 +2,7 @@ import { ITestCase } from '../../models/interfaces';
 
 export function getEmptyTestCase(testCaseNumber?: number): ITestCase {
     return {
-        id: `test-case-${testCaseNumber}`,
+        _id: `test-case-${testCaseNumber}`,
         code: '',
         expectedOutput: '',
     };

@@ -72,10 +72,13 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
     const [createdExercise, setCreatedExercise] = useState<null | IExerciseWithId>(null);
 
     // Save currently unsaved work on exercise creation so that users do not lose their intermediate process.
-    // Svae the work in localStorage for now.
     const saveDraft = () => {
-        setExerciseDraft(createExerciseObject());
-        toastNotify('Saved Draft Locally!', ToastType.SUCCESS);
+        if (createdExercise == null) {
+            setExerciseDraft(createExerciseObject());
+            toastNotify('Saved Draft Locally!', ToastType.SUCCESS);
+        } else {
+            toastNotify('You already posted the exercise!');
+        }
     };
 
     const runCode = async () => {
@@ -142,6 +145,7 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
         if (ok) {
             toastNotify('Challenge was saved successfully!', ToastType.SUCCESS);
             if (data) setCreatedExercise(data);
+            setExerciseDraft('');
         } else {
             toastNotify(message, ToastType.ERROR);
         }
@@ -185,6 +189,8 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
         setSolutionCode(exerciseDraft.solutionCode);
         setName(exerciseDraft.name);
     }, [exerciseDraft]);
+
+    console.log('createdExercise:', createdExercise);
 
     const value = {
         name,
