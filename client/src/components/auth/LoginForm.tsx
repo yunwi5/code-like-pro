@@ -1,18 +1,14 @@
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { loginRequest } from '../../apis/auth';
-import { ToastType } from '../../models/enums';
-import { toastNotify } from '../../utils/notification/toast';
+import { useUserContext } from '../../store/context/UserContext';
 import { invalidateEmail, invalidatePassword } from '../../utils/string-utils/validation';
 import AuthCard from './AuthCard';
 
 type LoginState = { email: string; password: string };
 const LoginForm = () => {
-    const navigate = useNavigate();
+    const { login, isLoading } = useUserContext();
     const [loginState, setLoginState] = useState({ email: '', password: '' });
     const [errorState, setErrorState] = useState({ email: '', password: '', overall: '' });
-    const [isLoading, setIsLoading] = useState(false);
 
     // Check if the form is initially submitted by the user.
     const initialSubmitRef = useRef<boolean>(false);
@@ -46,19 +42,13 @@ const LoginForm = () => {
 
         // If any errorState is on, do not send the register request.
         if (Object.values(error).join('').trim()) return;
+        const { ok, message } = await login(loginState);
 
-        setIsLoading(true);
-        // Use returned data as a global user data
-        const { ok, data } = await loginRequest(loginState);
-        console.log(data);
-        setIsLoading(false);
-
-        // If the login is success, redirect to the home page.
-        if (ok) {
-            navigate('/');
-            toastNotify('Login Successful!', ToastType.SUCCESS);
-        } else {
-            setErrorState((prev) => ({ ...prev, overall: 'Email or password is incorrect.' }));
+        if (!ok) {
+            setErrorState((prev) => ({
+                ...prev,
+                overall: message || 'Something went wrong...',
+            }));
         }
     };
 

@@ -1,9 +1,13 @@
 import { Helmet } from 'react-helmet';
 import ExerciseCreationMain from '../../components/exercise-creation/ExerciseCreationMain';
 import { AppProperty } from '../../constants/app';
+import useAuth from '../../hooks/useAuth';
 import { ExerciseCreationContextProvider } from '../../store/context/ExerciseCreationContext';
 
-const ExerciseCreation = () => {
+const ExerciseCreationPage: React.FC = () => {
+    // Auth protector. Only authenticated user can access this page.
+    useAuth();
+
     return (
         <>
             <Helmet>
@@ -20,4 +24,4 @@ const ExerciseCreation = () => {
     );
 };
 
-export default ExerciseCreation;
+export default ExerciseCreationPage;

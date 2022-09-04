@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AvatarIds } from '../../../assets';
+import { AvatarImagesList } from '../../../assets';
 import Button from '../../ui/buttons/Button';
 import ProfileAvatar from './sections/ProfileAvatar';
 import ProfileInfoItem from './sections/ProfileInfoItem';
@@ -10,11 +10,11 @@ const ProfileMain = () => {
 
     // Only username and avatars are editable in the profile page.
     const [profileName, setProfileName] = useState('Camille');
-    const [avatarId, setAvatarId] = useState(AvatarIds[0]);
+    const [picture, setPicture] = useState(AvatarImagesList[0]);
 
     const handleProfileEdit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('New name:', profileName, 'New avatar:', avatarId);
+        console.log('New name:', profileName, 'New avatar:', picture);
         // Send some HTTP Request to edit the profile.
     };
 
@@ -24,8 +24,8 @@ const ProfileMain = () => {
                 <ProfileHeader />
                 <ProfileAvatar
                     isEditing={isEditing}
-                    avatarId={avatarId}
-                    setAvatarId={setAvatarId}
+                    picture={picture}
+                    setPicture={setPicture}
                 />
 
                 {/* Profile information */}

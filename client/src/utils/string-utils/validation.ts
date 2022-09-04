@@ -14,6 +14,6 @@ export function invalidateUsername(name: string) {
 
 export function invalidatePassword(pass: string) {
     if (!pass) return 'Password is required!';
-    if (pass.length < 6) return 'Password should be at least 6 characters!';
+    if (pass.length < 7) return 'Password should be at least 7 characters!';
     return null;
 }
