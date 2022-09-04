@@ -26,5 +26,4 @@ export const AvatarImages = {
     Avatar12,
 };
 
-export const AvatarIds = Object.keys(AvatarImages);
 export const AvatarImagesList = Object.values(AvatarImages);

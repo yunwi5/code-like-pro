@@ -14,7 +14,7 @@ const CreationSidebar: React.FC = () => {
                     {CreationSectionList.map((section: any) => {
                         const activeClass =
                             section === activeSection
-                                ? 'text-main-500 font-semibold border-l-main-300/90'
+                                ? 'text-main-500 font-semibold !border-l-main-300/90'
                                 : 'border-l-gray-400/70';
 
                         return (

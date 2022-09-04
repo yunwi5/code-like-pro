@@ -9,8 +9,10 @@ import { AppProperty } from '../../constants/app';
 import { ExerciseAttemptCtxProvider } from '../../store/context/ExerciseAttemptContext';
 import { toastNotify } from '../../utils/notification/toast';
 import { ToastType } from '../../models/enums';
+import useAuth from '../../hooks/useAuth';
 
 const ExerciseAttemptPage: React.FC = () => {
+    useAuth();
     const navigate = useNavigate();
     const params = useParams();
     const exerciseId = params.id || '';

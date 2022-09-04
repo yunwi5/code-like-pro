@@ -63,14 +63,8 @@ const getAuthFailure = (req, res) => {
 // Helper function
 // Do not return password
 const getUserToReturn = (user) => {
-    const userToReturn = {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        date: user.date,
-        createdAt: user.createdAt,
-    };
-    return userToReturn;
+    delete user.password;
+    return user;
 };
 
 const controller = {

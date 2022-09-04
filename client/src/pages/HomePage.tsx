@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import { AppProperty } from '../constants/app';
-import { getLoginSuccess } from '../apis/auth';
 
 const Home: React.FC = () => {
-    useEffect(() => {
-        getLoginSuccess().then((data) => console.log('login success data:', data));
-    }, []);
-
     return (
         <>
             <Helmet>

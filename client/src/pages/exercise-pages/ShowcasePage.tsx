@@ -1,11 +1,12 @@
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { AppProperty } from '../../constants/app';
+import useAuth from '../../hooks/useAuth';
 
 const ShowcasePage = () => {
+    useAuth();
     const params = useParams();
     const exerciseId = params.id;
-    console.log('Exercise showcase for exercise ID:', exerciseId);
     // Send the request to get the showcase data of this exercise.
 
     return (
