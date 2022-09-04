@@ -10,7 +10,7 @@ interface Props {
 // Choosing or clicking one subsection should switch to that particular subsection.
 const ExerciseInfoNav: React.FC<Props> = ({ activeSubSection, setActiveSubSection }) => {
     return (
-        <nav className="flex text-lg">
+        <nav className="flex text-sm xs:text-base lg:!text-lg">
             {SubSectionList.map((section, idx) => {
                 let className =
                     'flex-1 flex-center px-2 py-2 !cursor-pointer transition-all hover:bg-gray-600 hover:text-gray-50';

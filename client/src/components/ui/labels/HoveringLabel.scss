@@ -5,7 +5,7 @@
         opacity: 0;
         transition: all 0.35s ease-in-out;
         position: absolute;
-        top: 0%;
+        top: 100%;
         left: 50%;
         border-radius: 3px;
         transform: translateX(-50%);
@@ -20,7 +20,6 @@
     &:hover {
         .hover-label__panel {
             opacity: 1;
-            top: 100%;
             box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
         }
     }

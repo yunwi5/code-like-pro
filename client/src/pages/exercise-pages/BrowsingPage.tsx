@@ -1,16 +1,20 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { PacmanLoader } from 'react-spinners';
+import { Helmet } from 'react-helmet';
 
 import { getExercises } from '../../apis/exercise';
 import BrowsingMain from '../../components/browsing/BrowsingMain';
-import { Helmet } from 'react-helmet';
 import { AppProperty } from '../../constants/app';
 import { IExerciseCard } from '../../models/interfaces';
 import { mapJobeLangCodeToAppLanguage } from '../../utils/language';
 import { createRandomExercises } from '../../utils/random/random-exercise';
+import { toastNotify } from '../../utils/notification/toast';
+import { ToastType } from '../../models/enums';
 
 const BrowsingPage: React.FC = () => {
+    const navigate = useNavigate();
     const {
         isLoading,
         error,
@@ -46,6 +50,14 @@ const BrowsingPage: React.FC = () => {
         const randomExercises = createRandomExercises(1000);
         return exerciseCards.concat(randomExercises);
     }, [exerciseCards]);
+
+    // If there is an error from the fetching, redirect to the home page.
+    useEffect(() => {
+        if (!!error) {
+            navigate('/');
+            toastNotify('Sorry, something went wrong in browsing', ToastType.ERROR);
+        }
+    }, [error]);
 
     return (
         <>

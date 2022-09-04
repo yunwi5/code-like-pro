@@ -4,7 +4,7 @@ import ExerciseInfoSection from './exercise-info/ExerciseInfoSection';
 
 const ExerciseAttemptMain: React.FC = () => {
     return (
-        <main className="flex flex-col lg:flex-row gap-5 lg:min-h-[max(90vh,35rem)] lg:max-h-[93vh] bg-gray-200/70 border-t-2 border-gray-300/90">
+        <main className="flex flex-col lg:flex-row gap-x-5 lg:min-h-[max(92.5vh,35rem)] lg:max-h-[93vh] bg-gray-200/70 border-t-2 border-gray-300/90">
             {/* Code editor left side, consisting of prompt, test cases, and scratch pad */}
             <ExerciseInfoSection />
 

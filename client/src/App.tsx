@@ -8,6 +8,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 // Profile nested pages
 import ProfilePages from './components/profile';
+import ShowcasePage from './pages/exercise-pages/ShowcasePage';
 
 // Lazy loading imports. Higher performance for initial page loading.
 const ExerciseCreationPage = lazy(() => import('./pages/exercise-pages/ExerciseCreation'));
@@ -47,6 +48,7 @@ function App() {
                     <Route path="/create-exercise" element={<ExerciseCreationPage />} />
                     <Route path="/browse" element={<BrowsingPage />} />
                     <Route path="/exercise/:id" element={<ExerciseAttemptPage />} />
+                    <Route path="/showcase/:id" element={<ShowcasePage />} />
 
                     {/* Undefined routes redirect to the home page */}
                     <Route path="*" element={<Navigate to="/" replace />} />

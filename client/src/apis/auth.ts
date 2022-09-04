@@ -1,7 +1,5 @@
-import axios from 'axios';
 import { AppProperty } from '../constants/app';
-import { IUser } from '../models/interfaces/IUser';
-import { authConfig } from './config';
+import { IUser } from '../models/interfaces/user/IUser';
 import { getRequest, postRequest } from './requests';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/auth`;

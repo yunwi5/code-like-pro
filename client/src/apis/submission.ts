@@ -1,6 +1,6 @@
 import { AppProperty } from '../constants/app';
 import { postRequest } from './requests';
-import { ITestCase, ITestResult } from '../models/interfaces';
+import { ITestCase, ITestResult, IUserSubmission } from '../models/interfaces';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/submission`;
 
@@ -10,4 +10,16 @@ export async function runTestCases(body: RunRequestBody) {
     return await postRequest<ITestResult[]>({ url: `${API_DOMAIN}/run`, body });
 }
 
-export async function postSubmissions() {}
+// Get userSubmission for the particular exercise
+export async function getSubmission(exerciseId: string) {
+    // Implement the GET request
+}
+
+// UserSubmission to the backend
+type SubmissionBody = { code: string };
+export async function postSubmission(exerciseId: string, body: SubmissionBody) {
+    return await postRequest<IUserSubmission>({
+        url: `${API_DOMAIN}/${exerciseId}`,
+        body,
+    });
+}
