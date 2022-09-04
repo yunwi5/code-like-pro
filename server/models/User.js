@@ -22,11 +22,10 @@ const UserSchema = new Schema({
         default: () => Date.now(),
         immutable: true,
     },
+    // Link to the user profile picture. Either link to google profile picture or internal link to the avatar image of the app.
     pictureUrl: { type: String },
-    avatarId: { type: String },
     liked: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
     exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
-    // submissions: [{type: mongoose.Schema.Types.ObjectID, ref: "UserSubmission"}],
 });
 
 const User = mongoose.model('User', UserSchema);

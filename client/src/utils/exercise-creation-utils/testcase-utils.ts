@@ -37,3 +37,12 @@ export function analyzeTestCasesResult(
     if (!everythingCorrect) return { status: 'error', message: 'You failed some tests...' };
     return { status: 'success', message: 'You passed all tests! Ready to submit.' };
 }
+
+// Test case output analysis
+export function getCorrectTestCaseCount(testCaseOutputs: ITestResult[]) {
+    let correct = 0;
+    testCaseOutputs.forEach((result) => {
+        if (result.correct) correct++;
+    });
+    return { correct };
+}

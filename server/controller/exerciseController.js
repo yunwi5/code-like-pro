@@ -160,7 +160,7 @@ const reportExercise = async (req, res) => {
 };
 
 /*
-When user likes the exercise,
+GET: User likes/undo-likes the exercise,
 Exercise stores list of ids of users that like it, User stores the list of exercises he/she likes.
 */
 const toggleLikeExercise = async (req, res) => {
@@ -184,9 +184,6 @@ const toggleLikeExercise = async (req, res) => {
 
     await exercise.save();
     await user.save();
-    console.log('exercise liked:', exercise.liked);
-    console.log('user liked:', user.liked);
-
     res.json(exercise);
 };
 

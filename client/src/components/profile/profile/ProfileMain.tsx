@@ -19,7 +19,7 @@ const ProfileMain = () => {
     };
 
     return (
-        <section className="relative lg:min-w-[55rem]">
+        <section className="relative flex-1">
             <div className="pl-7 pr-4 py-3">
                 <ProfileHeader />
                 <ProfileAvatar
@@ -66,7 +66,7 @@ const ProfileMain = () => {
                 </form>
             </div>
 
-            <div className="flex justify-end px-3 py-3 border-t-[3px] border-gray-300">
+            <div className="flex justify-end px-3 py-3 pr-[5rem] border-t-[3px] border-gray-300">
                 <Button className="rounded-sm" onClick={() => setIsEditing((ps) => !ps)}>
                     {isEditing ? 'Save Profile' : 'Edit Profile'}
                 </Button>
