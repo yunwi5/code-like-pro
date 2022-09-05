@@ -5,6 +5,7 @@ import CustomSelect from './CustomSelect';
 
 interface Props {
     searchKeys: string[] | readonly string[];
+    label?: string | null;
     onKeyChange?: (newKey: string) => void;
     keyValue?: string;
     onTextChange?: (text: string) => void;
@@ -18,6 +19,7 @@ const Searchbar: React.FC<Props> = ({
     onTextChange,
     keyValue,
     textValue,
+    label = 'Search',
     onSearch,
 }) => {
     const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -32,7 +34,7 @@ const Searchbar: React.FC<Props> = ({
         <form className="flex items-end gap-1" onSubmit={handleSubmit}>
             <CustomSelect
                 options={searchKeys}
-                labelText={<span className="font-semibold">Search</span>}
+                labelText={<span className="font-semibold">{label}</span>}
                 id="search-option-select"
                 className="gap-1"
                 value={keyValue}

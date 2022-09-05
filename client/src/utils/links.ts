@@ -4,3 +4,7 @@ export function getExerciseAttemptPageLink(id: string) {
 export function getShowcasePageLink(exerciseId: string) {
     return `/showcase/${exerciseId}`;
 }
+
+export function getExerciseEditLink(exerciseId: string) {
+    return `/edit-exercise/${exerciseId}`;
+}

@@ -4,6 +4,7 @@ import { GoAlert } from 'react-icons/go';
 import { likeExerciseRequest } from '../../../apis/exercise';
 
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
+import { mapJobeLangCodeToAppLanguage } from '../../../utils/language';
 import HoveringLabel from '../../ui/labels/HoveringLabel';
 import IssueReportModal from '../modals/IssueReportModal';
 
@@ -37,7 +38,9 @@ const EditorControlBar: React.FC = () => {
                         defaultValue={exercise?.language}
                         className="text-gray-600 border-2 border-gray-500/90 bg-gray-50 focus:outline focus:outline-2 focus:outline-main-500 focus:text-main-500 focus:border-transparent shadow-md rounded-sm px-2 py-1"
                     >
-                        <option>{exercise?.language}</option>
+                        <option value={exercise?.language}>
+                            {mapJobeLangCodeToAppLanguage(exercise?.language || ('' as any))}
+                        </option>
                     </select>
                 </div>
 

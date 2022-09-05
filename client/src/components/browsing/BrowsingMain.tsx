@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useBrowsing from '../../hooks/useBrowsing';
 import { IExerciseCard } from '../../models/interfaces';
-import ExerciseList from './ExerciseList';
+import ExerciseList from '../ui/ExerciseList';
 import BrowsingSidebar from './sidebar/BrowsingSidebar';
 
 interface Props {

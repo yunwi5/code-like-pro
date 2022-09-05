@@ -14,8 +14,7 @@ import useAuth from '../../hooks/useAuth';
 const ExerciseAttemptPage: React.FC = () => {
     useAuth();
     const navigate = useNavigate();
-    const params = useParams();
-    const exerciseId = params.id || '';
+    const exerciseId = useParams().id || '';
 
     // Get QueryClient from the context.
     const queryClient = useQueryClient();

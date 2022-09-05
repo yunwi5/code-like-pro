@@ -4,7 +4,6 @@ import ShowcaseInviteModal from '../../components/exercise-attempt/modals/Showca
 import { ToastType } from '../../models/enums';
 import { IExerciseWithId, ITestResult, IUserSubmission } from '../../models/interfaces';
 import { getCorrectTestCaseCount } from '../../utils/exercise-utils/testcase';
-import { mapLanguageToJobeLangCode } from '../../utils/language';
 import { toastNotify } from '../../utils/notification';
 
 interface IExerciseAttemptCtx {
@@ -66,7 +65,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         } = await runTestCases({
             code: userSolution,
             testCases: exercise.testCases,
-            language: mapLanguageToJobeLangCode(exercise.language),
+            language: exercise.language,
         });
         setIsLoading(false);
 

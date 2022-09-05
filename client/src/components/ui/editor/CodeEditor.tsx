@@ -3,6 +3,7 @@ import Editor from '@monaco-editor/react';
 import monaco from 'monaco-editor';
 import { Language } from '../../../models/enums';
 import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
+import { mapJobeLangCodeToAppLanguage } from '../../../utils/language';
 
 type Monaco = typeof monaco;
 type CodeEditor = monaco.editor.IStandaloneCodeEditor;
@@ -57,7 +58,7 @@ const CodeEditor: React.FC<Props> = ({
         >
             {showHeader && (
                 <div className="flex-between px-3 py-2 text-gray-700 bg-gray-300/90 capitalize text-lg">
-                    {language ?? 'Python'}
+                    {language ? mapJobeLangCodeToAppLanguage(language) : 'Python'}
                     <ExpandShrinkToggler
                         isShrinked={isShrinked}
                         setIsShrinked={setIsShrinked}
@@ -85,8 +86,10 @@ const CodeEditor: React.FC<Props> = ({
 // For example, we use the name C++ which should be mapped to cpp for monaco language config.
 function getMonacoLanguageName(lang: Language | undefined) {
     switch (lang) {
-        case Language.CPP:
-            return 'cpp';
+        case Language.JAVASCRIPT:
+            return 'javascript';
+        case Language.PYTHON:
+            return 'python';
         default:
             return lang?.toLowerCase();
     }

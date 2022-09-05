@@ -9,41 +9,25 @@ import {
 } from '../assets/svg-icons/language-svgs';
 import { Language } from '../models/enums';
 
-// Map app language name to jobe server code for code execution on the backend.
-export function mapLanguageToJobeLangCode(language: Language) {
-    switch (language) {
+// Map JOBE server language code to user-readable app language name.
+// Example: cpp -> C++, nodejs -> Node JS
+export function mapJobeLangCodeToAppLanguage(langCode: string): string {
+    switch (langCode.trim()) {
         case Language.CPP:
-            return 'cpp';
+            return 'C++';
         case Language.PYTHON:
-            return 'python3';
+            return 'Python';
         case Language.JAVASCRIPT:
-            return 'nodejs';
-        // All other languages codes are just our client style names in lowercase.
+            return 'Node Js';
         default:
-            return language.toLowerCase();
+            return langCode[0].toUpperCase() + langCode.substring(1);
     }
 }
 
-// Map JOBE server language code back to app language name
-export function mapJobeLangCodeToAppLanguage(langCode: string): Language {
-    switch (langCode.trim()) {
-        case 'c':
-            return Language.C;
-        case 'cpp':
-            return Language.CPP;
-        case 'python3':
-            return Language.PYTHON;
-        case 'java':
-            return Language.JAVA;
-        case 'nodejs':
-            return Language.JAVASCRIPT;
-        case 'php':
-            return Language.PHP;
-        case 'pascal':
-            return Language.PASCAL;
-        default:
-            return Language.PYTHON;
-    }
+export function languageCodesToReadableNames(
+    langCodes: string[] | readonly string[],
+): string[] {
+    return langCodes.map((lang) => mapJobeLangCodeToAppLanguage(lang as Language));
 }
 
 // Find the icon for each language.

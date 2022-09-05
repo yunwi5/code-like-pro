@@ -50,6 +50,19 @@ export async function putRequest<T>({ url, body, headers }: ReqBodyParams) {
     }
 }
 
+export async function patchRequest<T>({ url, body, headers }: ReqBodyParams) {
+    let data: T | null = null;
+    try {
+        let response = await axios.patch<T>(url, body, headers ?? authConfig);
+        data = response.data;
+        return { ok: true, data };
+    } catch (err) {
+        let message = extractErrorMessage(err);
+        console.log(message);
+        return { ok: false, message };
+    }
+}
+
 export async function deleteRequest<T>({ url, headers }: ReqParams) {
     let data: T | null = null;
     try {

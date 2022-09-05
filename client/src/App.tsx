@@ -13,6 +13,7 @@ import { useUserContext } from './store/context/UserContext';
 
 // Lazy loading imports. Higher performance for initial page loading.
 const ExerciseCreationPage = lazy(() => import('./pages/exercise-pages/ExerciseCreationPage'));
+const ExerciseEditPage = lazy(() => import('./pages/exercise-pages/ExerciseEditPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/auth/RegisterPage'));
@@ -56,6 +57,7 @@ function App() {
                     {/* Exercise pages */}
                     <Route path="/browse" element={<BrowsingPage />} />
                     <Route path="/create-exercise" element={<ExerciseCreationPage />} />
+                    <Route path="/edit-exercise/:id" element={<ExerciseEditPage />} />
                     <Route path="/exercise/:id" element={<ExerciseAttemptPage />} />
                     <Route path="/showcase/:id" element={<ShowcasePage />} />
 

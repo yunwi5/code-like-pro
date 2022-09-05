@@ -5,9 +5,10 @@ const catchAsync = require('../middleware/catchAsync');
 
 const router = express.Router();
 
-router.patch('/', ensureAuthenticated, catchAsync(userController.updateUser));
-
+// Get user detail
 router.get('/:id', ensureAuthenticated, catchAsync(userController.getUserByID));
 
+// Edit user profile
+router.patch('/', ensureAuthenticated, catchAsync(userController.updateUser));
 
 module.exports = router;
