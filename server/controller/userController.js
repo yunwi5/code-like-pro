@@ -7,7 +7,7 @@ const getUserByID = async (req, res) => {
     let user;
     try {
         // populate author field with author name
-        user = await User.findById(req.params.id).populate('liked');
+        user = await User.findById(req.params.id).populate('liked').lean();
     } catch (err) {
         console.log(err.message);
     }
@@ -26,8 +26,23 @@ const getUserByID = async (req, res) => {
     }
 };
 
+const updateUser = async(req, res) => {
+    const updatedDetails = req.body;
+    const user = await User.findById(req.user._id);
+
+    user.name = updatedDetails.name;
+    user.pictureUrl = updatedDetails.pictureUrl;
+
+    await user.save();
+
+    res.status(200).json(user);
+
+}
+
 const controller = {
     getUserByID,
+    updateUser,
 };
+
 
 module.exports = controller;
