@@ -7,18 +7,19 @@ import { MdEmail } from 'react-icons/md';
 
 import CustomInput from '../ui/inputs/CustomInput';
 import Button from '../ui/buttons/Button';
-import { GoogleIcon } from '../../assets/svg-icons/social-svgs';
-import { IAuthErrorState, IAuthFormState } from '../../models/interfaces';
 import GoogleLogin from './GoogleLogin';
 
 const btnClass = 'min-w-[10rem] my-3 w-full';
+
+type AuthFormState = { email: string; password: string; name?: string };
+type AuthErrorState = { email: string; name?: string; password: string; overall: string };
 
 const AuthCard = (props: {
     isLogin: boolean;
     onSubmit: (e: React.FormEvent) => void;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    formState: IAuthFormState; // form state that stores current value for each input
-    errorState?: IAuthErrorState; // form state that stores error for each input
+    formState: AuthFormState; // form state that stores current value for each input
+    errorState?: AuthErrorState; // form state that stores error for each input
     isLoading?: boolean;
 }) => {
     return (

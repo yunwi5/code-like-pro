@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { registerRequest } from '../../apis/auth';
 
 import { ToastType } from '../../models/enums';
-import { IRegisterState } from '../../models/interfaces';
 import { toastNotify } from '../../utils/notification/toast';
 import {
     invalidateEmail,
@@ -12,6 +11,7 @@ import {
 } from '../../utils/string-utils/validation';
 import AuthCard from './AuthCard';
 
+type IRegisterState = { email: string; password: string; name: string };
 const RegisterForm = () => {
     const navigate = useNavigate();
     const [registerState, setRegisterState] = useState({ email: '', password: '', name: '' });

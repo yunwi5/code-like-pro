@@ -71,6 +71,7 @@ function App() {
     );
 }
 
+// Loading spinner to be shown when the page is loading.
 const LoadingFallback: React.FC = () => {
     return (
         <div className="min-h-[82.5vh] flex-center">
