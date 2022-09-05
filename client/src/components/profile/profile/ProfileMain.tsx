@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AvatarIds } from '../../../assets';
+import { AvatarImagesList } from '../../../assets';
 import Button from '../../ui/buttons/Button';
 import ProfileAvatar from './sections/ProfileAvatar';
 import ProfileInfoItem from './sections/ProfileInfoItem';
@@ -10,22 +10,22 @@ const ProfileMain = () => {
 
     // Only username and avatars are editable in the profile page.
     const [profileName, setProfileName] = useState('Camille');
-    const [avatarId, setAvatarId] = useState(AvatarIds[0]);
+    const [picture, setPicture] = useState(AvatarImagesList[0]);
 
     const handleProfileEdit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('New name:', profileName, 'New avatar:', avatarId);
+        console.log('New name:', profileName, 'New avatar:', picture);
         // Send some HTTP Request to edit the profile.
     };
 
     return (
-        <section className="relative lg:min-w-[55rem]">
+        <section className="relative flex-1">
             <div className="pl-7 pr-4 py-3">
                 <ProfileHeader />
                 <ProfileAvatar
                     isEditing={isEditing}
-                    avatarId={avatarId}
-                    setAvatarId={setAvatarId}
+                    picture={picture}
+                    setPicture={setPicture}
                 />
 
                 {/* Profile information */}
@@ -66,7 +66,7 @@ const ProfileMain = () => {
                 </form>
             </div>
 
-            <div className="flex justify-end px-3 py-3 border-t-[3px] border-gray-300">
+            <div className="flex justify-end px-3 py-3 pr-[5rem] border-t-[3px] border-gray-300">
                 <Button className="rounded-sm" onClick={() => setIsEditing((ps) => !ps)}>
                     {isEditing ? 'Save Profile' : 'Edit Profile'}
                 </Button>

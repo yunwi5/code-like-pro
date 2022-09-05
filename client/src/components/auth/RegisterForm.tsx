@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { registerRequest } from '../../apis/auth';
+
 import { ToastType } from '../../models/enums';
 import { IRegisterState } from '../../models/interfaces';
 import { toastNotify } from '../../utils/notification/toast';
@@ -59,7 +59,7 @@ const RegisterForm = () => {
         if (Object.values(error).join('').trim()) return;
 
         setIsLoading(true);
-        const { ok, message } = await registerRequest(registerState);
+        const { ok, data, message } = await registerRequest(registerState);
         setIsLoading(false);
 
         // If register is success, redirect to the login page.
@@ -67,8 +67,7 @@ const RegisterForm = () => {
             navigate('/login');
             toastNotify('Register successful!', ToastType.SUCCESS);
         } else {
-            toastNotify(message || 'Register is unsuccessful..', ToastType.ERROR);
-            setErrorState({ ...errorState, overall: message });
+            setErrorState({ ...errorState, overall: message || 'Something went wrong...' });
         }
     };
 

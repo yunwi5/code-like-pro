@@ -1,15 +1,28 @@
 import React, { useState } from 'react';
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
+import { likeExerciseRequest } from '../../../apis/exercise';
 
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import HoveringLabel from '../../ui/labels/HoveringLabel';
-import IssueReportModal from '../issue-report/IssueReportModal';
+import IssueReportModal from '../modals/IssueReportModal';
 
 // Control header that let users set language settings, favorite and report functionalities.
 const EditorControlBar: React.FC = () => {
-    const { exercise } = useExerciseAttemptCtx();
+    const { exercise, refetchExercise } = useExerciseAttemptCtx();
     const [showReportModal, setShowReportModal] = useState(false);
+
+    // State for whether the user liked the exercise or not.
+    const [liked, setLiked] = useState(false);
+
+    const handleLiked = async () => {
+        // Needs to send the request to the server that the user liked it or not.
+        setLiked((ps) => !ps);
+        if (exercise == null) return;
+        const response = await likeExerciseRequest(exercise?._id);
+        refetchExercise();
+        console.log('Liked response:', response);
+    };
 
     return (
         <>
@@ -33,8 +46,11 @@ const EditorControlBar: React.FC = () => {
                     className="ml-auto z-50"
                     label={<span className="text-base hover:text-yellow-300">Favorite</span>}
                 >
-                    <div className="icon-box ml-auto w-[2rem] h-[2rem] border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-yellow-50">
-                        <AiFillStar />
+                    <div
+                        onClick={handleLiked}
+                        className="icon-box ml-auto w-[2rem] h-[2rem] border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-yellow-50"
+                    >
+                        {liked ? <AiFillStar /> : <AiOutlineStar />}
                     </div>
                 </HoveringLabel>
 

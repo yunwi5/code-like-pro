@@ -74,7 +74,10 @@ const TestCase: React.FC<Props> = (props) => {
                     {output && (
                         <div className="flex flex-col lg:flex-row flex-wrap gap-3 justify-between mb-2">
                             {expectedOutputComponent}
-                            <ActualOutput actualOutput={output.actualOutput} />
+                            <ActualOutput
+                                readOnly={readOnly}
+                                actualOutput={output.actualOutput}
+                            />
                         </div>
                     )}
 
@@ -121,8 +124,9 @@ const TestCaseHeading: React.FC<HeadingProps> = (props) => {
 // Actual output block
 interface OutputProps {
     actualOutput: string;
+    readOnly: boolean;
 }
-const ActualOutput: React.FC<OutputProps> = ({ actualOutput }) => {
+const ActualOutput: React.FC<OutputProps> = ({ actualOutput, readOnly }) => {
     return (
         <div className="flex-1">
             <p className="px-2 py-1 bg-gray-300">Actual Output</p>
@@ -130,7 +134,9 @@ const ActualOutput: React.FC<OutputProps> = ({ actualOutput }) => {
             <textarea
                 value={actualOutput}
                 onChange={() => {}}
-                className={'text-sm min-h-[82.7%] w-full px-3 py-2 input'}
+                className={`text-sm w-full px-3 py-2 input ${
+                    readOnly && 'focus:!outline-none'
+                }`}
             />
         </div>
     );
@@ -148,13 +154,12 @@ const ExpectedOutput: React.FC<ExpectedOutputProps> = ({
     readOnly,
 }) => {
     return (
-        <div className="//min-w-[10rem] flex-1">
+        <div className="flex-1 flex flex-col">
             <p className="px-2 py-1 bg-gray-300">Expected Output</p>
             <textarea
-                rows={5}
                 onChange={onOutputChange}
                 value={expectedOutput}
-                className={`text-sm min-h-[82.7%] min-w-[100%] flex-1 !px-3 py-2 input ${
+                className={`flex-1 text-sm min-w-[100%] !px-3 py-2 input ${
                     readOnly && 'focus:!outline-none'
                 }`}
             />

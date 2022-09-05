@@ -1,24 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import EditorControlBar from './EditorControlBar';
 import CodeEditor from '../../ui/editor/CodeEditor';
-import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
+import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
+import EditorActions from './EditorActions';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 
 const EditorOutputSection: React.FC = () => {
-    const { language, solutionCode, setSolutionCode } = useExerciseCreationContext();
+    const { exercise, userSolution, setUserSolution } = useExerciseAttemptCtx();
 
-    const handleChange = (value: string | undefined) => setSolutionCode(value ?? '');
+    // Store current user's code in the localStorate, so that it is not lost when the user refreshes the page.
+    const localStorageKey = `user-solution-${exercise?._id}`;
+    const [localSolution, setLocalSolution] = useLocalStorage<string>(
+        localStorageKey,
+        userSolution,
+    );
+
+    const handleChange = (value: string | undefined) => {
+        setUserSolution(value ?? '');
+        setLocalSolution(value ?? '');
+    };
+
+    // When the user re-enters the page, or refreshes the page,
+    // Retrieve previous user code for this exercise from the localStorage.
+    useEffect(() => {
+        if (!userSolution) {
+            setUserSolution(localSolution);
+        }
+    }, [userSolution]);
+
     return (
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col">
             <EditorControlBar />
             <CodeEditor
-                language={language}
+                language={exercise?.language}
                 onChange={handleChange}
-                value={solutionCode}
+                value={userSolution}
                 height={'25rem'}
-                className="!border-none lg:!max-w-[50vw]"
+                className="flex-1 !border-none lg:!max-w-[50vw]"
                 showHeader={false}
             />
-            <h1 className="text-xl text-text-500 py-2">Output</h1>
+            <EditorActions />
         </div>
     );
 };

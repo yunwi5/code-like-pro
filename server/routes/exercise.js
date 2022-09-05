@@ -19,7 +19,7 @@ router.delete('/:id', ensureAuthenticated, catchAsync(exerciseController.deleteE
 router.post('/:id/report', ensureAuthenticated, catchAsync(exerciseController.reportExercise));
 
 // Like/favorite toggling functionality
-router.post(
+router.get(
     '/:id/like',
     ensureAuthenticated,
     catchAsync(exerciseController.toggleLikeExercise),

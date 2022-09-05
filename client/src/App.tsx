@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ClimbingBoxLoader } from 'react-spinners';
@@ -8,9 +8,11 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 // Profile nested pages
 import ProfilePages from './components/profile';
+import ShowcasePage from './pages/exercise-pages/ShowcasePage';
+import { useUserContext } from './store/context/UserContext';
 
 // Lazy loading imports. Higher performance for initial page loading.
-const ExerciseCreationPage = lazy(() => import('./pages/exercise-pages/ExerciseCreation'));
+const ExerciseCreationPage = lazy(() => import('./pages/exercise-pages/ExerciseCreationPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/auth/RegisterPage'));
@@ -22,6 +24,14 @@ const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmiss
     ProfilePages;
 
 function App() {
+    const { user, loginBySession } = useUserContext();
+    const isLoggedIn = !!user;
+
+    // When the user refreshes the page, login the user on the client side with the stored session.
+    useEffect(() => {
+        loginBySession();
+    }, [loginBySession]);
+
     return (
         <div className="App">
             <Header />
@@ -30,9 +40,9 @@ function App() {
                     {/* Home page */}
                     <Route path="/" element={<HomePage />} />
 
-                    {/* Auth pages login & register */}
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
+                    {/* Auth pages login & register. Do not show if the user is already logged in. */}
+                    {!isLoggedIn && <Route path="/login" element={<LoginPage />} />}
+                    {!isLoggedIn && <Route path="/register" element={<RegisterPage />} />}
 
                     {/* User profile pages */}
                     <Route path="/profile" element={<ProfilePage />}>
@@ -44,9 +54,10 @@ function App() {
                     </Route>
 
                     {/* Exercise pages */}
-                    <Route path="/create-exercise" element={<ExerciseCreationPage />} />
                     <Route path="/browse" element={<BrowsingPage />} />
+                    <Route path="/create-exercise" element={<ExerciseCreationPage />} />
                     <Route path="/exercise/:id" element={<ExerciseAttemptPage />} />
+                    <Route path="/showcase/:id" element={<ShowcasePage />} />
 
                     {/* Undefined routes redirect to the home page */}
                     <Route path="*" element={<Navigate to="/" replace />} />

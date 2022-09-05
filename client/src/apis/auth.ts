@@ -1,7 +1,5 @@
-import axios from 'axios';
 import { AppProperty } from '../constants/app';
-import { IUser } from '../models/interfaces/IUser';
-import { authConfig } from './config';
+import { IUser } from '../models/interfaces/user/IUser';
 import { getRequest, postRequest } from './requests';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/auth`;
@@ -19,12 +17,12 @@ export async function loginRequest(body: LoginProps) {
     return await postRequest<IUser>({ url: `${API_DOMAIN}/login`, body });
 }
 
+// Try login with the existing session.
 export async function getLoginSuccess() {
-    return await getRequest({ url: `${API_DOMAIN}/login/success` });
+    return await getRequest<IUser>({ url: `${API_DOMAIN}/login/success` });
 }
 
-export async function privateRequest() {
-    return await getRequest<{ message: string }>({
-        url: `${AppProperty.SERVER_DOMAIN}/api/protected`,
-    });
+// Send the logout request to the server to clear the session.
+export async function logoutRequest() {
+    return await getRequest<{ message: string }>({ url: `${API_DOMAIN}/logout` });
 }

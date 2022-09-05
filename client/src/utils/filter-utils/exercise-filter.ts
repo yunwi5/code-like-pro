@@ -30,7 +30,5 @@ export function filterExercises<T>(exercises: IExerciseCard[], filterState: IFil
         // If passed all the filters, return true.
         return true;
     });
-
-    console.log(filtered);
     return filtered as T[];
 }

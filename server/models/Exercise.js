@@ -34,6 +34,7 @@ const ExerciseSchema = new Schema({
     solutionCode: {
         type: String,
     },
+    startingTemplate: { type: String },
     language: {
         type: String,
         enum: LanguageEnum,

@@ -16,10 +16,10 @@ interface Props {
 
 // Complete text editor for users to write their prompt.
 export const TextEditor: React.FC<Props> = (props) => {
-    const { onChange, value, placeholder, className, readOnly = false } = props;
+    const { onChange, value, placeholder, className = '', readOnly = false } = props;
 
     return (
-        <div className={`shadow-sm ${className ?? ''}`}>
+        <div className={`shadow-sm ${className}`}>
             <EditorToolbar />
             <ReactQuill
                 theme="snow"

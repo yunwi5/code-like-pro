@@ -1,5 +1,5 @@
 import { Difficulty, Language, ProgrammingTopic } from '../../enums';
-import { IUser } from '../IUser';
+import { IUser } from '../user/IUser';
 
 // Interface that stores the information for exercise cards on the browsing page.
 // Different from IExercise object that is used on exercise creation page and attemp page.
