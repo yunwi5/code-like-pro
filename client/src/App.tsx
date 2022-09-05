@@ -76,7 +76,7 @@ function App() {
 // Loading spinner to be shown when the page is loading.
 const LoadingFallback: React.FC = () => {
     return (
-        <div className="min-h-[82.5vh] flex-center">
+        <div className="min-h-[83.5vh] flex-center">
             <ClimbingBoxLoader size={65} color="#5552e4" />
         </div>
     );

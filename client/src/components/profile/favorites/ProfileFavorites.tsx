@@ -1,4 +1,3 @@
-import React, { useMemo, useState } from 'react';
 import useExerciseSearch from '../../../hooks/useExerciseSearch';
 import { SearchKey, SearchKeyList } from '../../../models/enums';
 import { useUserContext } from '../../../store/context/UserContext';
