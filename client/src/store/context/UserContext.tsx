@@ -27,7 +27,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-const REFETCH_INTERVAL = 3000;
+const REFETCH_INTERVAL = 2500;
 
 export const UserContextProvider: React.FC<Props> = ({ children }) => {
     const navigate = useNavigate();
@@ -44,6 +44,8 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         },
     );
 
+    if (error) console.log(error);
+
     // Quickly find out whether the user liked the exercise or not in O(1) time.
     const likedExerciseIdSet = useMemo(() => {
         const likedIds = userDetail?.liked.map((ex) => ex._id) || [];
@@ -54,8 +56,6 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         if (!userDetail?.submissions) return {};
         return createSubmissionMap(userDetail.submissions);
     }, [userDetail?.submissions]);
-
-    if (error) console.log(error);
 
     const loginBySession = useCallback(async () => {
         setIsLoading(true);

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getExerciseById } from '../../apis/exercise';
