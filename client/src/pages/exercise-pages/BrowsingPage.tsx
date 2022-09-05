@@ -8,10 +8,10 @@ import { getExercises } from '../../apis/exercise';
 import BrowsingMain from '../../components/browsing/BrowsingMain';
 import { AppProperty } from '../../constants/app';
 import { IExerciseCard } from '../../models/interfaces';
-import { mapJobeLangCodeToAppLanguage } from '../../utils/language';
 import { createRandomExercises } from '../../utils/random/random-exercise';
-import { toastNotify } from '../../utils/notification/toast';
+import { toastNotify } from '../../utils/notification';
 import { ToastType } from '../../models/enums';
+import { mapExercisesToExerciseCards } from '../../utils/exercise-utils/exercise';
 
 const BrowsingPage: React.FC = () => {
     const navigate = useNavigate();
@@ -26,21 +26,9 @@ const BrowsingPage: React.FC = () => {
         return <h1 className="flex-center h-[82.5vh] text-center">Something went wrong...</h1>;
     }
 
+    // exercise cards from the server.
     const exerciseCards: IExerciseCard[] = useMemo(
-        () =>
-            (exercises ?? []).map((ex) => ({
-                _id: ex._id,
-                name: ex.name,
-                topic: ex.topic,
-                correctRate: 0, // for now we do not have correctness data yet
-                reports: 0, // for now we do not have issue report data yet
-                stars: 0,
-                prompt: ex.prompt,
-                language: mapJobeLangCodeToAppLanguage(ex.language), // map language code to our app language name
-                difficulty: ex.difficulty,
-                tags: ex.tags,
-                author: ex.author,
-            })),
+        () => mapExercisesToExerciseCards(exercises || []),
         [exercises],
     );
 

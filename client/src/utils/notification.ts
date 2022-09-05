@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastType } from '../../models/enums';
+import { ToastType } from '../models/enums';
 
 export const toastNotify = (message: string, type?: ToastType) => {
     // add toastId to prevent multiple rendering

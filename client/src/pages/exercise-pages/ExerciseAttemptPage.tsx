@@ -7,7 +7,7 @@ import { getExerciseById } from '../../apis/exercise';
 import ExerciseAttemptMain from '../../components/exercise-attempt/ExerciseAttemptMain';
 import { AppProperty } from '../../constants/app';
 import { ExerciseAttemptCtxProvider } from '../../store/context/ExerciseAttemptContext';
-import { toastNotify } from '../../utils/notification/toast';
+import { toastNotify } from '../../utils/notification';
 import { ToastType } from '../../models/enums';
 import useAuth from '../../hooks/useAuth';
 

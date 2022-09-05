@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { registerRequest } from '../../apis/auth';
 
 import { ToastType } from '../../models/enums';
-import { toastNotify } from '../../utils/notification/toast';
+import { toastNotify } from '../../utils/notification';
 import {
     invalidateEmail,
     invalidatePassword,

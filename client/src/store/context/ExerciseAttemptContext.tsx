@@ -3,9 +3,9 @@ import { postSubmission, runTestCases } from '../../apis/submission';
 import ShowcaseInviteModal from '../../components/exercise-attempt/modals/ShowcaseInviteModal';
 import { ToastType } from '../../models/enums';
 import { IExerciseWithId, ITestResult, IUserSubmission } from '../../models/interfaces';
-import { getCorrectTestCaseCount } from '../../utils/exercise-creation-utils/testcase-utils';
+import { getCorrectTestCaseCount } from '../../utils/exercise-utils/testcase';
 import { mapLanguageToJobeLangCode } from '../../utils/language';
-import { toastNotify } from '../../utils/notification/toast';
+import { toastNotify } from '../../utils/notification';
 
 interface IExerciseAttemptCtx {
     exercise: IExerciseWithId | null;

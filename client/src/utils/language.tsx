@@ -9,6 +9,7 @@ import {
 } from '../assets/svg-icons/language-svgs';
 import { Language } from '../models/enums';
 
+// Map app language name to jobe server code for code execution on the backend.
 export function mapLanguageToJobeLangCode(language: Language) {
     switch (language) {
         case Language.CPP:
@@ -23,6 +24,7 @@ export function mapLanguageToJobeLangCode(language: Language) {
     }
 }
 
+// Map JOBE server language code back to app language name
 export function mapJobeLangCodeToAppLanguage(langCode: string): Language {
     switch (langCode.trim()) {
         case 'c':
@@ -44,7 +46,7 @@ export function mapJobeLangCodeToAppLanguage(langCode: string): Language {
     }
 }
 
-// Fine the icon for each language supported.
+// Find the icon for each language.
 type SvgParams = { width?: string; height?: string; className?: string };
 export function getLanguageIcon(language: Language, params?: SvgParams) {
     switch (language) {

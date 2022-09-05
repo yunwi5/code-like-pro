@@ -15,5 +15,5 @@ export interface IExerciseCard {
     tags: string[];
     createdAt?: Date | string;
     prompt?: string;
-    author?: IUser;
+    author?: { _id: string; name: string };
 }

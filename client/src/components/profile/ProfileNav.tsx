@@ -1,4 +1,4 @@
-import { getProfileSectionIcon, ProfileLinkMap } from '../../utils/profile-util';
+import { getProfileSectionIcon, ProfileLinkMap } from '../../utils/profile';
 import ActiveNavLink from '../ui/links/ActiveNavLink';
 import { ProfileSectionList } from '../../models/enums';
 

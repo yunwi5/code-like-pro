@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getLoginSuccess, loginRequest, logoutRequest } from '../../apis/auth';
 import { ToastType } from '../../models/enums';
 import { IUser } from '../../models/interfaces';
-import { toastNotify } from '../../utils/notification/toast';
+import { toastNotify } from '../../utils/notification';
 
 type LoginState = { email: string; password: string };
 type ResponseType = { ok: boolean; message?: string; data?: IUser };

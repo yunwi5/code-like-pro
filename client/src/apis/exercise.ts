@@ -6,7 +6,14 @@ import { deleteRequest, getRequest, postRequest, putRequest } from './requests';
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/exercise`;
 
 export async function getExercises() {
-    return await getRequest<IExerciseWithId[]>({ url: API_DOMAIN });
+    const response = await getRequest<IExerciseWithId[]>({ url: API_DOMAIN });
+    const exercises = response.data;
+    if (exercises) {
+        exercises.forEach((ex) => {
+            ex.language = mapJobeLangCodeToAppLanguage(ex?.language);
+        });
+    }
+    return { ...response, data: exercises };
 }
 
 export async function getExerciseById(id: string) {

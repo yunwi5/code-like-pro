@@ -21,9 +21,9 @@ import {
 import {
     analyzeTestCasesResult,
     getInitialTestCaseArray,
-} from '../../utils/exercise-creation-utils/testcase-utils';
+} from '../../utils/exercise-utils/testcase';
 import { mapLanguageToJobeLangCode } from '../../utils/language';
-import { toastNotify } from '../../utils/notification/toast';
+import { toastNotify } from '../../utils/notification';
 
 export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>({
     setActiveSection: () => {},
@@ -130,7 +130,7 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
             return;
         }
 
-        const exercise = createExerciseObject();
+        const exercise: any = createExerciseObject();
 
         // Get jobe language code.
         exercise.language = mapLanguageToJobeLangCode(language) as any;

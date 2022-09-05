@@ -3,7 +3,7 @@ import useUpdateEffect from '../../../hooks/useUpdateEffect';
 import { CreationSection } from '../../../models/enums';
 import { ITestCaseProps } from '../../../models/interfaces';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
-import { getEmptyTestCase } from '../../../utils/exercise-creation-utils/testcase-utils';
+import { getEmptyTestCase } from '../../../utils/exercise-utils/testcase';
 import Button from '../../ui/buttons/Button';
 import TestCase from '../../ui/test-cases/TestCase';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
