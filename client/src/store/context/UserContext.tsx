@@ -27,7 +27,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-const REFETCH_INTERVAL = 2500;
+const REFETCH_INTERVAL = 2000;
 
 export const UserContextProvider: React.FC<Props> = ({ children }) => {
     const navigate = useNavigate();
@@ -72,7 +72,6 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
             const { ok, data, message } = await loginRequest(loginState);
             setIsLoading(false);
 
-            // If the login is success, redirect to the home page.
             if (ok && data) setUser(data);
             return { ok, data, message };
         },

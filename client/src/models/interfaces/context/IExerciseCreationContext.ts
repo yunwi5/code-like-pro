@@ -1,4 +1,4 @@
-import { IExercise, ITestCase, ITestResult } from '..';
+import { IExerciseWithId, ITestCase, ITestResult } from '..';
 import { CreationSection, Difficulty, Language, ProgrammingTopic } from '../../enums';
 
 export interface IReadyStatus {
@@ -31,8 +31,7 @@ export interface IExerciseCreationContext {
     readyStatus: IReadyStatus | null;
     testCaseOutputs: ITestResult[];
     isLoading: boolean;
-    redirectToCreatedExercisePage: Function;
-    createdExercise: null | IExercise;
+    createdExercise: null | IExerciseWithId;
     activeSection: CreationSection | null;
     setActiveSection: React.Dispatch<React.SetStateAction<CreationSection | null>>;
 }

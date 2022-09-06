@@ -35,12 +35,12 @@ const SubmissionCard: React.FC<Props> = ({ submission, className }) => {
                     <BsFileEarmarkCodeFill className="text-lg text-gray-500" />{' '}
                     {dateTimeFormat}
                 </time>
-                <p className={`flex-start gap-2 ${statusClass}`}>
+                <div className={`flex-start gap-2 ${statusClass}`}>
                     <div className="flex-center w-[1.65rem] h-[1.65rem] rounded-full shadow-md bg-white">
                         {submission.correct ? <FiCheck size={23} /> : <IoMdClose size={23} />}
                     </div>
                     {submission.correct ? 'Correct' : 'Incorrect'}
-                </p>
+                </div>
             </header>
 
             {/* Submission exercise title and difficulty info */}
