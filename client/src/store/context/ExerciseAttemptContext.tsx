@@ -2,14 +2,14 @@ import React, { useContext, useState } from 'react';
 import { postSubmission, runTestCases } from '../../apis/submission';
 import ShowcaseInviteModal from '../../components/exercise-attempt/modals/ShowcaseInviteModal';
 import { ToastType } from '../../models/enums';
-import { IExerciseWithId, ITestResult, IUserSubmission } from '../../models/interfaces';
+import { IExerciseWithId, ITestOutput, IUserSubmission } from '../../models/interfaces';
 import { getCorrectTestCaseCount } from '../../utils/exercise-utils/testcase';
 import { toastNotify } from '../../utils/notification';
 
 interface IExerciseAttemptCtx {
     exercise: IExerciseWithId | null;
     isLoading: boolean;
-    testCaseOutputs: ITestResult[];
+    testCaseOutputs: ITestOutput[];
     userSolution: string;
     userSubmission: IUserSubmission | null;
     setUserSolution: React.Dispatch<React.SetStateAction<string>>;
@@ -52,7 +52,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     const [userSubmission, setUserSubmission] = useState<IUserSubmission | null>(
         previousSubmission ?? null,
     );
-    const [testCaseOutputs, setTestCaseOutputs] = useState<ITestResult[]>([]);
+    const [testCaseOutputs, setTestCaseOutputs] = useState<ITestOutput[]>([]);
 
     // Showcase invite modal to encourage users to join the showcase, after they get correct.
     const [showInviteModal, setShowInviteModal] = useState(false);

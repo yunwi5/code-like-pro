@@ -34,11 +34,16 @@ const runTestCases = async (req, res) => {
     const feedbackArray = [];
 
     for (let i = 0; i < testCaseResults.length; i++) {
-        const result = testCaseResults[i].stdout.trim();
+        const stdOut = testCaseResults[i].stdout.trim();
+        const stdErr = testCaseResults[i].stderr.trim() || null;
 
-        const feedback = { actualOutput: result, expectedOutput: testCases[i].expectedOutput };
+        const feedback = {
+            actualOutput: stdOut,
+            expectedOutput: testCases[i].expectedOutput,
+            error: stdErr,
+        };
 
-        if (result !== testCases[i].expectedOutput.trim()) {
+        if (stdOut !== testCases[i].expectedOutput.trim()) {
             feedback.correct = false;
         } else {
             feedback.correct = true;

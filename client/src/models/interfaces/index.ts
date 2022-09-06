@@ -1,8 +1,8 @@
-export type { ITestCase, ITestCaseProps } from './exercise/ITestCase';
+export type { ITestCase as ITestCase, ITestCaseProps } from './exercise/ITestCase';
 // Exercise related interfaces
 export type { IExercise, IExerciseWithId } from './exercise/IExercise';
 export type { IExerciseCard } from './exercise/IExerciseCard';
-export type { ITestResult } from './exercise/ITestResult';
+export type { ITestOutput } from './exercise/ITestOutput';
 export type { IIssueReport } from './exercise/IIssueReport';
 
 // User related interfaces

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ITestCase, ITestResult } from '../../../../models/interfaces';
+import { ITestCase, ITestOutput } from '../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 
 function getOpenAndHiddenTestCounts(testCases: ITestCase[]) {
@@ -10,7 +10,7 @@ function getOpenAndHiddenTestCounts(testCases: ITestCase[]) {
     return [openTestCasesCount, hiddenTestCasesCount];
 }
 
-function generateOutputMessages(testCases: ITestCase[], outputs: ITestResult[]) {
+function generateOutputMessages(testCases: ITestCase[], outputs: ITestOutput[]) {
     if (outputs.length < 1) return ['', ''];
     const [openTestCasesCount, hiddenTestCasesCount] = getOpenAndHiddenTestCounts(testCases);
 
