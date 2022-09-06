@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DateTime } from 'luxon';
 import { FiCheck } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 
@@ -8,6 +7,7 @@ import { IUserSubmissionPopulated } from '../../../models/interfaces';
 import { getDifficultyColorClass } from '../../../utils/difficulty';
 import { getExerciseAttemptPageLink } from '../../../utils/links';
 import { BsFileEarmarkCodeFill } from 'react-icons/bs';
+import { getDateTimeFormat } from '../../../utils/datetime';
 
 interface Props {
     submission: IUserSubmissionPopulated;
@@ -23,8 +23,7 @@ const SubmissionCard: React.FC<Props> = ({ submission, className }) => {
     const statusClass = submission.correct ? 'text-emerald-500' : 'text-rose-500';
 
     // Human readable datetime format.
-    const postDateTime = DateTime.fromISO(submission.postedAt);
-    const dateTimeFormat = postDateTime.toLocaleString(DateTime.DATETIME_MED);
+    const dateTimeFormat = getDateTimeFormat(submission.postedAt);
 
     return (
         <article

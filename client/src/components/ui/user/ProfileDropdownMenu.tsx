@@ -6,15 +6,15 @@ import { getProfileSectionIcon, ProfileLinkMap } from '../../../utils/profile';
 import ProfilePicture from './ProfilePicture';
 
 const ProfileDropdownMenu: React.FC = () => {
-    const { user, logout } = useUserContext();
+    const { userDetail, logout } = useUserContext();
 
     return (
-        <nav className="z-[1000] absolute top-[102%] right-0 bg-gray-50 transition-all shadow-md hover:shadow-lg rounded-sm">
+        <nav className="z-[1000] absolute top-[102%] right-0 bg-gray-50 text-gray-700 transition-all shadow-md hover:shadow-lg rounded-sm">
             <div className="flex items-center gap-3 px-4 py-3">
                 <ProfilePicture size={'2.5rem'} />
                 <div>
-                    <h3 className="text-lg">{user?.name}</h3>
-                    <p className="-mt-1 text-gray-400 text-sm">{user?.email}</p>
+                    <h3 className="text-lg leading-6 mb-1">{userDetail?.name}</h3>
+                    <p className="-mt-1 text-gray-400 text-sm">{userDetail?.email}</p>
                 </div>
             </div>
             <div>

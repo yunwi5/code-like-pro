@@ -3,7 +3,7 @@ export interface IUser {
     _id: string;
     name: string;
     email: string;
-    createdAt: string | Date;
+    createdAt: string; // ISO datetime format
     liked: string[]; // list of exercise ids that user liked
     pictureUrl?: string; // user profile picture
 }

@@ -1,25 +1,41 @@
 import React, { useState } from 'react';
+import { patchUserDetail } from '../../../apis/user';
 import { AvatarImagesList } from '../../../assets';
+import { useUserContext } from '../../../store/context/UserContext';
+import { getDateFormat } from '../../../utils/datetime';
+import { getUsedLanguagesByUser } from '../../../utils/language';
 import Button from '../../ui/buttons/Button';
+import ProfileLoader from '../ProfileLoader';
 import ProfileAvatar from './sections/ProfileAvatar';
 import ProfileInfoItem from './sections/ProfileInfoItem';
 import ProfileInput from './sections/ProfileInput';
 
 const ProfileMain = () => {
+    const { userDetail } = useUserContext();
     const [isEditing, setIsEditing] = useState(false);
 
     // Only username and avatars are editable in the profile page.
-    const [profileName, setProfileName] = useState('Camille');
-    const [picture, setPicture] = useState(AvatarImagesList[0]);
+    const [profileName, setProfileName] = useState(userDetail?.name || '');
+    const [picture, setPicture] = useState(userDetail?.pictureUrl || AvatarImagesList[0]);
 
-    const handleProfileEdit = (e: React.FormEvent) => {
+    // Loading state
+    if (!userDetail) return <ProfileLoader />;
+
+    // Handle profile edit operation & request
+    const handleProfileEdit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log('New name:', profileName, 'New avatar:', picture);
         // Send some HTTP Request to edit the profile.
+        const result = await patchUserDetail({ name: profileName, pictureUrl: picture });
+        console.log('Patch result:', result);
     };
 
+    // Calculate basic statistics for the profile page.
+    const solvedExercisesCount = userDetail.submissions.filter((sub) => sub.correct).length;
+    const usedLanguages = getUsedLanguagesByUser(userDetail.submissions);
+
     return (
-        <section className="relative flex-1">
+        <form className="relative flex-1" onSubmit={handleProfileEdit}>
             <div className="pl-7 pr-4 py-3">
                 <ProfileHeader />
                 <ProfileAvatar
@@ -29,10 +45,7 @@ const ProfileMain = () => {
                 />
 
                 {/* Profile information */}
-                <form
-                    className="grid grid-cols-1 md:grid-cols-2 gap-y-[1.75rem] mt-3"
-                    onSubmit={handleProfileEdit}
-                >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-[1.75rem] mt-3">
                     {isEditing ? (
                         <ProfileInput
                             label="Username"
@@ -49,21 +62,19 @@ const ProfileMain = () => {
 
                     <ProfileInfoItem
                         label="Email"
-                        value="camil@gmail.com"
+                        value={userDetail.email}
                         className="col-span-2"
                     />
-                    <ProfileInfoItem label="Languages" value="Python, Java, C++" />
+                    <ProfileInfoItem label="Languages" value={usedLanguages.join(', ')} />
+
+                    {/* Ranking data needs to be updated. */}
                     <ProfileInfoItem label="Ranking Points" value="11,938 (2nd)" />
                     <ProfileInfoItem
                         label="Member Since"
-                        value={new Date().toLocaleDateString('en-us', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: '2-digit',
-                        })}
+                        value={getDateFormat(userDetail.createdAt)}
                     />
-                    <ProfileInfoItem label="Exercises Solved" value="1,259" />
-                </form>
+                    <ProfileInfoItem label="Exercises Solved" value={solvedExercisesCount} />
+                </div>
             </div>
 
             <div className="flex justify-end px-3 py-3 pr-[5rem] border-t-[3px] border-gray-300">
@@ -71,7 +82,7 @@ const ProfileMain = () => {
                     {isEditing ? 'Save Profile' : 'Edit Profile'}
                 </Button>
             </div>
-        </section>
+        </form>
     );
 };
 

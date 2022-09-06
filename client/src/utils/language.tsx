@@ -8,6 +8,7 @@ import {
     PythonIcon,
 } from '../assets/svg-icons/language-svgs';
 import { Language } from '../models/enums';
+import { IUserSubmission, IUserSubmissionPopulated } from '../models/interfaces';
 
 // Map JOBE server language code to user-readable app language name.
 // Example: cpp -> C++, nodejs -> Node JS
@@ -52,4 +53,12 @@ export function getLanguageIcon(language: Language, params?: SvgParams) {
         case Language.PASCAL:
             return <PascalIcon {...params} />;
     }
+}
+
+export function getUsedLanguagesByUser(submissions: IUserSubmissionPopulated[]) {
+    const usedLanguages = new Set<Language>();
+    for (let sub of submissions) {
+        usedLanguages.add(sub.exercise.language);
+    }
+    return languageCodesToReadableNames(Array.from(usedLanguages));
 }
