@@ -1,23 +1,23 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { ClimbingBoxLoader } from 'react-spinners';
+import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
 
 // Layout component imports
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 // Profile nested pages
 import ProfilePages from './components/profile';
-import ShowcasePage from './pages/exercise-pages/ShowcasePage';
 import { useUserContext } from './store/context/UserContext';
 
 // Lazy loading imports. Higher performance for initial page loading.
-const ExerciseCreationPage = lazy(() => import('./pages/exercise-pages/ExerciseCreationPage'));
-const ExerciseEditPage = lazy(() => import('./pages/exercise-pages/ExerciseEditPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/auth/RegisterPage'));
+const ExerciseCreationPage = lazy(() => import('./pages/exercise-pages/ExerciseCreationPage'));
+const ExerciseEditPage = lazy(() => import('./pages/exercise-pages/ExerciseEditPage'));
 const ExerciseAttemptPage = lazy(() => import('./pages/exercise-pages/ExerciseAttemptPage'));
+const ShowcasePage = lazy(() => import('./pages/exercise-pages/ShowcasePage'));
 const BrowsingPage = lazy(() => import('./pages/exercise-pages/BrowsingPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 

@@ -12,7 +12,6 @@ import './styles/index.scss';
 // Provide ReactQuery client, so that all child components could use React Query for data fetching.
 const queryClient = new QueryClient();
 
-// Should use React StrictMode?
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
         <QueryClientProvider client={queryClient}>

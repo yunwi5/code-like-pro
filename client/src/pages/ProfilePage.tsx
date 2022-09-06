@@ -26,7 +26,7 @@ const ProfilePage: React.FC = () => {
                     content="User profile page for programming exercise progress tracking"
                 />
             </Helmet>
-            <main className="min-h-[82.5vh] py-10 flex-center flex-col text-gray-700">
+            <main className="min-h-[82.5vh] pt-10 pb-20 flex-center flex-col text-gray-700">
                 <div className="mx-auto w-[100vw] md:w-[90vw] lg:w-[80vw] xl:w-[77vw]">
                     <h1 className="mb-3 text-gray-600 text-3xl self-start">{activeSection}</h1>
                     <div className="flex md:bg-gray-50 rounded-md overflow-hidden md:shadow-md">

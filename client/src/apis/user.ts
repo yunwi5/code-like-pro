@@ -8,7 +8,7 @@ export async function getUserDetail(userId: string) {
     return await getRequest<IUserDetail>({ url: `${API_DOMAIN}/${userId}` });
 }
 
-type PatchBody = { name: string; pictureUrl: string };
+type PatchBody = { name: string; pictureUrl: string; description: string };
 export async function patchUserDetail(body: PatchBody) {
     return await patchRequest({ url: API_DOMAIN, body });
 }

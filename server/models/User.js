@@ -13,6 +13,8 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    // User description such as About Me section on the profile.
+    description: { type: String, default: '' },
     password: {
         type: String,
         required: true,
