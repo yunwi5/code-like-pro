@@ -3,8 +3,11 @@
 ## About
 A practice website for programming students where the exercises themselves are created by the students.
 
+<br />
+
 ## Getting Started
 
+### Client
 For the development mode on the client,
 
 ```bash
@@ -17,8 +20,7 @@ $ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the client application.
 
-<br />
-<br />
+### Server
 For the development mode on the server,
 
 ```bash
@@ -31,10 +33,11 @@ $ npm run dev
 
 Server runs on [http://localhost:8080](http://localhost:8080) on your computer by default.
 
+### Server Environment Variables Set Up
+* MongoDB Atlas - Connection to cloud database requires MONGO_USERNAME and MONGO_PASSWORD environment variables set up in <code>/server/.env</code> file for a successful connection.
+* Google OAuth - For google authentication, Google cloud requires client credentials GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables in <code>/server/.env</code> file.
+
 <br />
-### Server Environment Variables
-* MongoDB Atlas - Connection to cloud database requires MONGO_USERNAME and MONGO_PASSWORD environment variables set up for a successful connection.
-* Google OAuth - For google authentication, Google cloud requires client credentials GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.
 
 ## Technologies used
 
@@ -57,6 +60,7 @@ Server runs on [http://localhost:8080](http://localhost:8080) on your computer b
 6. MongoDB
 7. Yup
 
+<br />
 
 ## Our Team Of Best Fit
 
