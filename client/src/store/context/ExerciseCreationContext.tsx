@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { postExercise, putExercise } from '../../apis/exercise';
 import { runTestCases } from '../../apis/submission';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -27,7 +26,6 @@ import { toastNotify } from '../../utils/notification';
 export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>({
     setActiveSection: () => {},
     setName: () => {},
-    redirectToCreatedExercisePage: () => {},
     runCode: () => {},
     testCases: [],
     tags: [],
@@ -45,11 +43,9 @@ interface Props {
 // Context for sharing and storing user exercise creation data.
 // Each exercise creation related component can use this context to receive or update the data.
 export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exercise }) => {
-    const navigate = useNavigate();
-    const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExercise | ''>(
-        DRAFT_LOCAL_STORATE_KEY,
-        '',
-    );
+    // Construct a unique key for the exercise draft so that exercise drafts do not conlict each other.
+    const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${exercise ? `-${exercise._id}` : ''}`;
+    const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExercise | ''>(draftKey, '');
 
     const [name, setName] = useState(exercise?.name || '');
     const [prompt, setPrompt] = useState(exercise?.prompt || '');
@@ -84,13 +80,28 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
 
     const [activeSection, setActiveSection] = useState<CreationSection | null>(null);
 
+    const createExerciseObject = () => ({
+        name,
+        language,
+        difficulty,
+        topic,
+        prompt,
+        solutionCode,
+        startingTemplate,
+        tags,
+        // Remove id and error from test cases.
+        testCases: testCases.map((testCase) => ({
+            ...testCase,
+            _id: undefined,
+            error: undefined,
+        })),
+    });
+
     // Save currently unsaved work on exercise creation so that users do not lose their intermediate process.
     const saveDraft = () => {
         if (createdExercise == null) {
             setExerciseDraft(createExerciseObject());
             toastNotify('Saved Draft Locally!', ToastType.SUCCESS);
-        } else {
-            toastNotify('You already posted the exercise!');
         }
     };
 
@@ -106,8 +117,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
             language: language,
         });
         setIsLoading(false);
-
-        console.log('testCasesResult:', testCasesResult);
 
         if (ok && testCasesResult) {
             const { status, message } = analyzeTestCasesResult(testCases, testCasesResult);
@@ -159,28 +168,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
         setIsLoading(false);
     };
 
-    const redirectToCreatedExercisePage = () => {
-        if (!createdExercise || !createdExercise._id) return;
-        navigate(`/exercise/${createdExercise._id}`);
-    };
-
-    const createExerciseObject = () => ({
-        name,
-        language,
-        difficulty,
-        topic,
-        prompt,
-        solutionCode,
-        startingTemplate,
-        tags,
-        // Remove id and error from test cases.
-        testCases: testCases.map((testCase) => ({
-            ...testCase,
-            _id: undefined,
-            error: undefined,
-        })),
-    });
-
     // Runs on mount.
     useEffect(() => {
         // If there is no draft initially, return.
@@ -221,7 +208,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
         saveExercise,
         isLoading,
         createdExercise,
-        redirectToCreatedExercisePage,
         activeSection,
         setActiveSection,
         runCode,

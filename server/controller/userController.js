@@ -38,12 +38,7 @@ const getUserByID = async (req, res) => {
 
 const updateUser = async (req, res) => {
     const updatedDetails = req.body;
-    const user = await User.findById(req.user._id);
-
-    if (updatedDetails.name) user.name = updatedDetails.name;
-    if (updatedDetails.pictureUrl) user.pictureUrl = updatedDetails.pictureUrl;
-
-    await user.save();
+    const user = await User.findByIdAndUpdate(req.user._id, updatedDetails, { new: true });
 
     res.status(200).json(user);
 };

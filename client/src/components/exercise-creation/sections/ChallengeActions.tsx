@@ -3,19 +3,15 @@ import { useExerciseCreationContext } from '../../../store/context/ExerciseCreat
 import { IReadyStatus } from '../../../models/interfaces';
 import Button from '../../ui/buttons/Button';
 import RingLoader from 'react-spinners/RingLoader';
+import { useNavigate } from 'react-router-dom';
+import { getExerciseAttemptPageLink } from '../../../utils/links';
 
 const btnClass = 'min-w-[10rem]';
 
 const ChallengeActions: React.FC = () => {
-    const {
-        saveDraft,
-        saveExercise,
-        runCode,
-        isLoading,
-        createdExercise,
-        redirectToCreatedExercisePage,
-        readyStatus,
-    } = useExerciseCreationContext();
+    const navigate = useNavigate();
+    const { saveDraft, saveExercise, runCode, isLoading, createdExercise, readyStatus } =
+        useExerciseCreationContext();
 
     return (
         <div className="flex flex-col sm:flex-row lg:flex-col flex-wrap justify-between gap-2">
@@ -45,7 +41,7 @@ const ChallengeActions: React.FC = () => {
             {!!createdExercise && (
                 <Button
                     mode="empty"
-                    onClick={() => redirectToCreatedExercisePage()}
+                    onClick={() => navigate(getExerciseAttemptPageLink(createdExercise._id))}
                     className={btnClass}
                 >
                     Published Result

@@ -19,7 +19,7 @@ const ExerciseAttemptPage: React.FC = () => {
     const navigate = useNavigate();
     const exerciseId = useParams().id || '';
 
-    // Get QueryClient from the context.
+    // Get QueryClient and construct the query key.
     const queryClient = useQueryClient();
     const exerciseQueryKey = `exercise-${exerciseId}`;
 
@@ -28,12 +28,16 @@ const ExerciseAttemptPage: React.FC = () => {
         getExerciseById(exerciseId).then((response) => response.data),
     );
 
+    // Refetch the exercise data for an immediate update on UI.
+    const refetchExercise = () => queryClient.invalidateQueries([exerciseQueryKey]);
+
     // Previous user submission data from the context. Either user submission or null.
-    const userSubmission = { ...submissionMap[exerciseId], exercise: exerciseId };
+    let userSubmission = submissionMap[exerciseId] && {
+        ...submissionMap[exerciseId],
+        exercise: exerciseId,
+    };
 
     if (exerciseError) console.log(exerciseError);
-
-    const refetchExercise = () => queryClient.invalidateQueries([exerciseQueryKey]);
 
     // If the exercise id is null, or if there is an exercise error, redirect to the browsing page.
     useEffect(() => {

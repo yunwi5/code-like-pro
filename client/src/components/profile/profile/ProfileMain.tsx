@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { patchUserDetail } from '../../../apis/user';
-import { AvatarImagesList } from '../../../assets';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getDateFormat } from '../../../utils/datetime';
 import { getUsedLanguagesByUser } from '../../../utils/language';
@@ -16,7 +15,8 @@ const ProfileMain = () => {
 
     // Only username and avatars are editable in the profile page.
     const [profileName, setProfileName] = useState(userDetail?.name || '');
-    const [picture, setPicture] = useState(userDetail?.pictureUrl || AvatarImagesList[0]);
+    const [picture, setPicture] = useState(userDetail?.pictureUrl || '');
+    const [description, setDescription] = useState(userDetail?.description || '-');
 
     // Loading state
     if (!userDetail) return <ProfileLoader />;
@@ -24,14 +24,13 @@ const ProfileMain = () => {
     // Handle profile edit operation & request
     const handleProfileEdit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('New name:', profileName, 'New avatar:', picture);
         // Send some HTTP Request to edit the profile.
-        const result = await patchUserDetail({ name: profileName, pictureUrl: picture });
-        console.log('Patch result:', result);
+        await patchUserDetail({ name: profileName, pictureUrl: picture, description });
     };
 
     // Calculate basic statistics for the profile page.
     const solvedExercisesCount = userDetail.submissions.filter((sub) => sub.correct).length;
+    const createdExerciseCount = userDetail.exercises.length;
     const usedLanguages = getUsedLanguagesByUser(userDetail.submissions);
 
     return (
@@ -60,19 +59,32 @@ const ProfileMain = () => {
                         />
                     )}
 
-                    <ProfileInfoItem
-                        label="Email"
-                        value={userDetail.email}
-                        className="col-span-2"
-                    />
-                    <ProfileInfoItem label="Languages" value={usedLanguages.join(', ')} />
+                    {isEditing ? (
+                        <ProfileInput
+                            label="About Me"
+                            type="textarea"
+                            value={description}
+                            onChange={(newValue) => setDescription(newValue)}
+                            className="col-span-2"
+                        />
+                    ) : (
+                        <ProfileInfoItem
+                            label="About Me"
+                            value={description}
+                            className="col-span-2"
+                        />
+                    )}
 
-                    {/* Ranking data needs to be updated. */}
-                    <ProfileInfoItem label="Ranking Points" value="11,938 (2nd)" />
+                    <ProfileInfoItem label="Email" value={userDetail.email} />
                     <ProfileInfoItem
                         label="Member Since"
                         value={getDateFormat(userDetail.createdAt)}
                     />
+                    {/* Ranking data needs to be updated. */}
+                    <ProfileInfoItem label="Languages" value={usedLanguages.join(', ')} />
+                    <ProfileInfoItem label="Ranking Points" value="11,938 (2nd)" />
+
+                    <ProfileInfoItem label="Exercises Created" value={createdExerciseCount} />
                     <ProfileInfoItem label="Exercises Solved" value={solvedExercisesCount} />
                 </div>
             </div>

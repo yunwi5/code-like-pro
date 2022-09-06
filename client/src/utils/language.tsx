@@ -8,7 +8,7 @@ import {
     PythonIcon,
 } from '../assets/svg-icons/language-svgs';
 import { Language } from '../models/enums';
-import { IUserSubmission, IUserSubmissionPopulated } from '../models/interfaces';
+import { IUserSubmissionPopulated } from '../models/interfaces';
 
 // Map JOBE server language code to user-readable app language name.
 // Example: cpp -> C++, nodejs -> Node JS

@@ -14,6 +14,8 @@ const ExercisePromptHeader: React.FC = () => {
 
     const colorClass = getDifficultyColorClass(exercise.difficulty);
 
+    console.log('userSubmission:', userSubmission);
+
     return (
         <header>
             <div className="flex-between">
