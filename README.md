@@ -11,9 +11,9 @@ A practice website for programming students where the exercises themselves are c
 For the development mode on the client,
 
 ```bash
-# Go to client/frontend directory
+# Go to client directory
 $ cd client
-# Install the dependencies on package.json
+# Install the dependencies on /client/package.json
 $ npm install
 $ npm run dev
 ```
@@ -24,9 +24,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 For the development mode on the server,
 
 ```bash
-# Go to server/backend directory
+# Go to server directory
 $ cd server
-# Install the dependencies on package.json
+# Install the dependencies on /server/package.json
 $ npm install
 $ npm run dev
 ```
