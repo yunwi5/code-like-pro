@@ -32,7 +32,7 @@ $ npm run dev
 Server runs on [http://localhost:8080](http://localhost:8080) on your computer by default.
 
 <br />
-### :exclamation: Server Environment Variables
+### Server Environment Variables
 * MongoDB Atlas - Connection to cloud database requires MONGO_USERNAME and MONGO_PASSWORD environment variables set up for a successful connection.
 * Google OAuth - For google authentication, Google cloud requires client credentials GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.
 
