@@ -16,11 +16,10 @@ $ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the client application.
-<br />
-For the development mode on the server,
 
 <br />
 <br />
+For the development mode on the server,
 
 ```bash
 # Go to server/backend directory
@@ -32,11 +31,8 @@ $ npm run dev
 
 Server runs on [http://localhost:8080](http://localhost:8080) on your computer by default.
 
-<br />
 
 ## Technologies used
-
-<br />
 
 ### Frontend
 1. TypeScript
@@ -48,8 +44,6 @@ Server runs on [http://localhost:8080](http://localhost:8080) on your computer b
 7. Monaco-Editor (code editor)
 8. Luxon
 
-<br />
-
 ### Backend
 1. Node Js
 2. Express Js
@@ -58,8 +52,6 @@ Server runs on [http://localhost:8080](http://localhost:8080) on your computer b
 5. Mongoose
 6. MongoDB
 7. Yup
-
-<br />
 
 
 ## Our Team Of Best Fit
