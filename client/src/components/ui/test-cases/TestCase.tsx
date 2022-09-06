@@ -32,7 +32,7 @@ const TestCase: React.FC<Props> = (props) => {
 
     const statusClass = getStatusClass(output);
 
-    const expectedOutputComponent = (
+    const expectedOutput = (
         <ExpectedOutput
             onOutputChange={handleOutputChange}
             expectedOutput={testCase.expectedOutput}
@@ -67,13 +67,13 @@ const TestCase: React.FC<Props> = (props) => {
                                 readOnly={readOnly}
                             />
                         </div>
-                        {!output && expectedOutputComponent}
+                        {!output && expectedOutput}
                     </div>
 
                     {/* Actual output of the test running */}
                     {output && (
                         <div className="flex flex-col lg:flex-row flex-wrap gap-3 justify-between mb-2">
-                            {expectedOutputComponent}
+                            {expectedOutput}
                             <ActualOutput output={output} />
                         </div>
                     )}

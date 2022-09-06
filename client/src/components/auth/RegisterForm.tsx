@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerRequest } from '../../apis/auth';
 
-import { ToastType } from '../../models/enums';
 import { toastNotify } from '../../utils/notification';
 import {
     invalidateEmail,
@@ -65,7 +64,7 @@ const RegisterForm = () => {
         // If register is success, redirect to the login page.
         if (ok) {
             navigate('/login');
-            toastNotify('Register successful!', ToastType.SUCCESS);
+            toastNotify('Register successful!', 'success');
         } else {
             setErrorState({ ...errorState, overall: message || 'Something went wrong...' });
         }

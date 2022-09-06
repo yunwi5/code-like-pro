@@ -8,4 +8,3 @@ export { SortingDirection, SortingDirectionList } from './SortingDirection';
 export { SearchKey, SearchKeyList } from './SearchKey';
 
 export { ProfileSection, ProfileSectionList } from './ProfileSection';
-export { ToastType } from './ToastType';

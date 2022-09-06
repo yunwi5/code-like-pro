@@ -6,7 +6,6 @@ import { getExerciseById } from '../../apis/exercise';
 import ExerciseCreationMain from '../../components/exercise-creation/ExerciseCreationMain';
 import { AppProperty } from '../../constants/app';
 import useAuth from '../../hooks/useAuth';
-import { ToastType } from '../../models/enums';
 import { ExerciseCreationContextProvider } from '../../store/context/ExerciseCreationContext';
 import { toastNotify } from '../../utils/notification';
 import { ClipLoader } from 'react-spinners';
@@ -28,7 +27,7 @@ const ExerciseEditPage = () => {
     // If there is an error while fetching the exercise data, redirect to the home page.
     useEffect(() => {
         if (!!error) {
-            toastNotify(`Oops, ${(error as any)?.message}`, ToastType.ERROR);
+            toastNotify(`Oops, ${(error as any)?.message}`, 'error');
             navigate('/');
         }
     }, [error]);

@@ -9,12 +9,11 @@ import { getDifficultyColorClass } from '../../../utils/difficulty';
 import { getLanguageIcon, mapJobeLangCodeToAppLanguage } from '../../../utils/language';
 import { Link, useNavigate } from 'react-router-dom';
 import { getExerciseAttemptPageLink, getExerciseEditLink } from '../../../utils/links';
-import HoveringLabel from '../labels/HoveringLabel';
-import styles from './ExerciseCard.module.scss';
+import { deleteExercise } from '../../../apis/exercise';
 import { useUserContext } from '../../../store/context/UserContext';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import HoveringLabel from '../labels/HoveringLabel';
 import DeleteModal from '../modals/variations/DeleteModal';
-import { deleteExercise } from '../../../apis/exercise';
 
 interface Props {
     exercise: IExerciseCard;
@@ -29,15 +28,12 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
     const liked: boolean = likedExerciseIdSet.has(exercise?._id || '');
 
     const navigate = useNavigate();
-
     const difficultyStyle = getDifficultyColorClass(exercise.difficulty);
-    // Different hovering effect based on view mode and authorized mode.
-    const bgHoverStyle = !exercise.isAuthorized ? 'hover:bg-blue-500/30' : 'hover:bg-gray-200';
 
     return (
         <>
             <article
-                className={`flex flex-col gap-4 px-4 py-2 text-gray-700 border-2 border-gray-200/90 rounded-sm transition-all shadow-md hover:shadow-lg cursor-pointer ${bgHoverStyle} ${className} ${styles.card}`}
+                className={`flex flex-col gap-4 px-4 py-2 text-gray-700 hover:bg-gray-200 border-2 border-gray-200/90 rounded-sm transition-all shadow-md hover:shadow-lg cursor-pointer ${className}`}
             >
                 {/* Exercise name, difficulty and language */}
                 <header className="flex-start gap-3">
@@ -120,16 +116,6 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                         </div>
                     )}
                 </div>
-
-                {/* Link to exercise attempt page for this exercise */}
-                {!exercise?.isAuthorized && (
-                    <Link
-                        className={`${styles.btn} btn btn-fill`}
-                        to={getExerciseAttemptPageLink(exercise._id)}
-                    >
-                        Try This!
-                    </Link>
-                )}
             </article>
             {showDeleteModal && (
                 <DeleteModal

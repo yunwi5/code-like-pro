@@ -10,7 +10,6 @@ import { AppProperty } from '../../constants/app';
 import { IExerciseCard } from '../../models/interfaces';
 import { createRandomExercises } from '../../utils/random/random-exercise';
 import { toastNotify } from '../../utils/notification';
-import { ToastType } from '../../models/enums';
 import { mapExercisesToExerciseCards } from '../../utils/exercise-utils/exercise';
 
 const BrowsingPage: React.FC = () => {
@@ -43,7 +42,7 @@ const BrowsingPage: React.FC = () => {
     useEffect(() => {
         if (!!error) {
             navigate('/');
-            toastNotify('Sorry, something went wrong in browsing', ToastType.ERROR);
+            toastNotify('Sorry, something went wrong in browsing', 'error');
         }
     }, [error]);
 

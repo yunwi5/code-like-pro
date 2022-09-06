@@ -7,7 +7,6 @@ import CustomTextArea from '../../ui/inputs/CustomTextArea';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { reportExerciseRequest } from '../../../apis/exercise';
 import { toastNotify } from '../../../utils/notification';
-import { ToastType } from '../../../models/enums';
 import { ClipLoader } from 'react-spinners';
 
 const IssueCategories = [
@@ -45,12 +44,12 @@ const IssueReportModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         if (ok) {
             console.log(data);
             setDescription('');
-            toastNotify('Sending report successful!', ToastType.SUCCESS);
+            toastNotify('Sending report successful!', 'success');
             onClose();
         } else {
             console.log(message);
             setError(message);
-            toastNotify(message, ToastType.ERROR);
+            toastNotify(message, 'error');
         }
     };
 
