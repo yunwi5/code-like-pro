@@ -13,6 +13,10 @@ const ChallengeActions: React.FC = () => {
     const { saveDraft, saveExercise, runCode, isLoading, createdExercise, readyStatus } =
         useExerciseCreationContext();
 
+    // Determine whether to show the 'published exercise result' option or not.
+    // Users should create their exercise first and ready status should be 'success' to see the 'Published Result'.
+    const showPublishedResult = !!createdExercise && readyStatus?.status === 'success';
+
     return (
         <div className="flex flex-col sm:flex-row lg:flex-col flex-wrap justify-between gap-2">
             {/* Safe draft to local storage only if the user did not publish the exercise yet. */}
@@ -38,7 +42,7 @@ const ChallengeActions: React.FC = () => {
                     </Button>
                 </>
             )}
-            {!!createdExercise && (
+            {showPublishedResult && (
                 <Button
                     mode="empty"
                     onClick={() => navigate(getExerciseAttemptPageLink(createdExercise._id))}

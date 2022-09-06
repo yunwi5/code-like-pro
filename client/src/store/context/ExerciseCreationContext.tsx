@@ -15,7 +15,7 @@ import {
     IExerciseWithId,
     IReadyStatus,
     ITestCase,
-    ITestResult,
+    ITestOutput,
 } from '../../models/interfaces';
 import {
     analyzeTestCasesResult,
@@ -64,7 +64,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
     const [testCases, setTestCases] = useState<ITestCase[]>(
         exercise?.testCases || getInitialTestCaseArray(),
     );
-    const [testCaseOutputs, setTestCaseOutputs] = useState<ITestResult[]>([]);
+    const [testCaseOutputs, setTestCaseOutputs] = useState<ITestOutput[]>([]);
 
     // Boolean value indicating whether the user submission was saved to the server successfully.
     const [createdExercise, setCreatedExercise] = useState<null | IExerciseWithId>(

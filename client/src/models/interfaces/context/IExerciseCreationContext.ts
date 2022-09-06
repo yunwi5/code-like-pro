@@ -1,4 +1,4 @@
-import { IExerciseWithId, ITestCase, ITestResult } from '..';
+import { IExerciseWithId, ITestCase, ITestOutput } from '..';
 import { CreationSection, Difficulty, Language, ProgrammingTopic } from '../../enums';
 
 export interface IReadyStatus {
@@ -29,7 +29,7 @@ export interface IExerciseCreationContext {
     saveExercise: () => void;
     runCode: () => void;
     readyStatus: IReadyStatus | null;
-    testCaseOutputs: ITestResult[];
+    testCaseOutputs: ITestOutput[];
     isLoading: boolean;
     createdExercise: null | IExerciseWithId;
     activeSection: CreationSection | null;

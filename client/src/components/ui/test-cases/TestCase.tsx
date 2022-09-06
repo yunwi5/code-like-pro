@@ -3,7 +3,7 @@ import { Language } from '../../../models/enums';
 import CodeEditor from '../editor/CodeEditor';
 import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
 import { ImBin2 } from 'react-icons/im';
-import { ITestCase, ITestCaseProps, ITestResult } from '../../../models/interfaces';
+import { ITestCase, ITestCaseProps, ITestOutput } from '../../../models/interfaces';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
     testCase: ITestCase;
     onUpdate?: (props: ITestCaseProps) => void;
     onDelete?: () => void;
-    output?: ITestResult | undefined;
+    output?: ITestOutput | undefined;
     readOnly?: boolean;
 }
 
@@ -74,10 +74,7 @@ const TestCase: React.FC<Props> = (props) => {
                     {output && (
                         <div className="flex flex-col lg:flex-row flex-wrap gap-3 justify-between mb-2">
                             {expectedOutputComponent}
-                            <ActualOutput
-                                readOnly={readOnly}
-                                actualOutput={output.actualOutput}
-                            />
+                            <ActualOutput output={output} />
                         </div>
                     )}
 
@@ -98,7 +95,7 @@ const TestCase: React.FC<Props> = (props) => {
 // Header of the test case component. Name, status and shrink toggler.
 interface HeadingProps {
     name: string;
-    output: ITestResult | undefined;
+    output: ITestOutput | undefined;
     isShrinked: boolean;
     setIsShrinked: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -118,27 +115,6 @@ const TestCaseHeading: React.FC<HeadingProps> = (props) => {
             </span>
             <ExpandShrinkToggler isShrinked={isShrinked} setIsShrinked={setIsShrinked} />
         </h3>
-    );
-};
-
-// Actual output block
-interface OutputProps {
-    actualOutput: string;
-    readOnly: boolean;
-}
-const ActualOutput: React.FC<OutputProps> = ({ actualOutput, readOnly }) => {
-    return (
-        <div className="flex-1">
-            <p className="px-2 py-1 bg-gray-300">Actual Output</p>
-            {/* Readonly testarea */}
-            <textarea
-                value={actualOutput}
-                onChange={() => {}}
-                className={`text-sm w-full px-3 py-2 input ${
-                    readOnly && 'focus:!outline-none'
-                }`}
-            />
-        </div>
     );
 };
 
@@ -163,6 +139,29 @@ const ExpectedOutput: React.FC<ExpectedOutputProps> = ({
                     readOnly && 'focus:!outline-none'
                 }`}
             />
+        </div>
+    );
+};
+
+// Actual output block
+interface OutputProps {
+    output: ITestOutput;
+}
+// Actual output should always be readonly mode.
+const ActualOutput: React.FC<OutputProps> = ({ output }) => {
+    // If there is a std error, show error traceback instead of an output for more meaningful feedback.
+    const error = output.error;
+    const errorClass = error ? 'bg-rose-50 text-rose-700' : '';
+
+    return (
+        <div className="flex-1 flex flex-col">
+            <p className="px-2 py-1 bg-gray-300">Actual Output</p>
+            {/* Readonly output */}
+            <div
+                className={`input flex-1 w-full px-3 py-2 text-sm focus:!outline-none ${errorClass}`}
+            >
+                {error ?? output.actualOutput}
+            </div>
         </div>
     );
 };
@@ -194,7 +193,7 @@ const TestCaseControl: React.FC<ControlProps> = ({ onHidden, hidden, onDelete })
     );
 };
 
-function getStatusClass(output: ITestResult | undefined) {
+function getStatusClass(output: ITestOutput | undefined) {
     if (!output) return '';
     return output.correct ? 'bg-green-200/70' : 'bg-rose-200/70';
 }

@@ -1,4 +1,4 @@
-import { ITestCase, ITestResult } from '../../models/interfaces';
+import { ITestCase, ITestOutput } from '../../models/interfaces';
 
 export function getEmptyTestCase(testCaseNumber?: number): ITestCase {
     return {
@@ -18,7 +18,7 @@ export function testCaseEmpty(testCase: ITestCase) {
 
 export function analyzeTestCasesResult(
     testCases: ITestCase[],
-    testCasesResult: ITestResult[],
+    testCasesResult: ITestOutput[],
 ) {
     const nonEmptyTests = testCases.filter((test) => !testCaseEmpty(test));
     const haveEnoughTests = nonEmptyTests.length >= 3;
@@ -39,7 +39,7 @@ export function analyzeTestCasesResult(
 }
 
 // Test case output analysis
-export function getCorrectTestCaseCount(testCaseOutputs: ITestResult[]) {
+export function getCorrectTestCaseCount(testCaseOutputs: ITestOutput[]) {
     let correct = 0;
     testCaseOutputs.forEach((result) => {
         if (result.correct) correct++;
