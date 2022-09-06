@@ -1,18 +1,23 @@
 import React from 'react';
-import usePagination from '../../hooks/usePagination';
-import { IExerciseCard } from '../../models/interfaces';
-import ExerciseCard from '../ui/cards/ExerciseCard';
-import PageNavigation from '../ui/PageNavigation';
+import usePagination from '../../../hooks/usePagination';
+import { IExerciseCard } from '../../../models/interfaces';
+import ExerciseCard from '../cards/ExerciseCard';
+import PageNavigation from '../PageNavigation';
 
 const EXERCISE_PER_PAGE = 10;
 
-const ExerciseList: React.FC<{ exercises: IExerciseCard[] }> = ({ exercises }) => {
+interface Props {
+    exercises: IExerciseCard[];
+    exercisePerPage?: number;
+}
+
+const ExerciseList: React.FC<Props> = ({ exercises, exercisePerPage = EXERCISE_PER_PAGE }) => {
     const {
         array: currentPageExercises,
         page,
         setPage,
         maxPage,
-    } = usePagination<IExerciseCard>({ array: exercises, itemPerPage: EXERCISE_PER_PAGE });
+    } = usePagination<IExerciseCard>({ array: exercises, itemPerPage: exercisePerPage });
 
     const handlePage = (newPage: number) => setPage(newPage);
 

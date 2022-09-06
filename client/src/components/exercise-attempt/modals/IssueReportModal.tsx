@@ -6,7 +6,7 @@ import CustomSelect from '../../ui/inputs/CustomSelect';
 import CustomTextArea from '../../ui/inputs/CustomTextArea';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { reportExerciseRequest } from '../../../apis/exercise';
-import { toastNotify } from '../../../utils/notification/toast';
+import { toastNotify } from '../../../utils/notification';
 import { ToastType } from '../../../models/enums';
 import { ClipLoader } from 'react-spinners';
 

@@ -15,5 +15,6 @@ export interface IExerciseCard {
     tags: string[];
     createdAt?: Date | string;
     prompt?: string;
-    author?: IUser;
+    author?: { _id: string; name: string };
+    isAuthorized?: boolean; // Authorize the user if the user is a creator. Give edit/delete access.
 }

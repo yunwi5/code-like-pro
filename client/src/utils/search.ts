@@ -2,7 +2,7 @@ import { SearchKey } from '../models/enums';
 import { IExerciseCard } from '../models/interfaces';
 import { ISearchingState } from '../store/redux/browsing-slice';
 
-function searchIncludes(searched: string, inputString: string) {
+export function searchIncludes(searched: string, inputString: string) {
     return searched.toLowerCase().includes(inputString.trim().toLowerCase());
 }
 

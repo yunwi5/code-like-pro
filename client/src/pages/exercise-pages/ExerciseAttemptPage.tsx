@@ -2,38 +2,38 @@ import React, { useEffect } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ClipLoader } from 'react-spinners';
+import ClipLoader from 'react-spinners/ClipLoader';
+
+import useAuth from '../../hooks/useAuth';
+import { useUserContext } from '../../store/context/UserContext';
 import { getExerciseById } from '../../apis/exercise';
-import ExerciseAttemptMain from '../../components/exercise-attempt/ExerciseAttemptMain';
 import { AppProperty } from '../../constants/app';
 import { ExerciseAttemptCtxProvider } from '../../store/context/ExerciseAttemptContext';
-import { toastNotify } from '../../utils/notification/toast';
+import { toastNotify } from '../../utils/notification';
 import { ToastType } from '../../models/enums';
-import useAuth from '../../hooks/useAuth';
+import ExerciseAttemptMain from '../../components/exercise-attempt/ExerciseAttemptMain';
 
 const ExerciseAttemptPage: React.FC = () => {
     useAuth();
+    const { submissionMap } = useUserContext();
     const navigate = useNavigate();
-    const params = useParams();
-    const exerciseId = params.id || '';
+    const exerciseId = useParams().id || '';
 
     // Get QueryClient from the context.
     const queryClient = useQueryClient();
     const exerciseQueryKey = `exercise-${exerciseId}`;
 
+    // Fetch the exercise data
     const { data: exercise, error: exerciseError } = useQuery([exerciseQueryKey], () =>
         getExerciseById(exerciseId).then((response) => response.data),
     );
 
-    // Need to fetch the user submission for this exercise as well.
+    // Previous user submission data from the context. Either user submission or null.
+    const userSubmission = { ...submissionMap[exerciseId], exercise: exerciseId };
 
-    if (exerciseError) {
-        console.log(exerciseError);
-    }
+    if (exerciseError) console.log(exerciseError);
 
-    const refetchExercise = () => {
-        queryClient.invalidateQueries([exerciseQueryKey]);
-    };
+    const refetchExercise = () => queryClient.invalidateQueries([exerciseQueryKey]);
 
     // If the exercise id is null, or if there is an exercise error, redirect to the browsing page.
     useEffect(() => {
@@ -63,6 +63,7 @@ const ExerciseAttemptPage: React.FC = () => {
                 <ExerciseAttemptCtxProvider
                     refetchExercise={refetchExercise}
                     exercise={exercise}
+                    userSubmission={userSubmission}
                 >
                     <ExerciseAttemptMain />
                 </ExerciseAttemptCtxProvider>

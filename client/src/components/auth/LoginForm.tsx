@@ -1,11 +1,15 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastType } from '../../models/enums';
 
 import { useUserContext } from '../../store/context/UserContext';
+import { toastNotify } from '../../utils/notification';
 import { invalidateEmail, invalidatePassword } from '../../utils/string-utils/validation';
 import AuthCard from './AuthCard';
 
 type LoginState = { email: string; password: string };
 const LoginForm = () => {
+    const navigate = useNavigate();
     const { login, isLoading } = useUserContext();
     const [loginState, setLoginState] = useState({ email: '', password: '' });
     const [errorState, setErrorState] = useState({ email: '', password: '', overall: '' });
@@ -42,9 +46,13 @@ const LoginForm = () => {
 
         // If any errorState is on, do not send the register request.
         if (Object.values(error).join('').trim()) return;
-        const { ok, message } = await login(loginState);
+        const { ok, message, data } = await login(loginState);
 
-        if (!ok) {
+        // If the login is success, redirect to the home page.
+        if (ok && data) {
+            navigate('/');
+            toastNotify('Login Successful!', ToastType.SUCCESS);
+        } else {
             setErrorState((prev) => ({
                 ...prev,
                 overall: message || 'Something went wrong...',

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { IExerciseCard } from '../models/interfaces';
 import { useAppSelector } from '../store/redux/store';
 import { filterExercises } from '../utils/filter-utils/exercise-filter';
-import { searchExercises } from '../utils/search-util';
+import { searchExercises } from '../utils/search';
 import { sortExercises } from '../utils/sorting-utils/exercise-sorting';
 
 // Get searching, filtering, and sorting information from redux.

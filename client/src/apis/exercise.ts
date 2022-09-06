@@ -1,6 +1,5 @@
 import { AppProperty } from '../constants/app';
 import { IExercise, IExerciseWithId, IIssueReport } from '../models/interfaces';
-import { mapJobeLangCodeToAppLanguage } from '../utils/language';
 import { deleteRequest, getRequest, postRequest, putRequest } from './requests';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/exercise`;
@@ -10,15 +9,9 @@ export async function getExercises() {
 }
 
 export async function getExerciseById(id: string) {
-    const response = await getRequest<IExerciseWithId | undefined>({
+    return await getRequest<IExerciseWithId | undefined>({
         url: `${API_DOMAIN}/${id}`,
     });
-    let exerciseData = response.data;
-    // Map jobe server language code back to application style name
-    if (exerciseData) {
-        exerciseData.language = mapJobeLangCodeToAppLanguage(exerciseData?.language);
-    }
-    return { ...response, data: exerciseData };
 }
 
 export async function postExercise(exercise: IExercise) {

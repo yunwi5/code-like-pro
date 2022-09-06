@@ -21,9 +21,8 @@ import {
 import {
     analyzeTestCasesResult,
     getInitialTestCaseArray,
-} from '../../utils/exercise-creation-utils/testcase-utils';
-import { mapLanguageToJobeLangCode } from '../../utils/language';
-import { toastNotify } from '../../utils/notification/toast';
+} from '../../utils/exercise-utils/testcase';
+import { toastNotify } from '../../utils/notification';
 
 export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>({
     setActiveSection: () => {},
@@ -38,31 +37,43 @@ export const useExerciseCreationContext = () => useContext(ExerciseCreationConte
 
 export const DRAFT_LOCAL_STORATE_KEY = 'exercise_creation_draft';
 
+interface Props {
+    children: React.ReactNode;
+    exercise?: IExerciseWithId;
+}
+
 // Context for sharing and storing user exercise creation data.
 // Each exercise creation related component can use this context to receive or update the data.
-export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNode }> = ({
-    children,
-}) => {
+export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exercise }) => {
     const navigate = useNavigate();
     const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExercise | ''>(
         DRAFT_LOCAL_STORATE_KEY,
         '',
     );
 
-    const [name, setName] = useState('');
-    const [prompt, setPrompt] = useState('');
-    const [language, setLanguage] = useState<Language>(Language.C);
-    const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.EASY);
-    const [topic, setTopic] = useState<ProgrammingTopic>(ProgrammingTopic.ARRAY);
+    const [name, setName] = useState(exercise?.name || '');
+    const [prompt, setPrompt] = useState(exercise?.prompt || '');
+    const [language, setLanguage] = useState<Language>(exercise?.language || Language.C);
+    const [difficulty, setDifficulty] = useState<Difficulty>(
+        exercise?.difficulty || Difficulty.EASY,
+    );
+    const [topic, setTopic] = useState<ProgrammingTopic>(
+        exercise?.topic || ProgrammingTopic.ARRAY,
+    );
 
-    const [solutionCode, setSolutionCode] = useState('');
-    const [startingTemplate, setStartingTemplate] = useState('');
+    const [solutionCode, setSolutionCode] = useState(exercise?.solutionCode || '');
+    const [startingTemplate, setStartingTemplate] = useState(exercise?.startingTemplate || '');
 
-    const [tags, setTags] = useState<string[]>([]);
-    const [testCases, setTestCases] = useState<ITestCase[]>(() => getInitialTestCaseArray());
+    const [tags, setTags] = useState<string[]>(exercise?.tags || []);
+    const [testCases, setTestCases] = useState<ITestCase[]>(
+        exercise?.testCases || getInitialTestCaseArray(),
+    );
     const [testCaseOutputs, setTestCaseOutputs] = useState<ITestResult[]>([]);
 
-    const [activeSection, setActiveSection] = useState<CreationSection | null>(null);
+    // Boolean value indicating whether the user submission was saved to the server successfully.
+    const [createdExercise, setCreatedExercise] = useState<null | IExerciseWithId>(
+        exercise ?? null,
+    );
 
     // State for loading while sending a request to the server. Loading state should not let users to click 'Run Code' or 'Save Challenge' buttons.
     // Show some loading spinners while loading.
@@ -71,8 +82,7 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
     // Check whether the user is ready to post the exercise or not.
     const [readyStatus, setReadyStatus] = useState<IReadyStatus | null>(null);
 
-    // Boolean value indicating whether the user submission was saved to the server successfully.
-    const [createdExercise, setCreatedExercise] = useState<null | IExerciseWithId>(null);
+    const [activeSection, setActiveSection] = useState<CreationSection | null>(null);
 
     // Save currently unsaved work on exercise creation so that users do not lose their intermediate process.
     const saveDraft = () => {
@@ -93,7 +103,7 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
         } = await runTestCases({
             code: solutionCode,
             testCases,
-            language: mapLanguageToJobeLangCode(language),
+            language: language,
         });
         setIsLoading(false);
 
@@ -130,10 +140,7 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
             return;
         }
 
-        const exercise = createExerciseObject();
-
-        // Get jobe language code.
-        exercise.language = mapLanguageToJobeLangCode(language) as any;
+        const exercise: any = createExerciseObject();
 
         setIsLoading(true);
         // If the exercise already exists, send PUT request, otherwise send POST request.
@@ -176,7 +183,10 @@ export const ExerciseCreationContextProvider: React.FC<{ children: React.ReactNo
 
     // Runs on mount.
     useEffect(() => {
+        // If there is no draft initially, return.
         if (!exerciseDraft) return;
+        // If there is an initial exercise (edit mode), do not use the draft data.
+        if (exercise) return;
         setLanguage(exerciseDraft.language as Language);
         setTopic(exerciseDraft.topic);
         setDifficulty(exerciseDraft.difficulty);

@@ -11,7 +11,7 @@ const createApp = () => {
     app.use(
         cors({
             origin: keys.ClientBaseURL,
-            methods: 'GET,POST,PUT,DELETE',
+            methods: 'GET,POST,PUT,PATCH,DELETE',
             credentials: true, // IMPORTANT to set to true
         }),
     );

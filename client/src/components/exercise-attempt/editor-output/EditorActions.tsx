@@ -4,6 +4,7 @@ import { BsListUl } from 'react-icons/bs';
 import { RiSlideshow3Line } from 'react-icons/ri';
 
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
+import { getShowcasePageLink } from '../../../utils/links';
 import Button from '../../ui/buttons/Button';
 
 const EditorActions = () => {
@@ -23,7 +24,7 @@ const EditorActions = () => {
                 </Link>
                 {userGotCorrect && (
                     <Link
-                        to={`/showcase/${exercise?._id || ''}`}
+                        to={getShowcasePageLink(exercise?._id || '')}
                         className="btn-small py-[0.3rem] flex-center gap-1 text-[1.08rem] text-gray-700 rounded-sm shadow-md bg-gray-300 hover:bg-gray-600/90 hover:text-gray-50"
                     >
                         <RiSlideshow3Line />

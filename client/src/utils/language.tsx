@@ -8,43 +8,32 @@ import {
     PythonIcon,
 } from '../assets/svg-icons/language-svgs';
 import { Language } from '../models/enums';
+import { IUserSubmission, IUserSubmissionPopulated } from '../models/interfaces';
 
-export function mapLanguageToJobeLangCode(language: Language) {
-    switch (language) {
-        case Language.CPP:
-            return 'cpp';
-        case Language.PYTHON:
-            return 'python3';
-        case Language.JAVASCRIPT:
-            return 'nodejs';
-        // All other languages codes are just our client style names in lowercase.
-        default:
-            return language.toLowerCase();
-    }
-}
+// Map JOBE server language code to user-readable app language name.
+// Example: cpp -> C++, nodejs -> Node JS
+export function mapJobeLangCodeToAppLanguage(langCode: string): string {
+    if (!langCode.trim()) return 'Text';
 
-export function mapJobeLangCodeToAppLanguage(langCode: string): Language {
     switch (langCode.trim()) {
-        case 'c':
-            return Language.C;
-        case 'cpp':
-            return Language.CPP;
-        case 'python3':
-            return Language.PYTHON;
-        case 'java':
-            return Language.JAVA;
-        case 'nodejs':
-            return Language.JAVASCRIPT;
-        case 'php':
-            return Language.PHP;
-        case 'pascal':
-            return Language.PASCAL;
+        case Language.CPP:
+            return 'C++';
+        case Language.PYTHON:
+            return 'Python';
+        case Language.JAVASCRIPT:
+            return 'Node Js';
         default:
-            return Language.PYTHON;
+            return langCode[0].toUpperCase() + langCode.substring(1);
     }
 }
 
-// Fine the icon for each language supported.
+export function languageCodesToReadableNames(
+    langCodes: string[] | readonly string[],
+): string[] {
+    return langCodes.map((lang) => mapJobeLangCodeToAppLanguage(lang as Language));
+}
+
+// Find the icon for each language.
 type SvgParams = { width?: string; height?: string; className?: string };
 export function getLanguageIcon(language: Language, params?: SvgParams) {
     switch (language) {
@@ -64,4 +53,12 @@ export function getLanguageIcon(language: Language, params?: SvgParams) {
         case Language.PASCAL:
             return <PascalIcon {...params} />;
     }
+}
+
+export function getUsedLanguagesByUser(submissions: IUserSubmissionPopulated[]) {
+    const usedLanguages = new Set<Language>();
+    for (let sub of submissions) {
+        usedLanguages.add(sub.exercise.language);
+    }
+    return languageCodesToReadableNames(Array.from(usedLanguages));
 }

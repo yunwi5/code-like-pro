@@ -17,6 +17,8 @@ export function getDifficultyColorClass(difficulty: Difficulty) {
     }
 }
 
+// This is used for sorting exercises by difficulty.
+// Easy is given the lowest value so that easy exercises come first in ascending order.
 export function mapDifficultyToNumericValue(difficulty: Difficulty) {
     switch (difficulty) {
         case Difficulty.EASY:

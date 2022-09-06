@@ -3,9 +3,8 @@ import { postSubmission, runTestCases } from '../../apis/submission';
 import ShowcaseInviteModal from '../../components/exercise-attempt/modals/ShowcaseInviteModal';
 import { ToastType } from '../../models/enums';
 import { IExerciseWithId, ITestResult, IUserSubmission } from '../../models/interfaces';
-import { getCorrectTestCaseCount } from '../../utils/exercise-creation-utils/testcase-utils';
-import { mapLanguageToJobeLangCode } from '../../utils/language';
-import { toastNotify } from '../../utils/notification/toast';
+import { getCorrectTestCaseCount } from '../../utils/exercise-utils/testcase';
+import { toastNotify } from '../../utils/notification';
 
 interface IExerciseAttemptCtx {
     exercise: IExerciseWithId | null;
@@ -47,7 +46,9 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     children,
 }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [userSolution, setUserSolution] = useState(exercise.startingTemplate);
+    const [userSolution, setUserSolution] = useState(
+        previousSubmission?.code ?? exercise.startingTemplate,
+    );
     const [userSubmission, setUserSubmission] = useState<IUserSubmission | null>(
         previousSubmission ?? null,
     );
@@ -66,7 +67,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         } = await runTestCases({
             code: userSolution,
             testCases: exercise.testCases,
-            language: mapLanguageToJobeLangCode(exercise.language),
+            language: exercise.language,
         });
         setIsLoading(false);
 

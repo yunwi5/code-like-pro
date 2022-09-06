@@ -25,6 +25,11 @@ const ProfileAvatarEdit: React.FC<{ onSelect: (id: string) => void }> = ({ onSel
     const originalPicture = useUserContext()?.user?.pictureUrl;
     const [showOptions, setShowOptions] = useState(false);
 
+    const handleAvatarSelect = (picture: string) => {
+        onSelect(picture);
+        setShowOptions(false);
+    };
+
     const pictureOptions = originalPicture
         ? [originalPicture, ...AvatarImagesList]
         : AvatarImagesList;
@@ -37,9 +42,10 @@ const ProfileAvatarEdit: React.FC<{ onSelect: (id: string) => void }> = ({ onSel
             />
             {showOptions && (
                 <div className="absolute top-0 -left-[24rem] -translate-x-10 grid grid-cols-4 gap-x-2 gap-y-2 px-2 py-2 rounded-md bg-white shadow-lg cursor-pointer">
-                    {pictureOptions.map((pictureOption) => (
+                    {pictureOptions.map((pictureOption, idx) => (
                         <div
-                            onClick={() => onSelect(pictureOption)}
+                            key={idx}
+                            onClick={() => handleAvatarSelect(pictureOption)}
                             className="px-1 py-1 w-[6rem] hover:bg-gray-100"
                         >
                             <img
