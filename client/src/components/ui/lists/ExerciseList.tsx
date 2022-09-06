@@ -1,8 +1,8 @@
 import React from 'react';
-import usePagination from '../../hooks/usePagination';
-import { IExerciseCard } from '../../models/interfaces';
-import ExerciseCard from './cards/ExerciseCard';
-import PageNavigation from './PageNavigation';
+import usePagination from '../../../hooks/usePagination';
+import { IExerciseCard } from '../../../models/interfaces';
+import ExerciseCard from '../cards/ExerciseCard';
+import PageNavigation from '../PageNavigation';
 
 const EXERCISE_PER_PAGE = 10;
 

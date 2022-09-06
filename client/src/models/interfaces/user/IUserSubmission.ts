@@ -1,4 +1,4 @@
-import { IExercise } from '../exercise/IExercise';
+import { IExerciseWithId } from '../exercise/IExercise';
 
 export interface IUserSubmission {
     _id: string;
@@ -16,5 +16,5 @@ export interface IUserSubmissionPopulated {
     correct: boolean;
     user: string; // user id unpopulated
     postedAt: string; // ISO date format
-    exercise: IExercise; // exercise data is populated
+    exercise: IExerciseWithId; // exercise data is populated
 }

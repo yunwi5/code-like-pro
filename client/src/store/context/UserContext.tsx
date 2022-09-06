@@ -52,6 +52,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         return new Set(likedIds);
     }, [userDetail?.liked]);
 
+    // Key: ExerciseID, value: IUserSubmission
     const submissionMap = useMemo(() => {
         if (!userDetail?.submissions) return {};
         return createSubmissionMap(userDetail.submissions);

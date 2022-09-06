@@ -8,7 +8,7 @@ import {
     mapExerciseToExerciseCard,
 } from '../../../utils/exercise-utils/exercise';
 import { searchExercises } from '../../../utils/search';
-import ExerciseList from '../../ui/ExerciseList';
+import ExerciseList from '../../ui/lists/ExerciseList';
 import Searchbar from '../../ui/inputs/Searchbar';
 import ProfileSectionContainer from '../containers/ProfileSectionContainer';
 import ProfileLoader from '../ProfileLoader';

@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
-import { likeExerciseRequest } from '../../../apis/exercise';
 
+import { likeExerciseRequest } from '../../../apis/exercise';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
+import { useUserContext } from '../../../store/context/UserContext';
 import { mapJobeLangCodeToAppLanguage } from '../../../utils/language';
 import HoveringLabel from '../../ui/labels/HoveringLabel';
 import IssueReportModal from '../modals/IssueReportModal';
 
 // Control header that let users set language settings, favorite and report functionalities.
 const EditorControlBar: React.FC = () => {
+    const { likedExerciseIdSet } = useUserContext();
     const { exercise, refetchExercise } = useExerciseAttemptCtx();
     const [showReportModal, setShowReportModal] = useState(false);
 
@@ -25,6 +27,11 @@ const EditorControlBar: React.FC = () => {
         console.log('Liked response:', response);
     };
 
+    // Set the user liked status initially based on the previous liked exercises of the user.
+    useEffect(() => {
+        setLiked(likedExerciseIdSet.has(exercise?._id || ''));
+    }, [likedExerciseIdSet, exercise?._id]);
+
     return (
         <>
             <div className="flex items-center px-3 lg:pl-1 lg:pr-5 py-[0.55rem] lg:py-[0.375rem] ">
@@ -39,7 +46,7 @@ const EditorControlBar: React.FC = () => {
                         className="text-gray-600 border-2 border-gray-500/90 bg-gray-50 focus:outline focus:outline-2 focus:outline-main-500 focus:text-main-500 focus:border-transparent shadow-md rounded-sm px-2 py-1"
                     >
                         <option value={exercise?.language}>
-                            {mapJobeLangCodeToAppLanguage(exercise?.language || ('' as any))}
+                            {mapJobeLangCodeToAppLanguage(exercise?.language || '')}
                         </option>
                     </select>
                 </div>

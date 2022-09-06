@@ -46,7 +46,9 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     children,
 }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [userSolution, setUserSolution] = useState(exercise.startingTemplate);
+    const [userSolution, setUserSolution] = useState(
+        previousSubmission?.code ?? exercise.startingTemplate,
+    );
     const [userSubmission, setUserSubmission] = useState<IUserSubmission | null>(
         previousSubmission ?? null,
     );

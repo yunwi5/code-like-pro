@@ -12,6 +12,8 @@ import { Language } from '../models/enums';
 // Map JOBE server language code to user-readable app language name.
 // Example: cpp -> C++, nodejs -> Node JS
 export function mapJobeLangCodeToAppLanguage(langCode: string): string {
+    if (!langCode.trim()) return 'Text';
+
     switch (langCode.trim()) {
         case Language.CPP:
             return 'C++';

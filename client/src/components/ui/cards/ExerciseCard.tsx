@@ -37,7 +37,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
     return (
         <>
             <article
-                className={`flex flex-col gap-4 px-4 py-2 text-gray-700 border-2 border-gray-200/90 rounded-sm cursor-pointer ${bgHoverStyle} ${className} ${styles.card}`}
+                className={`flex flex-col gap-4 px-4 py-2 text-gray-700 border-2 border-gray-200/90 rounded-sm transition-all shadow-md hover:shadow-lg cursor-pointer ${bgHoverStyle} ${className} ${styles.card}`}
             >
                 {/* Exercise name, difficulty and language */}
                 <header className="flex-start gap-3">
