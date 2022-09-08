@@ -9,9 +9,10 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { Pie, Doughnut, PolarArea, Bar } from 'react-chartjs-2';
+import { Pie, Doughnut, Bar } from 'react-chartjs-2';
 import { IChartData } from '../../../models/interfaces';
-import { generateChartDataset } from '../../../utils/analysis-utils/chart';
+import { generateChartDataset } from '../../../utils/analysis-utils';
+import { AiFillRobot } from 'react-icons/ai';
 
 ChartJS.register(
     CategoryScale,
@@ -73,14 +74,28 @@ const CategoricalChart: React.FC<Props> = (props) => {
         ],
     };
 
+    // Check if the user has no data. If the user has no data,
+    // display alternative message instead of an empty chart.
+    const datasetIsEmpty = data.reduce((acc, curr) => acc + curr, 0) === 0;
+
     return (
         <div>
-            {chartType === 'pie' && (
-                <Pie width={width} height={height} options={options} data={dataset} />
+            {datasetIsEmpty && (
+                <h3 className="flex-center flex-col text-2xl h-[18rem]">
+                    <AiFillRobot className="text-main-400" />
+                    <span className="text-gray-500">You don't have data yet!</span>
+                </h3>
             )}
-            {chartType === 'doughnut' && <Doughnut options={options} data={dataset} />}
-            {chartType === 'bar' && (
-                <Bar className="max-h-[22.5rem]" options={barOptions} data={dataset} />
+            {!datasetIsEmpty && (
+                <>
+                    {chartType === 'pie' && (
+                        <Pie width={width} height={height} options={options} data={dataset} />
+                    )}
+                    {chartType === 'doughnut' && <Doughnut options={options} data={dataset} />}
+                    {chartType === 'bar' && (
+                        <Bar className="max-h-[22.5rem]" options={barOptions} data={dataset} />
+                    )}
+                </>
             )}
         </div>
     );

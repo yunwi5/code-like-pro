@@ -3,6 +3,9 @@ import { TrendPeriodMode } from '../../../../models/enums';
 import TrendModeSelect from './TrendModeSelect';
 import ExerciseCreationTrend from './ExerciseCreationTrend';
 import ExerciseAttemptTrend from './ExerciseAttemptTrend';
+import { FaRobot } from 'react-icons/fa';
+
+type TrendSection = 'attempt' | 'create' | null;
 
 // Main component for trend analysis of user exercise creatio and attempts.
 const TrendAnalysis: React.FC = () => {
@@ -18,6 +21,9 @@ const TrendAnalysis: React.FC = () => {
                 <ExerciseAttemptTrend trendMode={trendMode} />
                 <ExerciseCreationTrend trendMode={trendMode} />
             </div>
+            <p className="flex-start gap-2 mt-5 font-semibold">
+                <FaRobot className="text-sky-500 text-xl" /> Keep pushing forward!
+            </p>
         </div>
     );
 };

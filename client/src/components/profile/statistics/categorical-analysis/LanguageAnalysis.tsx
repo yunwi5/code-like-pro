@@ -17,7 +17,7 @@ const LanguageAnalysis: React.FC = () => {
 
     return (
         <section>
-            <h2 className="mt-4 lg:-mb-12 text-2xl basis-full">Language Analytics</h2>
+            <h2 className="mt-4 lg:-mb-[4.5rem] text-2xl basis-full">Language Analytics</h2>
             <div className="flex-between">
                 {languageDataArray.length > 0 && (
                     <LanguageAnalyticMessages dataArray={languageDataArray} />
@@ -45,8 +45,9 @@ const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray }) => {
     const mostRecentSubmission = getMostRecentSubmission(userDetail?.submissions || []);
 
     const mostUsed = dataArray.reduce(
-        (accMaxData, currData) => (currData.value > accMaxData.value ? currData : accMaxData),
-        dataArray[0],
+        (accMaxData, currData) =>
+            currData.value > (accMaxData?.value ?? 0) ? currData : accMaxData,
+        dataArray.length > 0 ? dataArray[0] : null,
     );
 
     return (
@@ -55,31 +56,35 @@ const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray }) => {
                 <h5 className="font-semibold">Total Languages Trained:</h5>
                 <p>{dataArray.length} Languages</p>
             </div>
-            <div className="flex-start flex-wrap gap-2 text-base">
-                <h5 className="font-semibold">Languages:</h5>
-                {dataArray.map((data) => (
-                    <div key={data.label} className="flex flex-col items-center ml-2">
-                        <span className="text-sm">
-                            {getLanguageIcon(data.label as any, {
-                                width: '33px',
-                                height: '33px',
-                            })}
+            {dataArray.length > 0 && (
+                <div className="flex-start flex-wrap gap-2 text-base">
+                    <h5 className="font-semibold">Languages:</h5>
+                    {dataArray.map((data) => (
+                        <div key={data.label} className="flex flex-col items-center ml-2">
+                            <span className="text-sm">
+                                {getLanguageIcon(data.label as any, {
+                                    width: '33px',
+                                    height: '33px',
+                                })}
+                            </span>
+                            <span className="text-sm">
+                                {prettierLanguageName(data.label as any)}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            )}
+            {mostUsed && (
+                <div className="flex-start gap-2">
+                    <h5 className="font-semibold">Most Trained Language:</h5>
+                    <p>
+                        {prettierLanguageName(mostUsed.label)} &nbsp;
+                        <span className="font-semibold text-gray-500 text-[0.95rem]">
+                            ({mostUsed.value} times)
                         </span>
-                        <span className="text-sm">
-                            {prettierLanguageName(data.label as any)}
-                        </span>
-                    </div>
-                ))}
-            </div>
-            <div className="flex-start gap-2">
-                <h5 className="font-semibold">Most Trained Language:</h5>
-                <p>
-                    {prettierLanguageName(mostUsed.label)} &nbsp;
-                    <span className="font-semibold text-gray-500 text-[0.95rem]">
-                        ({mostUsed.value} times)
-                    </span>
-                </p>
-            </div>
+                    </p>
+                </div>
+            )}
             {mostRecentSubmission && (
                 <div className="flex-start gap-2">
                     <h5 className="font-semibold">Most Recent:</h5>

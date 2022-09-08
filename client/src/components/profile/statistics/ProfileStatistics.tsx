@@ -1,4 +1,3 @@
-import React from 'react';
 import { GiProgression } from 'react-icons/gi';
 
 import { AnalysisContextProvider } from '../../../store/context/AnalysisContext';
@@ -16,9 +15,6 @@ const ProfileStatistics = () => {
                     <GiProgression className="text-main-400" />
                     Progress Analytics
                 </h1>
-                {/* Trend analysis of user exercise creations and attempts */}
-                <TrendAnalysis />
-
                 {/* User Language Stats */}
                 <LanguageAnalysis />
                 <div className="flex justify-between flex-col lg:flex-row">
@@ -29,6 +25,9 @@ const ProfileStatistics = () => {
                 </div>
                 {/* Exercise topics comparisons */}
                 <TopicAnalysis />
+
+                {/* Trend analysis of user exercise creations and attempts */}
+                <TrendAnalysis />
             </main>
         </AnalysisContextProvider>
     );

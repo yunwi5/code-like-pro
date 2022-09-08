@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { IChartData } from '../../../../models/interfaces';
 import { useAnalysisContext } from '../../../../store/context/AnalysisContext';
+import { getMostFrequentChartData } from '../../../../utils/analysis-utils';
 import CategoricalChart from '../../../ui/charts/CategoricalChart';
 
 const TopicAnalysis: React.FC = () => {
@@ -27,22 +28,10 @@ const TopicAnalysis: React.FC = () => {
 
 const TopicAnalysisMessages: React.FC<{ dataArray: IChartData[] }> = ({ dataArray }) => {
     // Most frequent topics 1 or more.
-    function getMostFrequentData(dataArray: IChartData[]) {
-        let mostFrequentOnes: IChartData[] = [];
-        dataArray.forEach((topicData) => {
-            if (mostFrequentOnes.length === 0) mostFrequentOnes.push(topicData);
-            else {
-                if (mostFrequentOnes[0].value < topicData.value) {
-                    mostFrequentOnes = [topicData];
-                } else if (mostFrequentOnes[0].value === topicData.value) {
-                    mostFrequentOnes.push(topicData);
-                }
-            }
-        });
-        return mostFrequentOnes;
-    }
+    const mostFrequentTopics = useMemo(() => getMostFrequentChartData(dataArray), [dataArray]);
 
-    const mostFrequentTopics = useMemo(() => getMostFrequentData(dataArray), []);
+    // If the user has not made attempts to any of the topics, return null.
+    if (mostFrequentTopics.length === 0 || mostFrequentTopics[0].value === 0) return null;
 
     return (
         <div className="flex flex-wrap items-center gap-x-2">

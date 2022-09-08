@@ -13,7 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 
 import { IChartData } from '../../../models/interfaces';
-import { generateChartDataset } from '../../../utils/analysis-utils/chart';
+import { generateChartDataset } from '../../../utils/analysis-utils';
 
 ChartJS.register(
     CategoryScale,
@@ -69,7 +69,7 @@ const TrendChart: React.FC<Props> = (props) => {
 
     return (
         <div>
-            <Line className="max-h-[25rem]" options={options} data={dataset} />
+            <Line className="max-h-[20rem]" options={options} data={dataset} />
         </div>
     );
 };
