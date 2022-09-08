@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { postSubmission, runTestCases } from '../../apis/submission';
 import ShowcaseInviteModal from '../../components/exercise-attempt/modals/ShowcaseInviteModal';
-import { ToastType } from '../../models/enums';
 import { IExerciseWithId, ITestOutput, IUserSubmission } from '../../models/interfaces';
 import { getCorrectTestCaseCount } from '../../utils/exercise-utils/testcase';
 import { toastNotify } from '../../utils/notification';
@@ -78,7 +77,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
             const { correct } = getCorrectTestCaseCount(outputs);
             toastNotify(`You got ${correct} tests correct out of ${outputs.length} tests!`);
         } else {
-            toastNotify(`Oops, ${message}`, ToastType.ERROR);
+            toastNotify(`Oops, ${message}`, 'error');
         }
     };
 
@@ -96,13 +95,13 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         if (ok && newSubmission) {
             setUserSubmission(newSubmission);
             if (newSubmission.correct) {
-                toastNotify('Your submission status is correct!', ToastType.SUCCESS);
+                toastNotify('Your submission status is correct!', 'success');
                 setShowInviteModal(true);
             } else {
                 toastNotify(`Submission status is incorrect. Debug your code and try again!`);
             }
         } else {
-            toastNotify(`Oops, ${message}`, ToastType.ERROR);
+            toastNotify(`Oops, ${message}`, 'error');
         }
     };
 

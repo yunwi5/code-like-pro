@@ -22,6 +22,12 @@ html {
     min-height: 100vh;
 }
 
+// Mouse selection color
+::selection {
+    background-color: $color-main-400;
+    color: #f9f9f9;
+}
+
 .logo {
     font-family: 'Red Hat Mono', monospace;
     font-weight: 400;

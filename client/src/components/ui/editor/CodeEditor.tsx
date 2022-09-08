@@ -3,7 +3,7 @@ import Editor from '@monaco-editor/react';
 import monaco from 'monaco-editor';
 import { Language } from '../../../models/enums';
 import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
-import { mapJobeLangCodeToAppLanguage } from '../../../utils/language';
+import { prettierLanguageName } from '../../../utils/language';
 
 type Monaco = typeof monaco;
 type CodeEditor = monaco.editor.IStandaloneCodeEditor;
@@ -58,7 +58,7 @@ const CodeEditor: React.FC<Props> = ({
         >
             {showHeader && (
                 <div className="flex-between px-3 py-2 text-gray-700 bg-gray-300/90 capitalize text-lg">
-                    {language ? mapJobeLangCodeToAppLanguage(language) : 'Python'}
+                    {language ? prettierLanguageName(language) : 'Python'}
                     <ExpandShrinkToggler
                         isShrinked={isShrinked}
                         setIsShrinked={setIsShrinked}

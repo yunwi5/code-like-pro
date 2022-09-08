@@ -10,6 +10,7 @@ const ProfileDropdownMenu: React.FC = () => {
 
     return (
         <nav className="z-[1000] absolute top-[102%] right-0 bg-gray-50 text-gray-700 transition-all shadow-md hover:shadow-lg rounded-sm">
+            {/* Profile information */}
             <div className="flex items-center gap-3 px-4 py-3">
                 <ProfilePicture size={'2.5rem'} />
                 <div>
@@ -17,7 +18,9 @@ const ProfileDropdownMenu: React.FC = () => {
                     <p className="-mt-1 text-gray-400 text-sm">{userDetail?.email}</p>
                 </div>
             </div>
+
             <div>
+                {/* List of links to particular profile section */}
                 {ProfileSectionList.map((section) => (
                     <Link
                         key={section}
@@ -27,6 +30,8 @@ const ProfileDropdownMenu: React.FC = () => {
                         {getProfileSectionIcon(section)} {section}
                     </Link>
                 ))}
+
+                {/* Logout button */}
                 <div
                     onClick={logout}
                     className="flex-start gap-3 px-4 py-2 border-t-2 whitespace-nowrap border-t-gray-200 hover:bg-gray-200 hover:text-main-500"

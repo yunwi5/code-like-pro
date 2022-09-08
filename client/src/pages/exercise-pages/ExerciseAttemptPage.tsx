@@ -10,7 +10,6 @@ import { getExerciseById } from '../../apis/exercise';
 import { AppProperty } from '../../constants/app';
 import { ExerciseAttemptCtxProvider } from '../../store/context/ExerciseAttemptContext';
 import { toastNotify } from '../../utils/notification';
-import { ToastType } from '../../models/enums';
 import ExerciseAttemptMain from '../../components/exercise-attempt/ExerciseAttemptMain';
 
 const ExerciseAttemptPage: React.FC = () => {
@@ -42,7 +41,7 @@ const ExerciseAttemptPage: React.FC = () => {
     // If the exercise id is null, or if there is an exercise error, redirect to the browsing page.
     useEffect(() => {
         if (exerciseId == null || !!exerciseError) {
-            toastNotify('Sorry, the exercise does not exist...', ToastType.ERROR);
+            toastNotify('Sorry, the exercise does not exist...', 'error');
             navigate('/browse');
         }
     }, [exerciseId, exerciseError]);

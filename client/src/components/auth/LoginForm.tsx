@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ToastType } from '../../models/enums';
 
 import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification';
@@ -51,7 +50,7 @@ const LoginForm = () => {
         // If the login is success, redirect to the home page.
         if (ok && data) {
             navigate('/');
-            toastNotify('Login Successful!', ToastType.SUCCESS);
+            toastNotify('Login Successful!', 'success');
         } else {
             setErrorState((prev) => ({
                 ...prev,

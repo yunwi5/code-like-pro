@@ -2,13 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { postExercise, putExercise } from '../../apis/exercise';
 import { runTestCases } from '../../apis/submission';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import {
-    CreationSection,
-    Difficulty,
-    Language,
-    ProgrammingTopic,
-    ToastType,
-} from '../../models/enums';
+import { CreationSection, Difficulty, Language, ProgrammingTopic } from '../../models/enums';
 import {
     IExercise,
     IExerciseCreationContext,
@@ -101,7 +95,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
     const saveDraft = () => {
         if (createdExercise == null) {
             setExerciseDraft(createExerciseObject());
-            toastNotify('Saved Draft Locally!', ToastType.SUCCESS);
+            toastNotify('Saved Draft Locally!', 'success');
         }
     };
 
@@ -122,16 +116,16 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
             const { status, message } = analyzeTestCasesResult(testCases, testCasesResult);
 
             if (status === 'error') {
-                toastNotify(message, ToastType.ERROR);
+                toastNotify(message, 'error');
                 setReadyStatus({ status: 'error', message });
             } else {
-                toastNotify(message, ToastType.SUCCESS);
+                toastNotify(message, 'success');
                 setReadyStatus({ status: 'success', message });
             }
             setTestCaseOutputs(testCasesResult);
         } else {
             console.log('Error on run code:', message);
-            toastNotify('Oops, something went wrong on the server.', ToastType.ERROR);
+            toastNotify('Oops, something went wrong on the server.', 'error');
         }
     };
 
@@ -159,11 +153,11 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
             : await postExercise(exercise);
 
         if (ok) {
-            toastNotify('Challenge was saved successfully!', ToastType.SUCCESS);
+            toastNotify('Challenge was saved successfully!', 'success');
             if (data) setCreatedExercise(data);
             setExerciseDraft('');
         } else {
-            toastNotify(message, ToastType.ERROR);
+            toastNotify(message, 'error');
         }
         setIsLoading(false);
     };

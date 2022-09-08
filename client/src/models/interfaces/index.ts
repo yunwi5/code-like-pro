@@ -16,3 +16,6 @@ export type {
     IReadyStatus,
 } from './context/IExerciseCreationContext';
 export type { IUserContext } from './context/IUserContext';
+
+// Data Analysis interfaces
+export type { IChartData } from './analysis/ChartData';

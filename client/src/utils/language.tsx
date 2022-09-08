@@ -12,7 +12,7 @@ import { IUserSubmissionPopulated } from '../models/interfaces';
 
 // Map JOBE server language code to user-readable app language name.
 // Example: cpp -> C++, nodejs -> Node JS
-export function mapJobeLangCodeToAppLanguage(langCode: string): string {
+export function prettierLanguageName(langCode: string): string {
     if (!langCode.trim()) return 'Text';
 
     switch (langCode.trim()) {
@@ -27,10 +27,8 @@ export function mapJobeLangCodeToAppLanguage(langCode: string): string {
     }
 }
 
-export function languageCodesToReadableNames(
-    langCodes: string[] | readonly string[],
-): string[] {
-    return langCodes.map((lang) => mapJobeLangCodeToAppLanguage(lang as Language));
+export function prettierLanguageNames(langCodes: string[] | readonly string[]): string[] {
+    return langCodes.map((lang) => prettierLanguageName(lang as Language));
 }
 
 // Find the icon for each language.
@@ -60,5 +58,5 @@ export function getUsedLanguagesByUser(submissions: IUserSubmissionPopulated[]) 
     for (let sub of submissions) {
         usedLanguages.add(sub.exercise.language);
     }
-    return languageCodesToReadableNames(Array.from(usedLanguages));
+    return prettierLanguageNames(Array.from(usedLanguages));
 }
