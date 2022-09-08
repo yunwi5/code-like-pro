@@ -1,6 +1,16 @@
-import { Difficulty, DifficultyList, SubmissionStatus } from '../../models/enums';
+import {
+    Difficulty,
+    DifficultyList,
+    ProgrammingTopicList,
+    SubmissionStatus,
+} from '../../models/enums';
 import { IChartData, IUserSubmissionPopulated } from '../../models/interfaces';
-import { DifficultyColorMap, LanguageColorMap, StatusColorMap } from './analysis-color';
+import {
+    DifficultyColorMap,
+    getLightColorByIndex,
+    LanguageColorMap,
+    StatusColorMap,
+} from './analysis-color';
 
 export function getLanguageChartDataArray(
     submissions: IUserSubmissionPopulated[],
@@ -39,16 +49,31 @@ export function getDifficultyChartDataArray(
         else difficultyFreqMap[diff] = 1;
     });
 
-    const chartDataList = [];
-    for (const diff of DifficultyList) {
+    return createChartDataArrayWithFixedLabels(
+        difficultyFreqMap,
+        DifficultyColorMap,
+        DifficultyList,
+    );
+}
+
+export function getTopicChartDataArray(submissions: IUserSubmissionPopulated[]) {
+    const topicFreqMap: { [key: string]: number } = {};
+    submissions.forEach((submission) => {
+        for (const tag of submission.exercise.tags) {
+            if (tag in topicFreqMap) topicFreqMap[tag]++;
+            else topicFreqMap[tag] = 1;
+        }
+    });
+
+    const chartDataList: IChartData[] = [];
+    ProgrammingTopicList.forEach((topic, idx) => {
         const data: IChartData = {
-            label: diff,
-            value: difficultyFreqMap[diff] ?? 0,
-            backgroundColor: DifficultyColorMap[diff],
+            label: topic,
+            value: topicFreqMap[topic] ?? 0,
+            backgroundColor: getLightColorByIndex(idx),
         };
         chartDataList.push(data);
-    }
-
+    });
     return chartDataList;
 }
 
@@ -73,7 +98,7 @@ export function createChartDataArray(
 export function createChartDataArrayWithFixedLabels(
     freqMap: { [key: string]: number },
     colorMap: { [key: string]: string },
-    chartLabels: string[],
+    chartLabels: string[] | readonly string[],
 ) {
     const chartDataList = [];
     for (const label of chartLabels) {

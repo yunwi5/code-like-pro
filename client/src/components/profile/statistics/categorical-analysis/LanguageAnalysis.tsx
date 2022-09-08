@@ -5,7 +5,7 @@ import { useUserContext } from '../../../../store/context/UserContext';
 import { getDateFormat } from '../../../../utils/datetime';
 import { getLanguageIcon, prettierLanguageName } from '../../../../utils/language';
 import { getMostRecentSubmission } from '../../../../utils/user-submission';
-import ProportionChart from '../../../ui/charts/ProportionChart';
+import CategoricalChart from '../../../ui/charts/CategoricalChart';
 import ProfileLoader from '../../ProfileLoader';
 
 const LanguageAnalysis: React.FC = () => {
@@ -20,10 +20,10 @@ const LanguageAnalysis: React.FC = () => {
 
     return (
         <section>
-            <h2 className="lg:-mb-12 text-2xl basis-full">Language Analytics</h2>
+            <h2 className="mt-4 lg:-mb-12 text-2xl basis-full">Language Analytics</h2>
             <div className="flex-between">
                 <LanguageAnalyticMessages dataArray={languageDataArray} />
-                <ProportionChart
+                <CategoricalChart
                     dataArray={languageDataArray.map((data) => ({
                         ...data,
                         label: prettierLanguageName(data.label),
@@ -56,7 +56,7 @@ const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray }) => {
                 <h5 className="font-semibold">Total Languages Trained:</h5>
                 <p>{dataArray.length} Languages</p>
             </div>
-            <div className="flex-start gap-2 text-base">
+            <div className="flex-start flex-wrap gap-2 text-base">
                 <h5 className="font-semibold">Languages:</h5>
                 {dataArray.map((data) => (
                     <div className="flex flex-col items-center ml-2">

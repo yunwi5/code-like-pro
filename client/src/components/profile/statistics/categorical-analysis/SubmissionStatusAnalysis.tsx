@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { IChartData } from '../../../../models/interfaces';
 import { useAnalysisContext } from '../../../../store/context/AnalysisContext';
-import ProportionChart from '../../../ui/charts/ProportionChart';
+import CategoricalChart from '../../../ui/charts/CategoricalChart';
 import ProfileLoader from '../../ProfileLoader';
 import ProportionMessages from './ProportionMessages';
 
@@ -23,7 +23,7 @@ const SubmissionStatusAnalysis: React.FC = () => {
                     dataArray={statusDataArray}
                     total={analyzer.submissions.length}
                 />
-                <ProportionChart
+                <CategoricalChart
                     chartType="pie"
                     dataArray={statusDataArray}
                     width="280px"

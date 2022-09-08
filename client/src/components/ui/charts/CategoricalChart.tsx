@@ -41,7 +41,7 @@ interface Props {
     legendPosition?: 'top' | 'left' | 'right' | 'bottom';
 }
 
-const ProportionChart: React.FC<Props> = (props) => {
+const CategoricalChart: React.FC<Props> = (props) => {
     const {
         chartType = 'pie',
         dataArray,
@@ -96,4 +96,4 @@ const ProportionChart: React.FC<Props> = (props) => {
     );
 };
 
-export default ProportionChart;
+export default CategoricalChart;

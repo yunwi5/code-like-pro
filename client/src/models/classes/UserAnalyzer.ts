@@ -1,10 +1,11 @@
+import { AnalysisPeriod } from '../enums';
+import { IChartData, IExerciseWithId, IUserSubmissionPopulated } from '../interfaces';
 import {
     getDifficultyChartDataArray,
     getLanguageChartDataArray,
     getSubmissionStatusDataArray,
+    getTopicChartDataArray,
 } from '../../utils/analysis-utils/categorical-analysis';
-import { AnalysisPeriod } from '../enums';
-import { IChartData, IExerciseWithId, IUserSubmissionPopulated } from '../interfaces';
 
 export class UserAnalyzer {
     exercises: IExerciseWithId[]; // List of exercises user has created.
@@ -32,6 +33,7 @@ export class UserAnalyzer {
 
     getTopicProportion() {
         // return list of topic proportion of the exercises user attempted
+        return getTopicChartDataArray(this.submissions);
     }
 
     getExerciseAttemptTrend(analysisPeriod: AnalysisPeriod, numPeriods: number = 5) {
