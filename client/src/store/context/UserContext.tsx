@@ -62,7 +62,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         setIsLoading(true);
         const { ok, data } = await getLoginSuccess();
         setIsLoading(false);
-        if (ok) setUser(data as any);
+        if (ok && data) setUser(data);
     }, []);
 
     const login = useCallback(

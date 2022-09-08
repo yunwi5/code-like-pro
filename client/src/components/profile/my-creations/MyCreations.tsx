@@ -1,13 +1,7 @@
-import React, { useMemo, useState } from 'react';
 import useExerciseSearch from '../../../hooks/useExerciseSearch';
 import { SearchKey, SearchKeyList } from '../../../models/enums';
 import { useUserContext } from '../../../store/context/UserContext';
-import { ISearchingState } from '../../../store/redux/browsing-slice';
-import {
-    mapExercisesToExerciseCards,
-    mapExerciseToExerciseCard,
-} from '../../../utils/exercise-utils/exercise';
-import { searchExercises } from '../../../utils/search';
+import { mapExercisesToExerciseCards } from '../../../utils/exercise-utils/exercise';
 import ExerciseList from '../../ui/lists/ExerciseList';
 import Searchbar from '../../ui/inputs/Searchbar';
 import ProfileSectionContainer from '../containers/ProfileSectionContainer';
@@ -17,11 +11,11 @@ import ProfileLoader from '../ProfileLoader';
 const searchKeys = SearchKeyList.filter((key) => key !== SearchKey.AUTHOR);
 
 const MyCreations = () => {
-    const { userDetail, user } = useUserContext();
+    const { userDetail } = useUserContext();
     const creations = userDetail?.exercises || [];
     const creationCards = mapExercisesToExerciseCards(creations, {
         isAuthorized: true,
-        author: user || undefined,
+        author: userDetail || undefined,
     });
 
     const {
