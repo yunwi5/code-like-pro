@@ -6,15 +6,12 @@ import { getDateFormat } from '../../../../utils/datetime';
 import { getLanguageIcon, prettierLanguageName } from '../../../../utils/language';
 import { getMostRecentSubmission } from '../../../../utils/user-submission';
 import CategoricalChart from '../../../ui/charts/CategoricalChart';
-import ProfileLoader from '../../ProfileLoader';
 
 const LanguageAnalysis: React.FC = () => {
     const { analyzer } = useAnalysisContext();
 
-    if (analyzer == null) return <ProfileLoader />;
-
     const languageDataArray: IChartData[] = useMemo(
-        () => analyzer.getLanguageProportion(),
+        () => analyzer?.getLanguageProportion() || [],
         [analyzer],
     );
 
@@ -22,7 +19,9 @@ const LanguageAnalysis: React.FC = () => {
         <section>
             <h2 className="mt-4 lg:-mb-12 text-2xl basis-full">Language Analytics</h2>
             <div className="flex-between">
-                <LanguageAnalyticMessages dataArray={languageDataArray} />
+                {languageDataArray.length > 0 && (
+                    <LanguageAnalyticMessages dataArray={languageDataArray} />
+                )}
                 <CategoricalChart
                     dataArray={languageDataArray.map((data) => ({
                         ...data,
@@ -59,7 +58,7 @@ const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray }) => {
             <div className="flex-start flex-wrap gap-2 text-base">
                 <h5 className="font-semibold">Languages:</h5>
                 {dataArray.map((data) => (
-                    <div className="flex flex-col items-center ml-2">
+                    <div key={data.label} className="flex flex-col items-center ml-2">
                         <span className="text-sm">
                             {getLanguageIcon(data.label as any, {
                                 width: '33px',

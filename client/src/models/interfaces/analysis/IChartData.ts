@@ -1,6 +1,6 @@
 export interface IChartData {
     label: string;
     value: number;
-    backgroundColor: string;
+    backgroundColor?: string;
     borderColor?: string;
 }

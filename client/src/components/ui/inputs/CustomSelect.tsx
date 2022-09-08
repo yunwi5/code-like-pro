@@ -4,7 +4,7 @@ interface Props {
     id: string;
     labelText?: string | JSX.Element;
     // option values
-    options: string[] | readonly string[];
+    options: number[] | string[] | readonly string[];
     // option labels that represent human readable format of the options (optional)
     optionLabels?: string[];
     className?: string;

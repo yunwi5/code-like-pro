@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -60,7 +60,7 @@ const CategoricalChart: React.FC<Props> = (props) => {
         },
     };
 
-    let chartData = {
+    let dataset = {
         labels,
         datasets: [
             {
@@ -73,25 +73,15 @@ const CategoricalChart: React.FC<Props> = (props) => {
         ],
     };
 
-    // let barData = {
-    //     labels,
-    //     datasets: [
-    //         {
-    //             label: 'Chart Label',
-    //             data,
-    //             backgroundColor: backgroundColors?.map((bg) => `${bg}bd`),
-    //             borderColor:
-    //         },
-    //     ],
-    // };
-
     return (
         <div>
             {chartType === 'pie' && (
-                <Pie width={width} height={height} options={options} data={chartData} />
+                <Pie width={width} height={height} options={options} data={dataset} />
             )}
-            {chartType === 'doughnut' && <Doughnut options={options} data={chartData} />}
-            {chartType === 'bar' && <Bar options={barOptions} data={chartData} />}
+            {chartType === 'doughnut' && <Doughnut options={options} data={dataset} />}
+            {chartType === 'bar' && (
+                <Bar className="max-h-[22.5rem]" options={barOptions} data={dataset} />
+            )}
         </div>
     );
 };

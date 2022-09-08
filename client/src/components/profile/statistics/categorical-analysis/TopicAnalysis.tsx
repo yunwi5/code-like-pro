@@ -2,14 +2,11 @@ import React, { useMemo } from 'react';
 import { IChartData } from '../../../../models/interfaces';
 import { useAnalysisContext } from '../../../../store/context/AnalysisContext';
 import CategoricalChart from '../../../ui/charts/CategoricalChart';
-import ProfileLoader from '../../ProfileLoader';
 
 const TopicAnalysis: React.FC = () => {
     const { analyzer } = useAnalysisContext();
 
-    if (analyzer == null) return <ProfileLoader />;
-
-    const topicDataArray = useMemo(() => analyzer.getTopicProportion(), [analyzer]);
+    const topicDataArray = useMemo(() => analyzer?.getTopicProportion() || [], [analyzer]);
 
     return (
         <section>
@@ -19,7 +16,7 @@ const TopicAnalysis: React.FC = () => {
                     dataArray={topicDataArray}
                     chartType="bar"
                     width="100%"
-                    height="400px"
+                    height="200px"
                     legendPosition="bottom"
                 />
                 <TopicAnalysisMessages dataArray={topicDataArray} />
@@ -48,8 +45,9 @@ const TopicAnalysisMessages: React.FC<{ dataArray: IChartData[] }> = ({ dataArra
     const mostFrequentTopics = useMemo(() => getMostFrequentData(dataArray), []);
 
     return (
-        <div className="flex flex-wrap gap-2">
-            Programming topic{mostFrequentTopics.length > 1 && 's'} you practiced the most are{' '}
+        <div className="flex flex-wrap items-center gap-x-2">
+            Programming topic
+            {mostFrequentTopics.length > 1 && 's'} you practiced the most are{' '}
             {mostFrequentTopics.map((topicData, idx) => {
                 let suffix: JSX.Element | string = '';
                 if (idx === mostFrequentTopics.length - 2) {
@@ -59,8 +57,10 @@ const TopicAnalysisMessages: React.FC<{ dataArray: IChartData[] }> = ({ dataArra
                 }
                 return (
                     <span key={idx}>
-                        <strong className="text-gray-600">{topicData.label}</strong> (
-                        {topicData.value} times) {suffix}
+                        <strong className="text-semibold text-gray-600">
+                            {topicData.label}
+                        </strong>{' '}
+                        ({topicData.value} times) {suffix}
                     </span>
                 );
             })}

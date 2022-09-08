@@ -1,9 +1,4 @@
-import {
-    Difficulty,
-    DifficultyList,
-    ProgrammingTopicList,
-    SubmissionStatus,
-} from '../../models/enums';
+import { DifficultyList, ProgrammingTopicList, SubmissionStatus } from '../../models/enums';
 import { IChartData, IUserSubmissionPopulated } from '../../models/interfaces';
 import {
     DifficultyColorMap,

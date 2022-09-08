@@ -16,6 +16,9 @@ const ProfileStatistics = () => {
                     <GiProgression className="text-main-400" />
                     Progress Analytics
                 </h1>
+                {/* Trend analysis of user exercise creations and attempts */}
+                <TrendAnalysis />
+
                 {/* User Language Stats */}
                 <LanguageAnalysis />
                 <div className="flex justify-between flex-col lg:flex-row">
@@ -26,7 +29,6 @@ const ProfileStatistics = () => {
                 </div>
                 {/* Exercise topics comparisons */}
                 <TopicAnalysis />
-                <TrendAnalysis />
             </main>
         </AnalysisContextProvider>
     );
