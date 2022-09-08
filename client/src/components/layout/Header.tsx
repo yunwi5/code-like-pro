@@ -13,9 +13,9 @@ const Header = () => {
             <div className="logo flex items-center flex-shrink-0 text-main-400 pl-28">
                 <NavLink
                     to="/"
-                    className="flex-start gap-2 text-2xl tracking-tight hover:cursor-pointer"
+                    className="flex-start gap-2 text-xl tracking-tight hover:cursor-pointer"
                 >
-                    <Logo size={30} />
+                    <Logo size={25} />
                     CodeLikePro
                 </NavLink>
             </div>
