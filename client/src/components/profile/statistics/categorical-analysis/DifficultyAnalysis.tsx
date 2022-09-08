@@ -1,28 +1,24 @@
 import React, { useMemo } from 'react';
 import { IChartData } from '../../../../models/interfaces';
 import { useAnalysisContext } from '../../../../store/context/AnalysisContext';
-import { round } from '../../../../utils/calculation';
 import CategoricalChart from '../../../ui/charts/CategoricalChart';
-import ProfileLoader from '../../ProfileLoader';
 import ProportionMessages from './ProportionMessages';
 
 const DifficultyAnalysis: React.FC = () => {
     const { analyzer } = useAnalysisContext();
 
-    if (analyzer == null) return <ProfileLoader />;
-
     const difficultyChartDataArray: IChartData[] = useMemo(
-        () => analyzer.getDifficultyProportion(),
+        () => analyzer?.getDifficultyProportion() || [],
         [analyzer],
     );
 
     return (
         <section>
-            <h2 className="text-2xl basis-full">Difficulty Analytics</h2>
+            <h3 className="text-2xl basis-full">Difficulty Analytics</h3>
             <div className="flex-between gap-x-6">
                 <ProportionMessages
                     dataArray={difficultyChartDataArray}
-                    total={analyzer.submissions.length}
+                    total={analyzer?.submissions.length || 0}
                 />
                 <CategoricalChart
                     chartType="pie"

@@ -45,13 +45,13 @@ export const ProgrammingTopicColorMap = {
 };
 
 export const ExerciseAttemptColor = {
-    backgroundColor: SKY_300,
-    borderColor: SKY_500,
+    fillColor: `${SKY_300}77`,
+    outlineColor: SKY_500,
 };
 
 export const ExerciseCreationColor = {
-    backgroundColor: BLUE_300,
-    borderColor: BLUE_500,
+    fillColor: `${BLUE_300}77`,
+    outlineColor: BLUE_500,
 };
 
 const LightColorList = [

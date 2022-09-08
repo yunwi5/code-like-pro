@@ -1,5 +1,6 @@
 import { FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+
 import { ProfileSectionList } from '../../../models/enums';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getProfileSectionIcon, ProfileLinkMap } from '../../../utils/profile';

@@ -13,7 +13,8 @@ const ProportionMessages: React.FC<Props> = ({ dataArray, total }) => {
             {dataArray.map((data, idx) => (
                 <div key={idx} className="flex-start gap-2">
                     <h5 className="font-semibold text-gray-600">{data.label}:</h5>
-                    <p>{round((data.value / total) * 100).toFixed(1)}%</p>
+                    {/* When calculating proportion, prevent division by zero. */}
+                    <p>{round((data.value / (total || 1)) * 100).toFixed(1)}%</p>
                 </div>
             ))}
         </div>

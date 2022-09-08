@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MdAddAPhoto } from 'react-icons/md';
+
 import { AvatarImagesList } from '../../../../assets';
 import { useUserContext } from '../../../../store/context/UserContext';
 
@@ -22,7 +23,7 @@ const ProfileAvatar: React.FC<Props> = ({ picture, setPicture, isEditing }) => {
 };
 
 const ProfileAvatarEdit: React.FC<{ onSelect: (id: string) => void }> = ({ onSelect }) => {
-    const originalPicture = useUserContext()?.user?.pictureUrl;
+    const originalPicture = useUserContext()?.userDetail?.pictureUrl;
     const [showOptions, setShowOptions] = useState(false);
 
     const handleAvatarSelect = (picture: string) => {

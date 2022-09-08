@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
+
 import { SearchKey } from '../../../models/enums';
 import { useUserContext } from '../../../store/context/UserContext';
-import { filterListByString } from '../../../utils/filter-utils/string-filter';
 import { searchIncludes } from '../../../utils/search';
 import Searchbar from '../../ui/inputs/Searchbar';
 import SubmissionList from '../../ui/lists/SubmissionList';

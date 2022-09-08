@@ -1,15 +1,13 @@
 import React, { useMemo } from 'react';
 import { IChartData } from '../../../../models/interfaces';
 import { useAnalysisContext } from '../../../../store/context/AnalysisContext';
+import { getMostFrequentChartData } from '../../../../utils/analysis-utils';
 import CategoricalChart from '../../../ui/charts/CategoricalChart';
-import ProfileLoader from '../../ProfileLoader';
 
 const TopicAnalysis: React.FC = () => {
     const { analyzer } = useAnalysisContext();
 
-    if (analyzer == null) return <ProfileLoader />;
-
-    const topicDataArray = useMemo(() => analyzer.getTopicProportion(), [analyzer]);
+    const topicDataArray = useMemo(() => analyzer?.getTopicProportion() || [], [analyzer]);
 
     return (
         <section>
@@ -19,7 +17,7 @@ const TopicAnalysis: React.FC = () => {
                     dataArray={topicDataArray}
                     chartType="bar"
                     width="100%"
-                    height="400px"
+                    height="200px"
                     legendPosition="bottom"
                 />
                 <TopicAnalysisMessages dataArray={topicDataArray} />
@@ -30,26 +28,15 @@ const TopicAnalysis: React.FC = () => {
 
 const TopicAnalysisMessages: React.FC<{ dataArray: IChartData[] }> = ({ dataArray }) => {
     // Most frequent topics 1 or more.
-    function getMostFrequentData(dataArray: IChartData[]) {
-        let mostFrequentOnes: IChartData[] = [];
-        dataArray.forEach((topicData) => {
-            if (mostFrequentOnes.length === 0) mostFrequentOnes.push(topicData);
-            else {
-                if (mostFrequentOnes[0].value < topicData.value) {
-                    mostFrequentOnes = [topicData];
-                } else if (mostFrequentOnes[0].value === topicData.value) {
-                    mostFrequentOnes.push(topicData);
-                }
-            }
-        });
-        return mostFrequentOnes;
-    }
+    const mostFrequentTopics = useMemo(() => getMostFrequentChartData(dataArray), [dataArray]);
 
-    const mostFrequentTopics = useMemo(() => getMostFrequentData(dataArray), []);
+    // If the user has not made attempts to any of the topics, return null.
+    if (mostFrequentTopics.length === 0 || mostFrequentTopics[0].value === 0) return null;
 
     return (
-        <div className="flex flex-wrap gap-2">
-            Programming topic{mostFrequentTopics.length > 1 && 's'} you practiced the most are{' '}
+        <div className="flex flex-wrap items-center gap-x-2">
+            Programming topic
+            {mostFrequentTopics.length > 1 && 's'} you practiced the most are{' '}
             {mostFrequentTopics.map((topicData, idx) => {
                 let suffix: JSX.Element | string = '';
                 if (idx === mostFrequentTopics.length - 2) {
@@ -59,8 +46,10 @@ const TopicAnalysisMessages: React.FC<{ dataArray: IChartData[] }> = ({ dataArra
                 }
                 return (
                     <span key={idx}>
-                        <strong className="text-gray-600">{topicData.label}</strong> (
-                        {topicData.value} times) {suffix}
+                        <strong className="text-semibold text-gray-600">
+                            {topicData.label}
+                        </strong>{' '}
+                        ({topicData.value} times) {suffix}
                     </span>
                 );
             })}

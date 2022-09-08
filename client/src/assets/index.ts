@@ -1,3 +1,4 @@
+export { default as Logo } from './Logo';
 import Avatar1 from './avatars/avatar1.png';
 import Avatar2 from './avatars/avatar2.png';
 import Avatar3 from './avatars/avatar3.png';

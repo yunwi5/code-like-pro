@@ -9,4 +9,4 @@ export { SearchKey, SearchKeyList } from './SearchKey';
 export { CreationSection, CreationSectionList } from './page-sections/CreationSection';
 export { ProfileSection, ProfileSectionList } from './page-sections/ProfileSection';
 
-export { AnalysisPeriod, AnalysisPeriodList } from './data-analysis/AnalysisPeriod';
+export { TrendPeriodMode, TrendPeriodModeList } from './data-analysis/TrendPeriodMode';
