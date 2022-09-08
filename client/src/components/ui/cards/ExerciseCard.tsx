@@ -6,7 +6,7 @@ import { BsFillTagsFill } from 'react-icons/bs';
 
 import { IExerciseCard } from '../../../models/interfaces';
 import { getDifficultyColorClass } from '../../../utils/difficulty';
-import { getLanguageIcon, mapJobeLangCodeToAppLanguage } from '../../../utils/language';
+import { getLanguageIcon, prettierLanguageName } from '../../../utils/language';
 import { Link, useNavigate } from 'react-router-dom';
 import { getExerciseAttemptPageLink, getExerciseEditLink } from '../../../utils/links';
 import { deleteExercise } from '../../../apis/exercise';
@@ -54,7 +54,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                         </HoveringLabel>
                     )}
                     <HoveringLabel
-                        label={mapJobeLangCodeToAppLanguage(exercise.language)}
+                        label={prettierLanguageName(exercise.language)}
                         className="ml-auto"
                     >
                         {getLanguageIcon(exercise.language, { width: '30px', height: '30px' })}

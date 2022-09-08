@@ -16,6 +16,7 @@ const runTestCases = async (req, res) => {
     const testCasePromises = testCases.map((testCase) => {
         const test = code + '\n\n' + testCase.code;
 
+        console.log('language id:', language);
         const body = {
             run_spec: {
                 language_id: language,

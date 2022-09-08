@@ -11,6 +11,8 @@ interface Props {
     exercisePerPage?: number;
 }
 
+// .js or .jsx
+
 const ExerciseList: React.FC<Props> = ({ exercises, exercisePerPage = EXERCISE_PER_PAGE }) => {
     const {
         array: currentPageExercises,

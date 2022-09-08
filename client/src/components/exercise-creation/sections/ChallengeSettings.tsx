@@ -8,7 +8,7 @@ import {
 } from '../../../models/enums';
 import { ProgrammingTopicList } from '../../../models/enums/ProgrammingTopic';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
-import { languageCodesToReadableNames } from '../../../utils/language';
+import { prettierLanguageNames } from '../../../utils/language';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 import ChallengeTags from './ChallengeTags';
@@ -33,7 +33,7 @@ const ChallengeSettings: React.FC = () => {
                     id="language"
                     labelText="Language:"
                     options={LanguageList}
-                    optionLabels={languageCodesToReadableNames(LanguageList)}
+                    optionLabels={prettierLanguageNames(LanguageList)}
                 />
                 <CustomSelect
                     onChange={(top: string) => setTopic(top as any)}

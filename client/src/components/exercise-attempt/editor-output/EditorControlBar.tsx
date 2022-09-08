@@ -5,7 +5,7 @@ import { GoAlert } from 'react-icons/go';
 import { likeExerciseRequest } from '../../../apis/exercise';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../store/context/UserContext';
-import { mapJobeLangCodeToAppLanguage } from '../../../utils/language';
+import { prettierLanguageName } from '../../../utils/language';
 import HoveringLabel from '../../ui/labels/HoveringLabel';
 import IssueReportModal from '../modals/IssueReportModal';
 import ExerciseSettings from './ExerciseSettings';
@@ -49,7 +49,7 @@ const EditorControlBar: React.FC = () => {
                         className="text-gray-600 border-2 border-gray-500/90 bg-gray-50 focus:outline focus:outline-2 focus:outline-main-500 focus:text-main-500 focus:border-transparent shadow-md rounded-sm px-2 py-1"
                     >
                         <option value={exercise?.language}>
-                            {mapJobeLangCodeToAppLanguage(exercise?.language || '')}
+                            {prettierLanguageName(exercise?.language || '')}
                         </option>
                     </select>
                 </div>

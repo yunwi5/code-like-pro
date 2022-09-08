@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { LanguageList, SubmissionStatusList } from '../../../../models/enums';
 import { browsingActions } from '../../../../store/redux/browsing-slice';
 import { useAppSelector } from '../../../../store/redux/store';
-import { languageCodesToReadableNames } from '../../../../utils/language';
+import { prettierLanguageNames } from '../../../../utils/language';
 import CustomSelect from '../../../ui/inputs/CustomSelect';
 
 const languageOptions = ['All', ...LanguageList];
@@ -28,7 +28,7 @@ const LanguageAndStatusFilter = () => {
                 value={language}
                 onChange={handleLanguage}
                 options={languageOptions}
-                optionLabels={languageCodesToReadableNames(languageOptions)}
+                optionLabels={prettierLanguageNames(languageOptions)}
             />
             <CustomSelect
                 className="gap-1"
