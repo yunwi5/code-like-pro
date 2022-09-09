@@ -45,7 +45,6 @@ interface Props {
     fillColor: string; // chart fill color
     outlineColor: string; // chart outline color
     chartLabel: string;
-    // width?: string;
 }
 
 const TrendChart: React.FC<Props> = (props) => {

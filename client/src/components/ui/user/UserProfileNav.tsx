@@ -14,9 +14,12 @@ const UserProfileNav: React.FC = () => {
                 onClick={() => setShowDropdown((ps) => !ps)}
                 className="relative flex-center gap-2 -my-1 py-1 px-2 hover:bg-gray-200/90 focus-within:bg-gray-100 rounded-md cursor-pointer"
             >
+                {/* User profile picture shown on the header. */}
                 <ProfilePicture />
+                {/* Dropdown toggler button. */}
                 <IoMdArrowDropdown className="text-gray-600 hover:text-main-500 text-xl" />
 
+                {/* Dropdown menu that displays user profile information and profile links. */}
                 {showDropdown && <ProfileDropdownMenu />}
             </div>
         </ClickAwayListener>

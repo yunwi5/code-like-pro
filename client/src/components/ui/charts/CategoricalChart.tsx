@@ -40,6 +40,7 @@ interface Props {
     width?: string;
     height?: string;
     legendPosition?: 'top' | 'left' | 'right' | 'bottom';
+    chartLabel?: string;
 }
 
 const CategoricalChart: React.FC<Props> = (props) => {
@@ -48,6 +49,7 @@ const CategoricalChart: React.FC<Props> = (props) => {
         dataArray,
         width = '400px',
         height = '400px',
+        chartLabel = 'Analysis',
         legendPosition,
     } = props;
     const { labels, data, backgroundColors, borderColors } = generateChartDataset(dataArray);
@@ -65,7 +67,7 @@ const CategoricalChart: React.FC<Props> = (props) => {
         labels,
         datasets: [
             {
-                label: 'Chart Label',
+                label: chartLabel,
                 data,
                 backgroundColor: backgroundColors,
                 borderColor: borderColors,
