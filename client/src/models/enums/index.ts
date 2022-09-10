@@ -2,7 +2,7 @@ export { Language, LanguageList } from './Language';
 export { Difficulty, DifficultyList } from './Difficulty';
 export { ProgrammingTopic, ProgrammingTopicList } from './ProgrammingTopic';
 export { SubmissionStatus, SubmissionStatusList } from './SubmissionStatus';
-export { SortingKey, SortingKeyList } from './SortingKey';
+export { ExerciseSortingKey, ExerciseSortingKeyList } from './SortingKey';
 export { SortingDirection, SortingDirectionList } from './SortingDirection';
 export { SearchKey, SearchKeyList } from './SearchKey';
 
