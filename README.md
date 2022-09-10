@@ -64,17 +64,18 @@ Server runs on [http://localhost:8080](http://localhost:8080) on your computer b
 
 ## Our Team Of Best Fit
 
-| Member                                               | Roles                                       |
-| ---------------------------------------------------- | --------------------------------------------|
-| [JD Briones](https://github.com/jeed02)              | Team Leader, Frontend Developer, Designer   |
-| [Yunkeun Jo](https://github.com/yunwi5)              | Scrum Master, Frontend Developer, Designer  |
-| [Amo Li](https://github.com/Amotys)                  | Frontend Developer                          |
-| [Daniel McAnulty](https://github.com/DanielMcAnulty) | Backend Developer                           |
-| [Irene Chen](https://github.com/irenechen20015)      | Backend Developer                           |
+| Member                                               | Roles                                            |
+| ---------------------------------------------------- | -------------------------------------------------|
+| [JD Briones](https://github.com/jeed02)              | Team Leader, Frontend Developer, Designer        |
+| [Yunkeun Jo](https://github.com/yunwi5)              | Frontend Developer, Backend Developer, Designer  |
+| [Amo Li](https://github.com/Amotys)                  | Frontend Developer                               |
+| [Daniel McAnulty](https://github.com/DanielMcAnulty) | Backend Developer                                |
+| [Irene Chen](https://github.com/irenechen20015)      | Backend Developer                                |
 
 <br />
 
 ## Acknowledgements
 
-Thanks everyone for having interests on our CodeLikePro capstone project!
+Acknowledgement to our client Paul Denny who gave us an amazing project opportunity.
+Acknowledgement to everyone for having interests on our CodeLikePro capstone project.
 
