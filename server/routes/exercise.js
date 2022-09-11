@@ -25,4 +25,11 @@ router.get(
     catchAsync(exerciseController.toggleLikeExercise),
 );
 
+router
+    .route('/:id/comment')
+    // Route for getting all the comments of the exercise of the param id.
+    .get(ensureAuthenticated, catchAsync(exerciseController.getExerciseComments))
+    // Route for adding a comment to the exercise of the param id.
+    .post(ensureAuthenticated, catchAsync(exerciseController.postExerciseComment));
+
 module.exports = router;
