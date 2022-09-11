@@ -193,31 +193,44 @@ const toggleLikeExercise = async (req, res) => {
 const postExerciseComment = async (req, res) => {
     const exerciseId = req.params.id;
     const { text } = req.body;
-    // Construct the comment object with required attributes.
-    const newComment = new Comment({ text, user: req.user });
 
-    // Find the exercise and push the new comment to its 'comments' list.
-    // await Exercise.findByIdAndUpdate(exerciseId, { $push: newComment });
-    const exercise = await Exercise.findById(exerciseId);
-    exercise.comments.push(newComment);
-    const commentPromise = newComment.save();
-    const exercisePromise = exercise.save();
-    await Promise.all([commentPromise, exercisePromise]);
+    try {
+        // Construct the comment object with required attributes.
+        const newComment = new Comment({ text, user: req.user });
 
-    res.status(201).json(newComment);
+        // Find the exercise and push the new comment to its 'comments' list.
+        // await Exercise.findByIdAndUpdate(exerciseId, { $push: newComment });
+        const exercise = await Exercise.findById(exerciseId);
+        if (exercise == null) return res.status(404).json('Exercise not found');
+
+        exercise.comments.push(newComment);
+        const commentPromise = newComment.save();
+        const exercisePromise = exercise.save();
+        await Promise.all([commentPromise, exercisePromise]);
+        res.status(201).json(newComment);
+    } catch (err) {
+        console.log(err.message);
+        res.status(400).json(err.message);
+    }
 };
+
 /* Get all user comments of the exercise of req.params.id,
 returns the list of comments as a JSON list. */
 const getExerciseComments = async (req, res) => {
     const exerciseId = req.params.id;
 
-    const exercise = await Exercise.findById(exerciseId).populate({
-        path: 'comments',
-        populate: { path: 'user', select: ['email', 'name', 'pictureUrl'] },
-    });
-    const comments = exercise.comments;
+    try {
+        const exercise = await Exercise.findById(exerciseId).populate({
+            path: 'comments',
+            populate: { path: 'user', select: ['email', 'name', 'pictureUrl'] },
+        });
+        const comments = exercise.comments;
 
-    res.status(200).json(comments);
+        res.status(200).json(comments);
+    } catch (err) {
+        console.log(err.message);
+        res.status(404).json('Exercise was not found.');
+    }
 };
 
 const controller = {

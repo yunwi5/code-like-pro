@@ -76,7 +76,13 @@ const deleteComment = async (req, res) => {
         if (comment.user.toString() !== req.user._id.toString()) {
             return res.status(401).json('You are not the author of the comment');
         }
-        await comment.remove();
+
+        // Delete the comment itself.
+        const p1 = comment.remove();
+        // Delete all the replying comments of this comment, if exist.
+        const p2 = Comment.deleteMany({ replyTo: comment._id });
+        await Promise.all([p1, p2]);
+
         res.status(200).json(comment);
     } catch (err) {
         console.log(err.message);
