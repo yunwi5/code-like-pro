@@ -30,6 +30,7 @@ const Header = () => {
                 </div>
                 <NavLink
                     to="/"
+                    onClick={() => setShowMobileDropdownMenu(false)}
                     className="flex-start gap-2 text-xl tracking-tight hover:cursor-pointer"
                 >
                     <Logo size={25} />
@@ -40,8 +41,11 @@ const Header = () => {
                 <NavList />
             </div>
 
-            {/* Show the mobile dropdown menu if the showMobileDropdownMenu state is true. */}
-            {showMobileDropdownMenu && <MobileDropdownMenu />}
+            {/* Mobile dropdown menu to be displayed if the showMobileDropdownMenu state is true. */}
+            <MobileDropdownMenu
+                visible={showMobileDropdownMenu}
+                onHide={() => setShowMobileDropdownMenu(false)}
+            />
 
             {/* User profile info and navigation on the right side of the header. */}
             {isLoggedIn && <UserProfileNav />}
@@ -51,41 +55,51 @@ const Header = () => {
 
 /*  Dropdown menu that is shown when the user clicks the hamburger menu on the header.
 This will be hidden for the large screen size by default. */
-const MobileDropdownMenu = () => {
+const MobileDropdownMenu: React.FC<{ visible: boolean; onHide: () => void }> = ({
+    visible, // boolean value to indicate whether to display the dropdown menu or not.
+    onHide, // callback function to hide the mobile dropdown when the user clicks the link inside the nav,
+}) => {
+    const isLoggedIn = !!useUserContext().user;
     const { logout } = useUserContext();
 
     return (
-        <div className="absolute lg:hidden z-[500] w-full min-h-[85vh] top-[101%] left-0 bg-gray-100">
+        <nav
+            className={`mobile-nav absolute lg:hidden z-[500] w-full min-h-[85vh] top-[101%] left-0 bg-gray-100 ${
+                visible ? 'visible' : ''
+            }`}
+        >
             {/* Dropdown menu for nav list */}
-            <div className="px-5 py-5">
+            <div className="px-5 py-5" onClick={onHide}>
                 <h2 className="text-gray-700 font-bold text-lg">Menu</h2>
                 <NavList className="pl-2" />
             </div>
 
             {/* Dropdown menu for profile sections */}
-            <div className="px-5 pb-5">
-                <h2 className="text-gray-700 font-bold text-lg">Profile</h2>
+            {isLoggedIn && (
+                <div className="px-5 pb-5" onClick={onHide}>
+                    <h2 className="text-gray-700 font-bold text-lg">Profile</h2>
 
-                <ProfileMenuHeader className="px-0 !pl-[0.375rem]" />
-                {/* List of links to particular profile section */}
-                {ProfileSectionList.map((section) => (
-                    <Link
-                        key={section}
+                    <ProfileMenuHeader className="px-0 !pl-[0.375rem]" />
+                    {/* List of links to particular profile section */}
+                    {ProfileSectionList.map((section) => (
+                        <Link
+                            key={section}
+                            className="flex-start gap-3 pl-2 py-2 whitespace-nowrap hover:text-main-600"
+                            to={`/profile/${ProfileLinkMap[section]}`}
+                        >
+                            {section}
+                        </Link>
+                    ))}
+                    {/* Logout button */}
+                    <div
+                        onClick={logout}
                         className="flex-start gap-3 pl-2 py-2 whitespace-nowrap hover:text-main-600"
-                        to={`/profile/${ProfileLinkMap[section]}`}
                     >
-                        {section}
-                    </Link>
-                ))}
-                {/* Logout button */}
-                <div
-                    onClick={logout}
-                    className="flex-start gap-3 pl-2 py-2 whitespace-nowrap hover:text-main-600"
-                >
-                    Logout
+                        Logout
+                    </div>
                 </div>
-            </div>
-        </div>
+            )}
+        </nav>
     );
 };
 
@@ -121,12 +135,12 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
                     Create
                 </ActiveNavLink>
             </div>
-            <div>
+            <div className="flex flex-col lg:flex-row gap-4 max-w-[7rem] lg:max-w-none mt-4 lg:mt-0">
                 {!isLoggedIn && (
                     <>
                         <NavLink
                             to="/login"
-                            className="bg-transparent hover:bg-main-600 text-main-600 font-regular hover:text-white py-[0.35rem] px-4 mr-3 border border-main-500 hover:border-transparent rounded shadow-sm"
+                            className="bg-transparent hover:bg-main-600 text-main-600 font-regular hover:text-white py-[0.35rem] px-4 border border-main-500 hover:border-transparent rounded shadow-sm"
                         >
                             Login
                         </NavLink>
