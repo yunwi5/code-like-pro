@@ -4,6 +4,16 @@
     color: rgba($color-main-600, 0.9);
 }
 
+// Styling for mobile dropdown navbar
+.mobile-nav {
+    transform: translateX(-100%);
+    transition: all 0.35s ease-out;
+}
+
+.mobile-nav.visible {
+    transform: translateX(0%);
+}
+
 // Styling for hamburger menu toggling the dropdown
 .hamburger-menu {
     $height: 2.5px;

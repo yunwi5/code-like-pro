@@ -91,11 +91,21 @@ const CategoricalChart: React.FC<Props> = (props) => {
             {!datasetIsEmpty && (
                 <>
                     {chartType === 'pie' && (
-                        <Pie width={width} height={height} options={options} data={dataset} />
+                        <Pie
+                            className="max-w-[100%]"
+                            width={width}
+                            height={height}
+                            options={options}
+                            data={dataset}
+                        />
                     )}
                     {chartType === 'doughnut' && <Doughnut options={options} data={dataset} />}
                     {chartType === 'bar' && (
-                        <Bar className="max-h-[22.5rem]" options={barOptions} data={dataset} />
+                        <Bar
+                            className="max-h-[22.5rem] max-w-[100%]"
+                            options={barOptions}
+                            data={dataset}
+                        />
                     )}
                 </>
             )}

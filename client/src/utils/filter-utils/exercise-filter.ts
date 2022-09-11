@@ -1,16 +1,14 @@
-import { Language } from '../../models/enums';
-import { IExerciseCard } from '../../models/interfaces';
+import { SubmissionStatus } from '../../models/enums';
+import { IExerciseCard, IUserSubmissionPopulated } from '../../models/interfaces';
 import { IFilterState } from '../../store/redux/browsing-slice';
 
+// Filter exercises by selected language, difficulty and tags.
 export function filterExercises<T>(exercises: IExerciseCard[], filterState: IFilterState) {
     const filtered = exercises.filter((ex) => {
         // Language filter
         if (filterState.language !== 'All' && ex.language !== filterState.language) {
             return false;
         }
-
-        // difficulty filter, submissionStatus not yet implemented.
-        // if ((filterState.submissionStatus !== 'All') && ex.submissionStatus !== filterState.submissionStatus)
 
         // Difficulties filter
         if (filterState.difficulties.length > 0) {
@@ -31,4 +29,27 @@ export function filterExercises<T>(exercises: IExerciseCard[], filterState: IFil
         return true;
     });
     return filtered as T[];
+}
+
+// Filter exercises by user submission status (result).
+type SubmissionMap = { [key: string]: IUserSubmissionPopulated };
+export function filterExercisesBySubmissionStatus(
+    exercises: IExerciseCard[],
+    submissionMap: SubmissionMap,
+    submissionStatus: SubmissionStatus | 'All',
+) {
+    return exercises.filter((ex) => {
+        if (submissionStatus === 'All') return true;
+        if (submissionMap[ex._id] == null) {
+            // Means this exercise was not attempted by the user.
+            return submissionStatus === SubmissionStatus.UNATTEMPTED;
+        } else {
+            // Means this exercise was previosuly attempted by the user.
+            if (submissionMap[ex._id].correct)
+                // If the submission status is correct
+                return submissionStatus === SubmissionStatus.CORRECT;
+            // If the submissio status is incorrect
+            return submissionStatus === SubmissionStatus.INCORRECT;
+        }
+    });
 }

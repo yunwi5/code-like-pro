@@ -76,6 +76,9 @@ Server runs on [http://localhost:8080](http://localhost:8080) on your computer b
 
 ## Acknowledgements
 
-Acknowledgement to our client Paul Denny who gave us an amazing project opportunity.
+Special acknowledgement to our client Paul Denny who gave us an amazing project opportunity.
+<br />
+Acknowledgement to COMPSCI 399 lecturers and tutors who gave us an amazing opportunity throughout the course.
+<br />
 Acknowledgement to everyone for having interests on our CodeLikePro capstone project.
 

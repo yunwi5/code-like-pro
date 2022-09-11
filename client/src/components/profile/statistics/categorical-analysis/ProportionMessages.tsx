@@ -9,7 +9,7 @@ interface Props {
 
 const ProportionMessages: React.FC<Props> = ({ dataArray, total }) => {
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 order-2 sm:order-none mt-4 sm:mt-0">
             {dataArray.map((data, idx) => (
                 <div key={idx} className="flex-start gap-2">
                     <h5 className="font-semibold text-gray-600">{data.label}:</h5>

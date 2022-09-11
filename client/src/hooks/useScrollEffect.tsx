@@ -29,7 +29,7 @@ const useScrollEffect = ({ elementRef, callbackOnView }: Props) => {
         const timer = setTimeout(() => {
             window.addEventListener('scroll', scrollEffect);
             clearTimeout(timer);
-        }, 1000);
+        }, 500);
         return () => window.removeEventListener('scroll', scrollEffect);
     }, []);
 
