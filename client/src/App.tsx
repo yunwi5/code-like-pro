@@ -14,12 +14,12 @@ import { useUserContext } from './store/context/UserContext';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/auth/RegisterPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const ExerciseCreationPage = lazy(() => import('./pages/exercise-pages/ExerciseCreationPage'));
 const ExerciseEditPage = lazy(() => import('./pages/exercise-pages/ExerciseEditPage'));
 const ExerciseAttemptPage = lazy(() => import('./pages/exercise-pages/ExerciseAttemptPage'));
-const ShowcasePage = lazy(() => import('./pages/exercise-pages/ShowcasePage'));
 const BrowsingPage = lazy(() => import('./pages/exercise-pages/BrowsingPage'));
-const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const ShowcasePage = lazy(() => import('./pages/exercise-pages/ShowcasePage'));
 
 const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =
     ProfilePages;

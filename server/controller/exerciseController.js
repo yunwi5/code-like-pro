@@ -1,5 +1,6 @@
 const Exercise = require('../models/Exercise');
 const ExerciseReport = require('../models/ExerciseReport');
+const Comment = require('../models/Comment');
 
 const makeRequest = require('../utils/makeRequest');
 
@@ -187,6 +188,51 @@ const toggleLikeExercise = async (req, res) => {
     res.json(exercise);
 };
 
+/* Exercise comment APIs */
+/* User should be authenticated before posting a comment */
+const postExerciseComment = async (req, res) => {
+    const exerciseId = req.params.id;
+    const { text } = req.body;
+
+    try {
+        // Construct the comment object with required attributes.
+        const newComment = new Comment({ text, user: req.user });
+
+        // Find the exercise and push the new comment to its 'comments' list.
+        // await Exercise.findByIdAndUpdate(exerciseId, { $push: newComment });
+        const exercise = await Exercise.findById(exerciseId);
+        if (exercise == null) return res.status(404).json('Exercise not found');
+
+        exercise.comments.push(newComment);
+        const commentPromise = newComment.save();
+        const exercisePromise = exercise.save();
+        await Promise.all([commentPromise, exercisePromise]);
+        res.status(201).json(newComment);
+    } catch (err) {
+        console.log(err.message);
+        res.status(400).json(err.message);
+    }
+};
+
+/* Get all user comments of the exercise of req.params.id,
+returns the list of comments as a JSON list. */
+const getExerciseComments = async (req, res) => {
+    const exerciseId = req.params.id;
+
+    try {
+        const exercise = await Exercise.findById(exerciseId).populate({
+            path: 'comments',
+            populate: { path: 'user', select: ['email', 'name', 'pictureUrl'] },
+        });
+        const comments = exercise.comments;
+
+        res.status(200).json(comments);
+    } catch (err) {
+        console.log(err.message);
+        res.status(404).json('Exercise was not found.');
+    }
+};
+
 const controller = {
     postExercise,
     getExercises,
@@ -195,6 +241,8 @@ const controller = {
     deleteExercise,
     reportExercise,
     toggleLikeExercise,
+    postExerciseComment,
+    getExerciseComments,
 };
 
 module.exports = controller;

@@ -4,22 +4,17 @@ import { Link } from 'react-router-dom';
 import { ProfileSectionList } from '../../../models/enums';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getProfileSectionIcon, ProfileLinkMap } from '../../../utils/profile';
-import ProfilePicture from './ProfilePicture';
+import ProfileMenuHeader from './ProfileMenuHeader';
 
+// Profile dropdown menu that displays user profile info and profile links.
+// This component is used in UserProfileNav.tsx to display its dropdown menu.
 const ProfileDropdownMenu: React.FC = () => {
-    const { userDetail, logout } = useUserContext();
+    const { logout } = useUserContext();
 
     return (
         <nav className="z-[1000] absolute top-[102%] right-0 bg-gray-50 text-gray-700 transition-all shadow-md hover:shadow-lg rounded-sm">
             {/* Profile information */}
-            <div className="flex items-center gap-3 px-4 py-3">
-                <ProfilePicture size={'2.5rem'} />
-                <div>
-                    <h3 className="text-lg leading-6 mb-1">{userDetail?.name}</h3>
-                    <p className="-mt-1 text-gray-400 text-sm">{userDetail?.email}</p>
-                </div>
-            </div>
-
+            <ProfileMenuHeader />
             <div>
                 {/* List of links to particular profile section */}
                 {ProfileSectionList.map((section) => (
@@ -31,7 +26,6 @@ const ProfileDropdownMenu: React.FC = () => {
                         {getProfileSectionIcon(section)} {section}
                     </Link>
                 ))}
-
                 {/* Logout button */}
                 <div
                     onClick={logout}

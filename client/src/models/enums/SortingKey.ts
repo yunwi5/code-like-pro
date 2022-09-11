@@ -1,4 +1,4 @@
-export enum SortingKey {
+export enum ExerciseSortingKey {
     NONE = 'None',
     NAME = 'Name',
     CORRECT_RATE = 'Correct Rate',
@@ -7,4 +7,4 @@ export enum SortingKey {
     ISSUE_REPORTS = 'Issue Reports',
 }
 
-export const SortingKeyList = Object.freeze(Object.values(SortingKey));
+export const ExerciseSortingKeyList = Object.freeze(Object.values(ExerciseSortingKey));

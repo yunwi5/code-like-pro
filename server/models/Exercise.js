@@ -60,6 +60,7 @@ const ExerciseSchema = new Schema({
     },
     tags: [{ type: String }],
     reports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ExerciseReport' }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
 const Exercise = mongoose.model('Exercise', ExerciseSchema);

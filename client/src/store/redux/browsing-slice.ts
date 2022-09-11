@@ -4,7 +4,7 @@ import {
     Language,
     SearchKey,
     SortingDirection,
-    SortingKey,
+    ExerciseSortingKey,
     SubmissionStatus,
 } from '../../models/enums';
 
@@ -14,7 +14,7 @@ export interface ISearchingState {
 }
 
 export interface ISortingState {
-    key: SortingKey;
+    key: ExerciseSortingKey;
     direction: SortingDirection;
 }
 
@@ -33,7 +33,7 @@ export interface IBrowsingOperationState {
 
 const initialState: IBrowsingOperationState = {
     searching: { key: SearchKey.TITLE, text: '' },
-    sorting: { key: SortingKey.NONE, direction: SortingDirection.ASCENDING },
+    sorting: { key: ExerciseSortingKey.NONE, direction: SortingDirection.ASCENDING },
     filtering: { language: 'All', submissionStatus: 'All', difficulties: [], tags: [] },
 };
 

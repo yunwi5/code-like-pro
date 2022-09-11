@@ -6,6 +6,9 @@ interface Props {
     size?: string;
 }
 
+// Displays profile picture of the user.
+// If the user has a picture link to display, show the picture in the circle.
+// If the user has no picture, show some placeholder user icon in the circle.
 const ProfilePicture: React.FC<Props> = ({ size = '2.25rem' }) => {
     const { userDetail } = useUserContext();
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import { AppProperty } from '../constants/app';
+import { Logo } from '../assets';
 
 const Home: React.FC = () => {
     return (
@@ -15,6 +16,7 @@ const Home: React.FC = () => {
                 />
             </Helmet>
             <section className="h-[80vh] w-full flex-center flex-col">
+                <Logo size={250} />
                 <div>Home</div>
                 <Link className="text-blue-500" to="/exercise/630c2cd2127fc69377732710">
                     Example exercise attempt page

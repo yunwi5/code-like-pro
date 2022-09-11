@@ -1,5 +1,5 @@
 import React from 'react';
-import { SortingDirectionList, SortingKeyList } from '../../../../models/enums';
+import { SortingDirectionList, ExerciseSortingKeyList } from '../../../../models/enums';
 import { browsingActions } from '../../../../store/redux/browsing-slice';
 import { useAppDispatch, useAppSelector } from '../../../../store/redux/store';
 import CustomSelect from '../../../ui/inputs/CustomSelect';
@@ -19,7 +19,7 @@ const ExerciseSorter = () => {
             <CustomSelect
                 className="flex-1 gap-1"
                 labelText={<span className="font-semibold">Sort By</span>}
-                options={SortingKeyList}
+                options={ExerciseSortingKeyList}
                 onChange={handleKeyChange}
                 value={key}
                 id="sorting-key"
