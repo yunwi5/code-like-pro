@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { SubmissionStatus } from '../models/enums';
 import { IExerciseCard } from '../models/interfaces';
 import { useUserContext } from '../store/context/UserContext';
 import { useAppSelector } from '../store/redux/store';

@@ -12,7 +12,7 @@ interface Props {
 
 const ProfileAvatar: React.FC<Props> = ({ picture, setPicture, isEditing }) => {
     return (
-        <div className="absolute top-5 right-[4rem] flex-center flex-col gap-2">
+        <div className="self-start md:absolute top-5 right-[4rem] mt-10 flex items-center flex-col gap-2">
             {isEditing && <ProfileAvatarEdit onSelect={(pic: string) => setPicture(pic)} />}
             <div className="flex-center bg-gray-200 rounded-full overflow-hidden border-2 border-main-200 w-[12rem] h-[12rem]">
                 <img src={picture || ''} className="object-cover w-[10rem] h-[10rem]" />

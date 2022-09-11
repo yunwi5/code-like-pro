@@ -11,7 +11,7 @@ const TopicAnalysis: React.FC = () => {
 
     return (
         <section>
-            <h2 className="mt-8 text-2xl basis-full">Programming Topics</h2>
+            <h2 className="mt-8 mb-4 sm:mb-1 text-2xl">Programming Topics</h2>
             <div className="flex flex-col gap-5">
                 <CategoricalChart
                     dataArray={topicDataArray}

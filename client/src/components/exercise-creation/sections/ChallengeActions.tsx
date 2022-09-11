@@ -14,8 +14,8 @@ const ChallengeActions: React.FC = () => {
         useExerciseCreationContext();
 
     // Determine whether to show the 'published exercise result' option or not.
-    // Users should create their exercise first and ready status should be 'success' to see the 'Published Result'.
-    const showPublishedResult = !!createdExercise && readyStatus?.status === 'success';
+    // Users should create their exercise first and ready status should not be 'error' to see the 'Published Result'.
+    const showPublishedResult = !!createdExercise && readyStatus?.status !== 'error';
 
     return (
         <div className="flex flex-col sm:flex-row lg:flex-col flex-wrap justify-between gap-2">

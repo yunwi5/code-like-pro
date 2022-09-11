@@ -36,7 +36,7 @@ const ProfileMain = () => {
 
     return (
         <form className="relative flex-1" onSubmit={handleProfileEdit}>
-            <div className="pl-7 pr-4 py-3">
+            <div className="flex flex-col pl-7 pr-4 py-3">
                 <ProfileHeader />
                 <ProfileAvatar
                     isEditing={isEditing}
@@ -45,7 +45,7 @@ const ProfileMain = () => {
                 />
 
                 {/* Profile information */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-[1.75rem] mt-3">
+                <div className="grid grid-cols-1 xs:grid-cols-2 gap-x-5 gap-y-[1.75rem] mt-3">
                     {isEditing ? (
                         <ProfileInput
                             label="Username"
@@ -56,7 +56,7 @@ const ProfileMain = () => {
                         <ProfileInfoItem
                             label="Username"
                             value={profileName}
-                            className="col-span-2"
+                            className="md:col-span-2"
                         />
                     )}
 
@@ -66,13 +66,13 @@ const ProfileMain = () => {
                             type="textarea"
                             value={description}
                             onChange={(newValue) => setDescription(newValue)}
-                            className="col-span-2"
+                            className="md:col-span-2"
                         />
                     ) : (
                         <ProfileInfoItem
                             label="About Me"
                             value={description}
-                            className="col-span-2"
+                            className="md:col-span-2"
                         />
                     )}
 
@@ -90,7 +90,7 @@ const ProfileMain = () => {
                 </div>
             </div>
 
-            <div className="flex justify-end px-3 py-3 pr-[5rem] border-t-[3px] border-gray-300">
+            <div className="flex md:justify-end px-3 py-3 md:pr-[5rem] border-t-[3px] border-gray-300">
                 <Button className="rounded-sm" onClick={() => setIsEditing((ps) => !ps)}>
                     {isEditing ? 'Save Profile' : 'Edit Profile'}
                 </Button>

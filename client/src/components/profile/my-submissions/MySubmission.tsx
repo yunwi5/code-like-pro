@@ -22,7 +22,7 @@ const MySubmission: React.FC = () => {
 
     return (
         <ProfileSectionContainer>
-            <nav className="flex-between !items-end mb-6">
+            <nav className="flex flex-col sm:flex-row justify-between sm:items-end gap-y-4 mb-6">
                 <Searchbar
                     onKeyChange={() => {}}
                     onTextChange={(text) => setSearchText(text)}

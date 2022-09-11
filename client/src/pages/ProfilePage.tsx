@@ -27,9 +27,12 @@ const ProfilePage: React.FC = () => {
                 />
             </Helmet>
             <main className="min-h-[82.5vh] pt-10 pb-20 flex-center flex-col text-gray-700">
-                <div className="mx-auto w-[100vw] md:w-[90vw] lg:w-[80vw] xl:w-[77vw]">
-                    <h1 className="mb-3 text-gray-600 text-3xl self-start">{activeSection}</h1>
-                    <div className="flex md:bg-gray-50 rounded-md overflow-hidden md:shadow-md">
+                {/* Different width configuration for different screen sizes. */}
+                <div className="mx-auto w-[100vw] sm:w-[95vw] md:w-[92.5vw] lg:w-[90vw] xl:w-[85vw] 2xl:w-[80vw] 3xl:w-[75vw]">
+                    <h1 className="mb-3 pl-2 sm:pl-0 text-gray-600 text-3xl self-start">
+                        {activeSection}
+                    </h1>
+                    <div className="flex flex-col lg:flex-row sm:bg-gray-50 rounded-md overflow-hidden sm:shadow-md">
                         <ProfileNav />
                         <Outlet />
                     </div>

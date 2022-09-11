@@ -16,19 +16,20 @@ const LanguageAnalysis: React.FC = () => {
     );
 
     return (
-        <section>
-            <h2 className="mt-4 lg:-mb-[4.5rem] text-2xl basis-full">Language Analytics</h2>
-            <div className="flex-between">
+        <section className="pl-3 md:pl-0">
+            <h2 className="mt-4 lg:-mb-[2.5rem] text-2xl">Language Analytics</h2>
+            <div className="flex justify-between sm:items-center flex-col sm:flex-row">
                 {languageDataArray.length > 0 && (
-                    <LanguageAnalyticMessages dataArray={languageDataArray} />
+                    <LanguageAnalyticMessages
+                        className="order-2 sm:order-none"
+                        dataArray={languageDataArray}
+                    />
                 )}
                 <CategoricalChart
                     dataArray={languageDataArray.map((data) => ({
                         ...data,
                         label: prettierLanguageName(data.label),
                     }))}
-                    width="430px"
-                    height="430px"
                     legendPosition="right"
                 />
             </div>
@@ -38,9 +39,10 @@ const LanguageAnalysis: React.FC = () => {
 
 interface AnalyticsProps {
     dataArray: IChartData[];
+    className?: string;
 }
 
-const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray }) => {
+const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray, className = '' }) => {
     const { userDetail } = useUserContext();
     const mostRecentSubmission = getMostRecentSubmission(userDetail?.submissions || []);
 
@@ -51,7 +53,7 @@ const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray }) => {
     );
 
     return (
-        <div className="flex flex-col gap-3">
+        <div className={`flex flex-col gap-3 ${className}`}>
             <div className="flex-start gap-2 text-base">
                 <h5 className="font-semibold">Total Languages Trained:</h5>
                 <p>{dataArray.length} Languages</p>

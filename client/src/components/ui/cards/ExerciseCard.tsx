@@ -21,14 +21,18 @@ interface Props {
 }
 
 const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
+    const navigate = useNavigate();
     const { likedExerciseIdSet } = useUserContext();
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     // Check if the exercise is liked by the user.
     const liked: boolean = likedExerciseIdSet.has(exercise?._id || '');
-
-    const navigate = useNavigate();
     const difficultyStyle = getDifficultyColorClass(exercise.difficulty);
+
+    // Group of edit & delete buttons displayed only if the user is the author.
+    const exerciseControl = exercise?.isAuthorized ? (
+        <ExerciseCardControl exercise={exercise} onDelete={() => setShowDeleteModal(true)} />
+    ) : null;
 
     return (
         <>
@@ -79,12 +83,15 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                         <MdReportProblem className="text-stone-500/80 text-base" />{' '}
                         {exercise.reports} Reports
                     </li>
+
+                    {/* If the user is authorized (either creator or admin), give edit and delete accesses */}
+                    <li className="ml-auto sm:hidden">{exerciseControl}</li>
                 </ul>
 
-                <div className="flex-between">
+                <div className={`hidden sm:flex flex-between`}>
                     {/* Tags List. Tags will only be shown on the card for 640px screen size or above. */}
                     {/* On the mobile screen size, rendering tag list makes it look worse. */}
-                    <ul className="hidden sm:flex-start flex-wrap gap-2 text-[0.85rem]">
+                    <ul className="flex-start flex-wrap gap-2 text-[0.85rem]">
                         <BsFillTagsFill className="text-lg text-slate-500" />
 
                         {/* Display maximum 5 tags. Fist 5 tags in this case. */}
@@ -99,22 +106,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                     </ul>
 
                     {/* If the user is authorized (either creator or admin), give edit and delete accesses */}
-                    {exercise?.isAuthorized && (
-                        <div className="flex-start gap-1">
-                            <Link
-                                to={getExerciseEditLink(exercise._id)}
-                                className="px-1 py-1 transition-all rounded-md text-sky-500 hover:bg-sky-500 hover:text-white"
-                            >
-                                <MdOutlineEdit className=" text-2xl" />
-                            </Link>
-                            <button
-                                onClick={() => setShowDeleteModal(true)}
-                                className="px-1 py-1 transition-all rounded-md text-rose-500 hover:bg-rose-500 hover:text-white"
-                            >
-                                <RiDeleteBin6Line className="text-2xl" />
-                            </button>
-                        </div>
-                    )}
+                    {exerciseControl}
                 </div>
             </article>
             {showDeleteModal && (
@@ -125,6 +117,29 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                 />
             )}
         </>
+    );
+};
+
+interface ControlProps {
+    exercise: IExerciseCard;
+    onDelete: () => void;
+}
+const ExerciseCardControl: React.FC<ControlProps> = ({ exercise, onDelete }) => {
+    return (
+        <div className="flex-start gap-1">
+            <Link
+                to={getExerciseEditLink(exercise._id)}
+                className="px-1 py-1 transition-all rounded-md text-sky-500 hover:bg-sky-500 hover:text-white"
+            >
+                <MdOutlineEdit className=" text-2xl" />
+            </Link>
+            <button
+                onClick={onDelete}
+                className="px-1 py-1 transition-all rounded-md text-rose-500 hover:bg-rose-500 hover:text-white"
+            >
+                <RiDeleteBin6Line className="text-2xl" />
+            </button>
+        </div>
     );
 };
 

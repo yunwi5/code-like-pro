@@ -68,7 +68,7 @@ const TrendChart: React.FC<Props> = (props) => {
 
     return (
         <div>
-            <Line className="max-h-[20rem]" options={options} data={dataset} />
+            <Line className="max-h-[20rem] max-w-[100%]" options={options} data={dataset} />
         </div>
     );
 };
