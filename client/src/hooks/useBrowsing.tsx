@@ -1,13 +1,19 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { SubmissionStatus } from '../models/enums';
 import { IExerciseCard } from '../models/interfaces';
+import { useUserContext } from '../store/context/UserContext';
 import { useAppSelector } from '../store/redux/store';
-import { filterExercises } from '../utils/filter-utils/exercise-filter';
+import {
+    filterExercises,
+    filterExercisesBySubmissionStatus,
+} from '../utils/filter-utils/exercise-filter';
 import { searchExercises } from '../utils/search';
 import { sortExercises } from '../utils/sorting-utils/exercise-sorting';
 
 // Get searching, filtering, and sorting information from redux.
 // Apply those settings to the exercises list
 function useBrowsing(exercises: IExerciseCard[]) {
+    const { submissionMap } = useUserContext(); // To access the user submission results of the exercises.
     const { searching, sorting, filtering } = useAppSelector((state) => state.browsing);
 
     // Searched, filtered and sorted exercises.
@@ -21,7 +27,14 @@ function useBrowsing(exercises: IExerciseCard[]) {
 
     // Do filtering second
     const filteredExercises = useMemo(() => {
-        return filterExercises<IExerciseCard>(searchedExercises, filtering);
+        // Filter exercises by selected language, difficulty and tags.
+        let filtered = filterExercises<IExerciseCard>(searchedExercises, filtering);
+        // Filter exercises further by user submission status (result).
+        return filterExercisesBySubmissionStatus(
+            filtered,
+            submissionMap,
+            filtering.submissionStatus,
+        );
     }, [searchedExercises, filtering]);
 
     // Do sorting last as it is the most expensive operation.
