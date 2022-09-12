@@ -62,7 +62,7 @@ const Logo: React.FC<Props> = ({ size = 80 }) => {
                     filterUnits="userSpaceOnUse"
                     color-interpolation-filters="sRGB"
                 >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
                     <feColorMatrix
                         in="SourceAlpha"
                         type="matrix"
@@ -95,9 +95,9 @@ const Logo: React.FC<Props> = ({ size = 80 }) => {
                     width="283.135"
                     height="215.228"
                     filterUnits="userSpaceOnUse"
-                    color-interpolation-filters="sRGB"
+                    colorInterpolationFilters="sRGB"
                 >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
                     <feColorMatrix
                         in="SourceAlpha"
                         type="matrix"
@@ -132,7 +132,7 @@ const Logo: React.FC<Props> = ({ size = 80 }) => {
                     filterUnits="userSpaceOnUse"
                     color-interpolation-filters="sRGB"
                 >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
                     <feColorMatrix
                         in="SourceAlpha"
                         type="matrix"
@@ -167,7 +167,7 @@ const Logo: React.FC<Props> = ({ size = 80 }) => {
                     filterUnits="userSpaceOnUse"
                     color-interpolation-filters="sRGB"
                 >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
                     <feColorMatrix
                         in="SourceAlpha"
                         type="matrix"
@@ -202,7 +202,7 @@ const Logo: React.FC<Props> = ({ size = 80 }) => {
                     filterUnits="userSpaceOnUse"
                     color-interpolation-filters="sRGB"
                 >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
                     <feColorMatrix
                         in="SourceAlpha"
                         type="matrix"

@@ -15,6 +15,9 @@ router.put('/:id', ensureAuthenticated, catchAsync(exerciseController.updateExer
 
 router.delete('/:id', ensureAuthenticated, catchAsync(exerciseController.deleteExercise));
 
+// Submission history of the exercise from any users.
+router.get('/:id/submission', catchAsync(exerciseController.getExerciseSubmissions));
+
 // User issue report for the exercise
 router.post('/:id/report', ensureAuthenticated, catchAsync(exerciseController.reportExercise));
 

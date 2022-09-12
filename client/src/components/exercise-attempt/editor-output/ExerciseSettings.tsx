@@ -32,7 +32,7 @@ const ExerciseSettings: React.FC = () => {
     return (
         <>
             <ClickAwayListener onClickAway={() => setShowDropdown(false)}>
-                <div className="relative ml-2">
+                <div className="relative ml-2 -mr-2">
                     <button
                         onClick={() => setShowDropdown((ps) => !ps)}
                         className="flex-center w-[2rem] h-[2rem] bg-gray-500 hover:bg-gray-700 transition-all shadow-md rounded-sm"

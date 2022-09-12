@@ -1,5 +1,10 @@
 import { AppProperty } from '../constants/app';
-import { IExercise, IExerciseWithId, IIssueReport } from '../models/interfaces';
+import {
+    IExercise,
+    IExerciseWithId,
+    IIssueReport,
+    IUserSubmission,
+} from '../models/interfaces';
 import { deleteRequest, getRequest, postRequest, putRequest } from './requests';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/exercise`;
@@ -27,6 +32,11 @@ export async function putExercise(id: string, updatedExercise: IExercise) {
 
 export async function deleteExercise(id: string) {
     return await deleteRequest<{ message: string }>({ url: `${API_DOMAIN}/${id}` });
+}
+
+// GET: submission history of an exercise as a UserSubmission[]
+export async function getExerciseSubmissions(id: string) {
+    return await getRequest<IUserSubmission[]>({ url: `${API_DOMAIN}/${id}/submission` });
 }
 
 export async function reportExerciseRequest(id: string, reportBody: IIssueReport) {

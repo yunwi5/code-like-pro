@@ -1,5 +1,6 @@
 const Exercise = require('../models/Exercise');
 const ExerciseReport = require('../models/ExerciseReport');
+const UserSubmission = require('../models/UserSubmission');
 const Comment = require('../models/Comment');
 
 const makeRequest = require('../utils/makeRequest');
@@ -135,6 +136,23 @@ const deleteExercise = async (req, res) => {
     }
 };
 
+/* GET: all submissions from the exercise of the param id */
+const getExerciseSubmissions = async (req, res) => {
+    const exerciseId = req.params.id;
+
+    try {
+        const submissions = await UserSubmission.find({ exercise: exerciseId });
+        // If the returned object is an array, it means success.
+        if (Array.isArray(submissions)) res.status(200).json(submissions);
+        // If the returned object is not array, it is not a correct response.
+        else throw new Error('Submissions should be an array...');
+    } catch (err) {
+        console.log(err.message);
+        res.status(400).json(err.message);
+    }
+};
+
+/* POST: exercise issue report from the user */
 const reportExercise = async (req, res) => {
     const exerciseId = req.params.id;
     const { category, description } = req.body;
@@ -239,6 +257,7 @@ const controller = {
     getExerciseByID,
     updateExercise,
     deleteExercise,
+    getExerciseSubmissions,
     reportExercise,
     toggleLikeExercise,
     postExerciseComment,
