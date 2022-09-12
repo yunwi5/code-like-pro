@@ -14,6 +14,7 @@ import { useUserContext } from '../../../store/context/UserContext';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import HoveringLabel from '../labels/HoveringLabel';
 import DeleteModal from '../modals/variations/DeleteModal';
+import LanguageLabel from '../labels/LanguageLabel';
 
 interface Props {
     exercise: IExerciseCard;
@@ -57,12 +58,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                             <AiFillStar className="text-yellow-500/70 text-2xl" />
                         </HoveringLabel>
                     )}
-                    <HoveringLabel
-                        label={prettierLanguageName(exercise.language)}
-                        className="ml-auto"
-                    >
-                        {getLanguageIcon(exercise.language, { width: '30px', height: '30px' })}
-                    </HoveringLabel>
+                    <LanguageLabel language={exercise.language} className="ml-auto" />
                 </header>
 
                 {/* Exercise Info */}

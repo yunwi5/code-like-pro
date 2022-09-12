@@ -4,6 +4,7 @@ import { Logo } from '../../assets';
 import { ProfileSectionList } from '../../models/enums';
 import { useUserContext } from '../../store/context/UserContext';
 import { ProfileLinkMap } from '../../utils/profile';
+import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
 import ActiveNavLink from '../ui/links/ActiveNavLink';
 import ProfileMenuHeader from '../ui/user/ProfileMenuHeader';
 import UserProfileNav from '../ui/user/UserProfileNav';
@@ -19,15 +20,11 @@ const Header = () => {
     return (
         <header className="relative flex items-center justify-between px-4 md:px-8 lg:px-[5.5%] py-3 m-0 shadow-sm">
             <div className="logo flex items-center flex-shrink-0 text-main-400">
-                {/* Hamburger menu that toggles the mobile dropdown menu visibility. Only shown on the mobile screen size */}
-                <div
-                    className="flex-center lg:hidden -my-2 h-[2.4rem] w-[2.4rem] rounded-full hover:bg-gray-100 mr-2 cursor-pointer"
-                    onClick={() => setShowMobileDropdownMenu((ps) => !ps)}
-                >
-                    <div
-                        className={`hamburger-menu ${showMobileDropdownMenu ? 'active' : ''}`}
-                    />
-                </div>
+                {/* Hamburger menu icon that toggles the mobile dropdown menu visibility. Only shown on the mobile screen size */}
+                <HamburgerMenu
+                    visible={showMobileDropdownMenu}
+                    setVisible={setShowMobileDropdownMenu}
+                />
                 <NavLink
                     to="/"
                     onClick={() => setShowMobileDropdownMenu(false)}

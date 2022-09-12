@@ -1,3 +1,7 @@
+export function getBrowsingPageLink() {
+    return '/browse';
+}
+
 export function getExerciseAttemptPageLink(id: string) {
     return `/exercise/${id}`;
 }
