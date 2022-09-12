@@ -8,6 +8,7 @@
         top: 100%;
         left: 50%;
         border-radius: 3px;
+        white-space: nowrap;
         transform: translateX(-50%);
         clip-path: polygon(0% 20%, 40% 20%, 50% 0, 60% 20%, 100% 20%, 100% 100%, 0 100%);
     }

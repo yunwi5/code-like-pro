@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { postSubmission, runTestCases } from '../../apis/submission';
 import ShowcaseInviteModal from '../../components/exercise-attempt/modals/ShowcaseInviteModal';
 import { IExerciseWithId, ITestOutput, IUserSubmission } from '../../models/interfaces';
@@ -104,6 +104,12 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
             toastNotify(`Oops, ${message}`, 'error');
         }
     };
+
+    useEffect(() => {
+        if (!previousSubmission) return;
+        setUserSubmission(previousSubmission);
+        setUserSolution(previousSubmission.code);
+    }, [previousSubmission]);
 
     const value = {
         exercise,

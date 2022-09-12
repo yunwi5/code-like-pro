@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 
 interface Props {
     labelText?: string;
@@ -15,10 +15,13 @@ const CustomTextArea: React.FC<Props> = ({
     rows = 3,
     error = '',
 }) => {
+    const id = useId();
+
     return (
         <div className="flex flex-col gap-2">
-            {labelText && <label>Description</label>}
+            {labelText && <label htmlFor={id}>{labelText && 'Description'}</label>}
             <textarea
+                id={id}
                 rows={rows}
                 value={value}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>

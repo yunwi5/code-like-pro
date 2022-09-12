@@ -4,6 +4,7 @@ import { Logo } from '../../assets';
 import { ProfileSectionList } from '../../models/enums';
 import { useUserContext } from '../../store/context/UserContext';
 import { ProfileLinkMap } from '../../utils/profile';
+import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
 import ActiveNavLink from '../ui/links/ActiveNavLink';
 import ProfileMenuHeader from '../ui/user/ProfileMenuHeader';
 import UserProfileNav from '../ui/user/UserProfileNav';
@@ -19,15 +20,11 @@ const Header = () => {
     return (
         <header className="relative flex items-center justify-between px-4 md:px-8 lg:px-[5.5%] py-3 m-0 shadow-sm">
             <div className="logo flex items-center flex-shrink-0 text-main-400">
-                {/* Hamburger menu that toggles the mobile dropdown menu visibility. Only shown on the mobile screen size */}
-                <div
-                    className="flex-center lg:hidden h-[2rem] mr-4 cursor-pointer"
-                    onClick={() => setShowMobileDropdownMenu((ps) => !ps)}
-                >
-                    <div
-                        className={`hamburger-menu ${showMobileDropdownMenu ? 'active' : ''}`}
-                    />
-                </div>
+                {/* Hamburger menu icon that toggles the mobile dropdown menu visibility. Only shown on the mobile screen size */}
+                <HamburgerMenu
+                    visible={showMobileDropdownMenu}
+                    setVisible={setShowMobileDropdownMenu}
+                />
                 <NavLink
                     to="/"
                     onClick={() => setShowMobileDropdownMenu(false)}
@@ -37,6 +34,8 @@ const Header = () => {
                     CodeLikePro
                 </NavLink>
             </div>
+
+            {/* Navigation list: Browse, Ranking & Create shown only for a large (> 1024px) screens. */}
             <div className="hidden lg:block w-full">
                 <NavList />
             </div>
@@ -44,7 +43,7 @@ const Header = () => {
             {/* Mobile dropdown menu to be displayed if the showMobileDropdownMenu state is true. */}
             <MobileDropdownMenu
                 visible={showMobileDropdownMenu}
-                onHide={() => setShowMobileDropdownMenu(false)}
+                onClose={() => setShowMobileDropdownMenu(false)}
             />
 
             {/* User profile info and navigation on the right side of the header. */}
@@ -55,28 +54,30 @@ const Header = () => {
 
 /*  Dropdown menu that is shown when the user clicks the hamburger menu on the header.
 This will be hidden for the large screen size by default. */
-const MobileDropdownMenu: React.FC<{ visible: boolean; onHide: () => void }> = ({
+const MobileDropdownMenu: React.FC<{ visible: boolean; onClose: () => void }> = ({
     visible, // boolean value to indicate whether to display the dropdown menu or not.
-    onHide, // callback function to hide the mobile dropdown when the user clicks the link inside the nav,
+    onClose, // callback function to hide the mobile dropdown when the user clicks the link inside the nav,
 }) => {
     const isLoggedIn = !!useUserContext().user;
     const { logout } = useUserContext();
 
+    // Determine whether to show the mobile nav or not based on the 'visible' prop.
+    const visibleClass = visible ? 'visible' : '';
     return (
         <nav
-            className={`mobile-nav absolute lg:hidden z-[500] w-full min-h-[85vh] top-[101%] left-0 bg-gray-100 ${
-                visible ? 'visible' : ''
-            }`}
+            className={`mobile-nav absolute lg:hidden z-[500] w-full min-h-[85vh] top-[101%] left-0 bg-gray-100 ${visibleClass}`}
         >
             {/* Dropdown menu for nav list */}
-            <div className="px-5 py-5" onClick={onHide}>
+            <div className="px-5 py-5">
                 <h2 className="text-gray-700 font-bold text-lg">Menu</h2>
-                <NavList className="pl-2" />
+                <div onClick={onClose}>
+                    <NavList className="pl-2" />
+                </div>
             </div>
 
             {/* Dropdown menu for profile sections */}
             {isLoggedIn && (
-                <div className="px-5 pb-5" onClick={onHide}>
+                <div className="px-5 pb-5">
                     <h2 className="text-gray-700 font-bold text-lg">Profile</h2>
 
                     <ProfileMenuHeader className="px-0 !pl-[0.375rem]" />
@@ -84,6 +85,7 @@ const MobileDropdownMenu: React.FC<{ visible: boolean; onHide: () => void }> = (
                     {ProfileSectionList.map((section) => (
                         <Link
                             key={section}
+                            onClick={onClose}
                             className="flex-start gap-3 pl-2 py-2 whitespace-nowrap hover:text-main-600"
                             to={`/profile/${ProfileLinkMap[section]}`}
                         >
@@ -92,8 +94,11 @@ const MobileDropdownMenu: React.FC<{ visible: boolean; onHide: () => void }> = (
                     ))}
                     {/* Logout button */}
                     <div
-                        onClick={logout}
-                        className="flex-start gap-3 pl-2 py-2 whitespace-nowrap hover:text-main-600"
+                        onClick={() => {
+                            logout();
+                            onClose();
+                        }}
+                        className="flex-start gap-3 pl-2 py-2 whitespace-nowrap hover:text-main-600 cursor-pointer"
                     >
                         Logout
                     </div>

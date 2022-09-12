@@ -23,9 +23,7 @@ const EditorOutputSection: React.FC = () => {
     // When the user re-enters the page, or refreshes the page,
     // Retrieve previous user code for this exercise from the localStorage.
     useEffect(() => {
-        if (!userSolution) {
-            setUserSolution(localSolution);
-        }
+        if (!userSolution) setUserSolution(localSolution);
     }, [userSolution]);
 
     return (

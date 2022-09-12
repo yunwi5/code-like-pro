@@ -5,7 +5,7 @@ import { ImKey } from 'react-icons/im';
 import { FaUserAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
-import CustomInput from '../ui/inputs/CustomInput';
+import AuthInput from '../ui/inputs/AuthInput';
 import Button from '../ui/buttons/Button';
 import GoogleLogin from './GoogleLogin';
 
@@ -40,7 +40,7 @@ const AuthCard = (props: {
 
                     <form className="flex flex-col w-full" onSubmit={props.onSubmit}>
                         {!props.isLogin && (
-                            <CustomInput
+                            <AuthInput
                                 type="text"
                                 placeholder="Username"
                                 onChange={props.onChange}
@@ -50,7 +50,7 @@ const AuthCard = (props: {
                                 icon={<FaUserAlt />}
                             />
                         )}
-                        <CustomInput
+                        <AuthInput
                             type="email"
                             placeholder="Email"
                             onChange={props.onChange}
@@ -59,7 +59,7 @@ const AuthCard = (props: {
                             icon={<MdEmail />}
                             error={props.errorState?.email}
                         />
-                        <CustomInput
+                        <AuthInput
                             type="password"
                             placeholder="Password"
                             onChange={props.onChange}

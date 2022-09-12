@@ -1,7 +1,7 @@
 import React from 'react';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 import TextEditor from '../../../../ui/editor/text-editor/TextEditor';
-import ExercisePromptFooter from './ExercisePromptFooter';
+import TagList from '../../../../ui/lists/TagList';
 import ExercisePromptHeader from './ExercisePromptHeader';
 
 const ExercisePrompt: React.FC = () => {
@@ -17,7 +17,9 @@ const ExercisePrompt: React.FC = () => {
                 readOnly={true}
                 placeholder={'Write something awesome...'}
             />
-            <ExercisePromptFooter />
+            <footer className="-mt-3">
+                <TagList tags={exercise?.tags || []} />
+            </footer>
         </section>
     );
 };

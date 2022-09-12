@@ -1,5 +1,11 @@
 import { AppProperty } from '../constants/app';
-import { IExercise, IExerciseWithId, IIssueReport } from '../models/interfaces';
+import {
+    IExercise,
+    IExerciseWithId,
+    IIssueReport,
+    IShowCase,
+    IUserSubmission,
+} from '../models/interfaces';
 import { deleteRequest, getRequest, postRequest, putRequest } from './requests';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/exercise`;
@@ -29,6 +35,11 @@ export async function deleteExercise(id: string) {
     return await deleteRequest<{ message: string }>({ url: `${API_DOMAIN}/${id}` });
 }
 
+// GET: submission history of an exercise as a UserSubmission[]
+export async function getExerciseSubmissions(id: string) {
+    return await getRequest<IUserSubmission[]>({ url: `${API_DOMAIN}/${id}/submission` });
+}
+
 export async function reportExerciseRequest(id: string, reportBody: IIssueReport) {
     return await postRequest<IIssueReport>({
         url: `${API_DOMAIN}/${id}/report`,
@@ -38,4 +49,13 @@ export async function reportExerciseRequest(id: string, reportBody: IIssueReport
 
 export async function likeExerciseRequest(id: string) {
     return await getRequest<IExercise>({ url: `${API_DOMAIN}/${id}/like` });
+}
+
+// POST: post user showcase solution
+type ShowcaeProps = { code: string; description: string };
+export async function postExerciseShowCase(id: string, showcaseProps: ShowcaeProps) {
+    return await postRequest<IShowCase>({
+        url: `${API_DOMAIN}/${id}/showcase`,
+        body: showcaseProps,
+    });
 }

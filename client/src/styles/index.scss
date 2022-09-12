@@ -71,10 +71,10 @@ code {
         @apply px-2 py-2 border-2 border-gray-300 bg-gray-50 rounded-sm shadow-md focus:shadow-lg focus:outline focus:outline-2 focus:outline-main-300;
     }
     .btn {
-        @apply px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer;
+        @apply px-3 py-2 text-lg transition-all rounded-sm shadow-sm hover:shadow-md cursor-pointer;
     }
     .btn-fill {
-        @apply text-main-50 bg-main-400 hover:bg-main-500;
+        @apply text-main-50 bg-main-400 hover:bg-main-500 border-2 border-main-400 hover:border-main-500;
     }
     .btn-empty {
         @apply text-main-600 border-2 border-main-400 bg-main-50/20 hover:bg-main-500 hover:text-main-50;
@@ -83,7 +83,7 @@ code {
         @apply px-2 py-[0.3rem] text-base;
     }
     .btn-social {
-        @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200;
+        @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200 border-transparent;
     }
     // Button in blue color (secondary theme)
     .btn-blue-fill {

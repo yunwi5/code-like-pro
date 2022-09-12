@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 import useAuth from '../../hooks/useAuth';
 import { useUserContext } from '../../store/context/UserContext';
-import { getExerciseById } from '../../apis/exercise';
 import { AppProperty } from '../../constants/app';
 import { ExerciseAttemptCtxProvider } from '../../store/context/ExerciseAttemptContext';
 import { toastNotify } from '../../utils/notification';
 import ExerciseAttemptMain from '../../components/exercise-attempt/ExerciseAttemptMain';
+import useExerciseQuery from '../../hooks/queries/useExerciseQuery';
 
 const ExerciseAttemptPage: React.FC = () => {
     useAuth();
@@ -18,17 +17,13 @@ const ExerciseAttemptPage: React.FC = () => {
     const navigate = useNavigate();
     const exerciseId = useParams().id || '';
 
-    // Get QueryClient and construct the query key.
-    const queryClient = useQueryClient();
-    const exerciseQueryKey = `exercise-${exerciseId}`;
-
-    // Fetch the exercise data
-    const { data: exercise, error: exerciseError } = useQuery([exerciseQueryKey], () =>
-        getExerciseById(exerciseId).then((response) => response.data),
-    );
-
-    // Refetch the exercise data for an immediate update on UI.
-    const refetchExercise = () => queryClient.invalidateQueries([exerciseQueryKey]);
+    // Custom hook for fetching exercise data.
+    const {
+        exercise,
+        error: exerciseError,
+        isLoading,
+        refetch,
+    } = useExerciseQuery(exerciseId);
 
     // Previous user submission data from the context. Either user submission or null.
     let userSubmission = submissionMap[exerciseId] && {
@@ -36,11 +31,9 @@ const ExerciseAttemptPage: React.FC = () => {
         exercise: exerciseId,
     };
 
-    if (exerciseError) console.log(exerciseError);
-
-    // If the exercise id is null, or if there is an exercise error, redirect to the browsing page.
+    // If the exercise does not exist, or if there is an exercise error, redirect to the browsing page.
     useEffect(() => {
-        if (exerciseId == null || !!exerciseError) {
+        if (!isLoading && !!exerciseError) {
             toastNotify('Sorry, the exercise does not exist...', 'error');
             navigate('/browse');
         }
@@ -64,7 +57,7 @@ const ExerciseAttemptPage: React.FC = () => {
             )}
             {exercise && (
                 <ExerciseAttemptCtxProvider
-                    refetchExercise={refetchExercise}
+                    refetchExercise={refetch}
                     exercise={exercise}
                     userSubmission={userSubmission}
                 >

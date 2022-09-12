@@ -10,11 +10,6 @@ export async function runTestCases(body: RunRequestBody) {
     return await postRequest<ITestOutput[]>({ url: `${API_DOMAIN}/run`, body });
 }
 
-// Get userSubmission for the particular exercise
-export async function getSubmission(exerciseId: string) {
-    // Implement the GET request
-}
-
 // UserSubmission to the backend
 type SubmissionBody = { code: string };
 export async function postSubmission(exerciseId: string, body: SubmissionBody) {
