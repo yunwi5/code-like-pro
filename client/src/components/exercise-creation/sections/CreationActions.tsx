@@ -8,7 +8,7 @@ import { getExerciseAttemptPageLink } from '../../../utils/links';
 
 const btnClass = 'min-w-[10rem]';
 
-const ChallengeActions: React.FC = () => {
+const CreationActions: React.FC = () => {
     const navigate = useNavigate();
     const { saveDraft, saveExercise, runCode, isLoading, createdExercise, readyStatus } =
         useExerciseCreationContext();
@@ -69,4 +69,4 @@ const StatusMessage: React.FC<{ readyStatus: IReadyStatus }> = ({ readyStatus })
     );
 };
 
-export default ChallengeActions;
+export default CreationActions;

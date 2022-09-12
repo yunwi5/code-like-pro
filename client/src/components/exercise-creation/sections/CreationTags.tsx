@@ -6,7 +6,7 @@ import AutoComplete from '../../ui/inputs/AutoComplete';
 
 const PredefinedTags = [...ProgrammingTopicList];
 
-const ChallengeTags: React.FC = () => {
+const CreationTags: React.FC = () => {
     const { tags, setTags } = useExerciseCreationContext();
 
     const handleAdd = (newTag: string) => {
@@ -39,4 +39,4 @@ const ChallengeTags: React.FC = () => {
     );
 };
 
-export default ChallengeTags;
+export default CreationTags;
