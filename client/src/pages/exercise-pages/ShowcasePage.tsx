@@ -6,17 +6,23 @@ import ShowcaseMain from '../../components/showcase/ShowcaseMain';
 import { AppProperty } from '../../constants/app';
 import useExerciseQuery from '../../hooks/queries/useExerciseQuery';
 import useAuth from '../../hooks/useAuth';
+import { IUserSubmissionPopulated } from '../../models/interfaces';
 import { ShowcaseContextProvider } from '../../store/context/ShowcaseContext';
+import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification';
 
 const ShowcasePage = () => {
     useAuth();
     const navigate = useNavigate();
+    const { submissionMap } = useUserContext();
     const params = useParams();
     const exerciseId = params.id;
     // Send the request to get the showcase data of this exercise.
 
     const { exercise, refetch, isLoading, error } = useExerciseQuery(exerciseId || '');
+
+    const userSubmission: IUserSubmissionPopulated | undefined =
+        submissionMap[exerciseId || ''];
 
     // If the exercise does not exist or there is an error, redirect to the home page.
     useEffect(() => {
@@ -39,8 +45,11 @@ const ShowcasePage = () => {
                 {/* If there is no exercise yet, show the loading spinner. */}
                 {!exercise && <ClipLoader size={200} color="#3c38e0" />}
                 {/* Wrap the showcase components with the showcase context that provides all showcase data. */}
-                {exercise && (
-                    <ShowcaseContextProvider exercise={exercise}>
+                {exercise && userSubmission && (
+                    <ShowcaseContextProvider
+                        exercise={exercise}
+                        userSubmission={userSubmission}
+                    >
                         <ShowcaseMain />
                     </ShowcaseContextProvider>
                 )}

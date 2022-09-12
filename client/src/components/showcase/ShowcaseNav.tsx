@@ -15,9 +15,14 @@ const ShowcaseSectionList = Object.values(ShowcaseSection || {});
 interface Props {
     activeSection: ShowcaseSection;
     setActiveSection: React.Dispatch<React.SetStateAction<ShowcaseSection>>;
+    setShowPostModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ShowcaseNav: React.FC<Props> = ({ activeSection, setActiveSection }) => {
+const ShowcaseNav: React.FC<Props> = ({
+    activeSection,
+    setActiveSection,
+    setShowPostModal,
+}) => {
     return (
         <nav className="flex justify-between items-center">
             {/* Showcase section navigation as a list */}
@@ -26,14 +31,14 @@ const ShowcaseNav: React.FC<Props> = ({ activeSection, setActiveSection }) => {
                     let activeClass = '';
                     if (activeSection === section) {
                         activeClass +=
-                            'text-gray-50 hover:!text-white bg-gray-600/90 hover:bg-gray-700 brightness-110 shadow';
+                            'text-gray-50 hover:!text-white !bg-gray-600/90 hover:!bg-gray-700 brightness-110 shadow';
                     }
 
                     return (
                         <button
                             key={section}
                             onClick={() => setActiveSection(section)}
-                            className={`flex-center gap-2 px-4 py-[0.35rem] text-lg rounded hover:text-main-500 ${activeClass}`}
+                            className={`flex-center gap-2 px-4 py-[0.35rem] text-lg rounded hover:text-main-500 hover:bg-gray-100/80 ${activeClass}`}
                         >
                             {getSectionIcon(section)}
                             {section}
@@ -45,6 +50,7 @@ const ShowcaseNav: React.FC<Props> = ({ activeSection, setActiveSection }) => {
             {/* Posting showcase action trigger */}
             <div>
                 <button
+                    onClick={() => setShowPostModal(true)}
                     className={
                         'flex-center gap-2 px-3 py-2 text-base rounded-sm bg-slate-700/[95%] hover:bg-slate-800 text-white shadow-md'
                     }

@@ -1,43 +1,32 @@
-import React from 'react';
+import React, { useId } from 'react';
 
-const CustomInput = (props: {
-    type: string;
-    placeholder: string;
-    className?: string;
-    labelText?: string;
-    name?: string;
+interface Props {
     value?: string;
-    id?: string;
+    onChange?: (value: string) => void;
+    placeholder?: string;
     error?: string | null;
-    icon?: JSX.Element;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}) => {
-    const errorClass = props.error ? '!border-rose-400 !bg-rose-50 focus:outline-none' : '';
+    labelText?: string;
+}
+
+const CustomInput: React.FC<Props> = (props) => {
+    const { labelText, value, onChange, error, placeholder = '' } = props;
+    const id = useId();
 
     return (
-        <div className="relative flex flex-col gap-1 my-3">
+        <div className="flex flex-col gap-2">
+            {labelText && <label htmlFor={id}>{labelText}</label>}
             <input
-                className={`w-full p-3 text-sm h-9 bg-grey-200 border-grey-700 border-b-[1.5px] ${errorClass}`}
-                id={props.id}
-                name={props.name}
-                type={props.type}
-                value={props.value}
-                onChange={props.onChange}
-                placeholder={props.placeholder}
+                id={id}
+                className={`px-2 py-1 rounded-sm shadow-md focus:shadow-lg border-2 border-gray-300 focus-main ${
+                    error ? 'border-rose-400 focus:outline-transparent' : ''
+                }`}
+                placeholder={placeholder}
+                value={value}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    onChange && onChange(e.target.value)
+                }
             />
-            {/* Optional gray icon shown in the mock up */}
-            {props.icon && (
-                <span
-                    className={
-                        'absolute text-[0.9rem] text-gray-400 top-[calc(2.25rem/2)] right-2 -translate-y-[50%]'
-                    }
-                >
-                    {props.icon}
-                </span>
-            )}
-
-            {/* Show form error if exists */}
-            {props.error && <p className="text-left text-rose-500 text-sm">{props.error}</p>}
+            {error && <p className="text-rose-500">{error}</p>}
         </div>
     );
 };
