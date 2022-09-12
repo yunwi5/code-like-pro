@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { FaBug } from 'react-icons/fa';
 
-import Modal from '../../ui/modals/Modal';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CustomTextArea from '../../ui/inputs/CustomTextArea';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { reportExerciseRequest } from '../../../apis/exercise';
 import { toastNotify } from '../../../utils/notification';
-import { ClipLoader } from 'react-spinners';
 import FormModal from '../../ui/modals/variations/FormModal';
 
 const IssueCategories = [
@@ -44,7 +42,6 @@ const IssueReportModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         setIsLoading(false);
         if (ok) {
             console.log(data);
-            setDescription('');
             toastNotify('Sending report successful!', 'success');
             onClose();
         } else {

@@ -10,6 +10,10 @@ export type { IUser } from './user/IUser';
 export type { IUserDetail } from './user/IUserDetail';
 export type { IUserSubmission, IUserSubmissionPopulated } from './user/IUserSubmission';
 
+// Showcae related interfaces
+export type { IVote } from './showcase/IVote';
+export type { IShowCase } from './showcase/IShowcase';
+
 // Context types
 export type {
     IExerciseCreationContext,

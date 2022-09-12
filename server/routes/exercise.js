@@ -28,6 +28,12 @@ router.get(
     catchAsync(exerciseController.toggleLikeExercise),
 );
 
+// Routes for handling user showcases for the exercise of the param id.
+router
+    .route('/:id/showcase')
+    .post(ensureAuthenticated, catchAsync(exerciseController.postExerciseShowcase));
+
+// Routes for handling comments (discussion forum) for the exercise of the param id.
 router
     .route('/:id/comment')
     // Route for getting all the comments of the exercise of the param id.

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FaLaptopCode } from 'react-icons/fa';
+import { postExerciseShowCase } from '../../../apis/exercise';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
+import { toastNotify } from '../../../utils/notification';
 import CodeEditor from '../../ui/editor/CodeEditor';
 import CustomInput from '../../ui/inputs/CustomInput';
 import FormModal from '../../ui/modals/variations/FormModal';
@@ -15,19 +17,28 @@ const ShowcasePostModal: React.FC<Props> = ({ onClose }) => {
     const [error, setError] = useState<null | string>(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!exercise) return;
         if (description.trim() === '') {
             return setError('Please write your short description!');
         }
 
-        const showCase = {
+        const showCaseProps = {
             code: userSubmission?.code || '',
             description,
         };
 
         setIsLoading(true);
         // Send Http POST request to add user showcase.
+        const { ok, data, message } = await postExerciseShowCase(exercise._id, showCaseProps);
+        if (ok) {
+            toastNotify('Your showcase was posted!', 'success');
+            console.log('new showcase:', data);
+            onClose();
+        } else {
+            toastNotify(`Sorry there is an error: ${message}.`, 'error');
+        }
         setIsLoading(false);
     };
 

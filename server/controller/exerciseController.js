@@ -2,6 +2,7 @@ const Exercise = require('../models/Exercise');
 const ExerciseReport = require('../models/ExerciseReport');
 const UserSubmission = require('../models/UserSubmission');
 const Comment = require('../models/Comment');
+const ShowCase = require('../models/ShowCase');
 
 const makeRequest = require('../utils/makeRequest');
 
@@ -206,6 +207,42 @@ const toggleLikeExercise = async (req, res) => {
     res.json(exercise);
 };
 
+/* Post showcase for the exercise of the param id. */
+/* Req body: {code: string, description: string} */
+const postExerciseShowcase = async (req, res) => {
+    const exerciseId = req.params.id;
+    const { code, description } = req.body;
+
+    try {
+        const exercise = await Exercise.findById(exerciseId).populate('showCases');
+        if (exercise == null) return res.status(404).json('Exercise not found');
+
+        // Identify if the user previosuly made the showcase for this exercise.
+        let showCase = exercise.showCases.find(
+            (show) => show.user?.toString() === req.user._id.toString(),
+        );
+
+        if (showCase == null) {
+            // Construct the showcase object with required attributes.
+            showCase = new ShowCase({ code, description, user: req.user });
+            exercise.showCases.push(showCase);
+        } else {
+            // If there is an existing showcase, update its attributes.
+            showCase.code = code;
+            showCase.description = description;
+        }
+
+        // Execute async operations in parallel and await them together.
+        const p1 = showCase.save();
+        const p2 = exercise.save();
+        await Promise.all([p1, p2]);
+        res.status(201).json(showCase);
+    } catch (err) {
+        console.log(err.message);
+        res.status(400).json(err.message);
+    }
+};
+
 /* Exercise comment APIs */
 /* User should be authenticated before posting a comment */
 const postExerciseComment = async (req, res) => {
@@ -260,6 +297,7 @@ const controller = {
     getExerciseSubmissions,
     reportExercise,
     toggleLikeExercise,
+    postExerciseShowcase,
     postExerciseComment,
     getExerciseComments,
 };

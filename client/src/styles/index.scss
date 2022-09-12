@@ -83,7 +83,7 @@ code {
         @apply px-2 py-[0.3rem] text-base;
     }
     .btn-social {
-        @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200;
+        @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200 border-transparent;
     }
     // Button in blue color (secondary theme)
     .btn-blue-fill {
