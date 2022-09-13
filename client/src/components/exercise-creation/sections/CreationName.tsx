@@ -3,7 +3,7 @@ import { CreationSection } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
-const ChallengeName: React.FC = () => {
+const CreationName: React.FC = () => {
     const { name, setName } = useExerciseCreationContext();
     return (
         <CreationSectionContainer
@@ -21,4 +21,4 @@ const ChallengeName: React.FC = () => {
     );
 };
 
-export default ChallengeName;
+export default CreationName;

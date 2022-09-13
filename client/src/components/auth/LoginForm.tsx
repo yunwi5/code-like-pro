@@ -67,7 +67,7 @@ const LoginForm = () => {
             formState={loginState}
             errorState={errorState}
             isLoading={isLoading}
-        ></AuthCard>
+        />
     );
 };
 

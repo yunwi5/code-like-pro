@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getExerciseById } from '../../apis/exercise';
+import { Helmet } from 'react-helmet';
+
 import ExerciseCreationMain from '../../components/exercise-creation/ExerciseCreationMain';
 import { AppProperty } from '../../constants/app';
 import useAuth from '../../hooks/useAuth';
 import { ExerciseCreationContextProvider } from '../../store/context/ExerciseCreationContext';
 import { toastNotify } from '../../utils/notification';
 import { ClipLoader } from 'react-spinners';
+import useExerciseQuery from '../../hooks/queries/useExerciseQuery';
 
 const ExerciseEditPage = () => {
     useAuth();
@@ -16,12 +16,7 @@ const ExerciseEditPage = () => {
     const exerciseId = useParams().id || '';
 
     // Get QueryClient from the context.
-    const exerciseQueryKey = `exercise-${exerciseId}`;
-
-    const { data: exercise, error } = useQuery([exerciseQueryKey], () =>
-        getExerciseById(exerciseId).then((response) => response.data),
-    );
-
+    const { exercise, error } = useExerciseQuery(exerciseId || '');
     if (error) console.log(error);
 
     // If there is an error while fetching the exercise data, redirect to the home page.

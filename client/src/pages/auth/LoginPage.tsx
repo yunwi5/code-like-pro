@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { AppProperty } from '../../constants/app';
-import AuthCard from '../../components/auth/AuthCard';
 import LoginForm from '../../components/auth/LoginForm';
 
 const LoginPage = () => {

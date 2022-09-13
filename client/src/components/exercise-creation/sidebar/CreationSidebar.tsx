@@ -1,7 +1,7 @@
 import React from 'react';
 import { CreationSectionList } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
-import ChallengeActions from '../sections/ChallengeActions';
+import ChallengeActions from '../sections/CreationActions';
 
 const CreationSidebar: React.FC = () => {
     const { activeSection } = useExerciseCreationContext();

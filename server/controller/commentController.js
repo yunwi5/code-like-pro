@@ -9,7 +9,7 @@ const getReplyComments = async (req, res) => {
         // If the comment was not found, return 404.
         if (comment == null) return res.status(404).json('Comment not found.');
 
-        const replyComments = await Comment.find({ replyTo: comment });
+        const replyComments = await Comment.find({ replyTo: comment }).populate({path: 'user', select: ['email', 'name', 'pictureUrl']});
         return res.status(200).json(replyComments);
     } catch (err) {
         console.log(err.message);

@@ -8,7 +8,7 @@ import Button from '../../ui/buttons/Button';
 import TestCase from '../../ui/test-cases/TestCase';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
-const ChallengeTestCases: React.FC = () => {
+const CreationTestCases: React.FC = () => {
     const { testCases, language, setTestCases, testCaseOutputs } =
         useExerciseCreationContext();
 
@@ -60,4 +60,4 @@ const ChallengeTestCases: React.FC = () => {
     );
 };
 
-export default ChallengeTestCases;
+export default CreationTestCases;

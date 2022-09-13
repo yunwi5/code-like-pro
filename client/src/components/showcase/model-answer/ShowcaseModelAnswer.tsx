@@ -10,7 +10,7 @@ const ShowcaseModelAnswer: React.FC = () => {
     if (!exercise) return null;
 
     return (
-        <div className="flex flex-col lg:flex-row justify-around gap-x-8">
+        <div className="flex flex-col lg:flex-row justify-around gap-8">
             <div className="flex-1">
                 <h2 className="text-xl md:text-2xl mb-4">Problem</h2>
                 <TextEditor

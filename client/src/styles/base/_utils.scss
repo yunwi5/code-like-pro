@@ -6,10 +6,15 @@
     }
 }
 
+.input-underline-effect {
+    transition: all 0.4s ease-in-out;
+    @include focus-underline-from-middle($color-main-400, 3px);
+}
+
 .link-underline-effect {
-    @include underline-from-middle($color-main-400);
+    @include hover-underline-from-middle($color-main-400);
 }
 
 .link-underline-effect-thin {
-    @include underline-from-middle($color-main-400, 1.5px);
+    @include hover-underline-from-middle($color-main-400, 1.5px);
 }

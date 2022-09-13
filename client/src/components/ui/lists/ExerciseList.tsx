@@ -4,14 +4,13 @@ import { IExerciseCard } from '../../../models/interfaces';
 import ExerciseCard from '../cards/ExerciseCard';
 import PageNavigation from '../PageNavigation';
 
+// Default value of exercisePerPage which is applied when the prop was not given.
 const EXERCISE_PER_PAGE = 10;
 
 interface Props {
     exercises: IExerciseCard[];
     exercisePerPage?: number;
 }
-
-// .js or .jsx
 
 const ExerciseList: React.FC<Props> = ({ exercises, exercisePerPage = EXERCISE_PER_PAGE }) => {
     const {

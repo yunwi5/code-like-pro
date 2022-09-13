@@ -4,7 +4,7 @@ import { useExerciseCreationContext } from '../../../store/context/ExerciseCreat
 import TextEditor from '../../ui/editor/text-editor/TextEditor';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
-const ChallengePrompt: React.FC = () => {
+const CreationPrompt: React.FC = () => {
     const { prompt, setPrompt } = useExerciseCreationContext();
 
     return (
@@ -14,4 +14,4 @@ const ChallengePrompt: React.FC = () => {
     );
 };
 
-export default ChallengePrompt;
+export default CreationPrompt;

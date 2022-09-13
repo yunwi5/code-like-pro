@@ -12,7 +12,8 @@ export type { IUserSubmission, IUserSubmissionPopulated } from './user/IUserSubm
 
 // Showcae related interfaces
 export type { IVote } from './showcase/IVote';
-export type { IShowCase } from './showcase/IShowcase';
+export type { IShowCase } from './showcase/IShowCase';
+export type { IComment } from './showcase/IComment';
 
 // Context types
 export type {

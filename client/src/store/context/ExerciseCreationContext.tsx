@@ -132,7 +132,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
     // Send POST request to the server.
     const saveExercise = async () => {
         // Check if they run the test cases before posting
-        if (readyStatus == null) {
+        if (createdExercise == null && readyStatus == null) {
             setReadyStatus({ status: 'error', message: 'Please run your code first!' });
             return;
         } else if (readyStatus?.status === 'error') {
@@ -157,7 +157,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
             if (data) setCreatedExercise(data);
             setExerciseDraft('');
         } else {
-            toastNotify(message, 'error');
+            toastNotify(message || 'Something went wrong...', 'error');
         }
         setIsLoading(false);
     };

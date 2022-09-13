@@ -11,9 +11,9 @@ import { useExerciseCreationContext } from '../../../store/context/ExerciseCreat
 import { prettierLanguageNames } from '../../../utils/language';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
-import ChallengeTags from './ChallengeTags';
+import CreationTags from './CreationTags';
 
-const ChallengeSettings: React.FC = () => {
+const CreationSettings: React.FC = () => {
     const { language, setLanguage, difficulty, setDifficulty, topic, setTopic } =
         useExerciseCreationContext();
 
@@ -43,9 +43,9 @@ const ChallengeSettings: React.FC = () => {
                     options={ProgrammingTopicList}
                 />
             </div>
-            <ChallengeTags />
+            <CreationTags />
         </CreationSectionContainer>
     );
 };
 
-export default ChallengeSettings;
+export default CreationSettings;

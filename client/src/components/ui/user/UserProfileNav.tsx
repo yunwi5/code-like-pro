@@ -3,9 +3,11 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import ProfileDropdownMenu from './ProfileDropdownMenu';
 import ProfilePicture from './ProfilePicture';
 import ClickAwayListener from 'react-click-away-listener';
+import { useUserContext } from '../../../store/context/UserContext';
 
 // Profile navigation on the header.
 const UserProfileNav: React.FC = () => {
+    const { userDetail } = useUserContext();
     const [showDropdown, setShowDropdown] = useState(false);
 
     return (
@@ -15,7 +17,7 @@ const UserProfileNav: React.FC = () => {
                 className="relative flex-center gap-2 -my-1 py-1 px-2 hover:bg-gray-200/90 focus-within:bg-gray-100 rounded-md cursor-pointer"
             >
                 {/* User profile picture shown on the header. */}
-                <ProfilePicture />
+                <ProfilePicture picture={userDetail?.pictureUrl} />
                 {/* Dropdown toggler button. */}
                 <IoMdArrowDropdown className="text-gray-600 hover:text-main-500 text-xl" />
 

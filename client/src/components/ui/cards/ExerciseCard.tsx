@@ -6,8 +6,7 @@ import { BsFillTagsFill } from 'react-icons/bs';
 
 import { IExerciseCard } from '../../../models/interfaces';
 import { getDifficultyColorClass } from '../../../utils/difficulty';
-import { getLanguageIcon, prettierLanguageName } from '../../../utils/language';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getExerciseAttemptPageLink, getExerciseEditLink } from '../../../utils/links';
 import { deleteExercise } from '../../../apis/exercise';
 import { useUserContext } from '../../../store/context/UserContext';
@@ -15,6 +14,8 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import HoveringLabel from '../labels/HoveringLabel';
 import DeleteModal from '../modals/variations/DeleteModal';
 import LanguageLabel from '../labels/LanguageLabel';
+import EditButton from '../buttons/icon-buttons/EditButton';
+import DeleteButton from '../buttons/icon-buttons/DeleteButton';
 
 interface Props {
     exercise: IExerciseCard;
@@ -32,7 +33,10 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
 
     // Group of edit & delete buttons displayed only if the user is the author.
     const exerciseControl = exercise?.isAuthorized ? (
-        <ExerciseCardControl exercise={exercise} onDelete={() => setShowDeleteModal(true)} />
+        <ExerciseCardControl
+            onEdit={() => navigate(getExerciseEditLink(exercise._id))}
+            onDelete={() => setShowDeleteModal(true)}
+        />
     ) : null;
 
     return (
@@ -117,24 +121,14 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
 };
 
 interface ControlProps {
-    exercise: IExerciseCard;
+    onEdit: () => void;
     onDelete: () => void;
 }
-const ExerciseCardControl: React.FC<ControlProps> = ({ exercise, onDelete }) => {
+const ExerciseCardControl: React.FC<ControlProps> = ({ onEdit, onDelete }) => {
     return (
         <div className="flex-start gap-1">
-            <Link
-                to={getExerciseEditLink(exercise._id)}
-                className="px-1 py-1 transition-all rounded-md text-sky-500 hover:bg-sky-500 hover:text-white"
-            >
-                <MdOutlineEdit className=" text-2xl" />
-            </Link>
-            <button
-                onClick={onDelete}
-                className="px-1 py-1 transition-all rounded-md text-rose-500 hover:bg-rose-500 hover:text-white"
-            >
-                <RiDeleteBin6Line className="text-2xl" />
-            </button>
+            <EditButton onEdit={onEdit} />
+            <DeleteButton onDelete={onDelete} />
         </div>
     );
 };

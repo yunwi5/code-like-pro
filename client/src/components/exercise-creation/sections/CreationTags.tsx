@@ -1,12 +1,12 @@
 import React from 'react';
 import { ProgrammingTopicList } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
-import Tag from '../../ui/design-elements/Tag';
+import Tag from '../../ui/labels/Tag';
 import AutoComplete from '../../ui/inputs/AutoComplete';
 
 const PredefinedTags = [...ProgrammingTopicList];
 
-const ChallengeTags: React.FC = () => {
+const CreationTags: React.FC = () => {
     const { tags, setTags } = useExerciseCreationContext();
 
     const handleAdd = (newTag: string) => {
@@ -39,4 +39,4 @@ const ChallengeTags: React.FC = () => {
     );
 };
 
-export default ChallengeTags;
+export default CreationTags;

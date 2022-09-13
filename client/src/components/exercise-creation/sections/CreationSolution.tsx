@@ -4,24 +4,21 @@ import { useExerciseCreationContext } from '../../../store/context/ExerciseCreat
 import CodeEditor from '../../ui/editor/CodeEditor';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
-const ChallengeTemplate: React.FC = () => {
-    const { language, startingTemplate, setStartingTemplate } = useExerciseCreationContext();
+const CreationSolution: React.FC = () => {
+    const { language, solutionCode, setSolutionCode } = useExerciseCreationContext();
 
-    const handleChange = (value: string | undefined) => setStartingTemplate(value ?? '');
+    const handleChange = (value: string | undefined) => setSolutionCode(value ?? '');
 
     return (
-        <CreationSectionContainer
-            title="User Starting Template"
-            id={CreationSection.STARTING_TEMPLATE}
-        >
+        <CreationSectionContainer title="Solution Code" id={CreationSection.SOLUTION_CODE}>
             <CodeEditor
                 language={language}
                 onChange={handleChange}
-                value={startingTemplate}
-                height={'13rem'}
+                value={solutionCode}
+                height={'22rem'}
             />
         </CreationSectionContainer>
     );
 };
 
-export default ChallengeTemplate;
+export default CreationSolution;
