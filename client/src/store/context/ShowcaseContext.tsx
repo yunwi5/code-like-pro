@@ -1,6 +1,5 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import React, { useContext, useEffect, useState } from 'react';
-import { getExerciseComments } from '../../apis/exercise';
+import React, { useContext } from 'react';
+import useExerciseCommentsQuery from '../../hooks/queries/useExerciseCommentsQuery';
 import { IComment, IExerciseWithId, IUserSubmissionPopulated } from '../../models/interfaces';
 
 type QueryOption = 'comments' | 'showcases';
@@ -33,23 +32,17 @@ export const ShowcaseContextProvider: React.FC<Props> = ({
     userSubmission,
     children,
 }) => {
-    const queryClient = useQueryClient();
+    // Use React-Query to fetch the comments data of this exercise.
+    const { comments, refetch: refetchComments } = useExerciseCommentsQuery(exercise._id, 800);
 
-    const commentQueryKey = `exercise-${exercise._id}.comment`;
-    const { data: response } = useQuery(
-        [commentQueryKey],
-        () => getExerciseComments(exercise._id),
-        { refetchInterval: 1000 },
-    );
+    // Use React-Query to fetch the showcases data of this exercise.
 
-    const { data: comments, message: error } = response || {};
-    if (error) console.log(error);
-
+    // Refetch comment or showcase data from the server using custom query hooks.
     const refetchQuery = (option: QueryOption) => {
-        if (option === 'comments') queryClient.invalidateQueries([commentQueryKey]);
+        if (option === 'comments') refetchComments();
     };
 
-    const value = { exercise, userSubmission, comments: comments || [], refetchQuery };
+    const value = { exercise, userSubmission, comments, refetchQuery };
 
     return <ShowcaseContext.Provider value={value}>{children}</ShowcaseContext.Provider>;
 };

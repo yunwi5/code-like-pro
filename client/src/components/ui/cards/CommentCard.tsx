@@ -54,9 +54,8 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
 
     const handleDeleteComment = async () => {
         const { ok } = await deleteComment(comment._id);
-
-        if (ok) toastNotify('Deleted your comment!');
-        else toastNotify('Oops, something went wrong while deleting your comment.', 'error');
+        if (!ok)
+            toastNotify('Oops, something went wrong while deleting your comment.', 'error');
     };
 
     // Derive upvote & downvote count from the list of votes

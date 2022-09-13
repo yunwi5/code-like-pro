@@ -14,8 +14,7 @@ interface Props {
 const CommentEditModal: React.FC<Props> = ({ onClose, comment }) => {
     const handleEdit = async (text: string) => {
         const { ok } = await patchComment(comment._id, { text });
-        if (ok) toastNotify('Edited Your Comment!', 'success');
-        else toastNotify('Oops, something went wrong...', 'error');
+        if (!ok) toastNotify('Oops, something went wrong...', 'error');
         onClose();
     };
 
