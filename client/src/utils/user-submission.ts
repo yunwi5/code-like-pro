@@ -37,6 +37,6 @@ export function getSubmissionStats(
     submissions.forEach((submission) => {
         if (submission.correct) correctCount++;
     });
-    const correctRate = round((correctCount / total || 0) * 100, 1).toFixed(1);
+    const correctRate = round((correctCount / (total || 1)) * 100, 1).toFixed(1);
     return { correctRate, correctCount, total };
 }

@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
+
+import useAuth from '../../hooks/useAuth';
+import useExerciseQuery from '../../hooks/queries/useExerciseQuery';
 import ShowcaseMain from '../../components/showcase/ShowcaseMain';
 import { AppProperty } from '../../constants/app';
-import useExerciseQuery from '../../hooks/queries/useExerciseQuery';
-import useAuth from '../../hooks/useAuth';
 import { IUserSubmissionPopulated } from '../../models/interfaces';
 import { ShowcaseContextProvider } from '../../store/context/ShowcaseContext';
 import { useUserContext } from '../../store/context/UserContext';
@@ -17,9 +18,9 @@ const ShowcasePage = () => {
     const { submissionMap } = useUserContext();
     const params = useParams();
     const exerciseId = params.id;
-    // Send the request to get the showcase data of this exercise.
 
-    const { exercise, refetch, isLoading, error } = useExerciseQuery(exerciseId || '');
+    // Fetch the exercise data using React Query.
+    const { exercise, isLoading, error } = useExerciseQuery(exerciseId || '');
 
     const userSubmission: IUserSubmissionPopulated | undefined =
         submissionMap[exerciseId || ''];

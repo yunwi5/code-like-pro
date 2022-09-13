@@ -5,83 +5,6 @@ import {
     IUserSubmissionPopulated,
 } from '../../models/interfaces';
 
-function getRecentDaysDataAsList(numPeriods: number): [DateTime[], IChartData[]] {
-    const today = DateTime.now().startOf('day');
-
-    // Create a list of recent days for trend.
-    const recentDaysList: DateTime[] = [];
-    for (let i = 0; i < numPeriods; i++) {
-        const recentDay = today.plus({ days: -i });
-        recentDaysList.push(recentDay);
-    }
-    // The oldest day is the first element, the most recent day is the last element
-    recentDaysList.reverse();
-
-    const recentDaysChartDataList: IChartData[] = recentDaysList.map((day) => ({
-        label: day.toLocaleString({ month: 'short', day: 'numeric' }),
-        value: 0,
-    }));
-
-    return [recentDaysList, recentDaysChartDataList];
-}
-
-function getRecentWeeksDataAsList(numPeriods: number): [DateTime[], IChartData[]] {
-    const weekEnding = DateTime.now().endOf('week');
-
-    // create a list of recent weeks for trend.
-    const recentWeeksList: DateTime[] = [];
-    for (let i = 0; i < numPeriods; i++) {
-        const recentWeek = weekEnding.plus({ weeks: -i });
-        recentWeeksList.push(recentWeek);
-    }
-    // The oldest week is the first element, the most recent week is the last element
-    recentWeeksList.reverse();
-
-    const recentWeeksChartDataList: IChartData[] = recentWeeksList.map((week) => ({
-        label: week.toLocaleString({ month: 'short', day: 'numeric' }),
-        value: 0,
-    }));
-    return [recentWeeksList, recentWeeksChartDataList];
-}
-
-function getRecentMonthsDataAsList(numPeriods: number): [DateTime[], IChartData[]] {
-    const currentMonth = DateTime.now().startOf('month');
-
-    // create a list of recent months for a trend.
-    const recentMonthsList: DateTime[] = [];
-    for (let i = 0; i < numPeriods; i++) {
-        const recentMonth = currentMonth.minus({ months: i });
-        recentMonthsList.push(recentMonth);
-    }
-    // The oldest month is the first element, the most recent month is the last element.
-    recentMonthsList.reverse();
-
-    const recentMonthsChartDataList: IChartData[] = recentMonthsList.map((month) => ({
-        label: month.toLocaleString({ month: 'long' }),
-        value: 0,
-    }));
-    return [recentMonthsList, recentMonthsChartDataList];
-}
-
-function getRecentYearsDataAsList(numPeriods: number): [DateTime[], IChartData[]] {
-    const currentYear = DateTime.now().startOf('year');
-
-    // create a list of recent years for a trend
-    const recentYearsList: DateTime[] = [];
-    for (let i = 0; i < numPeriods; i++) {
-        const recentYear = currentYear.minus({ years: i });
-        recentYearsList.push(recentYear);
-    }
-    // The oldest month is the first element, the most recent month is the last element.
-    recentYearsList.reverse();
-
-    const recentYearsChartDataList: IChartData[] = recentYearsList.map((year) => ({
-        label: year.toLocaleString({ year: 'numeric' }),
-        value: 0,
-    }));
-    return [recentYearsList, recentYearsChartDataList];
-}
-
 // Exercise attempt trend DAILY
 export function getDailyExerciseAttemptTrendData(
     submissions: IUserSubmissionPopulated[],
@@ -256,4 +179,81 @@ export function getYearlyExerciseAttemptTrendData(
         });
     });
     return recentYearsChartDataList;
+}
+
+function getRecentDaysDataAsList(numPeriods: number): [DateTime[], IChartData[]] {
+    const today = DateTime.now().startOf('day');
+
+    // Create a list of recent days for trend.
+    const recentDaysList: DateTime[] = [];
+    for (let i = 0; i < numPeriods; i++) {
+        const recentDay = today.plus({ days: -i });
+        recentDaysList.push(recentDay);
+    }
+    // The oldest day is the first element, the most recent day is the last element
+    recentDaysList.reverse();
+
+    const recentDaysChartDataList: IChartData[] = recentDaysList.map((day) => ({
+        label: day.toLocaleString({ month: 'short', day: 'numeric' }),
+        value: 0,
+    }));
+
+    return [recentDaysList, recentDaysChartDataList];
+}
+
+function getRecentWeeksDataAsList(numPeriods: number): [DateTime[], IChartData[]] {
+    const weekEnding = DateTime.now().endOf('week');
+
+    // create a list of recent weeks for trend.
+    const recentWeeksList: DateTime[] = [];
+    for (let i = 0; i < numPeriods; i++) {
+        const recentWeek = weekEnding.plus({ weeks: -i });
+        recentWeeksList.push(recentWeek);
+    }
+    // The oldest week is the first element, the most recent week is the last element
+    recentWeeksList.reverse();
+
+    const recentWeeksChartDataList: IChartData[] = recentWeeksList.map((week) => ({
+        label: week.toLocaleString({ month: 'short', day: 'numeric' }),
+        value: 0,
+    }));
+    return [recentWeeksList, recentWeeksChartDataList];
+}
+
+function getRecentMonthsDataAsList(numPeriods: number): [DateTime[], IChartData[]] {
+    const currentMonth = DateTime.now().startOf('month');
+
+    // create a list of recent months for a trend.
+    const recentMonthsList: DateTime[] = [];
+    for (let i = 0; i < numPeriods; i++) {
+        const recentMonth = currentMonth.minus({ months: i });
+        recentMonthsList.push(recentMonth);
+    }
+    // The oldest month is the first element, the most recent month is the last element.
+    recentMonthsList.reverse();
+
+    const recentMonthsChartDataList: IChartData[] = recentMonthsList.map((month) => ({
+        label: month.toLocaleString({ month: 'long' }),
+        value: 0,
+    }));
+    return [recentMonthsList, recentMonthsChartDataList];
+}
+
+function getRecentYearsDataAsList(numPeriods: number): [DateTime[], IChartData[]] {
+    const currentYear = DateTime.now().startOf('year');
+
+    // create a list of recent years for a trend
+    const recentYearsList: DateTime[] = [];
+    for (let i = 0; i < numPeriods; i++) {
+        const recentYear = currentYear.minus({ years: i });
+        recentYearsList.push(recentYear);
+    }
+    // The oldest month is the first element, the most recent month is the last element.
+    recentYearsList.reverse();
+
+    const recentYearsChartDataList: IChartData[] = recentYearsList.map((year) => ({
+        label: year.toLocaleString({ year: 'numeric' }),
+        value: 0,
+    }));
+    return [recentYearsList, recentYearsChartDataList];
 }

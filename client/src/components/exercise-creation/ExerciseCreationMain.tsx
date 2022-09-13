@@ -24,6 +24,7 @@ const ExerciseCreationMain = () => {
                 <CreationTemplate />
                 <CreationTestCases />
                 {/* Component for a set of buttons like 'Run Code', 'Save Changes' etc. */}
+                {/* Do not render sidebar for smaller screens < 1024px. */}
                 <div className="lg:hidden">
                     <CreationActions />
                 </div>

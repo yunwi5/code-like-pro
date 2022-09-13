@@ -8,7 +8,7 @@ const ExerciseAttemptMain: React.FC = () => {
             {/* Code editor left side, consisting of prompt, test cases, and scratch pad */}
             <ExerciseInfoSection />
 
-            {/* Code editor right side, consisting of control bar, editor and output */}
+            {/* Code editor right side, consisting of control bar, editor. */}
             <EditorOutputSection />
         </main>
     );

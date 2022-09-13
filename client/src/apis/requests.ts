@@ -77,7 +77,7 @@ export async function deleteRequest<T>({ url, headers }: ReqParams) {
 }
 
 // Extract error meessage from the response, if the request throws an error.
-function extractErrorMessage(error: any) {
+function extractErrorMessage(error: any): string {
     console.log('Response error:', error);
     let responseError = error.response.data.message;
     if (typeof responseError !== 'string') {

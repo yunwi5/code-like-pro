@@ -1,6 +1,5 @@
-// When hover, the underline expands from the middle to both sides.
-// Mainly used for link hovering effect.
-@mixin underline-from-middle($bg: $color-main-400, $height: 2.1px) {
+// Underline effect ::after pseudo element settings.
+@mixin underline-effect($bg, $height) {
     position: relative;
 
     &::after {
@@ -14,8 +13,24 @@
         background-color: $bg;
         transition: all 0.35s ease-out;
     }
+}
+
+// When hover, the underline expands from the middle to both sides.
+// Mainly used for link hovering effect.
+@mixin hover-underline-from-middle($bg: $color-main-400, $height: 2.1px) {
+    @include underline-effect($bg, $height);
 
     &:hover::after {
+        width: 100%;
+    }
+}
+
+// When focused within, the underline expands from the middle to both sides.
+// Used for pretty focus effect on the input group.
+@mixin focus-underline-from-middle($bg: $color-main-400, $height: 2.5px) {
+    @include underline-effect($bg, $height);
+
+    &:focus-within::after {
         width: 100%;
     }
 }

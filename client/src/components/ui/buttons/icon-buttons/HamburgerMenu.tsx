@@ -5,7 +5,7 @@ interface Props {
     setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// Hamburger menu on the top header. It is used to toggle the mobile dropdown menu.
+// Hamburger menu icon on the top header. It is used to toggle the mobile dropdown menu.
 const HamburgerMenu: React.FC<Props> = ({ visible, setVisible }) => {
     return (
         <div

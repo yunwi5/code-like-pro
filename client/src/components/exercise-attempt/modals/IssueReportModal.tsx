@@ -34,7 +34,7 @@ const IssueReportModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         }
 
         setIsLoading(true);
-        const { ok, data, message } = await reportExerciseRequest(exercise._id, {
+        let { ok, data, message } = await reportExerciseRequest(exercise._id, {
             category: issueCategory,
             description,
         });
@@ -45,7 +45,7 @@ const IssueReportModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             toastNotify('Sending report successful!', 'success');
             onClose();
         } else {
-            console.log(message);
+            message = message || 'Something went wrong...';
             setError(message);
             toastNotify(message, 'error');
         }

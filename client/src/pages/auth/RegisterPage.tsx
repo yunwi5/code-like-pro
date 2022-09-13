@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet';
 import { AppProperty } from '../../constants/app';
-import AuthCard from '../../components/auth/AuthCard';
 import RegisterForm from '../../components/auth/RegisterForm';
 
 const RegisterPage = () => {

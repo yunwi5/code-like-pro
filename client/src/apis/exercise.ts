@@ -1,5 +1,6 @@
 import { AppProperty } from '../constants/app';
 import {
+    IComment,
     IExercise,
     IExerciseWithId,
     IIssueReport,
@@ -58,4 +59,12 @@ export async function postExerciseShowCase(id: string, showcaseProps: ShowcaePro
         url: `${API_DOMAIN}/${id}/showcase`,
         body: showcaseProps,
     });
+}
+
+export async function getExerciseComments(id: string) {
+    return await getRequest<IComment[]>({ url: `${API_DOMAIN}/${id}/comment` });
+}
+
+export async function postExerciseComment(id: string, comment: { text: string }) {
+    return await postRequest<IComment>({ url: `${API_DOMAIN}/${id}/comment`, body: comment });
 }

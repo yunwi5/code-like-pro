@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsFillTagsFill } from 'react-icons/bs';
-import Tag from '../design-elements/Tag';
+import Tag from '../labels/Tag';
 
 interface Props {
     className?: string;

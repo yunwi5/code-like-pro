@@ -58,7 +58,7 @@ const RegisterForm = () => {
         if (Object.values(error).join('').trim()) return;
 
         setIsLoading(true);
-        const { ok, data, message } = await registerRequest(registerState);
+        const { ok, message } = await registerRequest(registerState);
         setIsLoading(false);
 
         // If register is success, redirect to the login page.

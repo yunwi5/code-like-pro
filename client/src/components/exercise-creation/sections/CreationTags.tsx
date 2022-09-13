@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProgrammingTopicList } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
-import Tag from '../../ui/design-elements/Tag';
+import Tag from '../../ui/labels/Tag';
 import AutoComplete from '../../ui/inputs/AutoComplete';
 
 const PredefinedTags = [...ProgrammingTopicList];

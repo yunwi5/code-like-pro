@@ -85,12 +85,11 @@ code {
     .btn-social {
         @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200 border-transparent;
     }
-    // Button in blue color (secondary theme)
-    .btn-blue-fill {
-        @apply text-main-50 bg-blue-600 hover:bg-blue-700/90;
-    }
     .btn-disabled {
         @apply opacity-50 cursor-not-allowed;
+    }
+    .icon-btn {
+        @apply hover:text-main-500 cursor-pointer;
     }
     .icon-box {
         @apply flex-center text-2xl border-[1.5px] rounded-sm shadow-md transition-all cursor-pointer;
