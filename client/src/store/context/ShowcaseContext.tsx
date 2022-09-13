@@ -36,6 +36,7 @@ export const ShowcaseContextProvider: React.FC<Props> = ({
     const { comments, refetch: refetchComments } = useExerciseCommentsQuery(exercise._id, 800);
 
     // Use React-Query to fetch the showcases data of this exercise.
+    // Implementation should be here.
 
     // Refetch comment or showcase data from the server using custom query hooks.
     const refetchQuery = (option: QueryOption) => {

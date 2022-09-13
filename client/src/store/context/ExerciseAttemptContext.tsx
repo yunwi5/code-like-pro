@@ -70,8 +70,6 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         });
         setIsLoading(false);
 
-        console.log('outputs:', outputs);
-
         if (ok && outputs) {
             setTestCaseOutputs(outputs);
             const { correct } = getCorrectTestCaseCount(outputs);
@@ -95,7 +93,6 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         if (ok && newSubmission) {
             setUserSubmission(newSubmission);
             if (newSubmission.correct) {
-                toastNotify('Your submission status is correct!', 'success');
                 setShowInviteModal(true);
             } else {
                 toastNotify(`Submission status is incorrect. Debug your code and try again!`);
