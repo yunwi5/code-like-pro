@@ -3,6 +3,7 @@ import { AiFillWechat } from 'react-icons/ai';
 import { FaLaptopCode } from 'react-icons/fa';
 import { TbBulb } from 'react-icons/tb';
 import { BiCodeAlt } from 'react-icons/bi';
+import RoundButton from '../ui/buttons/RoundButton';
 
 export enum ShowcaseSection {
     MODEL_ANSWER = 'Model Answer',
@@ -49,15 +50,13 @@ const ShowcaseNav: React.FC<Props> = ({
 
             {/* Posting showcase action trigger */}
             <div>
-                <button
+                <RoundButton
                     onClick={() => setShowPostModal(true)}
-                    className={
-                        'flex-center gap-2 px-3 py-2 text-base rounded-sm bg-slate-700/[95%] hover:bg-slate-800 text-white shadow-md'
-                    }
+                    className="flex-center gap-2 text-base"
                 >
                     <BiCodeAlt className="text-xl" />
                     Post Showcase
-                </button>
+                </RoundButton>
             </div>
         </nav>
     );

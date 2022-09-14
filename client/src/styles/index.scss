@@ -71,7 +71,7 @@ code {
         @apply px-2 py-2 border-2 border-gray-300 bg-gray-50 rounded-sm shadow-md focus:shadow-lg focus:outline focus:outline-2 focus:outline-main-300;
     }
     .btn {
-        @apply px-3 py-2 text-lg transition-all rounded-sm shadow-sm hover:shadow-md cursor-pointer;
+        @apply px-3 py-2 text-lg transition-all rounded-sm shadow hover:shadow-md cursor-pointer;
     }
     .btn-fill {
         @apply text-main-50 bg-main-400 hover:bg-main-500 border-2 border-main-400 hover:border-main-500;
@@ -83,10 +83,16 @@ code {
         @apply px-2 py-[0.3rem] text-base;
     }
     .btn-social {
-        @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200 border-transparent;
+        @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200 border-transparent hover:border-transparent;
     }
     .btn-disabled {
         @apply opacity-50 cursor-not-allowed;
+    }
+    .btn-dark {
+        @apply bg-gray-700/[88] text-gray-50 hover:bg-gray-800 hover:text-white;
+    }
+    .btn-light {
+        @apply bg-white text-gray-600 hover:bg-gray-50 hover:text-main-500;
     }
     .icon-box {
         @apply flex-center text-2xl border-[1.5px] rounded-sm shadow-md transition-all cursor-pointer;
