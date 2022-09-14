@@ -11,7 +11,7 @@ function usePagination<T>({ array, itemPerPage }: { array: T[]; itemPerPage: num
     const currentPageItems = useMemo(() => {
         const startIndex = page * itemPerPage;
         return array.slice(startIndex, startIndex + itemPerPage);
-    }, [page, array]);
+    }, [page, array, itemPerPage]);
 
     // If the array length changes, go back to the first page.
     // So that user is not left with the empty page (due to the filtering).

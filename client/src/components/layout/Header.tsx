@@ -123,7 +123,7 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
                     className="block mt-4 lg:inline-block lg:mt-0 text-text-main hover:text-main-600 transition-all mr-10"
                     activeClassName="text-main-500 font-semibold"
                 >
-                    Browse
+                    Explore
                 </ActiveNavLink>
                 <ActiveNavLink
                     to="/ranking"
