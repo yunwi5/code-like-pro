@@ -36,12 +36,15 @@ const CommentForm: React.FC<Props> = (props) => {
         setText(e.target.value);
     };
 
+    // Cancel adding comment. Call onCancel() callback which is called when the cancel action is triggered.
     const handleCancel = () => {
         setText('');
         onCancel && onCancel();
     };
 
     useEffect(() => {
+        // Whenever form text changes, re-validates whether the form is valid or not.
+        // Form is valid only if there is a non-empty text.
         setFormValid(text.trim() === '' ? false : true);
     }, [text]);
 
