@@ -11,23 +11,15 @@ import { IExerciseCard } from '../../models/interfaces';
 import { createRandomExercises } from '../../utils/random/random-exercise';
 import { toastNotify } from '../../utils/notification';
 import { mapExercisesToExerciseCards } from '../../utils/exercise-utils/exercise';
+import useExerciseListQuery from '../../hooks/queries/useExerciseListQuery';
 
 const BrowsingPage: React.FC = () => {
     const navigate = useNavigate();
-    const {
-        isLoading,
-        error,
-        data: exercises,
-    } = useQuery(['exercises'], () => getExercises().then((res) => res.data));
-
-    if (error) {
-        console.log(error);
-        return <h1 className="flex-center h-[82.5vh] text-center">Something went wrong...</h1>;
-    }
+    const { isLoading, exercises, error } = useExerciseListQuery();
 
     // exercise cards from the server.
     const exerciseCards: IExerciseCard[] = useMemo(
-        () => mapExercisesToExerciseCards(exercises || []),
+        () => mapExercisesToExerciseCards(exercises),
         [exercises],
     );
 

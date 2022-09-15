@@ -1,4 +1,4 @@
-import { ITestCase } from '..';
+import { IComment, ITestCase } from '..';
 import { Difficulty, Language, ProgrammingTopic } from '../../enums';
 import { IUser } from '../user/IUser';
 
@@ -21,4 +21,5 @@ export interface IExercise {
 
 export interface IExerciseWithId extends IExercise {
     _id: string;
+    comments: IComment[] | string[];
 }

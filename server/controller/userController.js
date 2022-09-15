@@ -13,7 +13,7 @@ const getUserByID = async (req, res) => {
         const submissionsPromise = UserSubmission.find({ user: req.params.id }).populate(
             'exercise',
         );
-        const exercisesPromise = Exercise.find({ author: req.params.id });
+        const exercisesPromise = Exercise.find({ author: req.params.id }).populate('comments');
 
         // Await for async db operations all at once. Optimization purpose.
         const [userFound, submissions, exercises] = await Promise.all([

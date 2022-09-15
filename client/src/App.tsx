@@ -20,6 +20,7 @@ const ExerciseEditPage = lazy(() => import('./pages/exercise-pages/ExerciseEditP
 const ExerciseAttemptPage = lazy(() => import('./pages/exercise-pages/ExerciseAttemptPage'));
 const BrowsingPage = lazy(() => import('./pages/exercise-pages/BrowsingPage'));
 const ShowcasePage = lazy(() => import('./pages/exercise-pages/ShowcasePage'));
+const ShowcaseListPage = lazy(() => import('./pages/exercise-pages/ShowcaseListPage'));
 
 const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =
     ProfilePages;
@@ -60,6 +61,7 @@ function App() {
                     <Route path="/edit-exercise/:id" element={<ExerciseEditPage />} />
                     <Route path="/exercise/:id" element={<ExerciseAttemptPage />} />
                     <Route path="/showcase/:id" element={<ShowcasePage />} />
+                    <Route path="/showcase-list" element={<ShowcaseListPage />} />
 
                     {/* Undefined routes redirect to the home page */}
                     <Route path="*" element={<Navigate to="/" replace />} />

@@ -52,7 +52,7 @@ const postExercise = async (req, res) => {
 
 const getExercises = async (req, res) => {
     // populate author field with author name
-    const exercises = await Exercise.find({}).populate('author', 'name');
+    const exercises = await Exercise.find({}).populate('author', 'name').populate('comments');
     res.status(200).json(exercises);
 };
 
@@ -60,7 +60,10 @@ const getExerciseByID = async (req, res) => {
     let exercise;
     try {
         // populate author field with author name
-        exercise = await Exercise.findById(req.params.id).populate('author', 'name');
+        exercise = await Exercise.findById(req.params.id)
+            .populate('author', 'name')
+            .populate('comments');
+        console.log('exercise:', exercise);
     } catch (err) {
         console.log(err.message);
     }

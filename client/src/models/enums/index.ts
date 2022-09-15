@@ -10,5 +10,6 @@ export { SortingDirection, SortingDirectionList } from './sorting/SortingDirecti
 
 export { CreationSection, CreationSectionList } from './page-sections/CreationSection';
 export { ProfileSection, ProfileSectionList } from './page-sections/ProfileSection';
+export * from './page-sections/ShowCaseSection';
 
 export { TrendPeriodMode, TrendPeriodModeList } from './data-analysis/TrendPeriodMode';
