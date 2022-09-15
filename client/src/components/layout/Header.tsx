@@ -3,7 +3,6 @@ import { Link, NavLink } from 'react-router-dom';
 import { Logo } from '../../assets';
 import { ProfileSectionList } from '../../models/enums';
 import { useUserContext } from '../../store/context/UserContext';
-import { getShowcaseListPageLink } from '../../utils/links';
 import { ProfileLinkMap } from '../../utils/profile';
 import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
 import ActiveNavLink from '../ui/links/ActiveNavLink';
@@ -121,29 +120,29 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
             <div className="text-md lg:text-center md:flex-grow">
                 <ActiveNavLink
                     to="/browse"
-                    className="block mt-4 lg:inline-block lg:mt-0 text-text-main hover:text-main-600 transition-all mr-10"
-                    activeClassName="text-main-500 font-semibold"
+                    className="link-underline-effect mt-4 lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all mr-10"
+                    activeClassName="!text-main-500"
                 >
                     Explore
                 </ActiveNavLink>
                 <ActiveNavLink
                     to="/create-exercise"
-                    activeClassName="text-main-500 font-semibold"
-                    className="block mt-4 lg:inline-block lg:mt-0 text-text-main hover:text-main-600 transition-all mr-10"
+                    activeClassName="!text-main-500"
+                    className="link-underline-effect mt-4 lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all mr-10"
                 >
                     Create
                 </ActiveNavLink>
                 <ActiveNavLink
-                    to={getShowcaseListPageLink()}
-                    activeClassName="text-main-500 font-semibold"
-                    className="block mt-4 lg:inline-block lg:mt-0 text-text-main hover:text-main-600 transition-all mr-10"
+                    to={'/showcase-invites'}
+                    activeClassName="!text-main-500"
+                    className="link-underline-effect mt-4 lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all mr-10"
                 >
                     Showcases
                 </ActiveNavLink>
                 <ActiveNavLink
                     to="/ranking"
-                    activeClassName="text-main-500 font-semibold"
-                    className="block mt-4 lg:inline-block lg:mt-0 text-text-main hover:text-main-600 transition-all"
+                    activeClassName="!text-main-500"
+                    className="link-underline-effect mt-4 lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
                 >
                     Ranking
                 </ActiveNavLink>

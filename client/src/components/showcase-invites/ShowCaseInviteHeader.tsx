@@ -8,8 +8,8 @@ const ShowCaseInviteHeader: React.FC = () => {
     return (
         <header className="flex items-center justify-between">
             <div>
-                <h1 className="text-main-500/90 text-2xl lg:text-4xl capitalize">
-                    Please join our <span className="text-purple-600">showcase forums!</span>
+                <h1 className="bg-gradient-to-r from-main-500/90 to-fuchsia-600 bg-clip-text text-transparent lg:text-4xl capitalize">
+                    Please join our showcase forums!
                 </h1>
                 <div className="mt-5 text-[1.075rem] text-gray-500">
                     <p>

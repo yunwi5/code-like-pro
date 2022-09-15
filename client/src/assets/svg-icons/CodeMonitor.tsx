@@ -1,5 +1,6 @@
 import React from 'react';
 
+// License: CC0 License from https://www.svgrepo.com/
 const CodeMonitor: React.FC<{ size: string }> = ({ size }) => {
     return (
         <svg
