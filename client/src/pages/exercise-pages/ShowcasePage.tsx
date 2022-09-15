@@ -16,8 +16,7 @@ const ShowcasePage = () => {
     useAuth();
     const navigate = useNavigate();
     const { submissionMap } = useUserContext();
-    const params = useParams();
-    const exerciseId = params.id;
+    const exerciseId = useParams().id;
 
     // Fetch the exercise data using React Query.
     const { exercise, isLoading, error } = useExerciseQuery(exerciseId || '');
@@ -42,9 +41,11 @@ const ShowcasePage = () => {
                     content="Showcase page of a programming exercise where users can post their code, view other users' coding solutions and discuss the efficiency."
                 />
             </Helmet>
+
             <div className="flex-center min-h-[83vh] my-10">
                 {/* If there is no exercise yet, show the loading spinner. */}
                 {!exercise && <ClipLoader size={200} color="#3c38e0" />}
+
                 {/* Wrap the showcase components with the showcase context that provides all showcase data. */}
                 {exercise && userSubmission && (
                     <ShowcaseContextProvider

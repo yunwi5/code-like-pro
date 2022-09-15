@@ -11,7 +11,7 @@ const ShowcaseMain: React.FC = () => {
 
     return (
         <div className="flex flex-col gap-5 w-[95vw] lg:w-[92vw] xl:w-[85vw] max-w-[80rem] text-gray-700">
-            {/* Showcase header displaying exercise information and two action buttons */}
+            {/* Showcase header displaying exercise information and two action buttons. */}
             <ShowcaseHeader />
 
             {/* Showcase nav controlling active section. Display a button for posting user showcase. */}
