@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { parseQueryString } from '../../utils/string-utils/query';
 import ShowcaseDiscussions from './discussions/ShowcaseDiscussions';
 import ShowcasePostModal from './modal/ShowcasePostModal';
 import ShowcaseModelAnswer from './model-answer/ShowcaseModelAnswer';
@@ -6,8 +8,20 @@ import ShowcaseHeader from './ShowcaseHeader';
 import ShowcaseNav, { ShowcaseSection } from './ShowcaseNav';
 
 const ShowcaseMain: React.FC = () => {
-    const [activeSection, setActiveSection] = useState(ShowcaseSection.MODEL_ANSWER);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const section = parseQueryString<ShowcaseSection | null>(searchParams.get('section'));
+    const [activeSection, setActiveSection] = useState(
+        section ?? ShowcaseSection.MODEL_ANSWER,
+    );
     const [showPostModal, setShowPostModal] = useState(false);
+
+    useEffect(() => {
+        if (section) setActiveSection(parseQueryString(section) as any);
+    }, [section]);
+
+    useEffect(() => {
+        setSearchParams({ section: activeSection });
+    }, [activeSection]);
 
     return (
         <div className="flex flex-col gap-5 w-[95vw] lg:w-[92vw] xl:w-[85vw] max-w-[80rem] text-gray-700">

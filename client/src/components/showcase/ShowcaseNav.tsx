@@ -15,7 +15,7 @@ const ShowcaseSectionList = Object.values(ShowcaseSection || {});
 
 interface Props {
     activeSection: ShowcaseSection;
-    setActiveSection: React.Dispatch<React.SetStateAction<ShowcaseSection>>;
+    setActiveSection: (section: ShowcaseSection) => void;
     setShowPostModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
