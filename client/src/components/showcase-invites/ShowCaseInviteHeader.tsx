@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiOutlineWarning } from 'react-icons/ai';
 import { CodeMonitor } from '../../assets';
 
 // Header of the showcases invite page.
@@ -11,13 +12,18 @@ const ShowCaseInviteHeader: React.FC = () => {
                     Please join our <span className="text-purple-600">showcase forums!</span>
                 </h1>
                 <div className="mt-5 text-[1.075rem] text-gray-500">
-                    <p className="flex-start gap-2">
+                    <p>
                         We encourage you to join our challenge showcase forums and showcase
                         your amazing work!
                     </p>
-                    <p className="flex-start gap-2">
+                    <p>
                         Your participation in the showcases will contribute to your rankings as
                         well!
+                    </p>
+                    <p className="flex-start gap-1 text-stone-500 text-base">
+                        <AiOutlineWarning className="text-stone-500" />
+                        You can only join showcases for the exercises that you created or
+                        solved.
                     </p>
                 </div>
             </div>

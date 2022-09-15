@@ -29,5 +29,5 @@ export function getShowcasePageLink(
 }
 
 export function getShowcaseListPageLink() {
-    return `/showcase-list`;
+    return `/showcase-invites`;
 }

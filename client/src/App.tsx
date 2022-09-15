@@ -61,7 +61,9 @@ function App() {
                     <Route path="/edit-exercise/:id" element={<ExerciseEditPage />} />
                     <Route path="/exercise/:id" element={<ExerciseAttemptPage />} />
                     <Route path="/showcase/:id" element={<ShowcasePage />} />
-                    <Route path="/showcase-list" element={<ShowcaseListPage />} />
+
+                    {/* Showcase invites page listing showcase options available for the user. */}
+                    <Route path="/showcase-invites" element={<ShowcaseListPage />} />
 
                     {/* Undefined routes redirect to the home page */}
                     <Route path="*" element={<Navigate to="/" replace />} />

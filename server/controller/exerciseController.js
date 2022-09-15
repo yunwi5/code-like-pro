@@ -21,7 +21,6 @@ const postExercise = async (req, res) => {
         // Append test case to solution code and check if output is right
 
         const test = solutionCode + '\n\n' + testCase.code;
-        console.log(test);
 
         const body = {
             run_spec: {
@@ -37,7 +36,6 @@ const postExercise = async (req, res) => {
 
     const testCaseResults = await Promise.all(testCasePromises);
 
-    console.log(testCaseResults);
     for (let i = 0; i < testCaseResults.length; i++) {
         if (testCaseResults[i].stdout.trim() != testCases[i].expectedOutput.trim()) {
             return res.status(400).json({ message: 'Some test cases failed.' });
@@ -63,7 +61,6 @@ const getExerciseByID = async (req, res) => {
         exercise = await Exercise.findById(req.params.id)
             .populate('author', 'name')
             .populate('comments');
-        console.log('exercise:', exercise);
     } catch (err) {
         console.log(err.message);
     }
