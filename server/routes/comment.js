@@ -8,17 +8,20 @@ const router = express.Router();
 
 // Routes for editing or deleting the comment of the param id.
 router
-    .route('/:id')
-    .patch(ensureAuthenticated, catchAsync(commentController.patchComment))
-    .delete(ensureAuthenticated, catchAsync(commentController.deleteComment));
+  .route('/:id')
+  .patch(ensureAuthenticated, catchAsync(commentController.patchComment))
+  .delete(ensureAuthenticated, catchAsync(commentController.deleteComment));
 
 // Routes for getting and posting the replying comments of the comment of the param id.
 router
-    .route('/:id/reply')
-    .get(catchAsync(commentController.getReplyComments))
-    .post(ensureAuthenticated, catchAsync(commentController.postReplyComment));
+  .route('/:id/reply')
+  .get(catchAsync(commentController.getReplyComments))
+  .post(ensureAuthenticated, catchAsync(commentController.postReplyComment));
 
 // Routes for handling user upvote and downvote to the comment of the param id.
-router.post('/:id/vote', ensureAuthenticated, catchAsync(commentController.voteComment));
+router
+  .route('/:id/vote')
+  .post(ensureAuthenticated, catchAsync(commentController.voteComment))
+  .delete(ensureAuthenticated, catchAsync(commentController.cancelVoteComment));
 
 module.exports = router;
