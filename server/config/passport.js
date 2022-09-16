@@ -37,7 +37,7 @@ const passportStrategy = (passport) => {
         }),
     );
 
-    // Google authentication still in development
+    // Google authentication
     passport.use(
         new GoogleStrategy(
             {
@@ -67,7 +67,6 @@ const passportStrategy = (passport) => {
                                     pictureUrl: picture,
                                 },
                                 (err, user) => {
-                                    // request.user = user;
                                     return done(err, user);
                                 },
                             );

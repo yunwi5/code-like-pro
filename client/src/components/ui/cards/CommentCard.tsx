@@ -7,7 +7,7 @@ import {
     MdThumbUpAlt,
 } from 'react-icons/md';
 
-import { deleteComment, postCommentVote } from '../../../apis/comment';
+import { deleteComment, deleteCommentVote, postCommentVote } from '../../../apis/comment';
 import { IComment, IVote } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getDateTimeFormat } from '../../../utils/datetime';
@@ -25,24 +25,31 @@ interface Props {
 
 const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
     const { userDetail } = useUserContext();
+    const userId = userDetail?._id;
     const [votes, setVotes] = useState<IVote[]>(comment.votes);
+    // Set modal either none, edit modal or delete modal.
     const [modal, setModal] = useState<null | 'edit' | 'delete'>(null);
 
     const handleUserVote = async (type: 'up' | 'down') => {
-        if (!userDetail) return;
-        const userVoteIndex = votes.findIndex((vote) => vote.user === userDetail._id);
+        if (!userId) return;
+        const userVoteIndex = votes.findIndex((vote) => vote.user === userId);
 
         if (userVoteIndex < 0) {
             // If the user has no votes so far, add a new vote.
-            const newVote = { type, user: userDetail._id };
+            const newVote = { type, user: userId };
             setVotes([...votes, newVote]);
+
+            // Send request to post the comment vote by this user.
             await postCommentVote(comment._id, { type });
         } else {
             const userVote = votes[userVoteIndex];
 
             if (userVote.type === type) {
                 // Cancel voting.
-                setVotes(votes.filter((vote) => vote.user !== userDetail._id));
+                setVotes(votes.filter((vote) => vote.user !== userId));
+
+                // Send DELETE request to cancel the vote on this comment.
+                await deleteCommentVote(comment._id);
             } else {
                 // If the user already has vote on this comment, modify the vote and create a new array.
                 votes[userVoteIndex].type = type;
@@ -55,7 +62,7 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
     const handleDeleteComment = async () => {
         const { ok } = await deleteComment(comment._id);
         if (!ok)
-            toastNotify('Oops, something went wrong while deleting your comment.', 'error');
+            toastNotify('Oops, something went wrong while deleting your comment...', 'error');
     };
 
     // Derive upvote & downvote count from the list of votes
@@ -66,9 +73,10 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
     const downVoteCount = votes.length - upvoteCount;
 
     // Find current user's vote on this comment.
-    const userVote = votes.find((vote) => vote.user === userDetail?._id);
+    const userVote = votes.find((vote) => vote.user === userId);
 
-    const isCommentAuthor = comment.user._id === userDetail?._id;
+    // Check if the user is the author of the comment.
+    const isCommentAuthor = comment.user._id === userId;
 
     return (
         <article className="flex-1 flex gap-4 text-gray-799">
@@ -135,7 +143,6 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
             {modal === 'edit' && (
                 <CommentEditModal onClose={() => setModal(null)} comment={comment} />
             )}
-
             {modal === 'delete' && (
                 <DeleteModal
                     onClose={() => setModal(null)}

@@ -4,18 +4,11 @@ import { FaLaptopCode } from 'react-icons/fa';
 import { TbBulb } from 'react-icons/tb';
 import { BiCodeAlt } from 'react-icons/bi';
 import RoundButton from '../ui/buttons/RoundButton';
-
-export enum ShowcaseSection {
-    MODEL_ANSWER = 'Model Answer',
-    SHOWCASES = 'Showcases',
-    DISCUSSIONS = 'Discussions',
-}
-
-const ShowcaseSectionList = Object.values(ShowcaseSection || {});
+import { ShowCaseSection, ShowCaseSectionList } from '../../models/enums';
 
 interface Props {
-    activeSection: ShowcaseSection;
-    setActiveSection: React.Dispatch<React.SetStateAction<ShowcaseSection>>;
+    activeSection: ShowCaseSection;
+    setActiveSection: (section: ShowCaseSection) => void;
     setShowPostModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -28,7 +21,7 @@ const ShowcaseNav: React.FC<Props> = ({
         <nav className="flex justify-between items-center">
             {/* Showcase section navigation as a list */}
             <div className="flex justify-start items-center gap-3">
-                {ShowcaseSectionList.map((section) => {
+                {ShowCaseSectionList.map((section) => {
                     let activeClass = '';
                     if (activeSection === section) {
                         activeClass +=
@@ -62,13 +55,13 @@ const ShowcaseNav: React.FC<Props> = ({
     );
 };
 
-function getSectionIcon(section: ShowcaseSection) {
+function getSectionIcon(section: ShowCaseSection) {
     switch (section) {
-        case ShowcaseSection.MODEL_ANSWER:
+        case ShowCaseSection.MODEL_ANSWER:
             return <TbBulb className="text-xl" />;
-        case ShowcaseSection.SHOWCASES:
+        case ShowCaseSection.SHOWCASES:
             return <FaLaptopCode className="text-xl" />;
-        case ShowcaseSection.DISCUSSIONS:
+        case ShowCaseSection.DISCUSSIONS:
             return <AiFillWechat className="text-xl" />;
     }
 }

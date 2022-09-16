@@ -14,7 +14,7 @@ router.route('/login').get(
 router.get(
     '/callback',
     passport.authenticate('google', {
-        successRedirect: `${keys.ClientBaseURL}`,
+        successRedirect: keys.ClientBaseURL,
         failureMessage: true,
         failureRedirect: `${keys.ClientBaseURL}/login`,
     }),

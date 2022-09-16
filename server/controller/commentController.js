@@ -9,7 +9,10 @@ const getReplyComments = async (req, res) => {
         // If the comment was not found, return 404.
         if (comment == null) return res.status(404).json('Comment not found.');
 
-        const replyComments = await Comment.find({ replyTo: comment }).populate({path: 'user', select: ['email', 'name', 'pictureUrl']});
+        const replyComments = await Comment.find({ replyTo: comment }).populate({
+            path: 'user',
+            select: ['email', 'name', 'pictureUrl'],
+        });
         return res.status(200).json(replyComments);
     } catch (err) {
         console.log(err.message);
@@ -123,12 +126,38 @@ const voteComment = async (req, res) => {
     }
 };
 
+// Cancel the user's vote on the comment
+const cancelVoteComment = async (req, res) => {
+    const commentId = req.params.id;
+
+    try {
+        const comment = await Comment.findById(commentId);
+
+        const foundIndex = comment.votes.findIndex(
+            (vote) => vote.user.toString() === req.user._id.toString(),
+        );
+
+        if (foundIndex < 0) {
+            // If the vote was not found, return 404
+            return res.status(404).json({ message: 'User vote not found' });
+        } else {
+            // Remove the vote from the array.
+            comment.votes.splice(foundIndex, 1);
+            await comment.save();
+            return res.status(200).json(comment);
+        }
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+};
+
 const controller = {
     getReplyComments,
     postReplyComment,
     patchComment,
     deleteComment,
     voteComment,
+    cancelVoteComment,
 };
 
 module.exports = controller;

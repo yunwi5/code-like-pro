@@ -6,7 +6,7 @@ function useExerciseCommentsQuery(exerciseId: string, refetchInterval: number = 
     const queryClient = useQueryClient();
 
     // Use React-Query to fetch the comments data of this exercise.
-    const commentQueryKey = `exercise-${exerciseId}.comment`;
+    const commentQueryKey = `exercise-${exerciseId}-comment`;
     const { data: response, isLoading } = useQuery(
         [commentQueryKey],
         () => getExerciseComments(exerciseId),

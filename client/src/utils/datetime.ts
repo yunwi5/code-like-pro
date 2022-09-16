@@ -1,15 +1,19 @@
-import { DateTime } from 'luxon';
+import { DateTime, Interval } from 'luxon';
 
-export function getDateTimeFormat(isoString: string) {
-    const postDateTime = DateTime.fromISO(isoString);
-    const dateTimeFormat = postDateTime.toLocaleString(DateTime.DATETIME_MED);
-    return dateTimeFormat;
+// Get datetime format either absolute or relative formats.
+export function getDateFormat(isoString: string) {
+    const dt = DateTime.fromISO(isoString);
+    return dt.toLocaleString(DateTime.DATE_MED);
 }
 
-export function getDateFormat(isoString: string) {
-    const date = DateTime.fromISO(isoString);
-    const dateFormat = date.toLocaleString(DateTime.DATE_MED);
-    return dateFormat;
+export function getDateTimeFormat(isoString: string, relative: boolean = true) {
+    const dt = DateTime.fromISO(isoString);
+
+    // Return absolute datetime format i.e. 9th Aug 2022, 3:50pm
+    if (!relative) return dt.toLocaleString(DateTime.DATE_MED);
+
+    dt.toRelative();
+    return dt.toRelative();
 }
 
 // Used for sorting by datetime. Both params should be a valid ISO date format.

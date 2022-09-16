@@ -34,3 +34,7 @@ export async function postReplyComment(commentId: string, comment: { text: strin
 export async function postCommentVote(commentId: string, vote: { type: 'up' | 'down' }) {
     return await postRequest<IComment>({ url: `${API_DOMAIN}/${commentId}/vote`, body: vote });
 }
+
+export function deleteCommentVote(commentId: string) {
+    return deleteRequest<IComment>({ url: `${API_DOMAIN}/${commentId}/vote` });
+}
