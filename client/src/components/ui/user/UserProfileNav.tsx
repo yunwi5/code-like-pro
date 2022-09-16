@@ -20,7 +20,7 @@ const UserProfileNav: React.FC = () => {
                 <ProfilePicture picture={userDetail?.pictureUrl} />
 
                 {/* Show user name for medium to large screen sizes. */}
-                <p className="md:block">{userDetail?.name}</p>
+                <p className="hidden md:block">{userDetail?.name}</p>
 
                 {/* Dropdown toggler button. */}
                 <IoMdArrowDropdown className="text-gray-600 hover:text-main-500 text-xl" />

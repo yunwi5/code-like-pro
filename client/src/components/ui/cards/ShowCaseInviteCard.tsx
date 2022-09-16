@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { AiFillWechat } from 'react-icons/ai';
 import { BsCodeSlash } from 'react-icons/bs';
 import { FaLaptopCode, FaUserEdit } from 'react-icons/fa';
 import { TbBulb } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
-import { ShowCaseSection } from '../../../models/enums';
 
+import { ShowCaseSection } from '../../../models/enums';
 import { IExerciseWithId } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getShowcasePageLink } from '../../../utils/links';
@@ -59,7 +60,7 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
             </div>
 
             {/* Listing showcase page links with its associated sections as query strings. */}
-            <footer className="flex gap-2">
+            <footer className="flex flex-col md:flex-row gap-2">
                 <Link
                     to={getShowcasePageLink(exercise._id, ShowCaseSection.MODEL_ANSWER)}
                     className="flex-start gap-2 px-3 py-1 transition-all hover:bg-main-500/90 hover:text-white hover:shadow rounded-full"
@@ -72,13 +73,13 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
                     className="flex-start gap-2 px-3 py-1 transition-all hover:bg-purple-600 hover:text-white hover:shadow rounded-full"
                 >
                     <FaLaptopCode className="text-lg" />
-                    Solution Showcases
+                    User Solutions
                 </Link>
                 <Link
                     to={getShowcasePageLink(exercise._id, ShowCaseSection.DISCUSSIONS)}
                     className="flex-start gap-2 px-2 py-1 transition-all hover:bg-pink-600 hover:text-white hover:shadow rounded-full"
                 >
-                    <FaLaptopCode className="text-lg" />
+                    <AiFillWechat className="text-lg" />
                     {exercise.comments.length} Discussions
                 </Link>
             </footer>

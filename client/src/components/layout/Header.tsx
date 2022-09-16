@@ -18,7 +18,7 @@ const Header = () => {
     const [showMobileDropdownMenu, setShowMobileDropdownMenu] = useState(false);
 
     return (
-        <header className="relative flex items-center justify-between px-4 md:px-8 lg:px-[5.5%] py-3 m-0 shadow-sm">
+        <header className="relative flex items-center justify-between px-4 md:px-8 lg:px-[3.5%] xl:px-[5%] 2xl:px-[6%] 3xl:px-[7%] py-3 m-0 shadow-sm">
             <div className="logo flex items-center flex-shrink-0 text-main-400">
                 {/* Hamburger menu icon that toggles the mobile dropdown menu visibility. Only shown on the mobile screen size */}
                 <HamburgerMenu
@@ -56,7 +56,7 @@ const Header = () => {
 This will be hidden for the large screen size by default. */
 const MobileDropdownMenu: React.FC<{ visible: boolean; onClose: () => void }> = ({
     visible, // boolean value to indicate whether to display the dropdown menu or not.
-    onClose, // callback function to hide the mobile dropdown when the user clicks the link inside the nav,
+    onClose, // callback function to hide the mobile dropdown when the user clicks the link inside the nav, block
 }) => {
     const isLoggedIn = !!useUserContext().user;
     const { logout } = useUserContext();
@@ -86,7 +86,7 @@ const MobileDropdownMenu: React.FC<{ visible: boolean; onClose: () => void }> = 
                         <Link
                             key={section}
                             onClick={onClose}
-                            className="flex-start gap-3 pl-2 py-2 whitespace-nowrap hover:text-main-600"
+                            className="link-underline-effect w-fit flex-start gap-3 ml-2 my-4 whitespace-nowrap font-semibold text-gray-500 hover:text-main-600"
                             to={`/profile/${ProfileLinkMap[section]}`}
                         >
                             {section}
@@ -98,7 +98,7 @@ const MobileDropdownMenu: React.FC<{ visible: boolean; onClose: () => void }> = 
                             logout();
                             onClose();
                         }}
-                        className="flex-start gap-3 pl-2 py-2 whitespace-nowrap hover:text-main-600 cursor-pointer"
+                        className="link-underline-effect w-fit flex-start gap-3 ml-2 my-4 whitespace-nowrap font-semibold text-gray-500 hover:text-main-600 cursor-pointer"
                     >
                         Logout
                     </div>
@@ -117,10 +117,10 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
         <nav
             className={`flex flex-col lg:flex-row flex-grow lg:items-center md:w-auto ${className}`}
         >
-            <div className="text-md lg:text-center md:flex-grow">
+            <div className="text-md flex-col lg:flex-row lg:text-center md:flex-grow">
                 <ActiveNavLink
                     to="/browse"
-                    className="link-underline-effect mt-4 lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all mr-10"
+                    className="w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
                     activeClassName="!text-main-500"
                 >
                     Explore
@@ -128,21 +128,21 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
                 <ActiveNavLink
                     to="/create-exercise"
                     activeClassName="!text-main-500"
-                    className="link-underline-effect mt-4 lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all mr-10"
+                    className="w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
                 >
                     Create
                 </ActiveNavLink>
                 <ActiveNavLink
                     to={'/showcase-invites'}
                     activeClassName="!text-main-500"
-                    className="link-underline-effect mt-4 lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all mr-10"
+                    className="w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
                 >
                     Showcases
                 </ActiveNavLink>
                 <ActiveNavLink
                     to="/ranking"
                     activeClassName="!text-main-500"
-                    className="link-underline-effect mt-4 lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
+                    className="w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
                 >
                     Ranking
                 </ActiveNavLink>

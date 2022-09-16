@@ -144,7 +144,7 @@ const cancelVoteComment = async (req, res) => {
             // Remove the vote from the array.
             comment.votes.splice(foundIndex, 1);
             await comment.save();
-            return res.status(200).json({ message: 'Vote deleted' });
+            return res.status(200).json(comment);
         }
     } catch (err) {
         res.status(500).send(err.message);
