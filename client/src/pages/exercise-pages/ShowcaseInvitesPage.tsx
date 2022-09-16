@@ -9,7 +9,7 @@ import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification';
 import ShowCaseInvites from '../../components/showcase-invites/ShowCaseInvites';
 
-const ShowcaseListPage: React.FC = () => {
+const ShowcaseInvitesPage: React.FC = () => {
     useAuth();
     const navigate = useNavigate();
     const { userDetail, submissionMap } = useUserContext();
@@ -51,4 +51,4 @@ const ShowcaseListPage: React.FC = () => {
     );
 };
 
-export default ShowcaseListPage;
+export default ShowcaseInvitesPage;

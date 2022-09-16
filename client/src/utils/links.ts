@@ -28,6 +28,6 @@ export function getShowcasePageLink(
     return `/showcase/${exerciseId}?section=${sectionQueryString}`;
 }
 
-export function getShowcaseListPageLink() {
+export function getShowcaseInvitesPageLink() {
     return `/showcase-invites`;
 }
