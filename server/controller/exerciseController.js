@@ -4,6 +4,7 @@ const UserSubmission = require('../models/UserSubmission');
 const Comment = require('../models/Comment');
 const ShowCase = require('../models/ShowCase');
 
+const { constructLanguageFileSpec } = require('../utils/languageSupport');
 const makeRequest = require('../utils/makeRequest');
 
 const postExercise = async (req, res) => {
@@ -19,15 +20,8 @@ const postExercise = async (req, res) => {
 
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
-
-        const test = solutionCode + '\n\n' + testCase.code;
-
         const body = {
-            run_spec: {
-                language_id: language,
-                sourcefilename: 'test',
-                sourcecode: test,
-            },
+            run_spec: constructLanguageFileSpec(language, solutionCode, testCase.code),
         };
 
         const result = makeRequest(body);
@@ -84,15 +78,8 @@ const updateExercise = async (req, res) => {
 
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
-
-        const test = solutionCode + '\n' + testCase.code;
-
         const body = {
-            run_spec: {
-                language_id: language,
-                sourcefilename: 'test',
-                sourcecode: test,
-            },
+            run_spec: constructLanguageFileSpec(language, solutionCode, testCase.code),
         };
 
         const result = makeRequest(body);
