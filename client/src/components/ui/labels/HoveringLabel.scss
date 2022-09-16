@@ -5,22 +5,22 @@
         opacity: 0;
         transition: all 0.35s ease-in-out;
         position: absolute;
-        top: 0%;
+        top: 100%;
         left: 50%;
         border-radius: 3px;
+        white-space: nowrap;
         transform: translateX(-50%);
-        clip-path: polygon(0% 20%, 42% 20%, 50% 0, 58% 20%, 100% 20%, 100% 100%, 0 100%);
+        clip-path: polygon(0% 20%, 40% 20%, 50% 0, 60% 20%, 100% 20%, 100% 100%, 0 100%);
     }
 
     &__text {
         display: block;
-        transform: translateY(10%);
+        transform: translateY(15%);
     }
 
     &:hover {
         .hover-label__panel {
             opacity: 1;
-            top: 100%;
             box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
         }
     }

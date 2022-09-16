@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const { LanguageEnum } = require('./enums');
+
 const TestCaseSchema = new Schema({
-    testcode: {
+    code: {
         type: String,
         required: true,
     },
@@ -12,10 +14,10 @@ const TestCaseSchema = new Schema({
     },
     hidden: {
         type: Boolean,
-        default: () => False,
+        default: false,
     },
 });
-    
+
 const ExerciseSchema = new Schema({
     name: {
         type: String,
@@ -25,15 +27,17 @@ const ExerciseSchema = new Schema({
         type: String,
         required: true,
     },
-    level: {
+    difficulty: {
         type: String,
         required: true,
     },
     solutionCode: {
         type: String,
     },
+    startingTemplate: { type: String },
     language: {
         type: String,
+        enum: LanguageEnum,
         required: true,
     },
     topic: {
@@ -41,7 +45,7 @@ const ExerciseSchema = new Schema({
         required: true,
     },
     author: {
-        type: mongoose.Schema.Types.ObjectID,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
     createdAt: {
@@ -49,13 +53,15 @@ const ExerciseSchema = new Schema({
         default: () => Date.now(),
         immutable: true,
     },
-    liked: [{ type: mongoose.Schema.Types.ObjectID, ref: 'User' }],
+    liked: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     testCases: {
         type: [TestCaseSchema],
         required: true,
     },
-    submissions: [{ type: mongoose.Schema.Types.ObjectID, ref: 'UserSubmission' }],
     tags: [{ type: String }],
+    reports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ExerciseReport' }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+    showCases: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ShowCase' }],
 });
 
 const Exercise = mongoose.model('Exercise', ExerciseSchema);

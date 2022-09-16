@@ -4,6 +4,61 @@
     color: rgba($color-main-600, 0.9);
 }
 
+// Styling for mobile dropdown navbar
+.mobile-nav {
+    transform: translateX(-100%);
+    transition: all 0.35s ease-out;
+}
+
+.mobile-nav.visible {
+    transform: translateX(0%);
+}
+
+// Styling for hamburger menu toggling the dropdown
+.hamburger-menu {
+    $height: 2.5px;
+    $gap: 6.5px;
+
+    height: $height;
+    width: 1.4rem;
+    background-color: #64748b;
+    position: relative;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+        content: '';
+        height: $height;
+        width: 100%;
+        position: absolute;
+        top: calc(50% - #{$height}/ 2);
+        transition: all 0.35s ease-in-out;
+        background-color: #4b5563;
+        cursor: inherit;
+    }
+
+    &:before {
+        transform: translateY(calc(-#{$gap} - 0.15px));
+    }
+
+    &::after {
+        transform: translateY(#{$gap});
+    }
+}
+
+// Hamburger menu when it is active (and dropdown menu is shown)
+.hamburger-menu.active {
+    background-color: transparent;
+
+    &::before {
+        transform: rotateZ(45deg);
+    }
+
+    &::after {
+        transform: rotateZ(-45deg);
+    }
+}
+
 // Quill editor read-only mode styling
 // No toolbar, and no border should be shown on the prompt.
 .read-only-editor {
@@ -24,6 +79,12 @@
             outline: none;
         }
     }
+}
+
+// Ql text editor codeblock light theme config
+.ql-snow .ql-editor pre.ql-syntax {
+    background-color: #f3f4f6 !important;
+    color: #333 !important;
 }
 
 .ql-editor {

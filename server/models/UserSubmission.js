@@ -2,18 +2,25 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSubmissionSchema = new Schema({
+    // Code that the user has written for the submission
     code: {
         type: String,
         required: true,
     },
-    status: {
+    correct: {
         type: Boolean,
-        required: true,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
+    exercise: {
+        type: Schema.Types.ObjectId,
+        ref: 'Exercise',
     },
     postedAt: {
         type: Date,
         default: () => Date.now(),
-        immutable: true,
     },
 });
 

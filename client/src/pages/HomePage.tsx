@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+
 import { AppProperty } from '../constants/app';
-import Header from '../components/layout/Header';
+import { Logo } from '../assets';
 
 const Home: React.FC = () => {
     return (
@@ -13,7 +15,13 @@ const Home: React.FC = () => {
                     content={`Home page of ${AppProperty.APP_NAME} where users can see detailed information about programming exercises on the website.`}
                 />
             </Helmet>
-            <div>Home</div>
+            <section className="h-[80vh] w-full flex-center flex-col">
+                <Logo size={250} />
+                <div>Home</div>
+                <Link className="text-blue-500" to="/exercise/630c2cd2127fc69377732710">
+                    Example exercise attempt page
+                </Link>
+            </section>
         </>
     );
 };

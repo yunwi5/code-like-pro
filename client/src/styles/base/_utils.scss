@@ -1,7 +1,20 @@
-.link-underline-effect {
+.link-underline-effect,
+.link-underline-effect-thin {
     &:hover,
     &:focus {
         color: $color-main-500;
     }
-    @include underline-from-middle($color-main-400);
+}
+
+.input-underline-effect {
+    transition: all 0.4s ease-in-out;
+    @include focus-underline-from-middle($color-main-400, 3px);
+}
+
+.link-underline-effect {
+    @include hover-underline-from-middle($color-main-400);
+}
+
+.link-underline-effect-thin {
+    @include hover-underline-from-middle($color-main-400, 1.5px);
 }

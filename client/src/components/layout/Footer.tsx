@@ -8,6 +8,8 @@ import {
     TwitterIcon,
 } from '../../assets/svg-icons/social-svgs';
 import HoverLabel from '../ui/labels/HoveringLabel';
+import { Logo } from '../../assets';
+import useWindowSize from '../../hooks/useWindowSize';
 
 // Footer links do not have real links at the moment.
 // Main purpose is to avoid duplicated styles.
@@ -29,9 +31,15 @@ const socialIcons = [
 
 // Will need to include the logo in front, as soon as we design an app logo.
 const Footer: React.FC = () => {
+    const { width } = useWindowSize();
+
     return (
-        <footer className="relative z-[100] flex-between flex-col lg:flex-row gap-y-3 mb-5 lg:mx-[4%] xl:mx-[6%] px-2 py-3 border-t-2 border-gray-300 ">
-            <h2 className="logo text-2xl !text-main-400">{AppProperty.APP_NAME}</h2>
+        <footer className="relative z-[100] flex-between flex-col lg:flex-row gap-y-3 lg:px-[4.5%] xl:px-[6.5%] py-3 border-t-2 border-gray-300 ">
+            <h2 className="logo flex-start flex-col lg:flex-row gap-1 text-2xl !text-main-400">
+                {/* Display large logo for smaller screen (since the layout is a column layout), display small logo for large screen */}
+                <Logo size={width < 1024 ? 42 : 25} />
+                {AppProperty.APP_NAME}
+            </h2>
             <div className="flex flex-col sm:flex-row items-center gap-x-5 lg:ml-5 lg:mr-auto">
                 <p className="whitespace-nowrap text-gray-500/90">
                     Copyright &copy; 2022 JIADY CS 399

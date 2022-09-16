@@ -1,54 +1,45 @@
-import React from "react";
-import EditorControlBar from "./EditorControlBar";
-import CodeEditor from "../../ui/editor/code-editor/CodeEditor";
-import TestCaseOutput from "../../ui/test-cases/TestCaseOutput";
-import { ITestCase } from "../../../models/interfaces";
-import { useExerciseAttemptCtx } from "../../../store/context/ExerciseAttemptContext";
-import Button from "../../ui/buttons/Button";
-const btnClass = "min-w-[10rem] mr-2 xl:mr-4";
+import React, { useEffect } from 'react';
+import EditorControlBar from './EditorControlBar';
+import CodeEditor from '../../ui/editor/CodeEditor';
+import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
+import EditorActions from './EditorActions';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 
 const EditorOutputSection: React.FC = () => {
-  const { exercise } = useExerciseAttemptCtx();
+    const { exercise, userSolution, setUserSolution } = useExerciseAttemptCtx();
 
-  const testCases = exercise?.testCases;
-  if (exercise == null) return null;
+    // Store current user's code in the localStorate, so that it is not lost when the user refreshes the page.
+    const localStorageKey = `user-solution-${exercise?._id}`;
+    const [localSolution, setLocalSolution] = useLocalStorage<string>(
+        localStorageKey,
+        userSolution,
+    );
 
-  // Only display non hidden test cases.
-  const openTestCases = exercise.testCases.filter((ex) => !ex.hidden);
+    const handleChange = (value: string | undefined) => {
+        setUserSolution(value ?? '');
+        setLocalSolution(value ?? '');
+    };
 
-  const openTestCasesCount = openTestCases.length;
-  const hiddenTestCasesCount = exercise.testCases.length - openTestCasesCount;
+    // When the user re-enters the page, or refreshes the page,
+    // Retrieve previous user code for this exercise from the localStorage.
+    useEffect(() => {
+        if (!userSolution) setUserSolution(localSolution);
+    }, [userSolution]);
 
-  const handleChange = (value: string | undefined) => {};
-  return (
-    <div className="flex-1 overflow-y-scroll">
-      <EditorControlBar />
-      <CodeEditor
-        onChange={handleChange}
-        height={"30rem"}
-        showHeader={false}
-        className="mr-2 xl:mr-4"
-      />
-      <h1 className="text-xl text-text-500 py-2">Output</h1>
-      <ul className="flex flex-col gap-4 pr-2 xl:pr-4 py-2 w-full">
-        {openTestCases.map((openTestCases, idx) => (
-          <TestCaseOutput
-            key={idx}
-            name="Test Case ${idx + 1}"
-            expectedOutput={openTestCases.expectedOutput}
-            actualOutput=""
-            status={true}
-          />
-        ))}
-      </ul>
-      <div className="flex flex-row justify-end pr-2 xl:pr-2 py-2">
-        <Button className={btnClass} mode="empty">
-          Run Code
-        </Button>
-        <Button className={btnClass}>Submit</Button>
-      </div>
-    </div>
-  );
+    return (
+        <div className="flex-1 flex flex-col">
+            <EditorControlBar />
+            <CodeEditor
+                language={exercise?.language}
+                onChange={handleChange}
+                value={userSolution}
+                height={'25rem'}
+                className="flex-1 !border-none lg:!max-w-[50vw]"
+                showHeader={false}
+            />
+            <EditorActions />
+        </div>
+    );
 };
 
 export default EditorOutputSection;

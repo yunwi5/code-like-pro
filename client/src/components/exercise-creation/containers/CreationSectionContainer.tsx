@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import useScrollEffect from '../../../hooks/useScrollEffect';
 import { CreationSection } from '../../../models/enums';
+import useScrollEffect from '../../../hooks/useScrollEffect';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 
 interface Props {

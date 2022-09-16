@@ -1,5 +1,6 @@
 export enum ProgrammingTopic {
     ARRAY = 'Array',
+    ARITHMETIC = 'Arithmetic',
     STRING = 'String',
     BINARY_TREE = 'Binary Tree',
     BINARY_SEARCH_TREE = 'Binary Search Tree',
@@ -7,12 +8,15 @@ export enum ProgrammingTopic {
     DYNAMIC_PROGRAMMING = 'Dynamic Programming',
     GRAPH = 'Graph',
     GREEDY_ALGORITHM = 'Greedy Algorithm',
+    LINKED_LIST = 'Linked List',
+    MATHEMATICS = 'Mathematics',
+    GEOMETRY = 'Geometry',
     RECURSION = 'Recursion',
     SORTING = 'Sorting',
     SEARCHING = 'Searching',
     STACK = ' Stack',
     QUEUE = 'Queue',
-    LINKED_LIST = 'Linked List',
+    OTHERS = 'Others',
 }
 
-export const ProgrammingTopicList = Object.freeze(Object.values(ProgrammingTopic).sort());
+export const ProgrammingTopicList = Object.freeze(Object.values(ProgrammingTopic));

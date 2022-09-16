@@ -1,5 +1,9 @@
-import React from 'react';
 import { Quill } from 'react-quill';
+import hljs from 'highlight.js';
+
+hljs.configure({
+    languages: ['javascript', 'python', 'cpp', 'c', 'php'],
+});
 
 // Custom Undo button icon component for Quill editor. You can import it directly
 // from 'quill/assets/icons/undo.svg' but I found that a number of loaders do not
@@ -39,6 +43,9 @@ Quill.register(Font, true);
 
 // Modules object for setting up the Quill editor
 export const modules = {
+    syntax: {
+        highlight: (text: string) => hljs.highlightAuto(text).value,
+    },
     toolbar: {
         container: '#toolbar',
         handlers: {
@@ -69,7 +76,6 @@ export const formats = [
     'list',
     'bullet',
     'indent',
-    'link',
     'color',
     'code-block',
 ];
@@ -121,12 +127,12 @@ export const QuillToolbar = () => (
             <select className="ql-color" />
             <select className="ql-background" />
         </span>
-        <span className="ql-formats">
-            <button className="ql-link" />
-            {/* No need to use images in this app */}
-            {/* <button className="ql-image" />  */}
-            {/* <button className="ql-video" /> */}
-        </span>
+        {/* <span className="ql-formats"> */}
+        {/* <button className="ql-link" /> */}
+        {/* No need to use images in this app */}
+        {/* <button className="ql-image" />  */}
+        {/* <button className="ql-video" /> */}
+        {/* </span> */}
         <span className="ql-formats">
             <button className="ql-formula" />
             <button className="ql-code-block" />

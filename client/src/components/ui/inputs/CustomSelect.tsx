@@ -1,19 +1,29 @@
 import React from 'react';
 
 interface Props {
-    labelText?: string;
-    labelId?: string;
-    options: string[] | readonly string[];
+    id: string;
+    labelText?: string | JSX.Element;
+    // option values
+    options: number[] | string[] | readonly string[];
+    // option labels that represent human readable format of the options (optional)
+    optionLabels?: string[];
     className?: string;
     onChange?: (value: string) => void;
     value?: string;
-    id: string;
 }
 
 // App select with custom styles.
 // Reusable select input for consistent styling for the select.
 const CustomSelect: React.FC<Props> = (props) => {
-    const { value, labelText, labelId, options, onChange, id, className = '' } = props;
+    const {
+        value,
+        labelText,
+        options,
+        onChange,
+        id,
+        optionLabels = [],
+        className = '',
+    } = props;
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         onChange && onChange(e.target.value);
@@ -22,7 +32,7 @@ const CustomSelect: React.FC<Props> = (props) => {
     return (
         <div className={`flex flex-col gap-2 ${className}`}>
             {labelText && (
-                <label id={labelId ?? ''} className="text-[1.05rem]" htmlFor={id}>
+                <label className="text-[1.05rem]" htmlFor={id}>
                     {labelText}
                 </label>
             )}
@@ -34,7 +44,7 @@ const CustomSelect: React.FC<Props> = (props) => {
             >
                 {options.map((option, idx) => (
                     <option key={idx} value={option}>
-                        {option}
+                        {optionLabels[idx] ?? option}
                     </option>
                 ))}
             </select>

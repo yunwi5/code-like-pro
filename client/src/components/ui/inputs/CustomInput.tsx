@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useId } from 'react';
 
-const CustomInput = (props: {
-  type: string;
-  placeholder: string;
-  className?: string;
-  labelText?: string;
-  id?: string;
-}) => {
-  return (
-    <input
-      className="w-full text-sm my-3 h-9 p-3 bg-grey-200 border-grey-700 border-b-[1.5px]"
-      id={props.id}
-      type={props.type}
-      placeholder={props.placeholder}
-    ></input>
-  );
+interface Props {
+    value?: string;
+    onChange?: (value: string) => void;
+    placeholder?: string;
+    error?: string | null;
+    labelText?: string;
+}
+
+const CustomInput: React.FC<Props> = (props) => {
+    const { labelText, value, onChange, error, placeholder = '' } = props;
+    const id = useId();
+
+    return (
+        <div className="flex flex-col gap-2">
+            {labelText && <label htmlFor={id}>{labelText}</label>}
+            <input
+                id={id}
+                className={`px-2 py-1 rounded-sm shadow-md focus:shadow-lg border-2 border-gray-300 focus-main ${
+                    error ? 'border-rose-400 focus:outline-transparent' : ''
+                }`}
+                placeholder={placeholder}
+                value={value}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    onChange && onChange(e.target.value)
+                }
+            />
+            {error && <p className="text-rose-500">{error}</p>}
+        </div>
+    );
 };
 
 export default CustomInput;

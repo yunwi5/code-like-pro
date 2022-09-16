@@ -12,7 +12,7 @@ interface Props {
 // For example, when hovering the Facebook icon, the text label 'Facebook' appears below the icon.
 // This component is purely for advanced hovering effects.
 // See the example of this component inside the Footer.tsx.
-const HoverLabel: React.FC<Props> = ({ children, label, onClick, className = '' }) => {
+const HoveringLabel: React.FC<Props> = ({ children, label, onClick, className = '' }) => {
     return (
         <div className={`relative cursor-pointer hover-label ${className}`} onClick={onClick}>
             {children}
@@ -23,4 +23,4 @@ const HoverLabel: React.FC<Props> = ({ children, label, onClick, className = '' 
     );
 };
 
-export default HoverLabel;
+export default HoveringLabel;
