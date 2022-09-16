@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import monaco from 'monaco-editor';
+
 import { Language } from '../../../models/enums';
 import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
 import { prettierLanguageName } from '../../../utils/language';
+import styles from './CodeEditor.module.scss';
 
 type Monaco = typeof monaco;
 type CodeEditor = monaco.editor.IStandaloneCodeEditor;
@@ -27,7 +29,6 @@ const CodeEditor: React.FC<Props> = ({
     width,
     height,
     value,
-    validation = true,
     readOnly = false,
     className = '',
 }) => {
@@ -42,19 +43,11 @@ const CodeEditor: React.FC<Props> = ({
         // here is the monaco instance
         // do some configuration before editor is mounted
         monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
-        // Skip validation if the editor settings should skip it.
-        // For examples, test cases code skips validation.
-        if (!validation) {
-            monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
-                noSyntaxValidation: true,
-                noSemanticValidation: true,
-            });
-        }
     };
 
     return (
         <div
-            className={`flex flex-col border-2 bg-white border-gray-300 shadow-md focus-within:shadow-lg focus-within:outline focus-within:outline-2 focus-within:outline-gray-200 rounded-sm overflow-hidden ${className}`}
+            className={`${styles['editor-wrapper']} relative flex flex-col border-2 bg-white border-gray-300 shadow-md focus-within:shadow-lg focus-within:outline focus-within:outline-2 focus-within:outline-gray-200 rounded-sm overflow-hidden ${className}`}
         >
             {showHeader && (
                 <div className="flex-between px-3 py-2 text-gray-700 bg-gray-300/90 capitalize text-lg">
@@ -77,6 +70,16 @@ const CodeEditor: React.FC<Props> = ({
                     height={height}
                     options={{ readOnly: readOnly }}
                 />
+            )}
+
+            {/* Clear user code button */}
+            {!readOnly && (
+                <button
+                    onClick={() => onChange('')}
+                    className={`${styles['clear-btn']} absolute bottom-3 right-3 px-3 py-1 bg-gray-600/90 hover:bg-gray-700 text-white transition-all rounded shadow`}
+                >
+                    Clear
+                </button>
             )}
         </div>
     );
