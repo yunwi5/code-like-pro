@@ -31,7 +31,8 @@ router.get(
 // Routes for handling user showcases for the exercise of the param id.
 router
     .route('/:id/showcase')
-    .post(ensureAuthenticated, catchAsync(exerciseController.postExerciseShowcase));
+    .post(ensureAuthenticated, catchAsync(exerciseController.postExerciseShowcase))
+    .get(ensureAuthenticated, catchAsync(exerciseController.getExerciseShowcases));
 
 // Routes for handling comments (discussion forum) for the exercise of the param id.
 router

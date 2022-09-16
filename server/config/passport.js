@@ -67,7 +67,6 @@ const passportStrategy = (passport) => {
                                     pictureUrl: picture,
                                 },
                                 (err, user) => {
-                                    // request.user = user;
                                     return done(err, user);
                                 },
                             );
