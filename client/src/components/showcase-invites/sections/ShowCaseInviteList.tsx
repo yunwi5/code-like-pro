@@ -1,8 +1,8 @@
 import React from 'react';
-import usePagination from '../../hooks/usePagination';
-import { IExerciseWithId } from '../../models/interfaces';
-import ShowCaseInviteCard from '../ui/cards/ShowCaseInviteCard';
-import PageNavigation from '../ui/PageNavigation';
+import usePagination from '../../../hooks/usePagination';
+import { IExerciseWithId } from '../../../models/interfaces';
+import ShowCaseInviteCard from '../../ui/cards/ShowCaseInviteCard';
+import PageNavigation from '../../ui/PageNavigation';
 
 interface Props {
     exercises: IExerciseWithId[];

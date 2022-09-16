@@ -1,17 +1,18 @@
 import React from 'react';
 import { AiOutlineWarning } from 'react-icons/ai';
-import { CodeMonitor } from '../../assets';
+import { CodeMonitor } from '../../../assets';
 
 // Header of the showcases invite page.
 // Encouraging header and messages on the left, showcase svg image on the right.
+// Mobile layout breakpoint is md - 768px
 const ShowCaseInviteHeader: React.FC = () => {
     return (
-        <header className="flex items-center justify-between">
-            <div>
-                <h1 className="bg-gradient-to-r from-main-500/90 to-fuchsia-600 bg-clip-text text-transparent lg:text-4xl capitalize">
+        <header className="flex flex-col md:flex-row items-center justify-between gap-3">
+            <div className="order-2 md:order-none">
+                <h1 className="text-center md:text-left text-2xl sm:text-3xl lg:text-4xl bg-gradient-to-r from-main-500/90 to-fuchsia-600 bg-clip-text text-transparent capitalize">
                     Please join our showcase forums!
                 </h1>
-                <div className="mt-5 text-[1.075rem] text-gray-500">
+                <div className="mt-5 flex flex-col gap-y-2 sm:gap-y-[2px] text-center md:text-left text-base lg:text-[1.075rem] text-gray-500">
                     <p>
                         We encourage you to join our challenge showcase forums and showcase
                         your amazing work!
@@ -20,8 +21,8 @@ const ShowCaseInviteHeader: React.FC = () => {
                         Your participation in the showcases will contribute to your rankings as
                         well!
                     </p>
-                    <p className="flex-start gap-1 text-stone-500 text-base">
-                        <AiOutlineWarning className="text-stone-500" />
+                    <p className="gap-1 text-stone-500 text-base">
+                        <AiOutlineWarning className="inline text-stone-500 -translate-y-[2px]" />
                         You can only join showcases for the exercises that you created or
                         solved.
                     </p>

@@ -32,14 +32,14 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
     return (
         <article className="flex flex-col gap-3 px-2 lg:px-4 py-2 transition-all bg-slate-100/80 shadow hover:shadow-md rounded">
             {/* Card header that displays exercise title, language and author */}
-            <header className="flex items-center gap-2">
-                <h3 className="text-gray-600 text-xl hover:text-main-500 cursor-pointer">
+            <header className="flex flex-wrap items-center gap-2">
+                <h3 className="text-gray-600 text-lg sm:text-xl hover:text-main-500 cursor-pointer">
                     <Link to={getShowcasePageLink(exercise._id)}>{exercise.name}</Link>
                 </h3>
                 <span className="text-sm cursor-pointer">
                     <LanguageLabel language={exercise.language} />
                 </span>
-                <HoveringLabel label="Creator" className="flex-start gap-1 ml-auto text-sm">
+                <HoveringLabel label="Creator" className="flex-start gap-1 xs:ml-auto text-sm">
                     <FaUserEdit className="text-gray-600 text-lg" /> {author}
                 </HoveringLabel>
             </header>

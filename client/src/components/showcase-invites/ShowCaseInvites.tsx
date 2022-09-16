@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 import { IExerciseWithId } from '../../models/interfaces';
 import { getBrowsingPageLink, getExerciseCreationPageLink } from '../../utils/links';
-import ShowCaseInviteHeader from './ShowCaseInviteHeader';
-import ShowCaseInviteList from './ShowCaseInviteList';
-import ShowcaseListOptions from './ShowCaseListOptions';
+import ShowCaseInviteHeader from './sections/ShowCaseInviteHeader';
+import ShowCaseInviteList from './sections/ShowCaseInviteList';
+import ShowcaseListOptions from './sections/ShowCaseListOptions';
 
 interface Props {
     createdExercises: IExerciseWithId[];
@@ -22,7 +22,7 @@ const ShowCaseInvites: React.FC<Props> = ({ createdExercises, solvedExercises })
     const selectedExercises = showCreatedExercises ? createdExercises : solvedExercises;
 
     return (
-        <main className="flex flex-col gap-5 py-12 min-w-[90vw] md:min-w-[85vw] xl:min-w-[70vw] max-w-[60rem] min-h-[50vh] text-gray-700">
+        <main className="flex flex-col gap-5 px-3 sm:px-5 py-12 min-w-[90vw] xl:min-w-[70vw] max-w-[60rem] min-h-[50vh] text-gray-700">
             <ShowCaseInviteHeader />
             <ShowcaseListOptions
                 showCreatedExercises={showCreatedExercises}
