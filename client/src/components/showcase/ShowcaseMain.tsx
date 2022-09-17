@@ -21,7 +21,7 @@ const ShowcaseMain: React.FC = () => {
         if (section) setActiveSection(parseQueryString(section) as any);
     }, [section]);
 
-    // If the active section changes, change the section query string s well.
+    // If the active section changes, change the section query string as well.
     useEffect(() => {
         setSearchParams({ section: activeSection });
     }, [activeSection]);

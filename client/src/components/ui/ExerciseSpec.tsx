@@ -1,11 +1,13 @@
 import React from 'react';
-import { MdReportProblem, MdCategory } from 'react-icons/md';
+import { MdReportProblem } from 'react-icons/md';
 import { AiFillStar, AiFillCheckCircle } from 'react-icons/ai';
+import { BsFillCalendarCheckFill } from 'react-icons/bs';
 import { FaUserEdit } from 'react-icons/fa';
 
 import { IExerciseWithId } from '../../models/interfaces';
 import useExerciseSubmissionsQuery from '../../hooks/queries/useExerciseSubmissionsQuery';
 import { getSubmissionStats } from '../../utils/user-submission';
+import { getDateFormat } from '../../utils/datetime';
 
 // Listing exercise specs such as topic, favorite count, correct rate, and issue reports.
 const ExerciseSpec: React.FC<{ exercise: IExerciseWithId }> = ({ exercise }) => {
@@ -19,14 +21,15 @@ const ExerciseSpec: React.FC<{ exercise: IExerciseWithId }> = ({ exercise }) => 
                 {exercise.author?.name || 'Anonymous'}
             </li>
             <li className="flex gap-1">
-                <MdCategory className="text-sky-500 text-[1.4rem]" /> {exercise.topic}
+                <BsFillCalendarCheckFill className="text-blue-500/80 text-[1.15rem]" />{' '}
+                {getDateFormat(exercise.createdAt)}
             </li>
             <li className="flex gap-1">
-                <AiFillStar className="text-yellow-500 text-[1.35rem]" />{' '}
+                <AiFillStar className="text-yellow-500 text-[1.4rem]" />{' '}
                 {exercise.liked.length}
             </li>
             <li className="flex gap-1">
-                <AiFillCheckCircle className="text-emerald-400 text-[1.45rem]" />
+                <AiFillCheckCircle className="text-emerald-400 text-[1.4rem]" />
                 {correctCount} of {total} ({correctRate}%)
             </li>
             <li className="flex gap-1">

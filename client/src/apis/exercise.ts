@@ -48,14 +48,14 @@ export async function reportExerciseRequest(id: string, reportBody: IIssueReport
     });
 }
 
-export async function likeExerciseRequest(id: string) {
-    return await getRequest<IExercise>({ url: `${API_DOMAIN}/${id}/like` });
+export function likeExerciseRequest(id: string) {
+    return getRequest<IExercise>({ url: `${API_DOMAIN}/${id}/like` });
 }
 
 // POST: post user showcase solution
 type ShowcaeProps = { code: string; description: string };
-export async function postExerciseShowCase(id: string, showcaseProps: ShowcaeProps) {
-    return await postRequest<IShowCase>({
+export function postExerciseShowCase(id: string, showcaseProps: ShowcaeProps) {
+    return postRequest<IShowCase>({
         url: `${API_DOMAIN}/${id}/showcase`,
         body: showcaseProps,
     });

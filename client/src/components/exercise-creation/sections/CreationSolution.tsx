@@ -30,7 +30,7 @@ function getUserSolutionForSelectedLang(language: Language, solutionCode: string
     const templatesTrimmed = Object.values(LanguageTemplates).map((temp) =>
         removeAllSpaces(temp),
     );
-    const solutionCodeTrimmed = removeAllSpaces(solutionCode);
+    const solutionCodeTrimmed = removeAllSpaces(solutionCode || '');
 
     if (templatesTrimmed.includes(solutionCodeTrimmed)) return getLanguageTemplate(language);
     return solutionCode;

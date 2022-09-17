@@ -10,6 +10,7 @@ interface Props {
     id?: string;
     className?: string;
     placeholder?: string;
+    error?: string | null;
 }
 
 const ENTER_KEY = 'Enter';
@@ -20,7 +21,7 @@ const DOWN_KEY = 'ArrowDown';
 // For example, the ChallengeTags component is using this AutoComplete to add tags dynamically.
 // It allows users to add their own inputs, as well as predefined inputs passed as "options" prop.
 const AutoComplete: React.FC<Props> = (props) => {
-    const { label, options, onAdd, id, className, placeholder } = props;
+    const { label, options, onAdd, id, className, placeholder, error } = props;
     const [showDropdown, setShowDropdown] = useState(false);
     const [text, setText] = useState('');
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -39,8 +40,6 @@ const AutoComplete: React.FC<Props> = (props) => {
         const filtered = filterListByString(options as string[], newText);
         setFilteredOptions(filtered);
     };
-
-    const handleOption = (option: string) => setText(option);
 
     const handleKeyboard = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === DOWN_KEY) {
@@ -68,8 +67,16 @@ const AutoComplete: React.FC<Props> = (props) => {
             onAdd(text);
             setShowDropdown(false);
             setText('');
+            setFilteredOptions(options);
             setActiveIndex(null);
         }
+    };
+
+    // If the user clicks the dropdown option, add it and close the dropdown.
+    const handleClickOption = (option: string) => {
+        onAdd(option);
+        setText('');
+        setShowDropdown(false);
     };
 
     return (
@@ -99,13 +106,14 @@ const AutoComplete: React.FC<Props> = (props) => {
                                 className={`px-3 py-1 hover:bg-gray-300 hover:text-blue-500 cursor-pointer ${
                                     activeIndex === idx ? 'bg-gray-300 text-blue-500' : ''
                                 }`}
-                                onClick={() => handleOption(option)}
+                                onClick={() => handleClickOption(option)}
                             >
                                 {option}
                             </li>
                         ))}
                     </ul>
                 )}
+                {error && <p className="mt-2 -mb-2 text-rose-500">{error}</p>}
             </div>
         </ClickAwayListener>
     );

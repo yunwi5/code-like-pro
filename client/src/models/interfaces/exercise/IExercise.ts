@@ -6,12 +6,12 @@ export interface IExercise {
     _id?: string;
     name: string;
     language: Language;
-    topic: ProgrammingTopic;
     difficulty: Difficulty;
     prompt: string;
     solutionCode: string;
     startingTemplate: string;
     tags: string[];
+    courses: string[];
     testCases: ITestCase[];
     author?: IUser;
     createdAt: string; // ISO date for exercise creation

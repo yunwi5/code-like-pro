@@ -6,7 +6,7 @@ import { authConfig } from './config';
 
 // Request params for GET & DELETE requests
 type ReqParams = { url: string; headers?: AxiosRequestConfig };
-// Request params for POST & PUT requests
+// Request params for POST &  PUT & PATCH requests
 type ReqBodyParams = { url: string; body: any; headers?: AxiosRequestConfig };
 
 export async function getRequest<T>({ url, headers }: ReqParams) {
@@ -16,6 +16,7 @@ export async function getRequest<T>({ url, headers }: ReqParams) {
         data = response.data;
         return { ok: true, data };
     } catch (err) {
+        // 400 ~ 500
         let message = extractErrorMessage(err);
         console.log(message);
         return { ok: false, message };

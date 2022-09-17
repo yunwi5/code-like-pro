@@ -11,8 +11,6 @@ export interface IExerciseCreationContext {
     setName: (name: string) => void;
     language: Language;
     setLanguage: (lang: Language) => void;
-    topic: ProgrammingTopic;
-    setTopic: (topic: ProgrammingTopic) => void;
     prompt: string;
     difficulty: Difficulty;
     setDifficulty: (diff: Difficulty) => void;
@@ -21,6 +19,8 @@ export interface IExerciseCreationContext {
     setTestCases: React.Dispatch<React.SetStateAction<ITestCase[]>>;
     tags: string[];
     setTags: React.Dispatch<React.SetStateAction<string[]>>;
+    courses: string[];
+    setCourses: React.Dispatch<React.SetStateAction<string[]>>;
     startingTemplate: string;
     setStartingTemplate: React.Dispatch<React.SetStateAction<string>>;
     solutionCode: string;
