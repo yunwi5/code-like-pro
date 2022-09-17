@@ -21,7 +21,6 @@ const postExercise = async (req, res) => {
         // Append test case to solution code and check if output is right
 
         const test = solutionCode + '\n\n' + testCase.code;
-        console.log(test);
 
         const body = {
             run_spec: {
@@ -37,7 +36,6 @@ const postExercise = async (req, res) => {
 
     const testCaseResults = await Promise.all(testCasePromises);
 
-    console.log(testCaseResults);
     for (let i = 0; i < testCaseResults.length; i++) {
         if (testCaseResults[i].stdout.trim() != testCases[i].expectedOutput.trim()) {
             return res.status(400).json({ message: 'Some test cases failed.' });
@@ -52,7 +50,7 @@ const postExercise = async (req, res) => {
 
 const getExercises = async (req, res) => {
     // populate author field with author name
-    const exercises = await Exercise.find({}).populate('author', 'name');
+    const exercises = await Exercise.find({}).populate('author', 'name').populate('comments');
     res.status(200).json(exercises);
 };
 
@@ -60,7 +58,9 @@ const getExerciseByID = async (req, res) => {
     let exercise;
     try {
         // populate author field with author name
-        exercise = await Exercise.findById(req.params.id).populate('author', 'name');
+        exercise = await Exercise.findById(req.params.id)
+            .populate('author', 'name')
+            .populate('comments');
     } catch (err) {
         console.log(err.message);
     }
@@ -207,6 +207,25 @@ const toggleLikeExercise = async (req, res) => {
     res.json(exercise);
 };
 
+/* GET showcases for the exercise of the param id. */
+const getExerciseShowcases = async (req, res) => {
+    const exerciseId = req.params.id;
+
+    try {
+        // Find the exercise and populate the showcases of that exercise including its user.
+        const exercise = await Exercise.findById(exerciseId).populate({
+            path: 'showCases',
+            populate: { path: 'user', select: ['name', 'pictureUrl'] },
+        });
+        const showCases = exercise.showCases;
+        // Return the list of showcases as JSON
+        return res.status(200).json(showCases);
+    } catch (err) {
+        console.log(err.message);
+        return res.status(404).json(`Exercise ${exerciseId} not found`);
+    }
+};
+
 /* Post showcase for the exercise of the param id. */
 /* Req body: {code: string, description: string} */
 const postExerciseShowcase = async (req, res) => {
@@ -243,6 +262,25 @@ const postExerciseShowcase = async (req, res) => {
     }
 };
 
+/* Get all user comments of the exercise of req.params.id,
+returns the list of comments as a JSON list. */
+const getExerciseComments = async (req, res) => {
+    const exerciseId = req.params.id;
+
+    try {
+        const exercise = await Exercise.findById(exerciseId).populate({
+            path: 'comments',
+            populate: { path: 'user', select: ['email', 'name', 'pictureUrl'] },
+        });
+        const comments = exercise.comments;
+
+        res.status(200).json(comments);
+    } catch (err) {
+        console.log(err.message);
+        res.status(404).json('Exercise was not found.');
+    }
+};
+
 /* Exercise comment APIs */
 /* User should be authenticated before posting a comment */
 const postExerciseComment = async (req, res) => {
@@ -269,25 +307,6 @@ const postExerciseComment = async (req, res) => {
     }
 };
 
-/* Get all user comments of the exercise of req.params.id,
-returns the list of comments as a JSON list. */
-const getExerciseComments = async (req, res) => {
-    const exerciseId = req.params.id;
-
-    try {
-        const exercise = await Exercise.findById(exerciseId).populate({
-            path: 'comments',
-            populate: { path: 'user', select: ['email', 'name', 'pictureUrl'] },
-        });
-        const comments = exercise.comments;
-
-        res.status(200).json(comments);
-    } catch (err) {
-        console.log(err.message);
-        res.status(404).json('Exercise was not found.');
-    }
-};
-
 const controller = {
     postExercise,
     getExercises,
@@ -298,6 +317,7 @@ const controller = {
     reportExercise,
     toggleLikeExercise,
     postExerciseShowcase,
+    getExerciseShowcases,
     postExerciseComment,
     getExerciseComments,
 };

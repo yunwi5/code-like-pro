@@ -30,7 +30,7 @@ const CommentSorter: React.FC<Props> = ({ sortingState, setSortingState }) => {
     return (
         <div className="flex justify-between items-end mb-5">
             {showSorting ? (
-                <div className="flex-start gap-3">
+                <div className="flex-start gap-3 mb-2">
                     <Sortingbar
                         sortingKeys={CommentSortingKeyList}
                         onKeyChange={(newKey) => handleSortingKey(newKey as CommentSortingKey)}
