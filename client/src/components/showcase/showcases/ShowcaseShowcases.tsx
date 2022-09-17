@@ -14,7 +14,7 @@ const ShowcaseShowcases: React.FC = () => {
   });
 
   return (
-    <div>
+    <div className="flex flex-col px-4">
       <div className="flex flex-row">
         <ShowcaseSorter
           sortingState={sortingState}
