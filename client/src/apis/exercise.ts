@@ -48,11 +48,16 @@ export async function getExerciseSubmissions(id: string) {
     });
 }
 
-export async function reportExerciseRequest(id: string, reportBody: IIssueReport) {
+type ReportProps = { category: string; description: string };
+export async function postExerciseReport(id: string, reportBody: ReportProps) {
     return await postRequest<IIssueReport>({
         url: `${API_DOMAIN}/${id}/report`,
         body: reportBody,
     });
+}
+
+export async function getExerciseReports(id: string) {
+    return await getRequest<IIssueReport[]>({ url: `${API_DOMAIN}/${id}/report` });
 }
 
 export async function likeExerciseRequest(id: string) {

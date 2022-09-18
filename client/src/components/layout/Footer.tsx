@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
     const { width } = useWindowSize();
 
     return (
-        <footer className="relative z-[100] flex-between flex-col lg:flex-row gap-y-3 lg:px-[4.5%] xl:px-[6.5%] py-3 border-t-2 border-gray-300 ">
+        <footer className="relative z-[100] flex-between flex-col lg:flex-row gap-y-3 lg:px-[4.5%] xl:px-[6.5%] py-3 border-t-2 border-gray-200 ">
             <h2 className="logo flex-start flex-col lg:flex-row gap-1 text-2xl !text-main-400">
                 {/* Display large logo for smaller screen (since the layout is a column layout), display small logo for large screen */}
                 <Logo size={width < 1024 ? 42 : 25} />

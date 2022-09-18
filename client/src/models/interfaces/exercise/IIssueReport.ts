@@ -1,6 +1,9 @@
+import { IVote } from '../showcase/IVote';
+
 export interface IIssueReport {
-    _id?: string;
+    _id: string;
     category: string;
     description: string;
-    user?: string; // MongoDB user id when the report is created on the back end.
+    user?: { _id: string; name: string }; // MongoDB user id when the report is created on the back end.
+    votes: IVote[];
 }
