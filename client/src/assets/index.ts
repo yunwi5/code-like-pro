@@ -1,4 +1,6 @@
 export { default as Logo } from './Logo';
+export { default as CodeMonitor } from './svg-icons/CodeMonitor';
+
 import Avatar1 from './avatars/avatar1.png';
 import Avatar2 from './avatars/avatar2.png';
 import Avatar3 from './avatars/avatar3.png';
@@ -11,8 +13,6 @@ import Avatar9 from './avatars/avatar9.png';
 import Avatar10 from './avatars/avatar10.png';
 import Avatar11 from './avatars/avatar11.png';
 import Avatar12 from './avatars/avatar12.png';
-
-export { default as CodeMonitor } from './svg-icons/CodeMonitor';
 
 export const AvatarImages = {
     Avatar1,

@@ -56,7 +56,7 @@ const ShowcaseDiscussions: React.FC = () => {
     }, [sortingState, selectedComments]);
 
     return (
-        <div className="flex flex-col px-8">
+        <div className="flex-1 flex flex-col px-8">
             {/* Component that handles the selection of sorting key and direction from the user. */}
             <CommentSorter sortingState={sortingState} setSortingState={setSortingState} />
 

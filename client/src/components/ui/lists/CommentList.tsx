@@ -26,14 +26,14 @@ const CommentList: React.FC<Props> = ({ comments, commentPerPage }) => {
     const handlePage = (newPage: number) => setPage(newPage);
 
     return (
-        <section className="flex flex-col">
+        <section className="flex-1 flex flex-col">
             <div className="flex flex-col gap-8 mb-8">
                 {currentPageComments.map((comment) => (
                     <MainComment key={comment._id} comment={comment} />
                 ))}
             </div>
-
             <PageNavigation
+                className="mt-auto"
                 currentPage={page}
                 totalPages={maxPage}
                 onChangePage={handlePage}
