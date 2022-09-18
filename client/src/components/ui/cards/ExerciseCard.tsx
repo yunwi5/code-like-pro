@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AiFillCheckCircle, AiFillStar } from 'react-icons/ai';
 import { FaUser } from 'react-icons/fa';
-import { MdOutlineEdit, MdReportProblem } from 'react-icons/md';
+import { MdReportProblem } from 'react-icons/md';
 import { BsFillTagsFill } from 'react-icons/bs';
 
 import { IExerciseCard } from '../../../models/interfaces';
@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import { getExerciseAttemptPageLink, getExerciseEditLink } from '../../../utils/links';
 import { deleteExercise } from '../../../apis/exercise';
 import { useUserContext } from '../../../store/context/UserContext';
-import { RiDeleteBin6Line } from 'react-icons/ri';
 import HoveringLabel from '../labels/HoveringLabel';
 import DeleteModal from '../modals/variations/DeleteModal';
 import LanguageLabel from '../labels/LanguageLabel';
