@@ -10,7 +10,6 @@ export function createRandomExercise(idx: number) {
         name: `${randomChoice(randomExerciseNames)} ${idx + 1}`,
         language: randomChoice(LanguageList),
         difficulty: randomChoice(DifficultyList),
-        topic: randomChoice(ProgrammingTopicList),
         tags: randomMultipleChoices(ProgrammingTopicList),
         correctRate: getRandomNumber(0, 100),
         reports: getRandomNumber(0, 300),

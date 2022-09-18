@@ -13,6 +13,7 @@ interface Props {
     onVote: (type: 'up' | 'down') => void;
 }
 
+// Set of upvote and downvote buttons and functionalities.
 const VoteButtons: React.FC<Props> = ({ votes, onVote }) => {
     const userId = useUserContext().userDetail?._id;
 

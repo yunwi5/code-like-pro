@@ -60,12 +60,6 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
             toastNotify('Oops, something went wrong while deleting your comment...', 'error');
     };
 
-    // Derive upvote & downvote count from the list of votes
-    const upvoteCount = votes.reduce(
-        (accCount, curr) => (curr.type === 'up' ? accCount + 1 : accCount),
-        0,
-    );
-
     // Check if the user is the author of the comment.
     const isCommentAuthor = comment.user._id === userId;
 
