@@ -18,6 +18,6 @@ router.delete('/:id', ensureAuthenticated, catchAsync(showCaseController.deleteS
 router.post('/', ensureAuthenticated, catchAsync(showCaseController.postShowCase));
 
 // Edit show case
-router.patch('/', ensureAuthenticated, catchAsync(showCaseController.updateShowCase));
+router.patch('/:id', ensureAuthenticated, catchAsync(showCaseController.updateShowCase));
 
 module.exports = router;
