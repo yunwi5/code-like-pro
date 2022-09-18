@@ -14,6 +14,7 @@ const exerciseRouter = require('./routes/exercise');
 const userSubmissionRouter = require('./routes/userSubmission');
 const commentRouter = require('./routes/comment');
 const userRouter = require('./routes/user');
+const showCaseRouter = require('./routes/showCase');
 
 // Passport auth initialization
 passportStrategy(passport);
@@ -37,6 +38,7 @@ app.use('/api/exercise', exerciseRouter);
 app.use('/api/submission', userSubmissionRouter);
 app.use('/api/user', userRouter);
 app.use('/api/comment', commentRouter);
+app.use('/api/showCase', showCaseRouter);
 
 // Placeholder index route
 app.get('/', (req, res) => res.send('Welcome to the index route.'));

@@ -21,16 +21,16 @@ const ExerciseSpec: React.FC<{ exercise: IExerciseWithId }> = ({ exercise }) => 
                 {exercise.author?.name || 'Anonymous'}
             </li>
             <li className="flex gap-1">
-                <BsFillCalendarCheckFill className="text-blue-500/80 text-[1.15rem]" />{' '}
-                {getDateFormat(exercise.createdAt)}
-            </li>
-            <li className="flex gap-1">
                 <AiFillStar className="text-yellow-500 text-[1.4rem]" />{' '}
                 {exercise.liked.length}
             </li>
             <li className="flex gap-1">
                 <AiFillCheckCircle className="text-emerald-400 text-[1.4rem]" />
                 {correctCount} of {total} ({correctRate}%)
+            </li>
+            <li className="flex gap-1">
+                <BsFillCalendarCheckFill className="text-blue-500/80 text-[1.15rem]" />{' '}
+                {getDateFormat(exercise.createdAt)}
             </li>
             <li className="flex gap-1">
                 <MdReportProblem className="text-stone-500 text-[1.35rem]" />{' '}
