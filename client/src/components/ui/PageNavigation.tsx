@@ -5,6 +5,7 @@ interface Props {
     currentPage: number;
     totalPages: number;
     onChangePage: (newPage: number) => void;
+    className?: string;
 }
 
 function createAdjacentPageList(currentPage: number, totalPages: number) {
@@ -27,7 +28,12 @@ function createAdjacentPageList(currentPage: number, totalPages: number) {
 const navBtnClass =
     'flex-center w-[2rem] h-[2rem] rounded-sm text-2xl hover:bg-gray-200/90 cursor-pointer';
 
-const PageNavigation: React.FC<Props> = ({ currentPage, totalPages, onChangePage }) => {
+const PageNavigation: React.FC<Props> = ({
+    currentPage,
+    totalPages,
+    onChangePage,
+    className = '',
+}) => {
     const pageList = createAdjacentPageList(currentPage, totalPages);
 
     const currentPageCloseToEnd = currentPage + 4 >= totalPages;
@@ -35,7 +41,7 @@ const PageNavigation: React.FC<Props> = ({ currentPage, totalPages, onChangePage
     const dots = <span>...</span>;
 
     return (
-        <div className="flex-center gap-3">
+        <div className={`flex-center gap-3 ${className}`}>
             {/* Navigate to previous page */}
             <div
                 onClick={() => currentPage !== 0 && onChangePage(currentPage - 1)}

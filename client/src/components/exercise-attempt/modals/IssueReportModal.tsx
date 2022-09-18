@@ -4,7 +4,7 @@ import { FaBug } from 'react-icons/fa';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CustomTextArea from '../../ui/inputs/CustomTextArea';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import { reportExerciseRequest } from '../../../apis/exercise';
+import { postExerciseReport } from '../../../apis/exercise';
 import { toastNotify } from '../../../utils/notification';
 import FormModal from '../../ui/modals/variations/FormModal';
 
@@ -34,7 +34,7 @@ const IssueReportModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         }
 
         setIsLoading(true);
-        let { ok, data, message } = await reportExerciseRequest(exercise._id, {
+        let { ok, data, message } = await postExerciseReport(exercise._id, {
             category: issueCategory,
             description,
         });

@@ -12,7 +12,6 @@ export function getDateTimeFormat(isoString: string, relative: boolean = true) {
     // Return absolute datetime format i.e. 9th Aug 2022, 3:50pm
     if (!relative) return dt.toLocaleString(DateTime.DATE_MED);
 
-    dt.toRelative();
     return dt.toRelative();
 }
 

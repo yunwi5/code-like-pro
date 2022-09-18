@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const { LanguageEnum } = require('./enums');
+// Language enums available for this app
+const { LanguageList } = require('./enums');
 
 const TestCaseSchema = new Schema({
     code: {
@@ -37,7 +38,7 @@ const ExerciseSchema = new Schema({
     startingTemplate: { type: String },
     language: {
         type: String,
-        enum: LanguageEnum,
+        enum: LanguageList,
         required: true,
     },
     topic: {
@@ -59,6 +60,7 @@ const ExerciseSchema = new Schema({
         required: true,
     },
     tags: [{ type: String }],
+    courses: [{ type: String }],
     reports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ExerciseReport' }],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
     showCases: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ShowCase' }],

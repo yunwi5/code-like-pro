@@ -47,7 +47,7 @@ const ShowcasePage = () => {
                 {!exercise && <ClipLoader size={200} color="#3c38e0" />}
 
                 {/* Wrap the showcase components with the showcase context that provides all showcase data. */}
-                {exercise && userSubmission && (
+                {exercise && (
                     <ShowcaseContextProvider
                         exercise={exercise}
                         userSubmission={userSubmission}

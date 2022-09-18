@@ -23,6 +23,7 @@ export const ExerciseCreationContext = React.createContext<IExerciseCreationCont
     runCode: () => {},
     testCases: [],
     tags: [],
+    courses: [],
 } as any);
 
 export const useExerciseCreationContext = () => useContext(ExerciseCreationContext);
@@ -47,14 +48,13 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
     const [difficulty, setDifficulty] = useState<Difficulty>(
         exercise?.difficulty || Difficulty.EASY,
     );
-    const [topic, setTopic] = useState<ProgrammingTopic>(
-        exercise?.topic || ProgrammingTopic.ARRAY,
-    );
 
     const [solutionCode, setSolutionCode] = useState(exercise?.solutionCode || '');
     const [startingTemplate, setStartingTemplate] = useState(exercise?.startingTemplate || '');
 
     const [tags, setTags] = useState<string[]>(exercise?.tags || []);
+    const [courses, setCourses] = useState<string[]>(exercise?.courses || []);
+
     const [testCases, setTestCases] = useState<ITestCase[]>(
         exercise?.testCases || getInitialTestCaseArray(),
     );
@@ -78,11 +78,11 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
         name,
         language,
         difficulty,
-        topic,
         prompt,
         solutionCode,
         startingTemplate,
         tags,
+        courses,
         // Remove id and error from test cases.
         testCases: testCases.map((testCase) => ({
             ...testCase,
@@ -168,24 +168,25 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
         if (!exerciseDraft) return;
         // If there is an initial exercise (edit mode), do not use the draft data.
         if (exercise) return;
+        setName(exerciseDraft.name);
         setLanguage(exerciseDraft.language as Language);
-        setTopic(exerciseDraft.topic);
         setDifficulty(exerciseDraft.difficulty);
         setTags(exerciseDraft.tags);
+        setCourses(exerciseDraft.courses || []);
         setPrompt(exerciseDraft.prompt);
         setTestCases(exerciseDraft.testCases);
         setStartingTemplate(exerciseDraft.startingTemplate);
         setSolutionCode(exerciseDraft.solutionCode);
-        setName(exerciseDraft.name);
     }, [exerciseDraft]);
+
+    console.log({ createdExercise });
+    console.log({ createdExercise });
 
     const value = {
         name,
         setName,
         language,
         setLanguage,
-        topic,
-        setTopic,
         difficulty,
         setDifficulty,
         prompt,
@@ -194,6 +195,8 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
         setTestCases,
         tags,
         setTags,
+        courses,
+        setCourses,
         startingTemplate,
         setStartingTemplate,
         solutionCode,
