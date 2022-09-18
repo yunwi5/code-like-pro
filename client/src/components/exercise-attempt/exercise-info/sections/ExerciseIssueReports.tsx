@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { FaSmile } from 'react-icons/fa';
 
-import { ClipLoader } from 'react-spinners';
 import useExerciseReportsQuery from '../../../../hooks/queries/useExerciseReportsQuery';
+import ClipLoader from 'react-spinners/ClipLoader';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { compareByVotes } from '../../../../utils/sorting-utils';
 import IssueReportList from '../../../ui/lists/IssueReportList';
