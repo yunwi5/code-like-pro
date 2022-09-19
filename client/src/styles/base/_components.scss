@@ -89,4 +89,40 @@
 
 .ql-editor {
     min-height: 8rem;
+    // Default font size
+    font-size: 15px;
+
+    // Configure font-family of the ql text editor.
+    .ql-font-arial {
+        font-family: Arial;
+    }
+
+    .ql-font-georgia {
+        font-family: Georgia;
+    }
+
+    .ql-font-courier-new {
+        font-family: 'Courier New';
+    }
+
+    .ql-font-calibri {
+        font-family: Calibri;
+    }
+
+    .ql-font-helvetica {
+        font-family: Helvetica;
+    }
+
+    .ql-font-lucida {
+        font-family: lucida;
+    }
+}
+
+.ql-snow {
+    // Configure font sizes for different font size classes of ql.
+    @for $i from 8 through 100 {
+        .ql-size-#{$i}px {
+            font-size: #{$i}px;
+        }
+    }
 }
