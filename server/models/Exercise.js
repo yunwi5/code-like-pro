@@ -60,6 +60,7 @@ const ExerciseSchema = new Schema({
         type: [TestCaseSchema],
         required: true,
     },
+    // Tags as a list of topics
     tags: [{ type: String }],
     courses: [{ type: String }],
     reports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ExerciseReport' }],
