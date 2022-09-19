@@ -35,6 +35,7 @@ function getDifficultyMultiplier(difficulty) {
     }
 }
 
+// Function to add exercise creation points to each user in the param map.
 function addCreationPoints(userRankingDataMap, exercises) {
     // Adding ranking data for exercise creations.
     exercises.forEach((ex) => {
@@ -53,6 +54,7 @@ function addCreationPoints(userRankingDataMap, exercises) {
     });
 }
 
+// Function to add exercise solving points to each user in the param map.
 function addSolvingPoints(userRankingDataMap, submissions) {
     // Adding ranking data for exercise solving.
     submissions.forEach((sub) => {
@@ -71,6 +73,10 @@ function addSolvingPoints(userRankingDataMap, submissions) {
     });
 }
 
+/* Actual API route contollers */
+
+// GET: Global ranking data of the user as an array
+// Response body: Array<{user: {_id: string, name: string, pictureUrl: string}, creationPoints: number, solvingPoints: number}>
 const getUserRankings = async (req, res) => {
     const usersPromise = User.find({});
     const exercisesPromise = Exercise.find({});
@@ -99,4 +105,84 @@ const getUserRankings = async (req, res) => {
     return res.status(200).json(userRankingDataArray);
 };
 
-module.exports = { getUserRankings };
+// GET: Topic ranking data of the user as an array
+const getTopicsUserRankings = async (req, res) => {
+    const topic = req.params.topic;
+    const usersPromise = User.find();
+    // Query ONLY for exercises whose tags contain the param topic.
+    const exercisesPromise = Exercise.find({ tags: topic });
+    // Query ONLY for submissions whose exercises' tags contain the param topic.
+    const submissionsPromise = UserSubmission.find()
+        .populate({
+            path: 'exercise',
+            select: ['tags', 'difficulty'],
+        })
+        .then((submissions) => {
+            // Filter the submissions to check if the corresponding exercises' tags contain the topic in their tags.
+            return submissions.filter((sub) => sub.exercise.tags.includes(topic));
+        });
+
+    // Query all users, exercises and submissions data.
+    const [users, exercises, submissions] = await Promise.all([
+        usersPromise,
+        exercisesPromise,
+        submissionsPromise,
+    ]);
+
+    // Construct the user ranking map. Key is user._id.
+    const userRankingDataMap = constructUserRankingDataMap(users);
+
+    // Adding ranking data for exercise creations.
+    addCreationPoints(userRankingDataMap, exercises);
+
+    // Adding ranking data for exercise solving.
+    addSolvingPoints(userRankingDataMap, submissions);
+
+    // Showcase results will also be taken into account for the ranking.
+
+    const userRankingDataArray = Object.values(userRankingDataMap);
+
+    return res.status(200).json(userRankingDataArray);
+};
+
+// GET: Course ranking data of the user as an array
+const getCoursesUserRankings = async (req, res) => {
+    const course = req.params.course;
+    const usersPromise = User.find();
+    // Query ONLY for exercises whose courses contain the param course.
+    const exercisesPromise = Exercise.find({ courses: course });
+    // Query ONLY for submissions whose exercises' courses contain the param course.
+    const submissionsPromise = UserSubmission.find()
+        .populate({
+            path: 'exercise',
+            select: ['courses', 'difficulty'],
+        })
+        .then((submissions) => {
+            // Filter the submissions to check if the corresponding exercises' tags contain the topic in their tags.
+            return submissions.filter((sub) => sub.exercise.courses.includes(course));
+        });
+
+    // Query all users, exercises and submissions data.
+    const [users, exercises, submissions] = await Promise.all([
+        usersPromise,
+        exercisesPromise,
+        submissionsPromise,
+    ]);
+
+    // Construct the user ranking map. Key is user._id.
+    const userRankingDataMap = constructUserRankingDataMap(users);
+
+    // Adding ranking data for exercise creations.
+    addCreationPoints(userRankingDataMap, exercises);
+
+    // Adding ranking data for exercise solving.
+    addSolvingPoints(userRankingDataMap, submissions);
+
+    // Showcase results will also be taken into account for the ranking.
+
+    const userRankingDataArray = Object.values(userRankingDataMap);
+
+    return res.status(200).json(userRankingDataArray);
+};
+
+module.exports = { getUserRankings, getTopicsUserRankings, getCoursesUserRankings };
