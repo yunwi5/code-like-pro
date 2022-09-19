@@ -15,7 +15,6 @@ export function randomChoice<T>(array: T[] | readonly T[]): T {
 }
 
 // Choice multiple random elements from an array.
-//
 export function randomMultipleChoices<T>(
     array: T[] | readonly T[],
     min?: number,

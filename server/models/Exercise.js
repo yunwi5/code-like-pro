@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Language enums available for this app
-const { LanguageList } = require('./enums');
+// Language and difficulty enums available for this app
+const { LanguageList, DifficultyList } = require('./enums');
 
 const TestCaseSchema = new Schema({
     code: {
@@ -30,6 +30,7 @@ const ExerciseSchema = new Schema({
     },
     difficulty: {
         type: String,
+        enum: DifficultyList,
         required: true,
     },
     solutionCode: {

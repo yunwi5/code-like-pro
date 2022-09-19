@@ -1,3 +1,4 @@
+// Only languages that are allowed in this app.
 const Language = {
     PYTHON: 'python3',
     C: 'c',
@@ -11,4 +12,14 @@ const Language = {
 // We will not support python2 and Octave
 const LanguageList = ['python3', 'c', 'cpp', 'java', 'nodejs', 'php', 'pascal'];
 
-module.exports = { Language, LanguageList };
+// Only difficulties that are allowed in this app.
+const Difficulty = {
+    EASY: 'Easy',
+    MEDIUM: 'Medium',
+    HARD: 'Hard',
+    EXPERT: 'Expert',
+};
+
+const DifficultyList = Object.values(Difficulty);
+
+module.exports = { Language, LanguageList, Difficulty, DifficultyList };

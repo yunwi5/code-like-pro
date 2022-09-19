@@ -1,38 +1,39 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
+const keys = require('./keys');
 const errorHandler = require('../middleware/errorHandler');
 
 const createApp = () => {
-  const app = express();
+    const app = express();
 
-  // handle cors issue from client
-  app.use(
-    cors({
-      origin: '*',
-      methods: 'GET,POST,PUT,PATCH,DELETE',
-      credentials: true, // IMPORTANT to set to true
-    }),
-  );
+    // handle cors issue from client
+    app.use(
+        cors({
+            origin: keys.ClientBaseURL,
+            methods: 'GET,POST,PUT,PATCH,DELETE',
+            credentials: true, // IMPORTANT to set to true
+        }),
+    );
 
-  // Allow express to parse JSON
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
+    // Allow express to parse JSON
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: false }));
 
-  // Express Session
-  app.use(
-    session({
-      name: 'session',
-      secret: 'secretcat',
-      resave: false,
-      saveUninitialized: true,
-    }),
-  );
+    // Express Session
+    app.use(
+        session({
+            name: 'session',
+            secret: 'secretcat',
+            resave: false,
+            saveUninitialized: true,
+        }),
+    );
 
-  // Register default error handler
-  app.use(errorHandler);
+    // Register default error handler
+    app.use(errorHandler);
 
-  return app;
+    return app;
 };
 
 module.exports = createApp;

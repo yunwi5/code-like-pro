@@ -6,7 +6,6 @@ export interface IExerciseCard {
     _id: string;
     name: string;
     language: Language;
-    topic: ProgrammingTopic;
     difficulty: Difficulty;
     correctRate: number;
     stars: number; // favorite count
