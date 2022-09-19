@@ -20,4 +20,10 @@ router.post('/', ensureAuthenticated, catchAsync(showCaseController.postShowCase
 // Edit show case
 router.patch('/:id', ensureAuthenticated, catchAsync(showCaseController.updateShowCase));
 
+// Get comments
+router.get('/:id/comment', ensureAuthenticated, catchAsync(showCaseController.getComments));
+
+// Post comment
+router.post('/:id/comment', ensureAuthenticated, catchAsync(showCaseController.postComment));
+
 module.exports = router;
