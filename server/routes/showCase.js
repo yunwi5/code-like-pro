@@ -26,4 +26,10 @@ router.get('/:id/comment', ensureAuthenticated, catchAsync(showCaseController.ge
 // Post comment
 router.post('/:id/comment', ensureAuthenticated, catchAsync(showCaseController.postComment));
 
+// Post vote
+router.post('/:id/vote', ensureAuthenticated, catchAsync(showCaseController.postVote));
+
+// Remove vote
+router.delete('/:id/vote', ensureAuthenticated, catchAsync(showCaseController.deleteVote));
+
 module.exports = router;
