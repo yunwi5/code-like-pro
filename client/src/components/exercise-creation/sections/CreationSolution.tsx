@@ -1,7 +1,7 @@
 import React from 'react';
 import { CreationSection, Language } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
-import { getLanguageTemplate, LanguageTemplates } from '../../../utils/language';
+import { LanguageStartingTemplate } from '../../../utils/language';
 import { removeAllSpaces } from '../../../utils/string-utils/string-manipulation';
 import CodeEditor from '../../ui/editor/CodeEditor';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
@@ -27,12 +27,13 @@ const CreationSolution: React.FC = () => {
 // If the user has not written any code to the solution space yet, insert the starting template code for users to start with.
 // If the user has written any solution by themselves, do not replace their code by a new language.
 function getUserSolutionForSelectedLang(language: Language, solutionCode: string) {
-    const templatesTrimmed = Object.values(LanguageTemplates).map((temp) =>
+    const templatesTrimmed = Object.values(LanguageStartingTemplate).map((temp) =>
         removeAllSpaces(temp),
     );
     const solutionCodeTrimmed = removeAllSpaces(solutionCode || '');
 
-    if (templatesTrimmed.includes(solutionCodeTrimmed)) return getLanguageTemplate(language);
+    if (templatesTrimmed.includes(solutionCodeTrimmed))
+        return LanguageStartingTemplate[language] || '';
     return solutionCode;
 }
 

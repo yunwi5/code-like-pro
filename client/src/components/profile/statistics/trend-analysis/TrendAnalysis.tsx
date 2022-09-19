@@ -21,9 +21,9 @@ const TrendAnalysis: React.FC = () => {
                 <ExerciseAttemptTrend trendMode={trendMode} />
                 <ExerciseCreationTrend trendMode={trendMode} />
             </div>
-            <p className="flex-start gap-2 mt-5 font-semibold">
+            <footer className="flex-start gap-2 mt-5 font-semibold">
                 <FaRobot className="text-sky-500 text-xl" /> Keep pushing forward!
-            </p>
+            </footer>
         </div>
     );
 };
