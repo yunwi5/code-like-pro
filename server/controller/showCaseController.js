@@ -96,6 +96,63 @@ const postComment = async(req, res) => {
     res.status(200).json(comment);
 }
 
+const postVote = async(req, res) => {
+    const {type} = req.body;
+
+    try{
+        const showCase = await ShowCase.findById(req.params.id);
+        // Check if show case exists, return 404 if not
+        if (showCase == null) res.status(404).send(`Showcase ${req.params.id} not found`);
+
+        // See if there is already an existing vote made by the user
+        const foundVote = showCase.votes.find(
+            (vote) => vote.user.toString() === req.user._id.toString(),
+        );
+        if (foundVote){
+            // If user has already voted, update vote
+            foundVote.type = type;
+        } else {
+            // If user has not voted, create new vote
+            const newVote = {type, user: req.user._id};
+            showCase.votes.push(newVote);
+        }
+
+        await showCase.save();  
+        res.status(201).json(showCase);
+        
+    } catch(err){
+        console.log(err.message);
+        res.status(404).json(err.message);
+    }
+
+};
+
+const deleteVote = async(req, res) => {
+    try{
+        const showCase = await ShowCase.findById(req.params.id).populate('votes');
+        // Check if show case exists, return 404 if not
+        if (showCase == null) res.status(404).send(`Showcase ${req.params.id} not found`);
+
+        // Find index of existing vote made by the user, if there is one
+        const foundIndex = showCase.votes.findIndex(
+            (vote) => vote.user.toString() === req.user._id.toString(),
+        );
+
+        // If user has no vote return error
+        if (foundIndex < 0){
+            return res.status(404).json({ message: 'User vote not found' });
+        } else {
+            // If user has not voted, create new vote
+            showCase.votes.splice(foundIndex, 1);
+            await showCase.save();
+            return res.status(200).json(showCase);
+        }
+    } catch(err){
+        console.log(err.message);
+        res.status(404).json(err.message);
+    }
+}
+
 
 const controller = {
     postShowCase,
@@ -105,6 +162,8 @@ const controller = {
     deleteShowCase,
     postComment,
     getComments,
+    postVote,
+    deleteVote,
 };
 
 module.exports = controller;
