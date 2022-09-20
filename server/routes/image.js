@@ -13,6 +13,7 @@ imageRouter.post(
     catchAsync(imageController.postExerciseImage),
 );
 
-// imageRouter.post('/user')
+// Post user (custom) profile image
+imageRouter.post('/user', ensureAuthenticated, catchAsync(imageController.postUserImage));
 
 module.exports = imageRouter;

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const ImageSchema = new Schema({
     url: { type: String, required: true },
+    publicId: { type: String },
     // User attribute is not null, if the image is a profile image.
     user: {
         type: Schema.Types.ObjectId,
@@ -15,4 +16,6 @@ const ImageSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('Image', ImageSchema);
+const Image = mongoose.model('Image', ImageSchema);
+
+module.exports = Image;

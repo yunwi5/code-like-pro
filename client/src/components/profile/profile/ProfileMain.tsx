@@ -16,8 +16,9 @@ const ProfileMain = () => {
 
     // Only username and avatars are editable in the profile page.
     const [profileName, setProfileName] = useState(userDetail?.name || '');
-    const [picture, setPicture] = useState(userDetail?.pictureUrl || '');
     const [description, setDescription] = useState(userDetail?.description || '-');
+
+    const [picture, setPicture] = useState(userDetail?.pictureUrl || '');
 
     // Loading state
     if (!userDetail) return <ProfileLoader />;

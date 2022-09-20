@@ -11,6 +11,7 @@ export const toastNotify = (message: string, type?: MessageType) => {
             theme: 'dark',
             position: toast.POSITION.TOP_CENTER,
             className: '!bg-gray-700/90', // bg color can change.
+            autoClose: 3000, // Close after 5s by default
         });
     } else {
         toast(message, {
@@ -18,6 +19,7 @@ export const toastNotify = (message: string, type?: MessageType) => {
             theme: 'dark',
             position: toast.POSITION.TOP_CENTER,
             className: '!bg-gray-700/90', // bg color can change.
+            autoClose: 3000,
         });
     }
 };

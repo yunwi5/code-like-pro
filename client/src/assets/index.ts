@@ -3,7 +3,6 @@ export { default as CodeMonitor } from './svg-icons/CodeMonitor';
 
 import Avatar1 from './avatars/avatar1.png';
 import Avatar2 from './avatars/avatar2.png';
-import Avatar3 from './avatars/avatar3.png';
 import Avatar4 from './avatars/avatar4.png';
 import Avatar5 from './avatars/avatar5.png';
 import Avatar6 from './avatars/avatar6.png';
@@ -17,7 +16,6 @@ import Avatar12 from './avatars/avatar12.png';
 export const AvatarImages = {
     Avatar1,
     Avatar2,
-    Avatar3,
     Avatar4,
     Avatar5,
     Avatar6,
