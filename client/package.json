@@ -17,6 +17,7 @@
     "luxon": "^3.0.3",
     "monaco-editor": "^0.34.0",
     "node-sass": "^7.0.1",
+    "quill-image-uploader": "^1.2.3",
     "react": "^18.0.0",
     "react-chartjs-2": "^4.3.1",
     "react-click-away-listener": "^2.2.1",
