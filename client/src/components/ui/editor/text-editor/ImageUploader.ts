@@ -2,7 +2,7 @@ import { Quill } from 'react-quill';
 import ImageUploader from 'quill-image-uploader';
 import { postExercisePromptImage } from '../../../../apis/image';
 import { toastNotify } from '../../../../utils/notification';
-import { toBase64Image } from '../../../../utils/string-utils/image';
+import { toBase64Image } from '../../../../utils/image';
 
 // Image uploader module
 Quill.register('modules/imageUploader', ImageUploader);

@@ -6,7 +6,7 @@ import { getDateFormat } from '../../../utils/datetime';
 import { getUsedLanguagesByUser } from '../../../utils/language';
 import Button from '../../ui/buttons/Button';
 import ProfileLoader from '../ProfileLoader';
-import ProfileAvatar from './sections/ProfileAvatar';
+import ProfileAvatar from './avatars/ProfileAvatar';
 import ProfileInfoItem from './sections/ProfileInfoItem';
 import ProfileInput from './sections/ProfileInput';
 

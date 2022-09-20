@@ -1,6 +1,6 @@
 import { Quill } from 'react-quill';
 import hljs from 'highlight.js';
-import { imageUploader } from './ImageUpload';
+import { imageUploader } from './ImageUploader';
 
 hljs.configure({
     languages: ['javascript', 'python', 'cpp', 'c', 'php', 'java'],
