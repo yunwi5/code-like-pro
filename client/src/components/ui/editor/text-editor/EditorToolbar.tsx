@@ -1,6 +1,6 @@
 import { Quill } from 'react-quill';
 import hljs from 'highlight.js';
-import ImageUploader from 'quill-image-uploader';
+import { imageUploader } from './ImageUpload';
 
 hljs.configure({
     languages: ['javascript', 'python', 'cpp', 'c', 'php', 'java'],
@@ -82,6 +82,7 @@ export const modules = {
         maxStack: 100,
         userOnly: true,
     },
+    imageUploader: imageUploader,
 };
 
 // Formats objects for setting up the Quill editor

@@ -179,9 +179,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
         setSolutionCode(exerciseDraft.solutionCode);
     }, [exerciseDraft]);
 
-    console.log({ createdExercise });
-    console.log({ createdExercise });
-
     const value = {
         name,
         setName,
