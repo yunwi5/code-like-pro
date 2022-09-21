@@ -16,4 +16,7 @@ imageRouter.post(
 // Post user (custom) profile image
 imageRouter.post('/user', ensureAuthenticated, catchAsync(imageController.postUserImage));
 
+// Delete image by img url
+imageRouter.post('/', ensureAuthenticated, catchAsync(imageController.deleteImageByUrl));
+
 module.exports = imageRouter;
