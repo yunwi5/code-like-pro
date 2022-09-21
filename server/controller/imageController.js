@@ -26,25 +26,21 @@ const postUserImage = async (req, res) => {
         if (!inputImage)
             return res.status(404).json({ message: 'Requset body image not found.' });
 
-        const foundImagePromise = Image.findOne({ user: userId });
-        const uploadedResponsePromise = cloudinary.uploader.upload(inputImage, {
+        const foundImage = await Image.findOne({ user: userId });
+        const uploadedResponse = await cloudinary.uploader.upload(inputImage, {
             upload_preset: CLOUDINARY_DIR,
         });
 
-        const [foundImage, uploadedResponse] = await Promise.all([
-            foundImagePromise,
-            uploadedResponsePromise,
-        ]);
         console.log(uploadedResponse);
 
-        const destroyPromise = cloudinary.uploader.destroy(foundImage.publicId);
-        const removePromise = foundImage.remove();
+        if (foundImage) {
+            await cloudinary.uploader.destroy(foundImage.publicId);
+            await foundImage.remove();
+        }
 
         const { public_id, url } = uploadedResponse;
         const createdImage = new Image({ publicId: public_id, url, user: userId });
-        const createPromise = createdImage.save();
-
-        await Promise.all([destroyPromise, removePromise, createPromise]);
+        await createdImage.save();
 
         res.status(201).json(createdImage);
     } catch (err) {
@@ -53,4 +49,16 @@ const postUserImage = async (req, res) => {
     }
 };
 
-module.exports = { postExerciseImage, postUserImage };
+// DELETE request does not have a body, so use POST request instead to delete the image.
+const deleteImageByUrl = async (req, res) => {
+    const url = req.body.url;
+    const foundImage = await Image.findOne({ url });
+    if (!foundImage) return res.status(404).json({ message: 'Image not found.' });
+    await foundImage.remove();
+
+    const destroyResult = await cloudinary.uploader.destroy(foundImage.publicId);
+    console.log({ destroyResult });
+    res.status(200).json(destroyResult);
+};
+
+module.exports = { postExerciseImage, postUserImage, deleteImageByUrl };
