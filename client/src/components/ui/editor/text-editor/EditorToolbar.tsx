@@ -1,5 +1,6 @@
 import { Quill } from 'react-quill';
 import hljs from 'highlight.js';
+import { imageUploader } from './ImageUploader';
 
 hljs.configure({
     languages: ['javascript', 'python', 'cpp', 'c', 'php', 'java'],
@@ -81,6 +82,7 @@ export const modules = {
         maxStack: 100,
         userOnly: true,
     },
+    imageUploader: imageUploader,
 };
 
 // Formats objects for setting up the Quill editor
@@ -100,7 +102,7 @@ export const formats = [
     'bullet',
     'indent',
     'link',
-    // 'image',
+    'image',
     'color',
     'code-block',
 ];
@@ -119,12 +121,10 @@ export const QuillToolbar = () => (
                 <option value="lucida">Lucida</option>
             </select>
             <select className="ql-size" defaultValue="medium">
-                {/* <option value="small">Size 1</option> */}
-                {/* <option value="medium">Size 2</option> */}
-                {/* <option value="large">Size 3</option> */}
-                {/* <option value="huge">Size 4</option>/ */}
                 {fontSizeArr.map((value) => (
-                    <option value={value}>{value}</option>
+                    <option key={value} value={value}>
+                        {value}
+                    </option>
                 ))}
             </select>
             <select className="ql-header" defaultValue="3">
@@ -156,11 +156,11 @@ export const QuillToolbar = () => (
             <select className="ql-color" />
             <select className="ql-background" />
         </span>
-        {/* <span className="ql-formats">
-            <button className="ql-link" />
+        <span className="ql-formats">
+            {/* <button className="ql-link" /> */}
             <button className="ql-image" />
-            <button className="ql-video" />
-        </span> */}
+            {/* <button className="ql-video" /> */}
+        </span>
         <span className="ql-formats">
             {/* <button className="ql-formula" /> */}
             <button className="ql-code-block" />

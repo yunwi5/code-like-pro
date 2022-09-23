@@ -7,9 +7,9 @@ export default defineConfig({
         host: '0.0.0.0',
         port: 3000,
         // Currently there is an issue with proxy.
-        proxy: {
-            '/api': 'http://localhost:8080/',
-        },
-    },  
+        // proxy: {
+        //     '/api': 'http://localhost:8080/',
+        // },
+    },
     plugins: [react()],
 });
