@@ -1,0 +1,14 @@
+.editor-wrapper {
+    .clear-btn {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &:hover,
+    &:focus-within {
+        .clear-btn {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}

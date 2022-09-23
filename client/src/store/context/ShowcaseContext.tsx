@@ -23,13 +23,13 @@ export const useShowcase = () => useContext(ShowcaseContext);
 
 interface Props {
     exercise: IExerciseWithId;
-    userSubmission: IUserSubmissionPopulated;
+    userSubmission: IUserSubmissionPopulated | undefined;
     children: React.ReactNode;
 }
 
 export const ShowcaseContextProvider: React.FC<Props> = ({
     exercise,
-    userSubmission,
+    userSubmission = null,
     children,
 }) => {
     // Use React-Query to fetch the comments data of this exercise.

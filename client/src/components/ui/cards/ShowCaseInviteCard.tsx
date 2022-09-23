@@ -30,7 +30,7 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
     const author = inviteMode === 'created' ? userDetail?.name : exercise.author?.name;
 
     return (
-        <article className="flex flex-col gap-3 px-2 lg:px-4 py-2 transition-all bg-slate-100/80 shadow hover:shadow-md rounded">
+        <article className="flex flex-col gap-3 px-2 lg:px-4 py-2 transition-all odd:bg-slate-100 even:bg-slate-200/90 shadow hover:shadow-md rounded">
             {/* Card header that displays exercise title, language and author */}
             <header className="flex flex-wrap items-center gap-2">
                 <h3 className="text-gray-600 text-lg sm:text-xl hover:text-main-500 cursor-pointer">

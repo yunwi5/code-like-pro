@@ -16,9 +16,9 @@ const ProfilePicture: React.FC<Props> = ({ size = '2.25rem', picture }) => {
             style={{ width: size, height: size }}
         >
             {picture ? (
-                <img src={picture} className="object-cover" />
+                <img src={picture} className="min-w-full min-h-full object-cover" />
             ) : (
-                <FaUserCircle className="text-white" size={size} />
+                <FaUserCircle className="text-gray-700" size={size} />
             )}
         </div>
     );

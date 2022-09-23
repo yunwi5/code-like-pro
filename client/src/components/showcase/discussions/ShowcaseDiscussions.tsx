@@ -1,22 +1,23 @@
 import React, { useMemo, useState } from 'react';
 
 import { postExerciseComment } from '../../../apis/exercise';
-import { CommentSortingKey, SortingDirection } from '../../../models/enums';
+import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { useUserContext } from '../../../store/context/UserContext';
 import { toastNotify } from '../../../utils/notification';
-import { sortComments } from '../../../utils/sorting-utils/comment-sorting';
+import { sortVotingItems } from '../../../utils/sorting-utils/voting-items-sorting';
 import CommentForm from '../../ui/comments/CommentForm';
 import CommentList from '../../ui/lists/CommentList';
-import CommentSelectOptions from './sections/CommentSelectOptions';
-import CommentSorter from './sections/CommentSorter';
+import CommentSelectOptions from './CommentSelectOptions';
+import CommentSorter from '../../ui/sorting/VotingItemSorter';
+import { IComment } from '../../../models/interfaces';
 
 const ShowcaseDiscussions: React.FC = () => {
     const { userDetail } = useUserContext();
     const { exercise, comments, refetchQuery } = useShowcase();
 
     const [sortingState, setSortingState] = useState({
-        key: CommentSortingKey.NONE,
+        key: VotingItemSortingKey.NONE,
         direction: SortingDirection.DESCENDING,
     });
     const [showOnlyMyComments, setShowOnlyMyComments] = useState(false);
@@ -48,15 +49,15 @@ const ShowcaseDiscussions: React.FC = () => {
     // Whenver sorting state changes, sort the comments again.
     const sortedComments = useMemo(() => {
         // Pass sorting key and direction to sort the list of comments.
-        return sortComments(
+        return sortVotingItems(
             selectedComments,
             sortingState.key,
             sortingState.direction,
-        ).slice();
+        ).slice() as IComment[];
     }, [sortingState, selectedComments]);
 
     return (
-        <div className="flex flex-col px-8">
+        <div className="flex-1 flex flex-col px-8">
             {/* Component that handles the selection of sorting key and direction from the user. */}
             <CommentSorter sortingState={sortingState} setSortingState={setSortingState} />
 

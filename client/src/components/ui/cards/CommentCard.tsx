@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
 import { BsFillReplyFill } from 'react-icons/bs';
-import {
-    MdOutlineThumbDown,
-    MdOutlineThumbUpOffAlt,
-    MdThumbDownAlt,
-    MdThumbUpAlt,
-} from 'react-icons/md';
 
 import { deleteComment, deleteCommentVote, postCommentVote } from '../../../apis/comment';
 import { IComment, IVote } from '../../../models/interfaces';
@@ -14,6 +8,7 @@ import { getDateTimeFormat } from '../../../utils/datetime';
 import { toastNotify } from '../../../utils/notification';
 import DeleteButton from '../buttons/icon-buttons/DeleteButton';
 import EditButton from '../buttons/icon-buttons/EditButton';
+import VoteButtons from '../buttons/VoteButtons';
 import CommentEditModal from '../comments/CommentEditModal';
 import DeleteModal from '../modals/variations/DeleteModal';
 import ProfilePicture from '../user/ProfilePicture';
@@ -65,16 +60,6 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
             toastNotify('Oops, something went wrong while deleting your comment...', 'error');
     };
 
-    // Derive upvote & downvote count from the list of votes
-    const upvoteCount = votes.reduce(
-        (accCount, curr) => (curr.type === 'up' ? accCount + 1 : accCount),
-        0,
-    );
-    const downVoteCount = votes.length - upvoteCount;
-
-    // Find current user's vote on this comment.
-    const userVote = votes.find((vote) => vote.user === userId);
-
     // Check if the user is the author of the comment.
     const isCommentAuthor = comment.user._id === userId;
 
@@ -93,33 +78,7 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
 
                 {/* Comment votes & replies */}
                 <footer className="w-full flex gap-1 lg:gap-3 mt-2">
-                    <div
-                        onClick={() => handleUserVote('up')}
-                        className={`flex-start gap-1 cursor-pointer hover:text-main-500 ${
-                            userVote?.type === 'up' ? 'text-main-500' : ''
-                        }`}
-                    >
-                        {userVote?.type === 'up' ? (
-                            <MdThumbUpAlt className="text-xl cursor-pointer" />
-                        ) : (
-                            <MdOutlineThumbUpOffAlt className="text-lg cursor-pointer" />
-                        )}
-                        <span className="text-sm">{upvoteCount}</span>
-                    </div>
-
-                    <div
-                        onClick={() => handleUserVote('down')}
-                        className={`flex-start gap-1 cursor-pointer hover:text-main-500 ${
-                            userVote?.type === 'down' ? 'text-main-500' : ''
-                        }`}
-                    >
-                        {userVote?.type === 'down' ? (
-                            <MdThumbDownAlt className="text-xl cursor-pointer" />
-                        ) : (
-                            <MdOutlineThumbDown className="text-lg cursor-pointer" />
-                        )}
-                        <span className="text-sm">{downVoteCount}</span>
-                    </div>
+                    <VoteButtons votes={votes} onVote={handleUserVote} />
 
                     {onReply && (
                         <div

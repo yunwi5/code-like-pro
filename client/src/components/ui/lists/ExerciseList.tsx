@@ -13,6 +13,7 @@ interface Props {
 }
 
 const ExerciseList: React.FC<Props> = ({ exercises, exercisePerPage = EXERCISE_PER_PAGE }) => {
+    // custom hook for paging
     const {
         array: currentPageExercises,
         page,
@@ -23,7 +24,7 @@ const ExerciseList: React.FC<Props> = ({ exercises, exercisePerPage = EXERCISE_P
     const handlePage = (newPage: number) => setPage(newPage);
 
     return (
-        <section className="lg:basis-2/3">
+        <section style={{}} className="lg:basis-2/3">
             <div className="flex flex-col gap-5 mb-8">
                 {currentPageExercises.map((ex, idx) => (
                     <ExerciseCard

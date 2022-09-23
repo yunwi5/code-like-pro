@@ -4,6 +4,7 @@ const UserSubmission = require('../models/UserSubmission');
 const Comment = require('../models/Comment');
 const ShowCase = require('../models/ShowCase');
 
+const { constructLanguageFileSpec } = require('../utils/languageSupport');
 const makeRequest = require('../utils/makeRequest');
 
 const postExercise = async (req, res) => {
@@ -19,15 +20,8 @@ const postExercise = async (req, res) => {
 
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
-
-        const test = solutionCode + '\n\n' + testCase.code;
-
         const body = {
-            run_spec: {
-                language_id: language,
-                sourcefilename: 'test',
-                sourcecode: test,
-            },
+            run_spec: constructLanguageFileSpec(language, solutionCode, testCase.code),
         };
 
         const result = makeRequest(body);
@@ -84,15 +78,8 @@ const updateExercise = async (req, res) => {
 
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
-
-        const test = solutionCode + '\n' + testCase.code;
-
         const body = {
-            run_spec: {
-                language_id: language,
-                sourcefilename: 'test',
-                sourcecode: test,
-            },
+            run_spec: constructLanguageFileSpec(language, solutionCode, testCase.code),
         };
 
         const result = makeRequest(body);
@@ -153,8 +140,24 @@ const getExerciseSubmissions = async (req, res) => {
     }
 };
 
+/* GET: Exercise issue reports as JSON array */
+const getExerciseReports = async (req, res) => {
+    const exerciseId = req.params.id;
+    try {
+        const exercise = await Exercise.findById(exerciseId).populate({
+            path: 'reports',
+            populate: { path: 'user', select: 'name' },
+        });
+        const reports = exercise.reports;
+        return res.status(200).json(reports);
+    } catch (err) {
+        console.log(err.message);
+        return res.status(404).json({ message: `Exercise ${exerciseId} not found.` });
+    }
+};
+
 /* POST: exercise issue report from the user */
-const reportExercise = async (req, res) => {
+const postExerciseReport = async (req, res) => {
     const exerciseId = req.params.id;
     const { category, description } = req.body;
 
@@ -314,7 +317,8 @@ const controller = {
     updateExercise,
     deleteExercise,
     getExerciseSubmissions,
-    reportExercise,
+    getExerciseReports,
+    postExerciseReport,
     toggleLikeExercise,
     postExerciseShowcase,
     getExerciseShowcases,

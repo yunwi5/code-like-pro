@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import ExerciseInfoNav from './ExerciseInfoNav';
-import ExercisePrompt from './sub-sections/exercise-prompt/ExercisePrompt';
-import ScratchPad from './sub-sections/ScratchPad';
-import TestCasesDisplay from './sub-sections/TestCasesDisplay';
+import ExercisePrompt from './sections/exercise-prompt/ExercisePrompt';
+import ExerciseIssueReports from './sections/ExerciseIssueReports';
+import TestCasesDisplay from './sections/TestCasesDisplay';
 
 export enum SubSection {
     PROMPT = 'Prompt',
     TEST_CASES = 'Test Cases',
-    SCRATCH_PAD = 'Scratch Pad',
+    ISSUES = 'Issues',
 }
 
 export const SubSectionList = Object.freeze(Object.values(SubSection));
@@ -32,7 +32,7 @@ const ExerciseInfoSection: React.FC = () => {
             />
             {activeSubSection === SubSection.PROMPT && <ExercisePrompt />}
             {activeSubSection === SubSection.TEST_CASES && <TestCasesDisplay />}
-            {activeSubSection === SubSection.SCRATCH_PAD && <ScratchPad />}
+            {activeSubSection === SubSection.ISSUES && <ExerciseIssueReports />}
         </div>
     );
 };

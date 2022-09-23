@@ -1,4 +1,4 @@
-import { sortByDifficulty, sortByName } from '.';
+import { compareByDifficulty, compareByName } from '.';
 import { SortingDirection, ExerciseSortingKey } from '../../models/enums';
 import { IExerciseCard } from '../../models/interfaces';
 import { ISortingState } from '../../store/redux/browsing-slice';
@@ -8,7 +8,7 @@ export function sortExercises(exercises: IExerciseCard[], sortingState: ISorting
 
     const isAsc = sortingState.direction === SortingDirection.ASCENDING;
     if (sortingState.key === ExerciseSortingKey.NAME) {
-        return exercises.sort((a, b) => (isAsc ? sortByName(a, b) : sortByName(b, a)));
+        return exercises.sort((a, b) => (isAsc ? compareByName(a, b) : compareByName(b, a)));
     }
 
     // Sort by favorite/like counts by users
@@ -35,7 +35,7 @@ export function sortExercises(exercises: IExerciseCard[], sortingState: ISorting
     // Descending order is the other way around.
     if (sortingState.key === ExerciseSortingKey.DIFFICULTY) {
         return exercises.sort((a, b) =>
-            isAsc ? sortByDifficulty(a, b) : sortByDifficulty(b, a),
+            isAsc ? compareByDifficulty(a, b) : compareByDifficulty(b, a),
         );
     }
 

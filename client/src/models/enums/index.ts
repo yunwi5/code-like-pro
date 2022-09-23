@@ -1,15 +1,16 @@
-export { Language, LanguageList } from './Language';
-export { Difficulty, DifficultyList } from './Difficulty';
-export { ProgrammingTopic, ProgrammingTopicList } from './ProgrammingTopic';
-export { SubmissionStatus, SubmissionStatusList } from './SubmissionStatus';
-export { SearchKey, SearchKeyList } from './SearchKey';
+export * from './exercises/Language';
+export * from './exercises/Difficulty';
+export * from './exercises/ProgrammingTopic';
+export * from './exercises/Course';
+export * from './SubmissionStatus';
 
-export { ExerciseSortingKey, ExerciseSortingKeyList } from './sorting/ExerciseSortingKey';
-export { CommentSortingKey, CommentSortingKeyList } from './sorting/CommentSortingKey';
-export { SortingDirection, SortingDirectionList } from './sorting/SortingDirection';
+export * from './SearchKey';
+export * from './sorting/ExerciseSortingKey';
+export * from './sorting/VotingItemSortingKey';
+export * from './sorting/SortingDirection';
 
-export { CreationSection, CreationSectionList } from './page-sections/CreationSection';
-export { ProfileSection, ProfileSectionList } from './page-sections/ProfileSection';
+export * from './page-sections/CreationSection';
+export * from './page-sections/ProfileSection';
 export * from './page-sections/ShowCaseSection';
 
-export { TrendPeriodMode, TrendPeriodModeList } from './data-analysis/TrendPeriodMode';
+export * from './data-analysis/TrendPeriodMode';

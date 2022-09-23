@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { RiEmotionSadLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
 import { IExerciseWithId } from '../../models/interfaces';
 import { getBrowsingPageLink, getExerciseCreationPageLink } from '../../utils/links';
+import { compareByName } from '../../utils/sorting-utils';
 import ShowCaseInviteHeader from './sections/ShowCaseInviteHeader';
 import ShowCaseInviteList from './sections/ShowCaseInviteList';
 import ShowcaseListOptions from './sections/ShowCaseListOptions';
@@ -19,7 +20,11 @@ const ShowCaseInvites: React.FC<Props> = ({ createdExercises, solvedExercises })
     const [showCreatedExercises, setShowCreatedExercises] = useState(false);
 
     // Selected showcase invited exercises either 'Created' or 'Solved' exercises by the user.
-    const selectedExercises = showCreatedExercises ? createdExercises : solvedExercises;
+    // Sort the list alphabtically.
+    const selectedExercises = useMemo(() => {
+        const selected = showCreatedExercises ? createdExercises : solvedExercises;
+        return selected.sort((a, b) => compareByName(a, b));
+    }, [showCreatedExercises, createdExercises, solvedExercises]);
 
     return (
         <main className="flex flex-col gap-5 px-3 sm:px-5 py-12 min-w-[90vw] xl:min-w-[70vw] max-w-[60rem] min-h-[50vh] text-gray-700">

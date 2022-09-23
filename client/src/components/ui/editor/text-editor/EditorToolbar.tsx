@@ -1,8 +1,9 @@
 import { Quill } from 'react-quill';
 import hljs from 'highlight.js';
+import { imageUploader } from './ImageUploader';
 
 hljs.configure({
-    languages: ['javascript', 'python', 'cpp', 'c', 'php'],
+    languages: ['javascript', 'python', 'cpp', 'c', 'php', 'java'],
 });
 
 // Custom Undo button icon component for Quill editor. You can import it directly
@@ -31,14 +32,37 @@ function redoChange(this: any) {
     this.quill.history.redo();
 }
 
+const fontSizeArr = [
+    '10px',
+    '12px',
+    '14px',
+    '16px',
+    '20px',
+    '24px',
+    '32px',
+    '42px',
+    '54px',
+    '68px',
+    '84px',
+    '98px',
+];
+
 // Add sizes to whitelist and register them
 const Size = Quill.import('formats/size');
-Size.whitelist = ['extra-small', 'small', 'medium', 'large'];
+Size.whitelist = fontSizeArr;
 Quill.register(Size, true);
 
 // Add fonts to whitelist and register them
 const Font = Quill.import('formats/font');
-Font.whitelist = ['arial', 'comic-sans', 'courier-new', 'georgia', 'helvetica', 'lucida'];
+Font.whitelist = [
+    'calibri',
+    'arial',
+    'comic-sans',
+    'courier-new',
+    'georgia',
+    'helvetica',
+    'lucida',
+];
 Quill.register(Font, true);
 
 // Modules object for setting up the Quill editor
@@ -58,6 +82,7 @@ export const modules = {
         maxStack: 100,
         userOnly: true,
     },
+    imageUploader: imageUploader,
 };
 
 // Formats objects for setting up the Quill editor
@@ -76,6 +101,8 @@ export const formats = [
     'list',
     'bullet',
     'indent',
+    'link',
+    'image',
     'color',
     'code-block',
 ];
@@ -86,6 +113,7 @@ export const QuillToolbar = () => (
         <span className="ql-formats">
             <select className="ql-font" defaultValue="arial">
                 <option value="arial">Arial</option>
+                <option value="calibri">Calibri</option>
                 <option value="comic-sans">Comic Sans</option>
                 <option value="courier-new">Courier New</option>
                 <option value="georgia">Georgia</option>
@@ -93,10 +121,11 @@ export const QuillToolbar = () => (
                 <option value="lucida">Lucida</option>
             </select>
             <select className="ql-size" defaultValue="medium">
-                <option value="extra-small">Size 1</option>
-                <option value="small">Size 2</option>
-                <option value="medium">Size 3</option>
-                <option value="large">Size 4</option>
+                {fontSizeArr.map((value) => (
+                    <option key={value} value={value}>
+                        {value}
+                    </option>
+                ))}
             </select>
             <select className="ql-header" defaultValue="3">
                 <option value="1">Heading</option>
@@ -127,14 +156,13 @@ export const QuillToolbar = () => (
             <select className="ql-color" />
             <select className="ql-background" />
         </span>
-        {/* <span className="ql-formats"> */}
-        {/* <button className="ql-link" /> */}
-        {/* No need to use images in this app */}
-        {/* <button className="ql-image" />  */}
-        {/* <button className="ql-video" /> */}
-        {/* </span> */}
         <span className="ql-formats">
-            <button className="ql-formula" />
+            {/* <button className="ql-link" /> */}
+            <button className="ql-image" />
+            {/* <button className="ql-video" /> */}
+        </span>
+        <span className="ql-formats">
+            {/* <button className="ql-formula" /> */}
             <button className="ql-code-block" />
             <button className="ql-clean" />
         </span>

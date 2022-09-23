@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProgrammingTopicList } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import Tag from '../../ui/labels/Tag';
@@ -8,14 +8,19 @@ const PredefinedTags = [...ProgrammingTopicList];
 
 const CreationTags: React.FC = () => {
     const { tags, setTags } = useExerciseCreationContext();
+    const [error, setError] = useState<string | null>(null);
 
     const handleAdd = (newTag: string) => {
         newTag = newTag.trim();
         if (tags.includes(newTag)) return;
+        // Maximum 5 tags, if the user tries to exceeds, show error message.
+        if (tags.length >= 5) return setError('Sorry, maximum 5 tags!');
+
         setTags([...tags, newTag]);
     };
 
     const handleDelete = (tagToDelete: string) => {
+        setError(null);
         setTags(tags.filter((tag) => tag !== tagToDelete));
     };
 
@@ -24,9 +29,10 @@ const CreationTags: React.FC = () => {
             <AutoComplete
                 id="challenge-tags"
                 options={PredefinedTags.sort()}
-                label={'Tags (multiple):'}
+                label={'Tags:'}
                 placeholder="Enter predefined or your own tags"
                 onAdd={handleAdd}
+                error={error}
             />
             {tags.length > 0 && (
                 <div className="flex flex-wrap gap-x-3 gap-y-2 px-3 py-2 rounded-md border-[3px] border-slate-300">

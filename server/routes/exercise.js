@@ -19,7 +19,10 @@ router.delete('/:id', ensureAuthenticated, catchAsync(exerciseController.deleteE
 router.get('/:id/submission', catchAsync(exerciseController.getExerciseSubmissions));
 
 // User issue report for the exercise
-router.post('/:id/report', ensureAuthenticated, catchAsync(exerciseController.reportExercise));
+router
+    .route('/:id/report')
+    .post(ensureAuthenticated, catchAsync(exerciseController.postExerciseReport))
+    .get(ensureAuthenticated, catchAsync(exerciseController.getExerciseReports));
 
 // Like/favorite toggling functionality
 router.get(
