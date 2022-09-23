@@ -10,7 +10,6 @@ export function mapExerciseToExerciseCard(
     const exerciseCard: IExerciseCard = {
         _id: exercise._id,
         name: exercise.name,
-        topic: exercise.topic,
         correctRate: 0, // for now we do not have correctness data yet
         reports: exercise.reports.length,
         stars: exercise.liked.length,

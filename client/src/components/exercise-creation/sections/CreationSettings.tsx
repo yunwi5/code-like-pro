@@ -6,20 +6,20 @@ import {
     Language,
     LanguageList,
 } from '../../../models/enums';
-import { ProgrammingTopicList } from '../../../models/enums/ProgrammingTopic';
+import { ProgrammingTopicList } from '../../../models/enums/exercises/ProgrammingTopic';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import { prettierLanguageNames } from '../../../utils/language';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
+import CreationCourses from './CreationCourses';
 import CreationTags from './CreationTags';
 
 const CreationSettings: React.FC = () => {
-    const { language, setLanguage, difficulty, setDifficulty, topic, setTopic } =
-        useExerciseCreationContext();
+    const { language, setLanguage, difficulty, setDifficulty } = useExerciseCreationContext();
 
     return (
         <CreationSectionContainer title="Settings" id={CreationSection.SETTINGS}>
-            <div className="mb-14 md:mb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[7.5%] gap-y-[10%]">
+            <div className="mb-14 md:mb-4 grid grid-cols-1 md:grid-cols-2 gap-x-[7.5%] gap-y-[10%]">
                 <CustomSelect
                     id="difficulty"
                     value={difficulty}
@@ -35,15 +35,9 @@ const CreationSettings: React.FC = () => {
                     options={LanguageList}
                     optionLabels={prettierLanguageNames(LanguageList)}
                 />
-                <CustomSelect
-                    onChange={(top: string) => setTopic(top as any)}
-                    value={topic}
-                    id="topic"
-                    labelText="Topic:"
-                    options={ProgrammingTopicList}
-                />
             </div>
             <CreationTags />
+            <CreationCourses />
         </CreationSectionContainer>
     );
 };

@@ -75,8 +75,3 @@ export function getLightColorByIndex(index: number) {
     const colorIndex = index % LightColorList.length;
     return LightColorList[colorIndex];
 }
-
-// Used for assigning border classes of the chart data by index.
-export function getDarkColorByIndex(index: number) {
-    // Implement
-}

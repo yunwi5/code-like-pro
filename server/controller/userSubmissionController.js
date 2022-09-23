@@ -1,6 +1,7 @@
 const Exercise = require('../models/Exercise');
 const UserSubmission = require('../models/UserSubmission');
 const User = require('../models/User');
+const { getSourceFilename, constructLanguageFileSpec } = require('../utils/languageSupport');
 const makeRequest = require('../utils/makeRequest');
 
 /*
@@ -14,15 +15,8 @@ const runTestCases = async (req, res) => {
     const { code, language, testCases } = req.body;
 
     const testCasePromises = testCases.map((testCase) => {
-        const test = code + '\n\n' + testCase.code;
-
-        console.log('language id:', language);
         const body = {
-            run_spec: {
-                language_id: language,
-                sourcefilename: 'test',
-                sourcecode: test,
-            },
+            run_spec: constructLanguageFileSpec(language, code, testCase.code),
         };
 
         const result = makeRequest(body);
@@ -35,13 +29,14 @@ const runTestCases = async (req, res) => {
     const feedbackArray = [];
 
     for (let i = 0; i < testCaseResults.length; i++) {
-        const stdOut = testCaseResults[i].stdout.trim();
-        const stdErr = testCaseResults[i].stderr.trim() || null;
+        const stdOut = testCaseResults[i].stdout?.trim();
+        const stdErr = testCaseResults[i].stderr?.trim() || null;
+        const cmpInfo = testCaseResults[i]?.cmpinfo || null; // Compiler information such as compiler error.
 
         const feedback = {
             actualOutput: stdOut,
             expectedOutput: testCases[i].expectedOutput,
-            error: stdErr,
+            error: cmpInfo || stdErr, // Compiler error or if it does not exist, std error.
         };
 
         if (stdOut !== testCases[i].expectedOutput.trim()) {
@@ -88,15 +83,8 @@ const postSubmission = async (req, res) => {
 
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
-
-        const test = userSubmission.code + '\n' + testCase.code;
-
         const body = {
-            run_spec: {
-                language_id: language,
-                sourcefilename: 'test',
-                sourcecode: test,
-            },
+            run_spec: constructLanguageFileSpec(language, userSubmission.code, testCase.code),
         };
 
         const result = makeRequest(body);

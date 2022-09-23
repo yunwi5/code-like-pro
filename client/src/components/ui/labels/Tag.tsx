@@ -13,16 +13,15 @@ interface Props {
 const Tag: React.FC<Props> = ({ name, onDelete, className }) => {
     return (
         <div
-            className={`text-[0.85rem] w-fit flex-center gap-1 px-2 py-1 bg-gray-100 border-2 border-gray-300 hover:bg-gray-600/90 hover:text-gray-50 hover:shadow-md rounded-full ${
+            className={`text-[0.85rem] w-fit flex-center gap-1 px-2 py-1 bg-gray-100 border-2 border-gray-200/90 hover:border-gray-600/90 hover:bg-gray-600/90 hover:text-white hover:shadow-md rounded-full shadow hover:shadow-md ${
                 className ?? ''
             }`}
         >
-            <span className="text-base font-semibold">#</span>
             {name}
             {onDelete && (
                 <button
                     className={
-                        'flex-center ml-1 w-7 h-7 rounded-full border-2 border-gray-300 bg-gray-100 hover:bg-gray-400'
+                        'flex-center ml-1 w-7 h-7 rounded-full border-2 border-gray-200 hover:border-none bg-gray-100 hover:bg-gray-400'
                     }
                     onClick={onDelete}
                 >

@@ -60,3 +60,16 @@ export function getUsedLanguagesByUser(submissions: IUserSubmissionPopulated[]) 
     }
     return prettierLanguageNames(Array.from(usedLanguages));
 }
+
+// Provide starting tmeplate code for exercise creations.
+export const LanguageStartingTemplate: { [key: string]: string } = {
+    [Language.C]:
+        '#include <stdio.h>\n\n // Please do not define a main function by your self.\n// We will define the main function automaticlaly beind the scene to execute your code!\n// Write your function or class here.\n',
+    [Language.CPP]:
+        '#include <iostream>\nusing namespace std;\n\n// Please do not define a main function by your self.\n// We will define the main function automaticlaly beind the scene to execute your code!\n// Write your function or class here.\n',
+    [Language.JAVA]:
+        'import java.util.*;\n\n// Please write your solution method inside the Main class\n//You could define your own class as well but please do not name it as "Test"!\nclass Main {\n\n}\n',
+    [Language.JAVASCRIPT]: '// Write your programming solution here.',
+    [Language.PYTHON]: '# Write your programming solution here.',
+    others: '',
+};
