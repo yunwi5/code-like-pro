@@ -54,7 +54,7 @@ const LoginForm = () => {
         } else {
             setErrorState((prev) => ({
                 ...prev,
-                overall: message || 'Something went wrong...',
+                overall: 'Your email or password are incorrect',
             }));
         }
     };
