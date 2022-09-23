@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { CommentSortingKey, SortingDirection } from '../../../models/enums';
-import CommentSorter from '../discussions/sections/CommentSorter';
+import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
+import CommentSorter from '../../ui/sorting/VotingItemSorter';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import useExerciseShowcaseQuery from '../../../hooks/queries/useExerciseShowcaseQuery';
 import ShowcaseList from '../../ui/lists/ShowcaseList';
@@ -8,7 +8,7 @@ import ShowcaseList from '../../ui/lists/ShowcaseList';
 const ShowcaseShowcases: React.FC = () => {
     const { exercise } = useShowcase();
     const [sortingState, setSortingState] = useState({
-        key: CommentSortingKey.NONE,
+        key: VotingItemSortingKey.NONE,
         direction: SortingDirection.DESCENDING,
     });
     if (!exercise) return null;

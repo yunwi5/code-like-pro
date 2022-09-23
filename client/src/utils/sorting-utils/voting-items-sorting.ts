@@ -1,21 +1,26 @@
 import { compareByVotes } from '.';
-import { CommentSortingKey, SortingDirection } from '../../models/enums';
-import { IComment } from '../../models/interfaces';
+import { VotingItemSortingKey, SortingDirection } from '../../models/enums';
+import { IVote } from '../../models/interfaces';
 import { compareByDateTime } from '../datetime';
 
-export function sortComments(
-    comments: IComment[],
-    sortingKey: CommentSortingKey,
+interface IVotingItem {
+    votes: IVote[];
+    postedAt: string; // ISO date
+}
+
+export function sortVotingItems(
+    comments: IVotingItem[],
+    sortingKey: VotingItemSortingKey,
     direction: SortingDirection,
 ) {
     const isAsc = direction === SortingDirection.ASCENDING;
     switch (sortingKey) {
-        case CommentSortingKey.VOTES:
+        case VotingItemSortingKey.VOTES:
             return comments.sort((a, b) =>
                 isAsc ? compareByVotes(a.votes, b.votes) : compareByVotes(b.votes, a.votes),
             );
 
-        case CommentSortingKey.DATETIME:
+        case VotingItemSortingKey.DATETIME:
             return comments.sort((a, b) =>
                 isAsc
                     ? compareByDateTime(a.postedAt, b.postedAt)

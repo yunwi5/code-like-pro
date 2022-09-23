@@ -11,6 +11,7 @@ import { deleteRequest, getRequest, postRequest, putRequest } from './requests';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/exercise`;
 
+// fetch exercise list from the backend
 export async function getExercises() {
     return await getRequest<IExerciseWithId[]>({ url: API_DOMAIN });
 }

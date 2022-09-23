@@ -2,24 +2,25 @@ import React, { useState } from 'react';
 import { BsArrowLeft, BsSortUpAlt } from 'react-icons/bs';
 
 import {
-    CommentSortingKey,
-    CommentSortingKeyList,
+    VotingItemSortingKey,
+    VotingItemSortingKeyList,
     SortingDirection,
-} from '../../../../models/enums';
-import Sortingbar from '../../../ui/inputs/Sortingbar';
+} from '../../../models/enums';
+import Sortingbar from '../inputs/Sortingbar';
 
-type SortingState = { key: CommentSortingKey; direction: SortingDirection };
+type SortingState = { key: VotingItemSortingKey; direction: SortingDirection };
 
 interface Props {
     sortingState: SortingState;
     setSortingState: React.Dispatch<React.SetStateAction<SortingState>>;
 }
 
-// Component for managing sorting operation of the discussion comments.
-const CommentSorter: React.FC<Props> = ({ sortingState, setSortingState }) => {
+// Sorting helpter for voting item like comment and showcase items.
+// Can help items to be sorted by votes and date & time.
+const VotingItemSorter: React.FC<Props> = ({ sortingState, setSortingState }) => {
     const [showSorting, setShowSorting] = useState(false);
 
-    const handleSortingKey = (key: CommentSortingKey) => {
+    const handleSortingKey = (key: VotingItemSortingKey) => {
         setSortingState((prev) => ({ ...prev, key }));
     };
 
@@ -32,8 +33,10 @@ const CommentSorter: React.FC<Props> = ({ sortingState, setSortingState }) => {
             {showSorting ? (
                 <div className="flex-start gap-3 mb-2">
                     <Sortingbar
-                        sortingKeys={CommentSortingKeyList}
-                        onKeyChange={(newKey) => handleSortingKey(newKey as CommentSortingKey)}
+                        sortingKeys={VotingItemSortingKeyList}
+                        onKeyChange={(newKey) =>
+                            handleSortingKey(newKey as VotingItemSortingKey)
+                        }
                         onDirectionChange={handleSortingDirection}
                         sortingKey={sortingState.key}
                         direction={sortingState.direction}
@@ -55,4 +58,4 @@ const CommentSorter: React.FC<Props> = ({ sortingState, setSortingState }) => {
     );
 };
 
-export default CommentSorter;
+export default VotingItemSorter;
