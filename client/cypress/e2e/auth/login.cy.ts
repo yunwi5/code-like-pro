@@ -1,3 +1,4 @@
+// Valid user credentials for the testing purpose. This user is already registered.
 const testUserCredentials = {
     email: 'johndoe@gmail.com',
     password: 'johndoe789',
