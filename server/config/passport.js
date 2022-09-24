@@ -11,7 +11,7 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const passportStrategy = (passport) => {
     passport.use(
         new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-            console.log('email:', email, 'password:', password);
+            // console.log('email:', email, 'password:', password);
             // Match user
             User.findOne({ email })
                 .then((user) => {
@@ -45,13 +45,7 @@ const passportStrategy = (passport) => {
                 clientSecret: GOOGLE_CLIENT_SECRET,
                 callbackURL: '/api/auth/google/callback',
             },
-            (
-                // request: any,
-                accessToken,
-                refreshToken,
-                profile,
-                done,
-            ) => {
+            (accessToken, refreshToken, profile, done) => {
                 console.log('google profile json:', profile._json);
                 const { email, name, picture, sub } = profile._json;
 
