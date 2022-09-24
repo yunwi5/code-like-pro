@@ -117,3 +117,20 @@ export function deleteShowcaseVote(showcaseId: string) {
     url: `${AppProperty.SERVER_DOMAIN}/api/showcase/${showcaseId}/vote`,
   });
 }
+
+//Get showcase comments
+export async function getShowcaseComments(showcaseId: string) {
+  return await getRequest<IComment[]>({
+    url: `${AppProperty.SERVER_DOMAIN}/api/showcase/${showcaseId}/comment`,
+  });
+}
+
+export async function postShowcaseComment(
+  id: string,
+  comment: { text: string }
+) {
+  return await postRequest<IComment>({
+    url: `${AppProperty.SERVER_DOMAIN}/api/showcase/${id}/comment`,
+    body: comment,
+  });
+}

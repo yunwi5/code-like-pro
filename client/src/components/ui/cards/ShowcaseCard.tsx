@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-
-import { IExercise, IShowCase, IVote } from "../../../models/interfaces";
+import {
+  IComment,
+  IExercise,
+  IShowCase,
+  IVote,
+} from "../../../models/interfaces";
 import CodeEditor from "../editor/CodeEditor";
 import { getDateTimeFormat } from "../../../utils/datetime";
 import {
@@ -11,8 +15,17 @@ import {
   BsChevronUp,
   BsChevronDown,
 } from "react-icons/bs";
-import { postVoteRequest, deleteShowcaseVote } from "../../../apis/exercise";
+import {
+  postVoteRequest,
+  deleteShowcaseVote,
+  getShowcaseComments,
+  postShowcaseComment,
+} from "../../../apis/exercise";
 import { useUserContext } from "../../../store/context/UserContext";
+import CommentCard from "./CommentCard";
+import useShowcaseCommentQuery from "../../../hooks/queries/useShowcaseCommentQuery";
+import CommentForm from "../comments/CommentForm";
+import { toastNotify } from "../../../utils/notification";
 
 interface Props {
   showcase: IShowCase;
@@ -24,6 +37,9 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
   const { userDetail } = useUserContext();
   const userId = userDetail?._id;
   const [votes, setVotes] = useState<IVote[]>(showcase.votes);
+  const [showComment, setShowComment] = useState<Boolean>(false);
+
+  const { showcaseComments } = useShowcaseCommentQuery(showcase._id);
 
   const handleUserVote = async (type: "up" | "down") => {
     if (!userId) return;
@@ -62,6 +78,18 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
   );
   const downVoteCount = votes.length - upvoteCount;
   const totalVotes = upvoteCount - downVoteCount;
+
+  const handleSubmitComment = async (text: string) => {
+    // Send Http POST request to send the user comment to the server.
+    const newComment = { text }; // Comment only requires 'text' prop when sending it to the server.
+    if (!showcase) return;
+
+    // Send Http POST request to add the user's comment to the server.
+    const { ok, message } = await postShowcaseComment(showcase._id, newComment);
+
+    if (ok) toastNotify("Post comment!", "success");
+    else toastNotify(`Oops, ${message}`, "error");
+  };
 
   return (
     <div
@@ -138,14 +166,39 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
 
       <div className="flex flex-row">
         <div className="flex content-center mr-5">
-          <BsFillChatLeftFill className="m-1" />
-          <h5>{showcase.comments.length} Comments</h5>
+          {showComment ? (
+            <div
+              className="flex text-main-500 cursor-pointer"
+              onClick={() => setShowComment(!showComment)}
+            >
+              <BsFillChatLeftFill className="m-1" />
+              <h5>{showcase.comments.length} Comments</h5>
+            </div>
+          ) : (
+            <div
+              className="flex hover:text-main-500 cursor-pointer"
+              onClick={() => setShowComment(!showComment)}
+            >
+              <BsFillChatLeftFill className="m-1" />
+              <h5>{showcase.comments.length} Comments</h5>
+            </div>
+          )}
         </div>
         <div className="flex content-center mr-5">
           <BsFileCode className="m-1" />
           <h5>Compare With Yours</h5>
         </div>
       </div>
+      {showComment ? (
+        <div>
+          <CommentForm onSubmit={handleSubmitComment} className="mb-5" />
+          {showcaseComments.map((comment) => (
+            <CommentCard comment={comment} />
+          ))}
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };
