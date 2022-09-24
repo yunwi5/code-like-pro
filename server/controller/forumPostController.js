@@ -20,9 +20,21 @@ const getForumPost = async(req, res) =>{
     }
 }
 
+const getForumPostByCategory = async(req, res) =>{
+    try{
+        const forumPosts = await ForumPost.find({'category': req.params.category}).populate("author", "name pictureUrl");
+        res.status(200).json(forumPosts);
+    } catch (err){
+        console.log(err.message);
+        res.status(400).json(err.message);
+    }
+}
+
+
 const controller = {
     createForumPost,
     getForumPost,
+    getForumPostByCategory,
 }
 
 module.exports = controller;

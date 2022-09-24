@@ -9,5 +9,6 @@ router.post('/', ensureAuthenticated, catchAsync(forumPostController.createForum
 
 router.get('/', catchAsync(forumPostController.getForumPost));
 
+router.get('/:category', catchAsync(forumPostController.getForumPostByCategory))
 
 module.exports = router;
