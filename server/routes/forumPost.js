@@ -37,4 +37,6 @@ router.post(
     catchAsync(forumPostController.postForumPostLike),
 );
 
+router.patch('/:id', ensureAuthenticated, catchAsync(forumPostController.updateForumPost));
+
 module.exports = router;

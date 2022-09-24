@@ -54,6 +54,26 @@ const getForumPostById = async (req, res) => {
     }
 };
 
+const updateForumPost = async (req, res) => {
+    try {
+        const updatedDetails = req.body;
+        let forumPost = await ForumPost.findById(req.params.id);
+
+        if (req.user._id.toString() != forumPost.author.toString()) {
+            res.status(400).send('Error, user does not have permission to edit forum post');
+        }
+
+        forumPost = await ForumPost.findByIdAndUpdate(req.params.id, updatedDetails, {
+            new: true,
+        });
+
+        res.status(200).json(forumPost);
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json(err.message);
+    }
+};
+
 const deleteForumPost = async (req, res) => {
     const forumId = req.params.id;
 
@@ -167,6 +187,7 @@ const controller = {
     postForumPostComment,
     deleteForumPostComment,
     postForumPostLike,
+    updateForumPost,
 };
 
 module.exports = controller;
