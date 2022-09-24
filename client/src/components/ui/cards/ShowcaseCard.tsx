@@ -26,6 +26,7 @@ import CommentCard from "./CommentCard";
 import useShowcaseCommentQuery from "../../../hooks/queries/useShowcaseCommentQuery";
 import CommentForm from "../comments/CommentForm";
 import { toastNotify } from "../../../utils/notification";
+import { useShowcase } from "../../../store/context/ShowcaseContext";
 
 interface Props {
   showcase: IShowCase;
@@ -35,9 +36,12 @@ interface Props {
 
 const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
   const { userDetail } = useUserContext();
+  const { userSubmission } = useShowcase();
+
   const userId = userDetail?._id;
   const [votes, setVotes] = useState<IVote[]>(showcase.votes);
   const [showComment, setShowComment] = useState<Boolean>(false);
+  const [compare, setCompare] = useState<Boolean>(false);
 
   const { showcaseComments } = useShowcaseCommentQuery(showcase._id);
 
@@ -110,14 +114,41 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
       </div>
       <div className="grid grid-cols-8 gap-4">
         <div className="col-span-7">
-          <CodeEditor
-            className="flex-1 border-none shadow-none"
-            onChange={() => {}}
-            showHeader={false}
-            language={exercise.language}
-            value={showcase.code}
-            readOnly={true}
-          />
+          {compare ? (
+            <div className="grid gap-2 md:grid-cols-1 lg:grid-cols-2">
+              <div className="col-span-1">
+                <h5>Their Solution</h5>
+                <CodeEditor
+                  className="flex-1 border-none shadow-none"
+                  onChange={() => {}}
+                  showHeader={false}
+                  language={exercise.language}
+                  value={showcase.code}
+                  readOnly={true}
+                />
+              </div>
+              <div className="col-span-1">
+                <h5>Your Solution</h5>
+                <CodeEditor
+                  className="flex-1 border-none shadow-none"
+                  onChange={() => {}}
+                  showHeader={false}
+                  language={exercise.language}
+                  value={userSubmission?.code}
+                  readOnly={true}
+                />
+              </div>
+            </div>
+          ) : (
+            <CodeEditor
+              className="flex-1 border-none shadow-none"
+              onChange={() => {}}
+              showHeader={false}
+              language={exercise.language}
+              value={showcase.code}
+              readOnly={true}
+            />
+          )}
         </div>
         <div className="col-span-1 flex flex-col justify-center m-auto text-center">
           {userVote != undefined ? (
@@ -185,8 +216,23 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
           )}
         </div>
         <div className="flex content-center mr-5">
-          <BsFileCode className="m-1" />
-          <h5>Compare With Yours</h5>
+          {compare ? (
+            <div
+              className="flex text-main-500 cursor-pointer"
+              onClick={() => setCompare(!compare)}
+            >
+              <BsFileCode className="m-1" />
+              <h5>Compare With Yours</h5>
+            </div>
+          ) : (
+            <div
+              className="flex hover:text-main-500 cursor-pointer"
+              onClick={() => setCompare(!compare)}
+            >
+              <BsFileCode className="m-1" />
+              <h5>Compare With Yours</h5>
+            </div>
+          )}
         </div>
       </div>
       {showComment ? (
