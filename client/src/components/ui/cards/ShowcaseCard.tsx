@@ -172,7 +172,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
               onClick={() => setShowComment(!showComment)}
             >
               <BsFillChatLeftFill className="m-1" />
-              <h5>{showcase.comments.length} Comments</h5>
+              <h5>{showcaseComments.length} Comments</h5>
             </div>
           ) : (
             <div
@@ -180,7 +180,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
               onClick={() => setShowComment(!showComment)}
             >
               <BsFillChatLeftFill className="m-1" />
-              <h5>{showcase.comments.length} Comments</h5>
+              <h5>{showcaseComments.length} Comments</h5>
             </div>
           )}
         </div>
