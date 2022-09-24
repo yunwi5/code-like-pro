@@ -22,10 +22,9 @@ const getForumPosts = async (req, res) => {
 
 const getForumPostByCategory = async (req, res) => {
     try {
-        const forumPosts = await ForumPost.find({ category: req.params.category }).populate(
-            'author',
-            'name pictureUrl',
-        );
+        const forumPosts = await ForumPost.find({
+            category: req.params.category,
+        }).populate('author', 'name pictureUrl');
         res.status(200).json(forumPosts);
     } catch (err) {
         console.log(err.message);
@@ -60,7 +59,9 @@ const updateForumPost = async (req, res) => {
         let forumPost = await ForumPost.findById(req.params.id);
 
         if (req.user._id.toString() != forumPost.author.toString()) {
-            res.status(400).send('Error, user does not have permission to edit forum post');
+            res.status(400).send(
+                'Error, user does not have permission to edit forum post',
+            );
         }
 
         forumPost = await ForumPost.findByIdAndUpdate(req.params.id, updatedDetails, {
@@ -79,7 +80,8 @@ const deleteForumPost = async (req, res) => {
 
     try {
         const forum = await ForumPost.findById(forumId);
-        if (forum == null) return res.status(404).send(`Forum post ${forumId} was not found`);
+        if (forum == null)
+            return res.status(404).send(`Forum post ${forumId} was not found`);
 
         if (forum.author?.toString() !== req.user._id.toString()) {
             return res.status(401).send(`You are not the author of the post!`);
@@ -133,10 +135,13 @@ const deleteForumPostComment = async (req, res) => {
         const forumPostPromise = ForumPost.findById(forumId);
 
         const [_, forumPost] = await Promise.all([commentPromise, forumPostPromise]);
-        if (forumPost == null) return res.status(404).send(`Forum ${forumId} was not found`);
+        if (forumPost == null)
+            return res.status(404).send(`Forum ${forumId} was not found`);
 
         // Remove the comment id from the array of 'comments' of the ForumPost
-        forumPost.comments = forumPost.comments.filter((cid) => cid.toString() !== commentId);
+        forumPost.comments = forumPost.comments.filter(
+            (cid) => cid.toString() !== commentId,
+        );
 
         await forumPost.save();
         res.status(200).send('Forum post comment deleted');
