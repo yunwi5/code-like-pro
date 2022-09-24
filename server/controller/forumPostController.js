@@ -5,7 +5,7 @@ const createForumPost = async (req, res) => {
     const forumPost = new ForumPost(req.body);
     forumPost.author = req.user._id;
 
-    forumPost.save();
+    await forumPost.save();
 
     res.status(200).json(forumPost);
 };

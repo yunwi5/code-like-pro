@@ -1,33 +1,33 @@
 const ShowCase = require('../models/ShowCase');
 const Comment = require('../models/Comment');
 
-const postShowCase = async(req, res) => {
+const postShowCase = async (req, res) => {
     const showCaseBody = req.body;
     const showCase = new ShowCase(showCaseBody);
     showCase.user = req.user._id;
 
-    showCase.save()
+    await showCase.save();
 
     res.status(200).json(showCase);
-}
+};
 
-const getShowCaseByID = async(req, res) => {
+const getShowCaseByID = async (req, res) => {
     let showCase;
-    try{
+    try {
         showCase = await ShowCase.findById(req.params.id)
-            .populate({path: 'user', select: 'name'})
-            .populate({path: 'comments', populate: {path: "user", select: "name"}})
+            .populate({ path: 'user', select: 'name' })
+            .populate({ path: 'comments', populate: { path: 'user', select: 'name' } });
     } catch (err) {
         console.log(err.message);
     }
-    if (showCase != null){
+    if (showCase != null) {
         res.status(200).json(showCase);
-    } else{
+    } else {
         res.status(404).json(`Showcase ${req.params.id} not found`);
     }
 };
 
-const deleteShowCase = async(req, res) => {
+const deleteShowCase = async (req, res) => {
     let result; // returns deletedObject if the show case with the param id was found.
     try {
         result = await ShowCase.findByIdAndDelete(req.params.id);
@@ -43,63 +43,68 @@ const deleteShowCase = async(req, res) => {
     }
 };
 
-const getShowCase = async(req, res) => {
+const getShowCase = async (req, res) => {
     const showCases = await ShowCase.find({})
-        .populate({path: 'user', select: 'name'})
-        .populate({path: 'comments', populate: {path: "user", select: "name"}})
-    
-    res.status(200).json(showCases);
-}
+        .populate({ path: 'user', select: 'name' })
+        .populate({ path: 'comments', populate: { path: 'user', select: 'name' } });
 
-const updateShowCase = async(req, res) => {
+    res.status(200).json(showCases);
+};
+
+const updateShowCase = async (req, res) => {
     const updatedDetails = req.body;
-    const showCase = await ShowCase.findByIdAndUpdate(req.params.id, updatedDetails, { new: true });
+    const showCase = await ShowCase.findByIdAndUpdate(req.params.id, updatedDetails, {
+        new: true,
+    });
 
     res.status(200).json(showCase);
 };
 
-const getComments = async(req, res) => {
-    let showCase; 
-    try{
-        showCase = await ShowCase.findById(req.params.id).populate('comments');
-    } catch(err){
+const getComments = async (req, res) => {
+    let showCase;
+    try {
+        showCase = await ShowCase.findById(req.params.id).populate({
+            path: 'comments',
+            populate: { path: 'user', select: ['name', 'pictureUrl'] },
+        });
+    } catch (err) {
         console.log(err.message);
     }
 
-    if (showCase != null){
+    if (showCase != null) {
         res.status(200).json(showCase.comments);
-    } else{
+    } else {
         // If there is an error, or the show case was not found
         res.status(404).send(`Showcase ${req.params.id} not found`);
     }
 };
 
-const postComment = async(req, res) => {
+const postComment = async (req, res) => {
     const commentBody = req.body;
     const comment = new Comment(commentBody);
     comment.user = req.user._id;
 
     let showCase;
-    try{
+    try {
         showCase = await ShowCase.findById(req.params.id);
     } catch (err) {
         console.log(err.message);
     }
-    if (showCase != null){
+    if (showCase != null) {
         showCase.comments.push(comment._id);
-    } else{
-        res.status(404).json(`Showcase ${req.params.id} not found`);
+    } else {
+        return res.status(404).json(`Showcase ${req.params.id} not found`);
     }
-    comment.save();
-    showCase.save();
+    await comment.save();
+    await showCase.save();
 
     res.status(200).json(comment);
-}
+};
 
-const postVote = async(req, res) => {
-    const {type} = req.body;
+const postVote = async (req, res) => {
+    const { type } = req.body;
 
-    try{
+    try {
         const showCase = await ShowCase.findById(req.params.id);
         // Check if show case exists, return 404 if not
         if (showCase == null) res.status(404).send(`Showcase ${req.params.id} not found`);
@@ -108,27 +113,25 @@ const postVote = async(req, res) => {
         const foundVote = showCase.votes.find(
             (vote) => vote.user.toString() === req.user._id.toString(),
         );
-        if (foundVote){
+        if (foundVote) {
             // If user has already voted, update vote
             foundVote.type = type;
         } else {
             // If user has not voted, create new vote
-            const newVote = {type, user: req.user._id};
+            const newVote = { type, user: req.user._id };
             showCase.votes.push(newVote);
         }
 
-        await showCase.save();  
+        await showCase.save();
         res.status(201).json(showCase);
-        
-    } catch(err){
+    } catch (err) {
         console.log(err.message);
         res.status(404).json(err.message);
     }
-
 };
 
-const deleteVote = async(req, res) => {
-    try{
+const deleteVote = async (req, res) => {
+    try {
         const showCase = await ShowCase.findById(req.params.id).populate('votes');
         // Check if show case exists, return 404 if not
         if (showCase == null) res.status(404).send(`Showcase ${req.params.id} not found`);
@@ -139,7 +142,7 @@ const deleteVote = async(req, res) => {
         );
 
         // If user has no vote return error
-        if (foundIndex < 0){
+        if (foundIndex < 0) {
             return res.status(404).json({ message: 'User vote not found' });
         } else {
             // If user has not voted, create new vote
@@ -147,12 +150,11 @@ const deleteVote = async(req, res) => {
             await showCase.save();
             return res.status(200).json(showCase);
         }
-    } catch(err){
+    } catch (err) {
         console.log(err.message);
         res.status(404).json(err.message);
     }
-}
-
+};
 
 const controller = {
     postShowCase,
