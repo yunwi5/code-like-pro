@@ -11,4 +11,6 @@ router.get('/', catchAsync(forumPostController.getForumPost));
 
 router.get('/:category', catchAsync(forumPostController.getForumPostByCategory))
 
+router.patch('/:id', ensureAuthenticated, catchAsync(forumPostController.updateForumPost));
+
 module.exports = router;
