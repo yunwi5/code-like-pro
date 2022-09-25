@@ -37,7 +37,7 @@ export const customToastNotify = (props: ToastProps) => {
         message,
         toastId = 'toast1',
         type,
-        autoClose = 5000,
+        autoClose = 3000,
         position = toast.POSITION.TOP_CENTER,
     } = props;
 

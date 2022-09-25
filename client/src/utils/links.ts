@@ -1,4 +1,4 @@
-import { ShowCaseSection } from '../models/enums';
+import { ForumCategory, ShowCaseSection } from '../models/enums';
 import { convertToQueryString } from './string-utils/query';
 
 export function getBrowsingPageLink() {
@@ -30,4 +30,17 @@ export function getShowcasePageLink(
 
 export function getShowcaseInvitesPageLink() {
     return `/showcase-invites`;
+}
+
+// Global forum links
+export function getForumNavSectionLink(section: ForumCategory) {
+    return `/forum/${section}`;
+}
+
+export function getForumPostCreateLink() {
+    return 'create-post';
+}
+
+export function getForumPostEditLink(postId: string) {
+    return `edit-post/${postId}`;
 }

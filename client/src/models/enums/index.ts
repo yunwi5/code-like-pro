@@ -13,4 +13,6 @@ export * from './page-sections/CreationSection';
 export * from './page-sections/ProfileSection';
 export * from './page-sections/ShowCaseSection';
 
+export * from './ForumCategory';
+
 export * from './data-analysis/TrendPeriodMode';
