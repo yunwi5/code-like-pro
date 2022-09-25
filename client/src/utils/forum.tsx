@@ -5,12 +5,17 @@ import { VscTypeHierarchy, VscFeedback } from 'react-icons/vsc';
 import {
     CourseList,
     ForumCategory,
+    ForumPostType,
     LanguageList,
     ProgrammingTopicList,
 } from '../models/enums';
 import { FaReact, FaUniversity } from 'react-icons/fa';
 import { IoBusinessSharp } from 'react-icons/io5';
 import { prettierLanguageName } from './language';
+import { GrAnnounce } from 'react-icons/gr';
+import { BsQuestionCircleFill } from 'react-icons/bs';
+import { RiSlideshow3Line } from 'react-icons/ri';
+import { AiOutlineNotification } from 'react-icons/ai';
 
 export const ForumIcons = {
     [ForumCategory.GENERAL]: <GoCommentDiscussion className="inline text-[1.2em]" />,
@@ -20,6 +25,14 @@ export const ForumIcons = {
     [ForumCategory.TECHNOLOGIES]: <FaReact className="inline text-[1.2em]" />,
     [ForumCategory.UNIVERSITY]: <FaUniversity className="inline text-[1.2em]" />,
     [ForumCategory.FEEDBACK]: <VscFeedback className="inline text-[1.2em]" />,
+};
+
+export const ForumTypeIcons = {
+    [ForumPostType.ANNOUNCEMENT]: (
+        <AiOutlineNotification className="inline text-[1.2em]" />
+    ),
+    [ForumPostType.QUESTION]: <BsQuestionCircleFill className="inline text-[1.2em]" />,
+    [ForumPostType.SHOWCASE]: <RiSlideshow3Line className="inline text-[1.2em]" />,
 };
 
 // Each forum tags (needs to be updated)

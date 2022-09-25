@@ -7,6 +7,7 @@ export * from './SubmissionStatus';
 export * from './SearchKey';
 export * from './sorting/ExerciseSortingKey';
 export * from './sorting/VotingItemSortingKey';
+export * from './sorting/ForumPostSortingKey';
 export * from './sorting/SortingDirection';
 
 export * from './page-sections/CreationSection';

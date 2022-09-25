@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 
+import { useAppDispatch } from '../../store/redux/store';
 import useForumCategoryQuery from '../../hooks/forum-queries/useForumCategoryQuery';
 import ForumPostsSidebar from '../../components/forum/sidebar/ForumPostsSidebar';
 import { ForumNav } from '../../components/forum';
@@ -9,12 +10,15 @@ import { AppProperty } from '../../constants/app';
 import { ForumCategory } from '../../models/enums';
 import { getForumPostCreateLink } from '../../utils/links';
 import { toastNotify } from '../../utils/notification';
+import { forumActions } from '../../store/redux/forum-slice';
 
 const ForumCategoryPage: React.FC = () => {
     const navigate = useNavigate();
     const params = useParams();
     const category = params.category;
     const postId = params.id;
+    // To set forum posts globally in redux
+    const dispatch = useAppDispatch();
 
     const { posts, error } = useForumCategoryQuery(category as ForumCategory);
 
@@ -25,7 +29,15 @@ const ForumCategoryPage: React.FC = () => {
         }
     }, [error]);
 
-    console.table(posts);
+    useEffect(() => {
+        if (posts) dispatch(forumActions.setPosts(posts));
+    }, [posts, dispatch]);
+
+    // When entering a new foroum page, clear the existing sorting and searching state.
+    // Can be refactored to the custom hook.
+    useEffect(() => {
+        dispatch(forumActions.clear());
+    }, [dispatch]);
 
     return (
         <>
@@ -42,7 +54,7 @@ const ForumCategoryPage: React.FC = () => {
                 <ForumNav />
                 <main className="flex gap-5 justify-around min-h-[82.5vh]">
                     <ForumPostsSidebar />
-                    <section className="card min-h-[82.5vh] flex flex-col grow bg-gray-100/90">
+                    <section className="card min-h-[82.5vh] flex flex-col grow bg-gray-50">
                         {!postId && <DefaultContent />}
                         {postId && <Outlet />}
                     </section>

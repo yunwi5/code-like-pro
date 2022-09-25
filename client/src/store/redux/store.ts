@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
-import browsingSlice from './browsing-slice';
+import exerciseBrowsingSlice from './browsing-slice';
+import forumBrowsingSlice from './forum-slice';
 
 const store = configureStore({
     reducer: {
-        browsing: browsingSlice.reducer,
+        browsing: exerciseBrowsingSlice.reducer,
+        forum: forumBrowsingSlice.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
