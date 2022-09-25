@@ -10,6 +10,7 @@ import {
 } from '../models/enums';
 import { FaReact, FaUniversity } from 'react-icons/fa';
 import { IoBusinessSharp } from 'react-icons/io5';
+import { prettierLanguageName } from './language';
 
 export const ForumIcons = {
     [ForumCategory.GENERAL]: <GoCommentDiscussion className="inline text-[1.2em]" />,
@@ -41,7 +42,7 @@ export const ForumTags = {
         'Others',
     ],
     [ForumCategory.TECHNOLOGIES]: [
-        ...LanguageList,
+        ...LanguageList.map((lang) => prettierLanguageName(lang)),
         'React',
         'Angular',
         'Vue',

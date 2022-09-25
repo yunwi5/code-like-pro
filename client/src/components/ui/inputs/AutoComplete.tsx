@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import ClickAwayListener from 'react-click-away-listener';
 import { filterListByString } from '../../../utils/filter-utils/string-filter';
@@ -78,6 +78,11 @@ const AutoComplete: React.FC<Props> = (props) => {
         setText('');
         setShowDropdown(false);
     };
+
+    // If the option changes, update the filtered options as well.
+    useEffect(() => {
+        setFilteredOptions(options);
+    }, [options]);
 
     return (
         <ClickAwayListener onClickAway={() => setShowDropdown(false)}>

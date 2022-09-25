@@ -38,9 +38,9 @@ export function getForumNavSectionLink(section: ForumCategory) {
 }
 
 export function getForumPostCreateLink() {
-    return 'create-post';
+    return '/create-post';
 }
 
 export function getForumPostEditLink(postId: string) {
-    return `edit-post/${postId}`;
+    return `/edit-post/${postId}`;
 }
