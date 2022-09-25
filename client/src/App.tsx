@@ -23,7 +23,7 @@ const BrowsingPage = lazy(() => import('./pages/exercise/BrowsingPage'));
 const ShowcasePage = lazy(() => import('./pages/exercise/ShowcasePage'));
 const ShowcaseInvitesPage = lazy(() => import('./pages/exercise/ShowcaseInvitesPage'));
 const ForumCategoryPage = lazy(() => import('./pages/forum/ForumCategoryPage'));
-const PostCreatePage = lazy(() => import('./pages/forum/PostCreatePage'));
+const PostCreatePage = lazy(() => import('./pages/forum/PostCreationPage'));
 const PostEditPage = lazy(() => import('./pages/forum/PostEditPage'));
 
 const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =

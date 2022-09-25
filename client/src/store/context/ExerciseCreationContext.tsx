@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { postExercise, putExercise } from '../../apis/exercise';
 import { runTestCases } from '../../apis/submission';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { CreationSection, Difficulty, Language, ProgrammingTopic } from '../../models/enums';
+import { CreationSection, Difficulty, Language } from '../../models/enums';
 import {
     IExercise,
     IExerciseCreationContext,
@@ -32,15 +32,21 @@ export const DRAFT_LOCAL_STORATE_KEY = 'exercise_creation_draft';
 
 interface Props {
     children: React.ReactNode;
-    exercise?: IExerciseWithId;
+    exercise?: IExerciseWithId; // initial exercise (if in edit mode)
 }
 
 // Context for sharing and storing user exercise creation data.
 // Each exercise creation related component can use this context to receive or update the data.
-export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exercise }) => {
+export const ExerciseCreationContextProvider: React.FC<Props> = ({
+    children,
+    exercise,
+}) => {
     // Construct a unique key for the exercise draft so that exercise drafts do not conlict each other.
     const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${exercise ? `-${exercise._id}` : ''}`;
-    const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExercise | ''>(draftKey, '');
+    const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExercise | ''>(
+        draftKey,
+        '',
+    );
 
     const [name, setName] = useState(exercise?.name || '');
     const [prompt, setPrompt] = useState(exercise?.prompt || '');
@@ -50,7 +56,9 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
     );
 
     const [solutionCode, setSolutionCode] = useState(exercise?.solutionCode || '');
-    const [startingTemplate, setStartingTemplate] = useState(exercise?.startingTemplate || '');
+    const [startingTemplate, setStartingTemplate] = useState(
+        exercise?.startingTemplate || '',
+    );
 
     const [tags, setTags] = useState<string[]>(exercise?.tags || []);
     const [courses, setCourses] = useState<string[]>(exercise?.courses || []);
@@ -60,7 +68,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
     );
     const [testCaseOutputs, setTestCaseOutputs] = useState<ITestOutput[]>([]);
 
-    // Boolean value indicating whether the user submission was saved to the server successfully.
     const [createdExercise, setCreatedExercise] = useState<null | IExerciseWithId>(
         exercise ?? null,
     );
@@ -113,7 +120,10 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({ children, exe
         setIsLoading(false);
 
         if (ok && testCasesResult) {
-            const { status, message } = analyzeTestCasesResult(testCases, testCasesResult);
+            const { status, message } = analyzeTestCasesResult(
+                testCases,
+                testCasesResult,
+            );
 
             if (status === 'error') {
                 toastNotify(message, 'error');

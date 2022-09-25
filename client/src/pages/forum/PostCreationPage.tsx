@@ -1,10 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { ForumNav } from '../../components/forum';
-import PostCreateMain from '../../components/forum/post-create/PostCreateMain';
+import PostCreationMain from '../../components/forum/post-creation/PostCreationMain';
 import { AppProperty } from '../../constants/app';
+import { PostCreationContextProvider } from '../../store/context/PostCreationContext';
 
-const PostCreatePage: React.FC = () => {
+const PostCreationPage: React.FC = () => {
     return (
         <>
             <Helmet>
@@ -14,12 +15,14 @@ const PostCreatePage: React.FC = () => {
                     content={`Create a new user post for ${AppProperty.APP_NAME} global discussion forum`}
                 />
             </Helmet>
-            <div className="min-h-[max(35rem,83.5vh)] px-3 lg:px-8 xl:px-10 2xl:px-[5%] py-10">
+            <div className="min-h-[max(35rem,83.5vh)] px-3 lg:px-8 xl:px-10 2xl:px-[5%] pt-10 pb-14">
                 <ForumNav />
-                <PostCreateMain />
+                <PostCreationContextProvider>
+                    <PostCreationMain />
+                </PostCreationContextProvider>
             </div>
         </>
     );
 };
 
-export default PostCreatePage;
+export default PostCreationPage;

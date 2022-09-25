@@ -5,7 +5,7 @@ import { BsFillCalendarCheckFill } from 'react-icons/bs';
 import { FaUserEdit } from 'react-icons/fa';
 
 import { IExerciseWithId } from '../../models/interfaces';
-import useExerciseSubmissionsQuery from '../../hooks/queries/useExerciseSubmissionsQuery';
+import useExerciseSubmissionsQuery from '../../hooks/exercise-queries/useExerciseSubmissionsQuery';
 import { getSubmissionStats } from '../../utils/user-submission';
 import { getDateFormat } from '../../utils/datetime';
 

@@ -1,6 +1,10 @@
 import React, { useContext } from 'react';
-import useExerciseCommentsQuery from '../../hooks/queries/useExerciseCommentsQuery';
-import { IComment, IExerciseWithId, IUserSubmissionPopulated } from '../../models/interfaces';
+import useExerciseCommentsQuery from '../../hooks/exercise-queries/useExerciseCommentsQuery';
+import {
+    IComment,
+    IExerciseWithId,
+    IUserSubmissionPopulated,
+} from '../../models/interfaces';
 
 type QueryOption = 'comments' | 'showcases';
 
@@ -33,7 +37,10 @@ export const ShowcaseContextProvider: React.FC<Props> = ({
     children,
 }) => {
     // Use React-Query to fetch the comments data of this exercise.
-    const { comments, refetch: refetchComments } = useExerciseCommentsQuery(exercise._id, 800);
+    const { comments, refetch: refetchComments } = useExerciseCommentsQuery(
+        exercise._id,
+        800,
+    );
 
     // Use React-Query to fetch the showcases data of this exercise.
     // Implementation should be here.

@@ -91,11 +91,11 @@ const AutoComplete: React.FC<Props> = (props) => {
                         onClick={() => setShowDropdown(true)}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyboard}
-                        className="px-2 py-2 border-2 border-gray-300  rounded-sm shadow-md focus-main"
+                        className="px-2 py-[0.35rem] border-2 border-gray-300  rounded-sm shadow-md focus-main"
                     />
                     <AiFillCaretDown
                         onClick={() => setShowDropdown((ps) => !ps)}
-                        className="absolute hover:text-blue-500 top-[60%] right-3 cursor-pointer"
+                        className="absolute hover:text-blue-500 top-[62%] right-3 cursor-pointer"
                     />
                 </div>
                 {showDropdown && (

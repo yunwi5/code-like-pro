@@ -9,7 +9,7 @@ import { AppProperty } from '../../constants/app';
 import { ExerciseAttemptCtxProvider } from '../../store/context/ExerciseAttemptContext';
 import { toastNotify } from '../../utils/notification';
 import ExerciseAttemptMain from '../../components/exercise-attempt/ExerciseAttemptMain';
-import useExerciseQuery from '../../hooks/queries/useExerciseQuery';
+import useExerciseQuery from '../../hooks/exercise-queries/useExerciseQuery';
 
 const ExerciseAttemptPage: React.FC = () => {
     useAuth();
