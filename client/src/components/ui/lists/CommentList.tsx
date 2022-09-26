@@ -24,7 +24,7 @@ const CommentList: FC<Props> = ({ comments, commentPerPage, className = '' }) =>
         itemPerPage: commentPerPage ?? DEFAULT_PER_PAGE,
     });
 
-    const handlePage = (newPage: number) => setPage(newPage);
+  const handlePage = (newPage: number) => setPage(newPage);
 
     return (
         <section className={`flex-1 flex flex-col ${className}`}>
