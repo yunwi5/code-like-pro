@@ -17,7 +17,7 @@ const PostLike: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     };
 
     return (
-        <HoveringLabel label="Like!" onClick={handlePostLikeByUser}>
+        <HoveringLabel label={liked ? 'Unlike!' : 'Like!'} onClick={handlePostLikeByUser}>
             <div className="px-2 py-2 text-2xl border-2 border-pink-500 text-pink-600 hover:bg-pink-600 hover:text-white transition-all rounded cursor-pointer">
                 {liked ? <BsHeartFill /> : <BsHeart />}
             </div>

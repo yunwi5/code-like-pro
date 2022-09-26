@@ -10,6 +10,7 @@ import useForumPostQuery from '../../hooks/forum-queries/useForumPostQuery';
 import { PostCreationContextProvider } from '../../store/context/PostCreationContext';
 import { toastNotify } from '../../utils/notification';
 
+/* Page for editing an existing forum post written by the current user. */
 const PostEditPage: React.FC = () => {
     const navigate = useNavigate();
     const postId = useParams().id;

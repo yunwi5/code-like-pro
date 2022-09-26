@@ -6,14 +6,15 @@ import { toastNotify } from '../../../utils/notification';
 import PostCard from './sections/PostCard';
 import PostComments from './sections/PostComments';
 
+/* Post browsing on the right side of the forum page */
 const PostDetail: React.FC = () => {
     const navigate = useNavigate();
-    const params = useParams();
-    const postId = params.id;
+    const postId = useParams().id;
 
     const { post, error } = useForumPostQuery(postId || '', 1000);
 
     useEffect(() => {
+        // If there is an error, redirect to the home page.
         if (!!error) {
             navigate('/');
             toastNotify('Somethine went wrong while loading the post...', 'error');

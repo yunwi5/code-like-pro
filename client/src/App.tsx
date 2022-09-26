@@ -70,7 +70,7 @@ function App() {
                     {/* Showcase invites page listing showcase options available for the user. */}
                     <Route path="/showcase-invites" element={<ShowcaseInvitesPage />} />
 
-                    {/* Global forum pages */}
+                    {/* Global discussion forum pages */}
                     <Route path="/forum/:category" element={<ForumCategoryPage />}>
                         <Route path=":id" element={<PostDetail />} />
                     </Route>

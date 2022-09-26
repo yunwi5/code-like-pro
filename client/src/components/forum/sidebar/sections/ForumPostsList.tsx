@@ -6,6 +6,7 @@ import ForumPostListItem from './ForumPostListItem';
 
 const POST_PER_PAGE = 10;
 
+/* List of forum posts on the sidebar*/
 const ForumPostsList: React.FC = () => {
     const posts = useAppSelector((state) => state.forum.posts);
     const {

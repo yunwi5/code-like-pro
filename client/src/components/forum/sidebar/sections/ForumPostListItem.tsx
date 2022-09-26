@@ -12,9 +12,9 @@ import { getForumPostLink } from '../../../../utils/links';
 
 const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
     const postId = useParams().id;
-    // Check if the current post is active, shown on the right side.
+    // Check if the post is currently browsed by the user on the right side.
     const isActive = postId === post._id;
-
+    // Apply different styles if it is active.
     const activeClass = isActive ? 'border-l-[5px] border-l-main-300 bg-slate-200' : '';
 
     return (

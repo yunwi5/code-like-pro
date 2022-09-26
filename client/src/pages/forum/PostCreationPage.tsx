@@ -5,6 +5,7 @@ import PostCreationMain from '../../components/forum/post-creation/PostCreationM
 import { AppProperty } from '../../constants/app';
 import { PostCreationContextProvider } from '../../store/context/PostCreationContext';
 
+/* Page for creating a new forum post */
 const PostCreationPage: React.FC = () => {
     return (
         <>

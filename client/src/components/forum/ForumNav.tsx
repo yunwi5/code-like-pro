@@ -5,6 +5,7 @@ import { getForumNavSectionLink } from '../../utils/links';
 import ActiveNavLink from '../ui/links/ActiveNavLink';
 import './ForumNav.scss';
 
+/* Forum category section navigation. Displayed on the very top displaying different forum options as navigation buttons. */
 const ForumNav: React.FC = () => {
     return (
         <nav className="forum-nav flex gap-3 mb-8">

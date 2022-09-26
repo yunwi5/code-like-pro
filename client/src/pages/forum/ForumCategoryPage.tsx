@@ -22,6 +22,7 @@ const ForumCategoryPage: React.FC = () => {
 
     const { posts, error } = useForumCategoryQuery(category as ForumCategory);
 
+    // If there is an error while fetching posts, redirect to the home page.
     useEffect(() => {
         if (!!error) {
             toastNotify(`Oops, something went wrong while fetching posts...`, 'error');
@@ -29,6 +30,7 @@ const ForumCategoryPage: React.FC = () => {
         }
     }, [error]);
 
+    // Set the forum posts globally when the posts array changes.
     useEffect(() => {
         if (posts) dispatch(forumActions.setPosts(posts));
     }, [posts, dispatch]);
