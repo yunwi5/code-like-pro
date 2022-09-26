@@ -1,4 +1,4 @@
-import { ForumCategory, ShowCaseSection } from '../models/enums';
+import { ForumCategory, ForumCategoryList, ShowCaseSection } from '../models/enums';
 import { IForumPost } from '../models/interfaces';
 import { convertToQueryString } from './string-utils/query';
 
@@ -42,7 +42,11 @@ export function getForumPostLink(post: IForumPost) {
     return `/forum/${post.category}/${post._id}`;
 }
 
-export function getForumPostCreateLink() {
+// Link to creating new forum post. Can set default category through a query string.
+export function getForumPostCreateLink(defaultCategory?: ForumCategory) {
+    if (ForumCategoryList.includes(defaultCategory as any)) {
+        return `/create-post?default-category=${defaultCategory}`;
+    }
     return '/create-post';
 }
 

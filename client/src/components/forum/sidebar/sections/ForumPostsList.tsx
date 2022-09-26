@@ -1,6 +1,6 @@
 import React from 'react';
+import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 import usePagination from '../../../../hooks/usePagination';
-import { useAppSelector } from '../../../../store/redux/store';
 import PageNavigation from '../../../ui/PageNavigation';
 import ForumPostListItem from './ForumPostListItem';
 
@@ -8,7 +8,8 @@ const POST_PER_PAGE = 10;
 
 /* List of forum posts on the sidebar*/
 const ForumPostsList: React.FC = () => {
-    const posts = useAppSelector((state) => state.forum.posts);
+    // const posts = useAppSelector((state) => state.forum.posts);
+    const { posts } = useForumBrowsing();
     const {
         array: currentPagePosts,
         page,

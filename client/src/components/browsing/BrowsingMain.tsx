@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useBrowsing from '../../hooks/useBrowsing';
+import useBrowsing from '../../hooks/useExerciseBrowsing';
 import { IExerciseCard } from '../../models/interfaces';
 import ExerciseList from '../ui/lists/ExerciseList';
 import BrowsingSidebar from './sidebar/BrowsingSidebar';
@@ -33,7 +33,10 @@ const BrowsingMain: React.FC<Props> = ({ exercises }) => {
                 </h3>
             </div>
             <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                <BrowsingSidebar exercises={processedExercises} onShuffle={handleSuffle} />
+                <BrowsingSidebar
+                    exercises={processedExercises}
+                    onShuffle={handleSuffle}
+                />
                 <ExerciseList exercises={shuffledExercises} />
             </div>
         </main>
