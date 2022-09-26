@@ -15,6 +15,9 @@ export type { IVote } from './showcase/IVote';
 export type { IShowCase } from './showcase/IShowCase';
 export type { IComment } from './showcase/IComment';
 
+// Ranking related interfaces
+export * from './ranking/IRanking';
+
 // Context types
 export type {
     IExerciseCreationContext,

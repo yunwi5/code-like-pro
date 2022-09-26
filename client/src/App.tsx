@@ -21,6 +21,7 @@ const ExerciseAttemptPage = lazy(() => import('./pages/exercise-pages/ExerciseAt
 const BrowsingPage = lazy(() => import('./pages/exercise-pages/BrowsingPage'));
 const ShowcasePage = lazy(() => import('./pages/exercise-pages/ShowcasePage'));
 const ShowcaseInvitesPage = lazy(() => import('./pages/exercise-pages/ShowcaseInvitesPage'));
+const RankingPage = lazy(() => import('./pages/RankingPage'));
 
 const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =
     ProfilePages;
@@ -54,6 +55,8 @@ function App() {
                         <Route path="my-creations" element={<MyCreations />} />
                         <Route path="my-submissions" element={<MySubmission />} />
                     </Route>
+
+                    <Route path="/ranking" element={<RankingPage />} />
 
                     {/* Exercise pages */}
                     <Route path="/browse" element={<BrowsingPage />} />
