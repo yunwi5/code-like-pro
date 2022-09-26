@@ -34,7 +34,9 @@ export function getShowcaseInvitesPageLink() {
 }
 
 // Global forum links
-export function getForumNavSectionLink(section: ForumCategory) {
+
+// Forum category page link (i.e. Interviews, Technologies)
+export function getForumCategoryLink(section: ForumCategory) {
     return `/forum/${section}`;
 }
 

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Logo } from '../../assets';
-import { ProfileSectionList } from '../../models/enums';
+import { ForumCategoryList, ProfileSectionList } from '../../models/enums';
 import { useUserContext } from '../../store/context/UserContext';
+import { ForumIcons } from '../../utils/forum';
+import { getForumCategoryLink } from '../../utils/links';
 import { ProfileLinkMap } from '../../utils/profile';
 import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
 import ActiveNavLink from '../ui/links/ActiveNavLink';
@@ -120,7 +122,7 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
             <div className="text-md flex-col lg:flex-row lg:text-center md:flex-grow">
                 <ActiveNavLink
                     to="/browse"
-                    className="w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
+                    className="w-fit link-underline-effect mt-4 mr-8 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
                     activeClassName="!text-main-500"
                 >
                     Explore
@@ -128,31 +130,26 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
                 <ActiveNavLink
                     to="/create-exercise"
                     activeClassName="!text-main-500"
-                    className="w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
+                    className="w-fit link-underline-effect mt-4 mr-8 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
                 >
                     Create
                 </ActiveNavLink>
                 <ActiveNavLink
                     to={'/showcase-invites'}
                     activeClassName="!text-main-500"
-                    className="w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
+                    className="w-fit link-underline-effect mt-4 mr-8 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
                 >
                     Showcases
                 </ActiveNavLink>
                 <ActiveNavLink
                     to="/ranking"
                     activeClassName="!text-main-500"
-                    className="w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
+                    className="w-fit link-underline-effect mt-4 mr-8 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
                 >
                     Ranking
                 </ActiveNavLink>
-                <ActiveNavLink
-                    to="/forum"
-                    activeClassName="!text-main-500"
-                    className="w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-violet-500 font-semibold hover:text-main-600 transition-all"
-                >
-                    Forums
-                </ActiveNavLink>
+                {/* Forum nav item with some nested nav items */}
+                <ForumNavItem />
             </div>
             <div className="flex flex-col lg:flex-row gap-4 max-w-[7rem] lg:max-w-none mt-4 lg:mt-0">
                 {!isLoggedIn && (
@@ -175,5 +172,37 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
         </nav>
     );
 };
+
+// Forum nav item which has a nested nav list of forum categories.
+const ForumNavItem: React.FC = () => (
+    <ActiveNavLink
+        to="/forum"
+        activeClassName="!text-main-500"
+        className="nested-nav-parent w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
+    >
+        Forums
+        <span className="absolute top-[-13px] left-[80%] px-[0.4rem] py-[0.13rem] text-[0.6rem] rounded-full bg-violet-500 brightness-110 text-white">
+            New
+        </span>
+        {/* Nested nav list of forum categories */}
+        <div className="nested-nav-child !hidden lg:!block absolute top-[100%] left-0 pt-3">
+            <div className="flex flex-col shadow hover:shadow-md">
+                {/* Link to each forum category page */}
+                {ForumCategoryList.map((forum) => (
+                    <Link
+                        key={forum}
+                        to={getForumCategoryLink(forum)}
+                        className="flex-start gap-2 px-3 py-2 capitalize text-gray-500 hover:text-main-500 bg-gray-50 hover:bg-gray-100 border-b-2 border-gray-100"
+                    >
+                        <span className="text-main-600/80 hover:text-main-500">
+                            {ForumIcons[forum]}
+                        </span>{' '}
+                        {forum}
+                    </Link>
+                ))}
+            </div>
+        </div>
+    </ActiveNavLink>
+);
 
 export default Header;

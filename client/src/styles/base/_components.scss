@@ -81,6 +81,23 @@
     }
 }
 
+// Nested navigation
+// Nested nav list appears only when the parent nav item is hovered.
+.nested-nav-parent {
+    .nested-nav-child {
+        visibility: none;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.nested-nav-parent:hover {
+    .nested-nav-child {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
 // Ql text editor codeblock light theme config
 .ql-snow .ql-editor pre.ql-syntax {
     background-color: #f3f4f6 !important;
