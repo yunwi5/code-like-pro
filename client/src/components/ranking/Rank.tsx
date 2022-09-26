@@ -134,7 +134,6 @@ const Rank: React.FC = () => {
                         let oddChildColor = ' bg-gray-100';
                         let evenChildColor = '';
                         for (let user of page) {
-                            if (user.pictureUrl) console.log({ user });
                             if (index % 2 == 0) {
                                 tr.push(
                                     <tr
@@ -150,7 +149,7 @@ const Rank: React.FC = () => {
                                         </td>
                                         <td className={cellStyle}>
                                             <img
-                                                src={user.pictureUrl}
+                                                src={user.pictureUrl || default_profile}
                                                 className="rounded-full h-10 w-10 inline ml-4"
                                             />
                                         </td>
@@ -189,7 +188,7 @@ const Rank: React.FC = () => {
                                         </td>
                                         <td className={cellStyle}>
                                             <img
-                                                src={user.pictureUrl && default_profile}
+                                                src={user.pictureUrl || default_profile}
                                                 className="rounded-full h-10 w-10 inline ml-4"
                                             />
                                         </td>
