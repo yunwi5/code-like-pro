@@ -162,7 +162,9 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
             <div className="flex flex-col sm:flex-row gap-2">
                 <div className="flex content-center">
                     <button
-                        className={`${btnClass} ${showComment ? 'text-main-500' : ''}`}
+                        className={`${btnClass} ${
+                            showComment ? 'text-main-500' : ''
+                        } hover:bg-main-400`}
                         onClick={() => setShowComment(!showComment)}
                     >
                         <BsFillChatLeftFill className="m-1" />
@@ -174,7 +176,9 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                 </div>
                 <div className="flex content-center">
                     <div
-                        className={`${btnClass} ${compare ? 'text-violet-600' : ''}`}
+                        className={`${btnClass} ${
+                            compare ? 'text-violet-700' : ''
+                        } hover:bg-violet-600`}
                         onClick={() => setCompare(!compare)}
                     >
                         <BsFileCode className="m-1" />
