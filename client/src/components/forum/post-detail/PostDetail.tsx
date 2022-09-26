@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import MoonLoader from 'react-spinners/MoonLoader';
 import useForumPostQuery from '../../../hooks/forum-queries/useForumPostQuery';
 import { toastNotify } from '../../../utils/notification';
-import PostCard from './sections/PostCard';
+import PostBody from './sections/PostBody';
 import PostComments from './sections/PostComments';
 
 /* Post browsing on the right side of the forum page */
@@ -30,7 +30,7 @@ const PostDetail: React.FC = () => {
             )}
             {post && (
                 <>
-                    <PostCard post={post} />
+                    <PostBody post={post} />
                     <PostComments post={post} />
                 </>
             )}

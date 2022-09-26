@@ -146,13 +146,13 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
                 >
                     Ranking
                 </ActiveNavLink>
-                {/* <ActiveNavLink
-                    to="/ranking"
+                <ActiveNavLink
+                    to="/forum"
                     activeClassName="!text-main-500"
                     className="w-fit link-underline-effect mt-4 mr-10 block lg:inline-block lg:mt-0 text-violet-500 font-semibold hover:text-main-600 transition-all"
                 >
                     Forums
-                </ActiveNavLink> */}
+                </ActiveNavLink>
             </div>
             <div className="flex flex-col lg:flex-row gap-4 max-w-[7rem] lg:max-w-none mt-4 lg:mt-0">
                 {!isLoggedIn && (

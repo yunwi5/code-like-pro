@@ -22,6 +22,7 @@ const ExerciseAttemptPage = lazy(() => import('./pages/exercise/ExerciseAttemptP
 const BrowsingPage = lazy(() => import('./pages/exercise/BrowsingPage'));
 const ShowcasePage = lazy(() => import('./pages/exercise/ShowcasePage'));
 const ShowcaseInvitesPage = lazy(() => import('./pages/exercise/ShowcaseInvitesPage'));
+const ForumsPage = lazy(() => import('./pages/forum/ForumsPage'));
 const ForumCategoryPage = lazy(() => import('./pages/forum/ForumCategoryPage'));
 const PostCreatePage = lazy(() => import('./pages/forum/PostCreationPage'));
 const PostEditPage = lazy(() => import('./pages/forum/PostEditPage'));
@@ -71,6 +72,7 @@ function App() {
                     <Route path="/showcase-invites" element={<ShowcaseInvitesPage />} />
 
                     {/* Global discussion forum pages */}
+                    <Route path="/forum" element={<ForumsPage />} />
                     <Route path="/forum/:category" element={<ForumCategoryPage />}>
                         <Route path=":id" element={<PostDetail />} />
                     </Route>

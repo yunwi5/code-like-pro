@@ -4,10 +4,10 @@ import { AiFillStar, AiFillCheckCircle } from 'react-icons/ai';
 import { BsFillCalendarCheckFill } from 'react-icons/bs';
 import { FaUserEdit } from 'react-icons/fa';
 
-import { IExerciseWithId } from '../../models/interfaces';
-import useExerciseSubmissionsQuery from '../../hooks/exercise-queries/useExerciseSubmissionsQuery';
-import { getSubmissionStats } from '../../utils/user-submission';
-import { getDateFormat } from '../../utils/datetime';
+import { IExerciseWithId } from '../../../models/interfaces';
+import useExerciseSubmissionsQuery from '../../../hooks/exercise-queries/useExerciseSubmissionsQuery';
+import { getSubmissionStats } from '../../../utils/user-submission';
+import { getDateFormat } from '../../../utils/datetime';
 
 // Listing exercise specs such as topic, favorite count, correct rate, and issue reports.
 const ExerciseSpec: React.FC<{ exercise: IExerciseWithId }> = ({ exercise }) => {

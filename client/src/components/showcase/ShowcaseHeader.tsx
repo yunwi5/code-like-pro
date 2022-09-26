@@ -5,7 +5,7 @@ import { useShowcase } from '../../store/context/ShowcaseContext';
 import { getDifficultyColorClass } from '../../utils/difficulty';
 import { getBrowsingPageLink, getExerciseAttemptPageLink } from '../../utils/links';
 import Button from '../ui/buttons/Button';
-import ExerciseSpec from '../ui/ExerciseSpec';
+import ExerciseSpec from '../ui/spec/ExerciseSpec';
 import LanguageLabel from '../ui/labels/LanguageLabel';
 
 const ShowcaseHeader = () => {

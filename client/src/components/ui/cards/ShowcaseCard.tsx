@@ -89,7 +89,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
     };
 
     return (
-        <div
+        <article
             className={`flex flex-col gap-3 px-6 py-3 bg-gray-50 border-2 border-gray-200/90 rounded-sm transition-all shadow-md${className}`}
         >
             <h2 className="text-gray-500 font-bold text-xl">{showcase.description}</h2>
@@ -201,7 +201,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                     ))}
                 </div>
             ) : null}
-        </div>
+        </article>
     );
 };
 

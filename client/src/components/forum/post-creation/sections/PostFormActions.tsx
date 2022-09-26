@@ -25,12 +25,12 @@ const PostFormActions: React.FC = () => {
                 </Link>
             )}
             {!isLoading && (
-                <Button className="ml-auto" onClick={savePost} mode="fill">
+                <Button className="sm:ml-auto" onClick={savePost} mode="fill">
                     Save Post
                 </Button>
             )}
             {isLoading && (
-                <div className="ml-auto">
+                <div className="sm:ml-auto">
                     <MoonLoader size={50} color="#5552e4" />
                 </div>
             )}

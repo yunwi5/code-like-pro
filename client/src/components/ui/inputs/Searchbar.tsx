@@ -11,6 +11,7 @@ interface Props {
     onTextChange?: (text: string) => void;
     textValue?: string;
     onSearch?: () => void;
+    className?: string;
 }
 
 const Searchbar: React.FC<Props> = ({
@@ -21,6 +22,7 @@ const Searchbar: React.FC<Props> = ({
     textValue,
     label,
     onSearch,
+    className = '',
 }) => {
     const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) =>
         onTextChange && onTextChange(e.target.value);
@@ -31,16 +33,16 @@ const Searchbar: React.FC<Props> = ({
     };
 
     return (
-        <form className="flex items-end gap-1" onSubmit={handleSubmit}>
+        <form className={`flex items-end gap-1 ${className}`} onSubmit={handleSubmit}>
             <CustomSelect
                 options={searchKeys}
                 labelText={
                     label ? <span className="font-semibold">{label}</span> : undefined
                 }
                 id="search-option-select"
-                className="gap-1"
                 value={keyValue}
                 onChange={onKeyChange}
+                className="gap-1"
             />
             <div className="flex-1 flex self-end h-[2.5rem]">
                 <input

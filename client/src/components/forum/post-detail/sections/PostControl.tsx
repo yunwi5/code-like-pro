@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 
 import { IForumPost, IForumPostPopulated } from '../../../../models/interfaces';
-import { useAppSelector } from '../../../../store/redux/store';
 import { getForumPostLink } from '../../../../utils/links';
 import PostSettings from './PostSettings';
 
