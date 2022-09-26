@@ -1,4 +1,4 @@
-import { DateTime, Interval } from 'luxon';
+import { DateTime } from 'luxon';
 
 // Get datetime format either absolute or relative formats.
 export function getDateFormat(isoString: string) {
