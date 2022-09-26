@@ -1,6 +1,7 @@
 import React from 'react';
 import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 
 import { IForumPost, IForumPostPopulated } from '../../../../models/interfaces';
 import { useAppSelector } from '../../../../store/redux/store';
@@ -15,7 +16,7 @@ const navButtonDisabledClass =
 // Post naigation (previous, next) and settings.
 const PostControl: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     const navigate = useNavigate();
-    const posts = useAppSelector((state) => state.forum.posts);
+    const { posts } = useForumBrowsing();
 
     const postIndex = posts.findIndex((p) => p._id === post._id);
     const prevPost: IForumPost | undefined = posts[postIndex - 1];

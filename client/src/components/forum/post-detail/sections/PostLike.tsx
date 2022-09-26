@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { postForumPostLike } from '../../../../apis/forum';
 import { IForumPostPopulated } from '../../../../models/interfaces';
@@ -15,6 +15,11 @@ const PostLike: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
         setLiked((ps) => !ps);
         await postForumPostLike(post._id);
     };
+
+    // Update the local state, if the post object changes.
+    useEffect(() => {
+        setLiked(post.liked.includes(userId || ''));
+    }, [post]);
 
     return (
         <HoveringLabel label={liked ? 'Unlike!' : 'Like!'} onClick={handlePostLikeByUser}>

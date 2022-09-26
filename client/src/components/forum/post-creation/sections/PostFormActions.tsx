@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import MoonLoader from 'react-spinners/MoonLoader';
 import { usePostCreationContext } from '../../../../store/context/PostCreationContext';
+import { getForumPostLink } from '../../../../utils/links';
 import Button from '../../../ui/buttons/Button';
 
 const PostFormActions: React.FC = () => {
@@ -12,6 +14,15 @@ const PostFormActions: React.FC = () => {
                 <Button onClick={saveDraft} mode="empty">
                     Save Draft
                 </Button>
+            )}
+            {!isLoading && createdPost && (
+                <Link
+                    to={getForumPostLink(createdPost)}
+                    className="btn btn-empty"
+                    onClick={savePost}
+                >
+                    Published Post
+                </Link>
             )}
             {!isLoading && (
                 <Button className="ml-auto" onClick={savePost} mode="fill">

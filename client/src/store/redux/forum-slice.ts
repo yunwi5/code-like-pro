@@ -23,7 +23,10 @@ interface IForumState {
 const initialState: IForumState = {
     posts: [],
     searching: { key: SearchKey.TITLE, text: '' },
-    sorting: { key: ForumPostSortingKey.NONE, direction: SortingDirection.DESCENDING },
+    sorting: {
+        key: ForumPostSortingKey.DATETIME,
+        direction: SortingDirection.DESCENDING,
+    },
 };
 
 const forumSlice = createSlice({

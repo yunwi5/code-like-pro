@@ -1,5 +1,5 @@
 import { ForumCategory, ForumCategoryList, ShowCaseSection } from '../models/enums';
-import { IForumPost } from '../models/interfaces';
+import { IForumPost, IForumPostPopulated } from '../models/interfaces';
 import { convertToQueryString } from './string-utils/query';
 
 export function getBrowsingPageLink() {
@@ -38,7 +38,7 @@ export function getForumNavSectionLink(section: ForumCategory) {
     return `/forum/${section}`;
 }
 
-export function getForumPostLink(post: IForumPost) {
+export function getForumPostLink(post: IForumPost | IForumPostPopulated) {
     return `/forum/${post.category}/${post._id}`;
 }
 
