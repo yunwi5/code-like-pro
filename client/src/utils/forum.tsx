@@ -1,6 +1,11 @@
 import { GoCommentDiscussion } from 'react-icons/go';
 import { MdOutlinePeopleAlt } from 'react-icons/md';
+import { FaReact, FaUniversity } from 'react-icons/fa';
+import { IoBusinessSharp } from 'react-icons/io5';
 import { VscTypeHierarchy, VscFeedback } from 'react-icons/vsc';
+import { BsQuestionCircle } from 'react-icons/bs';
+import { RiSlideshow3Line } from 'react-icons/ri';
+import { AiOutlineNotification } from 'react-icons/ai';
 
 import {
     CourseList,
@@ -9,13 +14,7 @@ import {
     LanguageList,
     ProgrammingTopicList,
 } from '../models/enums';
-import { FaReact, FaUniversity } from 'react-icons/fa';
-import { IoBusinessSharp } from 'react-icons/io5';
 import { prettierLanguageName } from './language';
-import { GrAnnounce } from 'react-icons/gr';
-import { BsQuestionCircleFill } from 'react-icons/bs';
-import { RiSlideshow3Line } from 'react-icons/ri';
-import { AiOutlineNotification } from 'react-icons/ai';
 
 export const ForumIcons = {
     [ForumCategory.GENERAL]: <GoCommentDiscussion className="inline text-[1.2em]" />,
@@ -29,7 +28,7 @@ export const ForumIcons = {
 
 export const ForumTypeIcons = {
     [ForumPostType.ANNOUNCEMENT]: <AiOutlineNotification className="inline" />,
-    [ForumPostType.QUESTION]: <BsQuestionCircleFill className="inline" />,
+    [ForumPostType.QUESTION]: <BsQuestionCircle className="inline" />,
     [ForumPostType.SHOWCASE]: <RiSlideshow3Line className="inline" />,
 };
 

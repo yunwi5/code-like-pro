@@ -13,7 +13,11 @@ interface Props {
 // Default value of exercisePerPage which is applied when the prop was not given.
 const DEFAULT_PER_PAGE = 7;
 
-const CommentList: FC<Props> = ({ comments, commentPerPage, className = '' }) => {
+const CommentList: FC<Props> = ({
+    comments,
+    commentPerPage = DEFAULT_PER_PAGE,
+    className = '',
+}) => {
     const {
         array: currentPageComments,
         page,
@@ -21,10 +25,10 @@ const CommentList: FC<Props> = ({ comments, commentPerPage, className = '' }) =>
         maxPage,
     } = usePagination<IComment>({
         array: comments,
-        itemPerPage: commentPerPage ?? DEFAULT_PER_PAGE,
+        itemPerPage: commentPerPage,
     });
 
-  const handlePage = (newPage: number) => setPage(newPage);
+    const handlePage = (newPage: number) => setPage(newPage);
 
     return (
         <section className={`flex-1 flex flex-col ${className}`}>
@@ -34,7 +38,7 @@ const CommentList: FC<Props> = ({ comments, commentPerPage, className = '' }) =>
                 ))}
             </div>
             <PageNavigation
-                className="mt-auto"
+                className={`mt-auto`}
                 currentPage={page}
                 totalPages={maxPage}
                 onChangePage={handlePage}
