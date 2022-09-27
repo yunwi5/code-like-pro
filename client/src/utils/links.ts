@@ -1,4 +1,5 @@
-import { ShowCaseSection } from '../models/enums';
+import { ForumCategory, ForumCategoryList, ShowCaseSection } from '../models/enums';
+import { IForumPost, IForumPostPopulated } from '../models/interfaces';
 import { convertToQueryString } from './string-utils/query';
 
 export function getBrowsingPageLink() {
@@ -30,4 +31,27 @@ export function getShowcasePageLink(
 
 export function getShowcaseInvitesPageLink() {
     return `/showcase-invites`;
+}
+
+// Global forum links
+
+// Forum category page link (i.e. Interviews, Technologies)
+export function getForumCategoryLink(section: ForumCategory) {
+    return `/forum/${section}`;
+}
+
+export function getForumPostLink(post: IForumPost | IForumPostPopulated) {
+    return `/forum/${post.category}/${post._id}`;
+}
+
+// Link to creating new forum post. Can set default category through a query string.
+export function getForumPostCreateLink(defaultCategory?: ForumCategory) {
+    if (ForumCategoryList.includes(defaultCategory as any)) {
+        return `/create-post?default-category=${defaultCategory}`;
+    }
+    return '/create-post';
+}
+
+export function getForumPostEditLink(postId: string) {
+    return `/edit-post/${postId}`;
 }

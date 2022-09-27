@@ -1,27 +1,59 @@
 import { SearchKey } from '../models/enums';
-import { IExerciseCard } from '../models/interfaces';
+import { IExerciseCard, IForumPost } from '../models/interfaces';
 import { ISearchingState } from '../store/redux/browsing-slice';
 
 export function searchIncludes(searched: string, inputString: string) {
     return searched.toLowerCase().includes(inputString.trim().toLowerCase());
 }
 
-export function searchExercises(exercises: IExerciseCard[], searchState: ISearchingState) {
+function searchArrayByName<T>(array: Array<{ name: string }>, text: string) {
+    return array.filter((ex) => searchIncludes(ex.name, text)) as T;
+}
+
+function searchArrayByAuthor<T>(
+    array: Array<{ author?: { name: string } }>,
+    text: string,
+) {
+    return array.filter((ex) => searchIncludes(ex.author?.name || '', text)) as T;
+}
+
+export function searchExercises(
+    exercises: IExerciseCard[],
+    searchState: ISearchingState,
+) {
     // Search by exercise name case-insensitive
     if (searchState.key === SearchKey.TITLE) {
-        return exercises.filter((ex) => searchIncludes(ex.name, searchState.text));
+        return searchArrayByName<IExerciseCard[]>(exercises, searchState.text);
     }
 
     // Search by author name case-insensitive
     if (searchState.key === SearchKey.AUTHOR) {
-        return exercises.filter((ex) =>
-            searchIncludes(ex?.author?.name || '', searchState.text),
-        );
+        return searchArrayByAuthor<IExerciseCard[]>(exercises, searchState.text);
     }
 
     if (searchState.key === SearchKey.PROMPT) {
-        return exercises.filter((ex) => searchIncludes(ex?.prompt || '', searchState.text));
+        return exercises.filter((ex) =>
+            searchIncludes(ex?.prompt || '', searchState.text),
+        );
     }
 
     return exercises;
+}
+
+export function searchForumPosts(posts: IForumPost[], searchState: ISearchingState) {
+    // Search by exercise name case-insensitive
+    if (searchState.key === SearchKey.TITLE) {
+        return searchArrayByName<IForumPost[]>(posts, searchState.text);
+    }
+
+    // Search by author name case-insensitive
+    if (searchState.key === SearchKey.AUTHOR) {
+        return searchArrayByAuthor<IForumPost[]>(posts, searchState.text);
+    }
+
+    if (searchState.key === SearchKey.PROMPT) {
+        return posts.filter((ex) => searchIncludes(ex?.content || '', searchState.text));
+    }
+
+    return posts;
 }

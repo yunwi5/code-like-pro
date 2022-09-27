@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ProgrammingTopicList } from '../../../../models/enums';
 import { IExerciseCard } from '../../../../models/interfaces';
-import { browsingActions } from '../../../../store/redux/browsing-slice';
+import { exerciseBrowsingActions } from '../../../../store/redux/browsing-slice';
 import { useAppDispatch, useAppSelector } from '../../../../store/redux/store';
 import { getTagsCount } from '../../../../utils/tag';
 
@@ -37,7 +37,9 @@ const TagsFilter: React.FC<{ exercises: IExerciseCard[] }> = ({ exercises }) => 
                     return (
                         <li
                             key={tag}
-                            onClick={() => dispatch(browsingActions.toggleTags(tag))}
+                            onClick={() =>
+                                dispatch(exerciseBrowsingActions.toggleTags(tag))
+                            }
                             className={`px-2 py-[0.2rem] text-[0.85rem] bg-gray-300/80 cursor-pointer hover:bg-gray-600/90 hover:text-gray-50 ${textSizeClass} ${activeClass}`}
                         >
                             {tag} ({tagCountMap[tag] || 0})

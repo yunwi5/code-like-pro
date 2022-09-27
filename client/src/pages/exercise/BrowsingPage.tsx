@@ -11,7 +11,7 @@ import { IExerciseCard } from '../../models/interfaces';
 import { createRandomExercises } from '../../utils/random/random-exercise';
 import { toastNotify } from '../../utils/notification';
 import { mapExercisesToExerciseCards } from '../../utils/exercise-utils/exercise';
-import useExerciseListQuery from '../../hooks/queries/useExerciseListQuery';
+import useExerciseListQuery from '../../hooks/exercise-queries/useExerciseListQuery';
 
 const BrowsingPage: React.FC = () => {
     const navigate = useNavigate();

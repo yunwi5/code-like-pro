@@ -13,11 +13,16 @@ type SortingState = { key: VotingItemSortingKey; direction: SortingDirection };
 interface Props {
     sortingState: SortingState;
     setSortingState: React.Dispatch<React.SetStateAction<SortingState>>;
+    className?: string;
 }
 
 // Sorting helpter for voting item like comment and showcase items.
 // Can help items to be sorted by votes and date & time.
-const VotingItemSorter: React.FC<Props> = ({ sortingState, setSortingState }) => {
+const VotingItemSorter: React.FC<Props> = ({
+    sortingState,
+    setSortingState,
+    className = '',
+}) => {
     const [showSorting, setShowSorting] = useState(false);
 
     const handleSortingKey = (key: VotingItemSortingKey) => {
@@ -29,7 +34,7 @@ const VotingItemSorter: React.FC<Props> = ({ sortingState, setSortingState }) =>
     };
 
     return (
-        <div className="flex justify-between items-end mb-5">
+        <div className={`flex justify-between items-end ${className}`}>
             {showSorting ? (
                 <div className="flex-start gap-3 mb-2">
                     <Sortingbar

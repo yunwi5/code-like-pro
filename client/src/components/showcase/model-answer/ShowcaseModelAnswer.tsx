@@ -31,7 +31,7 @@ const ShowcaseModelAnswer: React.FC = () => {
             <div className="flex-1 flex flex-col">
                 <h2 className="text-xl md:text-2xl mb-4">Model Solution</h2>
                 <CodeEditor
-                    className="flex-1"
+                    className="flex-1 min-h-[15rem]"
                     onChange={() => {}}
                     showHeader={false}
                     language={exercise.language}

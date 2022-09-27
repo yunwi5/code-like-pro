@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import ClickAwayListener from 'react-click-away-listener';
 import { filterListByString } from '../../../utils/filter-utils/string-filter';
@@ -79,6 +79,11 @@ const AutoComplete: React.FC<Props> = (props) => {
         setShowDropdown(false);
     };
 
+    // If the option changes, update the filtered options as well.
+    useEffect(() => {
+        setFilteredOptions(options);
+    }, [options]);
+
     return (
         <ClickAwayListener onClickAway={() => setShowDropdown(false)}>
             <div className={`relative ${className ?? ''}`}>
@@ -91,11 +96,11 @@ const AutoComplete: React.FC<Props> = (props) => {
                         onClick={() => setShowDropdown(true)}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyboard}
-                        className="px-2 py-2 border-2 border-gray-300  rounded-sm shadow-md focus-main"
+                        className="px-2 py-[0.35rem] border-2 border-gray-300  rounded-sm shadow-md focus-main"
                     />
                     <AiFillCaretDown
                         onClick={() => setShowDropdown((ps) => !ps)}
-                        className="absolute hover:text-blue-500 top-[60%] right-3 cursor-pointer"
+                        className="absolute hover:text-blue-500 top-[62%] right-3 cursor-pointer"
                     />
                 </div>
                 {showDropdown && (

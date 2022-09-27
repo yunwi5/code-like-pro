@@ -1,6 +1,6 @@
 import React from 'react';
 import { SortingDirectionList, ExerciseSortingKeyList } from '../../../../models/enums';
-import { browsingActions } from '../../../../store/redux/browsing-slice';
+import { exerciseBrowsingActions } from '../../../../store/redux/browsing-slice';
 import { useAppDispatch, useAppSelector } from '../../../../store/redux/store';
 import CustomSelect from '../../../ui/inputs/CustomSelect';
 
@@ -9,10 +9,10 @@ const ExerciseSorter = () => {
     const dispatch = useAppDispatch();
 
     const handleKeyChange = (newKey: string) =>
-        dispatch(browsingActions.setSorting({ key: newKey as any, direction }));
+        dispatch(exerciseBrowsingActions.setSorting({ key: newKey as any, direction }));
 
     const handleDirectionChange = (dir: string) =>
-        dispatch(browsingActions.setSorting({ key, direction: dir as any }));
+        dispatch(exerciseBrowsingActions.setSorting({ key, direction: dir as any }));
 
     return (
         <div className="flex-start gap-1">

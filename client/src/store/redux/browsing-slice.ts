@@ -25,20 +25,20 @@ export interface IFilterState {
     tags: string[];
 }
 
-export interface IBrowsingOperationState {
+export interface IExerciseBrowsingState {
     searching: ISearchingState;
     sorting: ISortingState;
     filtering: IFilterState;
 }
 
-const initialState: IBrowsingOperationState = {
+const initialState: IExerciseBrowsingState = {
     searching: { key: SearchKey.TITLE, text: '' },
     sorting: { key: ExerciseSortingKey.NONE, direction: SortingDirection.ASCENDING },
     filtering: { language: 'All', submissionStatus: 'All', difficulties: [], tags: [] },
 };
 
-export const browsingOperationSlice = createSlice({
-    name: 'browsing-operation',
+const exerciseBrowsingSlice = createSlice({
+    name: 'exercise-browsing',
     initialState,
     reducers: {
         setSorting(state, action: PayloadAction<ISortingState>) {
@@ -76,6 +76,6 @@ export const browsingOperationSlice = createSlice({
     },
 });
 
-export const browsingActions = browsingOperationSlice.actions;
+export const exerciseBrowsingActions = exerciseBrowsingSlice.actions;
 
-export default browsingOperationSlice;
+export default exerciseBrowsingSlice;

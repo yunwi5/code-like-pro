@@ -1,13 +1,13 @@
 import React from 'react';
 import { MdReportProblem } from 'react-icons/md';
 import { AiFillStar, AiFillCheckCircle } from 'react-icons/ai';
-import { BsFillCalendarCheckFill } from 'react-icons/bs';
+import { BsClock } from 'react-icons/bs';
 import { FaUserEdit } from 'react-icons/fa';
 
-import { IExerciseWithId } from '../../models/interfaces';
-import useExerciseSubmissionsQuery from '../../hooks/queries/useExerciseSubmissionsQuery';
-import { getSubmissionStats } from '../../utils/user-submission';
-import { getDateFormat } from '../../utils/datetime';
+import { IExerciseWithId } from '../../../models/interfaces';
+import useExerciseSubmissionsQuery from '../../../hooks/exercise-queries/useExerciseSubmissionsQuery';
+import { getSubmissionStats } from '../../../utils/user-submission';
+import { getDateFormat } from '../../../utils/datetime';
 
 // Listing exercise specs such as topic, favorite count, correct rate, and issue reports.
 const ExerciseSpec: React.FC<{ exercise: IExerciseWithId }> = ({ exercise }) => {
@@ -29,7 +29,7 @@ const ExerciseSpec: React.FC<{ exercise: IExerciseWithId }> = ({ exercise }) => 
                 {correctCount} of {total} ({correctRate}%)
             </li>
             <li className="flex gap-1">
-                <BsFillCalendarCheckFill className="text-blue-500/80 text-[1.15rem]" />{' '}
+                <BsClock className="text-blue-500/80 text-[1.3rem]" />{' '}
                 {getDateFormat(exercise.createdAt)}
             </li>
             <li className="flex gap-1">

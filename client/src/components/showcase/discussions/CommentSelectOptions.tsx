@@ -8,7 +8,7 @@ const CommentSelectOptions: React.FC<{
 }> = ({ showOnlyMyComments, setShowOnlyMyComments }) => {
     return (
         // Selecting all comments or only user's comments
-        <div className="my-8 flex gap-3">
+        <div className="flex gap-3">
             <RoundButton
                 onClick={() => setShowOnlyMyComments(false)}
                 className="!text-base"

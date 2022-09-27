@@ -20,8 +20,7 @@ function useBrowsing(exercises: IExerciseCard[]) {
 
     // Do searching first
     const searchedExercises = useMemo(() => {
-        const res = searchExercises(exercises, searching);
-        return res;
+        return searchExercises(exercises, searching);
     }, [exercises, searching]);
 
     // Do filtering second

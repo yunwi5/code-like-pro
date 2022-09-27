@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { SearchKeyList } from '../../../../models/enums';
-import { browsingActions, ISearchingState } from '../../../../store/redux/browsing-slice';
+import {
+    exerciseBrowsingActions,
+    ISearchingState,
+} from '../../../../store/redux/browsing-slice';
 import { useAppDispatch, useAppSelector } from '../../../../store/redux/store';
 import Searchbar from '../../../ui/inputs/Searchbar';
 
@@ -16,7 +19,7 @@ const ExerciseSearch: React.FC = () => {
 
     const handleSearch = () => {
         console.log('Submit search!');
-        dispatch(browsingActions.setSearching({ ...localSearchingState }));
+        dispatch(exerciseBrowsingActions.setSearching({ ...localSearchingState }));
     };
 
     return (
