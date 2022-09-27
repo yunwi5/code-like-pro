@@ -1,6 +1,6 @@
 import React from 'react';
 import { BiCategoryAlt, BiCommentDots } from 'react-icons/bi';
-import { BsHeartFill } from 'react-icons/bs';
+import { BsClock, BsHeart, BsHeartFill } from 'react-icons/bs';
 import { FaUserEdit } from 'react-icons/fa';
 import { MdDateRange } from 'react-icons/md';
 import { IForumPost, IForumPostPopulated } from '../../../models/interfaces';
@@ -30,7 +30,7 @@ const ForumPostSpec: React.FC<Props> = ({ post, pictureUrl, className }) => {
                 {post.author.name}
             </li>
             <li className={spectItemClass}>
-                <MdDateRange className="text-sky-500/80 text-[1.3em]" />
+                <BsClock className="text-sky-500/80 text-[1.3em]" />
                 {getDateTimeFormat(post.createdAt)}
             </li>
             <li className={`${spectItemClass} capitalize`}>
@@ -44,13 +44,13 @@ const ForumPostSpec: React.FC<Props> = ({ post, pictureUrl, className }) => {
                 {post.postType}
             </li>
             <li className={spectItemClass}>
-                <BsHeartFill className="text-pink-500/80 text-[1.2em]" />
+                <BsHeart className="text-pink-500/80 text-[1.2em]" />
                 {post.liked.length} Like{post.liked.length > 1 && 's'}
             </li>
 
             <li className="hidden xl:flex items-center gap-2">
                 <BiCommentDots className="text-slate-600 text-[1.2em]" />
-                {post.comments.length} Comments
+                {post.comments.length} Comment{post.comments.length > 1 && 's'}
             </li>
         </ul>
     );

@@ -22,4 +22,5 @@ export interface IExercise {
 export interface IExerciseWithId extends IExercise {
     _id: string;
     comments: IComment[] | string[];
+    showCases: string[];
 }

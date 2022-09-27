@@ -28,11 +28,9 @@ export const ForumIcons = {
 };
 
 export const ForumTypeIcons = {
-    [ForumPostType.ANNOUNCEMENT]: (
-        <AiOutlineNotification className="inline text-[1.2em]" />
-    ),
-    [ForumPostType.QUESTION]: <BsQuestionCircleFill className="inline text-[1.2em]" />,
-    [ForumPostType.SHOWCASE]: <RiSlideshow3Line className="inline text-[1.2em]" />,
+    [ForumPostType.ANNOUNCEMENT]: <AiOutlineNotification className="inline" />,
+    [ForumPostType.QUESTION]: <BsQuestionCircleFill className="inline" />,
+    [ForumPostType.SHOWCASE]: <RiSlideshow3Line className="inline" />,
 };
 
 // Each forum tags (needs to be updated)

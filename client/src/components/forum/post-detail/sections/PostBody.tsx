@@ -1,5 +1,4 @@
 import React from 'react';
-import { BsFillTagsFill, BsHeartFill } from 'react-icons/bs';
 
 import { IForumPostPopulated } from '../../../../models/interfaces';
 import TextEditor from '../../../ui/editor/text-editor/TextEditor';
