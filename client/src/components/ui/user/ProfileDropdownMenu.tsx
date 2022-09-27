@@ -20,7 +20,7 @@ const ProfileDropdownMenu: React.FC = () => {
                 {ProfileSectionList.map((section) => (
                     <Link
                         key={section}
-                        className="flex-start gap-3 px-4 py-2 border-t-2 whitespace-nowrap border-t-gray-200 hover:bg-gray-200 hover:text-main-500"
+                        className="flex-start gap-3 px-4 py-2 border-t-2 whitespace-nowrap border-t-gray-200/80 hover:bg-gray-200 hover:text-main-500"
                         to={`/profile/${ProfileLinkMap[section]}`}
                     >
                         {getProfileSectionIcon(section)} {section}

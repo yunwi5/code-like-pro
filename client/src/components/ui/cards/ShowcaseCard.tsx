@@ -90,9 +90,11 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
 
     return (
         <article
-            className={`flex flex-col gap-3 px-6 py-3 bg-gray-50 border-2 border-gray-200/90 rounded-sm transition-all shadow-md${className}`}
+            className={`flex flex-col gap-3 px-3 sm:px-6 py-3 bg-gray-50 border-2 border-gray-200/90 rounded-sm transition-all shadow-md${className}`}
         >
-            <h2 className="text-gray-500 font-bold text-xl">{showcase.description}</h2>
+            <h2 className="text-gray-500 font-bold text-lg sm:text-xl">
+                {showcase.description}
+            </h2>
             <div className="flex flex-row m-0">
                 <div className="flex content-center mr-5">
                     <BsFillPersonFill className="m-1" />
@@ -148,16 +150,16 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                 <div className="col-span-1 flex flex-col justify-center m-auto text-center text-gray-400">
                     <div>
                         <IoIosArrowUp
-                            className={`text-[3rem] hover:text-main-500 cursor-pointer ${
+                            className={`text-3xl sm:text-[3rem] hover:text-main-500 cursor-pointer ${
                                 userVote?.type === 'up' ? 'text-main-500' : ''
                             }`}
                             onClick={() => handleUserVote('up')}
                         />
-                        <h2 className="font-semibold text-2xl text-gray-600">
+                        <h2 className="font-semibold text-xl sm:text-2xl text-gray-600">
                             {totalVotes}
                         </h2>
                         <IoIosArrowDown
-                            className={`text-[3rem] hover:text-main-500 cursor-pointer ${
+                            className={`text-3xl sm:text-[3rem] hover:text-main-500 cursor-pointer ${
                                 userVote?.type === 'down' ? 'text-main-500' : ''
                             }`}
                             onClick={() => handleUserVote('down')}
@@ -167,7 +169,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-2">
-                <div className="flex content-center">
+                <div className="self-stretch flex content-center">
                     <button
                         className={`${btnClass} ${
                             showComment ? 'text-main-500' : ''
@@ -207,6 +209,6 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
 
 // Cummon btn class for showing comments and showing comparison
 const btnClass =
-    'flex px-3 py-[0.3rem] rounded-full hover:text-white transition-all cursor-pointer';
+    'flex w-full sm:w-fit px-3 py-[0.3rem] rounded-full hover:text-white transition-all cursor-pointer';
 
 export default ShowcaseCard;

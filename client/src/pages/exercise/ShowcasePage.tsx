@@ -42,7 +42,7 @@ const ShowcasePage = () => {
                 />
             </Helmet>
 
-            <div className="flex-center min-h-[83vh] my-10">
+            <div className="flex-center min-h-[83vh] my-5 sm:my-10">
                 {/* If there is no exercise yet, show the loading spinner. */}
                 {!exercise && <ClipLoader size={200} color="#3c38e0" />}
 

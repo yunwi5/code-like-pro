@@ -1,5 +1,4 @@
 import React from 'react';
-
 import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 import usePagination from '../../../../hooks/usePagination';
 import { IForumPost } from '../../../../models/interfaces';
@@ -22,7 +21,12 @@ const ForumPostList: React.FC = () => {
     const handlePage = (newPage: number) => setPage(newPage);
 
     return (
-        <section className="my-5">
+        <section className="my-4">
+            <div className="mb-5">
+                <h2 className="text-gray-500 font-semibold text-base sm:text-lg">
+                    {posts.length} Post{posts.length > 0 && 's'}
+                </h2>
+            </div>
             <div className="flex flex-col gap-5 mb-8">
                 {currentPagePosts.map((post) => (
                     <ForumPostCard key={post._id} post={post} />

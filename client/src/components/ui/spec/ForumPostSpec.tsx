@@ -1,8 +1,8 @@
 import React from 'react';
 import { BiCategoryAlt, BiCommentDots } from 'react-icons/bi';
-import { BsClock, BsHeart, BsHeartFill } from 'react-icons/bs';
+import { BsClock, BsHeart } from 'react-icons/bs';
 import { FaUserEdit } from 'react-icons/fa';
-import { MdDateRange } from 'react-icons/md';
+
 import { IForumPost, IForumPostPopulated } from '../../../models/interfaces';
 import { getDateTimeFormat } from '../../../utils/datetime';
 import { ForumTypeIcons } from '../../../utils/forum';

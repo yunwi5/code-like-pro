@@ -31,7 +31,7 @@ const ShowcaseList: React.FC<Props> = ({
     const handlePage = (newPage: number) => setPage(newPage);
 
     return (
-        <section className="lg:basis-2/3">
+        <section>
             <div className="flex flex-col gap-5 mb-8">
                 {currentPageShowcases.map((sc, idx) => (
                     <ShowcaseCard

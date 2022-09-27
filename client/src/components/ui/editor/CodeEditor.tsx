@@ -11,7 +11,7 @@ type Monaco = typeof monaco;
 type CodeEditor = monaco.editor.IStandaloneCodeEditor;
 
 interface Props {
-    onChange(value: string | undefined): void;
+    onChange?: (value: string | undefined) => void;
     language?: Language;
     showHeader?: boolean;
     value?: string;
@@ -25,7 +25,7 @@ interface Props {
 const CodeEditor: React.FC<Props> = ({
     language,
     showHeader = true,
-    onChange,
+    onChange = () => {},
     width,
     height,
     value,

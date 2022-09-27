@@ -12,15 +12,16 @@ interface Props {
     setShowPostModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/* Showcase nav layout break point is md - 768px. */
 const ShowcaseNav: React.FC<Props> = ({
     activeSection,
     setActiveSection,
     setShowPostModal,
 }) => {
     return (
-        <nav className="flex justify-between items-center">
+        <nav className="flex flex-col md:flex-row justify-between items-center gap-x-2 gap-y-4">
             {/* Showcase section navigation as a list */}
-            <div className="flex justify-start items-center gap-3">
+            <div className="self-stretch flex flex-col xs:flex-row md:justify-start items-center gap-x-1 sm:gap-x-3 gap-y-2">
                 {ShowCaseSectionList.map((section) => {
                     let activeClass = '';
                     if (activeSection === section) {
@@ -32,7 +33,7 @@ const ShowcaseNav: React.FC<Props> = ({
                         <button
                             key={section}
                             onClick={() => setActiveSection(section)}
-                            className={`flex-center gap-2 px-4 py-[0.35rem] text-lg rounded hover:text-main-500 hover:bg-gray-100/80 ${activeClass}`}
+                            className={`self-stretch flex-1 flex-center gap-1 sm:gap-2 px-2 sm:px-4 py-[0.35rem] text-base sm:text-lg rounded whitespace-nowrap hover:text-main-500 hover:bg-gray-100/80 ${activeClass}`}
                         >
                             {getSectionIcon(section)}
                             {section}
@@ -42,15 +43,13 @@ const ShowcaseNav: React.FC<Props> = ({
             </div>
 
             {/* Posting showcase action trigger */}
-            <div>
-                <RoundButton
-                    onClick={() => setShowPostModal(true)}
-                    className="flex-center gap-2 text-base"
-                >
-                    <BiCodeAlt className="text-xl" />
-                    Post Showcase
-                </RoundButton>
-            </div>
+            <RoundButton
+                onClick={() => setShowPostModal(true)}
+                className="self-stretch xs:self-end flex-center gap-2 text-base"
+            >
+                <BiCodeAlt className="text-xl" />
+                Post Showcase
+            </RoundButton>
         </nav>
     );
 };
