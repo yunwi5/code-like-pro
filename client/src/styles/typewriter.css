@@ -1,11 +1,12 @@
-.typewriter {
+.typewriter h1 {
   overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: 0.15em solid #3c38e0; /* The typwriter cursor */
+  border-right: 0.1em solid #3c38e0; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  margin: 0; /* Gives that scrolling effect as the typing happens */
   letter-spacing: 0.15em; /* Adjust as needed */
   animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
   font-family: "Red Hat Display", sans-serif;
+  padding: 0.1em;
 }
 
 /* The typing effect */
@@ -26,5 +27,11 @@
   }
   50% {
     border-color: #3c38e0;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .typewriter h1 {
+    white-space: inherit;
   }
 }

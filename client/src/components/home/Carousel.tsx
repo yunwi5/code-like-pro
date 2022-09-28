@@ -53,10 +53,10 @@ export const Carousel: React.FC = () => {
 
   return (
     <div className="flex-center overflow-hidden flex-col my-5">
-      <h1 className="text-text-main-500 text-4xl mb-5">
-        Create. Solve. Showcase
+      <h1 className="text-text-main-500 text-3xl mb-5">
+        Create. Solve. Showcase.
       </h1>
-      <div className="flex-center h-[70vh]">
+      <div className="flex-center lg:h-[70vh]">
         <div
           className="text-3xl z-2 cursor-pointer"
           onClick={() => paginate(-1)}
@@ -69,7 +69,7 @@ export const Carousel: React.FC = () => {
             src={images[imageIndex]}
             custom={direction}
             variants={variants}
-            className="h-full w-full object-cover"
+            className="lg:h-full lg:w-full object-cover md:h-3/4 md:w-3/4"
             initial="enter"
             animate="center"
             exit="exit"

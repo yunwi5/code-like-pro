@@ -5,6 +5,8 @@ import { Helmet } from "react-helmet";
 import { AppProperty } from "../constants/app";
 import HeroLanding from "../components/home/HeroLanding";
 import Carousel from "../components/home/Carousel";
+import TopExercises from "../components/home/TopExercises";
+import TopUsers from "../components/home/TopUsers";
 
 const Home: React.FC = () => {
   return (
@@ -18,6 +20,8 @@ const Home: React.FC = () => {
       </Helmet>
       <HeroLanding />
       <Carousel />
+      <TopExercises />
+      <TopUsers />
     </>
   );
 };
