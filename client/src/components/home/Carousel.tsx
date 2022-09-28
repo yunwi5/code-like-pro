@@ -52,13 +52,13 @@ export const Carousel: React.FC = () => {
   };
 
   return (
-    <div className="flex-center overflow-hidden flex-col my-5">
+    <div className="flex-center overflow-hidden flex-col my-5 h-[90vh]">
       <h1 className="text-text-main-500 text-3xl mb-5">
         Create. Solve. Showcase.
       </h1>
       <div className="flex-center lg:h-[70vh]">
         <div
-          className="text-3xl z-2 cursor-pointer"
+          className="text-3xl z-2 cursor-pointer hover:text-main-500"
           onClick={() => paginate(-1)}
         >
           <BsChevronLeft />
@@ -95,7 +95,7 @@ export const Carousel: React.FC = () => {
         </AnimatePresence>
 
         <div
-          className="text-3xl z-2 cursor-pointer"
+          className="text-3xl z-2 cursor-pointer hover:text-main-500"
           onClick={() => paginate(1)}
         >
           <BsChevronRight />

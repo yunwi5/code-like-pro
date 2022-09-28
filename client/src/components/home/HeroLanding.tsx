@@ -5,7 +5,7 @@ import "../../styles/typewriter.css";
 
 const HeroLanding: React.FC = () => {
   return (
-    <div className="h-[80vh] w-full flex-center flex-col text-center overflow-hidden">
+    <div className="h-[95vh] w-full flex-center flex-col text-center overflow-hidden">
       <div className="typewriter">
         <h1 className="text-text-main-500 text-4xl p-12">
           Programming exercises created for students by students
