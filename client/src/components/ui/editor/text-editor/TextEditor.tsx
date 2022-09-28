@@ -19,7 +19,11 @@ export const TextEditor: React.FC<Props> = (props) => {
     const { onChange, value, placeholder, className = '', readOnly = false } = props;
 
     return (
-        <div className={`shadow-sm ${readOnly ? 'read-only-editor' : ''} ${className}`}>
+        <div
+            className={`shadow-sm ${
+                readOnly ? 'read-only-editor' : ''
+            } ${className} overflow-visible`}
+        >
             <EditorToolbar />
             <ReactQuill
                 theme="snow"

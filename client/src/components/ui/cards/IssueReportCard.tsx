@@ -64,7 +64,7 @@ const IssueReportCard: React.FC<{ report: IIssueReport; className?: string }> = 
             </header>
             <p>{report.description}</p>
             <footer className="flex gap-3">
-                <VoteButtons votes={report.votes} onVote={handleUserVote} />
+                <VoteButtons votes={votes} onVote={handleUserVote} />
             </footer>
         </article>
     );

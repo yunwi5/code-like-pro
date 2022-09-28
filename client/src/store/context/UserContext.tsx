@@ -58,6 +58,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         return createSubmissionMap(userDetail.submissions);
     }, [userDetail?.submissions]);
 
+    // Login with existing session so that the user does not have to login again when refreshing the page
     const loginBySession = useCallback(async () => {
         setIsLoading(true);
         const { ok, data } = await getLoginSuccess();
