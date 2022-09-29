@@ -39,7 +39,7 @@ const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
 
     return (
         <div className="flex-1 flex flex-col px-8 py-3 border-t-2 border-gray-200">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-wrap flex-row justify-between items-center gap-x-3 mb-4">
                 {/* Component that handles the selection of sorting key and direction from the user. */}
                 <VotingItemSorter
                     sortingState={sortingState}
@@ -47,8 +47,8 @@ const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
                 />
 
                 {/* Displays number of comments available in the discussion forum. */}
-                <h5 className="text-gray-500 font-semibold text-lg">
-                    {post.comments.length} Comments
+                <h5 className="text-gray-500 font-semibold text-base sm:text-lg">
+                    {post.comments.length} Comment{post.comments.length > 1 && 's'}
                 </h5>
             </div>
 

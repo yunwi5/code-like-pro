@@ -22,7 +22,11 @@ const PostBody: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
                     className="mt-4"
                 />
             </header>
-            <TextEditor value={post.content || ''} readOnly={true} />
+            <TextEditor
+                className="text-gray-600"
+                value={post.content || ''}
+                readOnly={true}
+            />
             <footer className="flex flex-col">
                 {/* Post like icon & functionality */}
                 <div className="flex justify-center items-center">

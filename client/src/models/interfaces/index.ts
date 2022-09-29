@@ -18,6 +18,9 @@ export * from './showcase/IVote';
 export * from './showcase/IShowCase';
 export * from './showcase/IComment';
 
+// Ranking related interfaces
+export * from './ranking/IRanking';
+
 // Context types
 export * from './context/IExerciseCreationContext';
 export * from './context/IUserContext';

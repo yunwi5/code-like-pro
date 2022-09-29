@@ -11,7 +11,7 @@ const PostFormContent = () => {
             <TextEditor
                 onChange={(newContent: string) => setContent(newContent)}
                 value={content}
-                className="bg-white border-[1.5px] border-gray-200 rounded-sm overflow-hidden"
+                className="bg-white border-[1.5px] border-gray-200 rounded-sm"
                 placeholder="Write about your post..."
             />
         </section>

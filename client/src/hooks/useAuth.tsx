@@ -7,7 +7,7 @@ function useAuth() {
     const { user, isLoading } = useUserContext();
     const isLoggedIn = !!user;
 
-    // If the user is not logged in, redirect to the login page.
+    // // If the user is not logged in, redirect to the login page.
     useEffect(() => {
         if (!isLoading && !isLoggedIn) navigate('/login');
     }, [isLoggedIn, isLoading]);

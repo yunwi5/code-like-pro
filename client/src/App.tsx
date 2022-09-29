@@ -26,6 +26,7 @@ const ForumsPage = lazy(() => import('./pages/forum/ForumsPage'));
 const ForumCategoryPage = lazy(() => import('./pages/forum/ForumCategoryPage'));
 const PostCreatePage = lazy(() => import('./pages/forum/PostCreationPage'));
 const PostEditPage = lazy(() => import('./pages/forum/PostEditPage'));
+const RankingPage = lazy(() => import('./pages/RankingPage'));
 
 const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =
     ProfilePages;
@@ -60,6 +61,8 @@ function App() {
                         <Route path="my-creations" element={<MyCreations />} />
                         <Route path="my-submissions" element={<MySubmission />} />
                     </Route>
+
+                    <Route path="/ranking" element={<RankingPage />} />
 
                     {/* Exercise pages */}
                     <Route path="/browse" element={<BrowsingPage />} />
