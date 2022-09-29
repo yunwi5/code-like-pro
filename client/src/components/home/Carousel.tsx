@@ -69,7 +69,7 @@ export const Carousel: React.FC = () => {
             src={images[imageIndex]}
             custom={direction}
             variants={variants}
-            className="lg:h-full lg:w-full object-cover md:h-3/4 md:w-3/4"
+            className="lg:h-full lg:w-full object-cover md:w-3/4"
             initial="enter"
             animate="center"
             exit="exit"
