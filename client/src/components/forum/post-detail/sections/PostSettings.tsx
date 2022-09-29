@@ -24,6 +24,7 @@ const PostSettings: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     return (
         <>
             <SettingsButton
+                className="ml-auto"
                 onEdit={() => navigate(getForumPostEditLink(post?._id))}
                 onDelete={() => setShowDeleteModal(true)}
             />

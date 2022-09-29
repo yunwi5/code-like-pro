@@ -6,12 +6,20 @@ interface Props {
     className: string;
     activeClassName: string;
     children: React.ReactNode;
+    onClick?: () => void;
 }
 
-const ActiveNavLink: React.FC<Props> = ({ to, className, activeClassName, children }) => {
+const ActiveNavLink: React.FC<Props> = ({
+    to,
+    className,
+    activeClassName,
+    children,
+    onClick,
+}) => {
     return (
         <NavLink
             to={to}
+            onClick={onClick}
             className={(navData) =>
                 navData.isActive ? `${className} ${activeClassName}` : className
             }

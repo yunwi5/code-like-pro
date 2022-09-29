@@ -44,7 +44,7 @@ const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
                     <MdDateRange className="text-sky-500/80 text-[1.2em]" />
                     {getDateTimeFormat(post.createdAt)}
                 </li>
-                <li className="md:hidden xl:flex gap-1">
+                <li className="flex gap-1 ">
                     <BiCommentDots className="text-slate-600 text-[1.2em]" />
                     {post.comments.length}
                 </li>

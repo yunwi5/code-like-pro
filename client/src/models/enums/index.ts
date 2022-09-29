@@ -13,6 +13,7 @@ export * from './sorting/SortingDirection';
 export * from './page-sections/CreationSection';
 export * from './page-sections/ProfileSection';
 export * from './page-sections/ShowCaseSection';
+export * from './page-sections/ForumCategorySection';
 
 export * from './forum/ForumCategory';
 export * from './forum/ForumPostType';

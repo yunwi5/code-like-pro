@@ -10,10 +10,14 @@ import PostLike from './PostLike';
 const PostBody: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     return (
         <article className="flex flex-col gap-10 px-4 py-3">
+            {/* Post header for heading, navigation and post information. */}
             <header>
-                <div className="flex gap-2 items-center">
-                    <h2 className="text-gray-600 text-2xl">{post.name}</h2>
-                    <PostControl post={post} />
+                {/* Heading mobile breakpoint is md - 768px */}
+                <div className="flex flex-col md:flex-row gap-2 gap-y-4 md:items-center">
+                    <h2 className="order-2 md:order-none text-gray-600 text-xl lg:text-2xl">
+                        {post.name}
+                    </h2>
+                    <PostControl post={post} className="md:ml-auto" />
                 </div>
 
                 <ForumPostSpec
@@ -22,6 +26,7 @@ const PostBody: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
                     className="mt-4"
                 />
             </header>
+            {/* Post main body content */}
             <TextEditor
                 className="text-gray-600"
                 value={post.content || ''}

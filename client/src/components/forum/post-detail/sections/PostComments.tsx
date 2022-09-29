@@ -38,7 +38,7 @@ const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     }, [sortingState, post.comments]);
 
     return (
-        <div className="flex-1 flex flex-col px-8 py-3 border-t-2 border-gray-200">
+        <div className="flex-1 flex flex-col px-4 xl:px-8 py-3 border-t-2 border-gray-200">
             <div className="flex flex-wrap flex-row justify-between items-center gap-x-3 mb-4">
                 {/* Component that handles the selection of sorting key and direction from the user. */}
                 <VotingItemSorter
