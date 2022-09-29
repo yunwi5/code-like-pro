@@ -27,7 +27,8 @@ const CommentEditModal: React.FC<Props> = ({ onClose, comment }) => {
                 {/* Modal header */}
                 <header className="px-7 py-4 shadow-md border-b-2 border-gray-200">
                     <h2 className="text-2xl flex-start gap-2">
-                        <RiEditBoxLine className="text-main-400 text-3xl" /> Edit Your Comment!
+                        <RiEditBoxLine className="text-main-400 text-3xl" /> Edit Your
+                        Comment!
                     </h2>
                 </header>
 
@@ -36,6 +37,7 @@ const CommentEditModal: React.FC<Props> = ({ onClose, comment }) => {
                     <CommentForm
                         onSubmit={handleEdit}
                         onCancel={onClose}
+                        inputType="textarea"
                         defaultComment={comment}
                     />
                 </div>

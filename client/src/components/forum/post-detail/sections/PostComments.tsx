@@ -5,6 +5,7 @@ import { IComment, IForumPostPopulated } from '../../../../models/interfaces';
 import { toastNotify } from '../../../../utils/notification';
 import { sortVotingItems } from '../../../../utils/sorting-utils/voting-items-sorting';
 import CommentForm from '../../../ui/comments/CommentForm';
+import TextEditor from '../../../ui/editor/text-editor/TextEditor';
 import CommentList from '../../../ui/lists/CommentList';
 import VotingItemSorter from '../../../ui/sorting/VotingItemSorter';
 
@@ -53,7 +54,7 @@ const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
             </div>
 
             {/* Form that lets user to add their comments to the discussion. */}
-            <CommentForm onSubmit={handleSubmitComment} />
+            <CommentForm inputType="textarea" onSubmit={handleSubmitComment} />
 
             {/* Render the list of comments with pagination. */}
             <CommentList comments={sortedComments} className="mt-8" />
