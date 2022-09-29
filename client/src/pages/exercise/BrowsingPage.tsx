@@ -4,11 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import { PacmanLoader } from 'react-spinners';
 import { Helmet } from 'react-helmet';
 
-import { getExercises } from '../../apis/exercise';
 import BrowsingMain from '../../components/browsing/BrowsingMain';
 import { AppProperty } from '../../constants/app';
 import { IExerciseCard } from '../../models/interfaces';
-import { createRandomExercises } from '../../utils/random/random-exercise';
 import { toastNotify } from '../../utils/notification';
 import { mapExercisesToExerciseCards } from '../../utils/exercise-utils/exercise';
 import useExerciseListQuery from '../../hooks/exercise-queries/useExerciseListQuery';
@@ -22,13 +20,6 @@ const BrowsingPage: React.FC = () => {
         () => mapExercisesToExerciseCards(exercises),
         [exercises],
     );
-
-    // Combine the exercises from the server and the random exercises generated on the client.
-    // For development and testing purposes, append random exercises for a large size dataset.
-    const randomExercises = useMemo(() => {
-        const randomExercises = createRandomExercises(1000);
-        return exerciseCards.concat(randomExercises);
-    }, [exerciseCards]);
 
     // If there is an error from the fetching, redirect to the home page.
     useEffect(() => {
@@ -54,7 +45,7 @@ const BrowsingPage: React.FC = () => {
                     <PacmanLoader size={100} color="#3c38e0dd" />
                 </div>
             )}
-            {!isLoading && <BrowsingMain exercises={randomExercises || []} />}
+            {!isLoading && <BrowsingMain exercises={exerciseCards || []} />}
         </>
     );
 };

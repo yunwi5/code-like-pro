@@ -44,7 +44,9 @@ const postExercise = async (req, res) => {
 
 const getExercises = async (req, res) => {
     // populate author field with author name
-    const exercises = await Exercise.find({}).populate('author', 'name').populate('comments');
+    const exercises = await Exercise.find({})
+        .populate('author', 'name')
+        .populate('comments');
     res.status(200).json(exercises);
 };
 
@@ -122,6 +124,27 @@ const deleteExercise = async (req, res) => {
         // If there is an error, or the exercise was not found.
         res.status(404).send(`Exercise ${req.params.id} not found`);
     }
+};
+
+/* GET top rankged exercises based on the  */
+const getTopExercises = async (req, res) => {
+    let amount = parseInt(req.query.amount);
+    console.log({ amount });
+    if (isNaN(amount) || !amount)
+        // Give defautl amount if the amount query string is invalid.
+        amount = 5;
+
+    const topRanked = await Exercise.aggregate()
+        .addFields({ length: { $size: '$liked' } })
+        .sort({ length: -1 })
+        .limit(amount);
+
+    const topRankedPopulated = await Exercise.populate(topRanked, {
+        path: 'author',
+        select: 'name',
+    });
+
+    res.status(200).json(topRankedPopulated);
 };
 
 /* GET: all submissions from the exercise of the param id */
@@ -316,6 +339,7 @@ const controller = {
     getExerciseByID,
     updateExercise,
     deleteExercise,
+    getTopExercises,
     getExerciseSubmissions,
     getExerciseReports,
     postExerciseReport,
