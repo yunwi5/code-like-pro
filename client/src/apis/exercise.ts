@@ -134,3 +134,11 @@ export async function postShowcaseComment(
     body: comment,
   });
 }
+
+//Get top 3 exercises
+
+export async function getTop3Exercises(){
+  return await getRequest<IExerciseWithId[]>({
+    url: `${API_DOMAIN}/top?amount=3`
+  })
+}
