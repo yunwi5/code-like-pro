@@ -126,7 +126,8 @@ const deleteExercise = async (req, res) => {
     }
 };
 
-/* GET top rankged exercises based on the  */
+/* GET top rankged exercises based on the 'liked' array length.
+Query string: amount, indicating the number of top exercises the frontend wants.  */
 const getTopExercises = async (req, res) => {
     let amount = parseInt(req.query.amount);
     console.log({ amount });
