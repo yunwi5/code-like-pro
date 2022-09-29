@@ -12,8 +12,13 @@ const navButtonClass =
 const navButtonDisabledClass =
     'opacity-50 cursor-not-allowed hover:!text-gray-600 hover:!bg-gray-200';
 
+interface Props {
+    post: IForumPostPopulated;
+    className?: string;
+}
+
 // Post naigation (previous, next) and settings.
-const PostControl: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
+const PostControl: React.FC<Props> = ({ post, className = '' }) => {
     const navigate = useNavigate();
     const { posts } = useForumBrowsing();
 
@@ -22,7 +27,9 @@ const PostControl: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     const nextPost: IForumPost | undefined = posts[postIndex + 1];
 
     return (
-        <div className="flex justify-between items-center gap-3 ml-auto text-[0.9rem]">
+        <div
+            className={`flex justify-between items-center gap-3 text-[0.9rem] ${className}`}
+        >
             <button
                 onClick={() => prevPost && navigate(getForumPostLink(prevPost))}
                 disabled={!prevPost}
