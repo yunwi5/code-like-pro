@@ -77,7 +77,7 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
                     </time>
                 </header>
                 {/* Comment body text */}
-                <p className="text-gray-600 mt-1">{comment.text}</p>
+                <p className="text-gray-600 mt-1 whitespace-pre">{comment.text}</p>
 
                 {/* Comment votes & replies */}
                 <footer className="w-full flex gap-1 lg:gap-3 mt-2">
