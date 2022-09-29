@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 
 import useAuth from '../../hooks/useAuth';
-import useExerciseQuery from '../../hooks/queries/useExerciseQuery';
+import useExerciseQuery from '../../hooks/exercise-queries/useExerciseQuery';
 import ShowcaseMain from '../../components/showcase/ShowcaseMain';
 import { AppProperty } from '../../constants/app';
 import { IUserSubmissionPopulated } from '../../models/interfaces';
@@ -42,7 +42,7 @@ const ShowcasePage = () => {
                 />
             </Helmet>
 
-            <div className="flex-center min-h-[83vh] my-10">
+            <div className="flex-center min-h-[83vh] my-5 sm:my-10">
                 {/* If there is no exercise yet, show the loading spinner. */}
                 {!exercise && <ClipLoader size={200} color="#3c38e0" />}
 

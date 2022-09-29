@@ -31,7 +31,10 @@ const ShowcasePostModal: React.FC<Props> = ({ onClose }) => {
 
         setIsLoading(true);
         // Send Http POST request to add user showcase.
-        const { ok, data, message } = await postExerciseShowCase(exercise._id, showCaseProps);
+        const { ok, data, message } = await postExerciseShowCase(
+            exercise._id,
+            showCaseProps,
+        );
         if (ok) {
             toastNotify('Your showcase was posted!', 'success');
             console.log('new showcase:', data);
@@ -76,7 +79,6 @@ const ShowcasePostModal: React.FC<Props> = ({ onClose }) => {
                 <h2 className="mb-2">Your Solution</h2>
                 <CodeEditor
                     className="flex-1"
-                    onChange={() => {}}
                     showHeader={false}
                     language={exercise.language}
                     value={userSubmission?.code || ''}

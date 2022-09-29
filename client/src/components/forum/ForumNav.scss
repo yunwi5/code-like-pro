@@ -1,0 +1,10 @@
+.forum-nav {
+    .nav-item-icon {
+        color: rgb(85, 82, 228);
+    }
+
+    .nav-item:hover .nav-item-icon,
+    .nav-item-active .nav-item-icon {
+        color: rgb(190 189 245);
+    }
+}

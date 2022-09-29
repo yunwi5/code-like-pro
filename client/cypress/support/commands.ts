@@ -14,6 +14,15 @@ import '@testing-library/cypress/add-commands';
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add(
+    'login' as any,
+    (email: any = 'johndoe@gmail.com', password: any = 'johndoe789') => {
+        cy.visit('/login');
+        cy.get('input[name=email]').type(email);
+        cy.get('input[name=password]').type(password);
+        cy.get('button[type=submit]').click();
+    },
+);
 //
 //
 // -- This is a child command --

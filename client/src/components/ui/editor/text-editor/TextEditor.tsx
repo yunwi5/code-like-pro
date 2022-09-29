@@ -7,8 +7,8 @@ import 'react-quill/dist/quill.snow.css';
 import 'highlight.js/styles/atom-one-light.css';
 
 interface Props {
-    onChange(value: string): void;
     value: string;
+    onChange?: (value: string) => void;
     readOnly?: boolean;
     placeholder?: string;
     className?: string;
@@ -19,7 +19,11 @@ export const TextEditor: React.FC<Props> = (props) => {
     const { onChange, value, placeholder, className = '', readOnly = false } = props;
 
     return (
-        <div className={`shadow-sm ${className}`}>
+        <div
+            className={`shadow-sm ${
+                readOnly ? 'read-only-editor' : ''
+            } ${className} overflow-visible`}
+        >
             <EditorToolbar />
             <ReactQuill
                 theme="snow"

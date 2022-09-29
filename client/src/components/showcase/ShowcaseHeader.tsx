@@ -5,9 +5,10 @@ import { useShowcase } from '../../store/context/ShowcaseContext';
 import { getDifficultyColorClass } from '../../utils/difficulty';
 import { getBrowsingPageLink, getExerciseAttemptPageLink } from '../../utils/links';
 import Button from '../ui/buttons/Button';
-import ExerciseSpec from '../ui/ExerciseSpec';
+import ExerciseSpec from '../ui/spec/ExerciseSpec';
 import LanguageLabel from '../ui/labels/LanguageLabel';
 
+/* Header layout breakpoint is lg - 1024px  */
 const ShowcaseHeader = () => {
     const navigate = useNavigate();
     const { exercise } = useShowcase();
@@ -33,12 +34,12 @@ const ShowcaseHeader = () => {
                 <ExerciseSpec exercise={exercise} />
             </div>
 
-            {/* Header action buttons. Try again & Back to list */}
-            <div className="flex flex-col sm:flex-row gap-2">
+            {/* Header action buttons. Try again & Back to list. Layout breakpoint is xs - 400px */}
+            <div className="self-stretch lg:self-center flex-col xs:flex-row gap-2 hidden xs:flex">
                 <Button
                     onClick={() => navigate(getExerciseAttemptPageLink(exercise._id))}
                     mode="empty"
-                    className="!text-base lg:text-lg"
+                    className="grow md:grow-0 !text-base lg:text-lg"
                 >
                     <span className="flex-center gap-2">
                         <GrRotateLeft className="text-xl lg:text-2xl" />
@@ -48,7 +49,7 @@ const ShowcaseHeader = () => {
                 <Button
                     onClick={() => navigate(getBrowsingPageLink())}
                     mode="fill"
-                    className="lg:min-w-[10rem] !text-base lg:text-lg"
+                    className="grow md:grow-0 !text-base lg:text-lg min-w-[10rem]"
                 >
                     <span className="flex-center gap-2">
                         <FaListUl className="text-xl" />

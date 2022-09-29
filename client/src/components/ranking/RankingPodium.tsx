@@ -44,7 +44,7 @@ const RankingPodium: React.FC<Props> = (props) => {
                                         >
                                             <img
                                                 src={
-                                                    rankingArray[index].pictureUrl &&
+                                                    rankingArray[index].pictureUrl ||
                                                     default_profile
                                                 }
                                                 className="rounded-full h-20 w-20 inline-block"

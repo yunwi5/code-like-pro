@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppProperty } from '../../constants/app';
 import useAuth from '../../hooks/useAuth';
-import useExerciseListQuery from '../../hooks/queries/useExerciseListQuery';
+import useExerciseListQuery from '../../hooks/exercise-queries/useExerciseListQuery';
 import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification';
 import ShowCaseInvites from '../../components/showcase-invites/ShowCaseInvites';
@@ -23,7 +23,10 @@ const ShowcaseInvitesPage: React.FC = () => {
     useEffect(() => {
         if (!isLoading && !!error) {
             navigate('/');
-            toastNotify('Sorry, something went wrong in fetching exercise data...', 'error');
+            toastNotify(
+                'Sorry, something went wrong in fetching exercise data...',
+                'error',
+            );
         }
     }, [error]);
 

@@ -1,45 +1,50 @@
-import React from "react";
-import usePagination from "../../../hooks/usePagination";
-import { IComment } from "../../../models/interfaces";
-import MainComment from "../comments/MainComment";
-import PageNavigation from "../PageNavigation";
+import React, { FC } from 'react';
+import usePagination from '../../../hooks/usePagination';
+import { IComment } from '../../../models/interfaces';
+import MainComment from '../comments/MainComment';
+import PageNavigation from '../PageNavigation';
 
 interface Props {
-  comments: IComment[];
-  commentPerPage?: number;
+    comments: IComment[];
+    commentPerPage?: number;
+    className?: string;
 }
 
 // Default value of exercisePerPage which is applied when the prop was not given.
 const DEFAULT_PER_PAGE = 7;
 
-const CommentList: React.FC<Props> = ({ comments, commentPerPage }) => {
-  const {
-    array: currentPageComments,
-    page,
-    setPage,
-    maxPage,
-  } = usePagination<IComment>({
-    array: comments,
-    itemPerPage: commentPerPage ?? DEFAULT_PER_PAGE,
-  });
+const CommentList: FC<Props> = ({
+    comments,
+    commentPerPage = DEFAULT_PER_PAGE,
+    className = '',
+}) => {
+    const {
+        array: currentPageComments,
+        page,
+        setPage,
+        maxPage,
+    } = usePagination<IComment>({
+        array: comments,
+        itemPerPage: commentPerPage,
+    });
 
-  const handlePage = (newPage: number) => setPage(newPage);
+    const handlePage = (newPage: number) => setPage(newPage);
 
-  return (
-    <section className="flex-1 flex flex-col">
-      <div className="flex flex-col gap-8 mb-8">
-        {currentPageComments.map((comment) => (
-          <MainComment key={comment._id} comment={comment} />
-        ))}
-      </div>
-      <PageNavigation
-        className="mt-auto"
-        currentPage={page}
-        totalPages={maxPage}
-        onChangePage={handlePage}
-      />
-    </section>
-  );
+    return (
+        <section className={`flex-1 flex flex-col ${className}`}>
+            <div className="flex flex-col gap-8 mb-8">
+                {currentPageComments.map((comment) => (
+                    <MainComment key={comment._id} comment={comment} />
+                ))}
+            </div>
+            <PageNavigation
+                className={`mt-auto`}
+                currentPage={page}
+                totalPages={maxPage}
+                onChangePage={handlePage}
+            />
+        </section>
+    );
 };
 
 export default CommentList;

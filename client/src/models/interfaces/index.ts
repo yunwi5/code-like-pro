@@ -1,29 +1,29 @@
-export type { ITestCase as ITestCase, ITestCaseProps } from './exercise/ITestCase';
+export * from './exercise/ITestCase';
 // Exercise related interfaces
-export type { IExercise, IExerciseWithId } from './exercise/IExercise';
-export type { IExerciseCard } from './exercise/IExerciseCard';
-export type { ITestOutput } from './exercise/ITestOutput';
-export type { IIssueReport } from './exercise/IIssueReport';
+export * from './exercise/IExercise';
+export * from './exercise/IExerciseCard';
+export * from './exercise/ITestOutput';
+export * from './exercise/IIssueReport';
+
+// Forum related interfaces
+export * from './forum/IForumPost';
 
 // User related interfaces
-export type { IUser } from './user/IUser';
-export type { IUserDetail } from './user/IUserDetail';
-export type { IUserSubmission, IUserSubmissionPopulated } from './user/IUserSubmission';
+export * from './user/IUser';
+export * from './user/IUserDetail';
+export * from './user/IUserSubmission';
 
 // Showcae related interfaces
-export type { IVote } from './showcase/IVote';
-export type { IShowCase } from './showcase/IShowCase';
-export type { IComment } from './showcase/IComment';
+export * from './showcase/IVote';
+export * from './showcase/IShowCase';
+export * from './showcase/IComment';
 
 // Ranking related interfaces
 export * from './ranking/IRanking';
 
 // Context types
-export type {
-    IExerciseCreationContext,
-    IReadyStatus,
-} from './context/IExerciseCreationContext';
-export type { IUserContext } from './context/IUserContext';
+export * from './context/IExerciseCreationContext';
+export * from './context/IUserContext';
 
 // Data Analysis interfaces
-export type { IChartData } from './analysis/IChartData';
+export * from './analysis/IChartData';

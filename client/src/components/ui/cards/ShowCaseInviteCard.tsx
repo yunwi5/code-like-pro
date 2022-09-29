@@ -24,7 +24,9 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
     // If the user has created the exercise, show the solution code written by this user.
     // If the user has solved the exercise, show the correct submission code written by this user.
     const userCode =
-        inviteMode === 'created' ? exercise.solutionCode : submissionMap[exercise._id].code;
+        inviteMode === 'created'
+            ? exercise.solutionCode
+            : submissionMap[exercise._id].code;
 
     // Author of th exercise.
     const author = inviteMode === 'created' ? userDetail?.name : exercise.author?.name;
@@ -39,7 +41,10 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
                 <span className="text-sm cursor-pointer">
                     <LanguageLabel language={exercise.language} />
                 </span>
-                <HoveringLabel label="Creator" className="flex-start gap-1 xs:ml-auto text-sm">
+                <HoveringLabel
+                    label="Creator"
+                    className="flex-start gap-1 xs:ml-auto text-sm"
+                >
                     <FaUserEdit className="text-gray-600 text-lg" /> {author}
                 </HoveringLabel>
             </header>
@@ -73,7 +78,7 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
                     className="flex-start gap-2 px-3 py-1 transition-all hover:bg-purple-600 hover:text-white hover:shadow rounded-full"
                 >
                     <FaLaptopCode className="text-lg" />
-                    User Solutions
+                    {exercise.showCases.length} User Solutions
                 </Link>
                 <Link
                     to={getShowcasePageLink(exercise._id, ShowCaseSection.DISCUSSIONS)}

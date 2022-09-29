@@ -12,7 +12,9 @@ const AuthInput = (props: {
     icon?: JSX.Element;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
-    const errorClass = props.error ? '!border-rose-400 !bg-rose-50 focus:outline-none' : '';
+    const errorClass = props.error
+        ? '!border-rose-400 !bg-rose-50 focus:outline-none'
+        : '';
 
     return (
         <div className="relative flex flex-col gap-1 my-3">
@@ -37,7 +39,9 @@ const AuthInput = (props: {
             )}
 
             {/* Show form error if exists */}
-            {props.error && <p className="text-left text-rose-500 text-sm">{props.error}</p>}
+            {props.error && (
+                <p className="text-left text-rose-500 text-sm">{props.error}</p>
+            )}
         </div>
     );
 };

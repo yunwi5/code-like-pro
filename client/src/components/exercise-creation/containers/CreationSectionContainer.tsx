@@ -6,12 +6,19 @@ import { useExerciseCreationContext } from '../../../store/context/ExerciseCreat
 interface Props {
     title: string | JSX.Element;
     children: React.ReactNode;
+    testId?: string;
     id: CreationSection;
     className?: string;
 }
 
 // Wrapper component for each section of exercise creation.
-const CreationSectionContainer: React.FC<Props> = ({ id, title, className, children }) => {
+const CreationSectionContainer: React.FC<Props> = ({
+    id,
+    testId,
+    title,
+    className,
+    children,
+}) => {
     const { setActiveSection, activeSection } = useExerciseCreationContext();
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -24,7 +31,12 @@ const CreationSectionContainer: React.FC<Props> = ({ id, title, className, child
     });
 
     return (
-        <section className={`flex flex-col gap-3 ${className ?? ''}`} id={id} ref={sectionRef}>
+        <section
+            className={`flex flex-col gap-3 ${className ?? ''}`}
+            data-testId={testId}
+            id={id}
+            ref={sectionRef}
+        >
             <h2 className="font-semibold text-xl">{title}</h2>
             {children}
         </section>

@@ -58,11 +58,15 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         return createSubmissionMap(userDetail.submissions);
     }, [userDetail?.submissions]);
 
+    // Login with existing session so that the user does not have to login again when refreshing the page
     const loginBySession = useCallback(async () => {
         setIsLoading(true);
         const { ok, data } = await getLoginSuccess();
-        setIsLoading(false);
-        if (ok && data) setUser(data);
+        setUser(() => {
+            setIsLoading(false);
+            if (ok && data) return data;
+            return null;
+        });
     }, []);
 
     const login = useCallback(
@@ -70,9 +74,11 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
             // Use returned data as a global user data
             setIsLoading(true);
             const { ok, data, message } = await loginRequest(loginState);
-            setIsLoading(false);
-
-            if (ok && data) setUser(data);
+            setUser(() => {
+                setIsLoading(false);
+                if (ok && data) return data;
+                return null;
+            });
             return { ok, data, message };
         },
         [navigate],

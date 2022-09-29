@@ -12,7 +12,11 @@ const CreationSolution: React.FC = () => {
     const handleChange = (value: string | undefined) => setSolutionCode(value ?? '');
 
     return (
-        <CreationSectionContainer title="Solution Code" id={CreationSection.SOLUTION_CODE}>
+        <CreationSectionContainer
+            title="Solution Code"
+            testId="solution-code"
+            id={CreationSection.SOLUTION_CODE}
+        >
             <CodeEditor
                 language={language}
                 onChange={handleChange}

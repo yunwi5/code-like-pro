@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Difficulty, DifficultyList } from '../../../../models/enums';
-import { browsingActions } from '../../../../store/redux/browsing-slice';
+import { exerciseBrowsingActions } from '../../../../store/redux/browsing-slice';
 import { useAppSelector } from '../../../../store/redux/store';
 import { getDifficultyColorClass } from '../../../../utils/difficulty';
 
@@ -10,7 +10,7 @@ const DifficultyFilter: React.FC = () => {
     const dispatch = useDispatch();
 
     const handleDifficultyToggle = (dif: Difficulty) => {
-        dispatch(browsingActions.toggleDifficulties(dif));
+        dispatch(exerciseBrowsingActions.toggleDifficulties(dif));
     };
 
     return (

@@ -5,9 +5,11 @@ const catchAsync = require('../middleware/catchAsync');
 
 const router = express.Router();
 
+router.get('/', catchAsync(exerciseController.getExercises));
+
 router.post('/', ensureAuthenticated, catchAsync(exerciseController.postExercise));
 
-router.get('/', catchAsync(exerciseController.getExercises));
+router.get('/top', catchAsync(exerciseController.getTopExercises));
 
 router.get('/:id', catchAsync(exerciseController.getExerciseByID));
 

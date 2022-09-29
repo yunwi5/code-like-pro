@@ -40,14 +40,18 @@ const ShowcaseMain: React.FC = () => {
             />
 
             {/* Showcase page main content */}
-            <main className="min-h-[max(60vh,35rem)] flex flex-col px-3 lg:px-6 xl:px-8 py-5 bg-slate-100 shadow-md rounded">
+            <main className="min-h-[max(60vh,35rem)] flex flex-col px-1 sm:px-3 lg:px-6 xl:px-8 py-5 bg-slate-100 shadow-md rounded">
                 {/* Render three different sections based on selected section by the user (on the navbar). */}
-                {activeSection === ShowCaseSection.MODEL_ANSWER && <ShowcaseModelAnswer />}
+                {activeSection === ShowCaseSection.MODEL_ANSWER && (
+                    <ShowcaseModelAnswer />
+                )}
                 {activeSection === ShowCaseSection.DISCUSSIONS && <ShowcaseDiscussions />}
                 {activeSection === ShowCaseSection.SHOWCASES && <ShowcaseShowcases />}
             </main>
 
-            {showPostModal && <ShowcasePostModal onClose={() => setShowPostModal(false)} />}
+            {showPostModal && (
+                <ShowcasePostModal onClose={() => setShowPostModal(false)} />
+            )}
         </div>
     );
 };

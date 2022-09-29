@@ -2,7 +2,7 @@ import React from 'react';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 import { getDifficultyColorClass } from '../../../../../utils/difficulty';
 import StatusLabel from '../../../../ui/labels/StatusLabel';
-import ExerciseSpec from '../../../../ui/ExerciseSpec';
+import ExerciseSpec from '../../../../ui/spec/ExerciseSpec';
 
 const ExercisePromptHeader: React.FC = () => {
     const { exercise, userSubmission } = useExerciseAttemptCtx();

@@ -8,6 +8,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 // Profile nested pages
 import ProfilePages from './components/profile';
+import ForumPages from './components/forum';
 import { useUserContext } from './store/context/UserContext';
 
 // Lazy loading imports. Higher performance for initial page loading.
@@ -15,16 +16,21 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/auth/RegisterPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
-const ExerciseCreationPage = lazy(() => import('./pages/exercise-pages/ExerciseCreationPage'));
-const ExerciseEditPage = lazy(() => import('./pages/exercise-pages/ExerciseEditPage'));
-const ExerciseAttemptPage = lazy(() => import('./pages/exercise-pages/ExerciseAttemptPage'));
-const BrowsingPage = lazy(() => import('./pages/exercise-pages/BrowsingPage'));
-const ShowcasePage = lazy(() => import('./pages/exercise-pages/ShowcasePage'));
-const ShowcaseInvitesPage = lazy(() => import('./pages/exercise-pages/ShowcaseInvitesPage'));
+const ExerciseCreationPage = lazy(() => import('./pages/exercise/ExerciseCreationPage'));
+const ExerciseEditPage = lazy(() => import('./pages/exercise/ExerciseEditPage'));
+const ExerciseAttemptPage = lazy(() => import('./pages/exercise/ExerciseAttemptPage'));
+const BrowsingPage = lazy(() => import('./pages/exercise/BrowsingPage'));
+const ShowcasePage = lazy(() => import('./pages/exercise/ShowcasePage'));
+const ShowcaseInvitesPage = lazy(() => import('./pages/exercise/ShowcaseInvitesPage'));
+const ForumsPage = lazy(() => import('./pages/forum/ForumsPage'));
+const ForumCategoryPage = lazy(() => import('./pages/forum/ForumCategoryPage'));
+const PostCreatePage = lazy(() => import('./pages/forum/PostCreationPage'));
+const PostEditPage = lazy(() => import('./pages/forum/PostEditPage'));
 const RankingPage = lazy(() => import('./pages/RankingPage'));
 
 const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =
     ProfilePages;
+const { PostDetail } = ForumPages;
 
 function App() {
     const { user, loginBySession } = useUserContext();
@@ -67,6 +73,14 @@ function App() {
 
                     {/* Showcase invites page listing showcase options available for the user. */}
                     <Route path="/showcase-invites" element={<ShowcaseInvitesPage />} />
+
+                    {/* Global discussion forum pages */}
+                    <Route path="/forum" element={<ForumsPage />} />
+                    <Route path="/forum/:category" element={<ForumCategoryPage />}>
+                        <Route path=":id" element={<PostDetail />} />
+                    </Route>
+                    <Route path="/create-post" element={<PostCreatePage />} />
+                    <Route path="/edit-post/:id" element={<PostEditPage />} />
 
                     {/* Undefined routes redirect to the home page */}
                     <Route path="*" element={<Navigate to="/" replace />} />
