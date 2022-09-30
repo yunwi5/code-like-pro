@@ -26,7 +26,8 @@ const ForumsPage = lazy(() => import('./pages/forum/ForumsPage'));
 const ForumCategoryPage = lazy(() => import('./pages/forum/ForumCategoryPage'));
 const PostCreatePage = lazy(() => import('./pages/forum/PostCreationPage'));
 const PostEditPage = lazy(() => import('./pages/forum/PostEditPage'));
-const RankingPage = lazy(() => import('./pages/RankingPage'));
+const RankingPage = lazy(() => import('./pages/ranking/RankingPage'));
+const TopicRankingPage = lazy(() => import('./pages/ranking/TopicRankingPage'));
 
 const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =
     ProfilePages;
@@ -62,8 +63,6 @@ function App() {
                         <Route path="my-submissions" element={<MySubmission />} />
                     </Route>
 
-                    <Route path="/ranking" element={<RankingPage />} />
-
                     {/* Exercise pages */}
                     <Route path="/browse" element={<BrowsingPage />} />
                     <Route path="/create-exercise" element={<ExerciseCreationPage />} />
@@ -73,6 +72,10 @@ function App() {
 
                     {/* Showcase invites page listing showcase options available for the user. */}
                     <Route path="/showcase-invites" element={<ShowcaseInvitesPage />} />
+
+                    {/* Ranking pages */}
+                    <Route path="/ranking" element={<RankingPage />} />
+                    <Route path="/ranking/topic/:topic" element={<TopicRankingPage />} />
 
                     {/* Global discussion forum pages */}
                     <Route path="/forum" element={<ForumsPage />} />

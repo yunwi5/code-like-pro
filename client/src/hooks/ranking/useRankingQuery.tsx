@@ -15,8 +15,7 @@ function fetchRankingData(topic: ProgrammingTopic | undefined) {
     return getTopicRanking(topic);
 }
 
-function useRankingQuery({ topic: defaultTopic, refetchInterval = 3000 }: Props) {
-    const [topic, setTopic] = useState<ProgrammingTopic | undefined>(defaultTopic);
+function useRankingQuery({ topic, refetchInterval = 3000 }: Props) {
     const { data: response, isLoading } = useQuery(
         ['ranking', topic],
         () => fetchRankingData(topic),
@@ -26,7 +25,7 @@ function useRankingQuery({ topic: defaultTopic, refetchInterval = 3000 }: Props)
     const { data, message: error } = response || {};
     if (error) console.log(error);
 
-    return { ranking: data || [], isLoading, topic, setTopic };
+    return { ranking: data || [], isLoading, topic };
 }
 
 export default useRankingQuery;

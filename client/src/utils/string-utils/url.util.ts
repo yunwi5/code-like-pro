@@ -1,8 +1,8 @@
-export function convertToQueryString(str: string) {
+export function convertToUrlString(str: string) {
     return str.split(' ').join('+');
 }
 
-export function parseQueryString<T>(queryString: string | null | undefined) {
+export function parseUrlString<T>(queryString: string | null | undefined) {
     if (!queryString) return null;
     return queryString.split('+').join(' ') as T;
 }

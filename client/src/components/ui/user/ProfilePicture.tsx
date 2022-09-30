@@ -16,10 +16,9 @@ const ProfilePicture: React.FC<Props> = ({ size = '2rem', picture, className = '
             className={`flex-center shrink-0 overflow-hidden rounded-full shadow bg-gray-700 ${className}`}
             style={{ width: size, height: size }}
         >
-            {picture ? (
+            <FaUser className="text-gray-200 scale-90 translate-y-1" size={size} />
+            {picture && (
                 <img src={picture} className="min-w-full min-h-full object-cover" />
-            ) : (
-                <FaUser className="text-gray-200 scale-90 translate-y-1" size={size} />
             )}
         </div>
     );

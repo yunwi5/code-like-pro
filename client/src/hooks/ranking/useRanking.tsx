@@ -7,10 +7,10 @@ interface Props {
     topic?: ProgrammingTopic;
     refetchInterval?: number;
 }
-function useRanking({ topic: defaultTopic, refetchInterval }: Props) {
+function useRanking({ topic, refetchInterval }: Props) {
     const [rankingCategory, setRankingCategory] = useState(RankingCategory.OVERALL);
-    const { ranking, topic, setTopic } = useRankingQuery({
-        topic: defaultTopic,
+    const { ranking, isLoading } = useRankingQuery({
+        topic,
         refetchInterval,
     });
 
@@ -18,7 +18,7 @@ function useRanking({ topic: defaultTopic, refetchInterval }: Props) {
         return sortRankingArray(ranking, rankingCategory).slice();
     }, [ranking, rankingCategory]);
 
-    return { rankingOrder, topic, setTopic, rankingCategory, setRankingCategory };
+    return { rankingOrder, rankingCategory, setRankingCategory, isLoading };
 }
 
 export default useRanking;

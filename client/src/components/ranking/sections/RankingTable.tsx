@@ -28,33 +28,46 @@ const RankingTable: React.FC<Props> = ({ rankingOrder, rankingCategory }) => {
     return (
         <div>
             <table className="w-full flex flex-col">
-                <tr className="flex border-b border-gray-300/90 text-gray-500">
-                    <th className={'basis-1/6 font-bold text-left p-2 pr-3'}>Rank</th>
-                    <th className={'basis-3/6 font-bold text-left p-2'}>User</th>
-                    <th className={'basis-2/6 font-bold text-right p-2'}>
-                        {rankingCategory} Acquired Points
-                    </th>
-                </tr>
-                {currentPageRanking.map((userRank, idx) => (
-                    <tr
-                        key={userRank._id}
-                        className="flex even:bg-gray-50/80 odd:bg-gray-100/80 text-gray-500 border-b-[1.5px] border-gray-200/90"
-                    >
-                        <td className="basis-1/6 flex-start px-3 py-3 font-bold">
-                            No. {currentPage * numOfUsersPerPage + idx + 1}
-                        </td>
-                        <td className="basis-3/6 flex-start gap-2 lg:gap-5 px-3 py-3 font-semibold">
-                            <ProfilePicture
-                                picture={userRank.pictureUrl}
-                                size={'2.5rem'}
-                            />{' '}
-                            <span>{userRank.name}</span>
-                        </td>
-                        <td className="basis-2/6 flex-center pl-8 py-3 font-semibold">
-                            {getDisplayRankingPoints(userRank, rankingCategory)}
-                        </td>
+                <thead>
+                    <tr className="flex border-b border-gray-300/90 text-gray-500">
+                        <th className={'basis-1/6 font-bold text-left px-3 py-2'}>
+                            Rank
+                        </th>
+                        <th className={'basis-3/6 font-bold text-left px-3 py-2'}>
+                            User
+                        </th>
+                        <th
+                            className={
+                                'basis-2/6 font-bold text-right p-2 whitespace-nowrap'
+                            }
+                        >
+                            {rankingCategory}{' '}
+                            <span className="hidden lg:inline">Acquired</span> Points
+                        </th>
                     </tr>
-                ))}
+                </thead>
+                <tbody>
+                    {currentPageRanking.map((userRank, idx) => (
+                        <tr
+                            key={userRank._id}
+                            className="flex even:bg-gray-50/80 odd:bg-gray-100/80 text-gray-500 transition-all hover:bg-slate-200/70 border-b-[1.5px] border-gray-200/90"
+                        >
+                            <td className="basis-1/6 flex-start px-3 py-3 font-bold whitespace-nowrap">
+                                No. {currentPage * numOfUsersPerPage + idx + 1}
+                            </td>
+                            <td className="basis-3/6 flex-start gap-2 lg:gap-5 px-3 py-3 font-semibold cursor-pointer">
+                                <ProfilePicture
+                                    picture={userRank.pictureUrl}
+                                    size={'2.5rem'}
+                                />{' '}
+                                <span>{userRank.name}</span>
+                            </td>
+                            <td className="basis-2/6 flex-center pl-8 py-3 font-semibold">
+                                {getDisplayRankingPoints(userRank, rankingCategory)}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
             </table>
 
             <PageNavigation
