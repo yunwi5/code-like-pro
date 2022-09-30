@@ -28,10 +28,10 @@ const RankingPodium: React.FC<Props> = (props) => {
                                         color = '#3c38e0';
                                     }
                                     if (index == 1) {
-                                        color = '#5552e4';
+                                        color = '#6a38e0';
                                     }
                                     if (index == 2) {
-                                        color = '#6765e7';
+                                        color = '#9238e0';
                                     }
                                     td.push(
                                         <td
@@ -40,11 +40,11 @@ const RankingPodium: React.FC<Props> = (props) => {
                                                 wordBreak: 'keep-all',
                                                 wordWrap: 'break-word',
                                             }}
-                                            className="text-center text-gray-800 font-bold px-8 inline-block align-bottom"
+                                            className="text-center text-gray-600 font-bold px-8 inline-block align-bottom"
                                         >
                                             <img
                                                 src={
-                                                    rankingArray[index].pictureUrl &&
+                                                    rankingArray[index].pictureUrl ||
                                                     default_profile
                                                 }
                                                 className="rounded-full h-20 w-20 inline-block"
@@ -58,7 +58,7 @@ const RankingPodium: React.FC<Props> = (props) => {
                                                     color: color,
                                                 }}
                                                 className={
-                                                    'w-48 text-4xl flex flex-row items-center rounded-lg justify-center text-gray-700 bg-gray-100 shadow-lg'
+                                                    'w-48 text-4xl flex flex-row items-center rounded-lg justify-center text-gray-600 bg-gray-100 shadow-lg'
                                                 }
                                             >
                                                 {index + 1}
