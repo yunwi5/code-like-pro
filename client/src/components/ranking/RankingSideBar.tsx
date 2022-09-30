@@ -1,43 +1,51 @@
+import { Link } from 'react-router-dom';
 import { ProgrammingTopicList } from '../../models/enums';
+import { useTopicParam } from '../../pages/ranking/TopicRankingPage';
+import { getGlobalRankigLink, getTopicRankingLink } from '../../utils/links';
+import ActiveNavLink from '../ui/links/ActiveNavLink';
+import RankingHeader from './sections/RankingHeader';
 
-const RankingSideBar: React.FC = () => {
-    // Fixed values for the time being.
-    const sideList = ['Global Rankings', 'Topic Rankings'];
-    const sideSublist = [[], ProgrammingTopicList];
+interface Props {
+    className?: string;
+    showHeader?: boolean;
+}
+
+const RankingSideBar: React.FC<Props> = ({ className = '', showHeader = true }) => {
+    const topic = useTopicParam();
 
     return (
-        <>
-            <div className="text-4xl pr-8 w-40 text-right text-gray-800 pt-16">
-                Global
-            </div>
-            <div className="text-blue-500 font-bold text-right pr-8 pb-10 w-40">
-                Rankings
-            </div>
-            <table className="w-40 bg-gray-100 rounded-2xl shadow-lg">
-                <tbody>
-                    {(() => {
-                        let tr = [];
-                        for (let i = 0; i < sideList.length; i++) {
-                            tr.push(
-                                <tr key={'SideBarTr' + i.toString()}>
-                                    <td className="px-3 pt-2 pb-1">{sideList[i]}</td>
-                                </tr>,
-                            );
-                            for (let j = 0; j < sideSublist[i].length; j++) {
-                                tr.push(
-                                    <tr key={'SideBarTr' + i.toString() + j.toString()}>
-                                        <td className="px-5 pb-2 text-xs">
-                                            {sideSublist[i][j]}
-                                        </td>
-                                    </tr>,
-                                );
-                            }
-                        }
-                        return tr;
-                    })()}
-                </tbody>
-            </table>
-        </>
+        <aside
+            className={`flex flex-col items-end gap-[4.35rem] pt-[6.5rem] ${className}`}
+        >
+            {showHeader && <RankingHeader />}
+            <section className="w-fit px-3 py-2 bg-gray-100 rounded transition-all shadow-md hover:shadow-lg text-gray-600">
+                <h3 className="mb-1 whitespace-nowrap">
+                    <Link
+                        to={getGlobalRankigLink()}
+                        className={`link-underline-effect w-fit text-lg ${
+                            !topic ? 'text-main-400 font-semibold' : ''
+                        }`}
+                    >
+                        Global Rankings
+                    </Link>
+                </h3>
+                <div>
+                    <h3 className="text-lg mb-1">Topic Rankings</h3>
+                    <div className="flex flex-col gap-2 pl-2">
+                        {ProgrammingTopicList.map((topic) => (
+                            <ActiveNavLink
+                                key={topic}
+                                to={getTopicRankingLink(topic)}
+                                activeClassName="!text-main-400 font-bold"
+                                className="link-underline-effect w-fit text-gray-600/90"
+                            >
+                                {topic}
+                            </ActiveNavLink>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        </aside>
     );
 };
 

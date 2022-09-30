@@ -53,7 +53,7 @@ const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
             </div>
 
             {/* Form that lets user to add their comments to the discussion. */}
-            <CommentForm onSubmit={handleSubmitComment} />
+            <CommentForm inputType="textarea" onSubmit={handleSubmitComment} />
 
             {/* Render the list of comments with pagination. */}
             <CommentList comments={sortedComments} className="mt-8" />
