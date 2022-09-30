@@ -4,7 +4,7 @@ import { IRanking } from '../../models/interfaces';
 import PageNavigation from '../ui/PageNavigation';
 import usePagination from '../../hooks/usePagination';
 import default_profile from './defaultImage/default.jpg';
-import RankingPodium from './RankingPodium';
+import RankingPodium from './sections/RankingPodium';
 
 function NumberHandling(number: any) {
     if (typeof number != 'number') {

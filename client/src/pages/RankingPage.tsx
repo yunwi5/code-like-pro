@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet';
 import { AppProperty } from '../constants/app';
 import RankingSideBar from '../components/ranking/RankingSideBar';
 import Rank from '../components/ranking/Rank';
+import RankingMain from '../components/ranking/RankingMain';
 
 const RankingPage: React.FC = () => {
     return (
@@ -14,13 +15,16 @@ const RankingPage: React.FC = () => {
                 />
             </Helmet>
 
-            <main className="grid grid-cols-3 gap-20 p-10 scale-100">
-                <div className="ml-auto">
+            <main className="flex justify-center gap-20 px-16 py-10 scale-100">
+                <div>
                     <RankingSideBar />
                 </div>
                 <div className="col-span-2 mb-auto">
-                    <Rank />
+                    <RankingMain />
                 </div>
+                {/* <div className="col-span-2 mb-auto">
+                    <Rank />
+                </div> */}
             </main>
         </>
     );
