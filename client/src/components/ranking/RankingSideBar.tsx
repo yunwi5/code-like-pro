@@ -7,10 +7,10 @@ const RankingSideBar: React.FC = () => {
 
     return (
         <>
-            <div className="text-4xl pr-8 w-40 text-right text-gray-800 pt-16">
+            <div className="text-4xl pr-8 w-40 text-right text-gray-600 pt-16">
                 Global
             </div>
-            <div className="text-blue-500 font-bold text-right pr-8 pb-10 w-40">
+            <div className="text-main-400 font-bold text-right pr-8 pb-10 w-40">
                 Rankings
             </div>
             <table className="w-40 bg-gray-100 rounded-2xl shadow-lg">
