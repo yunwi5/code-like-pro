@@ -1,7 +1,7 @@
 import React from 'react';
+import RankingMobileHeader from '../mobile/RankingMobileHeader';
 import RankingMain from '../RankingMain';
 import RankingSideBar from '../RankingSideBar';
-import RankingHeader from '../sections/RankingHeader';
 
 // Container that wraps the whole ranking section.
 // Mobile layout breakpoint is md - 768px
@@ -11,9 +11,7 @@ const RankingContainer: React.FC = () => {
     return (
         <div className="flex flex-col md:flex-row justify-center gap-x-10 xl:gap-x-20 gap-y-2 px-4 md:px-8 xl:px-16 py-10">
             {/* Ranking page mobile header */}
-            <div className="md:hidden flex justify-start px-3">
-                <RankingHeader />
-            </div>
+            <RankingMobileHeader />
             <RankingSideBar className="hidden md:flex" />
             <RankingMain />
         </div>

@@ -5,13 +5,20 @@ import { getGlobalRankigLink, getTopicRankingLink } from '../../utils/links';
 import ActiveNavLink from '../ui/links/ActiveNavLink';
 import RankingHeader from './sections/RankingHeader';
 
-const RankingSideBar: React.FC<{ className?: string }> = ({ className = '' }) => {
+interface Props {
+    className?: string;
+    showHeader?: boolean;
+}
+
+const RankingSideBar: React.FC<Props> = ({ className = '', showHeader = true }) => {
     const topic = useTopicParam();
 
     return (
-        <aside className={`flex flex-col items-end pt-[6.5rem] ${className}`}>
-            <RankingHeader className="mb-8" />
-            <section className="w-fit mt-10 px-3 py-2 bg-gray-100 rounded transition-all shadow-md hover:shadow-lg text-gray-600">
+        <aside
+            className={`flex flex-col items-end gap-[4.35rem] pt-[6.5rem] ${className}`}
+        >
+            {showHeader && <RankingHeader />}
+            <section className="w-fit px-3 py-2 bg-gray-100 rounded transition-all shadow-md hover:shadow-lg text-gray-600">
                 <h3 className="mb-1 whitespace-nowrap">
                     <Link
                         to={getGlobalRankigLink()}

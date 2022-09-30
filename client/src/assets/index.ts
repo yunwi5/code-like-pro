@@ -12,6 +12,9 @@ import Avatar9 from './avatars/avatar9.png';
 import Avatar10 from './avatars/avatar10.png';
 import Avatar11 from './avatars/avatar11.png';
 import Avatar12 from './avatars/avatar12.png';
+import Default from './avatars/default.jpg';
+
+export const DefaultProfile = Default;
 
 export const AvatarImages = {
     Avatar1,

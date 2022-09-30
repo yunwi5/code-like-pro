@@ -25,10 +25,7 @@ const Modal: React.FC<ModalProps> = (props) => {
 
     return (
         <>
-            {ReactDOM.createPortal(
-                <Backdrop className={''} onClose={props.onClose} />,
-                portalElement,
-            )}
+            <Backdrop onClose={props.onClose} />,
             {ReactDOM.createPortal(
                 <ModalOverlay className={props.className}>{props.children}</ModalOverlay>,
                 portalElement,
