@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { postForumPostComment } from '../../../../apis/forum';
+import { postForumPostComment } from '../../../../apis/forum.api';
 import { SortingDirection, VotingItemSortingKey } from '../../../../models/enums';
 import { IComment, IForumPostPopulated } from '../../../../models/interfaces';
 import { toastNotify } from '../../../../utils/notification';
-import { sortVotingItems } from '../../../../utils/sorting-utils/voting-items-sorting';
+import { sortVotingItems } from '../../../../utils/sorting-utils/voting-items.sorting';
 import CommentForm from '../../../ui/comments/CommentForm';
 import CommentList from '../../../ui/lists/CommentList';
 import VotingItemSorter from '../../../ui/sorting/VotingItemSorter';

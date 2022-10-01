@@ -3,6 +3,7 @@ import usePagination from '../../../hooks/usePagination';
 import { RankingCategory } from '../../../models/enums';
 import { IRanking } from '../../../models/interfaces';
 import PageNavigation from '../../ui/PageNavigation';
+import ProfileView from '../../ui/user/profile-view/ProfileView';
 import ProfilePicture from '../../ui/user/ProfilePicture';
 
 interface Props {
@@ -56,11 +57,7 @@ const RankingTable: React.FC<Props> = ({ rankingOrder, rankingCategory }) => {
                                 No. {currentPage * numOfUsersPerPage + idx + 1}
                             </td>
                             <td className="basis-3/6 flex-start gap-2 lg:gap-5 px-3 py-3 font-semibold cursor-pointer">
-                                <ProfilePicture
-                                    picture={userRank.pictureUrl}
-                                    size={'2.5rem'}
-                                />{' '}
-                                <span>{userRank.name}</span>
+                                <ProfileView user={userRank} />
                             </td>
                             <td className="basis-2/6 flex-center pl-8 py-3 font-semibold">
                                 {getDisplayRankingPoints(userRank, rankingCategory)}

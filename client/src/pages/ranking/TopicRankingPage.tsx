@@ -32,7 +32,6 @@ const RankingPage: React.FC = () => {
                     content={`Ranking page of ${AppProperty.APP_NAME} where users can browse their rankings in courses.`}
                 />
             </Helmet>
-
             <RankingContainer />
         </>
     );

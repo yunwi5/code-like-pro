@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import ProfileDropdownMenu from './ProfileDropdownMenu';
-import ProfilePicture from './ProfilePicture';
+import ProfilePicture from '../ProfilePicture';
 import ClickAwayListener from 'react-click-away-listener';
-import { useUserContext } from '../../../store/context/UserContext';
+import { useUserContext } from '../../../../store/context/UserContext';
 
 // Profile navigation on the header.
 const UserProfileNav: React.FC = () => {

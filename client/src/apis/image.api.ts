@@ -1,5 +1,5 @@
 import { AppProperty } from '../constants/app';
-import { postRequest } from './requests';
+import { postRequest } from './requests.api';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/image`;
 

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ClipLoader } from 'react-spinners';
+import useRanking from '../../../hooks/ranking/useRanking';
 
 import {
     ProfileEditContextProvider,
@@ -8,6 +9,7 @@ import {
 import { useUserContext } from '../../../store/context/UserContext';
 import { getDateFormat } from '../../../utils/datetime';
 import { getUsedLanguagesByUser } from '../../../utils/language';
+import { numberSuffix } from '../../../utils/number';
 import Button from '../../ui/buttons/Button';
 import ProfileLoader from '../ProfileLoader';
 import ProfileAvatar from './avatars/ProfileAvatar';
@@ -28,6 +30,8 @@ const ProfileMain = () => {
 
 const ProfileMainBody = () => {
     const { userDetail } = useUserContext();
+    const { getUserRank, rankingOrder } = useRanking();
+
     const {
         profileName,
         setProfileName,
@@ -43,7 +47,9 @@ const ProfileMainBody = () => {
     if (!userDetail) return <ProfileLoader />;
 
     // Calculate basic statistics for the profile page.
-    const solvedExercisesCount = userDetail.submissions.filter((sub) => sub.correct).length;
+    const solvedExercisesCount = userDetail.submissions.filter(
+        (sub) => sub.correct,
+    ).length;
     const createdExerciseCount = userDetail.exercises.length;
     const usedLanguages = getUsedLanguagesByUser(userDetail.submissions);
 
@@ -51,6 +57,12 @@ const ProfileMainBody = () => {
         if (!isEditing) return setIsEditing(true);
         onSubmitProfile();
     };
+
+    // Current user ranking data
+    const userRankData = useMemo(() => {
+        if (!userDetail) return null;
+        return getUserRank(userDetail._id);
+    }, [userDetail._id, rankingOrder]);
 
     return (
         <form className="relative flex-1" onSubmit={onSubmitProfile}>
@@ -95,12 +107,29 @@ const ProfileMainBody = () => {
                         label="Member Since"
                         value={getDateFormat(userDetail.createdAt)}
                     />
-                    {/* Ranking data needs to be updated. */}
-                    <ProfileInfoItem label="Languages" value={usedLanguages.join(', ')} />
-                    <ProfileInfoItem label="Ranking Points" value="11,938 (2nd)" />
 
-                    <ProfileInfoItem label="Exercises Created" value={createdExerciseCount} />
-                    <ProfileInfoItem label="Exercises Solved" value={solvedExercisesCount} />
+                    <ProfileInfoItem label="Languages" value={usedLanguages.join(', ')} />
+
+                    {/* User ranking data displayed only if the data exists. Otherwise, loading spinner */}
+                    {userRankData ? (
+                        <ProfileInfoItem
+                            label="Ranking Points"
+                            value={`${
+                                userRankData.creationPoints + userRankData.solvingPoints
+                            } (${numberSuffix(userRankData.order)})`}
+                        />
+                    ) : (
+                        <ClipLoader color="#5552e4" size={35} />
+                    )}
+
+                    <ProfileInfoItem
+                        label="Exercises Created"
+                        value={createdExerciseCount}
+                    />
+                    <ProfileInfoItem
+                        label="Exercises Solved"
+                        value={solvedExercisesCount}
+                    />
                 </div>
             </div>
 

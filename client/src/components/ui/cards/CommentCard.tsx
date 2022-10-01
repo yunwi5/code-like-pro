@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { BsFillReplyFill } from 'react-icons/bs';
 
-import { deleteComment, deleteCommentVote, postCommentVote } from '../../../apis/comment';
+import {
+    deleteComment,
+    deleteCommentVote,
+    postCommentVote,
+} from '../../../apis/comment.api';
 import { IComment, IVote } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getDateTimeFormat } from '../../../utils/datetime';

@@ -1,5 +1,5 @@
 import { AppProperty } from '../constants/app';
-import { postRequest } from './requests';
+import { postRequest } from './requests.api';
 import { ITestCase, ITestOutput, IUserSubmission } from '../models/interfaces';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/submission`;

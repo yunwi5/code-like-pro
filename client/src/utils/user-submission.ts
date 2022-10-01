@@ -1,6 +1,6 @@
 import { IUserSubmission, IUserSubmissionPopulated } from '../models/interfaces';
 import { DateTime } from 'luxon';
-import { round } from './calculation';
+import { round } from './number';
 
 // Create submission map for user exercise attempt.
 // Key should be ExerciseID and the value is the submission object.

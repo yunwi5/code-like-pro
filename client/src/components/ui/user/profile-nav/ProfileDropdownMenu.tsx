@@ -1,9 +1,9 @@
 import { FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-import { ProfileSectionList } from '../../../models/enums';
-import { useUserContext } from '../../../store/context/UserContext';
-import { getProfileSectionIcon, ProfileLinkMap } from '../../../utils/profile';
+import { ProfileSectionList } from '../../../../models/enums';
+import { useUserContext } from '../../../../store/context/UserContext';
+import { getProfileSectionIcon, ProfileLinkMap } from '../../../../utils/profile';
 import ProfileMenuHeader from './ProfileMenuHeader';
 
 // Profile dropdown menu that displays user profile info and profile links.

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { deleteExercise } from '../../../apis/exercise';
+import { deleteExercise } from '../../../apis/exercise.api';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { getExerciseEditLink } from '../../../utils/links';
 import { toastNotify } from '../../../utils/notification';

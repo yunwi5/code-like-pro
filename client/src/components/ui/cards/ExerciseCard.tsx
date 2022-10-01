@@ -8,7 +8,7 @@ import { IExerciseCard } from '../../../models/interfaces';
 import { getDifficultyColorClass } from '../../../utils/difficulty';
 import { useNavigate } from 'react-router-dom';
 import { getExerciseAttemptPageLink, getExerciseEditLink } from '../../../utils/links';
-import { deleteExercise } from '../../../apis/exercise';
+import { deleteExercise } from '../../../apis/exercise.api';
 import { useUserContext } from '../../../store/context/UserContext';
 import HoveringLabel from '../labels/HoveringLabel';
 import DeleteModal from '../modals/variations/DeleteModal';

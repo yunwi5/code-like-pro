@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useAppSelector } from '../store/redux/store';
 import { searchForumPosts } from '../utils/search';
-import { sortForumPosts } from '../utils/sorting-utils/forum-post-sorting';
+import { sortForumPosts } from '../utils/sorting-utils/forum-post.sorting';
 
 function useForumBrowsing() {
     const { sorting, searching, posts } = useAppSelector((state) => state.forum);

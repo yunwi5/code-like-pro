@@ -87,7 +87,9 @@ const PageNavigation: React.FC<Props> = ({
 
             {/* Navigate to next page */}
             <div
-                onClick={() => currentPage !== totalPages && onChangePage(currentPage + 1)}
+                onClick={() =>
+                    currentPage !== totalPages && onChangePage(currentPage + 1)
+                }
                 className={`${navBtnClass} ${
                     currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
                 }`}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaLaptopCode } from 'react-icons/fa';
-import { postExerciseShowCase } from '../../../apis/exercise';
+import { postExerciseShowCase } from '../../../apis/exercise.api';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { toastNotify } from '../../../utils/notification';
 import CodeEditor from '../../ui/editor/CodeEditor';
