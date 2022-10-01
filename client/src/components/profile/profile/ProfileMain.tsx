@@ -107,9 +107,10 @@ const ProfileMainBody = () => {
                         label="Member Since"
                         value={getDateFormat(userDetail.createdAt)}
                     />
-                    {/* Ranking data needs to be updated. */}
+
                     <ProfileInfoItem label="Languages" value={usedLanguages.join(', ')} />
 
+                    {/* User ranking data displayed only if the data exists. Otherwise, loading spinner */}
                     {userRankData ? (
                         <ProfileInfoItem
                             label="Ranking Points"
@@ -118,7 +119,7 @@ const ProfileMainBody = () => {
                             } (${numberSuffix(userRankData.order)})`}
                         />
                     ) : (
-                        <ClipLoader color="#5552e4" size={30} />
+                        <ClipLoader color="#5552e4" size={35} />
                     )}
 
                     <ProfileInfoItem

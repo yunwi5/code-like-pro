@@ -11,6 +11,8 @@ export * from './forum/IForumPost';
 // User related interfaces
 export * from './user/IUser';
 export * from './user/IUserDetail';
+export * from './user/IUserInfo';
+
 export * from './user/IUserSubmission';
 
 // Showcae related interfaces

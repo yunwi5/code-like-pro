@@ -1,6 +1,7 @@
 import React from 'react';
 import { DefaultProfile } from '../../../assets';
 import { IRanking } from '../../../models/interfaces';
+import ProfileView from '../../ui/user/profile-view/ProfileView';
 
 interface Props {
     rankingOrder: IRanking[];
@@ -19,13 +20,12 @@ const RankingPodium: React.FC<Props> = ({ rankingOrder, className = '' }) => {
                 return (
                     <div key={rankIndex} className="grow flex flex-col">
                         <div className="text-center text-gray-500 text-lg font-bold inline-block">
-                            <img
-                                src={rankingOrder[rankIndex].pictureUrl || DefaultProfile}
-                                className="rounded-full h-16 w-16 sm:h-20 sm:w-20 inline-block"
+                            <ProfileView
+                                user={rankingOrder[rankIndex]}
+                                className="flex flex-col gap-1 mb-2 !text-left text-base"
+                                size={'5rem'}
+                                hoverModalClassName={'!hidden'}
                             />
-                            <div className="mt-2 mb-4">
-                                {rankingOrder[rankIndex].name}
-                            </div>
                             <div
                                 style={{
                                     height: 100 - rankIndex * 25,

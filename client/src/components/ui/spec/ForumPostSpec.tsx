@@ -6,6 +6,7 @@ import { FaUserEdit } from 'react-icons/fa';
 import { IForumPost, IForumPostPopulated } from '../../../models/interfaces';
 import { getDateTimeFormat } from '../../../utils/datetime';
 import { ForumTypeIcons } from '../../../utils/forum';
+import ProfileView from '../user/profile-view/ProfileView';
 import ProfilePicture from '../user/ProfilePicture';
 
 interface Props {
@@ -23,11 +24,13 @@ const ForumPostSpec: React.FC<Props> = ({ post, pictureUrl, className }) => {
         >
             <li className={spectItemClass}>
                 {pictureUrl ? (
-                    <ProfilePicture picture={post.author.pictureUrl} size={'1.6rem'} />
+                    <ProfileView user={post.author} size={'1.8rem'} />
                 ) : (
-                    <FaUserEdit className="text-gray-600 text-[1.2em]" />
+                    <>
+                        <FaUserEdit className="text-gray-600 text-[1.2em]" />
+                        {post.author.name}
+                    </>
                 )}
-                {post.author.name}
             </li>
             <li className={spectItemClass}>
                 <BsClock className="text-sky-500/80 text-[1.3em]" />

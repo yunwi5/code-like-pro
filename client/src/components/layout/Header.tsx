@@ -8,8 +8,8 @@ import { getForumCategoryLink } from '../../utils/links';
 import { ProfileLinkMap } from '../../utils/profile';
 import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
 import ActiveNavLink from '../ui/links/ActiveNavLink';
-import ProfileMenuHeader from '../ui/user/ProfileMenuHeader';
-import UserProfileNav from '../ui/user/UserProfileNav';
+import ProfileMenuHeader from '../ui/user/profile-nav/ProfileMenuHeader';
+import UserProfileNav from '../ui/user/profile-nav/UserProfileNav';
 
 // Mobile header breakpoint is lg - 1024px.
 // Under 1024 px mobile header is displayed. Above 1024px desktop header is displayed.
