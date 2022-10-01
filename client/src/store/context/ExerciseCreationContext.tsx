@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { postExercise, putExercise } from '../../apis/exercise';
-import { runTestCases } from '../../apis/submission';
+import { runTestCases } from '../../apis/submission.api';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { CreationSection, Difficulty, Language } from '../../models/enums';
 import {

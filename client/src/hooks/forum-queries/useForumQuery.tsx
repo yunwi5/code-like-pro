@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getForumPosts } from '../../apis/forum';
+import { getForumPosts } from '../../apis/forum.api';
 
 // Get all posts across all forum categories
 function useForumQuery(refetchInterval?: number) {

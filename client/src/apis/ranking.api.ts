@@ -1,5 +1,5 @@
 import { AppProperty } from '../constants/app';
-import { getRequest } from './requests';
+import { getRequest } from './requests.api';
 import { IRanking } from '../models/interfaces';
 import { ProgrammingTopic } from '../models/enums';
 

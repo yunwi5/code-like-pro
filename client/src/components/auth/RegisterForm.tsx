@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerRequest } from '../../apis/auth';
+import { registerRequest } from '../../apis/auth.api';
 
 import { toastNotify } from '../../utils/notification';
 import {
@@ -13,7 +13,11 @@ import AuthCard from './AuthCard';
 type IRegisterState = { email: string; password: string; name: string };
 const RegisterForm = () => {
     const navigate = useNavigate();
-    const [registerState, setRegisterState] = useState({ email: '', password: '', name: '' });
+    const [registerState, setRegisterState] = useState({
+        email: '',
+        password: '',
+        name: '',
+    });
     const [errorState, setErrorState] = useState({
         email: '',
         password: '',
@@ -66,7 +70,10 @@ const RegisterForm = () => {
             navigate('/login');
             toastNotify('Register successful!', 'success');
         } else {
-            setErrorState({ ...errorState, overall: message || 'Something went wrong...' });
+            setErrorState({
+                ...errorState,
+                overall: message || 'Something went wrong...',
+            });
         }
     };
 

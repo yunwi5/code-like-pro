@@ -5,7 +5,7 @@ import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { useUserContext } from '../../../store/context/UserContext';
 import { toastNotify } from '../../../utils/notification';
-import { sortVotingItems } from '../../../utils/sorting-utils/voting-items-sorting';
+import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import CommentForm from '../../ui/comments/CommentForm';
 import CommentList from '../../ui/lists/CommentList';
 import CommentSelectOptions from './CommentSelectOptions';

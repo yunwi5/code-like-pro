@@ -7,7 +7,7 @@ import {
     filterExercisesBySubmissionStatus,
 } from '../utils/filter-utils/exercise-filter';
 import { searchExercises } from '../utils/search';
-import { sortExercises } from '../utils/sorting-utils/exercise-sorting';
+import { sortExercises } from '../utils/sorting-utils/exercise.sorting';
 
 // Get searching, filtering, and sorting information from redux.
 // Apply those settings to the exercises list

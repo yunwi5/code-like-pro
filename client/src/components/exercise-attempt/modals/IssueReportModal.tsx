@@ -66,7 +66,10 @@ const IssueReportModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             <>
                 <p className="-mt-2 -mb-2 flex-start flex-wrap gap-x-1 font-semibold text-slate-600">
                     Issue regarding the challenge{' '}
-                    <strong className="text-main-400">{exercise?.name || 'Unkown'}</strong>.
+                    <strong className="text-main-400">
+                        {exercise?.name || 'Unkown'}
+                    </strong>
+                    .
                 </p>
 
                 {/* Issue category select */}

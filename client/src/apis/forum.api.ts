@@ -6,7 +6,7 @@ import {
     IComment,
     IForumPostPopulated,
 } from '../models/interfaces';
-import { deleteRequest, getRequest, patchRequest, postRequest } from './requests';
+import { deleteRequest, getRequest, patchRequest, postRequest } from './requests.api';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/forumPost`;
 

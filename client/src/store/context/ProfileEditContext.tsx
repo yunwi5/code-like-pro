@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { deleteImageByUrl, postUserImage } from '../../apis/image';
-import { patchUserDetail } from '../../apis/user';
+import { deleteImageByUrl, postUserImage } from '../../apis/image.api';
+import { patchUserDetail } from '../../apis/user.api';
 import { isAvatarImage } from '../../utils/image';
 import { toastNotify } from '../../utils/notification';
 import { useUserContext } from './UserContext';
@@ -68,7 +68,10 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
             if (ok && data?.url) {
                 imageToUpload = data.url;
             } else {
-                toastNotify('Something went wrong while uploading your image...', 'error');
+                toastNotify(
+                    'Something went wrong while uploading your image...',
+                    'error',
+                );
             }
             setPicture(imageToUpload);
             setPreviewSource(null);
@@ -109,5 +112,9 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
         onSubmitProfile: handleProfileEdit,
     };
 
-    return <ProfileEditContext.Provider value={value}>{children}</ProfileEditContext.Provider>;
+    return (
+        <ProfileEditContext.Provider value={value}>
+            {children}
+        </ProfileEditContext.Provider>
+    );
 };

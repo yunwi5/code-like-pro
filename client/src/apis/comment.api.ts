@@ -1,5 +1,5 @@
 import { AppProperty } from '../constants/app';
-import { deleteRequest, getRequest, patchRequest, postRequest } from './requests';
+import { deleteRequest, getRequest, patchRequest, postRequest } from './requests.api';
 import { IComment } from '../models/interfaces';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/comment`;
@@ -32,7 +32,10 @@ export async function postReplyComment(commentId: string, comment: { text: strin
 }
 
 export async function postCommentVote(commentId: string, vote: { type: 'up' | 'down' }) {
-    return await postRequest<IComment>({ url: `${API_DOMAIN}/${commentId}/vote`, body: vote });
+    return await postRequest<IComment>({
+        url: `${API_DOMAIN}/${commentId}/vote`,
+        body: vote,
+    });
 }
 
 export function deleteCommentVote(commentId: string) {

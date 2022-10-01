@@ -1,6 +1,6 @@
 import React from 'react';
 import { RiEditBoxLine } from 'react-icons/ri';
-import { patchComment } from '../../../apis/comment';
+import { patchComment } from '../../../apis/comment.api';
 import { IComment } from '../../../models/interfaces';
 import { toastNotify } from '../../../utils/notification';
 import Modal from '../modals/Modal';

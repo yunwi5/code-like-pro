@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ForumCategory } from '../../models/enums';
-import { getForumPostsForCategory } from '../../apis/forum';
+import { getForumPostsForCategory } from '../../apis/forum.api';
 
 function useForumCategoryQuery(category: ForumCategory, refetchInterval: number = 1000) {
     const queryClient = useQueryClient();

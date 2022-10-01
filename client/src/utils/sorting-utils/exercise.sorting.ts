@@ -8,7 +8,9 @@ export function sortExercises(exercises: IExerciseCard[], sortingState: ISorting
 
     const isAsc = sortingState.direction === SortingDirection.ASCENDING;
     if (sortingState.key === ExerciseSortingKey.NAME) {
-        return exercises.sort((a, b) => (isAsc ? compareByName(a, b) : compareByName(b, a)));
+        return exercises.sort((a, b) =>
+            isAsc ? compareByName(a, b) : compareByName(b, a),
+        );
     }
 
     // Sort by favorite/like counts by users

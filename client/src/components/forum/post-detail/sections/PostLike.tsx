@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
-import { postForumPostLike } from '../../../../apis/forum';
+import { postForumPostLike } from '../../../../apis/forum.api';
 import { IForumPostPopulated } from '../../../../models/interfaces';
 import { useUserContext } from '../../../../store/context/UserContext';
 import HoveringLabel from '../../../ui/labels/HoveringLabel';

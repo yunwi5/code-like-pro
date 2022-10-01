@@ -1,6 +1,6 @@
 import { AppProperty } from '../constants/app';
 import { IUserDetail } from '../models/interfaces/user/IUserDetail';
-import { getRequest, patchRequest } from './requests';
+import { getRequest, patchRequest } from './requests.api';
 
 const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/user`;
 
