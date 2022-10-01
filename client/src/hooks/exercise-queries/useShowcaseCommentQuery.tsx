@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getShowcaseComments } from '../../apis/exercise';
+import { getShowcaseComments } from '../../apis/exercise.api';
 
 function useShowcaseCommentQuery(showcaseId: string, refetchInterval: number = 1000) {
     const queryClient = useQueryClient();

@@ -18,9 +18,9 @@ const RankingCategoryNavigation: React.FC<Props> = (props) => {
                 {RankingCategoryList.map((category) => (
                     <button
                         key={category}
-                        className={`flex-1 mr-3 px-3 py-2 min-w-[6.3rem] rounded-full shadow hover:bg-gray-200 ${
+                        className={`flex-1 mr-3 px-3 py-2 min-w-[6.3rem] rounded-full shadow hover:text-main-500 hover:bg-gray-200 ${
                             category === rankingCategory
-                                ? 'bg-gray-600 hover:bg-gray-700 text-gray-50'
+                                ? 'bg-gray-600 hover:bg-gray-700 !text-gray-50'
                                 : 'bg-gray-100'
                         }`}
                         onClick={() => setRankingCategory(category)}

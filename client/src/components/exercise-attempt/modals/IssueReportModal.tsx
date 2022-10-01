@@ -4,7 +4,7 @@ import { FaBug } from 'react-icons/fa';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CustomTextArea from '../../ui/inputs/CustomTextArea';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import { postExerciseReport } from '../../../apis/exercise';
+import { postExerciseReport } from '../../../apis/exercise.api';
 import { toastNotify } from '../../../utils/notification';
 import FormModal from '../../ui/modals/variations/FormModal';
 

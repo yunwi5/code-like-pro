@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 
-import { postExerciseComment } from '../../../apis/exercise';
+import { postExerciseComment } from '../../../apis/exercise.api';
 import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { useUserContext } from '../../../store/context/UserContext';

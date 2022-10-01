@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
-import { likeExerciseRequest } from '../../../apis/exercise';
+import { likeExerciseRequest } from '../../../apis/exercise.api';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../store/context/UserContext';
 import { prettierLanguageName } from '../../../utils/language';

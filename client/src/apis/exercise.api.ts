@@ -43,6 +43,13 @@ export async function deleteExercise(id: string) {
     });
 }
 
+//Get top 3 exercises
+export async function getTop3Exercises() {
+    return await getRequest<IExerciseWithId[]>({
+        url: `${API_DOMAIN}/top?amount=3`,
+    });
+}
+
 // GET: submission history of an exercise as a UserSubmission[]
 export async function getExerciseSubmissions(id: string) {
     return await getRequest<IUserSubmission[]>({
@@ -95,7 +102,6 @@ export async function postExerciseComment(id: string, comment: { text: string })
 }
 
 // POST vote for showcase
-
 export async function postVoteRequest(id: string, vote: { type: 'up' | 'down' }) {
     return await postRequest<IVote>({
         url: `${AppProperty.SERVER_DOMAIN}/api/showcase/${id}/vote`,
@@ -103,13 +109,14 @@ export async function postVoteRequest(id: string, vote: { type: 'up' | 'down' })
     });
 }
 
+// DELETE vote for showcase
 export function deleteShowcaseVote(showcaseId: string) {
     return deleteRequest<IVote>({
         url: `${AppProperty.SERVER_DOMAIN}/api/showcase/${showcaseId}/vote`,
     });
 }
 
-//Get showcase comments
+// GET showcase comments
 export async function getShowcaseComments(showcaseId: string) {
     return await getRequest<IComment[]>({
         url: `${AppProperty.SERVER_DOMAIN}/api/showcase/${showcaseId}/comment`,
@@ -121,12 +128,4 @@ export async function postShowcaseComment(id: string, comment: { text: string })
         url: `${AppProperty.SERVER_DOMAIN}/api/showcase/${id}/comment`,
         body: comment,
     });
-}
-
-//Get top 3 exercises
-
-export async function getTop3Exercises(){
-  return await getRequest<IExerciseWithId[]>({
-    url: `${API_DOMAIN}/top?amount=3`
-  })
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getExerciseById } from '../../apis/exercise';
+import { getExerciseById } from '../../apis/exercise.api';
 
 // Custom hook for fetching exercise data with React Query.
 function useExerciseQuery(exerciseId: string) {

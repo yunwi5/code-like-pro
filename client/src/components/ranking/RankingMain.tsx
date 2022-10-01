@@ -2,12 +2,13 @@ import React from 'react';
 import { ClockLoader } from 'react-spinners';
 
 import useRanking from '../../hooks/ranking/useRanking';
-import { ProgrammingTopic } from '../../models/enums';
+import { useTopicParam } from '../../pages/ranking/TopicRankingPage';
 import RankingCategoryNavigation from './sections/RankingCategoryNavigation';
 import RankingPodium from './sections/RankingPodium';
 import RankingTable from './sections/RankingTable';
 
-const RankingMain: React.FC<{ topic?: ProgrammingTopic }> = ({ topic }) => {
+const RankingMain: React.FC = () => {
+    const topic = useTopicParam();
     const { rankingOrder, rankingCategory, setRankingCategory, isLoading } = useRanking({
         topic,
     });
