@@ -10,6 +10,18 @@ import Strengths from '../components/home/strengths/Strengths';
 import Comparisons from '../components/home/comparisons/Comparisons';
 import ScrollProgress from '../components/home/ScrollProgress';
 
+const leftInVariants = {
+    initial: { opacity: 0, x: -300 },
+    animate: { opacity: 1, x: 0 },
+    viewport: { once: true },
+};
+
+const rightInVariants = {
+    initial: { opacity: 0, x: 300 },
+    animate: { opacity: 1, x: 0 },
+    viewport: { once: true },
+};
+
 const Home: React.FC = () => {
     return (
         <>
@@ -29,26 +41,38 @@ const Home: React.FC = () => {
             >
                 <Carousel />
             </motion.div>
-            <motion.div>
+            <motion.div
+                variants={leftInVariants as any}
+                initial="initial"
+                whileInView="animate"
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+            >
                 <Strengths />
             </motion.div>
             <motion.div
-                initial={{ opacity: 0, x: 300 }}
-                whileInView={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
+                variants={rightInVariants as any}
+                initial="initial"
+                whileInView="animate"
+                transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
             >
                 <Comparisons />
             </motion.div>
             <motion.div
-                initial={{ opacity: 0, x: -300 }}
-                whileInView={{ opacity: 1, x: 0, transition: { duration: 1 } }}
+                variants={leftInVariants as any}
+                initial="initial"
+                whileInView="animate"
+                transition={{ duration: 1 }}
                 viewport={{ once: true }}
             >
                 <TopExercises />
             </motion.div>
             <motion.div
-                initial={{ opacity: 0, x: 300 }}
-                whileInView={{ opacity: 1, x: 0, transition: { duration: 1 } }}
+                variants={rightInVariants as any}
+                initial="initial"
+                whileInView="animate"
+                transition={{ duration: 1 }}
                 viewport={{ once: true }}
             >
                 <TopUsers />

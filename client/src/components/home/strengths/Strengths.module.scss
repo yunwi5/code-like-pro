@@ -4,8 +4,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     justify-items: center;
-    row-gap: 4rem;
-    column-gap: 3.5rem;
     padding-bottom: 3rem;
     max-width: Min(95vw, 75rem);
 

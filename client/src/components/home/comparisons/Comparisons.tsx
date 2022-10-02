@@ -20,14 +20,18 @@ const Comparisons: React.FC = () => {
     const scrollRef = useRef<null | HTMLDivElement>(null);
 
     return (
-        <section className="flex flex-col gap-8 items-center py-8 px-10">
-            <h2 className={`text-3xl text-gray-500 font-semibold capitalize`}>
+        <section className="flex flex-col gap-8 items-center py-8 md:px-10">
+            <h2
+                className={`px-2 sm:px-10 text-center text-3xl text-gray-500 font-semibold capitalize`}
+            >
                 Nothing more than existing platform?&nbsp; No, better.
             </h2>
-            <div className="xl:w-[75rem]">
+
+            {/* Grid table of comparing platforms */}
+            <div className="w-[95vw] md:w-[90vw] xl:w-[75rem] overflow-x-scroll">
                 <div className="flex flex-col text-gray-600">
-                    <div className="grid grid-cols-9 border-b-2 border-gray-200 px-3 py-4">
-                        <div className="col-span-3"></div>
+                    <div className="w-[max(50rem,100%)] grid grid-cols-8 md:grid-cols-9 border-b-2 border-gray-200 px-3 py-4">
+                        <div className="col-span-2 md:col-span-3"></div>
                         {PlatformList.map((platform) => (
                             <div
                                 key={platform}
@@ -37,7 +41,7 @@ const Comparisons: React.FC = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="flex flex-col" ref={scrollRef}>
+                    <div className="min-w-[50rem] flex flex-col" ref={scrollRef}>
                         {features.map((feature, idx) => (
                             <motion.div
                                 key={idx}
@@ -52,9 +56,9 @@ const Comparisons: React.FC = () => {
                                     once: true,
                                     margin: `0px 0px ${200 + idx * 65.6}px 0px`,
                                 }}
-                                className="grid grid-cols-9 transition-all hover:bg-gray-50"
+                                className="grid grid-cols-8 md:grid-cols-9 transition-all hover:bg-gray-50"
                             >
-                                <div className="col-span-3 py-4 flex-start text-gray-500 font-semibold text-xl border-b-2 border-gray-100">
+                                <div className="col-span-2 md:col-span-3 py-4 flex-start text-gray-500 font-semibold text-xl border-b-2 border-gray-100">
                                     {feature.text}
                                 </div>
                                 {PlatformList.map((platform) => {
@@ -63,10 +67,10 @@ const Comparisons: React.FC = () => {
                                     return (
                                         <div
                                             key={platform}
-                                            className="col-span-2 px-6 py-4 border-b-2 border-gray-100"
+                                            className="col-span-2 flex-center px-6 py-4 border-b-2 border-gray-100"
                                         >
                                             <div
-                                                className={`rounded flex-center py-1 ${
+                                                className={`rounded w-full h-full flex-center py-1 ${
                                                     hasFeature
                                                         ? 'bg-emerald-50 hover:bg-emerald-100'
                                                         : 'bg-rose-50 hover:bg-rose-100'

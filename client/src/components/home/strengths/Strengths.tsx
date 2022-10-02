@@ -7,9 +7,9 @@ import { SiVisualstudiocode } from 'react-icons/si';
 import { AiOutlineClose } from 'react-icons/ai';
 
 import { AppProperty } from '../../../constants/app';
-import styles from './Strengths.module.scss';
 import StrengthCard from './StrengthCard';
 import Backdrop from '../../ui/modals/Backdrop';
+import styles from './Strengths.module.scss';
 
 const variants = {
     initial: {
@@ -34,13 +34,14 @@ const Strengths: React.FC = () => {
     const selectedItem = strengthsList.find((strength) => strength.id === selectedId);
 
     return (
-        <section className={styles.grid}>
+        <section className={`${styles.grid} gap-x-[3.5rem] gap-y-[2rem] lg:gap-y-[4rem]`}>
             <h2
                 className={`${styles.heading} text-3xl text-gray-500 font-semibold capitalize`}
             >
                 Why would you consider using {AppProperty.APP_NAME}
             </h2>
 
+            {/* For animating the sharing layout, use AnimateSharedLayout */}
             <AnimateSharedLayout>
                 {strengthsList.map((strength, idx) => (
                     <motion.div
@@ -51,11 +52,11 @@ const Strengths: React.FC = () => {
                         whileInView="animate"
                         transition={{
                             duration: 0.5,
-                            delay: idx * 0.1,
+                            delay: 0.5 + idx * 0.1,
                         }}
                         viewport={{
                             once: true,
-                            margin: idx > 2 ? `0px 0px 300px 0px` : undefined,
+                            margin: idx > 2 ? `0px 0px 650px 0px` : `0px 0px 350px 0px`,
                         }}
                         className={`px-2 py-3 flex flex-col items-center gap-3 hover:bg-gray-50 cursor-pointer ${styles.strength}`}
                     >
@@ -64,6 +65,8 @@ const Strengths: React.FC = () => {
                         </div>
                     </motion.div>
                 ))}
+
+                {/* Animated modal for a selected strength by the user */}
                 <AnimatePresence>
                     {selectedItem && (
                         <motion.div
@@ -99,7 +102,7 @@ const strengthsList = [
         id: '1',
         heading: 'Easy to create exercises',
         content:
-            'Any users can start creating their own exercises without any extra steps. Creating your own exercises will help you enhance your problem design aspect as well as testing aspects.',
+            'Any users can start creating their own exercises without any extra steps. Creating your own exercises will help you enhance your problem design aspects as well as testing aspects.',
         icon: <FaRegEdit />,
         link: '/create-exercise',
     },
