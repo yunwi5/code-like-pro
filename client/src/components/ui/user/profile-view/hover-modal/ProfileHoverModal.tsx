@@ -54,10 +54,11 @@ const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
                     </a>
                 </div>
                 <div className="flex flex-col">
-                    <strong className="flex-start gap-1 marker:text-gray-500/90">
+                    <strong className="flex-start gap-1 dark:text-gray-500/90">
                         <MdDateRange className="text-main-500 text-[1.2em]" />
                         Member Since
                     </strong>
+                    ''
                     <p>{getDateFormat(userInfo.createdAt)}</p>
                 </div>
                 {userRankData ? (
@@ -79,15 +80,16 @@ const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
                         <BsCodeSlash className="text-main-500 text-[1.2em]" />
                         Languages
                     </strong>
-                    <p className="flex items-center gap-2">
+                    <div className="flex items-center gap-2">
                         {userInfo.languages?.sort().map((lang) => (
                             <LanguageLabel
+                                key={lang}
                                 className="text-sm"
                                 language={lang}
                                 size={'25px'}
                             />
                         ))}
-                    </p>
+                    </div>
                 </div>
                 <div className="col-span-2 mt-1">
                     <Button size="small">View Detail</Button>
