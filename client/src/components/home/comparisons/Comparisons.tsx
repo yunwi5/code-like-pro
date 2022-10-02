@@ -28,7 +28,7 @@ const Comparisons: React.FC = () => {
             </h2>
 
             {/* Grid table of comparing platforms */}
-            <div className="w-[95vw] md:w-[90vw] xl:w-[75rem] overflow-x-scroll">
+            <div className="w-[95vw] md:w-[90vw] xl:w-[75rem] overflow-x-scroll md:overflow-x-visible overflow-y-visible">
                 <div className="flex flex-col text-gray-600">
                     <div className="w-[max(50rem,100%)] grid grid-cols-8 md:grid-cols-9 border-b-2 border-gray-200 px-3 py-4">
                         <div className="col-span-2 md:col-span-3"></div>
@@ -50,20 +50,20 @@ const Comparisons: React.FC = () => {
                                 whileInView="animate"
                                 transition={{
                                     duration: 0.5,
-                                    delay: 0.5 + idx * 0.1,
+                                    delay: idx * 0.1,
                                 }}
                                 viewport={{
                                     once: true,
-                                    margin: `0px 0px ${200 + idx * 65.6}px 0px`,
+                                    margin: `0px 0px ${100 + idx * 65.6}px 0px`,
                                 }}
                                 className="grid grid-cols-8 md:grid-cols-9 transition-all hover:bg-gray-50"
                             >
                                 <div className="col-span-2 md:col-span-3 py-4 flex-start text-gray-500 font-semibold text-xl border-b-2 border-gray-100">
                                     {feature.text}
                                 </div>
+
                                 {PlatformList.map((platform) => {
                                     const hasFeature = feature.platforms[platform];
-
                                     return (
                                         <div
                                             key={platform}

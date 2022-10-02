@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { AiOutlineUsergroupAdd } from 'react-icons/ai';
 import { FaLaptopCode, FaRegChartBar, FaRegEdit } from 'react-icons/fa';
@@ -28,13 +28,20 @@ const variants = {
     },
 };
 
+// List of strengths
 const Strengths: React.FC = () => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
+    // Modal drag constraint (only draggable within the current section)
+    const constraintRef = useRef<HTMLDivElement | null>(null);
 
+    // Selected strength to be displayed in the layout modal.
     const selectedItem = strengthsList.find((strength) => strength.id === selectedId);
 
     return (
-        <section className={`${styles.grid} gap-x-[3.5rem] gap-y-[2rem] lg:gap-y-[4rem]`}>
+        <section
+            ref={constraintRef}
+            className={`${styles.grid} gap-x-[3.5rem] gap-y-[2rem] lg:gap-y-[4rem]`}
+        >
             <h2
                 className={`${styles.heading} text-3xl text-gray-500 font-semibold capitalize`}
             >
@@ -52,7 +59,7 @@ const Strengths: React.FC = () => {
                         whileInView="animate"
                         transition={{
                             duration: 0.5,
-                            delay: 0.5 + idx * 0.1,
+                            delay: idx * 0.1,
                         }}
                         viewport={{
                             once: true,
@@ -71,10 +78,12 @@ const Strengths: React.FC = () => {
                     {selectedItem && (
                         <motion.div
                             layoutId={selectedItem.id}
+                            drag
+                            dragConstraints={constraintRef}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed w-[30rem] h-[20rem] top-[calc(50%-10rem)] left-[calc(50%-15rem)] bg-gray-50 rounded-md z-[200]"
+                            className="fixed w-[min(30rem,95vw)] h-[20rem] top-[calc(50%-10rem)] left-[calc(50%-min(15rem,47.5vw))] bg-gray-50 rounded-md z-[200]"
                         >
                             <div
                                 key={selectedId}
@@ -90,7 +99,7 @@ const Strengths: React.FC = () => {
                             </div>
                         </motion.div>
                     )}
-                    {selectedId && <Backdrop onClose={() => {}} />}
+                    {selectedId && <Backdrop onClose={() => setSelectedId(null)} />}
                 </AnimatePresence>
             </AnimateSharedLayout>
         </section>

@@ -33,50 +33,52 @@ const Home: React.FC = () => {
                 />
             </Helmet>
             <ScrollProgress />
-            <HeroLanding />
-            <motion.div
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0, transition: { duration: 0.8 } }}
-                viewport={{ once: true }}
-            >
-                <Carousel />
-            </motion.div>
-            <motion.div
-                variants={leftInVariants as any}
-                initial="initial"
-                whileInView="animate"
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-            >
-                <Strengths />
-            </motion.div>
-            <motion.div
-                variants={rightInVariants as any}
-                initial="initial"
-                whileInView="animate"
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-            >
-                <Comparisons />
-            </motion.div>
-            <motion.div
-                variants={leftInVariants as any}
-                initial="initial"
-                whileInView="animate"
-                transition={{ duration: 1 }}
-                viewport={{ once: true }}
-            >
-                <TopExercises />
-            </motion.div>
-            <motion.div
-                variants={rightInVariants as any}
-                initial="initial"
-                whileInView="animate"
-                transition={{ duration: 1 }}
-                viewport={{ once: true }}
-            >
-                <TopUsers />
-            </motion.div>
+            <div className="max-w-[100vw] overflow-hidden">
+                <HeroLanding />
+                <motion.div
+                    initial={{ opacity: 0, y: 100 }}
+                    whileInView={{ opacity: 1, y: 0, transition: { duration: 0.8 } }}
+                    viewport={{ once: true }}
+                >
+                    <Carousel />
+                </motion.div>
+                <motion.div
+                    variants={leftInVariants as any}
+                    initial="initial"
+                    whileInView="animate"
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                >
+                    <Strengths />
+                </motion.div>
+                <motion.div
+                    variants={rightInVariants as any}
+                    initial="initial"
+                    whileInView="animate"
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                >
+                    <Comparisons />
+                </motion.div>
+                <motion.div
+                    variants={leftInVariants as any}
+                    initial="initial"
+                    whileInView="animate"
+                    transition={{ duration: 1 }}
+                    viewport={{ once: true }}
+                >
+                    <TopExercises />
+                </motion.div>
+                <motion.div
+                    variants={rightInVariants as any}
+                    initial="initial"
+                    whileInView="animate"
+                    transition={{ duration: 1 }}
+                    viewport={{ once: true }}
+                >
+                    <TopUsers />
+                </motion.div>
+            </div>
         </>
     );
 };
