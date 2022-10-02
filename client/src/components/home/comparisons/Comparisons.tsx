@@ -40,6 +40,7 @@ const Comparisons: React.FC = () => {
                     <div className="flex flex-col" ref={scrollRef}>
                         {features.map((feature, idx) => (
                             <motion.div
+                                key={idx}
                                 variants={variants}
                                 initial="initial"
                                 whileInView="animate"

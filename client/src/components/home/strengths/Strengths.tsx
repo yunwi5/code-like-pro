@@ -13,15 +13,15 @@ import Backdrop from '../../ui/modals/Backdrop';
 
 const variants = {
     initial: {
-        opacity: 0.5,
-        // scale: 0.75,
+        opacity: 0.3,
+        scale: 0.75,
         translateX: 100,
         translateY: 300,
         boxShadow: '30px 30px 30px rgba(0, 0, 0, 0.3)',
     },
     animate: {
         opacity: 1,
-        // scale: 1,
+        scale: 1,
         translateX: 0,
         translateY: 0,
         transitionEnd: { boxShadow: 'none' },
@@ -71,11 +71,11 @@ const Strengths: React.FC = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed w-[30rem] h-[17rem] top-[calc(50%-8.5rem)] left-[calc(50%-15rem)] bg-gray-50 rounded-md z-[200]"
+                            className="fixed w-[30rem] h-[20rem] top-[calc(50%-10rem)] left-[calc(50%-15rem)] bg-gray-50 rounded-md z-[200]"
                         >
                             <div
                                 key={selectedId}
-                                className="z-[200] relative flex flex-col gap-3 items-center px-5 py-5"
+                                className="h-full z-[200] relative flex flex-col justify-center items-center gap-3 px-5 py-5"
                             >
                                 <motion.div
                                     onClick={() => setSelectedId(null)}
@@ -115,7 +115,7 @@ const strengthsList = [
         id: '3',
         heading: 'Detailed profile & statistics',
         content:
-            'We provide feature-rich code editor support for all our users. It has convenient view of test cases, syntax highlighting, and autocompletions like an IDE.',
+            'User profile pages support detailed statistics to let users able to track their progress of their work. They can also view their favorites, creations and submissions history.',
         icon: <FaRegChartBar />,
         link: '/profile',
     },
@@ -123,7 +123,7 @@ const strengthsList = [
         id: '4',
         heading: 'User showcasing',
         content:
-            'We provide feature-rich code editor support for all our users. It has convenient view of test cases, syntax highlighting, and autocompletions like an IDE.',
+            'For each exercise, users can showcase their solution in the user showcasing space. Users can get inspirations from clever solutions made by other users!',
         icon: <FaLaptopCode />,
         link: '/showcase-invites',
     },
@@ -131,7 +131,7 @@ const strengthsList = [
         id: '5',
         heading: 'Ranking competitions',
         content:
-            'We provide feature-rich code editor support for all our users. It has convenient view of test cases, syntax highlighting, and autocompletions like an IDE.',
+            'To increase the competitions among the users, we have a global ranking system. Users get more ranking points as they create and solve more exercises, giving them greater motivations.',
         icon: <IoPodiumOutline />,
         link: '/ranking',
     },
@@ -139,7 +139,7 @@ const strengthsList = [
         id: '6',
         heading: 'Enhanced social aspect',
         content:
-            'We provide feature-rich code editor support for all our users. It has convenient view of test cases, syntax highlighting, and autocompletions like an IDE.',
+            'We maximized the opportunity for users to interact each other. We have a discussion space for each exercise to discuss varioius problem solving aspects, as well as global discussion forum.',
         icon: <AiOutlineUsergroupAdd />,
         link: '/forum',
     },
