@@ -64,6 +64,9 @@ code {
     .flex-between {
         @apply flex justify-between items-center;
     }
+    .pos-center {
+        @apply top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%];
+    }
     .focus-main {
         @apply focus:outline focus:outline-2 focus:outline-main-300;
     }

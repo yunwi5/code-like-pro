@@ -12,6 +12,7 @@ import { numberSuffix } from '../../../../../utils/number';
 import LanguageLabel from '../../../labels/LanguageLabel';
 import ProfilePicture from '../../ProfilePicture';
 import Button from '../../../buttons/Button';
+import styles from './ProfileHoverModal.module.scss';
 
 interface Props {
     userInfo: IUserInfo;
@@ -28,8 +29,9 @@ const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
 
     return (
         <div
-            className={`absolute top-[calc(100%+0.75rem)] left-[50%] translate-x-[-10%] min-w-[25rem] bg-white rounded shadow hover:shadow-lg ${className}`}
+            className={`${styles.modal} absolute top-[calc(100%+0.75rem)] left-[50%] translate-x-[-10%] min-w-[25rem] bg-white border-2 border-gray-200/90 rounded shadow hover:shadow-lg ${className}`}
         >
+            <div className={styles.triangle}></div>
             <div className="flex items-center gap-5 px-3 pt-3 pb-2 border-b-2 border-b-gray-200">
                 <ProfilePicture picture={userInfo.pictureUrl} size={'3rem'} />
                 <div>
@@ -52,10 +54,11 @@ const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
                     </a>
                 </div>
                 <div className="flex flex-col">
-                    <strong className="flex-start gap-1 marker:text-gray-500/90">
+                    <strong className="flex-start gap-1 dark:text-gray-500/90">
                         <MdDateRange className="text-main-500 text-[1.2em]" />
                         Member Since
                     </strong>
+                    ''
                     <p>{getDateFormat(userInfo.createdAt)}</p>
                 </div>
                 {userRankData ? (
@@ -77,15 +80,16 @@ const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
                         <BsCodeSlash className="text-main-500 text-[1.2em]" />
                         Languages
                     </strong>
-                    <p className="flex items-center gap-2">
+                    <div className="flex items-center gap-2">
                         {userInfo.languages?.sort().map((lang) => (
                             <LanguageLabel
+                                key={lang}
                                 className="text-sm"
                                 language={lang}
                                 size={'25px'}
                             />
                         ))}
-                    </p>
+                    </div>
                 </div>
                 <div className="col-span-2 mt-1">
                     <Button size="small">View Detail</Button>
