@@ -47,14 +47,17 @@ const Strengths: React.FC = () => {
                         layoutId={strength.id}
                         onClick={() => !selectedId && setSelectedId(strength.id)}
                         variants={variants}
-                        initial={'initial'}
-                        whileInView={'animate'}
+                        initial="initial"
+                        whileInView="animate"
                         transition={{
                             duration: 0.5,
                             delay: idx * 0.1,
                         }}
-                        viewport={{ once: true }}
-                        className={`px-2 py-3 rounded-sm flex flex-col items-center gap-3 hover:bg-gray-50 cursor-pointer ${styles.strength}`}
+                        viewport={{
+                            once: true,
+                            margin: idx > 2 ? `0px 0px 300px 0px` : undefined,
+                        }}
+                        className={`px-2 py-3 flex flex-col items-center gap-3 hover:bg-gray-50 cursor-pointer ${styles.strength}`}
                     >
                         <div className="flex flex-col gap-3 items-center">
                             <StrengthCard key={idx} {...strength} />
@@ -68,11 +71,11 @@ const Strengths: React.FC = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed w-[30rem] h-[17rem] top-[calc(50%-8.5rem)] left-[calc(50%-15rem)] bg-gray-50 z-[200]"
+                            className="fixed w-[30rem] h-[17rem] top-[calc(50%-8.5rem)] left-[calc(50%-15rem)] bg-gray-50 rounded-md z-[200]"
                         >
                             <div
                                 key={selectedId}
-                                className="z-[200] relative flex flex-col gap-3 items-center rounded px-5 py-5"
+                                className="z-[200] relative flex flex-col gap-3 items-center px-5 py-5"
                             >
                                 <motion.div
                                     onClick={() => setSelectedId(null)}

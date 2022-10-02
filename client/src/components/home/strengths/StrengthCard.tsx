@@ -18,7 +18,10 @@ const StrengthCard: React.FC<Props> = ({ heading, icon, content, link }) => {
             <h3 className={`text-2xl text-gray-500 capitalize`}>{heading}</h3>
             <p className={'text-center'}>{content}</p>
             {link && (
-                <Link className="link-underline-effect w-fit text-blue-500" to={link}>
+                <Link
+                    className="px-2 py-[0.3rem] w-fit transition-all rounded-sm hover:bg-blue-100/90 text-blue-500 hover:text-blue-600 hover:shadow"
+                    to={link}
+                >
                     Learn More
                 </Link>
             )}
