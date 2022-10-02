@@ -42,7 +42,10 @@ interface AnalyticsProps {
     className?: string;
 }
 
-const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray, className = '' }) => {
+const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({
+    dataArray,
+    className = '',
+}) => {
     const { userDetail } = useUserContext();
     const mostRecentSubmission = getMostRecentSubmission(userDetail?.submissions || []);
 
@@ -51,6 +54,8 @@ const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray, classNa
             currData.value > (accMaxData?.value ?? 0) ? currData : accMaxData,
         dataArray.length > 0 ? dataArray[0] : null,
     );
+
+    const usedLanguages = dataArray.map((data) => data.label).sort();
 
     return (
         <div className={`flex flex-col gap-3 ${className}`}>
@@ -61,16 +66,16 @@ const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray, classNa
             {dataArray.length > 0 && (
                 <div className="flex-start flex-wrap gap-2 text-base">
                     <h5 className="font-semibold">Languages:</h5>
-                    {dataArray.map((data) => (
-                        <div key={data.label} className="flex flex-col items-center ml-2">
+                    {usedLanguages.map((lang) => (
+                        <div key={lang} className="flex flex-col items-center ml-2">
                             <span className="text-sm">
-                                {getLanguageIcon(data.label as any, {
+                                {getLanguageIcon(lang as any, {
                                     width: '33px',
                                     height: '33px',
                                 })}
                             </span>
                             <span className="text-sm">
-                                {prettierLanguageName(data.label as any)}
+                                {prettierLanguageName(lang as any)}
                             </span>
                         </div>
                     ))}
@@ -91,7 +96,9 @@ const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray, classNa
                 <div className="flex-start gap-2">
                     <h5 className="font-semibold">Most Recent:</h5>
                     <p>
-                        {prettierLanguageName(mostRecentSubmission.exercise.language as any)}
+                        {prettierLanguageName(
+                            mostRecentSubmission.exercise.language as any,
+                        )}
                         &ensp;
                         <span className="font-semibold text-gray-500 text-[0.95rem]">
                             ({getDateFormat(mostRecentSubmission.postedAt)})

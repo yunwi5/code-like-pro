@@ -1,11 +1,15 @@
-import { DifficultyList, ProgrammingTopicList, SubmissionStatus } from '../../models/enums';
+import {
+    DifficultyList,
+    ProgrammingTopicList,
+    SubmissionStatus,
+} from '../../models/enums';
 import { IChartData, IUserSubmissionPopulated } from '../../models/interfaces';
 import {
     DifficultyColorMap,
     getLightColorByIndex,
     LanguageColorMap,
     StatusColorMap,
-} from './analysis-color';
+} from '../colors';
 
 export function getLanguageChartDataArray(
     submissions: IUserSubmissionPopulated[],

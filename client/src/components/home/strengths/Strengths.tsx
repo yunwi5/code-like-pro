@@ -63,7 +63,7 @@ const Strengths: React.FC = () => {
                         }}
                         viewport={{
                             once: true,
-                            margin: idx > 2 ? `0px 0px 650px 0px` : `0px 0px 350px 0px`,
+                            margin: idx > 2 ? `0px 0px 450px 0px` : `0px 0px 150px 0px`,
                         }}
                         className={`px-2 py-3 flex flex-col items-center gap-3 hover:bg-gray-50 cursor-pointer ${styles.strength}`}
                     >

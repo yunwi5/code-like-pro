@@ -109,7 +109,7 @@ export const formats = [
 
 // Quill Toolbar component
 export const QuillToolbar = () => (
-    <div id="toolbar" className="sticky top-0 bg-gray-50 !z-[100]">
+    <div id="toolbar" className="sticky top-0 bg-gray-50 !z-[50]">
         <span className="ql-formats">
             <select className="ql-font" defaultValue="arial">
                 <option value="arial">Arial</option>

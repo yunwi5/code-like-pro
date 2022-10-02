@@ -3,9 +3,10 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
 import { likeExerciseRequest } from '../../../apis/exercise.api';
+import { Language } from '../../../models/enums';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../store/context/UserContext';
-import { prettierLanguageName } from '../../../utils/language';
+import { getLanguageIcon, prettierLanguageName } from '../../../utils/language';
 import HoveringLabel from '../../ui/labels/HoveringLabel';
 import IssueReportModal from '../modals/IssueReportModal';
 import ExerciseSettings from './ExerciseSettings';
@@ -35,23 +36,28 @@ const EditorControlBar: React.FC = () => {
     // Check if the user is an author of this exercise. If author, show the settings option.
     const isAuthor = !!userDetail?.exercises.find((ex) => ex._id === exercise?._id);
 
+    if (!exercise) return null;
+
     return (
         <>
             <div className="flex items-center px-3 lg:pl-1 lg:pr-4 py-[0.55rem] lg:py-[0.375rem] ">
                 {/* Language settings */}
-                <div>
-                    <label className="mr-2" htmlFor="language-select">
+                <div className="flex items-center">
+                    <label
+                        className="hidden md:inline-block mr-2"
+                        htmlFor="language-select"
+                    >
                         Language
                     </label>
-                    <select
-                        id="language-select"
-                        defaultValue={exercise?.language}
-                        className="text-gray-600 border-2 border-gray-500/90 bg-gray-50 focus:outline focus:outline-2 focus:outline-main-500 focus:text-main-500 focus:border-transparent shadow-md rounded-sm px-2 py-1"
+                    <div
+                        className={`px-3 py-[0.3rem] flex-center bg-slate-50 hover:bg-slate-100 text-gray-600 gap-2 rounded shadow transition-all`}
                     >
-                        <option value={exercise?.language}>
-                            {prettierLanguageName(exercise?.language || '')}
-                        </option>
-                    </select>
+                        {getLanguageIcon(exercise.language, {
+                            width: '25px',
+                            height: '25px',
+                        })}
+                        {prettierLanguageName(exercise.language || '')}
+                    </div>
                 </div>
 
                 {/* Favorite toggler */}

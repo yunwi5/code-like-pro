@@ -9,6 +9,7 @@ import TopUsers from '../components/home/TopUsers';
 import Strengths from '../components/home/strengths/Strengths';
 import Comparisons from '../components/home/comparisons/Comparisons';
 import ScrollProgress from '../components/home/ScrollProgress';
+import HomeFeatures from '../components/home/features/HomeFeatures';
 
 const leftInVariants = {
     initial: { opacity: 0, x: -300 },
@@ -41,6 +42,15 @@ const Home: React.FC = () => {
                     viewport={{ once: true }}
                 >
                     <Carousel />
+                </motion.div>
+                <motion.div
+                    variants={rightInVariants as any}
+                    initial="initial"
+                    whileInView="animate"
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                >
+                    <HomeFeatures />
                 </motion.div>
                 <motion.div
                     variants={leftInVariants as any}

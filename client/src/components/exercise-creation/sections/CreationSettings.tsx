@@ -15,7 +15,8 @@ import CreationCourses from './CreationCourses';
 import CreationTags from './CreationTags';
 
 const CreationSettings: React.FC = () => {
-    const { language, setLanguage, difficulty, setDifficulty } = useExerciseCreationContext();
+    const { language, setLanguage, difficulty, setDifficulty } =
+        useExerciseCreationContext();
 
     return (
         <CreationSectionContainer title="Settings" id={CreationSection.SETTINGS}>
@@ -37,7 +38,7 @@ const CreationSettings: React.FC = () => {
                 />
             </div>
             <CreationTags />
-            <CreationCourses />
+            {/* <CreationCourses /> */}
         </CreationSectionContainer>
     );
 };
