@@ -1,8 +1,7 @@
-import { compareByName } from '.';
+import { compareByDateTime, compareByName } from '.';
 import { ForumPostSortingKey, SortingDirection } from '../../models/enums';
 import { IForumPost } from '../../models/interfaces';
 import { IForumSortingState } from '../../store/redux/forum-slice';
-import { compareByDateTime } from '../datetime';
 
 // Sort forums based on forum post sorting key and sorting direction
 export function sortForumPosts(posts: IForumPost[], sortingState: IForumSortingState) {

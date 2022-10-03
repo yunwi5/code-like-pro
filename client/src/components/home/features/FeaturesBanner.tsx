@@ -13,7 +13,7 @@ const messages = [
     { text: 'Strong program tester', color: 'text-pink-500' },
 ];
 
-const MESSAGE_INTERVAL = 4500;
+const MESSAGE_INTERVAL = 5000;
 
 const FeaturesBanner: React.FC = () => {
     const [messageIndex, setMessageIndex] = useState(0);
@@ -32,7 +32,7 @@ const FeaturesBanner: React.FC = () => {
     return (
         <h1 className="flex flex-col md:flex-row items-start md:items-center gap-3 pl-4 text-4xl text-gray-500 font-semibold">
             <p>Become The</p>
-            <div className="px-3 py-2 max-h-[59px] transition-all border-2 border-slate-400 rounded-2xl text-main-400 font-bold shadow //overflow-hidden">
+            <div className="px-3 py-2 max-h-[59px] w-fit transition-all border-2 border-slate-400 rounded-2xl text-main-400 font-bold shadow">
                 <AnimatePresence>
                     {messages.map((message, idx) =>
                         messageIndex === idx ? (
@@ -59,7 +59,7 @@ const AnimatedLetters = ({
 }) => {
     return (
         <motion.div
-            className={`tracking-wide relative capitalize ${className}`}
+            className={`relative tracking-wide capitalize ${className}`}
             variants={banner}
             initial="initial"
             exit={{

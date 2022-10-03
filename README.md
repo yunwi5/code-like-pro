@@ -62,7 +62,7 @@ Server runs on [http://localhost:8080](http://localhost:8080) on your computer b
 
 <br />
 
-## Our Team Of Best Fit
+## Team Members
 
 | Member                                               | Roles                                            |
 | ---------------------------------------------------- | -------------------------------------------------|

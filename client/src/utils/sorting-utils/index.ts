@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { Difficulty } from '../../models/enums';
 import { IVote } from '../../models/interfaces';
 import { mapDifficultyToNumericValue } from '../difficulty';
@@ -30,4 +31,12 @@ export function compareByVotes(votesA: IVote[], votesB: IVote[]) {
     const voteMarginB = upvotesB - (votesB.length - upvotesB);
 
     return voteMarginA - voteMarginB;
+}
+
+// Used for sorting by datetime. Both params should be a valid ISO date format.
+export function compareByDateTime(isoDateA: string, isoDateB: string) {
+    const dateTimeA = DateTime.fromISO(isoDateA);
+    const dateTimeB = DateTime.fromISO(isoDateB);
+
+    return dateTimeA < dateTimeB ? -1 : 1;
 }

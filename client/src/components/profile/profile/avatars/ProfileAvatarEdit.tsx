@@ -28,7 +28,10 @@ const ProfileAvatarEdit: React.FC<{}> = ({}) => {
             setPreviewSource(pictureSource);
         } catch (err) {
             console.log(err);
-            return toastNotify('Something went wrong while uploading your image...', 'error');
+            return toastNotify(
+                'Something went wrong while uploading your image...',
+                'error',
+            );
         }
     };
 
@@ -40,7 +43,7 @@ const ProfileAvatarEdit: React.FC<{}> = ({}) => {
             />
             {showOptions && (
                 <ClickAwayListener onClickAway={() => setShowOptions(false)}>
-                    <div className="flex flex-col items-center pb-3 px-2 gap-3 absolute top-0 -left-[24rem] -translate-x-10 rounded-md bg-white shadow-lg cursor-pointer">
+                    <div className="flex flex-col items-center gap-3 w-max absolute top-0 left-0 md:-left-[24rem] md:-translate-x-10 pb-3 px-2 rounded-md bg-white shadow-lg cursor-pointer">
                         {!isLoading && (
                             <ProfileAvatarOptions onClose={() => setShowOptions(false)} />
                         )}

@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
             </h2>
             <div className="flex flex-col sm:flex-row items-center gap-x-5 lg:ml-5 lg:mr-auto">
                 <p className="whitespace-nowrap text-gray-500/90">
-                    Copyright &copy; 2022 JIADY CS 399
+                    Copyright &copy; 2022 CS 399 {AppProperty.APP_NAME}
                 </p>
                 <div className="flex gap-4 text-gray-600">
                     {footerLinks.map((link, idx) => (
@@ -78,7 +78,9 @@ const SocialIcon: React.FC<SocialIconProps> = ({ icon, label, href }) => {
                 </Link>
             }
         >
-            <div className="transition-all hover:scale-110 hover:brightness-125">{icon}</div>
+            <div className="transition-all hover:scale-110 hover:brightness-125">
+                {icon}
+            </div>
         </HoverLabel>
     );
 };

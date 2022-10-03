@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AnimateSharedLayout, motion } from 'framer-motion';
+
 import { AppImages } from '../../../assets/app-images';
+import {
+    getExerciseCreationPageLink,
+    getShowcaseInvitesPageLink,
+} from '../../../utils/links';
 import FeaturesBanner from './FeaturesBanner';
 import ImageBlock from './ImageBlock';
 import './ImageBlock.scss';
@@ -42,6 +48,8 @@ const imageMain = {
 };
 
 const HomeFeatures: React.FC = () => {
+    const navigate = useNavigate();
+
     return (
         <section className="w-[min(80rem,95vw)] min-h-[90vh] mx-auto my-20 text-gray-600">
             {/* Banners for letters animations */}
@@ -51,6 +59,7 @@ const HomeFeatures: React.FC = () => {
                     <motion.div variants={container} animate="show">
                         {/* Top left image */}
                         <ImageBlock
+                            onClick={() => navigate(getExerciseCreationPageLink())}
                             variants={image}
                             src={AppImages.ExerciseCreation}
                             alt="Exercise Creation"
@@ -59,6 +68,7 @@ const HomeFeatures: React.FC = () => {
 
                         {/* Bottom left image */}
                         <ImageBlock
+                            onClick={() => navigate(getShowcaseInvitesPageLink())}
                             variants={image}
                             src={AppImages.Showcases}
                             alt="User Showcases"
@@ -67,6 +77,7 @@ const HomeFeatures: React.FC = () => {
 
                         {/* Top right image */}
                         <ImageBlock
+                            onClick={() => navigate('/profile')}
                             variants={image}
                             src={AppImages.Statistics}
                             delay={0.5}
@@ -76,6 +87,7 @@ const HomeFeatures: React.FC = () => {
 
                         {/* Bottom right image */}
                         <ImageBlock
+                            onClick={() => navigate('/ranking')}
                             variants={image}
                             src={AppImages.Ranking}
                             delay={0.5}
@@ -83,7 +95,9 @@ const HomeFeatures: React.FC = () => {
                             className="bottom-[1rem] right-[1rem] h-[12rem] w-[calc(12*1.67)]"
                         />
 
+                        {/* Main middle image */}
                         <ImageBlock
+                            onClick={() => navigate('/browse')}
                             variants={imageMain}
                             src={AppImages.ExerciseAttempt}
                             alt="Exercise workspace"

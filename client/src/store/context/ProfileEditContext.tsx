@@ -19,6 +19,7 @@ interface IProfileEditContext {
     currentPicture: string;
     setPreviewSource: (preview: string) => void;
     onSubmitProfile: (e?: React.FormEvent) => void;
+    cancelEdit: () => void;
 }
 
 const ProfileEditContext = React.createContext<IProfileEditContext>({
@@ -35,6 +36,7 @@ const ProfileEditContext = React.createContext<IProfileEditContext>({
     currentPicture: '',
     setPreviewSource: (preview: string) => {},
     onSubmitProfile: () => {},
+    cancelEdit: () => {},
 });
 
 export const useProfileEditContext = () => useContext(ProfileEditContext);
@@ -94,6 +96,16 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
         setIsLoading(false);
     };
 
+    // Cancel editing the profile. Revert every profile info back to original.
+    const handleCancelEdit = () => {
+        setIsEditing(false);
+        if (!userDetail) return;
+        setProfileName(userDetail.name);
+        setDescription(userDetail.description);
+        if (userDetail.pictureUrl) setPicture(userDetail.pictureUrl);
+        setPreviewSource(null);
+    };
+
     const currentPicture = previewSource || picture;
 
     const value = {
@@ -110,6 +122,7 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
         setPreviewSource,
         currentPicture,
         onSubmitProfile: handleProfileEdit,
+        cancelEdit: handleCancelEdit,
     };
 
     return (

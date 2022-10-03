@@ -36,10 +36,8 @@ const ProfileMainBody = () => {
         profileName,
         setProfileName,
         description,
-        setDescription,
-        isLoading,
         isEditing,
-        setIsEditing,
+        setDescription,
         onSubmitProfile,
     } = useProfileEditContext();
 
@@ -52,11 +50,6 @@ const ProfileMainBody = () => {
     ).length;
     const createdExerciseCount = userDetail.exercises.length;
     const usedLanguages = getUsedLanguagesByUser(userDetail.submissions);
-
-    const handleActionButton = () => {
-        if (!isEditing) return setIsEditing(true);
-        onSubmitProfile();
-    };
 
     // Current user ranking data
     const userRankData = useMemo(() => {
@@ -132,20 +125,7 @@ const ProfileMainBody = () => {
                     />
                 </div>
             </div>
-
-            <div className="flex md:justify-end px-3 py-3 md:pr-[5rem] border-t-[3px] border-gray-300">
-                {isLoading ? (
-                    <ClipLoader size={40} color="#5552e4" />
-                ) : (
-                    <Button
-                        type={'button'}
-                        className="rounded-sm"
-                        onClick={handleActionButton}
-                    >
-                        {isEditing ? 'Save Profile' : 'Edit Profile'}
-                    </Button>
-                )}
-            </div>
+            <ProfileButtons />
         </form>
     );
 };
@@ -156,5 +136,38 @@ const ProfileHeader = React.memo(() => (
         <p className="text-gray-500">Your profile is publicly shown to other users.</p>
     </div>
 ));
+
+// Profile group of action buttons (edit, cancel and submit)
+const ProfileButtons = () => {
+    const { isLoading, isEditing, setIsEditing, onSubmitProfile, cancelEdit } =
+        useProfileEditContext();
+
+    const handleAction = () => {
+        if (!isEditing) return setIsEditing(true);
+        onSubmitProfile();
+    };
+
+    return (
+        <div className="flex gap-3 md:justify-end px-3 py-3 md:pr-[3rem] border-t-[3px] border-gray-300">
+            {isLoading && <ClipLoader size={40} color="#5552e4" />}
+            {!isLoading && (
+                <>
+                    {isEditing && (
+                        <button
+                            type="button"
+                            onClick={cancelEdit}
+                            className="btn min-w-[6.5rem] border-2 border-gray-500 hover:bg-gray-500 hover:text-white"
+                        >
+                            Cancel
+                        </button>
+                    )}
+                    <Button type={'button'} className="rounded-sm" onClick={handleAction}>
+                        {isEditing ? 'Save Profile' : 'Edit Profile'}
+                    </Button>
+                </>
+            )}
+        </div>
+    );
+};
 
 export default ProfileMain;
