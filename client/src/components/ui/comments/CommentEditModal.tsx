@@ -3,15 +3,16 @@ import { RiEditBoxLine } from 'react-icons/ri';
 import { patchComment } from '../../../apis/comment.api';
 import { IComment } from '../../../models/interfaces';
 import { toastNotify } from '../../../utils/notification';
-import Modal from '../modals/Modal';
+import AnimationModal from '../modals/AnimationModal';
 import CommentForm from './CommentForm';
 
 interface Props {
+    visible: boolean;
     onClose: () => void;
     comment: IComment; // Initial comment that should be edited.
 }
 
-const CommentEditModal: React.FC<Props> = ({ onClose, comment }) => {
+const CommentEditModal: React.FC<Props> = ({ visible, onClose, comment }) => {
     const handleEdit = async (text: string) => {
         const { ok } = await patchComment(comment._id, { text });
         if (!ok) toastNotify('Oops, something went wrong...', 'error');
@@ -19,7 +20,9 @@ const CommentEditModal: React.FC<Props> = ({ onClose, comment }) => {
     };
 
     return (
-        <Modal
+        <AnimationModal
+            visible={visible}
+            direction="vertical"
             onClose={onClose}
             className="!rounded-md min-w-[min(37.5rem,92.5vw)] overflow-hidden"
         >
@@ -32,7 +35,7 @@ const CommentEditModal: React.FC<Props> = ({ onClose, comment }) => {
                     </h2>
                 </header>
 
-                <div className="flex flex-col gap-5 bg-slate-200/90 px-7 py-10">
+                <div className="flex flex-col gap-5 bg-slate-200/90 px-7 pt-10 pb-7">
                     {/* Modal form body */}
                     <CommentForm
                         onSubmit={handleEdit}
@@ -42,7 +45,7 @@ const CommentEditModal: React.FC<Props> = ({ onClose, comment }) => {
                     />
                 </div>
             </div>
-        </Modal>
+        </AnimationModal>
     );
 };
 

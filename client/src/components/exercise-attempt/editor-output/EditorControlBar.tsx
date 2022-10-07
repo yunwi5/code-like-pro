@@ -3,7 +3,6 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
 import { likeExerciseRequest } from '../../../apis/exercise.api';
-import { Language } from '../../../models/enums';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getLanguageIcon, prettierLanguageName } from '../../../utils/language';
@@ -90,9 +89,10 @@ const EditorControlBar: React.FC = () => {
 
                 {isAuthor && <ExerciseSettings />}
             </div>
-            {showReportModal && (
-                <IssueReportModal onClose={() => setShowReportModal(false)} />
-            )}
+            <IssueReportModal
+                visible={showReportModal}
+                onClose={() => setShowReportModal(false)}
+            />
         </>
     );
 };

@@ -18,7 +18,10 @@ const IssueCategories = [
     'Others',
 ];
 
-const IssueReportModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+const IssueReportModal: React.FC<{ visible: boolean; onClose: () => void }> = ({
+    visible,
+    onClose,
+}) => {
     const { exercise, refetchExercise } = useExerciseAttemptCtx();
 
     const [issueCategory, setIssueCategory] = useState('Incorrect Difficulty'); // Incorrect Difficulty by default
@@ -53,6 +56,7 @@ const IssueReportModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
     return (
         <FormModal
+            visible={visible}
             onClose={onClose}
             onSubmit={handleSubmit}
             heading={

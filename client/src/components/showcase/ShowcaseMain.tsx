@@ -49,9 +49,10 @@ const ShowcaseMain: React.FC = () => {
                 {activeSection === ShowCaseSection.SHOWCASES && <ShowcaseShowcases />}
             </main>
 
-            {showPostModal && (
-                <ShowcasePostModal onClose={() => setShowPostModal(false)} />
-            )}
+            <ShowcasePostModal
+                visible={showPostModal}
+                onClose={() => setShowPostModal(false)}
+            />
         </div>
     );
 };

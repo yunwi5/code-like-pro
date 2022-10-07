@@ -1,21 +1,31 @@
 import React from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
-import Modal from '../Modal';
+import AnimationModal from '../AnimationModal';
 
 interface Props {
+    visible: boolean;
+    onClose(): void;
     heading: JSX.Element | string;
     children: React.ReactNode;
-    onClose(): void;
     onSubmit: (e: React.FormEvent) => void;
     isLoading?: boolean;
     buttonText?: string;
 }
 
 const FormModal: React.FC<Props> = (props) => {
-    const { heading, onClose, children, onSubmit, isLoading = false, buttonText } = props;
+    const {
+        visible,
+        heading,
+        onClose,
+        children,
+        onSubmit,
+        isLoading = false,
+        buttonText,
+    } = props;
 
     return (
-        <Modal
+        <AnimationModal
+            visible={visible}
             onClose={onClose}
             className="!rounded-md min-w-[min(37.5rem,92.5vw)] overflow-hidden"
         >
@@ -56,7 +66,7 @@ const FormModal: React.FC<Props> = (props) => {
                     </div>
                 </form>
             </div>
-        </Modal>
+        </AnimationModal>
     );
 };
 

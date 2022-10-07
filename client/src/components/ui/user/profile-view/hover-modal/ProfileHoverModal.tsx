@@ -58,7 +58,6 @@ const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
                         <MdDateRange className="text-main-500 text-[1.2em]" />
                         Member Since
                     </strong>
-                    ''
                     <p>{getDateFormat(userInfo.createdAt)}</p>
                 </div>
                 {userRankData ? (
