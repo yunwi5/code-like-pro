@@ -10,17 +10,16 @@ import Strengths from '../components/home/strengths/Strengths';
 import Comparisons from '../components/home/comparisons/Comparisons';
 import ScrollProgress from '../components/home/ScrollProgress';
 import HomeFeatures from '../components/home/features/HomeFeatures';
+import HomeDiscussions from '../components/home/discussions/HomeDiscussions';
 
 const leftInVariants = {
     initial: { opacity: 0, x: -300 },
     animate: { opacity: 1, x: 0 },
-    viewport: { once: true },
 };
 
 const rightInVariants = {
     initial: { opacity: 0, x: 300 },
     animate: { opacity: 1, x: 0 },
-    viewport: { once: true },
 };
 
 const Home: React.FC = () => {
@@ -34,8 +33,10 @@ const Home: React.FC = () => {
                 />
             </Helmet>
             <ScrollProgress />
+
             <div className="max-w-[100vw] overflow-hidden">
                 <HeroLanding />
+
                 <motion.div
                     initial={{ opacity: 0, y: 100 }}
                     whileInView={{ opacity: 1, y: 0, transition: { duration: 0.8 } }}
@@ -44,7 +45,7 @@ const Home: React.FC = () => {
                     <Carousel />
                 </motion.div>
                 <motion.div
-                    variants={rightInVariants as any}
+                    variants={rightInVariants}
                     initial="initial"
                     whileInView="animate"
                     transition={{ duration: 0.5 }}
@@ -53,7 +54,7 @@ const Home: React.FC = () => {
                     <HomeFeatures />
                 </motion.div>
                 <motion.div
-                    variants={leftInVariants as any}
+                    variants={leftInVariants}
                     initial="initial"
                     whileInView="animate"
                     transition={{ duration: 0.5 }}
@@ -62,7 +63,7 @@ const Home: React.FC = () => {
                     <Strengths />
                 </motion.div>
                 <motion.div
-                    variants={rightInVariants as any}
+                    variants={rightInVariants}
                     initial="initial"
                     whileInView="animate"
                     transition={{ duration: 0.5 }}
@@ -71,7 +72,7 @@ const Home: React.FC = () => {
                     <Comparisons />
                 </motion.div>
                 <motion.div
-                    variants={leftInVariants as any}
+                    variants={leftInVariants}
                     initial="initial"
                     whileInView="animate"
                     transition={{ duration: 1 }}
@@ -80,13 +81,22 @@ const Home: React.FC = () => {
                     <TopExercises />
                 </motion.div>
                 <motion.div
-                    variants={rightInVariants as any}
+                    variants={rightInVariants}
                     initial="initial"
                     whileInView="animate"
                     transition={{ duration: 1 }}
                     viewport={{ once: true }}
                 >
                     <TopUsers />
+                </motion.div>
+                <motion.div
+                    variants={leftInVariants}
+                    initial="initial"
+                    whileInView="animate"
+                    transition={{ duration: 1 }}
+                    viewport={{ once: true }}
+                >
+                    <HomeDiscussions />
                 </motion.div>
             </div>
         </>

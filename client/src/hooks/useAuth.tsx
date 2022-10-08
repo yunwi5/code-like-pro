@@ -9,7 +9,8 @@ function useAuth() {
 
     // // If the user is not logged in, redirect to the login page.
     useEffect(() => {
-        if (!isLoading && !isLoggedIn) navigate('/login');
+        if (isLoading || isLoggedIn) return;
+        navigate('/login');
     }, [isLoggedIn, isLoading]);
 
     return { user };

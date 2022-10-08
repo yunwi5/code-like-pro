@@ -7,7 +7,7 @@ import { MdDateRange } from 'react-icons/md';
 
 import { IForumPost } from '../../../../models/interfaces';
 import { getDateTimeFormat } from '../../../../utils/datetime';
-import { ForumTypeIcons } from '../../../../utils/forum';
+import { ForumPostTypeIcons } from '../../../../utils/forum';
 import { getForumPostLink } from '../../../../utils/links';
 
 const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
@@ -22,7 +22,9 @@ const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
             className={`flex flex-col gap-1 px-3 pt-3 pb-2 border-b-2 border-b-slate-300 ${activeClass}`}
         >
             <header className="flex gap-2">
-                <span className="text-main-400/80">{ForumTypeIcons[post.postType]}</span>
+                <span className="text-main-400/80">
+                    {ForumPostTypeIcons[post.postType]}
+                </span>
                 <h3
                     className={
                         'text-gray-600 text-base lg:text-lg hover:text-main-500 cursor-pointer'
