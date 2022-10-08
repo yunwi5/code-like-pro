@@ -18,28 +18,30 @@ const Home: React.FC = () => {
                     content={`Home page of ${AppProperty.APP_NAME} where users can see detailed information about programming exercises on the website.`}
                 />
             </Helmet>
-            <HeroLanding />
-            <motion.div
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0, transition: { duration: 0.8 } }}
-                viewport={{ once: true }}
-            >
-                <Carousel />
-            </motion.div>
-            <motion.div
-                initial={{ opacity: 0, x: -300 }}
-                whileInView={{ opacity: 1, x: 0, transition: { duration: 1 } }}
-                viewport={{ once: true }}
-            >
-                <TopExercises />
-            </motion.div>
-            <motion.div
-                initial={{ opacity: 0, x: 300 }}
-                whileInView={{ opacity: 1, x: 0, transition: { duration: 1 } }}
-                viewport={{ once: true }}
-            >
-                <TopUsers />
-            </motion.div>
+            <div className="overflow-hidden w-100">
+                <HeroLanding />
+                <motion.div
+                    initial={{ opacity: 0, y: 100 }}
+                    whileInView={{ opacity: 1, y: 0, transition: { duration: 0.8 } }}
+                    viewport={{ once: true }}
+                >
+                    <Carousel />
+                </motion.div>
+                <motion.div
+                    initial={{ opacity: 0, x: -300 }}
+                    whileInView={{ opacity: 1, x: 0, transition: { duration: 1 } }}
+                    viewport={{ once: true }}
+                >
+                    <TopExercises />
+                </motion.div>
+                <motion.div
+                    initial={{ opacity: 0, x: 300 }}
+                    whileInView={{ opacity: 1, x: 0, transition: { duration: 1 } }}
+                    viewport={{ once: true }}
+                >
+                    <TopUsers />
+                </motion.div>
+            </div>
         </>
     );
 };
