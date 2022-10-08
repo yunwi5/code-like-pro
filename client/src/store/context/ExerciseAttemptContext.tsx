@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { postSubmission, runTestCases } from '../../apis/submission';
+import { postSubmission, runTestCases } from '../../apis/submission.api';
 import ShowcaseInviteModal from '../../components/exercise-attempt/modals/ShowcaseInviteModal';
 import { IExerciseWithId, ITestOutput, IUserSubmission } from '../../models/interfaces';
 import { getCorrectTestCaseCount } from '../../utils/exercise-utils/testcase';
@@ -73,7 +73,9 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         if (ok && outputs) {
             setTestCaseOutputs(outputs);
             const { correct } = getCorrectTestCaseCount(outputs);
-            toastNotify(`You got ${correct} tests correct out of ${outputs.length} tests!`);
+            toastNotify(
+                `You got ${correct} tests correct out of ${outputs.length} tests!`,
+            );
         } else {
             toastNotify(`Oops, ${message}`, 'error');
         }
@@ -95,7 +97,9 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
             if (newSubmission.correct) {
                 setShowInviteModal(true);
             } else {
-                toastNotify(`Submission status is incorrect. Debug your code and try again!`);
+                toastNotify(
+                    `Submission status is incorrect. Debug your code and try again!`,
+                );
             }
         } else {
             toastNotify(`Oops, ${message}`, 'error');

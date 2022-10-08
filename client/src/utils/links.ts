@@ -1,6 +1,11 @@
-import { ForumCategory, ForumCategoryList, ShowCaseSection } from '../models/enums';
+import {
+    ForumCategory,
+    ForumCategoryList,
+    ProgrammingTopic,
+    ShowCaseSection,
+} from '../models/enums';
 import { IForumPost, IForumPostPopulated } from '../models/interfaces';
-import { convertToQueryString } from './string-utils/query';
+import { convertToUrlString } from './string-utils/url.util';
 
 export function getBrowsingPageLink() {
     return '/browse';
@@ -25,7 +30,7 @@ export function getShowcasePageLink(
 ) {
     // If the initial section is 'Showcase' or 'Discussions' users will direclty see that section
     // without having to go through the model answer.
-    const sectionQueryString = convertToQueryString(section);
+    const sectionQueryString = convertToUrlString(section);
     return `/showcase/${exerciseId}?section=${sectionQueryString}`;
 }
 
@@ -34,7 +39,6 @@ export function getShowcaseInvitesPageLink() {
 }
 
 // Global forum links
-
 // Forum category page link (i.e. Interviews, Technologies)
 export function getForumCategoryLink(section: ForumCategory) {
     return `/forum/${section}`;
@@ -54,4 +58,13 @@ export function getForumPostCreateLink(defaultCategory?: ForumCategory) {
 
 export function getForumPostEditLink(postId: string) {
     return `/edit-post/${postId}`;
+}
+
+// Ranking links
+export function getGlobalRankigLink() {
+    return '/ranking';
+}
+export function getTopicRankingLink(topic: ProgrammingTopic) {
+    const topicUrlString = convertToUrlString(topic);
+    return `/ranking/topic/${topicUrlString}`;
 }

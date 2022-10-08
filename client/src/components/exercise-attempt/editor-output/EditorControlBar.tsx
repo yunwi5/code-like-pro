@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
-import { likeExerciseRequest } from '../../../apis/exercise';
+import { likeExerciseRequest } from '../../../apis/exercise.api';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../store/context/UserContext';
 import { prettierLanguageName } from '../../../utils/language';
@@ -57,7 +57,9 @@ const EditorControlBar: React.FC = () => {
                 {/* Favorite toggler */}
                 <HoveringLabel
                     className="ml-auto z-50"
-                    label={<span className="text-base hover:text-yellow-300">Favorite</span>}
+                    label={
+                        <span className="text-base hover:text-yellow-300">Favorite</span>
+                    }
                 >
                     <div
                         onClick={handleLiked}
@@ -71,7 +73,9 @@ const EditorControlBar: React.FC = () => {
                 <HoveringLabel
                     className="ml-2 z-50"
                     onClick={() => setShowReportModal(true)}
-                    label={<span className="text-base hover:text-yellow-300">Report</span>}
+                    label={
+                        <span className="text-base hover:text-yellow-300">Report</span>
+                    }
                 >
                     <div className="icon-box w-[2rem] h-[2rem] border-main-500 text-main-400 hover:bg-main-400 hover:text-main-50">
                         <GoAlert />
@@ -80,7 +84,9 @@ const EditorControlBar: React.FC = () => {
 
                 {isAuthor && <ExerciseSettings />}
             </div>
-            {showReportModal && <IssueReportModal onClose={() => setShowReportModal(false)} />}
+            {showReportModal && (
+                <IssueReportModal onClose={() => setShowReportModal(false)} />
+            )}
         </>
     );
 };

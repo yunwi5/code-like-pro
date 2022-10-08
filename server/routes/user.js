@@ -6,7 +6,14 @@ const catchAsync = require('../middleware/catchAsync');
 const router = express.Router();
 
 // Get user detail
-router.get('/:id', ensureAuthenticated, catchAsync(userController.getUserByID));
+router.get(
+    '/:id/detail',
+    ensureAuthenticated,
+    catchAsync(userController.getUserDetailById),
+);
+
+// Get user basic info
+router.get('/:id', catchAsync(userController.getUserById));
 
 // Edit user profile
 router.patch('/', ensureAuthenticated, catchAsync(userController.updateUser));

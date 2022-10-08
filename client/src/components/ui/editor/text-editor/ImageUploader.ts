@@ -1,6 +1,6 @@
 import { Quill } from 'react-quill';
 import ImageUploader from 'quill-image-uploader';
-import { postExercisePromptImage } from '../../../../apis/image';
+import { postExercisePromptImage } from '../../../../apis/image.api';
 import { toastNotify } from '../../../../utils/notification';
 import { toBase64Image } from '../../../../utils/image';
 

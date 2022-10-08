@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getLoginSuccess, loginRequest, logoutRequest } from '../../apis/auth';
-import { getUserDetail } from '../../apis/user';
+import { getLoginSuccess, loginRequest, logoutRequest } from '../../apis/auth.api';
+import { getUserDetail } from '../../apis/user.api';
+import useUserQuery from '../../hooks/user/useUserDetailQuery';
 import { IUser, IUserContext } from '../../models/interfaces';
 import { createSubmissionMap } from '../../utils/user-submission';
 
@@ -35,16 +36,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     // Fetch user detail with ReactQuery only if the user is authenticated and user state is not null.
-    const { data: userDetail, error } = useQuery(
-        ['user', { id: user?._id }],
-        () => getUserDetail(user?._id || '').then((res) => res.data),
-        {
-            enabled: !!user?._id,
-            refetchInterval: REFETCH_INTERVAL,
-        },
-    );
-
-    if (error) console.log(error);
+    const { userDetail } = useUserQuery(user?._id, REFETCH_INTERVAL);
 
     // Quickly find out whether the user liked the exercise or not in O(1) time.
     const likedExerciseIdSet = useMemo(() => {

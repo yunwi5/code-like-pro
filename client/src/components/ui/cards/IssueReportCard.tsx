@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BiMessageAltError } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
 
-import { deleteReportVote, postReportVote } from '../../../apis/report';
+import { deleteReportVote, postReportVote } from '../../../apis/report.api';
 import { IIssueReport, IVote } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import VoteButtons from '../buttons/VoteButtons';

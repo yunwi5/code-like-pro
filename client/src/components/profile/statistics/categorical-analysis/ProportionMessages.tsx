@@ -1,6 +1,6 @@
 import React from 'react';
 import { IChartData } from '../../../../models/interfaces';
-import { round } from '../../../../utils/calculation';
+import { round } from '../../../../utils/number';
 
 interface Props {
     dataArray: IChartData[];

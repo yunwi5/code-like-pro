@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getExercises } from '../../apis/exercise';
+import { getExercises } from '../../apis/exercise.api';
 
 // Fetch the full list of exercises from the server
 function useExerciseListQuery() {

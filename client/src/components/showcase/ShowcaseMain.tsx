@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ShowCaseSection } from '../../models/enums';
-import { parseQueryString } from '../../utils/string-utils/query';
+import { parseUrlString } from '../../utils/string-utils/url.util';
 import ShowcaseDiscussions from './discussions/ShowcaseDiscussions';
 import ShowcasePostModal from './modal/ShowcasePostModal';
 import ShowcaseModelAnswer from './model-answer/ShowcaseModelAnswer';
@@ -11,7 +11,7 @@ import ShowcaseShowcases from './showcases/ShowcaseShowcases';
 
 const ShowcaseMain: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const section = parseQueryString<ShowCaseSection | null>(searchParams.get('section'));
+    const section = parseUrlString<ShowCaseSection | null>(searchParams.get('section'));
     const [activeSection, setActiveSection] = useState(
         section ?? ShowCaseSection.MODEL_ANSWER,
     );
@@ -19,7 +19,7 @@ const ShowcaseMain: React.FC = () => {
 
     // If the section query string changes, change the active section according to that.
     useEffect(() => {
-        if (section) setActiveSection(parseQueryString(section) as any);
+        if (section) setActiveSection(parseUrlString(section) as any);
     }, [section]);
 
     // If the active section changes, change the section query string s well.

@@ -9,6 +9,7 @@ router.get('/', catchAsync(exerciseController.getExercises));
 
 router.post('/', ensureAuthenticated, catchAsync(exerciseController.postExercise));
 
+// Put this route above GET /:id route to indicate this route's param is more specific.
 router.get('/top', catchAsync(exerciseController.getTopExercises));
 
 router.get('/:id', catchAsync(exerciseController.getExerciseByID));
@@ -26,7 +27,7 @@ router
     .post(ensureAuthenticated, catchAsync(exerciseController.postExerciseReport))
     .get(ensureAuthenticated, catchAsync(exerciseController.getExerciseReports));
 
-// Like/favorite toggling functionality
+// Like functionality
 router.get(
     '/:id/like',
     ensureAuthenticated,

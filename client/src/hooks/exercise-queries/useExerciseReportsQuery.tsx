@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getExerciseReports } from '../../apis/exercise';
+import { getExerciseReports } from '../../apis/exercise.api';
 
 function useExerciseReportsQuery(exerciseId: string, refetchInterval: number = 1000) {
     const queryClient = useQueryClient();

@@ -4,7 +4,7 @@ import VotingItemSorter from '../../ui/sorting/VotingItemSorter';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import useExerciseShowcaseQuery from '../../../hooks/exercise-queries/useExerciseShowcaseQuery';
 import ShowcaseList from '../../ui/lists/ShowcaseList';
-import { sortVotingItems } from '../../../utils/sorting-utils/voting-items-sorting';
+import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import { IShowCase } from '../../../models/interfaces';
 
 const ShowcaseShowcases: React.FC = () => {

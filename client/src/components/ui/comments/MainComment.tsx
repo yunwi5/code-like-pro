@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
-import { getReplyComments, postReplyComment } from '../../../apis/comment';
+import { getReplyComments, postReplyComment } from '../../../apis/comment.api';
 import { IComment } from '../../../models/interfaces';
 import CommentCard from '../cards/CommentCard';
 import CommentForm from './CommentForm';

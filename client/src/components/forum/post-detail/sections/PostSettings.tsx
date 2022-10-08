@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { deleteForumPost } from '../../../../apis/forum';
+import { deleteForumPost } from '../../../../apis/forum.api';
 import { IForumPostPopulated } from '../../../../models/interfaces';
 import { getForumPostEditLink } from '../../../../utils/links';
 import { toastNotify } from '../../../../utils/notification';
@@ -24,6 +24,7 @@ const PostSettings: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     return (
         <>
             <SettingsButton
+                className="ml-auto"
                 onEdit={() => navigate(getForumPostEditLink(post?._id))}
                 onDelete={() => setShowDeleteModal(true)}
             />

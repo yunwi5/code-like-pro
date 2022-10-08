@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getExerciseComments } from '../../apis/exercise';
+import { getExerciseComments } from '../../apis/exercise.api';
 
 function useExerciseCommentsQuery(exerciseId: string, refetchInterval: number = 1000) {
     const queryClient = useQueryClient();

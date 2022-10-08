@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { postForumPostComment } from '../../../../apis/forum';
+import { postForumPostComment } from '../../../../apis/forum.api';
 import { SortingDirection, VotingItemSortingKey } from '../../../../models/enums';
 import { IComment, IForumPostPopulated } from '../../../../models/interfaces';
 import { toastNotify } from '../../../../utils/notification';
-import { sortVotingItems } from '../../../../utils/sorting-utils/voting-items-sorting';
+import { sortVotingItems } from '../../../../utils/sorting-utils/voting-items.sorting';
 import CommentForm from '../../../ui/comments/CommentForm';
 import CommentList from '../../../ui/lists/CommentList';
 import VotingItemSorter from '../../../ui/sorting/VotingItemSorter';
@@ -38,7 +38,7 @@ const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     }, [sortingState, post.comments]);
 
     return (
-        <div className="flex-1 flex flex-col px-8 py-3 border-t-2 border-gray-200">
+        <div className="flex-1 flex flex-col px-4 xl:px-8 py-3 border-t-2 border-gray-200">
             <div className="flex flex-wrap flex-row justify-between items-center gap-x-3 mb-4">
                 {/* Component that handles the selection of sorting key and direction from the user. */}
                 <VotingItemSorter
@@ -53,7 +53,7 @@ const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
             </div>
 
             {/* Form that lets user to add their comments to the discussion. */}
-            <CommentForm onSubmit={handleSubmitComment} />
+            <CommentForm inputType="textarea" onSubmit={handleSubmitComment} />
 
             {/* Render the list of comments with pagination. */}
             <CommentList comments={sortedComments} className="mt-8" />

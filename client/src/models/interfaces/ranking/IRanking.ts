@@ -1,5 +1,5 @@
 export interface IRanking {
-    _id?: string;
+    _id: string;
     name: string;
     pictureUrl?: string;
     creationPoints: number;

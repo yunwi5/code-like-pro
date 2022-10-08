@@ -6,13 +6,14 @@ import HoveringLabel from './HoveringLabel';
 interface Props {
     language: Language;
     className?: string;
+    size?: string;
 }
 
 // Language icon label. When hovering, the language name will appear below.
-const LanguageLabel: React.FC<Props> = ({ language, className = '' }) => {
+const LanguageLabel: React.FC<Props> = ({ language, className = '', size }) => {
     return (
         <HoveringLabel label={prettierLanguageName(language)} className={className}>
-            {getLanguageIcon(language, { width: '30px', height: '30px' })}
+            {getLanguageIcon(language, { width: size ?? '30px', height: size ?? '30px' })}
         </HoveringLabel>
     );
 };

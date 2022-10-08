@@ -84,6 +84,7 @@
 // Nested navigation
 // Nested nav list appears only when the parent nav item is hovered.
 .nested-nav-parent {
+    position: relative;
     .nested-nav-child {
         visibility: none;
         opacity: 0;

@@ -2,13 +2,13 @@ import { Difficulty } from '../../models/enums';
 import { IVote } from '../../models/interfaces';
 import { mapDifficultyToNumericValue } from '../difficulty';
 
-export function compareByName(obj1: { name: string }, obj2: { name: string }) {
+export function compareByName<T extends { name: string }>(obj1: T, obj2: T) {
     return obj1.name.trim().toLowerCase() < obj2.name.trim().toLowerCase() ? -1 : 1;
 }
 
-export function compareByDifficulty(
-    obj1: { difficulty: Difficulty },
-    obj2: { difficulty: Difficulty },
+export function compareByDifficulty<T extends { difficulty: Difficulty }>(
+    obj1: T,
+    obj2: T,
 ) {
     const obj1DiffValue = mapDifficultyToNumericValue(obj1.difficulty);
     const obj2DiffValue = mapDifficultyToNumericValue(obj2.difficulty);
@@ -16,7 +16,10 @@ export function compareByDifficulty(
 }
 
 function getUpVotesCount(votes: IVote[]) {
-    return votes.reduce((accCount, curr) => (curr.type === 'up' ? accCount + 1 : accCount), 0);
+    return votes.reduce(
+        (accCount, curr) => (curr.type === 'up' ? accCount + 1 : accCount),
+        0,
+    );
 }
 
 export function compareByVotes(votesA: IVote[], votesB: IVote[]) {
