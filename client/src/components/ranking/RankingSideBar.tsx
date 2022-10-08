@@ -15,7 +15,7 @@ const RankingSideBar: React.FC<Props> = ({ className = '', showHeader = true }) 
 
     return (
         <aside
-            className={`flex flex-col items-end gap-[4.35rem] pt-[6.5rem] ${className}`}
+            className={`flex flex-col items-end gap-[3.3rem] pt-[6.5rem] ${className}`}
         >
             {showHeader && <RankingHeader />}
             <section className="w-fit px-3 py-2 bg-gray-100 rounded transition-all shadow-md hover:shadow-lg text-gray-600">

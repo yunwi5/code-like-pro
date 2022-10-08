@@ -106,9 +106,12 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
                 </footer>
             </div>
 
-            {modal === 'edit' && (
-                <CommentEditModal onClose={() => setModal(null)} comment={comment} />
-            )}
+            <CommentEditModal
+                visible={modal === 'edit'}
+                onClose={() => setModal(null)}
+                comment={comment}
+            />
+
             {modal === 'delete' && (
                 <DeleteModal
                     onClose={() => setModal(null)}

@@ -26,7 +26,23 @@ export const ForumIcons = {
     [ForumCategory.FEEDBACK]: <VscFeedback className="inline text-[1.2em]" />,
 };
 
-export const ForumTypeIcons = {
+export const ForumDescriptions = {
+    [ForumCategory.GENERAL]:
+        'Where you discuss general queries and posts about anything.',
+    [ForumCategory.ALGORITHMS]: 'Discuss algorithm knowledges in depth!',
+    [ForumCategory.INTERVIEWS]:
+        'Discuss how to master the notorious technical interviews',
+    [ForumCategory.CAREERS]:
+        'Discuss future career path as programmers or software engineers!',
+    [ForumCategory.TECHNOLOGIES]:
+        'Trendy technologies React, Vue, Svelte, Flutter, Kotlin, Swift, ...',
+    [ForumCategory.UNIVERSITY]:
+        'Discuss university courses or degress like CS or SE degree',
+    [ForumCategory.FEEDBACK]:
+        'Discuss any feedback to our application that we are always welcomed to hear!',
+};
+
+export const ForumPostTypeIcons = {
     [ForumPostType.ANNOUNCEMENT]: <AiOutlineNotification className="inline" />,
     [ForumPostType.QUESTION]: <BsQuestionCircle className="inline" />,
     [ForumPostType.SHOWCASE]: <RiSlideshow3Line className="inline" />,

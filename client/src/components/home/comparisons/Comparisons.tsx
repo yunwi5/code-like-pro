@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
 import { MdOutlineCheck } from 'react-icons/md';
+import { Logo } from '../../../assets';
 
 const variants = {
     initial: {
@@ -35,8 +36,11 @@ const Comparisons: React.FC = () => {
                         {PlatformList.map((platform) => (
                             <div
                                 key={platform}
-                                className="col-span-2 flex-center text-gray-500 text-2xl font-semibold"
+                                className="col-span-2 flex-center gap-2 text-gray-500 text-2xl font-semibold"
                             >
+                                {platform === Platform.CODE_LIKE_PRO && (
+                                    <Logo size={23} />
+                                )}
                                 {platform}
                             </div>
                         ))}

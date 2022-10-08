@@ -34,7 +34,9 @@ const AuthCard = (props: {
                             {props.isLogin ? 'Login' : 'Register'}
                         </h2>
                         <p className="text-xs font-light">
-                            {props.isLogin ? 'Sign in to your account' : 'Create an account'}
+                            {props.isLogin
+                                ? 'Sign in to your account'
+                                : 'Create an account'}
                         </p>
                     </div>
 

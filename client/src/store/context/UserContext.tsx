@@ -1,9 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { getLoginSuccess, loginRequest, logoutRequest } from '../../apis/auth.api';
-import { getUserDetail } from '../../apis/user.api';
 import useUserQuery from '../../hooks/user/useUserDetailQuery';
 import { IUser, IUserContext } from '../../models/interfaces';
 import { createSubmissionMap } from '../../utils/user-submission';

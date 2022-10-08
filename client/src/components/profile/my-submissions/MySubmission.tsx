@@ -3,6 +3,7 @@ import React, { useMemo, useState } from 'react';
 import { SearchKey } from '../../../models/enums';
 import { useUserContext } from '../../../store/context/UserContext';
 import { searchIncludes } from '../../../utils/search';
+import { compareByDateTime } from '../../../utils/sorting-utils';
 import Searchbar from '../../ui/inputs/Searchbar';
 import SubmissionList from '../../ui/lists/SubmissionList';
 import ProfileSectionContainer from '../containers/ProfileSectionContainer';
@@ -20,6 +21,13 @@ const MySubmission: React.FC = () => {
         return submissions.filter((sub) => searchIncludes(sub.exercise.name, searchText));
     }, [submissions, searchText]);
 
+    // Sort the submissions by date (recent to oldest)
+    const sortedSubmissions = useMemo(() => {
+        return searchedSubmissions
+            .sort((subA, subB) => compareByDateTime(subB.postedAt, subA.postedAt))
+            .slice();
+    }, [searchedSubmissions]);
+
     return (
         <ProfileSectionContainer>
             <nav className="flex flex-col sm:flex-row justify-between sm:items-end gap-y-4 mb-6">
@@ -32,10 +40,10 @@ const MySubmission: React.FC = () => {
                     label={null}
                 />
                 <h2 className="text-gray-500 font-semibold text-xl">
-                    {searchedSubmissions.length} Submissions
+                    {sortedSubmissions.length} Submissions
                 </h2>
             </nav>
-            <SubmissionList submissions={searchedSubmissions} />
+            <SubmissionList submissions={sortedSubmissions} />
         </ProfileSectionContainer>
     );
 };

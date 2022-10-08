@@ -17,6 +17,7 @@ describe('Exercise creation', () => {
     };
 
     it('Can type inputs to title, difficulty, language and tags', () => {
+        cy.visit('/create-exercise');
         cy.location().should((location) => {
             expect(location.pathname).equal('/create-exercise');
         });

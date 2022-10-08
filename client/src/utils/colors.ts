@@ -1,4 +1,9 @@
-import { Difficulty, Language, ProgrammingTopic, SubmissionStatus } from '../../models/enums';
+import {
+    Difficulty,
+    Language,
+    ProgrammingTopic,
+    SubmissionStatus,
+} from '../models/enums';
 
 const ROSE_300 = '#fda4af';
 const ORANGE_300 = '#fdba74';

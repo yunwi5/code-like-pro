@@ -10,7 +10,7 @@ import { IShowCase } from '../../../models/interfaces';
 const ShowcaseShowcases: React.FC = () => {
     const { exercise } = useShowcase();
     const [sortingState, setSortingState] = useState({
-        key: VotingItemSortingKey.DATETIME,
+        key: VotingItemSortingKey.VOTES,
         direction: SortingDirection.DESCENDING,
     });
     if (!exercise) return null;

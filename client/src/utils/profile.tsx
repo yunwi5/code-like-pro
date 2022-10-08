@@ -13,17 +13,17 @@ export const ProfileLinkMap = {
     [ProfileSection.MY_SUBMISSIONS]: 'my-submissions',
 };
 
-export function getProfileSectionIcon(section: ProfileSection) {
+export function getProfileSectionIcon(section: ProfileSection, className: string = '') {
     switch (section) {
         case ProfileSection.PROFILE:
-            return <FaRegUserCircle className="text-xl" />;
+            return <FaRegUserCircle className={`text-xl ${className}`} />;
         case ProfileSection.STATISTICS:
-            return <GoGraph className="text-xl" />;
+            return <GoGraph className={`text-xl ${className}`} />;
         case ProfileSection.FAVORITES:
-            return <AiOutlineStar className="text-xl" />;
+            return <AiOutlineStar className={`text-xl ${className}`} />;
         case ProfileSection.MY_CREATIONS:
-            return <IoCreateOutline className="text-xl" />;
+            return <IoCreateOutline className={`text-xl ${className}`} />;
         case ProfileSection.MY_SUBMISSIONS:
-            return <BsFileEarmarkCode className="text-xl" />;
+            return <BsFileEarmarkCode className={`text-xl ${className}`} />;
     }
 }

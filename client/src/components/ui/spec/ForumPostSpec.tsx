@@ -5,7 +5,7 @@ import { FaUserEdit } from 'react-icons/fa';
 
 import { IForumPost, IForumPostPopulated } from '../../../models/interfaces';
 import { getDateTimeFormat } from '../../../utils/datetime';
-import { ForumTypeIcons } from '../../../utils/forum';
+import { ForumPostTypeIcons } from '../../../utils/forum';
 import ProfileView from '../user/profile-view/ProfileView';
 import ProfilePicture from '../user/ProfilePicture';
 
@@ -42,7 +42,7 @@ const ForumPostSpec: React.FC<Props> = ({ post, pictureUrl, className }) => {
             </li>
             <li className={`${spectItemClass} capitalize`}>
                 <span className="text-main-400 text-base">
-                    {ForumTypeIcons[post.postType]}
+                    {ForumPostTypeIcons[post.postType]}
                 </span>
                 {post.postType}
             </li>

@@ -8,10 +8,11 @@ import CustomInput from '../../ui/inputs/CustomInput';
 import FormModal from '../../ui/modals/variations/FormModal';
 
 interface Props {
+    visible: boolean;
     onClose: () => void;
 }
 
-const ShowcasePostModal: React.FC<Props> = ({ onClose }) => {
+const ShowcasePostModal: React.FC<Props> = ({ visible, onClose }) => {
     const { userSubmission, exercise } = useShowcase();
     const [description, setDescription] = useState('');
     const [error, setError] = useState<null | string>(null);
@@ -54,6 +55,7 @@ const ShowcasePostModal: React.FC<Props> = ({ onClose }) => {
 
     return (
         <FormModal
+            visible={visible}
             onClose={onClose}
             onSubmit={handleSubmit}
             heading={

@@ -14,7 +14,7 @@ const ProfileAvatarOptions: React.FC<{ onClose: () => void }> = ({ onClose }) =>
     };
 
     return (
-        <div className="grid grid-cols-4 gap-x-2 gap-y-2 px-2 py-2">
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-x-2 gap-y-2 px-2 py-2">
             {pictureOptions.map((pictureOption, idx) => (
                 <div
                     key={idx}

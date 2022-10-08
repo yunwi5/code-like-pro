@@ -78,14 +78,16 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
                     className="flex-start gap-2 px-3 py-1 transition-all hover:bg-purple-600 hover:text-white hover:shadow rounded-full"
                 >
                     <FaLaptopCode className="text-lg" />
-                    {exercise.showCases.length} User Solutions
+                    {exercise.showCases?.length || 0} User Solution
+                    {(exercise.showCases?.length || 0) !== 1 && 's'}
                 </Link>
                 <Link
                     to={getShowcasePageLink(exercise._id, ShowCaseSection.DISCUSSIONS)}
                     className="flex-start gap-2 px-2 py-1 transition-all hover:bg-pink-600 hover:text-white hover:shadow rounded-full"
                 >
                     <AiFillWechat className="text-lg" />
-                    {exercise.comments.length} Discussions
+                    {exercise.comments?.length} Discussion
+                    {(exercise.comments?.length || 0) !== 1 && 's'}
                 </Link>
             </footer>
         </article>

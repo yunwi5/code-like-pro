@@ -12,8 +12,8 @@ const TopUsers: React.FC = () => {
     }, [rankingOrder]);
 
     return (
-        <div className="min-h-[70vh] w-full -mt-3 sm:mt-[20rem] lg:mt-10">
-            <div className="flex flex-col lg:flex-row justify-around gap-y-12 gap-x-10 h-full py-8 px-4 sm:px-10 md:px-16">
+        <div className="w-full -mt-3 sm:mt-[20rem] lg:mt-10">
+            <div className="min-h-[50vh] flex flex-col lg:flex-row justify-around gap-y-12 gap-x-10 h-full py-8 px-4 sm:px-10 md:px-16">
                 <div className="order-2 lg:order-none flex-center">
                     <RankingPodium
                         rankingOrder={top3Users}

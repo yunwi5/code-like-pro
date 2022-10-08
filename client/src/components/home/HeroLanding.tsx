@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/typewriter.css';
+import '../../styles/typewriter.scss';
 
 const HeroLanding: React.FC = () => {
     return (

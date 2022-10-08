@@ -24,12 +24,7 @@ const useScrollEffect = ({ elementRef, callbackOnView }: Props) => {
             const aboveSectionBottom = window.scrollY < distanceFromTop + rect.height;
             if (belowSectionTop && aboveSectionBottom) callbackOnView();
         };
-
-        // Due to performance issue, make scrollEffect as lower pripority using the timeout.
-        const timer = setTimeout(() => {
-            window.addEventListener('scroll', scrollEffect);
-            clearTimeout(timer);
-        }, 500);
+        window.addEventListener('scroll', scrollEffect);
         return () => window.removeEventListener('scroll', scrollEffect);
     }, []);
 
