@@ -3,7 +3,10 @@ const passport = require('passport');
 
 const authController = require('../../controller/auth/authController');
 const catchAsync = require('../../middleware/catchAsync');
-const { validateLoginBody, validateSignUpBody } = require('../../middleware/validateRequest');
+const {
+    validateLoginBody,
+    validateSignUpBody,
+} = require('../../middleware/validateRequest');
 
 const router = Router();
 
