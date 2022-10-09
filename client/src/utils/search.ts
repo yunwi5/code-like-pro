@@ -6,15 +6,15 @@ export function searchIncludes(searched: string, inputString: string) {
     return searched.toLowerCase().includes(inputString.trim().toLowerCase());
 }
 
-function searchArrayByName<T>(array: Array<{ name: string }>, text: string) {
-    return array.filter((ex) => searchIncludes(ex.name, text)) as T;
+function searchArrayByName<T extends { name: string }>(array: T[], text: string) {
+    return array.filter((ex) => searchIncludes(ex.name, text));
 }
 
-function searchArrayByAuthor<T>(
-    array: Array<{ author?: { name: string } }>,
+function searchArrayByAuthor<T extends { author?: { name: string } }>(
+    array: T[],
     text: string,
 ) {
-    return array.filter((ex) => searchIncludes(ex.author?.name || '', text)) as T;
+    return array.filter((ex) => searchIncludes(ex.author?.name || '', text));
 }
 
 export function searchExercises(
@@ -23,12 +23,12 @@ export function searchExercises(
 ) {
     // Search by exercise name case-insensitive
     if (searchState.key === SearchKey.TITLE) {
-        return searchArrayByName<IExerciseCard[]>(exercises, searchState.text);
+        return searchArrayByName<IExerciseCard>(exercises, searchState.text);
     }
 
     // Search by author name case-insensitive
     if (searchState.key === SearchKey.AUTHOR) {
-        return searchArrayByAuthor<IExerciseCard[]>(exercises, searchState.text);
+        return searchArrayByAuthor<IExerciseCard>(exercises, searchState.text);
     }
 
     if (searchState.key === SearchKey.PROMPT) {
@@ -43,12 +43,12 @@ export function searchExercises(
 export function searchForumPosts(posts: IForumPost[], searchState: ISearchingState) {
     // Search by exercise name case-insensitive
     if (searchState.key === SearchKey.TITLE) {
-        return searchArrayByName<IForumPost[]>(posts, searchState.text);
+        return searchArrayByName<IForumPost>(posts, searchState.text);
     }
 
     // Search by author name case-insensitive
     if (searchState.key === SearchKey.AUTHOR) {
-        return searchArrayByAuthor<IForumPost[]>(posts, searchState.text);
+        return searchArrayByAuthor<IForumPost>(posts, searchState.text);
     }
 
     if (searchState.key === SearchKey.PROMPT) {

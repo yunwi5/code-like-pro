@@ -3,7 +3,7 @@ import { IExerciseCard, IUserSubmissionPopulated } from '../../models/interfaces
 import { IFilterState } from '../../store/redux/browsing-slice';
 
 // Filter exercises by selected language, difficulty and tags.
-export function filterExercises<T>(exercises: IExerciseCard[], filterState: IFilterState) {
+export function filterExercises(exercises: IExerciseCard[], filterState: IFilterState) {
     const filtered = exercises.filter((ex) => {
         // Language filter
         if (filterState.language !== 'All' && ex.language !== filterState.language) {
@@ -28,7 +28,7 @@ export function filterExercises<T>(exercises: IExerciseCard[], filterState: IFil
         // If passed all the filters, return true.
         return true;
     });
-    return filtered as T[];
+    return filtered;
 }
 
 // Filter exercises by user submission status (result).

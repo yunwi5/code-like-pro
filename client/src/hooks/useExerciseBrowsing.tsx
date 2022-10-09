@@ -5,7 +5,7 @@ import { useAppSelector } from '../store/redux/store';
 import {
     filterExercises,
     filterExercisesBySubmissionStatus,
-} from '../utils/filter-utils/exercise-filter';
+} from '../utils/filter-utils/exercise.filter';
 import { searchExercises } from '../utils/search';
 import { sortExercises } from '../utils/sorting-utils/exercise.sorting';
 
@@ -26,7 +26,7 @@ function useBrowsing(exercises: IExerciseCard[]) {
     // Do filtering second
     const filteredExercises = useMemo(() => {
         // Filter exercises by selected language, difficulty and tags.
-        let filtered = filterExercises<IExerciseCard>(searchedExercises, filtering);
+        let filtered = filterExercises(searchedExercises, filtering);
         // Filter exercises further by user submission status (result).
         return filterExercisesBySubmissionStatus(
             filtered,

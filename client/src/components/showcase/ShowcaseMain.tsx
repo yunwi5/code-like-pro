@@ -11,8 +11,8 @@ import ShowcaseShowcases from './showcases/ShowcaseShowcases';
 
 const ShowcaseMain: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const section = parseUrlString<ShowCaseSection | null>(searchParams.get('section'));
-    const [activeSection, setActiveSection] = useState(
+    const section = parseUrlString(searchParams.get('section')) as ShowCaseSection;
+    const [activeSection, setActiveSection] = useState<ShowCaseSection>(
         section ?? ShowCaseSection.MODEL_ANSWER,
     );
     const [showPostModal, setShowPostModal] = useState(false);

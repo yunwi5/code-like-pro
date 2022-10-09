@@ -11,7 +11,7 @@ type Monaco = typeof monaco;
 type CodeEditor = monaco.editor.IStandaloneCodeEditor;
 
 interface Props {
-    onChange?: (value: string | undefined) => void;
+    onChange?: (value: string) => void;
     language?: Language;
     showHeader?: boolean;
     value?: string;
@@ -63,7 +63,7 @@ const CodeEditor: React.FC<Props> = ({
                     className="min-h-[7.5rem] pt-3 max-w-[90vw] lg:max-w-[80vw] max-h-[100vh] overflow-hidden"
                     language={getMonacoLanguageName(language) ?? 'python'}
                     value={value}
-                    onChange={onChange}
+                    onChange={(value: string | undefined) => onChange(value || '')}
                     beforeMount={handleEditorWillMount}
                     onMount={handleMount}
                     width={width}
