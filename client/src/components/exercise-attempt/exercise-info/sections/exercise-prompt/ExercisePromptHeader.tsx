@@ -1,7 +1,7 @@
 import React from 'react';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 import { getDifficultyColorClass } from '../../../../../utils/difficulty';
-import StatusLabel from '../../../../ui/labels/StatusLabel';
+import StatusCircle from '../../../../ui/labels/StatusCircle';
 import ExerciseSpec from '../../../../ui/spec/ExerciseSpec';
 
 const ExercisePromptHeader: React.FC = () => {
@@ -16,10 +16,10 @@ const ExercisePromptHeader: React.FC = () => {
             <div className="flex-between">
                 <h2 className="flex-start flex-wrap gap-3 text-xl md:text-2xl lg:text-3xl capitalize">
                     {exercise.name}
-                    {userSubmission && <StatusLabel correct={userSubmission.correct} />}
+                    {userSubmission && <StatusCircle correct={userSubmission.correct} />}
                 </h2>
                 <label
-                    className={`px-3 py-1 text-sm md:text-base lg:text-lg xl:text-xl border-2 ${colorClass} rounded-lg`}
+                    className={`px-2 py-1 text-sm md:text-base border-2 ${colorClass} rounded-lg`}
                 >
                     {exercise.difficulty}
                 </label>

@@ -32,7 +32,7 @@ const ExerciseIssueReports: React.FC = () => {
                 </div>
             )}
             {sortedReports.length === 0 && (
-                <div className="mt-12 flex-center gap-2 text-lg">
+                <div className="h-[20rem] flex-center gap-2 text-lg">
                     <FaSmile className="text-main-500 text-xl" />
                     <h3 className="text-slate-600">Fortunately, there are no issues!</h3>
                 </div>
