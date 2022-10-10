@@ -31,7 +31,7 @@ const REFETCH_INTERVAL = 2000;
 export const UserContextProvider: React.FC<Props> = ({ children }) => {
     const navigate = useNavigate();
     const [user, setUser] = useState<IUser | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     // Fetch user detail with ReactQuery only if the user is authenticated and user state is not null.
     const { userDetail } = useUserQuery(user?._id, REFETCH_INTERVAL);

@@ -32,7 +32,7 @@ const postSignUp = async (req, res) => {
     await newUser.save();
 
     const userToReturn = getUserToReturn(newUser);
-    res.json(userToReturn);
+    res.status(201).json(userToReturn);
 };
 
 const getLogout = (req, res, next) => {
@@ -49,7 +49,11 @@ const getAuthSuccess = (req, res) => {
         res.status(200).json(req.user);
         return;
     }
-    res.status(404).json({ success: false, message: 'User not found', cookies: req.cookies });
+    res.status(404).json({
+        success: false,
+        message: 'User not found',
+        cookies: req.cookies,
+    });
 };
 
 const getAuthFailure = (req, res) => {
@@ -63,8 +67,9 @@ const getAuthFailure = (req, res) => {
 // Helper function
 // Do not return password
 const getUserToReturn = (user) => {
-    delete user.password;
-    return user;
+    const userDoc = user._doc;
+    delete userDoc.password;
+    return userDoc;
 };
 
 const controller = {
