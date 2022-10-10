@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const keys = require('./keys');
 const errorHandler = require('../middleware/errorHandler');
 
 const router = require('../routes/index');
@@ -20,12 +19,12 @@ const forumPostRouter = require('../routes/forumPost');
 const createApp = () => {
     const app = express();
 
-    // handle cors issue from client
+    // handle cors issue from the client
     app.use(
         cors({
-            origin: keys.ClientBaseURL,
+            origin: true,
             methods: 'GET,POST,PUT,PATCH,DELETE',
-            credentials: true, // IMPORTANT to set to true
+            credentials: true, // IMPORTANT to set to true for session authentication
         }),
     );
 
