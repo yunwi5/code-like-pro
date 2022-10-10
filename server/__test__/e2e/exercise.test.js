@@ -125,6 +125,10 @@ describe('Exercises', () => {
 
         it('Cannot delete non-existing exercise', async () => {
             // If invalid exercise id is passed as a param, return 404.
+            await request(app)
+                .delete('/api/exercise/none')
+                .set('cookie', cookie)
+                .expect(404);
         });
 
         it('When deleting exercise, delete its comments and showcases as well', async () => {
