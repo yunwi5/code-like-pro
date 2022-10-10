@@ -42,10 +42,7 @@ const ExerciseSchema = new Schema({
         enum: LanguageList,
         required: true,
     },
-    topic: {
-        type: String,
-        required: true,
-    },
+    topic: { type: String },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

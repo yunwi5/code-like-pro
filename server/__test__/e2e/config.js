@@ -3,8 +3,10 @@ require('dotenv').config();
 
 const passportStrategy = require('../../config/passport');
 const { createApp, registerRoutes } = require('../../config/app');
-const { connectTestDB, dropDB, dropCollections } = require('../setuptestdb');
+const { connectTestDB, dropDB } = require('../setuptestdb');
 
+// Function that runs at the beginning of the e2e tests.
+// Always put this in beforeAll() callback function.
 const configureTestApp = async () => {
     // Passport auth initialization
     passportStrategy(passport);
@@ -25,6 +27,8 @@ const configureTestApp = async () => {
     return app;
 };
 
+// Function that runs after running all e2e tests.
+// Always put this in afterAll() callback function.
 const closeTestApp = async () => {
     await dropDB();
 };
