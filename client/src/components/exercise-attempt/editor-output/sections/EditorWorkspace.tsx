@@ -12,7 +12,7 @@ const EditorWorkspace: React.FC<{ index: number }> = ({ index }) => {
     const localStorageKey = `user-solution-${exercise?._id}-${index}`;
     const [localSolution, setLocalSolution] = useLocalStorage<string>(
         localStorageKey,
-        exercise?.startingTemplate,
+        exercise?.startingTemplate || '',
     );
 
     // Whenever the code changes, set user solution as well as set value to the localStorage.
@@ -26,6 +26,11 @@ const EditorWorkspace: React.FC<{ index: number }> = ({ index }) => {
     useEffect(() => {
         setUserSolution(localSolution);
     }, [localSolution, setUserSolution]);
+
+    // If the solution is empty at the beginning, apply the starting template from the creator.
+    useEffect(() => {
+        if (!localSolution) setLocalSolution(exercise?.startingTemplate);
+    }, [exercise?.startingTemplate, localSolution, setLocalSolution]);
 
     return (
         <CodeEditor

@@ -42,7 +42,12 @@ describe('Exercises', () => {
 
     describe('GET exercises', () => {
         it('Can get exercises', async () => {
-            await request(app).get('/api/exercise').expect(200);
+            const response = await request(app).get('/api/exercise');
+
+            // Confirm it is 200 OK
+            expect(response.statusCode).toBe(200);
+            // Confirm it is an array
+            expect(Array.isArray(response.body)).toBe(true);
         });
     });
 
