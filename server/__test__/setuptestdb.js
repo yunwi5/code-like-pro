@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
+/*
+Set up in-memory mongodb server for the testing server.
+Since it is for testing, the database should not affect the real database that actual users use.
+
+This file contains functions that create mongodb memory server, and drop the database 
+after testing everything to clean up the memory database before the next testing.
+*/
+
 // mongo instance
 let mongo = null;
 

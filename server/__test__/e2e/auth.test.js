@@ -67,8 +67,12 @@ describe('Authentication', () => {
     describe('Login the user', () => {
         it('Can login the user', async () => {
             const response = await request(app).post('/api/auth/login').send(userData);
-            console.log(response.body);
+            let cookie = response.headers['set-cookie'];
+
             expect(response.statusCode).toBe(200);
+
+            const res2 = await request(app).get('/api/protected').set('cookie', cookie);
+            expect(res2.statusCode).toBe(200);
         });
 
         it('Cannot login with missing attributes', async () => {

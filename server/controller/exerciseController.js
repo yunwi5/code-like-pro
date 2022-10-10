@@ -71,12 +71,10 @@ const getExerciseByID = async (req, res) => {
 const updateExercise = async (req, res) => {
     // get new exercise and test solution code
     const exerciseBody = req.body;
-    const newExercise = new Exercise(exerciseBody);
+    const testCases = exerciseBody.testCases;
+    const solutionCode = exerciseBody.solutionCode;
 
-    const testCases = newExercise.testCases;
-    const solutionCode = newExercise.solutionCode;
-
-    let language = newExercise.language;
+    let language = exerciseBody.language;
 
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
@@ -106,7 +104,7 @@ const updateExercise = async (req, res) => {
     } catch (err) {
         console.log(err.message);
     }
-    if (updatedExercise) res.status(201).json(updatedExercise);
+    if (updatedExercise) res.status(200).json(updatedExercise);
     else res.status(404).json(`Exercise with ${req.params.id} not found`);
 };
 

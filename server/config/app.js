@@ -58,7 +58,7 @@ const registerRoutes = (app) => {
     app.use('/api/exercise', exerciseRouter);
     app.use('/api/submission', userSubmissionRouter);
     app.use('/api/user', userRouter);
-    app.use('/api/showCase', showCaseRouter);
+    app.use('/api/showcase', showCaseRouter);
     app.use('/api/comment', commentRouter);
     app.use('/api/report', exerciseReportRouter);
     app.use('/api/ranking', rankingRouter);
