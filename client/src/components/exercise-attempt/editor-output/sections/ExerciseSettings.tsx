@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { deleteExercise } from '../../../apis/exercise.api';
-import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import { getExerciseEditLink } from '../../../utils/links';
-import { toastNotify } from '../../../utils/notification';
-import DeleteModal from '../../ui/modals/variations/DeleteModal';
-import SettingsButton from '../../ui/buttons/SettingsButton';
+import { deleteExercise } from '../../../../apis/exercise.api';
+import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import { getExerciseEditLink } from '../../../../utils/links';
+import { toastNotify } from '../../../../utils/notification';
+import DeleteModal from '../../../ui/modals/variations/DeleteModal';
+import SettingsButton from '../../../ui/buttons/SettingsButton';
 
 // Button on the editor page control bar, which is displayed only to the author of the exercis
 // To trigger the edit and delete action of the exercise they created.
