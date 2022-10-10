@@ -1,26 +1,49 @@
 import { useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+
 import { Logo } from '../../assets';
-import { ForumCategory, ForumCategoryList, ProfileSectionList } from '../../models/enums';
-import { useUserContext } from '../../store/context/UserContext';
+import { ForumCategoryList, ProfileSectionList } from '../../models/enums';
 import { ForumIcons } from '../../utils/forum';
 import { getForumCategoryLink } from '../../utils/links';
 import { ProfileLinkMap } from '../../utils/profile';
+import { useUserContext } from '../../store/context/UserContext';
 import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
 import ActiveNavLink from '../ui/links/ActiveNavLink';
 import ProfileMenuHeader from '../ui/user/profile-nav/ProfileMenuHeader';
 import UserProfileNav from '../ui/user/profile-nav/UserProfileNav';
+
+function getHeaderPositionClass(pathname: string) {
+    // If the route is NOT home page, sticky position to stick the header to the top when scrolled down.
+    if (pathname !== '/') return '!sticky top-0';
+    // If the route is home page, relative position.
+    return 'relative';
+}
+
+function getHeaderPaddingClass(pathname: string) {
+    // If the route is exercise attempt page, return small padding-x as it looks better on the attempt page.
+    if (pathname.match(/\/exercise\/\w+$/)) return 'px-4 lg:!px-5';
+    // If the route is other than the attempt page, return much larger paddings for large screen sizes.
+    return 'px-4 md:px-8 lg:px-[3.5%] xl:px-[5%] 2xl:px-[6%] 3xl:px-[7%]';
+}
 
 // Mobile header breakpoint is lg - 1024px.
 // Under 1024 px mobile header is displayed. Above 1024px desktop header is displayed.
 const Header = () => {
     const { user } = useUserContext();
     const isLoggedIn = !!user;
+    const pathname = useLocation().pathname;
     // State to manage visibility of the modbile dropdown menu.
     const [showMobileDropdownMenu, setShowMobileDropdownMenu] = useState(false);
 
+    // Get different styles for header by different pages.
+    const className = `${getHeaderPositionClass(pathname)} ${getHeaderPaddingClass(
+        pathname,
+    )}`;
+
     return (
-        <header className="relative flex items-center justify-between px-4 md:px-8 lg:px-[3.5%] xl:px-[5%] 2xl:px-[6%] 3xl:px-[7%] py-3 m-0 shadow-sm">
+        <header
+            className={`z-[90] relative flex items-center justify-between py-3 m-0 bg-white shadow ${className}`}
+        >
             <div className="logo flex items-center flex-shrink-0 text-main-400">
                 {/* Hamburger menu icon that toggles the mobile dropdown menu visibility. Only shown on the mobile screen size */}
                 <HamburgerMenu
@@ -180,7 +203,7 @@ const ForumNavItem: React.FC = () => {
             <ActiveNavLink
                 to="/forum"
                 activeClassName="!text-main-500"
-                className="link-underline-effect"
+                className="link-underline-effect nested-nav-item"
             >
                 Forums
                 <span className="absolute top-[-13px] left-[80%] px-[0.4rem] py-[0.13rem] text-[0.6rem] rounded-full bg-violet-500 brightness-110 text-white">
