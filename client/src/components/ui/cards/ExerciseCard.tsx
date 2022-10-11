@@ -108,13 +108,14 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                     {exerciseControl}
                 </div>
             </article>
-            {showDeleteModal && (
-                <DeleteModal
-                    onClose={() => setShowDeleteModal(false)}
-                    deleteFunction={deleteExercise.bind(null, exercise?._id)}
-                    item={`Exercise "${exercise?.name}"`}
-                />
-            )}
+
+            {/* Popup for delete operation confirmation */}
+            <DeleteModal
+                open={showDeleteModal}
+                onClose={() => setShowDeleteModal(false)}
+                deleteFunction={deleteExercise.bind(null, exercise?._id)}
+                item={`Exercise "${exercise?.name}"`}
+            />
         </>
     );
 };

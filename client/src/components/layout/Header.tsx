@@ -42,6 +42,7 @@ const Header = () => {
 
     return (
         <header
+            id="header"
             className={`z-[90] relative flex items-center justify-between py-3 m-0 bg-white shadow ${className}`}
         >
             <div className="logo flex items-center flex-shrink-0 text-main-400">

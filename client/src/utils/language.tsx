@@ -58,7 +58,7 @@ export function getUsedLanguagesByUser(submissions: IUserSubmissionPopulated[]) 
     for (let sub of submissions) {
         usedLanguages.add(sub.exercise.language);
     }
-    return prettierLanguageNames(Array.from(usedLanguages));
+    return prettierLanguageNames(Array.from(usedLanguages)).sort();
 }
 
 // Provide starting tmeplate code for exercise creations.

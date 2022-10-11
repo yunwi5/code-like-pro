@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { useMemo, useState } from 'react';
 
 import { SearchKey } from '../../../models/enums';
@@ -30,7 +31,11 @@ const MySubmission: React.FC = () => {
 
     return (
         <ProfileSectionContainer>
-            <nav className="flex flex-col sm:flex-row justify-between sm:items-end gap-y-4 mb-6">
+            <motion.nav
+                initial={{ opacity: 0, y: -150 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.35 } }}
+                className="flex flex-col sm:flex-row justify-between sm:items-end gap-y-4 mb-6"
+            >
                 <Searchbar
                     onKeyChange={() => {}}
                     onTextChange={(text) => setSearchText(text)}
@@ -42,7 +47,7 @@ const MySubmission: React.FC = () => {
                 <h2 className="text-gray-500 font-semibold text-xl">
                     {sortedSubmissions.length} Submissions
                 </h2>
-            </nav>
+            </motion.nav>
             <SubmissionList submissions={sortedSubmissions} />
         </ProfileSectionContainer>
     );

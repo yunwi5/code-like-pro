@@ -1,6 +1,8 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import usePagination from '../../../hooks/usePagination';
 import { IExerciseCard } from '../../../models/interfaces';
+import { listItemAnimations } from '../../../utils/animations';
 import ExerciseCard from '../cards/ExerciseCard';
 import PageNavigation from '../PageNavigation';
 
@@ -12,7 +14,10 @@ interface Props {
     exercisePerPage?: number;
 }
 
-const ExerciseList: React.FC<Props> = ({ exercises, exercisePerPage = EXERCISE_PER_PAGE }) => {
+const ExerciseList: React.FC<Props> = ({
+    exercises,
+    exercisePerPage = EXERCISE_PER_PAGE,
+}) => {
     // custom hook for paging
     const {
         array: currentPageExercises,
@@ -21,17 +26,27 @@ const ExerciseList: React.FC<Props> = ({ exercises, exercisePerPage = EXERCISE_P
         maxPage,
     } = usePagination<IExerciseCard>({ array: exercises, itemPerPage: exercisePerPage });
 
-    const handlePage = (newPage: number) => setPage(newPage);
+    const handlePage = (newPage: number) => {
+        setPage(newPage);
+    };
 
     return (
-        <section style={{}} className="lg:basis-2/3">
+        <section className="lg:basis-2/3">
             <div className="flex flex-col gap-5 mb-8">
                 {currentPageExercises.map((ex, idx) => (
-                    <ExerciseCard
+                    <motion.div
                         key={ex._id}
-                        exercise={ex}
-                        className={idx % 2 === 1 ? 'bg-gray-100' : ''}
-                    />
+                        variants={listItemAnimations}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        transition={{ duration: 0.3, delay: idx * 0.1 }}
+                    >
+                        <ExerciseCard
+                            exercise={ex}
+                            className={idx % 2 === 1 ? 'bg-gray-100' : ''}
+                        />
+                    </motion.div>
                 ))}
             </div>
             <PageNavigation

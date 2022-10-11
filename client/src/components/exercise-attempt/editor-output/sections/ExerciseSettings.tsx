@@ -33,14 +33,13 @@ const ExerciseSettings: React.FC = () => {
             />
 
             {/* Show delete warning modal if the user clicks the delete action */}
-            {showDeleteModal && (
-                <DeleteModal
-                    onClose={() => setShowDeleteModal(false)}
-                    deleteFunction={deleteExercise.bind(null, exercise._id)}
-                    onDelete={handleDeleteAction}
-                    item={`Exercise ${exercise.name}`}
-                />
-            )}
+            <DeleteModal
+                open={showDeleteModal}
+                onClose={() => setShowDeleteModal(false)}
+                deleteFunction={deleteExercise.bind(null, exercise._id)}
+                onDelete={handleDeleteAction}
+                item={`Exercise ${exercise.name}`}
+            />
         </>
     );
 };

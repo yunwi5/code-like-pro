@@ -3,7 +3,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import AnimationModal from '../AnimationModal';
 
 interface Props {
-    visible: boolean;
+    open: boolean;
     onClose(): void;
     heading: JSX.Element | string;
     children: React.ReactNode;
@@ -14,7 +14,7 @@ interface Props {
 
 const FormModal: React.FC<Props> = (props) => {
     const {
-        visible,
+        open,
         heading,
         onClose,
         children,
@@ -25,7 +25,7 @@ const FormModal: React.FC<Props> = (props) => {
 
     return (
         <AnimationModal
-            visible={visible}
+            open={open}
             onClose={onClose}
             className="!rounded-md min-w-[min(37.5rem,92.5vw)] overflow-hidden"
         >

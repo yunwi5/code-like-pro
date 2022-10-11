@@ -8,6 +8,16 @@ function usePagination<T>({ array, itemPerPage }: { array: T[]; itemPerPage: num
     // Last page number index based.
     const maxPage = Math.floor(Math.max(array.length - 1, 0) / itemPerPage);
 
+    const handlePage = (newPage: number) => {
+        setPage(newPage);
+
+        // When the page changes, scroll to the top of the page.
+        let timer = setTimeout(() => {
+            window.scroll({ top: 0, behavior: 'instant' as any });
+            clearTimeout(timer);
+        }, 2);
+    };
+
     const currentPageItems = useMemo(() => {
         const startIndex = page * itemPerPage;
         return array.slice(startIndex, startIndex + itemPerPage);
@@ -20,7 +30,7 @@ function usePagination<T>({ array, itemPerPage }: { array: T[]; itemPerPage: num
     }, [array.length]);
 
     // Return current page items as an array.
-    return { array: currentPageItems, page, setPage, maxPage };
+    return { array: currentPageItems, page, setPage: handlePage, maxPage };
 }
 
 export default usePagination;
