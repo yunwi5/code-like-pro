@@ -9,6 +9,7 @@ export interface IUserContext {
     login: (loginState: LoginState) => Promise<ResponseType>;
     logout: () => void;
     loginBySession: () => void;
+    refetchDetail: () => void;
     likedExerciseIdSet: Set<string>;
     submissionMap: { [key: string]: IUserSubmissionPopulated };
     userDetail: IUserDetail | undefined;

@@ -14,6 +14,7 @@ export const UserContext = React.createContext<IUserContext>({
     login: () => ({} as any),
     logout: () => {},
     loginBySession: () => {},
+    refetchDetail: () => {},
     likedExerciseIdSet: new Set(),
     submissionMap: {},
     userDetail: undefined,
@@ -34,7 +35,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     // Fetch user detail with ReactQuery only if the user is authenticated and user state is not null.
-    const { userDetail } = useUserQuery(user?._id, REFETCH_INTERVAL);
+    const { userDetail, refetch } = useUserQuery(user?._id, REFETCH_INTERVAL);
 
     // Quickly find out whether the user liked the exercise or not in O(1) time.
     const likedExerciseIdSet = useMemo(() => {
@@ -85,6 +86,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         login,
         logout,
         loginBySession,
+        refetchDetail: refetch,
         isLoading,
         likedExerciseIdSet,
         submissionMap,

@@ -172,7 +172,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                 <div className="self-stretch flex content-center">
                     <button
                         className={`${btnClass} ${
-                            showComment ? 'text-main-500' : ''
+                            showComment ? 'text-main-500 font-semibold' : ''
                         } hover:bg-main-400`}
                         onClick={() => setShowComment(!showComment)}
                     >
@@ -186,7 +186,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                 <div className="flex content-center">
                     <div
                         className={`${btnClass} ${
-                            compare ? 'text-violet-700' : ''
+                            compare ? 'text-violet-700 font-semibold' : ''
                         } hover:bg-violet-600`}
                         onClick={() => setCompare(!compare)}
                     >
@@ -196,7 +196,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                 </div>
             </div>
             {showComment ? (
-                <div>
+                <div className="mt-3 flex flex-col gap-2">
                     <CommentForm onSubmit={handleSubmitComment} className="mb-5" />
                     {showcaseComments.map((comment) => (
                         <CommentCard comment={comment} />
