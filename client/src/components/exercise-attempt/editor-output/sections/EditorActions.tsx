@@ -3,9 +3,9 @@ import PropagateLoader from 'react-spinners/PropagateLoader';
 import { BsListUl } from 'react-icons/bs';
 import { RiSlideshow3Line } from 'react-icons/ri';
 
-import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import { getShowcasePageLink } from '../../../utils/links';
-import Button from '../../ui/buttons/Button';
+import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import { getShowcasePageLink } from '../../../../utils/links';
+import Button from '../../../ui/buttons/Button';
 
 const EditorActions = () => {
     const { runCode, isLoading, submitCode, userSubmission, exercise } =

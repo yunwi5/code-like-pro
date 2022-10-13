@@ -107,18 +107,17 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
             </div>
 
             <CommentEditModal
-                visible={modal === 'edit'}
+                open={modal === 'edit'}
                 onClose={() => setModal(null)}
                 comment={comment}
             />
 
-            {modal === 'delete' && (
-                <DeleteModal
-                    onClose={() => setModal(null)}
-                    deleteFunction={handleDeleteComment}
-                    item="your comment"
-                />
-            )}
+            <DeleteModal
+                open={modal === 'delete'}
+                onClose={() => setModal(null)}
+                deleteFunction={handleDeleteComment}
+                item="your comment"
+            />
         </article>
     );
 };

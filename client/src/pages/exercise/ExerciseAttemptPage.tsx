@@ -39,6 +39,8 @@ const ExerciseAttemptPage: React.FC = () => {
         }
     }, [exerciseId, exerciseError]);
 
+    const isReady = !!exercise;
+
     return (
         <>
             <Helmet>
@@ -50,12 +52,12 @@ const ExerciseAttemptPage: React.FC = () => {
                     content={`Code editor page where users can attempt the coding challenge created by other users. Users can run the code and test the code before submission.`}
                 />
             </Helmet>
-            {!exercise && (
+            {!isReady && (
                 <div className="min-h-[82vh] flex-center">
                     <ClipLoader size={200} color="#3c38e0" />
                 </div>
             )}
-            {exercise && (
+            {isReady && (
                 <ExerciseAttemptCtxProvider
                     refetchExercise={refetch}
                     exercise={exercise}

@@ -33,7 +33,7 @@ const ExerciseSpec: React.FC<{ exercise: IExerciseWithId }> = ({ exercise }) => 
             </li>
             <li className="flex items-center gap-1">
                 <MdReportProblem className="text-stone-500 text-[1.35rem]" />{' '}
-                {exercise.reports.length} report(s)
+                {exercise.reports.length} report{exercise.reports.length !== 1 && 's'}
             </li>
         </ul>
     );

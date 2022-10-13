@@ -55,7 +55,7 @@ const ShowcasePostModal: React.FC<Props> = ({ visible, onClose }) => {
 
     return (
         <FormModal
-            visible={visible}
+            open={visible}
             onClose={onClose}
             onSubmit={handleSubmit}
             heading={

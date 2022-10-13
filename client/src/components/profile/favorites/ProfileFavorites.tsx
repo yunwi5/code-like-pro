@@ -6,6 +6,7 @@ import ExerciseList from '../../ui/lists/ExerciseList';
 import Searchbar from '../../ui/inputs/Searchbar';
 import ProfileSectionContainer from '../containers/ProfileSectionContainer';
 import ProfileLoader from '../ProfileLoader';
+import { motion } from 'framer-motion';
 
 const ProfileFavorites = () => {
     const { userDetail } = useUserContext();
@@ -23,7 +24,11 @@ const ProfileFavorites = () => {
 
     return (
         <ProfileSectionContainer>
-            <nav className="flex flex-col sm:flex-row justify-between sm:items-end gap-y-4 mb-6">
+            <motion.nav
+                initial={{ opacity: 0, y: -150 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.25 } }}
+                className="flex flex-col sm:flex-row justify-between sm:items-end gap-y-4 mb-6"
+            >
                 <Searchbar
                     onKeyChange={(newKey) => setSearchKey(newKey as SearchKey)}
                     onTextChange={(text) => setSearchText(text)}
@@ -35,7 +40,7 @@ const ProfileFavorites = () => {
                 <h2 className="text-gray-500 font-semibold text-xl">
                     {searchedExercises.length} Exercises
                 </h2>
-            </nav>
+            </motion.nav>
             <ExerciseList exercises={searchedExercises} exercisePerPage={5} />
         </ProfileSectionContainer>
     );

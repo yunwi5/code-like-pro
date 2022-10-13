@@ -127,11 +127,10 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     return (
         <ExerciseAttemptContext.Provider value={value}>
             {children}
-            {showInviteModal && (
-                <ShowcaseInviteModal
-                    onClose={() => setShowInviteModal(false)}
-                ></ShowcaseInviteModal>
-            )}
+            <ShowcaseInviteModal
+                open={showInviteModal}
+                onClose={() => setShowInviteModal(false)}
+            ></ShowcaseInviteModal>
         </ExerciseAttemptContext.Provider>
     );
 };

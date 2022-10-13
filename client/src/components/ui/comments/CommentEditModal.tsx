@@ -7,12 +7,12 @@ import AnimationModal from '../modals/AnimationModal';
 import CommentForm from './CommentForm';
 
 interface Props {
-    visible: boolean;
+    open: boolean;
     onClose: () => void;
     comment: IComment; // Initial comment that should be edited.
 }
 
-const CommentEditModal: React.FC<Props> = ({ visible, onClose, comment }) => {
+const CommentEditModal: React.FC<Props> = ({ open, onClose, comment }) => {
     const handleEdit = async (text: string) => {
         const { ok } = await patchComment(comment._id, { text });
         if (!ok) toastNotify('Oops, something went wrong...', 'error');
@@ -21,7 +21,7 @@ const CommentEditModal: React.FC<Props> = ({ visible, onClose, comment }) => {
 
     return (
         <AnimationModal
-            visible={visible}
+            open={open}
             direction="vertical"
             onClose={onClose}
             className="!rounded-md min-w-[min(37.5rem,92.5vw)] overflow-hidden"

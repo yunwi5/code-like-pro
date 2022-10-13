@@ -44,7 +44,7 @@ export const useProfileEditContext = () => useContext(ProfileEditContext);
 export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
-    const { userDetail } = useUserContext();
+    const { userDetail, refetchDetail } = useUserContext();
     const [isLoading, setIsLoading] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -90,8 +90,11 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
             pictureUrl: imageToUpload,
             description,
         });
-        if (ok) toastNotify('Profile updated!', 'success');
-        else toastNotify('Something went wrong while updating your profile...', 'error');
+        if (ok) {
+            toastNotify('Profile updated!', 'success');
+            refetchDetail();
+        } else
+            toastNotify('Something went wrong while updating your profile...', 'error');
 
         setIsLoading(false);
     };

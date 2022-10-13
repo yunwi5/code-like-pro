@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
-import { likeExerciseRequest } from '../../../apis/exercise.api';
-import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import { useUserContext } from '../../../store/context/UserContext';
-import { getLanguageIcon, prettierLanguageName } from '../../../utils/language';
-import HoveringLabel from '../../ui/labels/HoveringLabel';
-import IssueReportModal from '../modals/IssueReportModal';
+import { likeExerciseRequest } from '../../../../apis/exercise.api';
+import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import { useUserContext } from '../../../../store/context/UserContext';
+import { getLanguageIcon, prettierLanguageName } from '../../../../utils/language';
+import HoveringLabel from '../../../ui/labels/HoveringLabel';
+import IssueReportModal from '../../modals/IssueReportModal';
 import ExerciseSettings from './ExerciseSettings';
 
 // Control header that let users set language settings, favorite and report functionalities.
@@ -41,22 +41,14 @@ const EditorControlBar: React.FC = () => {
         <>
             <div className="flex items-center px-3 lg:pl-1 lg:pr-4 py-[0.55rem] lg:py-[0.375rem] ">
                 {/* Language settings */}
-                <div className="flex items-center">
-                    <label
-                        className="hidden md:inline-block mr-2"
-                        htmlFor="language-select"
-                    >
-                        Language
-                    </label>
-                    <div
-                        className={`px-3 py-[0.3rem] flex-center bg-slate-50 hover:bg-slate-100 text-gray-600 gap-2 rounded shadow transition-all`}
-                    >
-                        {getLanguageIcon(exercise.language, {
-                            width: '25px',
-                            height: '25px',
-                        })}
-                        {prettierLanguageName(exercise.language || '')}
-                    </div>
+                <div
+                    className={`px-3 py-[0.3rem] flex-center bg-slate-50 hover:bg-slate-100 text-gray-600 gap-2 rounded shadow transition-all`}
+                >
+                    {getLanguageIcon(exercise.language, {
+                        width: '25px',
+                        height: '25px',
+                    })}
+                    {prettierLanguageName(exercise.language || '')}
                 </div>
 
                 {/* Favorite toggler */}

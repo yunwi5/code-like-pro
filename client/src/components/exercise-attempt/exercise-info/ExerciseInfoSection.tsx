@@ -3,12 +3,14 @@ import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptCon
 import ExerciseInfoNav from './ExerciseInfoNav';
 import ExercisePrompt from './sections/exercise-prompt/ExercisePrompt';
 import ExerciseIssueReports from './sections/ExerciseIssueReports';
+import PreviousSubmission from './sections/PreviousSubmission';
 import TestCasesDisplay from './sections/TestCasesDisplay';
 
 export enum SubSection {
     PROMPT = 'Prompt',
     TEST_CASES = 'Test Cases',
     ISSUES = 'Issues',
+    SUBMISSION = 'Submission', // Previous user submission
 }
 
 export const SubSectionList = Object.freeze(Object.values(SubSection));
@@ -33,6 +35,7 @@ const ExerciseInfoSection: React.FC = () => {
             {activeSubSection === SubSection.PROMPT && <ExercisePrompt />}
             {activeSubSection === SubSection.TEST_CASES && <TestCasesDisplay />}
             {activeSubSection === SubSection.ISSUES && <ExerciseIssueReports />}
+            {activeSubSection === SubSection.SUBMISSION && <PreviousSubmission />}
         </div>
     );
 };

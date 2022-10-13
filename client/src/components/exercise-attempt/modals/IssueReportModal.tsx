@@ -56,7 +56,7 @@ const IssueReportModal: React.FC<{ visible: boolean; onClose: () => void }> = ({
 
     return (
         <FormModal
-            visible={visible}
+            open={visible}
             onClose={onClose}
             onSubmit={handleSubmit}
             heading={

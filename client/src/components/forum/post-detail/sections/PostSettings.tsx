@@ -30,14 +30,13 @@ const PostSettings: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
             />
 
             {/* Show delete warning modal if the user clicks the delete action */}
-            {showDeleteModal && (
-                <DeleteModal
-                    onClose={() => setShowDeleteModal(false)}
-                    deleteFunction={deleteForumPost.bind(null, post._id)}
-                    onDelete={handleDeleteAction}
-                    item={`Forum Post ${post.name}`}
-                />
-            )}
+            <DeleteModal
+                open={showDeleteModal}
+                onClose={() => setShowDeleteModal(false)}
+                deleteFunction={deleteForumPost.bind(null, post._id)}
+                onDelete={handleDeleteAction}
+                item={`Forum Post ${post.name}`}
+            />
         </>
     );
 };

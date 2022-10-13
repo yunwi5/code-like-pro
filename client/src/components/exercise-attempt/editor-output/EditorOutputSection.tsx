@@ -1,42 +1,42 @@
-import React, { useEffect } from 'react';
-import EditorControlBar from './EditorControlBar';
-import CodeEditor from '../../ui/editor/CodeEditor';
-import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import EditorActions from './EditorActions';
-import useLocalStorage from '../../../hooks/useLocalStorage';
+import React, { useState } from 'react';
+import EditorControlBar from './sections/EditorControlBar';
+import EditorActions from './sections/EditorActions';
+import EditorWorkspace from './sections/EditorWorkspace';
 
+// Exercise attempt output section where users mainly code their solution (right side on the desktop screen)
 const EditorOutputSection: React.FC = () => {
-    const { exercise, userSolution, setUserSolution } = useExerciseAttemptCtx();
-
-    // Store current user's code in the localStorate, so that it is not lost when the user refreshes the page.
-    const localStorageKey = `user-solution-${exercise?._id}`;
-    const [localSolution, setLocalSolution] = useLocalStorage<string>(
-        localStorageKey,
-        userSolution,
-    );
-
-    const handleChange = (value: string | undefined) => {
-        setUserSolution(value ?? '');
-        setLocalSolution(value ?? '');
-    };
-
-    // When the user re-enters the page, or refreshes the page,
-    // Retrieve previous user code for this exercise from the localStorage.
-    useEffect(() => {
-        if (!userSolution) setUserSolution(localSolution);
-    }, [userSolution]);
+    // Solution number (index) that is currently selected by the user.
+    // There are possibly 3 different solutions that the user can write for this exercise.
+    const [solutionIndex, setSolutionIndex] = useState(0);
 
     return (
         <div className="flex-1 flex flex-col">
+            {/* Controlbar that handles favorite and report UI and functionalities */}
             <EditorControlBar />
-            <CodeEditor
-                language={exercise?.language}
-                onChange={handleChange}
-                value={userSolution}
-                height={'25rem'}
-                className="flex-1 !border-none lg:!max-w-[50vw]"
-                showHeader={false}
-            />
+
+            {/* Selecting solution number that the user wants to keep working. There are solutions 1 ~ 3 for each exercise. */}
+            <div className="flex-1 flex flex-col">
+                <div className="flex gap-3 px-3 py-1 text-gray-600 bg-gray-50 border-b-[1.5px] border-b-slate-200">
+                    {[0, 1, 2].map((index) => (
+                        <span
+                            key={index}
+                            className={`px-2 py-1 font-semibold rounded cursor-pointer hover:bg-slate-200 hover:text-main-500 ${
+                                index === solutionIndex
+                                    ? 'bg-slate-200/80 text-main-500'
+                                    : ''
+                            }`}
+                            onClick={() => setSolutionIndex(index)}
+                        >
+                            Solution {index + 1}
+                        </span>
+                    ))}
+                </div>
+
+                {/* Code editor workspace. Users write solution code. */}
+                <EditorWorkspace key={solutionIndex} index={solutionIndex} />
+            </div>
+
+            {/* Editor actions including navigation, run code and submit code functionalities. */}
             <EditorActions />
         </div>
     );

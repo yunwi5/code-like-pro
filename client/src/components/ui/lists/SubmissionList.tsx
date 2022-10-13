@@ -1,6 +1,8 @@
 import React from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import usePagination from '../../../hooks/usePagination';
 import { IUserSubmissionPopulated } from '../../../models/interfaces';
+import { listItemAnimations } from '../../../utils/animations';
 import SubmissionCard from '../cards/SubmissionCard';
 import PageNavigation from '../PageNavigation';
 
@@ -22,22 +24,36 @@ const SubmissionList: React.FC<Props> = ({ submissions }) => {
         itemPerPage: SUBMISSION_PER_PAGE,
     });
 
+    const handlePage = (newPage: number) => {
+        setPage(newPage);
+    };
+
     return (
         <section>
             <div className="flex flex-col gap-5 mb-8">
-                {currentPageExercises.map((sub, idx) => (
-                    <SubmissionCard
-                        key={sub._id}
-                        submission={sub}
-                        className={idx % 2 === 1 ? 'bg-gray-100' : ''}
-                    />
-                ))}
+                <AnimatePresence>
+                    {currentPageExercises.map((sub, idx) => (
+                        <motion.div
+                            key={sub._id}
+                            variants={listItemAnimations}
+                            initial="initial"
+                            animate="animate"
+                            exit={{ opacity: 0, transition: { duration: 0.3 } }}
+                            transition={{ duration: 0.3, delay: idx * 0.07 }}
+                        >
+                            <SubmissionCard
+                                submission={sub}
+                                className={idx % 2 === 1 ? 'bg-gray-100' : ''}
+                            />
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
             </div>
 
             <PageNavigation
                 currentPage={page}
                 totalPages={maxPage}
-                onChangePage={(newPage: number) => setPage(newPage)}
+                onChangePage={handlePage}
             />
         </section>
     );

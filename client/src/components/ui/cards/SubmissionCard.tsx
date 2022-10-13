@@ -8,6 +8,7 @@ import { getDifficultyColorClass } from '../../../utils/difficulty';
 import { getExerciseAttemptPageLink } from '../../../utils/links';
 import { BsFileEarmarkCodeFill } from 'react-icons/bs';
 import { getDateTimeFormat } from '../../../utils/datetime';
+import StatusLabel from '../labels/StatusLabel';
 
 interface Props {
     submission: IUserSubmissionPopulated;
@@ -18,9 +19,8 @@ const SubmissionCard: React.FC<Props> = ({ submission, className }) => {
     const navigate = useNavigate();
     const { difficulty, name, _id: exerciseId } = submission.exercise;
 
-    // Apply different color styles for different difficulties and status.
+    // Apply different color styles for different difficulties.
     const difficultyClass = getDifficultyColorClass(difficulty);
-    const statusClass = submission.correct ? 'text-emerald-500' : 'text-rose-500';
 
     // Human readable datetime format.
     const dateTimeFormat = getDateTimeFormat(submission.postedAt);
@@ -35,12 +35,7 @@ const SubmissionCard: React.FC<Props> = ({ submission, className }) => {
                     <BsFileEarmarkCodeFill className="text-lg text-gray-500" />{' '}
                     {dateTimeFormat}
                 </time>
-                <div className={`flex-start gap-2 ${statusClass}`}>
-                    <div className="flex-center w-[1.65rem] h-[1.65rem] rounded-full shadow-md bg-white">
-                        {submission.correct ? <FiCheck size={23} /> : <IoMdClose size={23} />}
-                    </div>
-                    {submission.correct ? 'Correct' : 'Incorrect'}
-                </div>
+                <StatusLabel correct={submission.correct} />
             </header>
 
             {/* Submission exercise title and difficulty info */}

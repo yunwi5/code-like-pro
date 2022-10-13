@@ -1,19 +1,22 @@
 import React from 'react';
-import HoveringLabel from './HoveringLabel';
+import { FiCheck } from 'react-icons/fi';
+import { IoMdClose } from 'react-icons/io';
 
-const StatusLabel: React.FC<{ correct: boolean }> = ({ correct }) => {
+const StatusLabel: React.FC<{ correct: boolean; showIcon?: boolean }> = ({
+    correct,
+    showIcon = true,
+}) => {
+    const statusClass = correct ? 'text-emerald-500' : 'text-rose-500';
+
     return (
-        <>
-            {correct ? (
-                <HoveringLabel label="Correct" className="text-base">
-                    <div className="shadow-md bg-emerald-500/80 w-[1.35rem] h-[1.35rem] rounded-full"></div>
-                </HoveringLabel>
-            ) : (
-                <HoveringLabel label="Incorrect" className="text-base">
-                    <div className="shadow-md bg-rose-500 w-[1.35rem] h-[1.35rem] rounded-full" />
-                </HoveringLabel>
+        <div className={`flex-start gap-2 ${statusClass}`}>
+            {showIcon && (
+                <div className="flex-center w-[1.65rem] h-[1.65rem] rounded-full shadow-md bg-white">
+                    {correct ? <FiCheck size={23} /> : <IoMdClose size={23} />}
+                </div>
             )}
-        </>
+            {correct ? 'Success' : 'Fail'}
+        </div>
     );
 };
 

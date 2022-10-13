@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { ClipLoader } from 'react-spinners';
-import Modal from '../Modal';
+import AnimationModal from '../AnimationModal';
 
 interface Props {
+    open: boolean;
     // Callback function to trigger closing of the modal
     onClose: () => void;
     // Callback function for hanlding the delete request
@@ -15,7 +16,13 @@ interface Props {
 }
 
 // Modal for handling delete action and request
-const DeleteModal: React.FC<Props> = ({ onClose, deleteFunction, onDelete, item }) => {
+const DeleteModal: React.FC<Props> = ({
+    open,
+    onClose,
+    deleteFunction,
+    onDelete,
+    item,
+}) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleDelete = async () => {
@@ -32,7 +39,9 @@ const DeleteModal: React.FC<Props> = ({ onClose, deleteFunction, onDelete, item 
     };
 
     return (
-        <Modal
+        <AnimationModal
+            open={open}
+            direction="vertical"
             onClose={onClose}
             className="!rounded-md min-w-[min(25rem,92.5vw)] overflow-hidden"
         >
@@ -50,7 +59,9 @@ const DeleteModal: React.FC<Props> = ({ onClose, deleteFunction, onDelete, item 
                     You are about to delete{' '}
                     <strong className="text-semibold text-rose-500">{item}</strong>.
                 </p>
-                <p>Your action will not be cancelled, so please be careful before delete.</p>
+                <p>
+                    Your action will not be cancelled, so please be careful before delete.
+                </p>
 
                 {/* Action buttons for submission and closing modal */}
                 <div className="pt-2 flex-between">
@@ -76,7 +87,7 @@ const DeleteModal: React.FC<Props> = ({ onClose, deleteFunction, onDelete, item 
                     )}
                 </div>
             </div>
-        </Modal>
+        </AnimationModal>
     );
 };
 

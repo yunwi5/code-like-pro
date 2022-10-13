@@ -18,8 +18,8 @@ const ModalOverlay: React.FC<OverlayProps> = (props) => {
         <motion.div
             initial={{
                 opacity: 0,
-                y: !isHorizontal ? -300 : 0,
-                x: isHorizontal ? -300 : 0,
+                x: isHorizontal ? -200 : 0,
+                y: !isHorizontal ? -150 : 0,
             }}
             animate={{
                 opacity: 1,
@@ -34,8 +34,8 @@ const ModalOverlay: React.FC<OverlayProps> = (props) => {
             }}
             exit={{
                 opacity: 0,
-                x: isHorizontal ? 300 : 0,
-                y: !isHorizontal ? 300 : 0,
+                x: isHorizontal ? 200 : 0,
+                y: !isHorizontal ? 150 : 0,
                 transition: { duration: 0.2 },
             }}
             drag
@@ -60,23 +60,23 @@ const Backdrop: React.FC<BackdropProps> = ({ onClose, children }) => (
 
 /* Modal */
 interface ModalProps {
-    visible: boolean;
-    direction?: AnimationDirection;
+    open: boolean;
     onClose: () => void;
     children: React.ReactNode;
+    direction?: AnimationDirection;
     className?: string;
 }
 
 const portalElement = document.getElementById('modal') as HTMLElement;
 
 const AnimationModal: React.FC<ModalProps> = (props) => {
-    const { visible, direction = 'horizontal', onClose, className, children } = props;
+    const { open, direction = 'horizontal', onClose, className, children } = props;
 
     return (
         <>
             {ReactDOM.createPortal(
                 <AnimatePresence>
-                    {visible && (
+                    {open && (
                         <Backdrop onClose={onClose}>
                             <ModalOverlay direction={direction} className={className}>
                                 {children}

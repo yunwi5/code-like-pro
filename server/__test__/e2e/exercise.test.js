@@ -42,7 +42,12 @@ describe('Exercises', () => {
 
     describe('GET exercises', () => {
         it('Can get exercises', async () => {
-            await request(app).get('/api/exercise').expect(200);
+            const response = await request(app).get('/api/exercise');
+
+            // Confirm it is 200 OK
+            expect(response.statusCode).toBe(200);
+            // Confirm it is an array
+            expect(Array.isArray(response.body)).toBe(true);
         });
     });
 
@@ -119,8 +124,15 @@ describe('Exercises', () => {
     describe('DELETE an exercise', () => {
         it('Can delete an exercise', async () => {
             // Create a sample exercise with the createExercise() utility function
+            const createdExercise = await createExercise(app, cookie);
+
             // Send DELETE request to delete this exercise
+            const response = await request(app)
+                .delete(`/api/exercise/${createdExercise._id}`)
+                .set('cookie', cookie);
+
             // Test the status code is 200 OK
+            expect(response.statusCode).toBe(200);
         });
 
         it('Cannot delete non-existing exercise', async () => {

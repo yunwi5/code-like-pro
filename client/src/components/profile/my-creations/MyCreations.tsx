@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import useExerciseSearch from '../../../hooks/useExerciseSearch';
 import { SearchKey, SearchKeyList } from '../../../models/enums';
 import { useUserContext } from '../../../store/context/UserContext';
@@ -30,7 +32,11 @@ const MyCreations = () => {
 
     return (
         <ProfileSectionContainer>
-            <nav className="flex flex-col sm:flex-row justify-between sm:items-end gap-y-4 mb-6">
+            <motion.nav
+                initial={{ opacity: 0, y: -150 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.25 } }}
+                className="flex flex-col sm:flex-row justify-between sm:items-end gap-y-4 mb-6"
+            >
                 <Searchbar
                     onKeyChange={(newKey) => setSearchKey(newKey as SearchKey)}
                     onTextChange={(text) => setSearchText(text)}
@@ -42,7 +48,7 @@ const MyCreations = () => {
                 <h2 className="text-gray-500 font-semibold text-xl">
                     {searchedCreations.length} Creations
                 </h2>
-            </nav>
+            </motion.nav>
             <ExerciseList exercises={searchedCreations} exercisePerPage={5} />
         </ProfileSectionContainer>
     );
