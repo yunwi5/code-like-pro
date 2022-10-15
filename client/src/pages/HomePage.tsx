@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 
 import { AppProperty } from '../constants/app';
 import HeroLanding from '../components/home/HeroLanding';
-import Carousel from '../components/home/carousel/Carousel';
 import TopExercises from '../components/home/TopExercises';
 import TopUsers from '../components/home/TopUsers';
 import Strengths from '../components/home/strengths/Strengths';
@@ -37,14 +36,6 @@ const Home: React.FC = () => {
 
             <div className="max-w-[100vw] overflow-hidden">
                 <HeroLanding />
-
-                {/* <motion.div
-                    initial={{ opacity: 0, y: 100 }}
-                    whileInView={{ opacity: 1, y: 0, transition: { duration: 0.8 } }}
-                    viewport={{ once: true }}
-                >
-                    <Carousel />
-                </motion.div> */}
                 <motion.div
                     variants={rightInVariants}
                     initial="initial"
@@ -90,16 +81,16 @@ const Home: React.FC = () => {
                 >
                     <TopUsers />
                 </motion.div>
-                <motion.div
-                    variants={leftInVariants}
-                    initial="initial"
-                    whileInView="animate"
-                    transition={{ duration: 1 }}
-                    viewport={{ once: true }}
-                >
-                    <HomeDiscussions />
-                </motion.div>
             </div>
+            <motion.div
+                variants={leftInVariants}
+                initial="initial"
+                whileInView="animate"
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+            >
+                <HomeDiscussions />
+            </motion.div>
         </>
     );
 };

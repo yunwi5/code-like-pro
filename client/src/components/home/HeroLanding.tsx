@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 
 import { Typewriter } from '../../models/classes/TypeWriter';
-import '../../styles/typewriter.scss';
 import Carousel from './carousel/Carousel';
 import { sleep } from '../../utils/promise';
 
@@ -22,6 +21,7 @@ const HeroLanding: React.FC = () => {
         });
         typeWriter.typeString('Programming exercises created for students by students');
         typeWriter.start().then(async () => {
+            // Remove the type blinking 1s after the animation finishes
             await sleep(1000);
             setTypingFinished(true);
         });
