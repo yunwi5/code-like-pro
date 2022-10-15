@@ -32,27 +32,23 @@ const createApp = () => {
     app.use(express.json({ limit: '50mb' }));
     app.use(express.urlencoded({ limit: '50mb', extended: false }));
 
-    console.log({
-        nodeEnv: process.env.NODE_ENV,
-        isDevelopment: process.env.NODE_ENV !== 'production',
-    });
+    const sessionConfig = {
+        name: process.env.SESSION_NAME,
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        // proxy: true, // Required for Heroku & Digital Ocean (regarding X-Forwarded-For)
+        cookie: {
+            httpOnly: false,
+            secure: process.env.NODE_ENV !== 'production' ? undefined : true,
+            sameSite: 'none',
+        },
+    };
+
+    console.log({ sessionConfig });
 
     // Express Session
-    app.use(
-        session({
-            name: process.env.SESSION_NAME,
-            secret: process.env.SESSION_SECRET,
-            resave: false,
-            saveUninitialized: true,
-            proxy: true, // Required for Heroku & Digital Ocean (regarding X-Forwarded-For)
-            cookie: {
-                httpOnly: false,
-                secure: process.env.NODE_ENV !== 'production' ? undefined : true,
-                maxAge: 1000 * 60 * 60 * 48,
-                sameSite: 'none',
-            },
-        }),
-    );
+    app.use(session(sessionConfig));
 
     // Register default error handler
     app.use(errorHandler);
