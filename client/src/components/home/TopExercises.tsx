@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
 
-import useExerciseTop3Query from '../../hooks/exercise-queries/useExerciseTop3Query';
+import useExerciseTopQuery from '../../hooks/exercise-queries/useExerciseTopQuery';
 import ExerciseList from '../ui/lists/ExerciseList';
 import { IExerciseCard } from '../../models/interfaces';
 import { mapExercisesToExerciseCards } from '../../utils/exercise-utils/exercise';
 import ArrowLink from '../ui/links/ArrowLink';
 
 const TopExercises: React.FC = () => {
-    const { exercises } = useExerciseTop3Query();
+    const { exercises } = useExerciseTopQuery(3);
     const exerciseCards: IExerciseCard[] = useMemo(
         () => mapExercisesToExerciseCards(exercises),
         [exercises],
