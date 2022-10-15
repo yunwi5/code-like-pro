@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const errorHandler = require('../middleware/errorHandler');
 
+const MongoStore = require('connect-mongo');
+const errorHandler = require('../middleware/errorHandler');
+const keys = require('./keys');
 const router = require('../routes/index');
 const authRouter = require('../routes/auth/auth');
 const authGoogleRouter = require('../routes/auth/authGoogle');
@@ -15,6 +17,17 @@ const exerciseReportRouter = require('../routes/exerciseReport');
 const rankingRouter = require('../routes/ranking');
 const imageRouter = require('../routes/image');
 const forumPostRouter = require('../routes/forumPost');
+
+// Mongo session store for better session storage (default is in-memory session which is not efficient)
+const store = MongoStore.create({
+    mongoUrl: keys.MongoURI,
+    secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
+    touchAfter: 24 * 60 * 60, // lazy update the session, by limiting a period of time
+});
+
+store.on('error', function (e) {
+    console.log('Session store error', e);
+});
 
 const createApp = () => {
     const app = express();
@@ -33,15 +46,17 @@ const createApp = () => {
     app.use(express.urlencoded({ limit: '50mb', extended: false }));
 
     const sessionConfig = {
-        name: process.env.SESSION_NAME,
-        secret: process.env.SESSION_SECRET,
+        store,
+        name: process.env.SESSION_NAME || 'thisshouldnotbeasessionname',
+        secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
         resave: false,
         saveUninitialized: true,
-        proxy: true, // Required for Heroku & Digital Ocean (regarding X-Forwarded-For)
+        proxy: true, // Required for hosting providers like Heroku & Digital Ocean (regarding X-Forwarded-For)
         cookie: {
-            httpOnly: false,
-            secure: process.env.NODE_ENV !== 'production' ? undefined : true,
+            httpOnly: false, // We use JS to access the APIs, so should be false
+            secure: process.env.NODE_ENV !== 'production' ? undefined : true, // If true, it only works in https protocal. True in production.
             sameSite: 'none',
+            maxAge: 3 * 24 * 60 * 60 * 1000, //user won't have to login for 3 days
         },
     };
 

@@ -18,7 +18,7 @@ const Sortingbar: React.FC<Props> = (props) => {
     return (
         <div className="flex-start gap-2">
             <CustomSelect
-                className="flex-1 gap-0"
+                className="flex-1"
                 labelText={<span className="font-semibold">Sort By</span>}
                 options={sortingKeys}
                 onChange={onKeyChange}
@@ -26,7 +26,7 @@ const Sortingbar: React.FC<Props> = (props) => {
                 id="sorting-key"
             />
             <CustomSelect
-                className="flex-1 gap-0"
+                className="flex-1"
                 labelText={<span className="font-semibold">Direction</span>}
                 options={SortingDirectionList}
                 value={direction}

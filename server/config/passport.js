@@ -17,7 +17,9 @@ const passportStrategy = (passport) => {
                 .then((user) => {
                     if (!user) {
                         // no Match
-                        return done(null, false, { message: 'This email is not registered' });
+                        return done(null, false, {
+                            message: 'This email is not registered',
+                        });
                     } else {
                         // Match password
                         bcrypt.compare(password, user.password || '', (err, isMatch) => {
@@ -46,7 +48,6 @@ const passportStrategy = (passport) => {
                 callbackURL: '/api/auth/google/callback',
             },
             (accessToken, refreshToken, profile, done) => {
-                console.log('google profile json:', profile._json);
                 const { email, name, picture, sub } = profile._json;
 
                 User.findOne({ email })
