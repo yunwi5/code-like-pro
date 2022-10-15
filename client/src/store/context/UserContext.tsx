@@ -34,8 +34,6 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     const [user, setUser] = useState<IUser | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    console.log({ user });
-
     // Fetch user detail with ReactQuery only if the user is authenticated and user state is not null.
     const { userDetail, refetch } = useUserQuery(user?._id, REFETCH_INTERVAL);
 

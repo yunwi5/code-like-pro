@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import ProfileDropdownMenu from './ProfileDropdownMenu';
 import ProfilePicture from '../ProfilePicture';
@@ -9,17 +9,6 @@ import { useUserContext } from '../../../../store/context/UserContext';
 const UserProfileNav: React.FC = () => {
     const { userDetail } = useUserContext();
     const [showDropdown, setShowDropdown] = useState(false);
-    const [_, setRenderCount] = useState(0);
-
-    // Dirty trick to make the profile nav component to render once more after 1s.
-    // This is to force the profile image to be loaded.
-    useEffect(() => {
-        let timer = setTimeout(() => {
-            setRenderCount((prev) => prev + 1);
-        }, 1000);
-
-        return () => clearTimeout(timer);
-    }, []);
 
     return (
         <ClickAwayListener onClickAway={() => setShowDropdown(false)}>

@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 
 import { Typewriter } from '../../models/classes/TypeWriter';
@@ -30,7 +30,7 @@ const HeroLanding: React.FC = () => {
     return (
         <section className="min-h-[90vh] flex-center flex-col lg:flex-row gap-y-10 gap-x-3 py-5 px-4 max-w-[1600px] mx-auto">
             <div className="flex-1 flex flex-col justify-center items-center lg:items-start gap-6  mt-5 lg:mt-0 max-w-[min(80vw,70rem)] lg:ml-5 text-center lg:text-left overflow-hidden">
-                <h1 className="inline-block text-2xl md:text-4xl xl:text-[3rem] xl:leading-[3.5rem] tracking-[0.1em] capitalize bg-gradient-to-r from-main-500/90 to-fuchsia-600 bg-clip-text text-transparent">
+                <h1 className="inline-block text-3xl md:text-4xl xl:text-[3rem] xl:leading-[3.5rem] tracking-[0.1em] capitalize bg-gradient-to-r from-main-500/90 to-fuchsia-600 bg-clip-text text-transparent">
                     <span ref={typerRef}></span>
                     {!typingFinished && (
                         <span className="blink ml-[0.15rem] h-[0.95em]"></span>

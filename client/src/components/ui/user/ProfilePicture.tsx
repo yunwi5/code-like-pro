@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
+import useForceRerender from '../../../hooks/useForceRerender';
 
 interface Props {
     picture: string | undefined;
@@ -13,6 +14,9 @@ interface Props {
 const ProfilePicture: React.FC<Props> = ({ size = '2rem', picture, className = '' }) => {
     const imageRef = useRef<HTMLImageElement>(null);
     const [imageValid, setImageValid] = useState(true);
+    // Force the component to re-render once more after 1s, to force the image loading.
+    // Image loading takes time, so it is better to force re-render after 1s to ensure the image is eventually loaded.
+    useForceRerender(1000);
 
     // Prevent showing broken image
     useEffect(() => {

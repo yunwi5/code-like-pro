@@ -15,12 +15,14 @@ export interface IForumSortingState {
 }
 
 interface IForumState {
+    isLoading: boolean;
     posts: IForumPost[];
     searching: IForumSearchState;
     sorting: IForumSortingState;
 }
 
 const initialState: IForumState = {
+    isLoading: true,
     posts: [],
     searching: { key: SearchKey.TITLE, text: '' },
     sorting: {
@@ -35,6 +37,7 @@ const forumSlice = createSlice({
     reducers: {
         setPosts(state, action: PayloadAction<IForumPost[]>) {
             state.posts = action.payload;
+            state.isLoading = false;
         },
         setSorting(state, action: PayloadAction<IForumSortingState>) {
             state.sorting = action.payload;
