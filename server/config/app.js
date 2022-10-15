@@ -35,8 +35,8 @@ const createApp = () => {
     // Express Session
     app.use(
         session({
-            name: 'code-like-pro-unique-session-3140ed0s8d9f23jd',
-            secret: 'secretcatadsf9039f80ajqdfoqjp2oqudp',
+            name: process.env.SESSION_NAME,
+            secret: process.env.SESSION_SECRET,
             resave: false,
             saveUninitialized: true,
             proxy: true, // Required for Heroku & Digital Ocean (regarding X-Forwarded-For)
