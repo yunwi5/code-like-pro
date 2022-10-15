@@ -1,10 +1,10 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import usePagination from '../../../hooks/usePagination';
 import { RankingCategory } from '../../../models/enums';
 import { IRanking } from '../../../models/interfaces';
 import PageNavigation from '../../ui/PageNavigation';
 import ProfileView from '../../ui/user/profile-view/ProfileView';
-import ProfilePicture from '../../ui/user/ProfilePicture';
 
 interface Props {
     rankingOrder: IRanking[];
@@ -49,8 +49,11 @@ const RankingTable: React.FC<Props> = ({ rankingOrder, rankingCategory }) => {
                 </thead>
                 <tbody>
                     {currentPageRanking.map((userRank, idx) => (
-                        <tr
+                        <motion.tr
                             key={userRank._id}
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.25, delay: idx * 0.07 }}
                             className="flex even:bg-gray-50/80 odd:bg-gray-100/80 text-gray-500 transition-all hover:bg-slate-200/70 border-b-[1.5px] border-gray-200/90"
                         >
                             <td className="basis-1/6 flex-start px-3 py-3 font-bold whitespace-nowrap">
@@ -62,7 +65,7 @@ const RankingTable: React.FC<Props> = ({ rankingOrder, rankingCategory }) => {
                             <td className="basis-2/6 flex-center pl-8 py-3 font-semibold">
                                 {getDisplayRankingPoints(userRank, rankingCategory)}
                             </td>
-                        </tr>
+                        </motion.tr>
                     ))}
                 </tbody>
             </table>
