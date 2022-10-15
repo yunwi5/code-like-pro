@@ -37,7 +37,7 @@ const createApp = () => {
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
-        // proxy: true, // Required for Heroku & Digital Ocean (regarding X-Forwarded-For)
+        proxy: true, // Required for Heroku & Digital Ocean (regarding X-Forwarded-For)
         cookie: {
             httpOnly: false,
             secure: process.env.NODE_ENV !== 'production' ? undefined : true,
