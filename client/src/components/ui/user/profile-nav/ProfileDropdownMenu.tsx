@@ -5,14 +5,20 @@ import { ProfileSectionList } from '../../../../models/enums';
 import { useUserContext } from '../../../../store/context/UserContext';
 import { getProfileSectionIcon, ProfileLinkMap } from '../../../../utils/profile';
 import ProfileMenuHeader from './ProfileMenuHeader';
+import styles from './ProfileDropdownMenu.module.scss';
 
 // Profile dropdown menu that displays user profile info and profile links.
 // This component is used in UserProfileNav.tsx to display its dropdown menu.
-const ProfileDropdownMenu: React.FC = () => {
+const ProfileDropdownMenu: React.FC<{ visible: boolean }> = ({ visible }) => {
     const { logout } = useUserContext();
 
+    // Dropdown visibility style
+    const visibilityClass = visible ? styles['visible'] : '';
+
     return (
-        <nav className="z-[1000] absolute top-[110%] right-0 bg-gray-50 text-gray-700 transition-all shadow-md hover:shadow-lg rounded-sm">
+        <nav
+            className={`${styles['profile-dropdown']} ${visibilityClass} z-[1000] absolute top-[110%] right-0 bg-gray-50 text-gray-700 shadow-md hover:shadow-lg rounded-sm`}
+        >
             {/* Profile information */}
             <ProfileMenuHeader />
             <div>

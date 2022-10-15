@@ -88,12 +88,15 @@
     .nested-nav-child {
         visibility: hidden;
         opacity: 0;
+        transform: scale(0);
+        transform-origin: top left;
         transition: all 0.3s ease-in-out;
         z-index: -1;
     }
 
     // Nav item is hovered, then the dropdown menu starts appearing.
-    .nested-nav-item:hover ~ .nested-nav-child {
+    &:hover .nested-nav-child {
+        transform: scale(1);
         visibility: visible;
         opacity: 1;
         z-index: 50;

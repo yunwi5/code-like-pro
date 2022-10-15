@@ -108,7 +108,7 @@ const HomeFeatures: React.FC = () => {
                                 src={AppImages.Ranking}
                                 delay={0.5}
                                 alt="Global rankings"
-                                className="lg:bottom-[1rem] lg:right-[1rem] lg:h-[12rem] lg:w-[calc(12*1.67)]"
+                                className="lg:bottom-[1rem] lg:right-[1rem] lg:h-[12rem] lg:w-[calc(12rem*1.67)]"
                             />
                         </motion.div>
                     </AnimateSharedLayout>

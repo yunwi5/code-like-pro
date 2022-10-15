@@ -26,7 +26,7 @@ const UserProfileNav: React.FC = () => {
                 <IoMdArrowDropdown className="text-gray-600 hover:text-main-500 text-xl" />
 
                 {/* Dropdown menu that displays user profile information and profile links. */}
-                {showDropdown && <ProfileDropdownMenu />}
+                <ProfileDropdownMenu visible={showDropdown} />
             </div>
         </ClickAwayListener>
     );

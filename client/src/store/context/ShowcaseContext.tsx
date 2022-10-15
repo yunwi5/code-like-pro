@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import useExerciseCommentsQuery from '../../hooks/exercise-queries/useExerciseCommentsQuery';
+import useExerciseShowcaseQuery from '../../hooks/exercise-queries/useExerciseShowcaseQuery';
 import {
     IComment,
     IExerciseWithId,
+    IShowCase,
     IUserSubmissionPopulated,
 } from '../../models/interfaces';
 
@@ -12,6 +14,9 @@ interface IShowcaseContext {
     exercise: IExerciseWithId | null;
     userSubmission: IUserSubmissionPopulated | null;
     comments: IComment[];
+    showcases: IShowCase[];
+    commentsLoading: boolean;
+    showcasesLoading: boolean;
     refetchQuery: (option: QueryOption) => void;
 }
 
@@ -19,6 +24,9 @@ const ShowcaseContext = React.createContext<IShowcaseContext>({
     exercise: null,
     userSubmission: null,
     comments: [],
+    showcases: [],
+    commentsLoading: false,
+    showcasesLoading: false,
     refetchQuery: () => {},
 });
 
@@ -37,20 +45,33 @@ export const ShowcaseContextProvider: React.FC<Props> = ({
     children,
 }) => {
     // Use React-Query to fetch the comments data of this exercise.
-    const { comments, refetch: refetchComments } = useExerciseCommentsQuery(
-        exercise._id,
-        800,
-    );
+    const {
+        comments,
+        refetch: refetchComments,
+        isLoading: commentsLoading,
+    } = useExerciseCommentsQuery(exercise._id, 800);
 
-    // Use React-Query to fetch the showcases data of this exercise.
-    // Implementation should be here.
+    const {
+        showcases,
+        refetch: refetchShowcases,
+        isLoading: showcasesLoading,
+    } = useExerciseShowcaseQuery(exercise._id);
 
     // Refetch comment or showcase data from the server using custom query hooks.
     const refetchQuery = (option: QueryOption) => {
         if (option === 'comments') refetchComments();
+        if (option === 'showcases') refetchShowcases();
     };
 
-    const value = { exercise, userSubmission, comments, refetchQuery };
+    const value = {
+        exercise,
+        userSubmission,
+        comments,
+        showcases,
+        commentsLoading,
+        showcasesLoading,
+        refetchQuery,
+    };
 
     return <ShowcaseContext.Provider value={value}>{children}</ShowcaseContext.Provider>;
 };
