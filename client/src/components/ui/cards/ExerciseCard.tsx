@@ -15,6 +15,8 @@ import DeleteModal from '../modals/variations/DeleteModal';
 import LanguageLabel from '../labels/LanguageLabel';
 import EditButton from '../buttons/icon-buttons/EditButton';
 import DeleteButton from '../buttons/icon-buttons/DeleteButton';
+import useExerciseSubmissionsQuery from '../../../hooks/exercise-queries/useExerciseSubmissionsQuery';
+import { getSubmissionStats } from '../../../utils/user-submission';
 
 interface Props {
     exercise: IExerciseCard;
@@ -24,6 +26,8 @@ interface Props {
 const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
     const navigate = useNavigate();
     const { likedExerciseIdSet } = useUserContext();
+    const { submissions } = useExerciseSubmissionsQuery(exercise?._id || '');
+    const { correctRate } = getSubmissionStats(submissions || []);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     // Check if the exercise is liked by the user.
@@ -76,7 +80,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                     </li>
                     <li className="flex-start gap-1">
                         <AiFillCheckCircle className="text-emerald-400/80 text-base" />
-                        {exercise.correctRate}%
+                        {correctRate}%
                     </li>
                     <li className="flex-start gap-1">
                         <MdReportProblem className="text-stone-500/80 text-base" />{' '}

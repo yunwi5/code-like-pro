@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getExerciseSubmissions } from '../../apis/exercise.api';
 
 // Custom hook for fetching exercise submission data with refetchInterval (1s by default).
-function useExerciseSubmissionsQuery(exerciseId: string, refetchInterval: number = 1000) {
+function useExerciseSubmissionsQuery(exerciseId: string, refetchInterval?: number) {
     const { data: response, isLoading } = useQuery(
         ['exercise-submission', exerciseId],
         () => getExerciseSubmissions(exerciseId || ''),

@@ -18,13 +18,6 @@ export function sortExercises(exercises: IExerciseCard[], sortingState: ISorting
         return exercises.sort((a, b) => (isAsc ? a.stars - b.stars : b.stars - a.stars));
     }
 
-    // Sort by correctness rate.
-    if (sortingState.key === ExerciseSortingKey.CORRECT_RATE) {
-        return exercises.sort((a, b) =>
-            isAsc ? a.correctRate - b.correctRate : b.correctRate - a.correctRate,
-        );
-    }
-
     // Sort by number of issue reports
     if (sortingState.key === ExerciseSortingKey.ISSUE_REPORTS) {
         return exercises.sort((a, b) =>
