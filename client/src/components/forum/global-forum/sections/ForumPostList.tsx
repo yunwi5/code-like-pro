@@ -1,7 +1,9 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 import usePagination from '../../../../hooks/usePagination';
 import { IForumPost } from '../../../../models/interfaces';
+import { listItemAnimations } from '../../../../utils/animations';
 import ForumPostCard from '../../../ui/cards/ForumPostCard';
 import PageNavigation from '../../../ui/PageNavigation';
 
@@ -28,8 +30,17 @@ const ForumPostList: React.FC = () => {
                 </h2>
             </div>
             <div className="flex flex-col gap-5 mb-8">
-                {currentPagePosts.map((post) => (
-                    <ForumPostCard key={post._id} post={post} />
+                {currentPagePosts.map((post, idx) => (
+                    <motion.div
+                        key={post._id}
+                        variants={listItemAnimations}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        transition={{ duration: 0.3, delay: idx * 0.1 }}
+                    >
+                        <ForumPostCard key={post._id} post={post} />
+                    </motion.div>
                 ))}
             </div>
             <PageNavigation

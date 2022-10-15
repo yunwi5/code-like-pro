@@ -13,7 +13,7 @@ function usePagination<T>({ array, itemPerPage }: { array: T[]; itemPerPage: num
 
         // When the page changes, scroll to the top of the page.
         let timer = setTimeout(() => {
-            window.scroll({ top: 0, behavior: 'instant' as any });
+            window.scroll({ top: 50, behavior: 'instant' as any });
             clearTimeout(timer);
         }, 2);
     };
