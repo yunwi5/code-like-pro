@@ -55,10 +55,15 @@ const createApp = () => {
         cookie: {
             httpOnly: false, // We use JS to access the APIs, so should be false
             secure: process.env.NODE_ENV !== 'production' ? undefined : true, // If true, it only works in https protocal. True in production.
+            expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
             sameSite: 'none',
             maxAge: 3 * 24 * 60 * 60 * 1000, //user won't have to login for 3 days
         },
     };
+
+    if (app.get('env') === 'production') {
+        app.set('trust proxy', 1); // trust first proxy
+    }
 
     console.log({ sessionConfig });
 

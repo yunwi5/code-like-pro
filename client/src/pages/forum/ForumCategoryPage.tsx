@@ -3,11 +3,12 @@ import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../../store/redux/store';
+import { forumActions } from '../../store/redux/forum-slice';
 import useForumCategoryQuery from '../../hooks/forum-queries/useForumCategoryQuery';
 import { AppProperty } from '../../constants/app';
 import { ForumCategory } from '../../models/enums';
 import { toastNotify } from '../../utils/notification';
-import { forumActions } from '../../store/redux/forum-slice';
+import { capitalizeString } from '../../utils/string-utils/string-manipulation';
 import CategoryForumMain from '../../components/forum/category-forum/CategoryForumMain';
 
 const ForumCategoryPage: React.FC = () => {
@@ -43,7 +44,7 @@ const ForumCategoryPage: React.FC = () => {
         <>
             <Helmet>
                 <title>
-                    {category} Forum | {AppProperty.APP_NAME}
+                    {capitalizeString(category || '')} Forum | {AppProperty.APP_NAME}
                 </title>
                 <meta
                     name="description"

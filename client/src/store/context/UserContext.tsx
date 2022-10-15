@@ -65,6 +65,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
             // Use returned data as a global user data
             setIsLoading(true);
             const { ok, data, message } = await loginRequest(loginState);
+
             setUser(() => {
                 setIsLoading(false);
                 if (ok && data) return data;
@@ -80,6 +81,8 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         // Send the logout request to clear the session
         await logoutRequest();
     }, []);
+
+    console.log({ documentCookie: document.cookie });
 
     const value = {
         user,
