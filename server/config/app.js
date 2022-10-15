@@ -35,8 +35,8 @@ const createApp = () => {
     // handle cors issue from the client
     app.use(
         cors({
-            origin: true,
-            methods: 'GET,POST,PUT,PATCH,DELETE',
+            origin: ['http://localhost:3000', 'https://code-like-pro.vercel.app'],
+            methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
             credentials: true, // IMPORTANT to set to true for session authentication
         }),
     );
@@ -49,19 +49,18 @@ const createApp = () => {
         store,
         name: process.env.SESSION_NAME || 'thisshouldnotbeasessionname',
         secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
-        resave: false,
-        saveUninitialized: true,
+        resave: true,
+        saveUninitialized: false,
         // proxy: true, // Required for hosting providers like Heroku & Digital Ocean (regarding X-Forwarded-For)
         cookie: {
-            httpOnly: false, // We use JS to access the APIs, so should be false
-            secure: process.env.NODE_ENV !== 'production' ? undefined : true, // If true, it only works in https protocal. True in production.
+            // httpOnly: false, // We use JS to access the APIs, so should be false
+            secure: app.get('env') !== 'production' ? undefined : true, // If true, it only works in https protocal. True in production.
             expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-            sameSite: 'none',
+            sameSite: false,
             maxAge: 3 * 24 * 60 * 60 * 1000, //user won't have to login for 3 days
         },
     };
 
-    console.log({ env: app.get('env') });
     if (app.get('env') === 'production') {
         console.log('trust proxy, 1');
         app.set('trust proxy', 1); // trust first proxy
