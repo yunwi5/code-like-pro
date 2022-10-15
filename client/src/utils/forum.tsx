@@ -8,7 +8,6 @@ import { RiSlideshow3Line } from 'react-icons/ri';
 import { AiOutlineNotification } from 'react-icons/ai';
 
 import {
-    CourseList,
     ForumCategory,
     ForumPostType,
     LanguageList,
@@ -77,7 +76,20 @@ export const ForumTags = {
         'Sprint Boot',
         'Others',
     ],
-    [ForumCategory.UNIVERSITY]: [...CourseList, 'Others'],
+    [ForumCategory.UNIVERSITY]: [
+        'Undergraduate',
+        'Postgraduate',
+        'Masters',
+        'PhD',
+        'Computer Science',
+        'Data Science',
+        'Software Engineering',
+        'Information System',
+        'Information Technology',
+        'Machine Learning',
+        'Artificial Intelligence',
+        'Others',
+    ],
     [ForumCategory.FEEDBACK]: [
         'General Enquiry',
         'New Feature',
