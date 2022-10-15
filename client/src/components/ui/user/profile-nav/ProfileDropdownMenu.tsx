@@ -12,7 +12,7 @@ const ProfileDropdownMenu: React.FC = () => {
     const { logout } = useUserContext();
 
     return (
-        <nav className="z-[1000] absolute top-[102%] right-0 bg-gray-50 text-gray-700 transition-all shadow-md hover:shadow-lg rounded-sm">
+        <nav className="z-[1000] absolute top-[110%] right-0 bg-gray-50 text-gray-700 transition-all shadow-md hover:shadow-lg rounded-sm">
             {/* Profile information */}
             <ProfileMenuHeader />
             <div>

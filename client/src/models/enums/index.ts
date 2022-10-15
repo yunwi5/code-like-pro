@@ -1,7 +1,6 @@
 export * from './exercises/Language';
 export * from './exercises/Difficulty';
 export * from './exercises/ProgrammingTopic';
-export * from './exercises/Course';
 export * from './SubmissionStatus';
 
 export * from './SearchKey';

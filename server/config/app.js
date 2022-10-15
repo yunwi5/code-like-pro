@@ -35,10 +35,17 @@ const createApp = () => {
     // Express Session
     app.use(
         session({
-            name: 'session',
-            secret: 'secretcat',
+            name: 'code-like-pro-unique-session-3140ed0s8d9f23jd',
+            secret: 'secretcatadsf9039f80ajqdfoqjp2oqudp',
             resave: false,
             saveUninitialized: true,
+            proxy: true, // Required for Heroku & Digital Ocean (regarding X-Forwarded-For)
+            cookie: {
+                httpOnly: false,
+                secure: process.env.NODE_ENV !== 'production' ? undefined : true,
+                maxAge: 1000 * 60 * 60 * 48,
+                sameSite: 'none',
+            },
         }),
     );
 
