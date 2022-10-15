@@ -52,6 +52,7 @@ const Strengths: React.FC = () => {
             <AnimateSharedLayout>
                 {strengthsList.map((strength, idx) => (
                     <motion.div
+                        key={strength.id}
                         layoutId={strength.id}
                         onClick={() => !selectedId && setSelectedId(strength.id)}
                         variants={variants}

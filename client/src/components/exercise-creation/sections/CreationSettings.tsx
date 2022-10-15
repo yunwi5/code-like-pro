@@ -6,12 +6,10 @@ import {
     Language,
     LanguageList,
 } from '../../../models/enums';
-import { ProgrammingTopicList } from '../../../models/enums/exercises/ProgrammingTopic';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import { prettierLanguageNames } from '../../../utils/language';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
-import CreationCourses from './CreationCourses';
 import CreationTags from './CreationTags';
 
 const CreationSettings: React.FC = () => {
@@ -38,7 +36,6 @@ const CreationSettings: React.FC = () => {
                 />
             </div>
             <CreationTags />
-            {/* <CreationCourses /> */}
         </CreationSectionContainer>
     );
 };

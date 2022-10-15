@@ -1,7 +1,9 @@
 // External modules
 require('colors'); // colors to highlight console output like db connection
 const passport = require('passport');
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 // Internal modules
 const { createApp, registerRoutes } = require('./config/app');

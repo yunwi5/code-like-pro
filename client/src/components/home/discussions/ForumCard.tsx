@@ -1,6 +1,7 @@
 import React from 'react';
-import { BsCheckCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { BsCheckCircleFill } from 'react-icons/bs';
+
 import { ForumCategory } from '../../../models/enums';
 import { ForumDescriptions, ForumIcons } from '../../../utils/forum';
 import { getForumCategoryLink } from '../../../utils/links';
