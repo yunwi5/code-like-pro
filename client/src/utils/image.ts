@@ -1,4 +1,4 @@
-import { AvatarImagesList } from '../assets';
+import { AvatarImagesList } from '../assets/avatars';
 
 export function isAvatarImage(picture: string) {
     return AvatarImagesList.includes(picture);
