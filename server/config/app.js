@@ -32,6 +32,11 @@ const createApp = () => {
     app.use(express.json({ limit: '50mb' }));
     app.use(express.urlencoded({ limit: '50mb', extended: false }));
 
+    console.log({
+        nodeEnv: process.env.NODE_ENV,
+        isDevelopment: process.env.NODE_ENV !== 'production',
+    });
+
     // Express Session
     app.use(
         session({
