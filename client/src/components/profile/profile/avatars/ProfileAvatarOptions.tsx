@@ -1,4 +1,4 @@
-import { AvatarImagesList } from '../../../../assets';
+import { AvatarImagesList } from '../../../../assets/avatars';
 import { useProfileEditContext } from '../../../../store/context/ProfileEditContext';
 
 const ProfileAvatarOptions: React.FC<{ onClose: () => void }> = ({ onClose }) => {
