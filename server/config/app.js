@@ -51,7 +51,7 @@ const createApp = () => {
         secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
         resave: false,
         saveUninitialized: true,
-        proxy: true, // Required for hosting providers like Heroku & Digital Ocean (regarding X-Forwarded-For)
+        // proxy: true, // Required for hosting providers like Heroku & Digital Ocean (regarding X-Forwarded-For)
         cookie: {
             httpOnly: false, // We use JS to access the APIs, so should be false
             secure: process.env.NODE_ENV !== 'production' ? undefined : true, // If true, it only works in https protocal. True in production.
@@ -61,7 +61,9 @@ const createApp = () => {
         },
     };
 
+    console.log({ env: app.get('env') });
     if (app.get('env') === 'production') {
+        console.log('trust proxy, 1');
         app.set('trust proxy', 1); // trust first proxy
     }
 
