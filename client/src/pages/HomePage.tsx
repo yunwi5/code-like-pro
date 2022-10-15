@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
+
 import { AppProperty } from '../constants/app';
 import HeroLanding from '../components/home/HeroLanding';
 import Carousel from '../components/home/Carousel';
