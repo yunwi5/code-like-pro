@@ -67,6 +67,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
             // Use returned data as a global user data
             setIsLoading(true);
             const { ok, data, message } = await loginRequest(loginState);
+            console.log('loginOk:', ok, 'loginData:', data?.name);
 
             setUser(() => {
                 setIsLoading(false);
