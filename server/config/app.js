@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-// const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 
 const MongoStore = require('connect-mongo');
 const errorHandler = require('../middleware/errorHandler');
@@ -71,7 +71,7 @@ const createApp = () => {
 
     // Express Session
     // app.use(cookieParser(process.env.SESSION_SECRET || 'thisshouldnotbeasecret'));
-    // app.use(cookieParser());
+    app.use(cookieParser());
     app.use(session(sessionConfig));
 
     // Register default error handler
