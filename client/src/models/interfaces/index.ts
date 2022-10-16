@@ -18,6 +18,9 @@ export type { IComment } from './showcase/IComment';
 // Ranking related interfaces
 export * from './ranking/IRanking';
 
+// Badge interfaces
+export * from './badge/IBadge';
+
 // Context types
 export type {
     IExerciseCreationContext,
