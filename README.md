@@ -2,6 +2,7 @@
 
 ## About
 A practice website for programming students where the exercises themselves are created by the students.
+Deployed on Vercel [https://code-like-pro.vercel.app](https://code-like-pro.vercel.app)
 
 <br />
 
