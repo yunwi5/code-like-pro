@@ -1,12 +1,11 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getTop3Exercises } from '../../apis/exercise.api';
+import { getTopExercises } from '../../apis/exercise.api';
 
 // Fetch the full list of exercises from the server
-function useExerciseTop3Query() {
+function useExerciseTopQuery(amount: number = 3) {
     const { isLoading, data: response } = useQuery(
-        ['exercises'],
-        () => getTop3Exercises(),
+        ['top-exercises', amount],
+        () => getTopExercises(amount),
         {
             refetchOnWindowFocus: true, // refetch whenever the user focuses on the window.
         },
@@ -19,4 +18,4 @@ function useExerciseTop3Query() {
     return { isLoading, exercises: exercises || [], error };
 }
 
-export default useExerciseTop3Query;
+export default useExerciseTopQuery;

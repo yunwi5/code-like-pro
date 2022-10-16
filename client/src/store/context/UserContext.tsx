@@ -14,6 +14,7 @@ export const UserContext = React.createContext<IUserContext>({
     login: () => ({} as any),
     logout: () => {},
     loginBySession: () => {},
+    refetchDetail: () => {},
     likedExerciseIdSet: new Set(),
     submissionMap: {},
     userDetail: undefined,
@@ -34,7 +35,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     // Fetch user detail with ReactQuery only if the user is authenticated and user state is not null.
-    const { userDetail } = useUserQuery(user?._id, REFETCH_INTERVAL);
+    const { userDetail, refetch } = useUserQuery(user?._id, REFETCH_INTERVAL);
 
     // Quickly find out whether the user liked the exercise or not in O(1) time.
     const likedExerciseIdSet = useMemo(() => {
@@ -51,10 +52,12 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     // Login with existing session so that the user does not have to login again when refreshing the page
     const loginBySession = useCallback(async () => {
         setIsLoading(true);
-        const { ok, data } = await getLoginSuccess();
+        const { ok, data, response } = await getLoginSuccess();
+        console.log('loginBySessionOk:', ok, 'loginBySessionData:', data);
+        console.log(response);
         setUser(() => {
             setIsLoading(false);
-            if (ok && data) return data;
+            if (ok && data) return data.user;
             return null;
         });
     }, []);
@@ -64,6 +67,8 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
             // Use returned data as a global user data
             setIsLoading(true);
             const { ok, data, message } = await loginRequest(loginState);
+            console.log('loginOk:', ok, 'loginData:', data?.name);
+
             setUser(() => {
                 setIsLoading(false);
                 if (ok && data) return data;
@@ -80,11 +85,14 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         await logoutRequest();
     }, []);
 
+    console.log('Document cookies:', document.cookie);
+
     const value = {
         user,
         login,
         logout,
         loginBySession,
+        refetchDetail: refetch,
         isLoading,
         likedExerciseIdSet,
         submissionMap,

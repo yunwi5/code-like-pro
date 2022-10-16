@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const ShowCase = require('../models/ShowCase');
 const Comment = require('../models/Comment');
 
@@ -53,11 +54,24 @@ const getShowCase = async (req, res) => {
 
 const updateShowCase = async (req, res) => {
     const updatedDetails = req.body;
-    const showCase = await ShowCase.findByIdAndUpdate(req.params.id, updatedDetails, {
-        new: true,
-    });
+    try {
+        const showCase = await ShowCase.findByIdAndUpdate(req.params.id, updatedDetails, {
+            new: true,
+        });
+        res.status(200).json(showCase);
+    } catch (err) {
+        if (err instanceof mongoose.Error.CastError) {
+            return res.status(404).json({ message: 'Non existing showcase id' });
+        }
+        if (err instanceof mongoose.Error) {
+            console.log(err);
+            return res
+                .status(400)
+                .json({ message: 'Invalid shwowcase id or properties' });
+        }
 
-    res.status(200).json(showCase);
+        return res.status(500).json({ message: 'Something went wrong' });
+    }
 };
 
 const getComments = async (req, res) => {

@@ -2,7 +2,6 @@ import React from 'react';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import CodeEditor from '../../ui/editor/CodeEditor';
 import TextEditor from '../../ui/editor/text-editor/TextEditor';
-import CourseList from '../../ui/lists/CourseList';
 import TagList from '../../ui/lists/TagList';
 
 // One of showcase sections that displays exercise prompt and model solution from the creator.
@@ -24,7 +23,6 @@ const ShowcaseModelAnswer: React.FC = () => {
                     placeholder={'Write something awesome...'}
                 />
                 <TagList tags={exercise.tags} />
-                <CourseList courses={exercise.courses || []} className="mt-5" />
             </div>
 
             {/* Exercise model solution from the creator */}

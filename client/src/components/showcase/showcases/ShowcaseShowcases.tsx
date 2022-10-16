@@ -2,19 +2,18 @@ import React, { useMemo, useState } from 'react';
 import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
 import VotingItemSorter from '../../ui/sorting/VotingItemSorter';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
-import useExerciseShowcaseQuery from '../../../hooks/exercise-queries/useExerciseShowcaseQuery';
 import ShowcaseList from '../../ui/lists/ShowcaseList';
 import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import { IShowCase } from '../../../models/interfaces';
+import ShowcaseLoader from '../ShowcaseLoader';
 
 const ShowcaseShowcases: React.FC = () => {
-    const { exercise } = useShowcase();
+    const { exercise, showcases, showcasesLoading } = useShowcase();
     const [sortingState, setSortingState] = useState({
         key: VotingItemSortingKey.VOTES,
         direction: SortingDirection.DESCENDING,
     });
     if (!exercise) return null;
-    const { showcases } = useExerciseShowcaseQuery(exercise._id);
 
     // Whenver sorting state changes, sort the showcases again.
     const sortedShowcases = useMemo(() => {
@@ -37,6 +36,7 @@ const ShowcaseShowcases: React.FC = () => {
                     {showcases.length} Showcases
                 </h5>
             </div>
+            {showcasesLoading && <ShowcaseLoader />}
             <ShowcaseList showcases={sortedShowcases} exercise={exercise} />
         </div>
     );

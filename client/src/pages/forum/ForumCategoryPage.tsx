@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../../store/redux/store';
+import { forumActions } from '../../store/redux/forum-slice';
 import useForumCategoryQuery from '../../hooks/forum-queries/useForumCategoryQuery';
-import ForumPostsSidebar from '../../components/forum/sidebar/ForumPostsSidebar';
-import { ForumNav } from '../../components/forum';
 import { AppProperty } from '../../constants/app';
 import { ForumCategory } from '../../models/enums';
-import { getForumPostCreateLink } from '../../utils/links';
 import { toastNotify } from '../../utils/notification';
-import { forumActions } from '../../store/redux/forum-slice';
+import { capitalizeString } from '../../utils/string-utils/string-manipulation';
 import CategoryForumMain from '../../components/forum/category-forum/CategoryForumMain';
 
 const ForumCategoryPage: React.FC = () => {
@@ -33,6 +31,7 @@ const ForumCategoryPage: React.FC = () => {
     // Set the forum posts globally when the posts array changes.
     useEffect(() => {
         if (posts) dispatch(forumActions.setPosts(posts));
+        else dispatch(forumActions.setLoading(true));
     }, [posts, dispatch]);
 
     // When entering a new foroum page, clear the existing sorting and searching state.
@@ -45,7 +44,7 @@ const ForumCategoryPage: React.FC = () => {
         <>
             <Helmet>
                 <title>
-                    {category} Forum | {AppProperty.APP_NAME}
+                    {capitalizeString(category || '')} Forum | {AppProperty.APP_NAME}
                 </title>
                 <meta
                     name="description"

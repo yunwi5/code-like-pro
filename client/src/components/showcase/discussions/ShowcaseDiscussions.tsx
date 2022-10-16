@@ -1,20 +1,21 @@
 import React, { useMemo, useState } from 'react';
 
 import { postExerciseComment } from '../../../apis/exercise.api';
-import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
-import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { useUserContext } from '../../../store/context/UserContext';
+import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
+import { IComment } from '../../../models/interfaces';
+import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { toastNotify } from '../../../utils/notification';
 import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import CommentForm from '../../ui/comments/CommentForm';
 import CommentList from '../../ui/lists/CommentList';
 import CommentSelectOptions from './CommentSelectOptions';
 import CommentSorter from '../../ui/sorting/VotingItemSorter';
-import { IComment } from '../../../models/interfaces';
+import ShowcaseLoader from '../ShowcaseLoader';
 
 const ShowcaseDiscussions: React.FC = () => {
     const { userDetail } = useUserContext();
-    const { exercise, comments, refetchQuery } = useShowcase();
+    const { exercise, comments, commentsLoading, refetchQuery } = useShowcase();
 
     const [sortingState, setSortingState] = useState({
         key: VotingItemSortingKey.DATETIME,
@@ -80,6 +81,7 @@ const ShowcaseDiscussions: React.FC = () => {
                 </h5>
             </div>
 
+            {commentsLoading && <ShowcaseLoader />}
             {/* Render the list of comments with pagination. */}
             <CommentList comments={sortedComments} />
         </div>

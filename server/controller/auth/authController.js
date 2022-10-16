@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+
 const User = require('../../models/User');
 
 // Authentication itself is done by the passport middleware
@@ -8,6 +9,8 @@ const postLogin = async (req, res) => {
 
     const user = await User.findOne({ email });
     const userToReturn = getUserToReturn(user);
+    console.log('Login success:', user.name);
+
     return res.status(200).json(userToReturn);
 };
 
@@ -45,15 +48,12 @@ const getLogout = (req, res, next) => {
 
 const getAuthSuccess = (req, res) => {
     // DO NOT SET HEADERS TWICE (CORS ERROR)
-    if (req.user) {
-        res.status(200).json(req.user);
-        return;
-    }
-    res.status(404).json({
-        success: false,
-        message: 'User not found',
+    console.log({
+        requser: req.user,
         cookies: req.cookies,
+        signedCookies: req.signedCookies,
     });
+    res.status(200).json({ user: req.user, cookies: req.signedCookies });
 };
 
 const getAuthFailure = (req, res) => {

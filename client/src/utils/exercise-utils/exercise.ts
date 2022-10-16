@@ -1,3 +1,4 @@
+import { getExerciseSubmissions } from '../../apis/exercise.api';
 import { IExerciseCard, IExerciseWithId } from '../../models/interfaces';
 
 // Optional overriding attributes such as giving the authorized access.
@@ -10,7 +11,6 @@ export function mapExerciseToExerciseCard(
     const exerciseCard: IExerciseCard = {
         _id: exercise._id,
         name: exercise.name,
-        correctRate: 0, // for now we do not have correctness data yet
         reports: exercise.reports.length,
         stars: exercise.liked.length,
         prompt: exercise.prompt,

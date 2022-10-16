@@ -7,7 +7,6 @@ export interface IExerciseCard {
     name: string;
     language: Language;
     difficulty: Difficulty;
-    correctRate: number;
     stars: number; // favorite count
     reports: number; // report count
     tags: string[];

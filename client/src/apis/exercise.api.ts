@@ -44,9 +44,9 @@ export async function deleteExercise(id: string) {
 }
 
 //Get top 3 exercises
-export async function getTop3Exercises() {
+export async function getTopExercises(amount: number = 3) {
     return await getRequest<IExerciseWithId[]>({
-        url: `${API_DOMAIN}/top?amount=3`,
+        url: `${API_DOMAIN}/top?amount=${amount}`,
     });
 }
 

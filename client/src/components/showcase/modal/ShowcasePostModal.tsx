@@ -13,7 +13,7 @@ interface Props {
 }
 
 const ShowcasePostModal: React.FC<Props> = ({ visible, onClose }) => {
-    const { userSubmission, exercise } = useShowcase();
+    const { userSubmission, exercise, refetchQuery } = useShowcase();
     const [description, setDescription] = useState('');
     const [error, setError] = useState<null | string>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +38,8 @@ const ShowcasePostModal: React.FC<Props> = ({ visible, onClose }) => {
         );
         if (ok) {
             toastNotify('Your showcase was posted!', 'success');
-            console.log('new showcase:', data);
+            // Refetch showcases with update datat
+            refetchQuery('showcases');
             onClose();
         } else {
             toastNotify(`Sorry there is an error: ${message}.`, 'error');

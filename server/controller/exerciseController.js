@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Exercise = require('../models/Exercise');
 const ExerciseReport = require('../models/ExerciseReport');
 const UserSubmission = require('../models/UserSubmission');
@@ -37,7 +38,6 @@ const postExercise = async (req, res) => {
     }
 
     await exercise.save();
-    console.log('new exercise', exercise);
 
     res.status(201).json(exercise);
 };
@@ -88,7 +88,7 @@ const updateExercise = async (req, res) => {
 
     const testCaseResults = await Promise.all(testCasePromises);
 
-    console.log(testCaseResults);
+    // console.log(testCaseResults);
     for (let i = 0; i < testCaseResults.length; i++) {
         if (testCaseResults[i].stdout.trim() != testCases[i].expectedOutput.trim()) {
             return res.status(400).json({ message: 'Some test cases failed.' });
@@ -265,24 +265,29 @@ const postExerciseShowcase = async (req, res) => {
             (show) => show.user?.toString() === req.user._id.toString(),
         );
 
+        let statusCode;
         if (showCase == null) {
             // Construct the showcase object with required attributes.
             showCase = new ShowCase({ code, description, user: req.user });
             exercise.showCases.push(showCase);
+            statusCode = 201;
         } else {
             // If there is an existing showcase, update its attributes.
             showCase.code = code;
             showCase.description = description;
+            statusCode = 200;
         }
 
         // Execute async operations in parallel and await them together.
         const p1 = showCase.save();
         const p2 = exercise.save();
         await Promise.all([p1, p2]);
-        res.status(201).json(showCase);
+        res.status(statusCode).json(showCase);
     } catch (err) {
-        console.log(err.message);
-        res.status(400).json(err.message);
+        if (err instanceof mongoose.Error) {
+            return res.status(400).json({ message: 'Bad request' });
+        }
+        return res.status(500).json('Invalid exercise id');
     }
 };
 

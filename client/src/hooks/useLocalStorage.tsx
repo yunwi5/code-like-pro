@@ -5,13 +5,21 @@ function saveToLocalStorage(key: string, value: any) {
 }
 
 function getFromLocalStorage(key: string) {
-    const jsonValue = localStorage.getItem(key);
-    return jsonValue ? JSON.parse(jsonValue) : '';
+    try {
+        const jsonValue = localStorage.getItem(key);
+        // JS can raise an error if the jsonValue is invalid to be parsed.
+        return JSON.parse(jsonValue || '');
+    } catch (err) {
+        return null;
+    }
 }
 
 // Custom react hook to store the JSON object in localStorage.
 // It abstracts the process of retrieving JSON from the localStorage, and store JSON to the localStorage.
-function useLocalStorage<T>(key: string, initialValue: any): [T, (newValue: any) => void] {
+function useLocalStorage<T>(
+    key: string,
+    initialValue: any,
+): [T, (newValue: any) => void] {
     const [value, setValue] = useState<T>(() => {
         const storedValue = getFromLocalStorage(key);
         // If a value already exists, the initialValue param should be ignored.

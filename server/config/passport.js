@@ -17,7 +17,9 @@ const passportStrategy = (passport) => {
                 .then((user) => {
                     if (!user) {
                         // no Match
-                        return done(null, false, { message: 'This email is not registered' });
+                        return done(null, false, {
+                            message: 'This email is not registered',
+                        });
                     } else {
                         // Match password
                         bcrypt.compare(password, user.password || '', (err, isMatch) => {
@@ -33,7 +35,7 @@ const passportStrategy = (passport) => {
                         });
                     }
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => done(err));
         }),
     );
 
@@ -46,7 +48,6 @@ const passportStrategy = (passport) => {
                 callbackURL: '/api/auth/google/callback',
             },
             (accessToken, refreshToken, profile, done) => {
-                console.log('google profile json:', profile._json);
                 const { email, name, picture, sub } = profile._json;
 
                 User.findOne({ email })
@@ -69,17 +70,22 @@ const passportStrategy = (passport) => {
                             return done(null, user);
                         }
                     })
-                    .catch((err) => console.log(err));
+                    .catch((err) => done(err));
             },
         ),
     );
 
     passport.serializeUser((user, done) => {
+        console.log({ serializeUser: user.name });
         done(null, user);
     });
 
-    passport.deserializeUser((id, done) => {
-        User.findById(id, (err, user) => {
+    passport.deserializeUser((userId, done) => {
+        console.log({ deserializeUser: userId?.name });
+        if (typeof userId !== 'string') {
+            return done(null, userId);
+        }
+        User.findById(userId, function (err, user) {
             done(err, user);
         });
     });

@@ -9,7 +9,7 @@ import styles from './HomeDiscussions.module.scss';
 
 const HomeDiscussions: React.FC = () => {
     return (
-        <section className="mt-10 flex flex-col items-center gap-6 px-4 pt-14 pb-12 bg-gray-100">
+        <section className="mt-16 flex flex-col items-center gap-6 px-4 pt-14 pb-12 bg-gray-100">
             <h2 className={`text-3xl text-center text-gray-500 font-semibold capitalize`}>
                 Global discussion space across 7 categories
             </h2>

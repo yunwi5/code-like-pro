@@ -1,6 +1,7 @@
 import React from 'react';
-import { BsCheckCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { BsCheckCircleFill } from 'react-icons/bs';
+
 import { ForumCategory } from '../../../models/enums';
 import { ForumDescriptions, ForumIcons } from '../../../utils/forum';
 import { getForumCategoryLink } from '../../../utils/links';
@@ -9,7 +10,7 @@ import styles from './HomeDiscussions.module.scss';
 const ForumCard: React.FC<{ forum: ForumCategory }> = ({ forum }) => (
     <div className={`${styles.card}`}>
         <div
-            className={`${styles['card-front']} flex flex-col justify-center items-center py-2 bg-slate-300/[80] rounded-sm shadow`}
+            className={`${styles['card-front']} flex flex-col justify-center items-center py-2 bg-slate-200 rounded-sm shadow`}
         >
             <span className="text-[3rem] text-main-500">{ForumIcons[forum]}</span>
             <h3 className="mt-1 text-xl capitalize text-gray-600 font-semibold">
