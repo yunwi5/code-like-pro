@@ -52,11 +52,12 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     // Login with existing session so that the user does not have to login again when refreshing the page
     const loginBySession = useCallback(async () => {
         setIsLoading(true);
-        const { ok, data } = await getLoginSuccess();
+        const { ok, data, response } = await getLoginSuccess();
         console.log('loginBySessionOk:', ok, 'loginBySessionData:', data);
+        console.log('header:', response?.request);
         setUser(() => {
             setIsLoading(false);
-            if (ok && data) return data;
+            if (ok && data) return data.user;
             return null;
         });
     }, []);

@@ -35,7 +35,7 @@ const passportStrategy = (passport) => {
                         });
                     }
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => done(err));
         }),
     );
 
@@ -70,17 +70,22 @@ const passportStrategy = (passport) => {
                             return done(null, user);
                         }
                     })
-                    .catch((err) => console.log(err));
+                    .catch((err) => done(err));
             },
         ),
     );
 
     passport.serializeUser((user, done) => {
-        done(null, user);
+        console.log({ serializeUser: user });
+        return done(null, user);
     });
 
-    passport.deserializeUser((id, done) => {
-        User.findById(id, (err, user) => {
+    passport.deserializeUser((userId, done) => {
+        console.log({ deserializeUser: userId });
+        if (typeof userId !== 'string') {
+            return done(null, userId);
+        }
+        User.findById(userId, function (err, user) {
             done(err, user);
         });
     });

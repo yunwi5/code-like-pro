@@ -14,7 +14,7 @@ export async function getRequest<T>({ url, headers }: ReqParams) {
     try {
         const response = await axios.get<T>(url, headers ?? authConfig);
         data = response.data;
-        return { ok: true, data };
+        return { ok: true, data, response };
     } catch (err) {
         // 400 ~ 500
         let message = extractErrorMessage(err);

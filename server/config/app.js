@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const MongoStore = require('connect-mongo');
 const errorHandler = require('../middleware/errorHandler');
@@ -21,7 +22,7 @@ const forumPostRouter = require('../routes/forumPost');
 // Mongo session store for better session storage (default is in-memory session which is not efficient)
 const store = MongoStore.create({
     mongoUrl: keys.MongoURI,
-    secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
+    // secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
     touchAfter: 24 * 60 * 60, // lazy update the session, by limiting a period of time
 });
 
@@ -69,6 +70,7 @@ const createApp = () => {
     console.log({ sessionConfig });
 
     // Express Session
+    app.use(cookieParser());
     app.use(session(sessionConfig));
 
     // Register default error handler

@@ -19,7 +19,9 @@ export async function loginRequest(body: LoginProps) {
 
 // Try login with the existing session.
 export async function getLoginSuccess() {
-    return await getRequest<IUser>({ url: `${API_DOMAIN}/login/success` });
+    return await getRequest<{ user: IUser; cookies: any }>({
+        url: `${API_DOMAIN}/login/success`,
+    });
 }
 
 // Send the logout request to the server to clear the session.

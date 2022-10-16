@@ -14,7 +14,6 @@ router.post(
     '/login',
     validateLoginBody,
     passport.authenticate('local', {
-        // successRedirect: keys.ClientRedirectURL,
         successMessage: true,
         failureMessage: true,
     }),
