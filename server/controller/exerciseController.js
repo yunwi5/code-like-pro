@@ -321,7 +321,6 @@ const postExerciseComment = async (req, res) => {
         const newComment = new Comment({ text, user: req.user });
 
         // Find the exercise and push the new comment to its 'comments' list.
-        // await Exercise.findByIdAndUpdate(exerciseId, { $push: newComment });
         const exercise = await Exercise.findById(exerciseId);
         if (exercise == null) return res.status(404).json('Exercise not found');
 

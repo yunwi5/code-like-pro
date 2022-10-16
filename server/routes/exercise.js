@@ -1,7 +1,9 @@
 const express = require('express');
 const exerciseController = require('../controller/exerciseController');
+
 const { ensureAuthenticated } = require('../middleware/auth');
 const catchAsync = require('../middleware/catchAsync');
+const { validateCommentBody } = require('../middleware/validateRequest');
 
 const router = express.Router();
 
@@ -46,6 +48,10 @@ router
     // Route for getting all the comments of the exercise of the param id.
     .get(ensureAuthenticated, catchAsync(exerciseController.getExerciseComments))
     // Route for adding a comment to the exercise of the param id.
-    .post(ensureAuthenticated, catchAsync(exerciseController.postExerciseComment));
+    .post(
+        ensureAuthenticated,
+        validateCommentBody,
+        catchAsync(exerciseController.postExerciseComment),
+    );
 
 module.exports = router;
