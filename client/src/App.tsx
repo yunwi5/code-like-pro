@@ -28,6 +28,7 @@ const PostCreatePage = lazy(() => import('./pages/forum/PostCreationPage'));
 const PostEditPage = lazy(() => import('./pages/forum/PostEditPage'));
 const RankingPage = lazy(() => import('./pages/ranking/RankingPage'));
 const TopicRankingPage = lazy(() => import('./pages/ranking/TopicRankingPage'));
+const BadgePage = lazy(() => import('./components/profile/Badge'));
 
 const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =
     ProfilePages;
@@ -62,6 +63,7 @@ function App() {
                         <Route path="favorites" element={<ProfileFavorites />} />
                         <Route path="my-creations" element={<MyCreations />} />
                         <Route path="my-submissions" element={<MySubmission />} />
+                        {/*<Route path="badge" element={<BadgePage />} />    Does not work?*/}
                     </Route>
 
                     {/* Exercise pages */}
