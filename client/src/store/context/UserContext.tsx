@@ -53,6 +53,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     const loginBySession = useCallback(async () => {
         setIsLoading(true);
         const { ok, data } = await getLoginSuccess();
+        console.log('loginBySessionOk:', ok, 'loginBySessionData:', data);
         setUser(() => {
             setIsLoading(false);
             if (ok && data) return data;
@@ -81,8 +82,6 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         // Send the logout request to clear the session
         await logoutRequest();
     }, []);
-
-    console.log({ documentCookie: document.cookie });
 
     const value = {
         user,

@@ -38,7 +38,6 @@ const postExercise = async (req, res) => {
     }
 
     await exercise.save();
-    console.log('new exercise', exercise);
 
     res.status(201).json(exercise);
 };
@@ -89,7 +88,7 @@ const updateExercise = async (req, res) => {
 
     const testCaseResults = await Promise.all(testCasePromises);
 
-    console.log(testCaseResults);
+    // console.log(testCaseResults);
     for (let i = 0; i < testCaseResults.length; i++) {
         if (testCaseResults[i].stdout.trim() != testCases[i].expectedOutput.trim()) {
             return res.status(400).json({ message: 'Some test cases failed.' });
