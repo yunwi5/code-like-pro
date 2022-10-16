@@ -1,13 +1,13 @@
 import React from 'react';
-import BadgeCardUR from './badgeImages/BadgeCardUR.png';
-import BadgeCardSR from './badgeImages/BadgeCardSR.png';
-import BadgeCardR from './badgeImages/BadgeCardR.png';
-import BadgeCardN from './badgeImages/BadgeCardN.png';
-import BadgeN from './badgeImages/BadgeN.png';
-import BadgeR from './badgeImages/BadgeR.png';
-import BadgeSR from './badgeImages/BadgeSR.png';
-import BadgeUR from './badgeImages/BadgeUR.png';
-import { IBadge } from '../../models/interfaces';
+import BadgeCardUR from '../badgeImages/BadgeCardUR.png';
+import BadgeCardSR from '../badgeImages/BadgeCardSR.png';
+import BadgeCardR from '../badgeImages/BadgeCardR.png';
+import BadgeCardN from '../badgeImages/BadgeCardN.png';
+import BadgeN from '../badgeImages/BadgeN.png';
+import BadgeR from '../badgeImages/BadgeR.png';
+import BadgeSR from '../badgeImages/BadgeSR.png';
+import BadgeUR from '../badgeImages/BadgeUR.png';
+import { IBadge } from '../../../models/interfaces';
 
 interface Props {
     currentBadge: IBadge[];

@@ -1,8 +1,9 @@
 import { AiOutlineStar } from 'react-icons/ai';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { FaAward, FaRegUserCircle } from 'react-icons/fa';
 import { GoGraph } from 'react-icons/go';
 import { IoCreateOutline } from 'react-icons/io5';
 import { BsFileEarmarkCode } from 'react-icons/bs';
+
 import { ProfileSection } from '../models/enums';
 
 export const ProfileLinkMap = {
@@ -11,6 +12,7 @@ export const ProfileLinkMap = {
     [ProfileSection.FAVORITES]: 'favorites',
     [ProfileSection.MY_CREATIONS]: 'my-creations',
     [ProfileSection.MY_SUBMISSIONS]: 'my-submissions',
+    [ProfileSection.BADGES]: 'badges',
 };
 
 export function getProfileSectionIcon(section: ProfileSection, className: string = '') {
@@ -25,5 +27,7 @@ export function getProfileSectionIcon(section: ProfileSection, className: string
             return <IoCreateOutline className={`text-xl ${className}`} />;
         case ProfileSection.MY_SUBMISSIONS:
             return <BsFileEarmarkCode className={`text-xl ${className}`} />;
+        case ProfileSection.BADGES:
+            return <FaAward className={`text-xl ${className}`} />;
     }
 }

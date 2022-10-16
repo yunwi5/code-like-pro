@@ -47,6 +47,7 @@ function getActiveProfileSection(pathname: string) {
     if (pathname.includes('favorites')) return ProfileSection.FAVORITES;
     if (pathname.includes('creation')) return ProfileSection.MY_CREATIONS;
     if (pathname.includes('submission')) return ProfileSection.MY_SUBMISSIONS;
+    if (pathname.includes('badges')) return ProfileSection.BADGES;
     return ProfileSection.PROFILE;
 }
 
