@@ -76,12 +76,12 @@ const passportStrategy = (passport) => {
     );
 
     passport.serializeUser((user, done) => {
-        console.log({ serializeUser: user });
-        return done(null, user);
+        console.log({ serializeUser: user.name });
+        done(null, user);
     });
 
     passport.deserializeUser((userId, done) => {
-        console.log({ deserializeUser: userId });
+        console.log({ deserializeUser: userId?.name });
         if (typeof userId !== 'string') {
             return done(null, userId);
         }

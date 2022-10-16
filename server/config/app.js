@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 
 const MongoStore = require('connect-mongo');
 const errorHandler = require('../middleware/errorHandler');
@@ -43,8 +43,8 @@ const createApp = () => {
     );
 
     // Allow express to parse JSON
-    app.use(express.json({ limit: '50mb' }));
-    app.use(express.urlencoded({ limit: '50mb', extended: false }));
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: false }));
 
     const sessionConfig = {
         store,
@@ -57,7 +57,7 @@ const createApp = () => {
             // httpOnly: false, // We use JS to access the APIs, so should be false
             secure: app.get('env') !== 'production' ? undefined : true, // If true, it only works in https protocal. True in production.
             expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-            sameSite: 'none',
+            // sameSite: 'none',
             maxAge: 3 * 24 * 60 * 60 * 1000, //user won't have to login for 3 days
         },
     };
@@ -70,7 +70,8 @@ const createApp = () => {
     console.log({ sessionConfig });
 
     // Express Session
-    app.use(cookieParser());
+    // app.use(cookieParser(process.env.SESSION_SECRET || 'thisshouldnotbeasecret'));
+    // app.use(cookieParser());
     app.use(session(sessionConfig));
 
     // Register default error handler

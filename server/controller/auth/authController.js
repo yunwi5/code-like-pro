@@ -48,8 +48,12 @@ const getLogout = (req, res, next) => {
 
 const getAuthSuccess = (req, res) => {
     // DO NOT SET HEADERS TWICE (CORS ERROR)
-    console.log({ requser: req.user, cookies: req.cookies });
-    res.status(200).json({ user: req.user, cookies: req.cookies });
+    console.log({
+        requser: req.user,
+        cookies: req.cookies,
+        signedCookies: req.signedCookies,
+    });
+    res.status(200).json({ user: req.user, cookies: req.signedCookies });
 };
 
 const getAuthFailure = (req, res) => {
