@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+require('./Badge'); // To make sure the badge model is registered by importing it
 
 const UserSchema = new Schema({
     email: {
@@ -27,6 +28,7 @@ const UserSchema = new Schema({
     // Link to the user profile picture. Either link to google profile picture or internal link to the avatar image of the app.
     pictureUrl: { type: String },
     liked: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
+    badges: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Badge' }],
 });
 
 const User = mongoose.model('User', UserSchema);

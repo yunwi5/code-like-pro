@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const UserSubmission = require('../models/UserSubmission');
 const User = require('../models/User');
 const Exercise = require('../models/Exercise');
@@ -30,6 +31,8 @@ const getUserById = async (req, res) => {
         user = userFound;
         const languages = Array.from(usedLanguages);
         user.languages = languages;
+        // current app stores the list of the most recent submission only, so the length of submissions is essentially the number of exercises solved.
+        user.solvedExercises = submissions.length;
 
         res.status(200).json(user);
     } catch (err) {
@@ -74,6 +77,25 @@ const getUserDetailById = async (req, res) => {
     }
 };
 
+// GET a list of user's badges of the user of the param id
+const getUserBadges = async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const user = await User.findById(userId).populate({ path: 'badges' });
+        const badges = user.badges;
+
+        // Return an array of badges
+        return res.status(200).json(badges);
+    } catch (err) {
+        console.log(err.message);
+        if (err instanceof mongoose.Error) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        return res.status(500).json({ message: 'Something went wrong' });
+    }
+};
+
 const updateUser = async (req, res) => {
     const updatedDetails = req.body;
     const user = await User.findByIdAndUpdate(req.user._id, updatedDetails, {
@@ -86,6 +108,7 @@ const updateUser = async (req, res) => {
 const controller = {
     getUserById,
     getUserDetailById,
+    getUserBadges,
     updateUser,
 };
 
