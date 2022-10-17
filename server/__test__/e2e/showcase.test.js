@@ -24,10 +24,6 @@ describe('Showcase', () => {
         exercise = await createExercise(app, cookie);
     });
 
-    beforeEach(function () {
-        jest.setTimeout(30000);
-    });
-
     afterAll(async () => {
         await closeTestApp();
     });

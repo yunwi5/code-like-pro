@@ -6,7 +6,12 @@ const { validateForumpostBody } = require('../middleware/validateRequest');
 
 const router = express.Router();
 
-router.post('/', ensureAuthenticated, validateForumpostBody, catchAsync(forumPostController.createForumPost));
+router.post(
+    '/',
+    ensureAuthenticated,
+    validateForumpostBody,
+    catchAsync(forumPostController.createForumPost),
+);
 
 router.get('/', catchAsync(forumPostController.getForumPosts));
 
@@ -17,6 +22,12 @@ router
     .route('/:id')
     .get(catchAsync(forumPostController.getForumPostById))
     .delete(ensureAuthenticated, catchAsync(forumPostController.deleteForumPost));
+
+router.patch(
+    '/:id',
+    ensureAuthenticated,
+    catchAsync(forumPostController.updateForumPost),
+);
 
 // Post forum post comment
 router.post(
@@ -37,7 +48,5 @@ router.post(
     ensureAuthenticated,
     catchAsync(forumPostController.postForumPostLike),
 );
-
-router.patch('/:id', ensureAuthenticated, catchAsync(forumPostController.updateForumPost));
 
 module.exports = router;

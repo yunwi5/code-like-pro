@@ -33,7 +33,6 @@ describe('Ranking', () => {
 
             // Inspect the current user rank data
             expect(userRank).toBeDefined();
-            console.log({ userRank });
             expect(userRank.creationPoints).toBe(0);
             expect(userRank.solvingPoints).toBe(0);
         });

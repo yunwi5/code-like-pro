@@ -109,18 +109,38 @@ const updateExercise = async (req, res) => {
 };
 
 const deleteExercise = async (req, res) => {
-    let result; // returns deletedObject if the exercise with the param id was found.
     try {
-        result = await Exercise.findByIdAndDelete(req.params.id);
+        const exerciseId = req.params.id;
+        const exercise = await Exercise.findById(exerciseId);
+
+        // If the exercise is not found, return 404
+        if (exercise == null)
+            return res.status(404).send(`Exercise ${req.params.id} not found`);
+
+        // Shoud clear up all the entities that rely on this exercise
+        const showcaseIds = exercise.showCases;
+        const commentIds = exercise.comments;
+        const reportIds = exercise.reports;
+
+        const exp = exercise.remove();
+
+        // Clear the showcases of this exercise
+        const scp = ShowCase.deleteMany({ _id: { $in: showcaseIds } });
+        // Clear the comments of this exercise
+        const cp = Comment.deleteMany({ _id: { $in: commentIds } });
+        // Clear the reports of this exercise
+        const erp = ExerciseReport.deleteMany({ _id: { $in: reportIds } });
+
+        // delete result of the exercise
+        const [deleteResult, _] = await Promise.all([exp, scp, cp, erp]);
+
+        return res.status(200).json(deleteResult);
     } catch (err) {
         console.log(err.message);
-    }
-
-    if (result != null) {
-        return res.status(200).send('Delete successful.');
-    } else {
-        // If there is an error, or the exercise was not found.
-        res.status(404).send(`Exercise ${req.params.id} not found`);
+        if (err instanceof mongoose.Error) {
+            return res.status(404).send(`Exercise ${req.params.id} not found`);
+        }
+        return res.status(500).json({ message: 'Something went wrong' });
     }
 };
 

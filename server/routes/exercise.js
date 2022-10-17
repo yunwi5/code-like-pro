@@ -3,20 +3,33 @@ const exerciseController = require('../controller/exerciseController');
 
 const { ensureAuthenticated } = require('../middleware/auth');
 const catchAsync = require('../middleware/catchAsync');
-const { validateCommentBody } = require('../middleware/validateRequest');
+const {
+    validateExerciseBody,
+    validateCommentBody,
+} = require('../middleware/validateRequest');
 
 const router = express.Router();
 
 router.get('/', catchAsync(exerciseController.getExercises));
 
-router.post('/', ensureAuthenticated, catchAsync(exerciseController.postExercise));
+router.post(
+    '/',
+    ensureAuthenticated,
+    validateExerciseBody,
+    catchAsync(exerciseController.postExercise),
+);
 
 // Put this route above GET /:id route to indicate this route's param is more specific.
 router.get('/top', catchAsync(exerciseController.getTopExercises));
 
 router.get('/:id', catchAsync(exerciseController.getExerciseByID));
 
-router.put('/:id', ensureAuthenticated, catchAsync(exerciseController.updateExercise));
+router.put(
+    '/:id',
+    ensureAuthenticated,
+    validateExerciseBody,
+    catchAsync(exerciseController.updateExercise),
+);
 
 router.delete('/:id', ensureAuthenticated, catchAsync(exerciseController.deleteExercise));
 
