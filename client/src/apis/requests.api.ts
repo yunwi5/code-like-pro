@@ -12,9 +12,6 @@ type ReqBodyParams = { url: string; body: any; headers?: AxiosRequestConfig };
 export async function getRequest<T>({ url, headers }: ReqParams) {
     let data: T | null = null;
     try {
-        const reqHeaders = headers ?? authConfig;
-        console.log('withCredentials:', reqHeaders.withCredentials);
-
         const response = await axios.get<T>(url, authConfig);
         data = response.data;
         return { ok: true, data, response };
@@ -30,9 +27,6 @@ export async function getRequest<T>({ url, headers }: ReqParams) {
 export async function postRequest<T>({ url, body, headers }: ReqBodyParams) {
     let data: T | null = null;
     try {
-        const reqHeaders = headers ?? authConfig;
-        console.log('withCredentials:', reqHeaders.withCredentials);
-
         const response = await axios.post<T>(url, body, authConfig);
         data = response.data;
         return { ok: true, data };
