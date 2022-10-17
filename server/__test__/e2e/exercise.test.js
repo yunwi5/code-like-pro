@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { configureTestApp, closeTestApp } = require('./config');
-const { createUser, createExercise } = require('./createData');
+const { createUser, createExercise, createShowcase } = require('./createData');
 
 let app = null;
 let user = null;
@@ -75,11 +75,24 @@ describe('Exercises', () => {
                 .send({});
 
             // It should be 400 bad request or 422
-            expect(response.statusCode).toBe(500);
+            expect(response.statusCode).toBe(400);
         });
 
         it('Cannot create an exercise if there are less than 3 test cases.', async () => {
-            // The API needs to implement this aspect.
+            // Test exercise with only one test case. This should not be accepted.
+            const testExercise = {
+                ...sampleExercise,
+                testCases: [
+                    { code: 'printMessage("Hi")', expectedOutput: 'Hi', hidden: false },
+                ],
+            };
+
+            const response = await request(app)
+                .post('/api/exercise')
+                .set('cookie', cookie)
+                .send(testExercise);
+
+            expect(response.statusCode).toBe(400);
         });
 
         it('Cannot create an exercise if there are any failing test cases.', async () => {
@@ -95,8 +108,12 @@ describe('Exercises', () => {
     });
 
     describe('PUT an exercise', () => {
+        let createdExercise;
+        beforeAll(async () => {
+            createdExercise = await createExercise(app, cookie);
+        });
+
         it('Can update an exercise', async () => {
-            const createdExercise = await createExercise(app, cookie);
             // Insert an updated attribute to test update
             const updatedExercise = { ...sampleExercise, name: 'Updated' };
 
@@ -114,18 +131,58 @@ describe('Exercises', () => {
             // If necessary attributes like test cases are missing, it should not update.
             // This functionality is not ideally implemented at the moment.
             // The server should return 400 if they are missing, but currently return 500 internal server error.
+            const updatedProps = {
+                ...sampleExercise,
+                testCases: undefined,
+                solutionCode: undefined,
+            };
+
+            const response = await request(app)
+                .put(`/api/exercise/${createdExercise._id}`)
+                .set('cookie', cookie)
+                .send(updatedProps);
+
+            // Should be a bad request 400
+            expect(response.statusCode).toBe(400);
         });
 
         it('Cannot update if there are failing tests', async () => {
             // If any test cases fail, do not update.
+            // Test exercise with failing tests.
+            const testExercise = {
+                ...sampleExercise,
+                testCases: [
+                    {
+                        code: 'printMessage("Hi")',
+                        expectedOutput: 'wrong',
+                        hidden: false,
+                    },
+                    {
+                        code: 'printMessage("Hi")',
+                        expectedOutput: 'wrong',
+                        hidden: false,
+                    },
+                    {
+                        code: 'printMessage("Hi")',
+                        expectedOutput: 'wrong',
+                        hidden: false,
+                    },
+                ],
+            };
+
+            const response = await request(app)
+                .put(`/api/exercise/${createdExercise._id}`)
+                .set('cookie', cookie)
+                .send(testExercise);
+
+            // Should be a bad request 400 if there are any failing tests
+            expect(response.statusCode).toBe(400);
         });
     });
 
     describe('DELETE an exercise', () => {
         it('Can delete an exercise', async () => {
-            // Create a sample exercise with the createExercise() utility function
             const createdExercise = await createExercise(app, cookie);
-
             // Send DELETE request to delete this exercise
             const response = await request(app)
                 .delete(`/api/exercise/${createdExercise._id}`)
@@ -144,8 +201,26 @@ describe('Exercises', () => {
         });
 
         it('When deleting exercise, delete its comments and showcases as well', async () => {
+            const createdExercise = await createExercise(app, cookie);
             // This cleanup functionality has not been implemented.
             // Need to implement it and test it through this test function.
+
+            // Create a sample showcase that depends on this exercise
+            const createdShowcase = await createShowcase(app, cookie, createdExercise);
+            console.log({ createdShowcase });
+
+            // Delete the exercise that owns the showcase
+            await request(app)
+                .delete(`/api/exercise/${createdExercise._id}`)
+                .set('cookie', cookie);
+
+            // Send the request to get the showcase we created
+            const showcaseResponse = await request(app)
+                .get(`/api/showcase/${createdShowcase._id}`)
+                .set('Cookie', cookie);
+
+            // Showcase should not be found, because it should be deleted when its exercise is deleted.
+            expect(showcaseResponse.statusCode).toBe(404);
         });
     });
 });

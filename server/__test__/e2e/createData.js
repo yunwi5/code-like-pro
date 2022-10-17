@@ -55,4 +55,21 @@ const createExercise = async (app, cookie) => {
     return response.body;
 };
 
-module.exports = { createUser, createExercise };
+// Necessary props to create a showcase object
+const sampleShowcaseProps = {
+    code: 'function printMessage(msg) { console.log(msg);};',
+    description: 'Simple solution in O(1)',
+};
+
+// Create a sample showcase for further testing
+const createShowcase = async (app, cookie, exercise) => {
+    const response = await request(app)
+        .post(`/api/exercise/${exercise._id}/showcase`)
+        .set('cookie', cookie)
+        .send(sampleShowcaseProps);
+
+    // Return created showcase
+    return response.body;
+};
+
+module.exports = { createUser, createExercise, createShowcase };

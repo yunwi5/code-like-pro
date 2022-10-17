@@ -1,3 +1,4 @@
+// const jest = require('jest');
 const request = require('supertest');
 const { configureTestApp, closeTestApp } = require('./config');
 const { createUser, createExercise } = require('./createData');

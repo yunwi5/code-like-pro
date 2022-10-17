@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const passportStrategy = require('../../config/passport');
 const { createApp, registerRoutes } = require('../../config/app');
-const { connectTestDB, dropDB } = require('../setuptestdb');
+const { connectTestDB, dropDB, dropCollections } = require('../setuptestdb');
 
 // Function that runs at the beginning of the e2e tests.
 // Always put this in beforeAll() callback function.

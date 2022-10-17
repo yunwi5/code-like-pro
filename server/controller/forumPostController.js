@@ -7,7 +7,7 @@ const createForumPost = async (req, res) => {
 
     await forumPost.save();
 
-    res.status(200).json(forumPost);
+    res.status(201).json(forumPost);
 };
 
 const getForumPosts = async (req, res) => {
@@ -54,48 +54,66 @@ const getForumPostById = async (req, res) => {
 };
 
 const updateForumPost = async (req, res) => {
+    let forumPost;
+
     try {
-        const updatedDetails = req.body;
-        let forumPost = await ForumPost.findById(req.params.id);
-
-        if (req.user._id.toString() != forumPost.author.toString()) {
-            res.status(400).send(
-                'Error, user does not have permission to edit forum post',
-            );
-        }
-
-        forumPost = await ForumPost.findByIdAndUpdate(req.params.id, updatedDetails, {
-            new: true,
-        });
-
-        res.status(200).json(forumPost);
-    } catch (err) {
+        forumPost = await ForumPost.findById(req.params.id);
+    } catch(err){
         console.log(err.message);
-        res.status(500).json(err.message);
+    }
+
+    if (forumPost != null){
+        try {
+            const updatedDetails = req.body;
+
+            if (req.user._id.toString() != forumPost.author.toString()) {
+                res.status(400).send(
+                    'Error, user does not have permission to edit forum post',
+                );
+            }
+
+            forumPost = await ForumPost.findByIdAndUpdate(req.params.id, updatedDetails, {
+                new: true,
+            });
+
+            res.status(200).json(forumPost);
+        } catch (err) {
+            console.log(err.message);
+            res.status(500).json(err.message);
+        }
+    } else {
+        res.status(404).send(`Forum post ${forumId} was not found`);
     }
 };
 
 const deleteForumPost = async (req, res) => {
     const forumId = req.params.id;
+    let forum;
 
     try {
-        const forum = await ForumPost.findById(forumId);
-        if (forum == null)
-            return res.status(404).send(`Forum post ${forumId} was not found`);
-
-        if (forum.author?.toString() !== req.user._id.toString()) {
-            return res.status(401).send(`You are not the author of the post!`);
-        }
-
-        // Delete all the comments of this post, as they are now redundant.
-        const p1 = Comment.deleteMany({ _id: { $in: forum.comments } });
-        const p2 = forum.remove();
-        await Promise.all([p1, p2]);
-
-        res.status(200).send('Deleted');
+        forum = await ForumPost.findById(forumId);
     } catch (err) {
         console.log(err.message);
-        res.status(500).send('Something went wrong');
+    }
+        
+    if (forum != null){
+        try{
+            if (forum.author?.toString() !== req.user._id.toString()) {
+                return res.status(401).send(`You are not the author of the post!`);
+            }
+
+            // Delete all the comments of this post, as they are now redundant.
+            const p1 = Comment.deleteMany({ _id: { $in: forum.comments } });
+            const p2 = forum.remove();
+            await Promise.all([p1, p2]);
+
+            res.status(200).send('Deleted');
+        } catch (err) {
+            console.log(err.message);
+            res.status(500).send('Something went wrong');
+        }
+     } else {
+        res.status(404).send(`Forum post ${forumId} was not found`);
     }
 };
 
@@ -158,9 +176,17 @@ ForumPost stores the list of user ids who like the post inside 'liked' array att
 const postForumPostLike = async (req, res) => {
     const userId = req.user._id;
     const postId = req.params.id;
+    let forumPost;
 
     try {
-        const forumPost = await ForumPost.findById(postId);
+        forumPost = await ForumPost.findById(postId);
+    } catch (err){
+        console.log(err.message);
+        res.status(400).send(`Error, forum post ${postId} not found`);
+    }
+
+    try {
+        forumPost = await ForumPost.findById(postId);
 
         const foundIndex = forumPost.liked.findIndex(
             (id) => id.toString() === userId.toString(),
