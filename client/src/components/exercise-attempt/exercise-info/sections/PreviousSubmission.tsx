@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { useEffect, useMemo, useState } from 'react';
 import { BsFileEarmarkCode } from 'react-icons/bs';
 import { IoMdInformationCircle } from 'react-icons/io';
@@ -8,6 +9,7 @@ import {
     IUserSubmission,
 } from '../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import { listItemAnimations } from '../../../../utils/animations';
 import { getDateTimeFormat } from '../../../../utils/datetime';
 import { getLanguageIcon, prettierLanguageName } from '../../../../utils/language';
 import CodeEditor from '../../../ui/editor/CodeEditor';
@@ -25,7 +27,14 @@ const PreviousSubmission: React.FC = () => {
                 <BsFileEarmarkCode className="text-[1.1em]" /> Submission History
             </h2>
             {userSubmission && (
-                <SubmissionCard userSubmission={userSubmission} exercise={exercise} />
+                <motion.div
+                    variants={listItemAnimations}
+                    initial="initial"
+                    animate="animate"
+                    transition={{ duration: 0.3 }}
+                >
+                    <SubmissionCard userSubmission={userSubmission} exercise={exercise} />
+                </motion.div>
             )}
             {!userSubmission && (
                 <div className="h-[20rem] flex-center gap-1 text-lg text-gray-600">

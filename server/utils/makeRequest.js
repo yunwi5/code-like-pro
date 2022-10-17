@@ -13,8 +13,6 @@ async function makeRequest(bodyData) {
         );
 
         const data = await response.data;
-        console.log(data);
-
         return data;
     } catch (err) {
         console.log(err.message);

@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 const imageClass =
-    'absolute overflow-hidden rounded-sm border-[1.5px] border-gray-300 shadow hover:!opacity-100 hover:z-20';
+    'relative lg:absolute overflow-hidden rounded-sm border-[1.5px] border-gray-300 shadow hover:!opacity-100 hover:z-20';
 
 interface ImageProps {
     variants: any;
@@ -21,6 +22,7 @@ export const ImageBlock = ({
     src,
     alt,
 }: ImageProps) => {
+    const { width } = useWindowSize();
     return (
         <motion.div
             onClick={onClick}
@@ -28,7 +30,7 @@ export const ImageBlock = ({
             variants={variants}
             initial="hidden"
             whileInView="show"
-            whileHover={{ scale: 1.1, transition: { duration: 0.5 } }}
+            whileHover={{ scale: width >= 1024 ? 1.1 : 1, transition: { duration: 0.5 } }}
             transition={{
                 ease: [0.6, 0.01, -0.05, 0.95],
                 duration: 1.6,

@@ -1,7 +1,7 @@
 const Exercise = require('../models/Exercise');
 const UserSubmission = require('../models/UserSubmission');
 const User = require('../models/User');
-const { getSourceFilename, constructLanguageFileSpec } = require('../utils/languageSupport');
+const { constructLanguageFileSpec } = require('../utils/languageSupport');
 const makeRequest = require('../utils/makeRequest');
 
 /*
@@ -24,7 +24,7 @@ const runTestCases = async (req, res) => {
     });
 
     const testCaseResults = await Promise.all(testCasePromises);
-    console.log(testCaseResults);
+    // console.log(testCaseResults);
 
     const feedbackArray = [];
 
@@ -84,7 +84,11 @@ const postSubmission = async (req, res) => {
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
         const body = {
-            run_spec: constructLanguageFileSpec(language, userSubmission.code, testCase.code),
+            run_spec: constructLanguageFileSpec(
+                language,
+                userSubmission.code,
+                testCase.code,
+            ),
         };
 
         const result = makeRequest(body);

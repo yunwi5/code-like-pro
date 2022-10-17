@@ -1,5 +1,5 @@
+import { motion } from 'framer-motion';
 import React from 'react';
-import { DefaultProfile } from '../../../assets';
 import { IRanking } from '../../../models/interfaces';
 import ProfileView from '../../ui/user/profile-view/ProfileView';
 
@@ -18,7 +18,17 @@ const RankingPodium: React.FC<Props> = ({ rankingOrder, className = '' }) => {
                 if (rankIndex >= rankingOrder.length) return null;
 
                 return (
-                    <div key={rankIndex} className="grow flex flex-col">
+                    <motion.div
+                        key={rankIndex}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{
+                            opacity: 1,
+                            y: 0,
+                            transition: { duration: 0.5, delay: rankIndex * 0.15 },
+                        }}
+                        viewport={{ once: true }}
+                        className="grow flex flex-col"
+                    >
                         <div className="text-center text-gray-500 text-lg font-bold inline-block">
                             <ProfileView
                                 user={rankingOrder[rankIndex]}
@@ -35,7 +45,7 @@ const RankingPodium: React.FC<Props> = ({ rankingOrder, className = '' }) => {
                                 {rankIndex + 1}
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 );
             })}
         </section>

@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import { listItemAnimations } from '../../../../utils/animations';
 import TestCase from '../../../ui/test-cases/TestCase';
 import TestCaseMessages from './TestCaseMessages';
 
@@ -18,13 +20,22 @@ const TestCasesDisplay: React.FC = () => {
                     if (testCase.hidden) return null;
 
                     return (
-                        <TestCase
+                        <motion.div
                             key={idx}
-                            language={exercise.language}
-                            testCase={{ ...testCase, name: `Test Case ${idx + 1}` }}
-                            output={testCaseOutputs[idx]}
-                            readOnly={true}
-                        />
+                            variants={listItemAnimations}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            transition={{ duration: 0.3, delay: idx * 0.1 }}
+                        >
+                            <TestCase
+                                key={idx}
+                                language={exercise.language}
+                                testCase={{ ...testCase, name: `Test Case ${idx + 1}` }}
+                                output={testCaseOutputs[idx]}
+                                readOnly={true}
+                            />
+                        </motion.div>
                     );
                 })}
             </ul>

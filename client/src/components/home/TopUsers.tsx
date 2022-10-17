@@ -1,6 +1,4 @@
 import React, { useMemo } from 'react';
-import { MdDoubleArrow } from 'react-icons/md';
-import { Link } from 'react-router-dom';
 import useRanking from '../../hooks/ranking/useRanking';
 import RankingPodium from '../ranking/sections/RankingPodium';
 import ArrowLink from '../ui/links/ArrowLink';
@@ -12,8 +10,8 @@ const TopUsers: React.FC = () => {
     }, [rankingOrder]);
 
     return (
-        <div className="w-full -mt-3 sm:mt-[20rem] lg:mt-10">
-            <div className="min-h-[50vh] flex flex-col lg:flex-row justify-around gap-y-12 gap-x-10 h-full py-8 px-4 sm:px-10 md:px-16">
+        <div className="w-full">
+            <div className="flex flex-col lg:flex-row justify-around gap-y-12 gap-x-10 h-full py-3 lg:py-8 px-4 sm:px-10 md:px-16">
                 <div className="order-2 lg:order-none flex-center">
                     <RankingPodium
                         rankingOrder={top3Users}

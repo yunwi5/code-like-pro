@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Comment = require('../models/Comment');
 
 // Get all replying comments of the comment of the param id.
@@ -61,8 +62,13 @@ const patchComment = async (req, res) => {
         await comment.save();
         res.status(200).json(comment);
     } catch (err) {
-        console.log(err.message);
-        res.status(400).json(err.message);
+        if (err instanceof mongoose.Error.CastError) {
+            return res.status(404).json({ message: 'Invalid comment id' });
+        } else if (err instanceof mongoose.Error) {
+            return res.status(400).json({ message: 'Bad request' });
+        }
+
+        res.status(500).json(err.message);
     }
 };
 
@@ -88,6 +94,9 @@ const deleteComment = async (req, res) => {
 
         res.status(200).json(comment);
     } catch (err) {
+        if (err instanceof mongoose.Error.CastError) {
+            return res.status(404).json({ message: 'Invalid comment id' });
+        }
         console.log(err.message);
         res.status(400).json(err.message);
     }

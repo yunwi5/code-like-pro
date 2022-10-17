@@ -1,3 +1,4 @@
+// const jest = require('jest');
 const request = require('supertest');
 const { configureTestApp, closeTestApp } = require('./config');
 const { createUser, createExercise } = require('./createData');
@@ -21,6 +22,10 @@ describe('Showcase', () => {
         user = userReceived;
         cookie = cookieReceived;
         exercise = await createExercise(app, cookie);
+    });
+
+    beforeEach(function () {
+        jest.setTimeout(30000);
     });
 
     afterAll(async () => {

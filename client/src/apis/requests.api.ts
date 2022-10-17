@@ -12,9 +12,12 @@ type ReqBodyParams = { url: string; body: any; headers?: AxiosRequestConfig };
 export async function getRequest<T>({ url, headers }: ReqParams) {
     let data: T | null = null;
     try {
-        const response = await axios.get<T>(url, headers ?? authConfig);
+        const reqHeaders = headers ?? authConfig;
+        console.log('withCredentials:', reqHeaders.withCredentials);
+
+        const response = await axios.get<T>(url, authConfig);
         data = response.data;
-        return { ok: true, data };
+        return { ok: true, data, response };
     } catch (err) {
         // 400 ~ 500
         let message = extractErrorMessage(err);
@@ -27,7 +30,10 @@ export async function getRequest<T>({ url, headers }: ReqParams) {
 export async function postRequest<T>({ url, body, headers }: ReqBodyParams) {
     let data: T | null = null;
     try {
-        const response = await axios.post<T>(url, body, headers ?? authConfig);
+        const reqHeaders = headers ?? authConfig;
+        console.log('withCredentials:', reqHeaders.withCredentials);
+
+        const response = await axios.post<T>(url, body, authConfig);
         data = response.data;
         return { ok: true, data };
     } catch (err) {
@@ -41,7 +47,7 @@ export async function postRequest<T>({ url, body, headers }: ReqBodyParams) {
 export async function putRequest<T>({ url, body, headers }: ReqBodyParams) {
     let data: T | null = null;
     try {
-        let response = await axios.put<T>(url, body, headers ?? authConfig);
+        let response = await axios.put<T>(url, body, authConfig);
         data = response.data;
         return { ok: true, data };
     } catch (err) {
@@ -54,7 +60,7 @@ export async function putRequest<T>({ url, body, headers }: ReqBodyParams) {
 export async function patchRequest<T>({ url, body, headers }: ReqBodyParams) {
     let data: T | null = null;
     try {
-        let response = await axios.patch<T>(url, body, headers ?? authConfig);
+        let response = await axios.patch<T>(url, body, authConfig);
         data = response.data;
         return { ok: true, data };
     } catch (err) {
@@ -67,7 +73,7 @@ export async function patchRequest<T>({ url, body, headers }: ReqBodyParams) {
 export async function deleteRequest<T>({ url, headers }: ReqParams) {
     let data: T | null = null;
     try {
-        let response = await axios.delete<T>(url, headers ?? authConfig);
+        let response = await axios.delete<T>(url, authConfig);
         data = response.data;
         return { ok: true, data };
     } catch (err) {

@@ -18,3 +18,25 @@
 .link-underline-effect-thin {
     @include hover-underline-from-middle($color-main-400, 1.5px);
 }
+
+/* The typewriter cursor effect */
+@keyframes blinking {
+    0%,
+    100% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: #3c38e0;
+    }
+}
+
+.blink {
+    display: inline-block;
+    width: 3px;
+    margin-top: auto;
+    margin-bottom: auto;
+    animation-duration: 0.75s;
+    animation-name: blinking;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}

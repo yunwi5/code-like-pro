@@ -52,10 +52,12 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     // Login with existing session so that the user does not have to login again when refreshing the page
     const loginBySession = useCallback(async () => {
         setIsLoading(true);
-        const { ok, data } = await getLoginSuccess();
+        const { ok, data, response } = await getLoginSuccess();
+        console.log('loginBySessionOk:', ok, 'loginBySessionData:', data);
+        console.log(response);
         setUser(() => {
             setIsLoading(false);
-            if (ok && data) return data;
+            if (ok && data) return data.user;
             return null;
         });
     }, []);
@@ -65,6 +67,8 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
             // Use returned data as a global user data
             setIsLoading(true);
             const { ok, data, message } = await loginRequest(loginState);
+            console.log('loginOk:', ok, 'loginData:', data?.name);
+
             setUser(() => {
                 setIsLoading(false);
                 if (ok && data) return data;
@@ -80,6 +84,8 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         // Send the logout request to clear the session
         await logoutRequest();
     }, []);
+
+    console.log('Document cookies:', document.cookie);
 
     const value = {
         user,

@@ -30,7 +30,7 @@ const FeaturesBanner: React.FC = () => {
     }, []);
 
     return (
-        <h1 className="flex flex-col md:flex-row items-start md:items-center gap-3 pl-4 text-4xl text-gray-500 font-semibold">
+        <h1 className="flex flex-col md:flex-row items-start md:items-center gap-3 pl-4 text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-gray-500 whitespace-nowrap font-semibold">
             <p>Become The</p>
             <div className="px-3 py-2 max-h-[59px] w-fit transition-all border-2 border-slate-400 rounded-2xl text-main-400 font-bold shadow">
                 <AnimatePresence>

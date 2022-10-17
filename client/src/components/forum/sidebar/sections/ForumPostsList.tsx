@@ -1,6 +1,9 @@
 import React from 'react';
+import PuffLoader from 'react-spinners/PuffLoader';
+
 import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 import usePagination from '../../../../hooks/usePagination';
+import { useAppSelector } from '../../../../store/redux/store';
 import PageNavigation from '../../../ui/PageNavigation';
 import ForumPostListItem from './ForumPostListItem';
 
@@ -8,7 +11,7 @@ const POST_PER_PAGE = 10;
 
 /* List of forum posts on the sidebar*/
 const ForumPostsList: React.FC = () => {
-    // const posts = useAppSelector((state) => state.forum.posts);
+    const isLoading = useAppSelector((state) => state.forum.isLoading);
     const { posts } = useForumBrowsing();
     const {
         array: currentPagePosts,
@@ -22,9 +25,16 @@ const ForumPostsList: React.FC = () => {
 
     return (
         <div className="flex flex-col">
-            {currentPagePosts.map((post) => (
-                <ForumPostListItem key={post._id} post={post} />
-            ))}
+            {/* Loading spinner while posts are loading */}
+            {isLoading && (
+                <div className="h-[50vh] flex-center">
+                    <PuffLoader size={200} color="#5552e4" />
+                </div>
+            )}
+            {!isLoading &&
+                currentPagePosts.map((post) => (
+                    <ForumPostListItem key={post._id} post={post} />
+                ))}
             <PageNavigation
                 currentPage={page}
                 totalPages={maxPage}

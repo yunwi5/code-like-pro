@@ -1,7 +1,6 @@
 import React from 'react';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 import TextEditor from '../../../../ui/editor/text-editor/TextEditor';
-import CourseList from '../../../../ui/lists/CourseList';
 import TagList from '../../../../ui/lists/TagList';
 import ExercisePromptHeader from './ExercisePromptHeader';
 
@@ -22,7 +21,6 @@ const ExercisePrompt: React.FC = () => {
             {/* Display exercise relevant tags and courses at the end. */}
             <footer className="-mt-3 flex flex-col gap-6">
                 <TagList title="Relevant Tags:" tags={exercise?.tags || []} />
-                {exercise?.courses && <CourseList courses={exercise?.courses || []} />}
             </footer>
         </section>
     );
