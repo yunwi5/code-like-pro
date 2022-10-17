@@ -21,7 +21,7 @@ const forumPostRouter = require('../routes/forumPost');
 // Mongo session store for better session storage (default is in-memory session which is not efficient)
 const store = MongoStore.create({
     mongoUrl: keys.MongoURI,
-    // secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
+    secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
     touchAfter: 24 * 60 * 60, // lazy update the session, by limiting a period of time
 });
 
