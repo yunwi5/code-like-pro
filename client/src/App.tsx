@@ -55,7 +55,7 @@ function App() {
                         <Route path="favorites" element={<ProfileFavorites />} />
                         <Route path="my-creations" element={<MyCreations />} />
                         <Route path="my-submissions" element={<MySubmission />} />
-                        {/*<Route path="badge" element={<BadgePage />} />    Does not work?*/}
+                        <Route path="badge" element={<BadgePage />} />
                     </Route>
 
                     <Route path="/ranking" element={<RankingPage />} />
