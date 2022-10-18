@@ -68,9 +68,15 @@ function addSolvingPoints(userRankingDataMap, submissions) {
             // Each solving has default ranking points of 10.
             userRankingDataMap[userId].solvingPoints += 10;
 
-            // Difficulty multiplier between 4 ~ 7
-            const difficultyMultiplier = getDifficultyMultiplier(sub.exercise.difficulty);
-            userRankingDataMap[userId].solvingPoints += 2 * difficultyMultiplier;
+            if (sub.exercise?.difficulty) {
+                // Difficulty multiplier between 4 ~ 7
+                const difficultyMultiplier = getDifficultyMultiplier(
+                    sub.exercise.difficulty,
+                );
+                userRankingDataMap[userId].solvingPoints += 2 * difficultyMultiplier;
+            } else {
+                console.log({ sub: sub.exercise });
+            }
         }
     });
 }
@@ -97,8 +103,9 @@ const getUserRankings = async (req, res) => {
     // Adding ranking data for exercise creations.
     addCreationPoints(userRankingDataMap, exercises);
 
+    const subs = submissions.filter((sub) => !!sub.exercise);
     // Adding ranking data for exercise solving.
-    addSolvingPoints(userRankingDataMap, submissions);
+    addSolvingPoints(userRankingDataMap, subs);
 
     // Showcase results will also be taken into account for the ranking.
 
@@ -137,8 +144,9 @@ const getTopicsUserRankings = async (req, res) => {
     // Adding ranking data for exercise creations.
     addCreationPoints(userRankingDataMap, exercises);
 
+    const subs = submissions.filter((sub) => !!sub.exercise);
     // Adding ranking data for exercise solving.
-    addSolvingPoints(userRankingDataMap, submissions);
+    addSolvingPoints(userRankingDataMap, subs);
 
     // Showcase results will also be taken into account for the ranking.
 
@@ -178,7 +186,7 @@ const getCoursesUserRankings = async (req, res) => {
     addCreationPoints(userRankingDataMap, exercises);
 
     // Adding ranking data for exercise solving.
-    addSolvingPoints(userRankingDataMap, submissions);
+    addSolvingPoints(userRankingDataMap, subs);
 
     // Showcase results will also be taken into account for the ranking.
 

@@ -45,6 +45,10 @@ const CodeEditor: React.FC<Props> = ({
         monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
     };
 
+    // const updateEditorTabSize = (tabSize: number) => {
+    // editorRef.current?.updateOptions({ tabSize });
+    // };
+
     return (
         <div
             className={`${styles['editor-wrapper']} relative flex flex-col border-2 bg-white border-gray-300 shadow-md focus-within:shadow-lg focus-within:outline focus-within:outline-2 focus-within:outline-gray-200 rounded-sm overflow-hidden ${className}`}

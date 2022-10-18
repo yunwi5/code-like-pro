@@ -21,7 +21,7 @@ const forumPostRouter = require('../routes/forumPost');
 // Mongo session store for better session storage (default is in-memory session which is not efficient)
 const store = MongoStore.create({
     mongoUrl: keys.MongoURI,
-    // secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
+    secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
     touchAfter: 24 * 60 * 60, // lazy update the session, by limiting a period of time
 });
 
@@ -46,24 +46,22 @@ const createApp = () => {
     app.use(express.urlencoded({ extended: false }));
 
     const sessionConfig = {
-        store,
         name: process.env.SESSION_NAME || 'thisshouldnotbeasessionname',
         secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
-        resave: true,
-        saveUninitialized: false,
+        resave: false,
+        saveUninitialized: true,
         // proxy: true, // Required for hosting providers like Heroku & Digital Ocean (regarding X-Forwarded-For)
         cookie: {
             httpOnly: false, // We use JS to access the APIs, so should be false
-            secure: app.get('env') !== 'production' ? undefined : true, // If true, it only works in https protocal. True in production.
-            expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-            sameSite: 'none',
-            maxAge: 3 * 24 * 60 * 60 * 1000, //user won't have to login for 3 days
+            secure: app.get('env') !== 'production' ? false : true, // If true, it only works in https protocal. True in production.
+            // sameSite: 'none', // caused the problem on chrome and edge
+            maxAge: 24 * 60 * 60 * 1000 * 7, //seven days
         },
     };
 
+    app.set('trust proxy', 1); // trust first proxy
     if (app.get('env') === 'production') {
         console.log('trust proxy, 1');
-        app.set('trust proxy', 1); // trust first proxy
     }
 
     console.log({ sessionConfig });
