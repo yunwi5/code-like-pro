@@ -7,6 +7,7 @@ import { round } from './number';
 export function createSubmissionMap(submissions: IUserSubmissionPopulated[]) {
     const submissionMap: { [key: string]: IUserSubmissionPopulated } = {};
     submissions.forEach((sub) => {
+        if (!sub?.exercise) return;
         submissionMap[sub.exercise._id] = sub;
     });
     return submissionMap;
@@ -35,7 +36,7 @@ export function getSubmissionStats(
     const total = submissions.length;
     let correctCount = 0;
     submissions.forEach((submission) => {
-        if (submission.correct) correctCount++;
+        if (submission?.correct) correctCount++;
     });
     const correctRate = round((correctCount / (total || 1)) * 100, 1).toFixed(1);
     return { correctRate, correctCount, total };

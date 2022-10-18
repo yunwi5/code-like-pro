@@ -131,9 +131,10 @@ const deleteExercise = async (req, res) => {
         const cp = Comment.deleteMany({ _id: { $in: commentIds } });
         // Clear the reports of this exercise
         const erp = ExerciseReport.deleteMany({ _id: { $in: reportIds } });
+        const usp = UserSubmission.deleteMany({ exercise: exercise._id });
 
         // delete result of the exercise
-        const [deleteResult, _] = await Promise.all([exp, scp, cp, erp]);
+        const [deleteResult, _] = await Promise.all([exp, scp, cp, erp, usp]);
 
         return res.status(200).json(deleteResult);
     } catch (err) {
