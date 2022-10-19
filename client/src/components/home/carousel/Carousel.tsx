@@ -4,7 +4,7 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { wrap } from 'popmotion';
 
 import { mod } from '../../../utils/number';
-import images from '../../../assets/homepage/imageData';
+import { AppImagesList as images } from '../../../assets/app-images';
 import './Carousel.scss';
 
 const variants = {

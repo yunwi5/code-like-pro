@@ -58,11 +58,11 @@ const updateForumPost = async (req, res) => {
 
     try {
         forumPost = await ForumPost.findById(req.params.id);
-    } catch(err){
+    } catch (err) {
         console.log(err.message);
     }
 
-    if (forumPost != null){
+    if (forumPost != null) {
         try {
             const updatedDetails = req.body;
 
@@ -95,9 +95,9 @@ const deleteForumPost = async (req, res) => {
     } catch (err) {
         console.log(err.message);
     }
-        
-    if (forum != null){
-        try{
+
+    if (forum != null) {
+        try {
             if (forum.author?.toString() !== req.user._id.toString()) {
                 return res.status(401).send(`You are not the author of the post!`);
             }
@@ -112,7 +112,7 @@ const deleteForumPost = async (req, res) => {
             console.log(err.message);
             res.status(500).send('Something went wrong');
         }
-     } else {
+    } else {
         res.status(404).send(`Forum post ${forumId} was not found`);
     }
 };
@@ -169,43 +169,61 @@ const deleteForumPostComment = async (req, res) => {
     }
 };
 
-/*
-Users can like the post.
-ForumPost stores the list of user ids who like the post inside 'liked' array attribute.
-*/
-const postForumPostLike = async (req, res) => {
-    const userId = req.user._id;
-    const postId = req.params.id;
-    let forumPost;
+/* User upvote | downvote the post. type is either 'up' | 'down' */
+const postVote = async (req, res) => {
+    const { type } = req.body;
 
     try {
-        forumPost = await ForumPost.findById(postId);
-    } catch (err){
-        console.log(err.message);
-        res.status(400).send(`Error, forum post ${postId} not found`);
-    }
+        const forumPost = await ForumPost.findById(req.params.id);
+        // Check if show case exists, return 404 if not
+        if (forumPost == null)
+            res.status(404).send(`Forum post ${req.params.id} not found`);
 
-    try {
-        forumPost = await ForumPost.findById(postId);
-
-        const foundIndex = forumPost.liked.findIndex(
-            (id) => id.toString() === userId.toString(),
+        // See if there is already an existing vote made by the user
+        const foundVote = forumPost.votes.find(
+            (vote) => vote.user.toString() === req.user._id.toString(),
         );
-
-        if (foundIndex < 0) {
-            // Means the current userId does not exist, so append the user id at the end.
-            forumPost.liked.push(userId);
+        if (foundVote) {
+            // If user has already voted, update vote
+            foundVote.type = type;
         } else {
-            // Means the current userId already exists, so delete the user id.
-            forumPost.liked.splice(foundIndex, 1);
+            // If user has not voted, create new vote
+            const newVote = { type, user: req.user._id };
+            forumPost.votes.push(newVote);
         }
-        await forumPost.save();
 
-        // Returns the updated ForumPost object.
+        await forumPost.save();
         res.status(201).json(forumPost);
     } catch (err) {
         console.log(err.message);
-        res.status(500).send('Something went wrong');
+        res.status(404).json(err.message);
+    }
+};
+
+const deleteVote = async (req, res) => {
+    try {
+        const forumPost = await ForumPost.findById(req.params.id).populate('votes');
+        // Check if show case exists, return 404 if not
+        if (forumPost == null)
+            res.status(404).send(`Forum post ${req.params.id} not found`);
+
+        // Find index of existing vote made by the user, if there is one
+        const foundIndex = forumPost.votes.findIndex(
+            (vote) => vote.user.toString() === req.user._id.toString(),
+        );
+
+        // If user has no vote return error
+        if (foundIndex < 0) {
+            return res.status(404).json({ message: 'User vote not found' });
+        } else {
+            // If user has not voted, create new vote
+            forumPost.votes.splice(foundIndex, 1);
+            await forumPost.save();
+            return res.status(200).json(forumPost);
+        }
+    } catch (err) {
+        console.log(err.message);
+        res.status(404).json(err.message);
     }
 };
 
@@ -217,8 +235,9 @@ const controller = {
     deleteForumPost,
     postForumPostComment,
     deleteForumPostComment,
-    postForumPostLike,
     updateForumPost,
+    postVote,
+    deleteVote,
 };
 
 module.exports = controller;

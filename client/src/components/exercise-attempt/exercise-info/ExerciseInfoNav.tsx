@@ -20,12 +20,15 @@ function getSectionIcon(section: SubSection) {
 // Choosing or clicking one subsection should switch to that particular subsection.
 const ExerciseInfoNav: React.FC<Props> = ({ activeSubSection, setActiveSubSection }) => {
     return (
-        <nav className="flex text-sm xs:text-base">
+        <nav className="flex text-sm xs:text-base flex-wrap">
             {SubSectionList.map((section, idx) => {
                 let className =
-                    'flex-1 flex-center gap-1 px-2 py-[0.7rem] !cursor-pointer transition-all hover:bg-gray-50 hover:text-main-500';
+                    'flex-1 flex-center gap-1 px-2 py-[0.7rem] whitespace-nowrap !cursor-pointer transition-all hover:bg-gray-50 hover:text-main-500';
                 if (idx > 0) {
                     className += ' flex-1 border-l-2 border-gray-300/70';
+                }
+                if (section === SubSection.PROMPT) {
+                    className += ' basis-full sm:basis-0';
                 }
                 if (section === activeSubSection) {
                     className += ' bg-white';

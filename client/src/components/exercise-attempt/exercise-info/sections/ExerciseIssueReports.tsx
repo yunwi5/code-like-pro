@@ -6,6 +6,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { compareByVotes } from '../../../../utils/sorting-utils';
 import IssueReportList from '../../../ui/lists/IssueReportList';
+import { GoIssueClosed } from 'react-icons/go';
 
 const ExerciseIssueReports: React.FC = () => {
     const { exercise } = useExerciseAttemptCtx();
@@ -19,29 +20,32 @@ const ExerciseIssueReports: React.FC = () => {
     }, [reports]);
 
     return (
-        <section className="flex-1 flex flex-col gap-4 px-4 py-5 overflow-y-scroll bg-white">
+        <section className="flex-1 flex flex-col gap-3 px-4 py-5 overflow-y-scroll bg-white">
             <div className="flex flex-wrap justify-between items-center">
-                <h2 className="text-main-600 text-xl capitalize">
-                    Be aware of these issues!
+                <h2 className="flex-start gap-1 text-gray-600 text-xl capitalize">
+                    <GoIssueClosed /> Be aware of these issues!
                 </h2>
                 <p className="text-gray-600/90 font-semibold">{reports.length} Issues</p>
             </div>
             {isLoading && (
                 <div className="flex-center py-10">
-                    <ClipLoader size={50} color="#5552e4" />
+                    <ClipLoader size={80} color="#5552e4" />
                 </div>
             )}
-            {sortedReports.length === 0 && (
-                <div className="h-[20rem] flex-center gap-2 text-lg">
-                    <FaSmile className="text-main-500 text-xl" />
-                    <h3 className="text-slate-600">Fortunately, there are no issues!</h3>
-                </div>
-            )}
+            {!isLoading && sortedReports.length === 0 && <NoReportsMessage />}
             {sortedReports && (
                 <IssueReportList reports={sortedReports} reportsPerPage={5} />
             )}
         </section>
     );
 };
+
+// Message to be displayed if there are no issue reports
+const NoReportsMessage = React.memo(() => (
+    <div className="h-[20rem] flex-center gap-2 text-lg">
+        <FaSmile className="text-main-500 text-xl" />
+        <h3 className="text-slate-600">Fortunately, there are no issues!</h3>
+    </div>
+));
 
 export default ExerciseIssueReports;

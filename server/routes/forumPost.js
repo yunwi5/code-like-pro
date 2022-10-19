@@ -1,8 +1,12 @@
 const express = require('express');
 const { ensureAuthenticated } = require('../middleware/auth');
+
 const catchAsync = require('../middleware/catchAsync');
 const forumPostController = require('../controller/forumPostController');
-const { validateForumpostBody } = require('../middleware/validateRequest');
+const {
+    validateForumpostBody,
+    validateVoteBody,
+} = require('../middleware/validateRequest');
 
 const router = express.Router();
 
@@ -42,11 +46,19 @@ router.delete(
     catchAsync(forumPostController.deleteForumPostComment),
 );
 
-// Post forum user like(favorite) functionality
+// Post vote
 router.post(
-    '/:id/like',
+    '/:id/vote',
     ensureAuthenticated,
-    catchAsync(forumPostController.postForumPostLike),
+    validateVoteBody,
+    catchAsync(forumPostController.postVote),
+);
+
+// Remove vote
+router.delete(
+    '/:id/vote',
+    ensureAuthenticated,
+    catchAsync(forumPostController.deleteVote),
 );
 
 module.exports = router;

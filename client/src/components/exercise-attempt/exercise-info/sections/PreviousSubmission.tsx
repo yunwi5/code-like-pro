@@ -22,8 +22,8 @@ const PreviousSubmission: React.FC = () => {
     if (!exercise) return null;
 
     return (
-        <section className="flex-1 bg-white pt-6 pb-5 px-4 xl:px-10">
-            <h2 className="flex-start gap-1 text-xl text-gray-500">
+        <section className="flex-1 bg-white px-4 py-5">
+            <h2 className="flex-start gap-1 text-xl text-gray-600">
                 <BsFileEarmarkCode className="text-[1.1em]" /> Submission History
             </h2>
             {userSubmission && (

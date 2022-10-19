@@ -13,3 +13,5 @@ export const AppImages = {
     Ranking,
     Statistics,
 };
+
+export const AppImagesList = Object.values(AppImages);

@@ -9,11 +9,11 @@ const config = {
     testPathIgnorePatterns: [
         'auth.test.js',
         'comment.test.js',
-        // 'exercise.test.js',
+        'exercise.test.js',
         'showcase.test.js',
         'ranking.test.js',
         'user*.test.js',
-        'forumpost.test.js',
+        // 'forumpost.test.js',
         'userSubmission.test.js',
     ],
 };

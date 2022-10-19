@@ -1,5 +1,6 @@
 import { ForumCategory, ForumPostType } from '../../enums';
 import { IComment } from '../showcase/IComment';
+import { IVote } from '../showcase/IVote';
 
 // Forum post creation form props.
 // Minimum requirements for post creation. Does not have comments and likes.
@@ -18,7 +19,7 @@ export interface IForumPost extends IForumPostProps {
     createdAt: string; // ISO
     author: { _id: string; name: string; pictureUrl: string };
     comments: string[];
-    liked: string[]; // list of user ids who liked this post
+    votes: IVote[];
 }
 
 // Comment populated
@@ -27,5 +28,5 @@ export interface IForumPostPopulated extends IForumPostProps {
     createdAt: string; // ISO
     author: { _id: string; name: string; pictureUrl: string };
     comments: IComment[];
-    liked: string[]; // list of user ids who liked this post
+    votes: IVote[];
 }
