@@ -42,6 +42,9 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
         />
     ) : null;
 
+    // Only display the first 5 tags
+    const tags = exercise.tags.sort().slice(0, 5);
+
     return (
         <>
             <article
@@ -98,7 +101,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                         <BsFillTagsFill className="text-lg text-slate-500" />
 
                         {/* Display maximum 5 tags. Fist 5 tags in this case. */}
-                        {exercise.tags.slice(0, 5).map((tag, idx) => (
+                        {tags.map((tag, idx) => (
                             <li
                                 key={idx}
                                 className="px-2 py-[0.125rem] bg-gray-400/40 hover:bg-gray-600/90 hover:text-gray-50 rounded-sm"

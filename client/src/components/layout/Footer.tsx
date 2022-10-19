@@ -14,10 +14,10 @@ import useWindowSize from '../../hooks/useWindowSize';
 // Footer links do not have real links at the moment.
 // Main purpose is to avoid duplicated styles.
 const footerLinks = [
-    { label: 'About', href: '#' },
-    { label: 'Assessment', href: '#' },
-    { label: 'Contest', href: '#' },
-    { label: 'Rankings', href: '#' },
+    { label: 'About', href: '/' },
+    { label: 'Questions', href: '/browse' },
+    { label: 'Forums', href: '/forum' },
+    { label: 'Rankings', href: '/ranking' },
 ];
 
 // List of social links and corresponding icons.
@@ -41,10 +41,10 @@ const Footer: React.FC = () => {
                 {AppProperty.APP_NAME}
             </h2>
             <div className="flex flex-col sm:flex-row items-center gap-x-5 lg:ml-5 lg:mr-auto">
-                <p className="whitespace-nowrap text-gray-500/90">
+                <p className="whitespace-nowrap text-gray-600/90">
                     Copyright &copy; 2022 CS 399 {AppProperty.APP_NAME}
                 </p>
-                <div className="flex gap-4 text-gray-600">
+                <div className="flex gap-4 text-gray-700">
                     {footerLinks.map((link, idx) => (
                         <Link key={idx} className="link-underline-effect" to={link.href}>
                             {link.label}
