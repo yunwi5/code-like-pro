@@ -1,4 +1,4 @@
-const ExerciseReport = require('../models/ExerciseReport');
+const ExerciseReport = require('../../models/ExerciseReport');
 
 const postReportVote = async (req, res) => {
     const reportId = req.params.id;

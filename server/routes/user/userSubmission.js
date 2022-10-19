@@ -1,9 +1,9 @@
 const express = require('express');
-const userSubmissionController = require('../controller/userSubmissionController');
+const userSubmissionController = require('../../controller/user/userSubmissionController');
 
-const { ensureAuthenticated } = require('../middleware/auth');
-const catchAsync = require('../middleware/catchAsync');
-const { validateRunCodeBody } = require('../middleware/validateRequest');
+const { ensureAuthenticated } = require('../../middleware/auth');
+const catchAsync = require('../../middleware/catchAsync');
+const { validateRunCodeBody } = require('../../middleware/validateRequest');
 
 const router = express.Router();
 

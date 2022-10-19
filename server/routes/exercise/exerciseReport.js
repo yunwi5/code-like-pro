@@ -1,7 +1,7 @@
 const express = require('express');
-const { ensureAuthenticated } = require('../middleware/auth');
-const catchAsync = require('../middleware/catchAsync');
-const exerciseReportController = require('../controller/exerciseReportController');
+const { ensureAuthenticated } = require('../../middleware/auth');
+const catchAsync = require('../../middleware/catchAsync');
+const exerciseReportController = require('../../controller/exercise/exerciseReportController');
 
 const router = express.Router();
 

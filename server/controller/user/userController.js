@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const UserSubmission = require('../models/UserSubmission');
-const User = require('../models/User');
-const Exercise = require('../models/Exercise');
+const UserSubmission = require('../../models/UserSubmission');
+const User = require('../../models/User');
+const Exercise = require('../../models/Exercise');
 
 const getUserById = async (req, res) => {
     let user;
