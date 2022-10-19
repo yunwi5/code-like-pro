@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { BiCommentDots } from 'react-icons/bi';
-import { BsHeartFill } from 'react-icons/bs';
 import { FaUserEdit } from 'react-icons/fa';
 import { MdDateRange } from 'react-icons/md';
 
@@ -9,6 +7,8 @@ import { IForumPost } from '../../../../models/interfaces';
 import { getDateTimeFormat } from '../../../../utils/datetime';
 import { ForumPostTypeIcons } from '../../../../utils/forum';
 import { getForumPostLink } from '../../../../utils/links';
+import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
+import { getVoteCounts } from '../../../../utils/votes';
 
 const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
     const postId = useParams().id;
@@ -16,6 +16,8 @@ const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
     const isActive = postId === post._id;
     // Apply different styles if it is active.
     const activeClass = isActive ? 'border-l-[5px] border-l-main-300 bg-slate-200' : '';
+
+    const { upVoteCount, downVoteCount } = getVoteCounts(post.votes || []);
 
     return (
         <article
@@ -39,16 +41,16 @@ const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
                     {post.author.name}
                 </li>
                 <li className="flex gap-1">
-                    <BsHeartFill className="text-pink-500/80 text-[1.2em]" />
-                    {post.liked.length}
-                </li>
-                <li className="flex gap-1">
                     <MdDateRange className="text-sky-500/80 text-[1.2em]" />
                     {getDateTimeFormat(post.createdAt)}
                 </li>
-                <li className="flex gap-1 ">
-                    <BiCommentDots className="text-slate-600 text-[1.2em]" />
-                    {post.comments.length}
+                <li className="flex gap-1">
+                    <AiOutlineLike className="text-blue-600 text-[1.2em]" />
+                    {upVoteCount}
+                </li>
+                <li className="flex gap-1">
+                    <AiOutlineDislike className="text-fuchsia-600 text-[1.2em]" />
+                    {downVoteCount}
                 </li>
             </ul>
         </article>

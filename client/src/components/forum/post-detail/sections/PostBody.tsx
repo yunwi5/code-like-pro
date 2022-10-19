@@ -5,7 +5,7 @@ import TextEditor from '../../../ui/editor/text-editor/TextEditor';
 import TagsGroup from '../../../ui/labels/TagsGroup';
 import ForumPostSpec from '../../../ui/spec/ForumPostSpec';
 import PostControl from './PostControl';
-import PostLike from './PostLike';
+import PostVotes from './PostVotes';
 
 const PostBody: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     return (
@@ -33,11 +33,7 @@ const PostBody: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
                 readOnly={true}
             />
             <footer className="flex flex-col">
-                {/* Post like icon & functionality */}
-                <div className="flex justify-center items-center">
-                    <PostLike post={post} />
-                </div>
-
+                <PostVotes post={post} />
                 <TagsGroup tags={post.tags} className="mt-4" />
             </footer>
         </article>

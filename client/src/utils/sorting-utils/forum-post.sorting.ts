@@ -1,4 +1,4 @@
-import { compareByDateTime, compareByName } from '.';
+import { compareByDateTime, compareByName, compareByVotes } from '.';
 import { ForumPostSortingKey, SortingDirection } from '../../models/enums';
 import { IForumPost } from '../../models/interfaces';
 import { IForumSortingState } from '../../store/redux/forum-slice';
@@ -16,7 +16,7 @@ export function sortForumPosts(posts: IForumPost[], sortingState: IForumSortingS
     // Sort by favorite/like counts by users
     if (sortingState.key === ForumPostSortingKey.LIKES) {
         return posts.sort((a, b) =>
-            isAsc ? a.liked.length - b.liked.length : b.liked.length - a.liked.length,
+            isAsc ? compareByVotes(a.votes, b.votes) : compareByVotes(b.votes, a.votes),
         );
     }
 

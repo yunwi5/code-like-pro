@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const { VoteSchema } = require('./Vote');
 
 const ForumPostSchema = new Schema({
     name: { type: String, required: true },
@@ -10,7 +11,8 @@ const ForumPostSchema = new Schema({
     createdAt: { type: Date, default: () => Date.now() },
     author: { type: Schema.Types.ObjectId, ref: 'User' },
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-    liked: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    // liked: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    votes: [VoteSchema],
 });
 
 const ForumPost = mongoose.model('ForumPost', ForumPostSchema);
