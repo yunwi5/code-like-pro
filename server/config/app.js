@@ -17,6 +17,7 @@ const exerciseReportRouter = require('../routes/exercise/exerciseReport');
 const rankingRouter = require('../routes/ranking');
 const imageRouter = require('../routes/image');
 const forumPostRouter = require('../routes/forumPost');
+const badgeRouter = require('../routes/badge');
 
 // Mongo session store for better session storage (default is in-memory session which is not efficient)
 const store = MongoStore.create({
@@ -65,7 +66,7 @@ const createApp = () => {
         console.log('trust proxy, 1');
     }
 
-    console.log({ sessionConfig });
+    // console.log({ sessionConfig });
 
     // Express Session
     app.use(session(sessionConfig));
@@ -91,6 +92,7 @@ const registerRoutes = (app) => {
     app.use('/api/ranking', rankingRouter);
     app.use('/api/image', imageRouter);
     app.use('/api/forumPost', forumPostRouter);
+    app.use('/api/badge', badgeRouter);
 };
 
 module.exports = { createApp, registerRoutes };

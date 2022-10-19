@@ -22,4 +22,39 @@ const Difficulty = {
 
 const DifficultyList = Object.values(Difficulty);
 
-module.exports = { Language, LanguageList, Difficulty, DifficultyList };
+// Badge categories
+const BadgeCategory = {
+    CREATION: 'Creation',
+    SOLVING: 'Solving',
+    SHOWCASE: 'Showcase',
+};
+
+const BadgeCategoryList = Object.values(BadgeCategory);
+
+// Badge rarity options
+const BadgeRarityOptions = { N: 'N', R: 'R', SR: 'SR', UR: 'UR' };
+
+const BadgeRarityOptionsList = Object.values(BadgeRarityOptions);
+
+// Badge available amount specifications (e.g. solving 10+ exercises)
+const BadgeAmountOptions = {
+    N: 1,
+    R: 5,
+    SR: 10,
+    UR: 50,
+};
+
+const BadgeAmountOptionsList = Object.values(BadgeAmountOptions);
+
+module.exports = {
+    Language,
+    LanguageList,
+    Difficulty,
+    DifficultyList,
+    BadgeCategory,
+    BadgeCategoryList,
+    BadgeRarityOptions,
+    BadgeRarityOptionsList,
+    BadgeAmountOptions,
+    BadgeAmountOptionsList,
+};
