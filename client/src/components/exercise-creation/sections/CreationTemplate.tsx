@@ -5,7 +5,8 @@ import CodeEditor from '../../ui/editor/CodeEditor';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
 const CreationTemplate: React.FC = () => {
-    const { language, startingTemplate, setStartingTemplate } = useExerciseCreationContext();
+    const { language, startingTemplate, setStartingTemplate } =
+        useExerciseCreationContext();
 
     const handleChange = (value: string | undefined) => setStartingTemplate(value ?? '');
 
