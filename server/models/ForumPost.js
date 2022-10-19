@@ -11,7 +11,6 @@ const ForumPostSchema = new Schema({
     createdAt: { type: Date, default: () => Date.now() },
     author: { type: Schema.Types.ObjectId, ref: 'User' },
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-    // liked: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     votes: [VoteSchema],
 });
 

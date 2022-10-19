@@ -169,46 +169,7 @@ const deleteForumPostComment = async (req, res) => {
     }
 };
 
-/*
-Users can like the post.
-ForumPost stores the list of user ids who like the post inside 'liked' array attribute.
-*/
-const postForumPostLike = async (req, res) => {
-    const userId = req.user._id;
-    const postId = req.params.id;
-    let forumPost;
-
-    try {
-        forumPost = await ForumPost.findById(postId);
-    } catch (err) {
-        console.log(err.message);
-        res.status(400).send(`Error, forum post ${postId} not found`);
-    }
-
-    try {
-        forumPost = await ForumPost.findById(postId);
-
-        const foundIndex = forumPost.liked.findIndex(
-            (id) => id.toString() === userId.toString(),
-        );
-
-        if (foundIndex < 0) {
-            // Means the current userId does not exist, so append the user id at the end.
-            forumPost.liked.push(userId);
-        } else {
-            // Means the current userId already exists, so delete the user id.
-            forumPost.liked.splice(foundIndex, 1);
-        }
-        await forumPost.save();
-
-        // Returns the updated ForumPost object.
-        res.status(201).json(forumPost);
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send('Something went wrong');
-    }
-};
-
+/* User upvote | downvote the post. type is either 'up' | 'down' */
 const postVote = async (req, res) => {
     const { type } = req.body;
 
@@ -275,7 +236,6 @@ const controller = {
     postForumPostComment,
     deleteForumPostComment,
     updateForumPost,
-    postForumPostLike,
     postVote,
     deleteVote,
 };
