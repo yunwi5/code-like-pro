@@ -51,18 +51,18 @@ const createApp = () => {
         secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
         resave: false,
         saveUninitialized: true,
-        // proxy: true, // Required for hosting providers like Heroku & Digital Ocean (regarding X-Forwarded-For)
         cookie: {
             httpOnly: true, // We use JS to access the APIs, so should be false
             secure: app.get('env') !== 'production' ? false : true, // If true, it only works in https protocal. True in production.
-            // sameSite: 'none', // caused the problem on chrome and edge
-            maxAge: 24 * 60 * 60 * 1000 * 7, //seven days
+            maxAge: 1000 * 60 * 60 * 48,
         },
     };
 
-    app.set('trust proxy', 1); // trust first proxy
+    // cookie: { httpOnly: true, secure: true, maxAge: 1000 * 60 * 60 * 48, sameSite: 'none' }
     if (app.get('env') === 'production') {
-        console.log('trust proxy, 1');
+        sessionConfig.cookie.sameSite = 'none'; // sameSite 'none' only for production
+        sessionConfig.proxy = true; // Required for hosting providers like Heroku & Digital Ocean (regarding X-Forwarded-For)
+        app.enable('trust proxy', true);
     }
 
     console.log({ sessionConfig });
