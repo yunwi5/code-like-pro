@@ -58,7 +58,7 @@ function App() {
                     <Route path="/" element={<HomePage />} />
 
                     {/* Auth pages login & register. Do not show if the user is already logged in. */}
-                    {!isLoggedIn && <Route path="/login" element={<LoginPage />} />}
+                    <Route path="/login" element={<LoginPage />} />
                     {!isLoggedIn && <Route path="/register" element={<RegisterPage />} />}
 
                     {/* User profile pages */}

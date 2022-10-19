@@ -5,6 +5,7 @@ import {
     IForumPost,
     IComment,
     IForumPostPopulated,
+    IVote,
 } from '../models/interfaces';
 import { deleteRequest, getRequest, patchRequest, postRequest } from './requests.api';
 
@@ -41,6 +42,17 @@ export async function postForumPostComment(id: string, comment: { text: string }
     });
 }
 
-export async function postForumPostLike(id: string) {
-    return await postRequest<IForumPost>({ url: `${API_DOMAIN}/${id}/like`, body: {} });
+// POST vote for forum post
+export async function postForumPostVote(id: string, vote: { type: 'up' | 'down' }) {
+    return await postRequest<IVote>({
+        url: `${AppProperty.SERVER_DOMAIN}/api/forumPost/${id}/vote`,
+        body: vote,
+    });
+}
+
+// DELETE vote for forum post
+export function deleteForumPostVote(postId: string) {
+    return deleteRequest<IVote>({
+        url: `${AppProperty.SERVER_DOMAIN}/api/forumPost/${postId}/vote`,
+    });
 }

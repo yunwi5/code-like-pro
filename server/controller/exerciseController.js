@@ -4,6 +4,7 @@ const ExerciseReport = require('../models/ExerciseReport');
 const UserSubmission = require('../models/UserSubmission');
 const Comment = require('../models/Comment');
 const ShowCase = require('../models/ShowCase');
+const User = require('../models/User');
 
 const { constructLanguageFileSpec } = require('../utils/languageSupport');
 const makeRequest = require('../utils/makeRequest');
@@ -130,9 +131,10 @@ const deleteExercise = async (req, res) => {
         const cp = Comment.deleteMany({ _id: { $in: commentIds } });
         // Clear the reports of this exercise
         const erp = ExerciseReport.deleteMany({ _id: { $in: reportIds } });
+        const usp = UserSubmission.deleteMany({ exercise: exercise._id });
 
         // delete result of the exercise
-        const [deleteResult, _] = await Promise.all([exp, scp, cp, erp]);
+        const [deleteResult, _] = await Promise.all([exp, scp, cp, erp, usp]);
 
         return res.status(200).json(deleteResult);
     } catch (err) {
@@ -229,26 +231,33 @@ Exercise stores list of ids of users that like it, User stores the list of exerc
 */
 const toggleLikeExercise = async (req, res) => {
     const exerciseId = req.params.id;
-    const user = req.user;
+    const userId = req.user._id;
 
-    const exercise = await Exercise.findById(exerciseId);
+    try {
+        const exercisePromise = Exercise.findById(exerciseId);
+        const userPromise = User.findById(userId);
+        const [exercise, user] = await Promise.all([exercisePromise, userPromise]);
 
-    if (exercise.liked.includes(user._id)) {
-        const userIndex = exercise.liked.findIndex((id) => id === user._id);
-        exercise.liked.splice(userIndex, 1);
+        if (exercise.liked.includes(user._id)) {
+            const userIndex = exercise.liked.findIndex((id) => id === user._id);
+            exercise.liked.splice(userIndex, 1);
 
-        const exerciseIndex = user.liked.findIndex(
-            (exId) => exId.toString() === exercise._id.toString(),
-        );
-        if (exerciseIndex >= 0) user.liked.splice(exerciseIndex, 1);
-    } else {
-        exercise.liked.push(user._id);
-        user.liked.push(exerciseId);
+            const exerciseIndex = user.liked.findIndex(
+                (exId) => exId.toString() === exercise._id.toString(),
+            );
+            if (exerciseIndex >= 0) user.liked.splice(exerciseIndex, 1);
+        } else {
+            exercise.liked.push(user._id);
+            user.liked.push(exerciseId);
+        }
+
+        await exercise.save();
+        await user.save();
+        res.json(exercise);
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ message: 'Something went wrong' });
     }
-
-    await exercise.save();
-    await user.save();
-    res.json(exercise);
 };
 
 /* GET showcases for the exercise of the param id. */

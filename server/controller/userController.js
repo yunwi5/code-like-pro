@@ -15,6 +15,7 @@ const getUserById = async (req, res) => {
             'exercise',
         );
 
+        // UserSubmission.deleteMany({});
         const [userFound, submissions] = await Promise.all([
             userPromise,
             submissionsPromise,

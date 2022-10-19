@@ -85,8 +85,6 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         await logoutRequest();
     }, []);
 
-    console.log('Document cookies:', document.cookie);
-
     const value = {
         user,
         login,

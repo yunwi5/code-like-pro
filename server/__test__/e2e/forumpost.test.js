@@ -11,11 +11,11 @@ const sampleForumpostProps = {
     name: 'Binary search',
     category: 'Algorithms',
     tags: ['Binary Search', 'Algorithm'],
-    postType: "Showcase",
-    content: "Binary search is an algorithm....",
+    postType: 'Showcase',
+    content: 'Binary search is an algorithm....',
 };
 
-describe ('Forumpost', () =>{
+describe('Forumpost', () => {
     beforeAll(async () => {
         app = await configureTestApp();
         const [userReceived, cookieReceived] = await createUser(app);
@@ -38,7 +38,7 @@ describe ('Forumpost', () =>{
         });
     });
 
-    describe('POST forum post', () =>{
+    describe('POST forum post', () => {
         it('Can create a forum post', async () => {
             const response = await request(app)
                 .post(`/api/forumPost`)
@@ -52,7 +52,7 @@ describe ('Forumpost', () =>{
             expect(createdForumpost._id).toBeDefined();
             expect(createdForumpost).toMatchObject(sampleForumpostProps);
         });
-        
+
         it('Cannot create a showcase with missing attributes', async () => {
             const response = await request(app)
                 .post(`/api/forumPost`)
@@ -62,9 +62,9 @@ describe ('Forumpost', () =>{
             // This should be 400
             expect(response.statusCode).toBe(400);
         });
-    })
+    });
 
-    describe('PATCH forum post', () =>{
+    describe('PATCH forum post', () => {
         let forumpostId;
         beforeAll(async () => {
             const postResponse = await request(app)
@@ -95,7 +95,7 @@ describe ('Forumpost', () =>{
             // Successful patch request status code 400 or 404
             expect([400, 404]).toContain(updateResponse.statusCode);
         });
-    })
+    });
 
     describe('DELETE forum post', () => {
         let forumpostId;
@@ -137,27 +137,28 @@ describe ('Forumpost', () =>{
 
         it('Can like/unlike a showcase', async () => {
             const response = await request(app)
-                .post(`/api/forumPost/${forumpostId}/like`)
-                .set('cookie', cookie);
+                .post(`/api/forumPost/${forumpostId}/vote`)
+                .set('cookie', cookie)
+                .send({ type: 'up' });
             expect(response.statusCode).toBe(201);
 
             const updatedForumpost = response.body;
             // Find the user in liked in forum post
-            const foundUser = updatedForumpost.liked.find(
-                (id) => id.toString() === user._id.toString(),
+            const foundUserVote = updatedForumpost.votes.find(
+                (vote) => vote.user === user._id,
             );
 
-            expect(foundUser).toEqual(user._id);
-            
+            expect(foundUserVote.user).toEqual(user._id);
+
             // Unlike forum we just liked
             const response2 = await request(app)
-                .post(`/api/forumPost/${forumpostId}/like`)
+                .delete(`/api/forumPost/${forumpostId}/vote`)
                 .set('cookie', cookie);
-        
+
             const updatedForumpost2 = response2.body;
-        
-            const foundIndex = updatedForumpost2.liked.findIndex(
-                (id) => id.toString() === user._id.toString(),
+
+            const foundIndex = updatedForumpost2.votes.findIndex(
+                (vote) => vote.user === user._id,
             );
 
             // Check user is not in liked list
@@ -166,9 +167,10 @@ describe ('Forumpost', () =>{
 
         it('Cannot like non-existing showcase', async () => {
             const response = await request(app)
-                .post(`/api/forumPost/invalid-id/like`)
-                .set('cookie', cookie);
-            expect(response.statusCode).toBe(400);
+                .post(`/api/forumPost/invalid-id/vote`)
+                .set('cookie', cookie)
+                .send({ type: 'up' });
+            expect(response.statusCode).toBe(404);
         });
     });
 });

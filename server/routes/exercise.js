@@ -43,7 +43,7 @@ router
     .get(ensureAuthenticated, catchAsync(exerciseController.getExerciseReports));
 
 // Like functionality
-router.get(
+router.post(
     '/:id/like',
     ensureAuthenticated,
     catchAsync(exerciseController.toggleLikeExercise),

@@ -45,6 +45,10 @@ const CodeEditor: React.FC<Props> = ({
         monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
     };
 
+    // const updateEditorTabSize = (tabSize: number) => {
+    // editorRef.current?.updateOptions({ tabSize });
+    // };
+
     return (
         <div
             className={`${styles['editor-wrapper']} relative flex flex-col border-2 bg-white border-gray-300 shadow-md focus-within:shadow-lg focus-within:outline focus-within:outline-2 focus-within:outline-gray-200 rounded-sm overflow-hidden ${className}`}
@@ -60,7 +64,7 @@ const CodeEditor: React.FC<Props> = ({
             )}
             {!isShrinked && (
                 <Editor
-                    className="min-h-[7.5rem] pt-3 max-w-[90vw] lg:max-w-[80vw] max-h-[100vh] overflow-hidden"
+                    className="min-h-[7.5rem] pt-3 max-w-[100vw] lg:max-w-[80vw] max-h-[100vh] overflow-hidden"
                     language={getMonacoLanguageName(language) ?? 'python'}
                     value={value}
                     onChange={(value: string | undefined) => onChange(value || '')}
