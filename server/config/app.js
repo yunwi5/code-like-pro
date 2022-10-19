@@ -46,13 +46,14 @@ const createApp = () => {
     app.use(express.urlencoded({ limit: '50mb', extended: false }));
 
     const sessionConfig = {
+        store,
         name: process.env.SESSION_NAME || 'thisshouldnotbeasessionname',
         secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
         resave: false,
         saveUninitialized: true,
         // proxy: true, // Required for hosting providers like Heroku & Digital Ocean (regarding X-Forwarded-For)
         cookie: {
-            httpOnly: false, // We use JS to access the APIs, so should be false
+            httpOnly: true, // We use JS to access the APIs, so should be false
             secure: app.get('env') !== 'production' ? false : true, // If true, it only works in https protocal. True in production.
             // sameSite: 'none', // caused the problem on chrome and edge
             maxAge: 24 * 60 * 60 * 1000 * 7, //seven days
