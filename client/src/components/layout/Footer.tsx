@@ -26,7 +26,11 @@ const socialIcons = [
     { icon: <InstagramIcon width={iconWidth} />, label: 'Instagram' },
     { icon: <FacebookIcon width={iconWidth} />, label: 'Facebook' },
     { icon: <TwitterIcon width={iconWidth} />, label: 'Twitter' },
-    { icon: <GithubIcon width={iconWidth} />, label: 'GitHub' },
+    {
+        icon: <GithubIcon width={iconWidth} />,
+        label: 'GitHub',
+        href: 'https://github.com/yunwi5/CS399_Group7_Project13',
+    },
 ];
 
 // Will need to include the logo in front, as soon as we design an app logo.
