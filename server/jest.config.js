@@ -13,8 +13,8 @@ const config = {
         'showcase.test.js',
         'ranking.test.js',
         'user*.test.js',
-        // 'forumpost.test.js',
-        'userSubmission.test.js',
+        'forumpost.test.js',
+        // 'userSubmission.test.js',
     ],
 };
 

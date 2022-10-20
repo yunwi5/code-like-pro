@@ -24,7 +24,7 @@ const ForumPostsList: React.FC = () => {
     });
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col lg:max-w-[23rem]">
             {/* Loading spinner while posts are loading */}
             {isLoading && (
                 <div className="h-[50vh] flex-center">

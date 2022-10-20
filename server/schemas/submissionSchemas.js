@@ -10,4 +10,11 @@ const runCodeBodySchema = yup.object({
     testCases: yup.array().of(testCaseSchema),
 });
 
-module.exports = { runCodeBodySchema };
+// Schema for user code submission for an exercise
+// User only needs to send the code.
+// The exercise id is part of the API param, and the server finds the corresponding exercise before code execution
+const submissionSchema = yup.object({
+    code: yup.string().required('Submission code is required'),
+});
+
+module.exports = { runCodeBodySchema, submissionSchema };

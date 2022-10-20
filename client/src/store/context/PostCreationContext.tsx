@@ -104,7 +104,7 @@ export const PostCreationContextProvider: React.FC<Props> = ({
         const promise = createdPost
             ? patchForumPost(createdPost._id, postProps)
             : postForumPost(postProps);
-        const { ok, data, message } = await promise;
+        const { ok, data } = await promise;
         setIsLoading(false);
 
         if (ok && data) {

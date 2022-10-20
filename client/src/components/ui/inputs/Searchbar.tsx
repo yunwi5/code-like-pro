@@ -34,27 +34,35 @@ const Searchbar: React.FC<Props> = ({
 
     return (
         <form className={`flex items-end gap-1 ${className}`} onSubmit={handleSubmit}>
-            <CustomSelect
-                options={searchKeys}
-                labelText={
-                    label ? <span className="font-semibold">{label}</span> : undefined
-                }
-                id="search-option-select"
-                value={keyValue}
-                onChange={onKeyChange}
-                className="gap-1"
-            />
-            <div className="flex-1 flex self-end h-[2.5rem]">
-                <input
-                    type="search"
-                    placeholder="Search your words"
-                    className="input flex-1 w-full"
-                    value={textValue}
-                    onChange={handleTextChange}
+            {label ? (
+                <label
+                    htmlFor="search-option-select"
+                    className="font-semibold col-span-2"
+                >
+                    {label}
+                </label>
+            ) : undefined}
+            <div className="flex items-center gap-1 w-full">
+                <CustomSelect
+                    options={searchKeys}
+                    id="search-option-select"
+                    value={keyValue}
+                    onChange={onKeyChange}
+                    className="h-[2.65rem]"
+                    selectClassName="flex-1"
                 />
-                <Button type="submit" className="px-2 rounded-tr-sm rounded-br-sm">
-                    <BsSearch />
-                </Button>
+                <div className="flex-1 flex self-end h-[2.65rem]">
+                    <input
+                        type="text"
+                        placeholder="Search your words"
+                        className="input flex-1 w-full h-full"
+                        value={textValue}
+                        onChange={handleTextChange}
+                    />
+                    <Button type="submit" className="px-2 rounded-tr-sm rounded-br-sm">
+                        <BsSearch />
+                    </Button>
+                </div>
             </div>
         </form>
     );

@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { configureTestApp, closeTestApp } = require('./config');
-const { createUser } = require('./createData');
+const { createUser, createExercise } = require('./createData');
 
 let app = null;
 let user = null;
@@ -58,5 +58,60 @@ describe('User submission', () => {
         });
     });
 
-    describe('POST user submission', () => {});
+    describe('POST user submission', () => {
+        let exercise;
+        beforeAll(async () => {
+            // Create a sample exercise for submission
+            exercise = await createExercise(app, cookie);
+        });
+
+        it('Can post a correct submission', async () => {
+            // correct code for the exerise
+            const code = 'function printMessage(msg) { console.log(msg);};';
+
+            const response = await request(app)
+                .post(`/api/submission/${exercise._id}`)
+                .set('Cookie', cookie)
+                .send({ code });
+
+            // New submission was created, should be 201
+            expect(response.statusCode).toBe(201);
+            const submission = response.body;
+
+            // Check correct status
+            expect(submission.correct).toBe(true);
+            // timestamp postedAt should be defined
+            expect(submission.postedAt).toBeDefined();
+            // match the code we just submitted
+            expect(submission.code).toEqual(code);
+        });
+
+        it('Can post a incorrect submission', async () => {
+            const response = await request(app)
+                .post(`/api/submission/${exercise._id}`)
+                .set('Cookie', cookie)
+                .send({
+                    code: 'function printMessage(msg) { console.log("incorrect");};',
+                });
+
+            // New submission was created, should be 201
+            expect(response.statusCode).toBe(201);
+            const submission = response.body;
+
+            // Check correct status
+            expect(submission.correct).toBe(false);
+        });
+
+        it('Cannot post any submission if there is no code', async () => {
+            const response = await request(app)
+                .post(`/api/submission/${exercise._id}`)
+                .set('Cookie', cookie)
+                .send({});
+
+            // Should be 400 bad request
+            expect(response.statusCode).toBe(400);
+            // Check error message is inside the body
+            expect(response.body.message).toBeDefined();
+        });
+    });
 });
