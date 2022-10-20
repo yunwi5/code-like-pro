@@ -17,7 +17,7 @@ const PostSettings: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     if (!post) return null;
 
     const handleDeleteAction = () => {
-        navigate('/browse');
+        navigate('/forum');
         toastNotify(`Successfully delete post ${post.name}`);
     };
 
