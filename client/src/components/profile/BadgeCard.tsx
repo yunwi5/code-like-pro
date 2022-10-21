@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import BadgeN from '../../assets/badgeImages/BadgeN.png';
 import BadgeR from '../../assets/badgeImages/BadgeR.png';
 import BadgeSR from '../../assets/badgeImages/BadgeSR.png';
@@ -68,13 +68,13 @@ const BadgeCard: React.FC<Props> = (props) => {
                         className="col-span-2 border border-solid border-main-400"
                         style={{ padding: textPadding }}
                     >
-                        <b className="text-main-400">Title:</b> {badge.title}
+                        <b className="text-main-400">Prerequisite:</b> {badge.name}
                     </div>
                     <div
                         className="col-span-2 border border-solid border-main-400"
                         style={{ padding: textPadding }}
                     >
-                        <b className="text-main-400">Prerequisite:</b> {badge.name}
+                        <b className="text-main-400">Badge Rarity:</b> {badge.rarity}
                     </div>
                     <div
                         className="col-span-2 border border-solid border-main-400"

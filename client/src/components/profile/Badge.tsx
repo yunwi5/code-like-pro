@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageNavigation from '../ui/PageNavigation';
 import usePagination from '../../hooks/usePagination';
 import BadgeN from '../../assets/badgeImages/BadgeN.png';
@@ -7,6 +7,8 @@ import BadgeSR from '../../assets/badgeImages/BadgeSR.png';
 import BadgeUR from '../../assets/badgeImages/BadgeUR.png';
 import { IBadge } from '../../models/interfaces';
 import BadgeCard from './BadgeCard';
+import { getBadges } from '../../apis/badge';
+import { useUserContext } from '../../store/context/UserContext';
 
 const badgesPerRow = 4;
 const maximumRows = 1;
@@ -85,20 +87,24 @@ function convertDate(d: Date) {
 }
 
 const Badge: React.FC = () => {
-    let para: IBadge[] = [];
+    const { userDetail } = useUserContext();
+    const para: IBadge[] = [];
     let [badgeArray, setBadge] = useState(para);
     let [orderMode, setOrder] = useState('');
     let [currentBadge, setCurrentBadge] = useState(para);
-
-    // // GET Badges.
-    // useEffect(() => {
-    //     getBadges().then((res) => {
-    //         if (res.ok && res.data) {
-    //             setBadge(res.data.sort((a,b) => a.title < b.title?-1:1));
-    //             setOrder('titleAtoZ');
-    //         }
-    //     });
-    // }, para);
+    // GET Badges.
+    let userId = userDetail?._id || 'null';
+    useEffect(() => {
+        if (userId == 'null') {
+            return;
+        }
+        getBadges(userId).then((res) => {
+            if (res.ok && res.data) {
+                setBadge(res.data.sort((a, b) => (a.name < b.name ? -1 : 1)));
+                setOrder('titleAtoZ');
+            }
+        });
+    }, [userId]);
 
     const buttonStyle = {
         marginLeft: 10,
@@ -126,7 +132,7 @@ const Badge: React.FC = () => {
                         onClick={() => {
                             setBadge(() => {
                                 return badgeArray.sort((a, b) =>
-                                    a.title < b.title ? -1 : 1,
+                                    a.name < b.name ? -1 : 1,
                                 );
                             });
                             setOrder('titleAtoZ');
@@ -219,7 +225,7 @@ const Badge: React.FC = () => {
                                     }}
                                     className="text-main-400"
                                 >
-                                    {badge.title}
+                                    {badge.name}
                                 </div>
                                 <div
                                     style={{
