@@ -148,14 +148,6 @@ const features = [
         },
     },
     {
-        text: 'Detailed profile statistics',
-        platforms: {
-            [Platform.LEETCODE]: false,
-            [Platform.CODEWARS]: false,
-            [Platform.CODE_LIKE_PRO]: true,
-        },
-    },
-    {
         text: 'Ranking competitions',
         platforms: {
             [Platform.LEETCODE]: true,

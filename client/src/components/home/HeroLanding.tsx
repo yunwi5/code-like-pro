@@ -42,7 +42,7 @@ const HeroLanding: React.FC = () => {
                 </h2>
 
                 <Link
-                    to={'/browse'}
+                    to={'/create-exercise'}
                     className="btn btn-fill text-lg md:text-xl flex-center gap-2 !text-white !rounded"
                 >
                     Get Started <HiOutlineArrowRight />

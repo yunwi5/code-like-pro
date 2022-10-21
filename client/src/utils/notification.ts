@@ -29,7 +29,7 @@ interface ToastProps {
     toastId?: string;
     type?: MessageType;
     autoClose: number;
-    position: ToastPosition;
+    position?: ToastPosition;
 }
 // Toast notification with more configs and customizations.
 export const customToastNotify = (props: ToastProps) => {
