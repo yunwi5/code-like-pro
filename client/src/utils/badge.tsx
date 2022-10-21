@@ -1,8 +1,13 @@
 import { BadgeImages } from '../assets/badgeImages';
-import NotificationBadge from '../components/profile/badges/NotificationBadge';
 import { BadgeRarity } from '../models/enums';
 import { IBadge } from '../models/interfaces';
 import { customToastNotify } from './notification';
+import NotificationBadge from '../components/profile/badges/NotificationBadge';
+
+export const RARITY_N_CUT = 1;
+export const RARITY_R_CUT = 5;
+export const RARITY_SR_CUT = 10;
+export const RARITY_UR_CUT = 30;
 
 export type RarityBreakpoint = 1 | 5 | 10 | 30;
 
@@ -14,10 +19,10 @@ export const BadgeImageMap = {
 };
 
 export const BadgeRarityPoints: { [key: string]: RarityBreakpoint } = {
-    [BadgeRarity.N]: 1,
-    [BadgeRarity.R]: 5,
-    [BadgeRarity.SR]: 10,
-    [BadgeRarity.UR]: 30,
+    [BadgeRarity.N]: RARITY_N_CUT,
+    [BadgeRarity.R]: RARITY_R_CUT,
+    [BadgeRarity.SR]: RARITY_SR_CUT,
+    [BadgeRarity.UR]: RARITY_UR_CUT,
 };
 
 export const compareByRarity = (r1: BadgeRarity, r2: BadgeRarity) => {

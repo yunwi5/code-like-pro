@@ -3,8 +3,8 @@ import { BsTrophy } from 'react-icons/bs';
 
 import useBadgeQuery from '../../../../../hooks/badges/useBadgeQuery';
 import { IRankingOrder, IUserInfo } from '../../../../../models/interfaces';
-import Badges from '../../../../profile/badges/Badges';
 import AnimationModal from '../../../modals/AnimationModal';
+import Badges from '../../../../profile/badges/Badges';
 import UserDetailHeader from './sections/userDetailHeader';
 import UserProfileInfo from './sections/UserProfileInfo';
 

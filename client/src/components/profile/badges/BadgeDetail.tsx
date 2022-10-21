@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
+
 import { IBadge } from '../../../models/interfaces';
 import { BadgeImageMap } from '../../../utils/badge';
 import { getDateFormat } from '../../../utils/datetime';
 import HoveringLabel from '../../ui/labels/HoveringLabel';
-import AnimationModal from '../../ui/modals/AnimationModal';
-import Backdrop from '../../ui/modals/Backdrop';
 
 interface Props {
     badge: IBadge;

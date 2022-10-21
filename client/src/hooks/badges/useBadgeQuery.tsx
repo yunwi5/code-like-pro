@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getBadges } from '../../apis/badge';
+import { getBadges } from '../../apis/badge.api';
 import { IBadge } from '../../models/interfaces';
 
 function useBadgeQuery(userId: string | undefined) {

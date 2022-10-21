@@ -1,16 +1,28 @@
 import useUserInfoQuery from '../user/useUserInfoQuery';
 import useBadgeQuery from './useBadgeQuery';
-import { postCreationBadge, postShowcaseBadge, postSolvingBadge } from '../../apis/badge';
+import {
+    postCreationBadge,
+    postShowcaseBadge,
+    postSolvingBadge,
+} from '../../apis/badge.api';
 import { BadgeCategory, BadgeRarity } from '../../models/enums';
 import { useUserContext } from '../../store/context/UserContext';
-import { BadgeRarityPoints, notifyBadgeRewards } from '../../utils/badge';
+import {
+    BadgeRarityPoints,
+    notifyBadgeRewards,
+    RARITY_N_CUT,
+    RARITY_R_CUT,
+    RARITY_SR_CUT,
+    RARITY_UR_CUT,
+} from '../../utils/badge';
 
+// Get possible list of rewardable rarities based on the amount
 function getRarityOptions(amount: number) {
-    if (amount >= 30)
+    if (amount >= RARITY_UR_CUT)
         return [BadgeRarity.UR, BadgeRarity.SR, BadgeRarity.R, BadgeRarity.N];
-    if (amount >= 10) return [BadgeRarity.SR, BadgeRarity.R, BadgeRarity.N];
-    if (amount >= 5) return [BadgeRarity.R, BadgeRarity.N];
-    if (amount >= 1) return [BadgeRarity.N];
+    if (amount >= RARITY_SR_CUT) return [BadgeRarity.SR, BadgeRarity.R, BadgeRarity.N];
+    if (amount >= RARITY_R_CUT) return [BadgeRarity.R, BadgeRarity.N];
+    if (amount >= RARITY_N_CUT) return [BadgeRarity.N];
     return [];
 }
 
@@ -19,8 +31,6 @@ function useBadgeQualification() {
     const { userDetail } = useUserContext();
     const { badges, refetch: refetchBadges } = useBadgeQuery(userDetail?._id);
     const { user } = useUserInfoQuery(userDetail?._id, 1000);
-
-    console.log({ user });
 
     // Inspect creation badge qualification
     const qualifyCreationBadges = async () => {
@@ -35,18 +45,17 @@ function useBadgeQualification() {
         for (const rarity of possibleRarities) {
             const existingOne = ownedCreationBadges.find((b) => b.rarity === rarity);
             // If the badge is not awarded yet (though qualified), add it to rewards
-            if (!existingOne) {
-                rewardsList.push(rarity);
-            }
+            if (!existingOne) rewardsList.push(rarity);
         }
         if (rewardsList.length === 0) return;
 
         const rewardPromises = rewardsList.map((rarity) => {
             return postCreationBadge(BadgeRarityPoints[rarity]);
         });
+
         const rewardResponses = await Promise.all(rewardPromises);
         const rewards = rewardResponses.map((res) => res.data);
-        console.log('rewards:', rewards);
+        // console.log('rewards:', rewards);
         refetchBadges();
         notifyBadgeRewards(rewards);
     };
@@ -62,9 +71,7 @@ function useBadgeQualification() {
         for (const rarity of possibleRarities) {
             const existingOne = ownedSolvingBadges.find((b) => b.rarity === rarity);
             // If the badge is not awarded yet (though qualified), add it to rewards
-            if (!existingOne) {
-                rewardsList.push(rarity);
-            }
+            if (!existingOne) rewardsList.push(rarity);
         }
         if (rewardsList.length === 0) return;
 
@@ -73,7 +80,7 @@ function useBadgeQualification() {
         });
         const rewardResponses = await Promise.all(rewardPromises);
         const rewards = rewardResponses.map((res) => res.data);
-        console.log('rewards:', rewards);
+        // console.log('rewards:', rewards);
         refetchBadges();
         notifyBadgeRewards(rewards);
     };
@@ -89,15 +96,13 @@ function useBadgeQualification() {
         for (const rarity of possibleRarities) {
             const existingOne = ownedShowcaseBadges.find((b) => b.rarity === rarity);
             // If the badge is not awarded yet (though qualified), add it to rewards
-            if (!existingOne) {
-                rewardsList.push(rarity);
-            }
+            if (!existingOne) rewardsList.push(rarity);
         }
         if (rewardsList.length === 0) return;
 
-        const rewardPromises = rewardsList.map((rarity) => {
-            return postShowcaseBadge(BadgeRarityPoints[rarity]);
-        });
+        const rewardPromises = rewardsList.map((rarity) =>
+            postShowcaseBadge(BadgeRarityPoints[rarity]),
+        );
         const rewardResponses = await Promise.all(rewardPromises);
         const rewards = rewardResponses.map((res) => res.data);
         refetchBadges();
