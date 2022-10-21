@@ -11,11 +11,12 @@ import BadgeDetail from './BadgeDetail';
 import styles from './Badges.module.scss';
 
 interface Props {
+    heading?: string | JSX.Element; // heading title
     badges: IBadge[];
     className?: string;
 }
 
-const Badges: React.FC<Props> = ({ badges, className }) => {
+const Badges: React.FC<Props> = ({ heading, badges, className }) => {
     const [selectedBadgeId, setSelectedBadgeId] = useState<string | null>(null);
     const [sortingState, setSortingState] = useState({
         key: BadgeSortingKey.RARITY,
@@ -31,8 +32,14 @@ const Badges: React.FC<Props> = ({ badges, className }) => {
 
     return (
         <section>
-            <BadgeSorter sortingState={sortingState} setSortingState={setSortingState} />
-            <div className={`${styles.grid} mt-2 ${className}`}>
+            <div className="mb-2 flex-between">
+                {heading}
+                <BadgeSorter
+                    sortingState={sortingState}
+                    setSortingState={setSortingState}
+                />
+            </div>
+            <div className={`${styles.grid} ${className}`}>
                 {sortedBadges.map((badge, idx) => (
                     <motion.div
                         key={badge._id}
@@ -46,7 +53,10 @@ const Badges: React.FC<Props> = ({ badges, className }) => {
                             delay: idx * 0.1,
                         }}
                     >
-                        <BadgeCard badge={badge} />
+                        <BadgeCard
+                            badge={badge}
+                            className={idx % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}
+                        />
                     </motion.div>
                 ))}
             </div>
@@ -73,7 +83,7 @@ const Badges: React.FC<Props> = ({ badges, className }) => {
 
             {/* Modal backdrop */}
             <div
-                className={`fixed top-0 left-0 h-[100vh] w-[100vw] bg-black/50 ${
+                className={`fixed top-0 left-0 h-[100vh] w-[100vw] z-[95] bg-black/50 ${
                     selectedBadge ? 'block' : 'hidden'
                 }`}
             ></div>
@@ -81,14 +91,15 @@ const Badges: React.FC<Props> = ({ badges, className }) => {
     );
 };
 
-const BadgeCard: React.FC<{ badge: IBadge; onClick?: () => void }> = ({
+const BadgeCard: React.FC<{ badge: IBadge; onClick?: () => void; className: string }> = ({
     badge,
     onClick,
+    className,
 }) => {
     return (
         <div
             onClick={onClick}
-            className={`${styles.card} flex flex-col items-center px-2 pt-0 pb-2 rounded shadow-md hover:shadow-lg cursor-pointer odd:bg-gray-100 even:bg-gray-200`}
+            className={`${styles.card} flex flex-col items-center px-2 pt-0 pb-2 rounded shadow-md hover:shadow-lg cursor-pointer ${className}`}
         >
             <img
                 width="100%"

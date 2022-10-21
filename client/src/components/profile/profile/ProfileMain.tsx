@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ClipLoader } from 'react-spinners';
+import useBadgeQuery from '../../../hooks/badges/useBadgeQuery';
 import useRanking from '../../../hooks/ranking/useRanking';
 
 import {
@@ -11,6 +12,8 @@ import { getDateFormat } from '../../../utils/datetime';
 import { getUsedLanguagesByUser } from '../../../utils/language';
 import { numberSuffix } from '../../../utils/number';
 import Button from '../../ui/buttons/Button';
+import Badges from '../badges/Badges';
+import MyBadges from '../badges/MyBadges';
 import ProfileLoader from '../ProfileLoader';
 import ProfileAvatar from './avatars/ProfileAvatar';
 import ProfileInfoItem from './sections/ProfileInfoItem';
@@ -31,6 +34,7 @@ const ProfileMain = () => {
 const ProfileMainBody = () => {
     const { userDetail } = useUserContext();
     const { getUserRank, rankingOrder } = useRanking();
+    const { badges } = useBadgeQuery(userDetail?._id);
 
     const {
         profileName,
@@ -56,6 +60,9 @@ const ProfileMainBody = () => {
         if (!userDetail) return null;
         return getUserRank(userDetail._id);
     }, [userDetail._id, rankingOrder]);
+
+    // Show badges only if it is not EDIT mode, and there are at least 1 badges.
+    const showBadges = !isEditing && (badges?.length || 0) > 0;
 
     return (
         <form className="relative flex-1" onSubmit={onSubmitProfile}>
@@ -124,6 +131,16 @@ const ProfileMainBody = () => {
                         value={solvedExercisesCount}
                     />
                 </div>
+
+                {/* Profile badges */}
+                {showBadges && (
+                    <div className="flex flex-col mt-10">
+                        <Badges
+                            heading={<h2 className="text-2xl">My Badges</h2>}
+                            badges={badges || []}
+                        />
+                    </div>
+                )}
             </div>
             <ProfileButtons />
         </form>
@@ -132,7 +149,7 @@ const ProfileMainBody = () => {
 
 const ProfileHeader = React.memo(() => (
     <div className="flex flex-col">
-        <h2 className="text-xl">My Profile</h2>
+        <h2 className="text-2xl">My Profile</h2>
         <p className="text-gray-500">Your profile is publicly shown to other users.</p>
     </div>
 ));

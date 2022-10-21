@@ -37,18 +37,21 @@ const BadgeSorter: React.FC<Props> = ({ sortingState, setSortingState }) => {
     return (
         <div className="flex items-center gap-2 font-semibold">
             <button
+                type="button"
                 className={`${btnClass} ${sortedByTitle ? 'text-main-500' : ''}`}
                 onClick={sortByTitle}
             >
                 Title A-Z
             </button>
             <button
+                type="button"
                 className={`${btnClass} ${sortedByNewest ? 'text-main-500' : ''}`}
                 onClick={sortByNewest}
             >
                 Newest
             </button>
             <button
+                type="button"
                 className={`${btnClass} ${sortedByRarest ? 'text-main-500' : ''}`}
                 onClick={sortByRarest}
             >
