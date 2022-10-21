@@ -4,6 +4,7 @@ const User = require('../../models/User');
 const Exercise = require('../../models/Exercise');
 
 const getUserById = async (req, res) => {
+    const userId = req.params.id;
     let user;
     try {
         // Do not select 'liked' exercises, and password (sensitive info)
@@ -11,14 +12,17 @@ const getUserById = async (req, res) => {
             .select({ liked: 0, password: 0 })
             .lean();
 
-        const submissionsPromise = UserSubmission.find({ user: req.params.id }).populate(
+        const submissionsPromise = UserSubmission.find({ user: userId }).populate(
             'exercise',
         );
 
+        const creationsPromise = Exercise.find({ author: userId });
+
         // UserSubmission.deleteMany({});
-        const [userFound, submissions] = await Promise.all([
+        const [userFound, submissions, creations] = await Promise.all([
             userPromise,
             submissionsPromise,
+            creationsPromise,
         ]);
 
         const usedLanguages = new Set();
@@ -30,10 +34,12 @@ const getUserById = async (req, res) => {
         }
 
         user = userFound;
-        const languages = Array.from(usedLanguages);
+        const languages = Array.from(usedLanguages).sort();
         user.languages = languages;
+
         // current app stores the list of the most recent submission only, so the length of submissions is essentially the number of exercises solved.
         user.solvedExercises = submissions.length;
+        user.createdExercises = creations.length;
 
         res.status(200).json(user);
     } catch (err) {

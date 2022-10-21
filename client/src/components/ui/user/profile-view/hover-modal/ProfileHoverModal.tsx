@@ -9,9 +9,8 @@ import useRanking from '../../../../../hooks/ranking/useRanking';
 import { IUserInfo } from '../../../../../models/interfaces';
 import { getDateFormat } from '../../../../../utils/datetime';
 import { numberSuffix } from '../../../../../utils/number';
-import LanguageLabel from '../../../labels/LanguageLabel';
+import LanguageLabel from '../../../icons/LanguageIcon';
 import ProfilePicture from '../../ProfilePicture';
-import Button from '../../../buttons/Button';
 import styles from './ProfileHoverModal.module.scss';
 
 interface Props {

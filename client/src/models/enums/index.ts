@@ -8,6 +8,7 @@ export * from './sorting/ExerciseSortingKey';
 export * from './sorting/VotingItemSortingKey';
 export * from './sorting/ForumPostSortingKey';
 export * from './sorting/SortingDirection';
+export * from './sorting/BadgeSortingKey';
 
 export * from './page-sections/CreationSection';
 export * from './page-sections/ProfileSection';
@@ -18,5 +19,7 @@ export * from './forum/ForumCategory';
 export * from './forum/ForumPostType';
 
 export * from './ranking/RankingCategory';
+
+export * from './badge/BadgeRarity';
 
 export * from './data-analysis/TrendPeriodMode';

@@ -12,7 +12,7 @@ import { deleteExercise } from '../../../apis/exercise.api';
 import { useUserContext } from '../../../store/context/UserContext';
 import HoveringLabel from '../labels/HoveringLabel';
 import DeleteModal from '../modals/variations/DeleteModal';
-import LanguageLabel from '../labels/LanguageLabel';
+import LanguageLabel from '../icons/LanguageIcon';
 import EditButton from '../buttons/icon-buttons/EditButton';
 import DeleteButton from '../buttons/icon-buttons/DeleteButton';
 import useExerciseSubmissionsQuery from '../../../hooks/exercise-queries/useExerciseSubmissionsQuery';

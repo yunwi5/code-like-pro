@@ -4,6 +4,7 @@ import useForceRerender from '../../../hooks/useForceRerender';
 
 interface Props {
     picture: string | undefined;
+    alt?: string;
     size?: string;
     className?: string;
 }
@@ -11,7 +12,12 @@ interface Props {
 // Displays profile picture of the user.
 // If the user has a picture link to display, show the picture in the circle.
 // If the user has no picture, show some placeholder user icon in the circle.
-const ProfilePicture: React.FC<Props> = ({ size = '2rem', picture, className = '' }) => {
+const ProfilePicture: React.FC<Props> = ({
+    size = '2rem',
+    alt,
+    picture,
+    className = '',
+}) => {
     const imageRef = useRef<HTMLImageElement>(null);
     const [imageValid, setImageValid] = useState(true);
     // Force the component to re-render once more after 1s, to force the image loading.
@@ -43,6 +49,7 @@ const ProfilePicture: React.FC<Props> = ({ size = '2rem', picture, className = '
             <img
                 ref={imageRef}
                 src={picture}
+                alt={alt}
                 className={`min-w-full min-h-full object-cover ${
                     imageValid ? '' : 'hidden'
                 }`}
