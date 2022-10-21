@@ -14,7 +14,6 @@ const config = {
         // 'ranking.test.js',
         // 'user*.test.js',
         // 'forumpost.test.js',
-        // 'userSubmission.test.js',
     ],
 };
 

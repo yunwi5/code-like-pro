@@ -10,7 +10,7 @@ import VotingItemSorter from '../../../ui/sorting/VotingItemSorter';
 
 const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     const [sortingState, setSortingState] = useState({
-        key: VotingItemSortingKey.NONE,
+        key: VotingItemSortingKey.DATETIME,
         direction: SortingDirection.DESCENDING,
     });
 

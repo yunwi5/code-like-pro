@@ -90,9 +90,9 @@ const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
                         ))}
                     </div>
                 </div>
-                <div className="col-span-2 mt-1">
+                {/* <div className="col-span-2 mt-1">
                     <Button size="small">View Detail</Button>
-                </div>
+                </div> */}
             </div>
         </div>
     );

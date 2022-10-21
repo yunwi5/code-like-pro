@@ -14,7 +14,7 @@ const TrendAnalysis: React.FC = () => {
     return (
         <div className="mt-8">
             <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-                <h2 className="text-3xl text-gray-600">Trend analysis</h2>
+                <h2 className="text-3xl text-gray-600">Trend Analysis</h2>
                 <TrendModeSelect trendMode={trendMode} setTrendMode={setTrendMode} />
             </header>
             <div className="mt-7 flex flex-wrap justify-between flex-col lg:flex-row gap-x-3 gap-y-8">

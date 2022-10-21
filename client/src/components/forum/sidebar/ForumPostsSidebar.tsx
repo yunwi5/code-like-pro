@@ -10,7 +10,7 @@ const ForumPostsSidebar: React.FC<{ className?: string }> = ({ className = '' })
         <aside
             className={`card w-full lg:w-fit flex flex-col min-w-[min(22.5rem,90vw)] bg-slate-100 rounded ${className}`}
         >
-            <section className="sticky top-0">
+            <section className="sticky top-[3.5rem]">
                 {/* Post sorting and searching */}
                 <ForumPostsControl />
                 {/* List of forum posts */}

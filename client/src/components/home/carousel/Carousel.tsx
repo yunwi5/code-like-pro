@@ -4,7 +4,7 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { wrap } from 'popmotion';
 
 import { mod } from '../../../utils/number';
-import { AppImagesList as images } from '../../../assets/app-images';
+import { AppImages } from '../../../assets/app-images';
 import './Carousel.scss';
 
 const variants = {
@@ -77,14 +77,14 @@ export const Carousel: React.FC = () => {
             <h1 className="text-text-main-500 text-xl sm:text-3xl mb-5">
                 Create. Solve. Showcase.
             </h1>
-            <div className="carousel flex-center relative lg:h-[70vh] max-w-[100vw]">
+            <div className="carousel flex-between gap-1 relative lg:h-[70vh] max-w-[100vw]">
                 <div
                     className="carousel-nav shrink-0 hidden sm:flex flex-center z-10 !w-[3rem] !h-[3rem] text-3xl bg-gray-50 hover:bg-gray-100 shadow rounded-full cursor-pointer hover:text-main-500"
                     onClick={() => paginate(-1)}
                 >
                     <BsChevronLeft />
                 </div>
-                <div className="h-[15rem] sm:h-[23rem] flex-center">
+                <div className="h-[15rem] sm:h-[24rem] flex-center">
                     <AnimatePresence initial={false} custom={direction}>
                         <motion.img
                             key={page}
@@ -141,6 +141,15 @@ export const Carousel: React.FC = () => {
         </div>
     );
 };
+
+// Carousel images list
+const images = [
+    AppImages.ExerciseCreation,
+    AppImages.ExerciseAttempt,
+    AppImages.Showcases,
+    AppImages.Ranking,
+    AppImages.ExerciseBrowsing,
+];
 
 // Btn styling for pagination dot buttons
 const paginateBtnClass =

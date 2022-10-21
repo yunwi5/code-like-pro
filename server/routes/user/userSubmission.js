@@ -3,7 +3,10 @@ const userSubmissionController = require('../../controller/user/userSubmissionCo
 
 const { ensureAuthenticated } = require('../../middleware/auth');
 const catchAsync = require('../../middleware/catchAsync');
-const { validateRunCodeBody } = require('../../middleware/validateRequest');
+const {
+    validateRunCodeBody,
+    validateUserSubmissionBody,
+} = require('../../middleware/validateRequest');
 
 const router = express.Router();
 
@@ -18,6 +21,7 @@ router.post(
 router.post(
     '/:id',
     ensureAuthenticated,
+    validateUserSubmissionBody,
     catchAsync(userSubmissionController.postSubmission),
 );
 

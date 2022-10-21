@@ -1,9 +1,12 @@
 // e2e testing for the exercise creation page.
 describe('Exercise creation', () => {
+    beforeEach(() => {
+        cy.visit('/create-exercise');
+    });
+
     it('Can access the creation page after login', () => {
         cy.login();
         cy.visit('/create-exercise');
-
         cy.location().should((location) => {
             expect(location.pathname).equal('/create-exercise');
         });
@@ -17,7 +20,6 @@ describe('Exercise creation', () => {
     };
 
     it('Can type inputs to title, difficulty, language and tags', () => {
-        cy.visit('/create-exercise');
         cy.location().should((location) => {
             expect(location.pathname).equal('/create-exercise');
         });
@@ -25,6 +27,7 @@ describe('Exercise creation', () => {
         // Enter title and verify
         cy.findByRole('challenge-name', { name: /challenge name/i }).type(
             exampleExercise.title,
+            { force: true },
         );
         cy.findByRole('challenge-name', { name: /challenge name/i }).should(
             'have.value',

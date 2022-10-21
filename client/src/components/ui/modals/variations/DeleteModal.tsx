@@ -43,7 +43,7 @@ const DeleteModal: React.FC<Props> = ({
             open={open}
             direction="vertical"
             onClose={onClose}
-            className="!rounded-md min-w-[min(25rem,92.5vw)] overflow-hidden"
+            className="!rounded-md //min-w-[min(25rem,92.5vw)] w-[clamp(25rem,35rem,95vw)] overflow-hidden"
         >
             {/* Delete modal header */}
             <header className="px-7 py-4 shadow-md border-b-2 border-rose-500">
@@ -55,7 +55,7 @@ const DeleteModal: React.FC<Props> = ({
 
             {/* Issue report body */}
             <div className="flex flex-col gap-3 px-7 pt-8 pb-5 bg-slate-200/90">
-                <p className="-mt-2 -mb-2 flex-start flex-wrap gap-x-1 font-semibold text-slate-600">
+                <p className="-mt-2 font-semibold text-slate-600">
                     You are about to delete{' '}
                     <strong className="text-semibold text-rose-500">{item}</strong>.
                 </p>

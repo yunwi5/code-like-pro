@@ -39,6 +39,7 @@ const EditorWorkspace: React.FC<{ index: number }> = ({ index }) => {
             value={localSolution}
             height={'25rem'}
             className="flex-1 !border-none lg:!max-w-[50vw] shadow-none"
+            editorClassName="!max-w-[100vw]"
             showHeader={false}
         />
     );

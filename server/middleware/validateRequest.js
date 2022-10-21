@@ -4,7 +4,7 @@ const { showcaseBodySchema } = require('../schemas/showcaseSchema');
 const { voteBodySchema } = require('../schemas/voteSchema');
 const { forumpostBodySchema } = require('../schemas/forumpostSchema');
 const { commentBodySchema } = require('../schemas/commentSchema');
-const { runCodeBodySchema } = require('../schemas/submissionSchemas');
+const { runCodeBodySchema, submissionSchema } = require('../schemas/submissionSchemas');
 
 const validateBody = async (req, res, next, schema) => {
     const body = req.body;
@@ -36,6 +36,11 @@ const validateRunCodeBody = async (req, res, next) => {
     return await validateBody(req, res, next, runCodeBodySchema);
 };
 
+// Validate user submission body
+const validateUserSubmissionBody = async (req, res, next) => {
+    return await validateBody(req, res, next, submissionSchema);
+};
+
 // Validate showcase body props before posting
 const validateShowcaseBody = async (req, res, next) => {
     return await validateBody(req, res, next, showcaseBodySchema);
@@ -59,6 +64,7 @@ module.exports = {
     validateSignUpBody,
     validateExerciseBody,
     validateRunCodeBody,
+    validateUserSubmissionBody,
     validateShowcaseBody,
     validateCommentBody,
     validateVoteBody,
