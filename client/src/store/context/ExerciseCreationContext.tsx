@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { postExercise, putExercise } from '../../apis/exercise.api';
 import { runTestCases } from '../../apis/submission.api';
+import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { CreationSection, Difficulty, Language } from '../../models/enums';
 import {
@@ -81,6 +82,9 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
 
     const [activeSection, setActiveSection] = useState<CreationSection | null>(null);
 
+    // creation badge reward if qualified
+    const { qualifyCreationBadges } = useBadgeQualification();
+
     const createExerciseObject = () => ({
         name,
         language,
@@ -134,7 +138,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
             }
             setTestCaseOutputs(testCasesResult);
         } else {
-            console.log('Error on run code:', message);
             toastNotify('Oops, something went wrong on the server.', 'error');
         }
     };
@@ -188,6 +191,11 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
         setStartingTemplate(exerciseDraft.startingTemplate);
         setSolutionCode(exerciseDraft.solutionCode);
     }, [exerciseDraft]);
+
+    // Creation badge qualification attempt when the new exercise is created
+    useEffect(() => {
+        qualifyCreationBadges();
+    }, [createdExercise]);
 
     const value = {
         name,

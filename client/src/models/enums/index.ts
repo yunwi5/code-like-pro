@@ -21,5 +21,6 @@ export * from './forum/ForumPostType';
 export * from './ranking/RankingCategory';
 
 export * from './badge/BadgeRarity';
+export * from './badge/BadgeCategory';
 
 export * from './data-analysis/TrendPeriodMode';

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const UserSubmission = require('../../models/UserSubmission');
 const User = require('../../models/User');
 const Exercise = require('../../models/Exercise');
+const ShowCase = require('../../models/ShowCase');
 
 const getUserById = async (req, res) => {
     const userId = req.params.id;
@@ -17,12 +18,13 @@ const getUserById = async (req, res) => {
         );
 
         const creationsPromise = Exercise.find({ author: userId });
+        const showcasesPromise = ShowCase.find({ user: userId });
 
-        // UserSubmission.deleteMany({});
-        const [userFound, submissions, creations] = await Promise.all([
+        const [userFound, submissions, creations, showcases] = await Promise.all([
             userPromise,
             submissionsPromise,
             creationsPromise,
+            showcasesPromise,
         ]);
 
         const usedLanguages = new Set();
@@ -40,6 +42,7 @@ const getUserById = async (req, res) => {
         // current app stores the list of the most recent submission only, so the length of submissions is essentially the number of exercises solved.
         user.solvedExercises = submissions.length;
         user.createdExercises = creations.length;
+        user.showCases = showcases.length;
 
         res.status(200).json(user);
     } catch (err) {

@@ -41,7 +41,7 @@ const BadgeAmountOptions = {
     N: 1,
     R: 5,
     SR: 10,
-    UR: 50,
+    UR: 30,
 };
 
 const BadgeAmountOptionsList = Object.values(BadgeAmountOptions);

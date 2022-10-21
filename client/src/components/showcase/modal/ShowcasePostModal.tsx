@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaLaptopCode } from 'react-icons/fa';
 import { postExerciseShowCase } from '../../../apis/exercise.api';
+import useBadgeQualification from '../../../hooks/badges/useBadgeQualification';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { toastNotify } from '../../../utils/notification';
 import CodeEditor from '../../ui/editor/CodeEditor';
@@ -14,6 +15,7 @@ interface Props {
 
 const ShowcasePostModal: React.FC<Props> = ({ visible, onClose }) => {
     const { userSubmission, exercise, refetchQuery } = useShowcase();
+    const { qualifyShowcaseBadges } = useBadgeQualification();
     const [description, setDescription] = useState('');
     const [error, setError] = useState<null | string>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -40,6 +42,8 @@ const ShowcasePostModal: React.FC<Props> = ({ visible, onClose }) => {
             toastNotify('Your showcase was posted!', 'success');
             // Refetch showcases with update datat
             refetchQuery('showcases');
+            // Try showcase badges qualification (if new badge requirements are met)
+            qualifyShowcaseBadges();
             onClose();
         } else {
             toastNotify(`Sorry there is an error: ${message}.`, 'error');

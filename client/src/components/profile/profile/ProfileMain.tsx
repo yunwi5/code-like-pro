@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { ClipLoader } from 'react-spinners';
 import useBadgeQuery from '../../../hooks/badges/useBadgeQuery';
 import useRanking from '../../../hooks/ranking/useRanking';
@@ -82,7 +82,7 @@ const ProfileMainBody = () => {
                         <ProfileInfoItem
                             label="Username"
                             value={profileName}
-                            className="md:col-span-2"
+                            className="md:col-span-2 md:max-w-[65%]"
                         />
                     )}
 
@@ -98,7 +98,7 @@ const ProfileMainBody = () => {
                         <ProfileInfoItem
                             label="About Me"
                             value={description}
-                            className="md:col-span-2"
+                            className="md:col-span-2 md:max-w-[65%]"
                         />
                     )}
 
@@ -134,7 +134,7 @@ const ProfileMainBody = () => {
 
                 {/* Profile badges */}
                 {showBadges && (
-                    <div className="flex flex-col mt-10">
+                    <div className="flex flex-col mt-10 mb-3">
                         <Badges
                             heading={<h2 className="text-2xl">My Badges</h2>}
                             badges={badges || []}

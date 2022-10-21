@@ -7,6 +7,7 @@ interface Props {
     alt?: string;
     size?: string;
     className?: string;
+    onClick?: () => void;
 }
 
 // Displays profile picture of the user.
@@ -17,6 +18,7 @@ const ProfilePicture: React.FC<Props> = ({
     alt,
     picture,
     className = '',
+    onClick,
 }) => {
     const imageRef = useRef<HTMLImageElement>(null);
     const [imageValid, setImageValid] = useState(true);
@@ -42,6 +44,7 @@ const ProfilePicture: React.FC<Props> = ({
 
     return (
         <div
+            onClick={onClick}
             className={`flex-center shrink-0 overflow-hidden rounded-full shadow bg-gray-200 ${className}`}
             style={{ width: size, height: size }}
         >

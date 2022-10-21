@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Toast notification on the right top of the web page. Message with different status type can be displayed.
 type MessageType = 'success' | 'error' | 'warning' | 'info';
-export const toastNotify = (message: string, type?: MessageType) => {
+export const toastNotify = (message: string | JSX.Element, type?: MessageType) => {
     // add toastId to prevent multiple rendering
     if (type) {
         toast[type](message, {
@@ -25,11 +25,12 @@ export const toastNotify = (message: string, type?: MessageType) => {
 };
 
 interface ToastProps {
-    message: string;
+    message: string | React.ReactNode;
     toastId?: string;
     type?: MessageType;
     autoClose: number;
     position?: ToastPosition;
+    className?: string;
 }
 // Toast notification with more configs and customizations.
 export const customToastNotify = (props: ToastProps) => {
@@ -39,6 +40,7 @@ export const customToastNotify = (props: ToastProps) => {
         type,
         autoClose = 3000,
         position = toast.POSITION.TOP_CENTER,
+        className = '',
     } = props;
 
     // add toastId to prevent multiple rendering
@@ -46,7 +48,7 @@ export const customToastNotify = (props: ToastProps) => {
         toast[type](message, {
             toastId,
             theme: 'dark',
-            className: '!bg-gray-700/80', // bg color can change.
+            className: `!bg-gray-700/90 ${className}`, // bg color can change.
             autoClose,
             position,
         });
@@ -54,7 +56,7 @@ export const customToastNotify = (props: ToastProps) => {
         toast(message, {
             toastId,
             theme: 'dark',
-            className: '!bg-gray-700/80', // bg color can change.
+            className: `!bg-gray-700/90 ${className}`, // bg color can change.
             autoClose,
             position,
         });

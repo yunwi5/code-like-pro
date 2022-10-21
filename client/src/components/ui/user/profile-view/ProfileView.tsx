@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import useRanking from '../../../../hooks/ranking/useRanking';
 import useUserInfoQuery from '../../../../hooks/user/useUserInfoQuery';
 import ProfilePicture from '../ProfilePicture';
-import UserDetailModal from './detail/UserDetailModal';
+import UserDetailModal from './detail-modal/UserDetailModal';
 import ProfileHoverModal from './hover-modal/ProfileHoverModal';
 import styles from './ProfileView.module.scss';
 
@@ -13,6 +13,7 @@ interface Props {
     hoverModalClassName?: string; // override hover modal styles, optional
 }
 
+// Viewing other user's profile (including the user itself)
 const ProfileView: React.FC<Props> = ({
     user,
     size,
@@ -30,23 +31,30 @@ const ProfileView: React.FC<Props> = ({
     // User detail modal
     const [showModal, setShowModal] = useState(false);
 
+    // currying function to handle the user modal state
+    const handleModal = (show: boolean) => () => setShowModal(show);
+
     if (!user) return <div>User not found</div>;
 
     return (
         <>
             <div
-                onClick={() => setShowModal(true)}
                 className={`${styles['profile-view']} relative flex-start gap-3 items-center cursor-pointer ${className}`}
             >
                 <ProfilePicture
+                    onClick={handleModal(true)}
                     picture={user.pictureUrl ?? userInfo?.pictureUrl}
                     size={size ?? '2.5rem'}
                 />
-                <span className={styles['user-name']}>{user.name}</span>
+                <span onClick={handleModal(true)} className={styles['user-name']}>
+                    {user.name}
+                </span>
                 {userInfo && (
                     <ProfileHoverModal
-                        className={`hidden sm:block ${styles['hover-modal']} ${hoverModalClassName}`}
+                        rankInfo={rankInfo}
                         userInfo={userInfo}
+                        onShowDetail={handleModal(true)}
+                        className={`hidden sm:block ${styles['hover-modal']} ${hoverModalClassName}`}
                     />
                 )}
             </div>

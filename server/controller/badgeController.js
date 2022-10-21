@@ -8,20 +8,22 @@ const Badge = require('../models/Badge');
 const { BadgeCategory } = require('../models/enums');
 const { getRequestedBadgeSpec } = require('../utils/badgeSpec');
 
-// validate if the user already has this badge, so that we don't assign the same badge
-// to the user twice
-const checkIfUserAlreadyHasBadge = (user, newBadge) => {
-    const alreadyHasThisBadge = user.badges.find((badge) => badge.name === newBadge.name);
-    return alreadyHasThisBadge;
-};
-
 // Create badge for the user and save it.
 // Save it only if the user does not have the same badge already
 const createUserBadge = async (userId, badgeSpec) => {
     const user = await User.findById(userId).populate('badges');
     const newBadge = new Badge({ ...badgeSpec });
 
-    if (checkIfUserAlreadyHasBadge(user, newBadge)) return null;
+    // validate if the user already has this badge, so that we don't assign the same badge
+    // to the user twice
+    const existingBadge = user.badges.find(
+        (badge) =>
+            badge.rarity === badgeSpec.rarity && badge.category === badgeSpec.category,
+    );
+
+    console.log({ existingBadge });
+
+    if (existingBadge) return null;
 
     user.badges.push(newBadge);
     const p1 = user.save();
