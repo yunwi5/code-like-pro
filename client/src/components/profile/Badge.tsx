@@ -8,22 +8,23 @@ import BadgeUR from '../../assets/badgeImages/BadgeUR.png';
 import { IBadge } from '../../models/interfaces';
 import BadgeCard from './BadgeCard';
 import { getBadges } from '../../apis/badge';
+import { useUserContext } from '../../store/context/UserContext';
 
 const badgesPerRow = 4;
 const maximumRows = 1;
 const rarityOrder = ['N','R','SR','UR'];
 
-// Fixed array.
-const d1 = new Date(2022,10,21,10,0,0,0);
-                const d2 = new Date(2023,5,21,10,0,0,0);
-                const d3 = new Date(2022,5,21,10,0,0,0);
-                const d4 = new Date(2022,9,21,10,0,0,0);
-const fixedArray = [
-    { 'rarity': 'UR', 'name': 'Solve 100+ Exercises', 'description': 'This is a fixed data of UR card.', 'awardedAt': d1, 'title':'Exercise King' ,'category':'ur'}, 
-    { 'rarity': 'SR', 'name': 'Solve 30+ Exercises', 'description': 'This is a fixed data of SR card, and this is also the test for a very long text length.', 'awardedAt': d2, 'title':'Exercise Queen' ,'category':'sr'}, 
-    { 'rarity': 'R', 'name': 'Solve 10+ Exercises', 'description': 'This is a fixed data of R card.', 'awardedAt': d3, 'title':'Exercise Prince' ,'category':'r'},
-    { 'rarity': 'N', 'name': 'Solve 1+ Exercises', 'description': 'This is a fixed data of N card.', 'awardedAt': d4, 'title':'Knight' ,'category':'n'},
-];
+// // Fixed array.
+// const d1 = new Date(2022,10,21,10,0,0,0);
+//                 const d2 = new Date(2023,5,21,10,0,0,0);
+//                 const d3 = new Date(2022,5,21,10,0,0,0);
+//                 const d4 = new Date(2022,9,21,10,0,0,0);
+// const fixedArray = [
+//     { 'rarity': 'UR', 'name': 'Solve 100+ Exercises', 'description': 'This is a fixed data of UR card.', 'awardedAt': d1,'category':'ur'}, 
+//     { 'rarity': 'SR', 'name': 'Solve 30+ Exercises', 'description': 'This is a fixed data of SR card, and this is also the test for a very long text length.', 'awardedAt': d2, 'category':'sr'}, 
+//     { 'rarity': 'R', 'name': 'Solve 10+ Exercises', 'description': 'This is a fixed data of R card.', 'awardedAt': d3, 'category':'r'},
+//     { 'rarity': 'N', 'name': 'Solve 1+ Exercises', 'description': 'This is a fixed data of N card.', 'awardedAt': d4, 'category':'n'},
+// ];
 
 function convertDate(d : Date){
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -33,20 +34,22 @@ function convertDate(d : Date){
 }
 
 const Badge: React.FC = () => {
-    let para: IBadge[] = [];
+    const { userDetail } = useUserContext();
+    const para: IBadge[] = [];
     let [badgeArray, setBadge] = useState(para);
     let [orderMode, setOrder] = useState('');
     let [currentBadge, setCurrentBadge] = useState(para);
-
-    // // GET Badges.
-    // useEffect(() => {
-    //     getBadges().then((res) => {
-    //         if (res.ok && res.data) {
-    //             setBadge(res.data.sort((a,b) => a.title < b.title?-1:1));
-    //             setOrder('titleAtoZ');
-    //         }
-    //     });
-    // }, para);
+    // GET Badges.
+    let userId = userDetail?._id || 'null';
+    useEffect(() => {
+        if (userId == 'null'){return;}
+        getBadges(userId).then((res) => {
+            if (res.ok && res.data) {
+                setBadge(res.data.sort((a,b) => a.name < b.name?-1:1));
+                setOrder('titleAtoZ');
+            }
+        });
+    }, [userId]);
 
     const buttonStyle = {
         marginLeft: 10,
@@ -65,7 +68,7 @@ const Badge: React.FC = () => {
                 <div className='text-2xl text-grey-600 mb-4'>Rewarded Badges</div>
                 <div>
                     <button onClick={()=>{
-                        setBadge(()=>{return badgeArray.sort((a,b)=>a.title < b.title?-1:1);});
+                        setBadge(()=>{return badgeArray.sort((a,b)=>a.name < b.name?-1:1);});
                         setOrder('titleAtoZ');
                     }} className={(orderMode=='titleAtoZ')?'text-main-400':'text-grey-400'}style={buttonStyle}>Title A-Z</button>
                     <button onClick={()=>{
@@ -88,7 +91,7 @@ const Badge: React.FC = () => {
                             }} 
                             src={(badge.rarity=='UR')?BadgeUR:(badge.rarity=='SR')?BadgeSR:(badge.rarity=='R')?BadgeR:BadgeN} 
                             className={'shadow rounded-lg hover:bg-grey-200'}/>
-                            <div style={{height:infoBoxHeight,textAlign:'center',fontWeight:'bold'}} className='text-main-400'>{badge.title}</div>
+                            <div style={{height:infoBoxHeight,textAlign:'center',fontWeight:'bold'}} className='text-main-400'>{badge.name}</div>
                             <div style={{height:infoBoxHeight,textAlign:'center',fontSize:10}}>{convertDate(badge.awardedAt)}</div>
                         </div>
                         :''
@@ -105,10 +108,10 @@ const Badge: React.FC = () => {
                     />
                 </div>
             </div>
-            <button onClick={()=>{
-                setBadge(fixedArray.sort((a,b)=>a.title<b.title?-1:1));
+            {/* <button onClick={()=>{
+                setBadge(fixedArray.sort((a,b)=>a.name<b.name?-1:1));
                 setOrder('titleAtoZ');
-            }}>test button</button>
+            }}>{userDetail?._id}</button> */}
         </>
     );
 };

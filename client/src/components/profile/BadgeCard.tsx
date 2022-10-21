@@ -28,10 +28,10 @@ const BadgeCard: React.FC<Props> = (props) => {
                         <img src={(badge.rarity=='UR')?BadgeUR:(badge.rarity=='SR')?BadgeSR:(badge.rarity=='R')?BadgeR:BadgeN}/>
                     </div>
                     <div className='col-span-2 border border-solid border-main-400' style={{padding:textPadding}}>
-                        <b className='text-main-400'>Title:</b> {badge.title}
+                        <b className='text-main-400'>Prerequisite:</b> {badge.name}
                     </div>
                     <div className='col-span-2 border border-solid border-main-400' style={{padding:textPadding}}>
-                        <b className='text-main-400'>Prerequisite:</b> {badge.name}
+                        <b className='text-main-400'>Badge Rarity:</b> {badge.rarity}
                     </div>
                     <div className='col-span-2 border border-solid border-main-400' style={{padding:textPadding}}>
                         <b className='text-main-400'>Awarded At:</b> {convertDate(badge.awardedAt)}
