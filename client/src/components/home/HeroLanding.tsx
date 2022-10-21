@@ -6,8 +6,11 @@ import { HiOutlineArrowRight } from 'react-icons/hi';
 import { Typewriter } from '../../models/classes/TypeWriter';
 import Carousel from './carousel/Carousel';
 import { sleep } from '../../utils/promise';
+import { useUserContext } from '../../store/context/UserContext';
+import { SiAzuredataexplorer } from 'react-icons/si';
 
 const HeroLanding: React.FC = () => {
+    const isLoggedIn = !!useUserContext().userDetail?._id;
     const typerRef = useRef<HTMLHeadingElement>(null);
     // State to track whether the typing animation has finished
     const [typingFinished, setTypingFinished] = useState(false);
@@ -41,12 +44,20 @@ const HeroLanding: React.FC = () => {
                     themselves are created by the students.
                 </h2>
 
-                <Link
-                    to={'/create-exercise'}
-                    className="btn btn-fill text-lg md:text-xl flex-center gap-2 !text-white !rounded"
-                >
-                    Get Started <HiOutlineArrowRight />
-                </Link>
+                <div className="flex flex-col sm:flex-row gap-4 w-[90%] sm:w-fit">
+                    <Link
+                        to={isLoggedIn ? '/create-exercise' : '/login'}
+                        className="btn btn-fill text-lg md:text-xl flex-center gap-2 !text-white !rounded"
+                    >
+                        Get Started <HiOutlineArrowRight />
+                    </Link>
+                    <Link
+                        to={'browse'}
+                        className="btn text-lg md:text-xl min-w-[10.5rem] flex-center gap-2 bg-purple-500 hover:bg-purple-600  !text-white !rounded"
+                    >
+                        Explore <SiAzuredataexplorer />
+                    </Link>
+                </div>
             </div>
             <motion.div
                 initial={{ opacity: 0, x: 100 }}

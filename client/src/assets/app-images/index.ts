@@ -8,9 +8,9 @@ import Statistics from './statistics.jpg';
 export const AppImages = {
     ExerciseCreation,
     ExerciseAttempt,
-    ExerciseBrowsing,
     Showcases,
     Ranking,
+    ExerciseBrowsing,
     Statistics,
 };
 
