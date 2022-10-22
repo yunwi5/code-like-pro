@@ -21,7 +21,7 @@ const createUserBadge = async (userId, badgeSpec) => {
             badge.rarity === badgeSpec.rarity && badge.category === badgeSpec.category,
     );
 
-    console.log({ existingBadge });
+    // console.log({ existingBadge });
 
     if (existingBadge) return null;
 
@@ -141,7 +141,7 @@ const deleteBadges = async (req, res) => {
         const badgeIds = user.badges;
         user.badges = [];
 
-        const result = await Badge.deleteMany({ _id: { $in: badgeIds } });
+        await Badge.deleteMany({ _id: { $in: badgeIds } });
         await user.save();
 
         res.status(200).json({ message: 'Delete badges success' });
