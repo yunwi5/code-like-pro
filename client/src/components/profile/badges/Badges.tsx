@@ -28,25 +28,26 @@ const Badges: React.FC<Props> = ({
     badgePerPage = BADGE_PER_PAGE,
     className,
 }) => {
-    const {
-        array: currentPageBadges,
-        maxPage,
-        page,
-        setPage,
-    } = usePagination({ itemPerPage: badgePerPage, array: badges });
-
     const [selectedBadgeId, setSelectedBadgeId] = useState<string | null>(null);
+    const selectedBadge = badges.find((badge) => badge._id === selectedBadgeId);
+
     const [sortingState, setSortingState] = useState({
         key: BadgeSortingKey.RARITY,
         direction: SortingDirection.DESCENDING,
     });
 
-    const selectedBadge = badges.find((badge) => badge._id === selectedBadgeId);
-
     // Sort the badges whenever the sorting state changes
     const sortedBadges = useMemo(() => {
-        return sortBadges(currentPageBadges, sortingState).slice();
-    }, [currentPageBadges, sortingState]);
+        return sortBadges(badges, sortingState).slice();
+    }, [badges, sortingState]);
+
+    // Apply pagination after sorting
+    const {
+        array: currentPageBadges,
+        maxPage,
+        page,
+        setPage,
+    } = usePagination({ itemPerPage: badgePerPage, array: sortedBadges });
 
     // Show pagination only if there are more than 1 page amount of badges
     const showPagination = badges.length > badgePerPage;
@@ -64,7 +65,7 @@ const Badges: React.FC<Props> = ({
                 />
             </div>
             <div className={`${layoutStyle} ${className}`}>
-                {sortedBadges.map((badge, idx) => (
+                {currentPageBadges.map((badge, idx) => (
                     <motion.div
                         key={badge._id}
                         layoutId={badge._id}
