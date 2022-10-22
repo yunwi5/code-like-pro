@@ -13,7 +13,6 @@ import { getUsedLanguagesByUser } from '../../../utils/language';
 import { numberSuffix } from '../../../utils/number';
 import Button from '../../ui/buttons/Button';
 import Badges from '../badges/Badges';
-import MyBadges from '../badges/MyBadges';
 import ProfileLoader from '../ProfileLoader';
 import ProfileAvatar from './avatars/ProfileAvatar';
 import ProfileInfoItem from './sections/ProfileInfoItem';
