@@ -22,6 +22,10 @@ export * from './showcase/IComment';
 
 // Ranking related interfaces
 export * from './ranking/IRanking';
+export * from './ranking/IRankingOrder';
+
+// Badge interfaces
+export * from './badge/IBadge';
 
 // Context types
 export * from './context/IExerciseCreationContext';

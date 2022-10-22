@@ -8,15 +8,16 @@ const keys = require('./keys');
 const router = require('../routes/index');
 const authRouter = require('../routes/auth/auth');
 const authGoogleRouter = require('../routes/auth/authGoogle');
-const exerciseRouter = require('../routes/exercise');
-const userSubmissionRouter = require('../routes/userSubmission');
+const exerciseRouter = require('../routes/exercise/exercise');
+const userSubmissionRouter = require('../routes/user/userSubmission');
 const commentRouter = require('../routes/comment');
-const userRouter = require('../routes/user');
+const userRouter = require('../routes/user/user');
 const showCaseRouter = require('../routes/showCase');
-const exerciseReportRouter = require('../routes/exerciseReport');
+const exerciseReportRouter = require('../routes/exercise/exerciseReport');
 const rankingRouter = require('../routes/ranking');
 const imageRouter = require('../routes/image');
 const forumPostRouter = require('../routes/forumPost');
+const badgeRouter = require('../routes/badge');
 
 // Mongo session store for better session storage (default is in-memory session which is not efficient)
 const store = MongoStore.create({
@@ -65,7 +66,7 @@ const createApp = () => {
         app.enable('trust proxy', true);
     }
 
-    console.log({ sessionConfig });
+    // console.log({ sessionConfig });
 
     // Express Session
     app.use(session(sessionConfig));
@@ -91,6 +92,7 @@ const registerRoutes = (app) => {
     app.use('/api/ranking', rankingRouter);
     app.use('/api/image', imageRouter);
     app.use('/api/forumPost', forumPostRouter);
+    app.use('/api/badge', badgeRouter);
 };
 
 module.exports = { createApp, registerRoutes };

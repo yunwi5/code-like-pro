@@ -3,6 +3,7 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import { GoGraph } from 'react-icons/go';
 import { IoCreateOutline } from 'react-icons/io5';
 import { BsFileEarmarkCode } from 'react-icons/bs';
+
 import { ProfileSection } from '../models/enums';
 
 export const ProfileLinkMap = {

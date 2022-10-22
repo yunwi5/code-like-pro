@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AiFillCheckCircle, AiFillStar } from 'react-icons/ai';
 import { FaUser } from 'react-icons/fa';
 import { MdReportProblem } from 'react-icons/md';
-import { BsFillTagsFill } from 'react-icons/bs';
+import { BsClock, BsFillTagsFill } from 'react-icons/bs';
 
 import { IExerciseCard } from '../../../models/interfaces';
 import { getDifficultyColorClass } from '../../../utils/difficulty';
@@ -12,11 +12,12 @@ import { deleteExercise } from '../../../apis/exercise.api';
 import { useUserContext } from '../../../store/context/UserContext';
 import HoveringLabel from '../labels/HoveringLabel';
 import DeleteModal from '../modals/variations/DeleteModal';
-import LanguageLabel from '../labels/LanguageLabel';
+import LanguageLabel from '../icons/LanguageIcon';
 import EditButton from '../buttons/icon-buttons/EditButton';
 import DeleteButton from '../buttons/icon-buttons/DeleteButton';
 import useExerciseSubmissionsQuery from '../../../hooks/exercise-queries/useExerciseSubmissionsQuery';
 import { getSubmissionStats } from '../../../utils/user-submission';
+import { getDateFormat } from '../../../utils/datetime';
 
 interface Props {
     exercise: IExerciseCard;
@@ -36,7 +37,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
 
     // Group of edit & delete buttons displayed only if the user is the author.
     const exerciseControl = exercise?.isAuthorized ? (
-        <ExerciseCardControl
+        <ExerciseControl
             onEdit={() => navigate(getExerciseEditLink(exercise._id))}
             onDelete={() => setShowDeleteModal(true)}
         />
@@ -86,6 +87,10 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
                         {correctRate}%
                     </li>
                     <li className="flex-start gap-1">
+                        <BsClock className="text-blue-500/80 text-base" />{' '}
+                        {getDateFormat(exercise.createdAt)}
+                    </li>
+                    <li className="hidden sm:flex justify-start items-center gap-1">
                         <MdReportProblem className="text-stone-500/80 text-base" />{' '}
                         {exercise.reports} Reports
                     </li>
@@ -131,7 +136,7 @@ interface ControlProps {
     onEdit: () => void;
     onDelete: () => void;
 }
-const ExerciseCardControl: React.FC<ControlProps> = ({ onEdit, onDelete }) => {
+const ExerciseControl: React.FC<ControlProps> = ({ onEdit, onDelete }) => {
     return (
         <div className="flex-start gap-1">
             <EditButton onEdit={onEdit} />

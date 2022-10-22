@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
-const Exercise = require('../models/Exercise');
-const ExerciseReport = require('../models/ExerciseReport');
-const UserSubmission = require('../models/UserSubmission');
-const Comment = require('../models/Comment');
-const ShowCase = require('../models/ShowCase');
-const User = require('../models/User');
+const Exercise = require('../../models/Exercise');
+const ExerciseReport = require('../../models/ExerciseReport');
+const UserSubmission = require('../../models/UserSubmission');
+const Comment = require('../../models/Comment');
+const ShowCase = require('../../models/ShowCase');
+const User = require('../../models/User');
 
-const { constructLanguageFileSpec } = require('../utils/languageSupport');
-const makeRequest = require('../utils/makeRequest');
+const { constructLanguageFileSpec } = require('../../utils/languageSupport');
+const makeRequest = require('../../utils/makeRequest');
 
 const postExercise = async (req, res) => {
     const exerciseBody = req.body;

@@ -1,8 +1,8 @@
-const Exercise = require('../models/Exercise');
-const UserSubmission = require('../models/UserSubmission');
-const User = require('../models/User');
-const { constructLanguageFileSpec } = require('../utils/languageSupport');
-const makeRequest = require('../utils/makeRequest');
+const Exercise = require('../../models/Exercise');
+const UserSubmission = require('../../models/UserSubmission');
+const User = require('../../models/User');
+const { constructLanguageFileSpec } = require('../../utils/languageSupport');
+const makeRequest = require('../../utils/makeRequest');
 
 /*
 Run the code for users to run their code. It does not store anything to the database.

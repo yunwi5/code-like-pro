@@ -1,35 +1,34 @@
-import React, { useMemo } from 'react';
-import { AiOutlineMail } from 'react-icons/ai';
-import { BsCodeSlash } from 'react-icons/bs';
+import React from 'react';
+import { BsCodeSlash, BsFileEarmarkCode } from 'react-icons/bs';
 import { IoPodiumOutline } from 'react-icons/io5';
 import { MdDateRange } from 'react-icons/md';
 import { ClipLoader } from 'react-spinners';
 
-import useRanking from '../../../../../hooks/ranking/useRanking';
-import { IUserInfo } from '../../../../../models/interfaces';
+import { IRankingOrder, IUserInfo } from '../../../../../models/interfaces';
 import { getDateFormat } from '../../../../../utils/datetime';
 import { numberSuffix } from '../../../../../utils/number';
-import LanguageLabel from '../../../labels/LanguageLabel';
-import ProfilePicture from '../../ProfilePicture';
 import Button from '../../../buttons/Button';
+import LanguageLabel from '../../../icons/LanguageIcon';
+import ProfilePicture from '../../ProfilePicture';
 import styles from './ProfileHoverModal.module.scss';
 
 interface Props {
     userInfo: IUserInfo;
+    rankInfo: IRankingOrder | null;
+    onShowDetail(): void; // trigger the event to show the user detail modal
     className?: string;
 }
 
 // Profile modal that appears when hovering the user profile picture and name.
-const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
-    const { getUserRank } = useRanking();
-
-    const userRankData = useMemo(() => {
-        return getUserRank(userInfo._id);
-    }, [getUserRank, userInfo._id]);
-
+const ProfileHoverModal: React.FC<Props> = ({
+    userInfo,
+    rankInfo,
+    onShowDetail,
+    className = '',
+}) => {
     return (
         <div
-            className={`${styles.modal} absolute top-[calc(100%+0.75rem)] left-[50%] translate-x-[-10%] min-w-[25rem] bg-white border-2 border-gray-200/90 rounded shadow hover:shadow-lg ${className}`}
+            className={`${styles.modal} absolute top-[calc(100%+0.75rem)] left-[50%] translate-x-[-10%] min-w-[26rem] bg-white border-2 border-gray-200/90 rounded shadow hover:shadow-lg ${className}`}
         >
             <div className={styles.triangle}></div>
             <div className="flex items-center gap-5 px-3 pt-3 pb-2 border-b-2 border-b-gray-200">
@@ -38,21 +37,12 @@ const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
                     <h3 className="text-xl text-gray-500 font-semibold">
                         {userInfo.name}
                     </h3>
-                    <p className="text-gray-400">{userInfo.description || '-'}</p>
+                    <p className="text-gray-400">
+                        {userInfo.description?.slice(0, 40) || '-'}
+                    </p>
                 </div>
             </div>
             <div className="bg-slate-100 grid grid-cols-2 gap-x-8 gap-y-3 px-4 py-2">
-                <div className="flex flex-col">
-                    <strong className="flex-start gap-1 text-gray-500/90">
-                        <AiOutlineMail className="text-main-500 text-[1.2em]" /> Email
-                    </strong>
-                    <a
-                        href={`mailto:${userInfo.email}`}
-                        className="w-fit link-underline-effect hover:text-main-500 whitespace-pre-wrap"
-                    >
-                        {userInfo.email}
-                    </a>
-                </div>
                 <div className="flex flex-col">
                     <strong className="flex-start gap-1 dark:text-gray-500/90">
                         <MdDateRange className="text-main-500 text-[1.2em]" />
@@ -60,20 +50,27 @@ const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
                     </strong>
                     <p>{getDateFormat(userInfo.createdAt)}</p>
                 </div>
-                {userRankData ? (
+                {rankInfo ? (
                     <div className="flex flex-col">
                         <strong className="flex-start gap-1 text-gray-500/90">
-                            <IoPodiumOutline className="text-main-500 text-[1.2em]" />
+                            <IoPodiumOutline className="text-main-500 text-[1.1em]" />
                             Rank
                         </strong>
                         <p>
-                            {userRankData.creationPoints + userRankData.solvingPoints} pts
-                            ({numberSuffix(userRankData.order)})
+                            {rankInfo.creationPoints + rankInfo.solvingPoints} pts (
+                            {numberSuffix(rankInfo.order)})
                         </p>
                     </div>
                 ) : (
                     <ClipLoader color="#5552e4" size={35} />
                 )}
+                <div className="flex flex-col">
+                    <strong className="flex-start gap-1 dark:text-gray-500/90">
+                        <BsFileEarmarkCode className="text-main-500" />
+                        Challenges Solved
+                    </strong>
+                    <p>{userInfo.solvedExercises} challenges</p>
+                </div>
                 <div className="flex flex-col">
                     <strong className="flex-start gap-1 marker:text-gray-500/90">
                         <BsCodeSlash className="text-main-500 text-[1.2em]" />
@@ -90,9 +87,11 @@ const ProfileHoverModal: React.FC<Props> = ({ userInfo, className = '' }) => {
                         ))}
                     </div>
                 </div>
-                {/* <div className="col-span-2 mt-1">
-                    <Button size="small">View Detail</Button>
-                </div> */}
+                <div className="col-span-2 mt-1">
+                    <Button onClick={onShowDetail} size="small">
+                        View Detail
+                    </Button>
+                </div>
             </div>
         </div>
     );

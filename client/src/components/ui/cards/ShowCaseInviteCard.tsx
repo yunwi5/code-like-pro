@@ -11,7 +11,7 @@ import { useUserContext } from '../../../store/context/UserContext';
 import { getShowcasePageLink } from '../../../utils/links';
 import CodeEditor from '../editor/CodeEditor';
 import HoveringLabel from '../labels/HoveringLabel';
-import LanguageLabel from '../labels/LanguageLabel';
+import LanguageLabel from '../icons/LanguageIcon';
 
 interface Props {
     exercise: IExerciseWithId;

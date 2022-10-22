@@ -6,4 +6,10 @@ const ProfileFavorites = lazy(() => import('./favorites/ProfileFavorites'));
 const MyCreations = lazy(() => import('./my-creations/MyCreations'));
 const MySubmission = lazy(() => import('./my-submissions/MySubmission'));
 
-export default { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission };
+export default {
+    ProfileMain,
+    ProfileFavorites,
+    ProfileStatistics,
+    MyCreations,
+    MySubmission,
+};

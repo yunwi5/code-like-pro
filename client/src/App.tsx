@@ -39,7 +39,6 @@ function App() {
 
     // When the user refreshes the page, login the user on the client side with the stored session.
     useEffect(() => {
-        console.log('Login by session');
         loginBySession();
     }, [loginBySession]);
 

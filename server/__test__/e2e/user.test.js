@@ -32,7 +32,7 @@ describe('Users', () => {
             const createdExercise = await createExercise(app, cookie);
             const exerciseId = createdExercise._id;
             await request(app)
-                .get(`/api/exercise/${exerciseId}/like`)
+                .post(`/api/exercise/${exerciseId}/like`)
                 .set('cookie', cookie);
             const userId = user._id;
             const detailResponse = await request(app)

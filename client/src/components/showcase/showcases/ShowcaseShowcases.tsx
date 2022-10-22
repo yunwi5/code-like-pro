@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
 import VotingItemSorter from '../../ui/sorting/VotingItemSorter';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
@@ -6,9 +6,15 @@ import ShowcaseList from '../../ui/lists/ShowcaseList';
 import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import { IShowCase } from '../../../models/interfaces';
 import ShowcaseLoader from '../ShowcaseLoader';
+import useBadgeQualification from '../../../hooks/badges/useBadgeQualification';
+import { useUserContext } from '../../../store/context/UserContext';
 
 const ShowcaseShowcases: React.FC = () => {
+    const { userDetail } = useUserContext();
     const { exercise, showcases, showcasesLoading } = useShowcase();
+    // Showcase badge reward
+    const { qualifyShowcaseBadges } = useBadgeQualification();
+
     const [sortingState, setSortingState] = useState({
         key: VotingItemSortingKey.VOTES,
         direction: SortingDirection.DESCENDING,
@@ -23,6 +29,12 @@ const ShowcaseShowcases: React.FC = () => {
             sortingState.direction,
         ).slice() as IShowCase[];
     }, [sortingState, showcases]);
+
+    const currentUserShowcase = showcases.find((sc) => sc.user._id === userDetail?._id);
+
+    useEffect(() => {
+        qualifyShowcaseBadges();
+    }, [currentUserShowcase]);
 
     return (
         <div className="flex flex-col px-1 md:px-4">

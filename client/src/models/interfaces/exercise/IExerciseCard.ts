@@ -10,7 +10,7 @@ export interface IExerciseCard {
     stars: number; // favorite count
     reports: number; // report count
     tags: string[];
-    createdAt?: Date | string;
+    createdAt: string;
     prompt?: string;
     author?: { _id: string; name: string };
     isAuthorized?: boolean; // Authorize the user if the user is a creator. Give edit/delete access.

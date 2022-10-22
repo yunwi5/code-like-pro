@@ -1,4 +1,4 @@
-import { compareByDifficulty, compareByName } from '.';
+import { compareByDateTime, compareByDifficulty, compareByName } from '.';
 import { SortingDirection, ExerciseSortingKey } from '../../models/enums';
 import { IExerciseCard } from '../../models/interfaces';
 import { ISortingState } from '../../store/redux/browsing-slice';
@@ -10,6 +10,14 @@ export function sortExercises(exercises: IExerciseCard[], sortingState: ISorting
     if (sortingState.key === ExerciseSortingKey.NAME) {
         return exercises.sort((a, b) =>
             isAsc ? compareByName(a, b) : compareByName(b, a),
+        );
+    }
+
+    if (sortingState.key === ExerciseSortingKey.DATETIME) {
+        return exercises.sort((a, b) =>
+            isAsc
+                ? compareByDateTime(a.createdAt, b.createdAt)
+                : compareByDateTime(b.createdAt, a.createdAt),
         );
     }
 

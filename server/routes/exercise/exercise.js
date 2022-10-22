@@ -1,12 +1,12 @@
 const express = require('express');
-const exerciseController = require('../controller/exerciseController');
+const exerciseController = require('../../controller/exercise/exerciseController');
 
-const { ensureAuthenticated } = require('../middleware/auth');
-const catchAsync = require('../middleware/catchAsync');
+const { ensureAuthenticated } = require('../../middleware/auth');
+const catchAsync = require('../../middleware/catchAsync');
 const {
     validateExerciseBody,
     validateCommentBody,
-} = require('../middleware/validateRequest');
+} = require('../../middleware/validateRequest');
 
 const router = express.Router();
 

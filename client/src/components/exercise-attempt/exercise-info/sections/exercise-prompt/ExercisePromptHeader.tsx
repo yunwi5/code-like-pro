@@ -1,7 +1,7 @@
 import React from 'react';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 import { getDifficultyColorClass } from '../../../../../utils/difficulty';
-import StatusCircle from '../../../../ui/labels/StatusCircle';
+import StatusCircle from '../../../../ui/icons/StatusCircle';
 import ExerciseSpec from '../../../../ui/spec/ExerciseSpec';
 
 const ExercisePromptHeader: React.FC = () => {

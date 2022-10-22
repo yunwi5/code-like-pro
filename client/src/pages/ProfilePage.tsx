@@ -28,7 +28,7 @@ const ProfilePage: React.FC = () => {
             </Helmet>
             <main className="min-h-[82.5vh] pt-10 pb-20 flex-center flex-col text-gray-700">
                 {/* Different width configuration for different screen sizes. */}
-                <div className="mx-auto w-[100vw] sm:w-[95vw] md:w-[92.5vw] lg:w-[90vw] xl:w-[85vw] 2xl:w-[80vw] 3xl:w-[75vw]">
+                <div className="mx-auto w-[100vw] sm:w-[95vw] md:w-[92.5vw] lg:w-[90vw] xl:w-[85vw] 2xl:w-[min(80vw,80rem)]">
                     <h1 className="hidden sm:block mb-3 pl-2 sm:pl-0 text-gray-600 text-3xl self-start">
                         {activeSection}
                     </h1>
@@ -47,6 +47,7 @@ function getActiveProfileSection(pathname: string) {
     if (pathname.includes('favorites')) return ProfileSection.FAVORITES;
     if (pathname.includes('creation')) return ProfileSection.MY_CREATIONS;
     if (pathname.includes('submission')) return ProfileSection.MY_SUBMISSIONS;
+    // if (pathname.includes('badges')) return ProfileSection.BADGES;
     return ProfileSection.PROFILE;
 }
 

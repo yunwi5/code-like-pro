@@ -45,7 +45,9 @@ const CreationActions: React.FC = () => {
             {showPublishedResult && (
                 <Button
                     mode="empty"
-                    onClick={() => navigate(getExerciseAttemptPageLink(createdExercise._id))}
+                    onClick={() =>
+                        navigate(getExerciseAttemptPageLink(createdExercise._id))
+                    }
                     className={btnClass}
                 >
                     Published Result

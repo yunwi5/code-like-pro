@@ -1,5 +1,5 @@
 import React from 'react';
-import HoveringLabel from './HoveringLabel';
+import HoveringLabel from '../labels/HoveringLabel';
 
 interface Props {
     correct: boolean;

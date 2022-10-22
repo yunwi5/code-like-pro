@@ -120,7 +120,7 @@ const GlobalForumPostsControl: React.FC = () => {
 const NewPostButton: React.FC<{ className?: string }> = ({ className = '' }) => (
     <Link
         to={getForumPostCreateLink()}
-        className={`btn btn-small btn-fill min-h-[2.4rem] ml-auto flex-center gap-1 ${className}`}
+        className={`btn btn-small btn-fill sm:min-h-[2.65rem] ml-auto flex-center gap-1 ${className}`}
     >
         <IoMdCreate className="text-[1.5em] sm:text-[1.2em]" />
         <span className="hidden sm:inline">New Post</span>

@@ -1,4 +1,3 @@
-import { getExerciseSubmissions } from '../../apis/exercise.api';
 import { IExerciseCard, IExerciseWithId } from '../../models/interfaces';
 
 // Optional overriding attributes such as giving the authorized access.
@@ -16,6 +15,7 @@ export function mapExerciseToExerciseCard(
         prompt: exercise.prompt,
         language: exercise.language,
         difficulty: exercise.difficulty,
+        createdAt: exercise.createdAt,
         tags: exercise.tags,
         author: exercise.author,
         ...attributes,

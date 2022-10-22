@@ -6,7 +6,7 @@ import { getDifficultyColorClass } from '../../utils/difficulty';
 import { getBrowsingPageLink, getExerciseAttemptPageLink } from '../../utils/links';
 import Button from '../ui/buttons/Button';
 import ExerciseSpec from '../ui/spec/ExerciseSpec';
-import LanguageLabel from '../ui/labels/LanguageLabel';
+import LanguageLabel from '../ui/icons/LanguageIcon';
 
 /* Header layout breakpoint is lg - 1024px  */
 const ShowcaseHeader = () => {
