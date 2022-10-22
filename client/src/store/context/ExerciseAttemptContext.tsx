@@ -116,7 +116,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
 
     useEffect(() => {
         qualifySolvingBadges();
-    }, [userSubmission]);
+    }, [userSubmission, qualifySolvingBadges]);
 
     const value = {
         exercise,
