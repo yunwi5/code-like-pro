@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { IExerciseCard } from '../models/interfaces';
 import { useUserContext } from '../store/context/UserContext';
 import { useAppSelector } from '../store/redux/store';

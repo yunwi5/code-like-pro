@@ -29,14 +29,8 @@ const PostEditPage = lazy(() => import('./pages/forum/PostEditPage'));
 const RankingPage = lazy(() => import('./pages/ranking/RankingPage'));
 const TopicRankingPage = lazy(() => import('./pages/ranking/TopicRankingPage'));
 
-const {
-    ProfileMain,
-    ProfileFavorites,
-    ProfileStatistics,
-    MyCreations,
-    MySubmission,
-    UserBadges,
-} = ProfilePages;
+const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmission } =
+    ProfilePages;
 const { PostDetail } = ForumPages;
 
 function App() {
@@ -45,7 +39,6 @@ function App() {
 
     // When the user refreshes the page, login the user on the client side with the stored session.
     useEffect(() => {
-        console.log('Login by session');
         loginBySession();
     }, [loginBySession]);
 
@@ -68,7 +61,6 @@ function App() {
                         <Route path="favorites" element={<ProfileFavorites />} />
                         <Route path="my-creations" element={<MyCreations />} />
                         <Route path="my-submissions" element={<MySubmission />} />
-                        <Route path="badges" element={<UserBadges />} />
                     </Route>
 
                     {/* Exercise pages */}
