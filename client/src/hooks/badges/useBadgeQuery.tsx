@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getBadges } from '../../apis/badge.api';
 import { IBadge } from '../../models/interfaces';
@@ -32,7 +32,10 @@ function useBadgeQuery(userId: string | undefined) {
     }, [badges]);
 
     // Refetch data of the query key
-    const refetch = () => queryClient.refetchQueries(['badges', userId]);
+    const refetch = useCallback(
+        () => queryClient.refetchQueries(['badges', userId]),
+        [queryClient],
+    );
 
     if (error) console.log(error);
 

@@ -15,6 +15,7 @@ import {
     RARITY_SR_CUT,
     RARITY_UR_CUT,
 } from '../../utils/badge';
+import { useCallback } from 'react';
 
 // Get possible list of rewardable rarities based on the amount
 function getRarityOptions(amount: number) {
@@ -33,7 +34,7 @@ function useBadgeQualification() {
     const { user } = useUserInfoQuery(userDetail?._id, 1000);
 
     // Inspect creation badge qualification
-    const qualifyCreationBadges = async () => {
+    const qualifyCreationBadges = useCallback(async () => {
         const ownedCreationBadges = badges.filter(
             (b) => b.category === BadgeCategory.CREATION,
         );
@@ -58,9 +59,9 @@ function useBadgeQualification() {
         // console.log('rewards:', rewards);
         refetchBadges();
         notifyBadgeRewards(rewards);
-    };
+    }, [badges, user, refetchBadges]);
 
-    const qualifySolvingBadges = async () => {
+    const qualifySolvingBadges = useCallback(async () => {
         const ownedSolvingBadges = badges.filter(
             (b) => b.category === BadgeCategory.SOLVING,
         );
@@ -83,9 +84,9 @@ function useBadgeQualification() {
         // console.log('rewards:', rewards);
         refetchBadges();
         notifyBadgeRewards(rewards);
-    };
+    }, [badges, user, refetchBadges]);
 
-    const qualifyShowcaseBadges = async () => {
+    const qualifyShowcaseBadges = useCallback(async () => {
         const ownedShowcaseBadges = badges.filter(
             (b) => b.category === BadgeCategory.SHOWCASE,
         );
@@ -107,7 +108,7 @@ function useBadgeQualification() {
         const rewards = rewardResponses.map((res) => res.data);
         refetchBadges();
         notifyBadgeRewards(rewards);
-    };
+    }, [badges, user, refetchBadges]);
 
     return { qualifyCreationBadges, qualifySolvingBadges, qualifyShowcaseBadges };
 }

@@ -34,7 +34,7 @@ const ShowcaseShowcases: React.FC = () => {
 
     useEffect(() => {
         qualifyShowcaseBadges();
-    }, [currentUserShowcase]);
+    }, [currentUserShowcase, qualifyShowcaseBadges]);
 
     return (
         <div className="flex flex-col px-1 md:px-4">

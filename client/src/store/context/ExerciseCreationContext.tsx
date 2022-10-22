@@ -168,7 +168,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
         if (ok) {
             toastNotify('Challenge was saved successfully!', 'success');
             if (data) setCreatedExercise(data);
-            setExerciseDraft('');
+            // setExerciseDraft('');
         } else {
             toastNotify(message || 'Something went wrong...', 'error');
         }
@@ -195,7 +195,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
     // Creation badge qualification attempt when the new exercise is created
     useEffect(() => {
         qualifyCreationBadges();
-    }, [createdExercise]);
+    }, [createdExercise, qualifyCreationBadges]);
 
     const value = {
         name,
