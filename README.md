@@ -125,13 +125,16 @@ Dependencies for testing libraries and nodemon which is the tool for the develop
 
 ### Frontend Deployment
 <img src="https://user-images.githubusercontent.com/86972879/197367662-cc9bc36a-c380-4c78-b7b2-a3a87721aa9d.png" height="150px" />
-We used <strong>Vercel</strong> for production deployment of our frontend React application.
+
+We used <strong>[Vercel](https://vercel.com/)</strong> for production deployment of our frontend React application.
 
 <br />
 
 ### Backend Deployment
 <img src="https://user-images.githubusercontent.com/86972879/197367698-61940313-1ed3-428b-92db-22dc846d90cb.png" height="150px" />
-We used <strong>Railway.app</strong> for production deployment of our backend Node Js application.
+
+We used <strong>[Railway](https://railway.app/)</strong> for production deployment of our backend Node Js application.
+
 
 <br />
 
@@ -182,9 +185,13 @@ These extensions will be implemented one by one in the future releases!
 
 ## Acknowledgements
 
-Special acknowledgement to our client Paul Denny who gave us an amazing project opportunity.
+Special acknowledgement to our client <strong>Paul Denny</strong> who gave us an amazing project opportunity and constantly gave us great feedback.
 <br />
-Acknowledgement to COMPSCI 399 lecturers and tutors who gave us an amazing opportunity throughout the course.
+Acknowledgement to COMPSCI 399 lecturer <strong>Asma</strong> who gave us great feedback on our project throughout the semester.
+<br />
+Acknowledgement to Vercel that powers our frontend application. 
+<br />
+Acknowledgement to Railway that powers our backend application. 
 <br />
 Acknowledgement to everyone for having interests on our CodeLikePro capstone project.
 
