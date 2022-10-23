@@ -62,7 +62,7 @@ If you want to run the tests on the backend, the guidance is the following.
 ```bash
 # From the project root directory, go to server directory
 $ cd server
-# Install the dependencies on /client/package.json if you haven't already
+# Install the dependencies on /server/package.json if you haven't already
 $ npm install
 # Test command is npm test which will run all unit and e2e tests on the backend
 $ npm test
