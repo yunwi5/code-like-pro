@@ -109,7 +109,6 @@ export const PostCreationContextProvider: React.FC<Props> = ({
 
         if (ok && data) {
             toastNotify('New post published!', 'success');
-            console.log({ published: data });
             setCreatedPost(data);
             setPostDraft(''); // clear post draft, once the post is published
         } else {

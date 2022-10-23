@@ -15,7 +15,6 @@ const PostVotes: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     const [votes, setVotes] = useState<IVote[]>(post?.votes || []);
 
     const handleUserVote = async (type: 'up' | 'down') => {
-        console.log(userId);
         if (!userId) return;
         const userVoteIndex = votes.findIndex((vote) => vote.user === userId);
 
@@ -25,8 +24,7 @@ const PostVotes: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
             setVotes([...votes, newVote]);
 
             // Send request to post the comment vote by this user.
-            const { data } = await postForumPostVote(post._id, { type });
-            console.log({ data });
+            await postForumPostVote(post._id, { type });
         } else {
             const userVote = votes[userVoteIndex];
 
@@ -35,8 +33,7 @@ const PostVotes: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
                 setVotes(votes.filter((vote) => vote.user !== userId));
 
                 // Send DELETE request to cancel the vote on this comment.
-                const { data } = await deleteForumPostVote(post._id);
-                console.log({ data });
+                await deleteForumPostVote(post._id);
             } else {
                 // If the user already has vote on this comment, modify the vote and create a new array.
                 votes[userVoteIndex].type = type;

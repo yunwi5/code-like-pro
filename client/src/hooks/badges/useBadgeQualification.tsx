@@ -56,7 +56,6 @@ function useBadgeQualification() {
 
         const rewardResponses = await Promise.all(rewardPromises);
         const rewards = rewardResponses.map((res) => res.data);
-        // console.log('rewards:', rewards);
         refetchBadges();
         notifyBadgeRewards(rewards);
     }, [badges, user, refetchBadges]);
@@ -81,7 +80,6 @@ function useBadgeQualification() {
         });
         const rewardResponses = await Promise.all(rewardPromises);
         const rewards = rewardResponses.map((res) => res.data);
-        // console.log('rewards:', rewards);
         refetchBadges();
         notifyBadgeRewards(rewards);
     }, [badges, user, refetchBadges]);

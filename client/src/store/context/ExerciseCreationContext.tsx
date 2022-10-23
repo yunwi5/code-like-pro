@@ -15,6 +15,7 @@ import {
 import {
     analyzeTestCasesResult,
     getInitialTestCaseArray,
+    testCasesEmpty,
 } from '../../utils/exercise-utils/testcase';
 import { toastNotify } from '../../utils/notification';
 
@@ -111,12 +112,16 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
     };
 
     const runCode = async () => {
+        // If the user did not write minimum content, do not run the code and show feedback.
+        if (solutionCode.trim() === '' || testCasesEmpty(testCases)) {
+            return setReadyStatus({
+                status: 'error',
+                message: 'Please write your solution code and non-empty test cases!',
+            });
+        }
+
         setIsLoading(true);
-        const {
-            ok,
-            data: testCasesResult,
-            message,
-        } = await runTestCases({
+        const { ok, data: testCasesResult } = await runTestCases({
             code: solutionCode,
             testCases,
             language: language,

@@ -33,10 +33,7 @@ const CreationTestCases: React.FC = () => {
 
     const title = (
         <div className="flex-between mb-5">
-            <span>Test Cases</span>{' '}
-            <Button onClick={addTestCase} className="translate-y-3">
-                + Test Case
-            </Button>
+            <span>Test Cases</span> <Button onClick={addTestCase}>+ Test Case</Button>
         </div>
     );
 
@@ -50,7 +47,9 @@ const CreationTestCases: React.FC = () => {
                             language={language}
                             output={testCaseOutputs[idx]}
                             testCase={{ ...testCase, name: `Test Case ${idx + 1}` }}
-                            onUpdate={(props: ITestCaseProps) => updateTestCase(props, idx)}
+                            onUpdate={(props: ITestCaseProps) =>
+                                updateTestCase(props, idx)
+                            }
                             onDelete={() => deleteTestCase(idx)}
                         />
                     );

@@ -21,8 +21,6 @@ const createUserBadge = async (userId, badgeSpec) => {
             badge.rarity === badgeSpec.rarity && badge.category === badgeSpec.category,
     );
 
-    // console.log({ existingBadge });
-
     if (existingBadge) return null;
 
     user.badges.push(newBadge);
@@ -81,7 +79,6 @@ const postExerciseSolvingBadge = async (req, res) => {
     if (badgeSpec == null)
         return res.status(400).json({ message: 'Non existing badge request' });
 
-    // console.log({ badgeSpec });
     try {
         const createdBadge = await createUserBadge(userId, badgeSpec);
 
@@ -117,7 +114,6 @@ const postShowcaseBadge = async (req, res) => {
     if (badgeSpec == null)
         return res.status(400).json({ message: 'Non existing badge request' });
 
-    // console.log({ badgeSpec });
     try {
         const createdBadge = await createUserBadge(userId, badgeSpec);
 

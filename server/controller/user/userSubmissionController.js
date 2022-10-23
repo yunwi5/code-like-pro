@@ -24,7 +24,6 @@ const runTestCases = async (req, res) => {
     });
 
     const testCaseResults = await Promise.all(testCasePromises);
-    // console.log(testCaseResults);
 
     const feedbackArray = [];
 

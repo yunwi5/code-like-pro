@@ -52,7 +52,6 @@ const patchComment = async (req, res) => {
         if (comment == null) return res.status(404).json('Comment not found');
 
         // If the user is not the author of the comment, do not authorize the operation.
-        console.log('comment user:', comment.user, ', req user:', req.user._id);
         if (comment.user.toString() !== req.user._id.toString()) {
             return res.status(401).json('You are not the author of the comment');
         }

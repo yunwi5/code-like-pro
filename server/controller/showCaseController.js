@@ -64,7 +64,6 @@ const updateShowCase = async (req, res) => {
             return res.status(404).json({ message: 'Non existing showcase id' });
         }
         if (err instanceof mongoose.Error) {
-            console.log(err);
             return res
                 .status(400)
                 .json({ message: 'Invalid shwowcase id or properties' });

@@ -24,7 +24,6 @@ export const imageUploader = {
             const { ok, data } = await postExercisePromptImage({ image });
             // We cancel the loading toast when it is done.
             toast.dismiss(loadingId);
-            console.log('response data:', data);
             if (ok && data) {
                 return data.url;
             } else {
