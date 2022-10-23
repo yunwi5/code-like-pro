@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 
 import { IForumPost, IForumPostPopulated } from '../../../../models/interfaces';
+import { useUserContext } from '../../../../store/context/UserContext';
 import { getForumPostLink } from '../../../../utils/links';
 import PostSettings from './PostSettings';
 
@@ -20,11 +21,15 @@ interface Props {
 // Post naigation (previous, next) and settings.
 const PostControl: React.FC<Props> = ({ post, className = '' }) => {
     const navigate = useNavigate();
+    const { userDetail } = useUserContext();
     const { posts } = useForumBrowsing();
 
     const postIndex = posts.findIndex((p) => p._id === post._id);
     const prevPost: IForumPost | undefined = posts[postIndex - 1];
     const nextPost: IForumPost | undefined = posts[postIndex + 1];
+
+    // Show settings only if the user is the author of the post
+    const isAthor = post.author._id === userDetail?._id;
 
     return (
         <div
@@ -46,7 +51,7 @@ const PostControl: React.FC<Props> = ({ post, className = '' }) => {
                 Next
                 <BsArrowRightShort className="text-2xl" />
             </button>
-            <PostSettings post={post} />
+            {isAthor && <PostSettings post={post} />}
         </div>
     );
 };

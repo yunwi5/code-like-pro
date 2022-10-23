@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { FiLogIn } from 'react-icons/fi';
+import { FaUserPlus } from 'react-icons/fa';
 
 import { Logo } from '../../assets';
 import { ForumCategoryList, ProfileSectionList } from '../../models/enums';
@@ -175,19 +177,21 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
                 {/* Forum nav item with some nested nav items */}
                 <ForumNavItem />
             </div>
-            <div className="flex flex-col lg:flex-row gap-4 max-w-[7rem] lg:max-w-none mt-4 lg:mt-0">
+            <div className="flex flex-col lg:flex-row gap-3 max-w-[7rem] lg:max-w-none mt-4 lg:mt-0">
                 {!isLoggedIn && (
                     <>
                         <NavLink
                             to="/login"
-                            className="bg-transparent hover:bg-main-600 text-main-600 font-regular hover:text-white py-[0.35rem] px-4 border border-main-500 hover:border-transparent rounded shadow-sm"
+                            className="flex-start gap-[0.35rem] px-3 py-[0.35rem] bg-transparent hover:bg-main-600 text-main-600 font-regular hover:text-white border border-main-500 hover:border-transparent rounded shadow-sm"
                         >
+                            <FiLogIn className="text-[1.1em]" />
                             Login
                         </NavLink>
                         <NavLink
                             to="/register"
-                            className="bg-main-500 hover:bg-main-600 text-gray-50 font-regular py-[0.35rem] px-4 border border-main-500 hover:border-transparent rounded shadow-sm"
+                            className="flex-start gap-[0.35rem] px-3 py-[0.35rem] bg-main-500 hover:bg-main-600 text-gray-50 font-regular border border-main-500 hover:border-transparent rounded shadow-sm"
                         >
+                            <FaUserPlus className="text-[1.1em]" />
                             Register
                         </NavLink>
                     </>

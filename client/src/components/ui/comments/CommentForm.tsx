@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineComment } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import { IComment } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
@@ -24,6 +25,7 @@ const CommentForm: React.FC<Props> = (props) => {
         onCancel,
     } = props;
 
+    const navigate = useNavigate();
     const { userDetail } = useUserContext();
     const [text, setText] = useState(defaultComment?.text || '');
     // Check whether the comment form is valid. If it is false, do not allow users to submit.
@@ -34,6 +36,8 @@ const CommentForm: React.FC<Props> = (props) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!formValid) return;
+        if (!userDetail?._id) return navigate('/login');
+
         setIsLoading(true);
         await onSubmit(text);
         setText('');

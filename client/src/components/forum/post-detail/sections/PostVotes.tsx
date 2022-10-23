@@ -5,17 +5,19 @@ import {
     AiOutlineDislike,
     AiOutlineLike,
 } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import { deleteForumPostVote, postForumPostVote } from '../../../../apis/forum.api';
 import { IForumPostPopulated, IVote } from '../../../../models/interfaces';
 import { useUserContext } from '../../../../store/context/UserContext';
 
 const PostVotes: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
+    const navigate = useNavigate();
     const { userDetail } = useUserContext();
     const userId = userDetail?._id;
     const [votes, setVotes] = useState<IVote[]>(post?.votes || []);
 
     const handleUserVote = async (type: 'up' | 'down') => {
-        if (!userId) return;
+        if (!userId) return navigate('/login');
         const userVoteIndex = votes.findIndex((vote) => vote.user === userId);
 
         if (userVoteIndex < 0) {
