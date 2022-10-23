@@ -10,24 +10,17 @@ Deployed on Vercel [https://code-like-pro.vercel.app](https://code-like-pro.verc
 
 ## Getting Started
 
-### Client
-For the development mode on the client,
+Both frontend and backend require Node.js JavaScript runtime environment to run the application locally. <br />
+The application requires `npm` commands to set up and start, therefore, please make sure you have Node.js installed on your machine before starting the application. <br />
+Node.js version 16 is highly recommended even though other versions would also be fine. We used Node.js veersion 16.17.0 for local development.
 
-```bash
-# Go to client directory
-$ cd client
-# Install the dependencies on /client/package.json
-$ npm install
-$ npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the client application.
+We recommend starting the backend server first and then the frontend, because the frontend has to consumre the APIs from the backend.
 
 ### Server
-For the development mode on the server,
+For the development mode on the backend server,
 
 ```bash
-# Go to server directory
+# From the project root directory, go to server directory
 $ cd server
 # Install the dependencies on /server/package.json
 $ npm install
@@ -36,9 +29,30 @@ $ npm run dev
 
 Server runs on [http://localhost:8080](http://localhost:8080) on your computer by default.
 
+
+### Client
+For the development mode on the client,
+
+```bash
+# From the project root directory, go to client directory
+$ cd client
+# Install the dependencies on /client/package.json
+$ npm install
+$ npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the client application.
+
+
 ### Server Environment Variables Set Up
+
+We have several environment variables to be set up on the backend directory in order to use full backend services such as Google authentication with google oauth2. <br />
+Please make the .env file inside the `/server` directory (if it does not exist already), and insert the following environment variables for successful server set up. 
+
 * MongoDB Atlas - Connection to cloud database requires MONGO_USERNAME and MONGO_PASSWORD environment variables set up in <code>/server/.env</code> file for a successful connection.
 * Google OAuth - For google authentication, Google cloud requires client credentials GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables in <code>/server/.env</code> file.
+* Cloudinary - For image uploading, place cloudinary credentials CLOUDINARY_CLOUD_NAME, CLOUDINARY_KEY and CLOUDINARY_SECRET in <code>/server/.env</code> file for cloudinary image uploading set up. The backend application still runs without these variables but cannot use image uploading functionality in that case.
+* Session - For cookie session name and secret, environment variables SESSION_NAME and SESSION_SECRET can be added in <code>/server/.env</code> file. However, these variables are optional and the server gives default values for session name and secret if there are no corresponding environment variables. These variables are recommended for production environment for security purpose. 
 
 <br />
 
