@@ -66,7 +66,6 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
         if (previewSource) {
             // Upload preview image to the server.
             const { ok, data } = await postUserImage({ image: previewSource });
-            console.log(ok, data);
             if (ok && data?.url) {
                 imageToUpload = data.url;
             } else {

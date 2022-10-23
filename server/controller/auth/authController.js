@@ -9,7 +9,6 @@ const postLogin = async (req, res) => {
 
     const user = await User.findOne({ email });
     const userToReturn = getUserToReturn(user);
-    console.log('Login success:', user.name);
 
     return res.status(200).json(userToReturn);
 };
@@ -48,11 +47,6 @@ const getLogout = (req, res, next) => {
 
 const getAuthSuccess = (req, res) => {
     // DO NOT SET HEADERS TWICE (CORS ERROR)
-    console.log({
-        requser: req.user,
-        cookies: req.cookies,
-        signedCookies: req.signedCookies,
-    });
     res.status(200).json({ user: req.user, cookies: req.signedCookies });
 };
 

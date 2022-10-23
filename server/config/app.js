@@ -66,8 +66,6 @@ const createApp = () => {
         app.enable('trust proxy', true);
     }
 
-    console.log({ sessionConfig });
-
     // Express Session
     app.use(session(sessionConfig));
 

@@ -18,7 +18,6 @@ const ExerciseSearch: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const handleSearch = () => {
-        console.log('Submit search!');
         dispatch(exerciseBrowsingActions.setSearching({ ...localSearchingState }));
     };
 

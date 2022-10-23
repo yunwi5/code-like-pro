@@ -11,7 +11,6 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const passportStrategy = (passport) => {
     passport.use(
         new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-            // console.log('email:', email, 'password:', password);
             // Match user
             User.findOne({ email })
                 .then((user) => {

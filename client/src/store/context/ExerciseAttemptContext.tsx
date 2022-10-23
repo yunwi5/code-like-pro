@@ -92,8 +92,6 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         } = await postSubmission(exercise._id, { code: userSolution });
         setIsLoading(false);
 
-        console.log('Submission result:', newSubmission);
-
         if (ok && newSubmission) {
             setUserSubmission(newSubmission);
             if (newSubmission.correct) {

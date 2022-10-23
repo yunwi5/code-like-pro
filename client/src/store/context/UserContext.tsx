@@ -53,8 +53,6 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     const loginBySession = useCallback(async () => {
         setIsLoading(true);
         const { ok, data, response } = await getLoginSuccess();
-        console.log('loginBySessionOk:', ok, 'loginBySessionData:', data);
-        console.log(response);
         setUser(() => {
             setIsLoading(false);
             if (ok && data) return data.user;
@@ -67,7 +65,6 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
             // Use returned data as a global user data
             setIsLoading(true);
             const { ok, data, message } = await loginRequest(loginState);
-            console.log('loginOk:', ok, 'loginData:', data?.name);
 
             setUser(() => {
                 setIsLoading(false);
