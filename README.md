@@ -86,12 +86,59 @@ We defined main tasks for each feature, break it down into subtasks and allocate
 
 <br />
 
+## Deployment
+
+### Frontend Deployment
+<img src="https://user-images.githubusercontent.com/86972879/197367662-cc9bc36a-c380-4c78-b7b2-a3a87721aa9d.png" height="150px" />
+We used <strong>Vercel</strong> for production deployment of our frontend React application.
+
+<br />
+
+### Backend Deployment
+<img src="https://user-images.githubusercontent.com/86972879/197367698-61940313-1ed3-428b-92db-22dc846d90cb.png" height="150px" />
+We used <strong>Railway.app</strong> for production deployment of our backend Node Js application.
+
+<br />
+
+### Production Application URL
+Our application has been deployed to the following URL: <br />
+[https://code-like-pro.vercel.app/](https://code-like-pro.vercel.app/)
+
+<br />
+
+## Future Plan & Improvements
+
+Our app currently offers various features to help students improve their programming skills, 
+but there are several extensions ideas for future releases based on the feedback from our users.
+
+### User Adding Their Own Test Cases
+This extension would let users add more test cases while attempting the exercise. 
+Currently, only the author of the exercise can create test cases. 
+A new feature allows users to add their own test cases while attempting the exercise, and possibly add them to the existing exercise if they pass all the existing tests. 
+This will improve the testing aspect of our programming exercises.
+
+### Programming Competitions  
+This extension is to have programming competitions where participants attempt to solve multiple sets of programming problems. 
+Awards are given as special badges and are decided by the fastest time for completion. 
+This will improve the gamification aspect that would make our platform more enjoyable.
+
+
+### Exercise Difficulty Judged By The User
+Third improvement would be to let users decide the difficulty of the exercise by rating the difficulty. 
+Currently, only the author of the exercise decides the difficulty, but it can be subjective. 
+In order to derive accurate difficulty and make it as useful information, we are planning to let users rate the difficulty for each exercise and we take the average of those ratings for difficulty adjustments.
+
+We are delightened to implement new features to suit futher needs from our users. 
+These extensions will be implemented one by one in the future releases!
+
+<br />
+
 ## Team Members
 
 | Member                                               | Roles                                            |
 | ---------------------------------------------------- | -------------------------------------------------|
-| [JD Briones](https://github.com/jeed02)              | Team Leader, Frontend Developer, Designer        |
-| [Yunkeun Jo](https://github.com/yunwi5)              | Frontend Developer, Backend Developer, Designer  |
+| [JD Briones](https://github.com/jeed02)              | Team Leader, Frontend Developer, UI/UXDesigner   |
+| [Yunkeun Jo](https://github.com/yunwi5)              | Fullstack Developer, UI/UX Designer              |
 | [Amo Li](https://github.com/Amotys)                  | Frontend Developer                               |
 | [Daniel McAnulty](https://github.com/DanielMcAnulty) | Backend Developer                                |
 | [Irene Chen](https://github.com/irenechen20015)      | Backend Developer                                |
