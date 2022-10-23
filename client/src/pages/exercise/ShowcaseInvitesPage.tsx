@@ -16,9 +16,6 @@ const ShowcaseInvitesPage: React.FC = () => {
 
     const { isLoading, exercises, error } = useExerciseListQuery();
 
-    // const createdExercises = exercises.filter()
-    console.log(userDetail?.exercises);
-
     // If there is an error from the fetching, redirect to the 5home page.
     useEffect(() => {
         if (!isLoading && !!error) {

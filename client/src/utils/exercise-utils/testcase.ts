@@ -16,6 +16,12 @@ export function testCaseEmpty(testCase: ITestCase) {
     return testCase.code.trim() === '' || testCase.expectedOutput.trim() === '';
 }
 
+// Inspect the test cases before sending them to the server to make sure they are non-empty
+export function testCasesEmpty(testCases: ITestCase[]) {
+    return testCases.every((testCase) => testCaseEmpty(testCase));
+}
+
+// Analyse and validate test cases result
 export function analyzeTestCasesResult(
     testCases: ITestCase[],
     testCasesResult: ITestOutput[],
@@ -23,7 +29,10 @@ export function analyzeTestCasesResult(
     const nonEmptyTests = testCases.filter((test) => !testCaseEmpty(test));
     const haveEnoughTests = nonEmptyTests.length >= 3;
     if (!haveEnoughTests) {
-        return { status: 'error', message: 'Please have at least 3 non-empty test cases!' };
+        return {
+            status: 'error',
+            message: 'Please have at least 3 non-empty test cases!',
+        };
     }
 
     const noHiddenTests = testCases.every((test) => !test.hidden);
@@ -34,7 +43,8 @@ export function analyzeTestCasesResult(
         return { status: 'error', message: 'Please have at least 1 open test(s)!' };
 
     const everythingCorrect = testCasesResult.every((testCase) => testCase.correct);
-    if (!everythingCorrect) return { status: 'error', message: 'You failed some tests...' };
+    if (!everythingCorrect)
+        return { status: 'error', message: 'You failed some tests...' };
     return { status: 'success', message: 'You passed all tests! Ready to submit.' };
 }
 
