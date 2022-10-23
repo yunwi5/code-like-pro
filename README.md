@@ -55,6 +55,22 @@ Please make the .env file inside the `/server` directory (if it does not exist a
 * Cloudinary - For image uploading, place cloudinary credentials CLOUDINARY_CLOUD_NAME, CLOUDINARY_KEY and CLOUDINARY_SECRET in <code>/server/.env</code> file for cloudinary image uploading set up. The backend application still runs without these variables but cannot use image uploading functionality in that case.
 * Session - For cookie session name and secret, environment variables SESSION_NAME and SESSION_SECRET can be added in <code>/server/.env</code> file. However, these variables are optional and the server gives default values for session name and secret if there are no corresponding environment variables. These variables are recommended for production environment for security purpose. 
 
+
+### Testing
+
+If you want to run the tests on the backend, the guidance is the following.
+```bash
+# From the project root directory, go to server directory
+$ cd server
+# Install the dependencies on /server/package.json if you haven't already
+$ npm install
+# Test command is npm test which will run all unit and e2e tests on the backend
+$ npm test
+```
+
+We used `Jest` and `Supertest` for backend unit and e2e testing.
+
+
 <br />
 
 ## Usage Examples
@@ -115,7 +131,7 @@ There are certainly other functionalities to introduce such as rankign system, p
 
 
 ## Project Management
-![jiady_2022-10-23_01 14pm](https://user-images.githubusercontent.com/86972879/197367056-59f1243a-1911-4c54-9e7d-f479fa0e3b38.png)
+![jiady_2022-10-23_05 32pm](https://user-images.githubusercontent.com/86972879/197373941-b6281066-0818-4f8a-baa4-aaf39cadd9aa.png)
 
 ### Jira Board 
 We took an Agile approach with SCRUM framework. 
