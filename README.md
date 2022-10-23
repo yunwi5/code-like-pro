@@ -14,7 +14,8 @@ Both frontend and backend require Node.js JavaScript runtime environment to run 
 The application requires `npm` commands to set up and start, therefore, please make sure you have Node.js installed on your machine before starting the application. <br />
 Node.js version 16 is highly recommended even though other versions would also be fine. We mainly used Node.js version `16.17.0` for local development.
 
-We recommend starting the backend server first and then the frontend, because the frontend has to consumre the APIs from the backend.
+We recommend starting the backend server first and then the frontend, because the frontend has to consumre the APIs from the backend. <br />
+We recommend using `VS Code` editor for set up the development environment and view the content of the project.
 
 ### Server
 For the development mode on the backend server,
@@ -136,7 +137,7 @@ We defined main tasks for each feature, break it down into subtasks and allocate
 ## Technologies Used
 
 This is the list of programming languages, frameworks and libraries we used for both frontend and backend. <br />
-For each dependency, we list human readable package name, followed by official package name and its version.
+For each dependency, we list human readable package name, followed by official `npm` package name and its version.
 
 ### Frontend
 
