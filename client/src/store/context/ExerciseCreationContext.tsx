@@ -173,7 +173,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
         if (ok) {
             toastNotify('Challenge was saved successfully!', 'success');
             if (data) setCreatedExercise(data);
-            // setExerciseDraft('');
+            setExerciseDraft('');
         } else {
             toastNotify(message || 'Something went wrong...', 'error');
         }
