@@ -12,7 +12,7 @@ Deployed on Vercel [https://code-like-pro.vercel.app](https://code-like-pro.verc
 
 Both frontend and backend require Node.js JavaScript runtime environment to run the application locally. <br />
 The application requires `npm` commands to set up and start, therefore, please make sure you have Node.js installed on your machine before starting the application. <br />
-Node.js version 16 is highly recommended even though other versions would also be fine. We used Node.js veersion 16.17.0 for local development.
+Node.js version 16 is highly recommended even though other versions would also be fine. We mainly used Node.js version `16.17.0` for local development.
 
 We recommend starting the backend server first and then the frontend, because the frontend has to consumre the APIs from the backend.
 
@@ -55,6 +55,63 @@ Please make the .env file inside the `/server` directory (if it does not exist a
 * Session - For cookie session name and secret, environment variables SESSION_NAME and SESSION_SECRET can be added in <code>/server/.env</code> file. However, these variables are optional and the server gives default values for session name and secret if there are no corresponding environment variables. These variables are recommended for production environment for security purpose. 
 
 <br />
+
+## Usage Examples
+
+### Exercise Creation
+<img src="https://user-images.githubusercontent.com/86972879/197369846-83ccc9e1-68fe-4d3a-8258-e3b40e490d09.jpg" height="350px" />
+
+Users can create their own programming exercise with the above UI. User can specify exercise name, difficulty, language, prompt, solution code and test cases. 
+User can run the test cases to check the output of their code before publishing it. <br />
+
+User should write at least three test cases including at least one hidden tests before the publish. The solution code has to pass all test cases as well.
+If these requirements are not met, the server will not allow this exercise to be published.
+
+
+### Exercise Browsing
+<img src="https://user-images.githubusercontent.com/86972879/197370183-7505fff5-49ef-43a4-921c-73bcbb9c9708.jpg" height="350px" />
+
+Users can browse the exercise with various search, sorting and filtering functionalities. 
+When the user clicks one of the exercisees, they can start solving that particular exercise.
+
+
+### Exercise Attempt & Code Editor Workspace
+<img src="https://user-images.githubusercontent.com/86972879/197370085-bf9b59e5-cc9e-4607-b5fd-31c0743f21fa.jpg" height="350px" />
+
+Users can solve the exercise by clicking the exercise they want to attempt. They can view the prompt, test cases, issue reports regarding the exercise, and submission history.
+Users can write the solution code in the coding workspace. They can run the code to run the test cases, and submit the code that would make an official submission history. 
+
+
+### User Solution Showcasing
+<img src="https://user-images.githubusercontent.com/86972879/197370247-71da0d86-87d2-4dfe-a1e4-1b545fa6fff2.png" height="350px" />
+
+Once the user solves the exercise, they can move on to the exercise showcase page. Users can showcase their solution so that other users can view.
+Users can upvote or downvote the existing showcase, and make comments to the showcase as well if there is anything to discuss further.
+
+### Global Forum Discussions
+<img src="https://user-images.githubusercontent.com/86972879/197370350-cfe246e2-f6c0-4f41-8b9c-52320aeab4b0.png" height="350px" />
+
+Users can view the forum posts across 7 different categories such as algorithms, technologies, and interviews which are all related to computer science and software engineering. 
+
+Users can view the post such as "Why use NextJs", they can like or dislike the post, and can make comments. Users can create their own software engineering related posts as well by clicking the <strong>New Post</strong> button.
+
+### User Profile
+<div style="display: flex; gap: 30px;">
+<img src="https://user-images.githubusercontent.com/86972879/197370521-0aa7d034-c536-485e-8939-8addd5e5d752.png" height="200px" />
+<img src="https://user-images.githubusercontent.com/86972879/197370543-93803efa-445f-4d87-a463-f8ae8793591b.png" height="200px" />
+</div>
+
+Users can view their profile information and edit username, description and profile picture. <br />
+They can also view the badges they obtained through their activities. As the user creates and solve more exercises and showcase more solutions, they gain more badges of higher prestige.
+
+
+<br />
+
+These are the key functionalities that our CodeLikepro application provides. <br />
+There are certainly other functionalities to introduce such as rankign system, profile statistics etc. However, we would not introduce all of them here so that the usage content does not get too long.
+
+<br />
+
 
 ## Project Management
 ![jiady_2022-10-23_01 14pm](https://user-images.githubusercontent.com/86972879/197367056-59f1243a-1911-4c54-9e7d-f479fa0e3b38.png)
