@@ -98,8 +98,8 @@ Users can view the post such as "Why use NextJs", they can like or dislike the p
 
 ### User Profile
 <div style="display: flex; gap: 30px;">
-<img src="https://user-images.githubusercontent.com/86972879/197370521-0aa7d034-c536-485e-8939-8addd5e5d752.png" height="200px" />
-<img src="https://user-images.githubusercontent.com/86972879/197370543-93803efa-445f-4d87-a463-f8ae8793591b.png" height="200px" />
+<img src="https://user-images.githubusercontent.com/86972879/197370521-0aa7d034-c536-485e-8939-8addd5e5d752.png" width="450px" />
+<img src="https://user-images.githubusercontent.com/86972879/197370543-93803efa-445f-4d87-a463-f8ae8793591b.png" width="450px" />
 </div>
 
 Users can view their profile information and edit username, description and profile picture. <br />
@@ -259,7 +259,7 @@ These extensions will be implemented one by one in the future releases!
 
 Special acknowledgement to our client <strong>Paul Denny</strong> who gave us an amazing project opportunity and constantly gave us great feedback.
 <br />
-Acknowledgement to COMPSCI 399 lecturer <strong>Asma</strong> who gave us great feedback on our project throughout the semester.
+Acknowledgement to COMPSCI 399 lecturer <strong>Asma Shakil</strong> who gave us great feedback on our project throughout the semester.
 <br />
 Acknowledgement to Vercel that powers our frontend application. 
 <br />
