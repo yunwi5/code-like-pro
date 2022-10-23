@@ -36,6 +36,7 @@ const TestCase: React.FC<Props> = (props) => {
         <ExpectedOutput
             onOutputChange={handleOutputChange}
             expectedOutput={testCase.expectedOutput}
+            className={output ? 'min-h-[6rem]' : 'min-h-[10rem]'}
             readOnly={readOnly}
         />
     );
@@ -123,21 +124,24 @@ interface ExpectedOutputProps {
     onOutputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     expectedOutput: string;
     readOnly: boolean;
+    className?: string;
 }
 const ExpectedOutput: React.FC<ExpectedOutputProps> = ({
     onOutputChange,
     expectedOutput,
+    className = '',
     readOnly,
 }) => {
     return (
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1">
             <p className="px-2 py-1 bg-gray-300">Expected Output</p>
             <textarea
                 onChange={onOutputChange}
                 value={expectedOutput}
-                className={`flex-1 text-sm min-w-[100%] !px-3 py-2 input ${
+                rows={3}
+                className={`text-sm min-w-[100%] !px-3 py-2 input ${
                     readOnly && 'focus:!outline-none'
-                }`}
+                } ${className}`}
             />
         </div>
     );
@@ -158,7 +162,7 @@ const ActualOutput: React.FC<OutputProps> = ({ output }) => {
             <p className="px-2 py-1 bg-gray-300">Actual Output</p>
             {/* Readonly output */}
             <div
-                className={`input flex-1 w-full px-3 py-2 text-sm focus:!outline-none ${errorClass}`}
+                className={`input flex-1 w-full px-3 py-2 whitespace-pre text-sm focus:!outline-none ${errorClass}`}
             >
                 {error ?? output.actualOutput}
             </div>
