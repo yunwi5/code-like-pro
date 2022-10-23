@@ -4,7 +4,6 @@
 A practice website for programming students where they create their own exercises, solve exercises from other programmers, 
 and showcase their solutions. <br />
 
-
 Deployed on Vercel [https://code-like-pro.vercel.app](https://code-like-pro.vercel.app)
 
 <br />
@@ -63,26 +62,62 @@ We defined main tasks for each feature, break it down into subtasks and allocate
 
 <br />
 
-## Technologies used
+## Technologies Used
+
+This is the list of programming languages, frameworks and libraries we used for both frontend and backend. <br />
+For each dependency, we list human readable package name, followed by official package name and its version.
 
 ### Frontend
-1. TypeScript
-2. React Js
-3. Tailwind CSS
-4. Sass
-5. React-Query
-6. React-Quill (text editor)
-7. Monaco-Editor (code editor)
-8. Luxon
+
+#### Programming Language
+1. TypeScript - typescript 4.6.3
+
+#### Libraries
+1. React JS - react 18.0.0
+2. TailwindCSS -tailwindcss 3.1.8
+3. React Router - react-router-dom 6.3.0
+4. React Query - @tanstack/react-query 4.2.3
+5. Monaco Editor - monaco-editor 0.34.0
+6. Quill Editor - react-quill 2.0.0
+7. Chart JS - chart.js 3.9.1
+8. Framer Motion - framer-motion 7.4.0
+9. Redux Toolkit - @reduxjs/toolkit 1.8.5
+10. React Icons - react-icons 4.4.0
+11. Luxon - luxon 3.0.3
+12. Sass - sass 1.54.5 
+
+The full dependencies of the frontend is available on `/client/package.json` file. <br />
+Please revise `/client/package.json` if you want to view the available scripts, full dependencies and dev dependencies.
+
+<br />
 
 ### Backend
-1. Node Js
-2. Express Js
-3. Passport Js (authentication)
-4. passport-google-oauth2
-5. Mongoose
-6. MongoDB
-7. Yup
+
+#### Programming Language
+1. Node JS (JavaScript) v16.17.0
+
+#### Framework
+1. Express JS - express 4.18.1
+
+#### Libraries
+1. Axios - axios 0.27.2
+2. BcryptJs - bcryptjs 2.4.3
+3. Mongoose ORM - mongoose 6.4.0
+4. Express Session - express-session 1.17.3
+5. Passport JS - passport 0.6.0
+6. Passport Google OAuth - passport-google-oauth20 2.0.0
+7. Passport Logal - passport-local 1.0.0
+8. Dotenv - dotenv 16.0.1
+9. Cloudinary - cloudinary 1.32.0
+10. Yup - yup 0.32.11
+
+#### Testing Libraries
+1. Jest - jest 29.1.2
+2. Supertest - supertest 6.3.0
+
+The full dependencies of the backend is available on `/server/package.json` file. <br />
+Please revise `/server/package.json` if you want to view the available scripts, full dependencies and dev dependencies. <br />
+Dependencies for testing libraries and nodemon which is the tool for the development server, are devDependencies.
 
 <br />
 
