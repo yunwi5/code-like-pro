@@ -18,7 +18,7 @@ const CustomInput: React.FC<Props> = (props) => {
             {labelText && <label htmlFor={id}>{labelText}</label>}
             <input
                 id={id}
-                className={`px-2 py-[0.35rem] bg-gray-50 focus:bg-white rounded-sm shadow-md focus:shadow-lg border-2 border-gray-300 focus-main ${
+                className={`px-2 py-[0.35rem] min-h-[2.5rem] bg-gray-50 focus:bg-white rounded-sm shadow-md focus:shadow-lg border-2 border-gray-300 focus-main ${
                     error ? 'border-rose-400 focus:outline-transparent' : ''
                 }`}
                 placeholder={placeholder}

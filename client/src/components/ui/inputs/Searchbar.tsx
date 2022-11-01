@@ -1,7 +1,9 @@
 import React from 'react';
 import { BsSearch } from 'react-icons/bs';
+import { MdClose } from 'react-icons/md';
 import Button from '../buttons/Button';
 import CustomSelect from './CustomSelect';
+import styles from './Searchbar.module.scss';
 
 interface Props {
     searchKeys: string[] | readonly string[];
@@ -17,19 +19,22 @@ interface Props {
 const Searchbar: React.FC<Props> = ({
     searchKeys,
     onKeyChange,
-    onTextChange,
+    onTextChange = () => {},
     keyValue,
     textValue,
     label,
-    onSearch,
+    onSearch = () => {},
     className = '',
 }) => {
-    const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-        onTextChange && onTextChange(e.target.value);
+    const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const text = e.target.value;
+        onTextChange(text);
+        if (text.trim() === '') onSearch();
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSearch && onSearch();
+        onSearch();
     };
 
     return (
@@ -48,17 +53,26 @@ const Searchbar: React.FC<Props> = ({
                     id="search-option-select"
                     value={keyValue}
                     onChange={onKeyChange}
-                    className="h-[2.65rem]"
+                    className="h-[2.55rem]"
                     selectClassName="flex-1"
                 />
-                <div className="flex-1 flex self-end h-[2.65rem]">
-                    <input
-                        type="text"
-                        placeholder="Search your words"
-                        className="input flex-1 w-full h-full"
-                        value={textValue}
-                        onChange={handleTextChange}
-                    />
+                <div className={`${styles.search} flex-1 flex self-end h-[2.55rem]`}>
+                    <div className="flex-1 relative">
+                        <input
+                            type="text"
+                            placeholder="Search your words"
+                            className="input w-full h-full"
+                            value={textValue}
+                            onChange={handleTextChange}
+                        />
+                        {/* Search clear button */}
+                        <div
+                            onClick={() => onTextChange('')}
+                            className={`${styles.clear} absolute top-[50%] right-2 -translate-y-[54%] flex-center w-[2.1rem] h-[2.1rem] hover:bg-gray-200 hover:shadow-md transition-all rounded-full cursor-pointer`}
+                        >
+                            <MdClose className="text-gray-600/90 text-2xl" />
+                        </div>
+                    </div>
                     <Button type="submit" className="px-2 rounded-tr-sm rounded-br-sm">
                         <BsSearch />
                     </Button>
