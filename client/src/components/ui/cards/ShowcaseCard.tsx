@@ -70,15 +70,6 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
         }
     };
 
-    const userVote = votes.find((vote) => vote.user === userId);
-
-    const upvoteCount = votes.reduce(
-        (accCount, curr) => (curr.type === 'up' ? accCount + 1 : accCount),
-        0,
-    );
-    const downVoteCount = votes.length - upvoteCount;
-    const totalVotes = upvoteCount - downVoteCount;
-
     const handleSubmitComment = async (text: string) => {
         // Send Http POST request to send the user comment to the server.
         const newComment = { text }; // Comment only requires 'text' prop when sending it to the server.
@@ -91,13 +82,30 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
         else toastNotify(`Oops, ${message}`, 'error');
     };
 
+    const isAuthor = showcase.user._id === userDetail?._id;
+    const userVote = votes.find((vote) => vote.user === userId);
+
+    const upvoteCount = votes.reduce(
+        (accCount, curr) => (curr.type === 'up' ? accCount + 1 : accCount),
+        0,
+    );
+    const downVoteCount = votes.length - upvoteCount;
+    const totalVotes = upvoteCount - downVoteCount;
+
     return (
         <article
             className={`flex flex-col gap-3 px-3 sm:px-6 py-3 bg-gray-50 border-2 border-gray-200/90 rounded-sm transition-all shadow-md${className}`}
         >
-            <h2 className="text-gray-500 font-bold text-lg sm:text-xl">
-                {showcase.description}
-            </h2>
+            <header className="flex-start gap-2">
+                <h2 className="text-gray-500 font-bold text-lg sm:text-xl">
+                    {showcase.description}{' '}
+                </h2>
+                {isAuthor && (
+                    <span className="inline-block px-2 py-1 text-base bg-main-500 text-white rounded-full">
+                        Yours
+                    </span>
+                )}
+            </header>
             <div className="flex flex-row m-0">
                 <div className="flex content-center mr-5">
                     <BsFillPersonFill className="m-1" />
@@ -201,7 +209,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                         <h5>Compare With Yours</h5>
                     </div>
                 </div>
-                <SocialShareButton />
+                {isAuthor && <SocialShareButton />}
             </div>
             {showComment ? (
                 <div className="mt-3 flex flex-col gap-2">

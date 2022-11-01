@@ -33,10 +33,7 @@ const Searchbar: React.FC<Props> = ({
     };
 
     // Handle all text change including clearing text
-    const handleTextChange = (text: string) => {
-        onTextChange(text);
-        if (text.trim() === '') onSearch();
-    };
+    const handleTextChange = (text: string) => onTextChange(text);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
