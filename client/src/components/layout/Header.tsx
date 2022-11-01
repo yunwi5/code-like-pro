@@ -211,9 +211,6 @@ const ForumNavItem: React.FC = () => {
                 className="link-underline-effect nested-nav-item"
             >
                 Forums
-                <span className="absolute top-[-13px] left-[80%] px-[0.4rem] py-[0.13rem] text-[0.6rem] rounded-full bg-violet-500 brightness-110 text-white">
-                    New
-                </span>
             </ActiveNavLink>
             {/* Nested nav list of forum categories */}
             <div className="nested-nav-child !hidden lg:!block absolute top-[100%] left-0 pt-3">

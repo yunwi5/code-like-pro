@@ -1,10 +1,12 @@
 import {
     ForumCategory,
     ForumCategoryList,
+    ProfileSection,
     ProgrammingTopic,
     ShowCaseSection,
 } from '../models/enums';
 import { IForumPost, IForumPostPopulated } from '../models/interfaces';
+import { ProfileLinkMap } from './profile';
 import { convertToUrlString } from './string-utils/url.util';
 
 export function getBrowsingPageLink() {
@@ -21,6 +23,11 @@ export function getExerciseCreationPageLink() {
 
 export function getExerciseEditLink(exerciseId: string) {
     return `/edit-exercise/${exerciseId}`;
+}
+
+export function getProfileLink(profileSection: ProfileSection) {
+    if (!profileSection) return '/profile';
+    return `/profile/${ProfileLinkMap[profileSection]}`;
 }
 
 // Could add initial shwocase section as a query string

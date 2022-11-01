@@ -5,11 +5,13 @@ import { AnimateSharedLayout, motion } from 'framer-motion';
 import { AppImages } from '../../../assets/app-images';
 import {
     getExerciseCreationPageLink,
+    getProfileLink,
     getShowcaseInvitesPageLink,
 } from '../../../utils/links';
 import FeaturesBanner from './FeaturesBanner';
 import ImageBlock from './ImageBlock';
 import './ImageBlock.scss';
+import { ProfileSection } from '../../../models/enums';
 
 // Image container animation for children staggering
 const container = {
@@ -93,7 +95,9 @@ const HomeFeatures: React.FC = () => {
 
                             {/* Top right image */}
                             <ImageBlock
-                                onClick={() => navigate('/profile')}
+                                onClick={() =>
+                                    navigate(getProfileLink(ProfileSection.STATISTICS))
+                                }
                                 variants={image}
                                 src={AppImages.Statistics}
                                 delay={0.5}
