@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IComment, IExercise, IShowCase, IVote } from '../../../models/interfaces';
+import { IExercise, IShowCase, IVote } from '../../../models/interfaces';
 import CodeEditor from '../editor/CodeEditor';
 import { getDateTimeFormat } from '../../../utils/datetime';
 import {
@@ -7,6 +7,7 @@ import {
     BsClock,
     BsFillChatLeftFill,
     BsFileCode,
+    BsShare,
 } from 'react-icons/bs';
 import {
     postVoteRequest,
@@ -20,6 +21,8 @@ import CommentForm from '../comments/CommentForm';
 import { toastNotify } from '../../../utils/notification';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import SocialPanel from '../social/SocialPanel';
+import { AppProperty } from '../../../constants/app';
 
 interface Props {
     showcase: IShowCase;
@@ -67,15 +70,6 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
         }
     };
 
-    const userVote = votes.find((vote) => vote.user === userId);
-
-    const upvoteCount = votes.reduce(
-        (accCount, curr) => (curr.type === 'up' ? accCount + 1 : accCount),
-        0,
-    );
-    const downVoteCount = votes.length - upvoteCount;
-    const totalVotes = upvoteCount - downVoteCount;
-
     const handleSubmitComment = async (text: string) => {
         // Send Http POST request to send the user comment to the server.
         const newComment = { text }; // Comment only requires 'text' prop when sending it to the server.
@@ -88,13 +82,30 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
         else toastNotify(`Oops, ${message}`, 'error');
     };
 
+    const isAuthor = showcase.user._id === userDetail?._id;
+    const userVote = votes.find((vote) => vote.user === userId);
+
+    const upvoteCount = votes.reduce(
+        (accCount, curr) => (curr.type === 'up' ? accCount + 1 : accCount),
+        0,
+    );
+    const downVoteCount = votes.length - upvoteCount;
+    const totalVotes = upvoteCount - downVoteCount;
+
     return (
         <article
             className={`flex flex-col gap-3 px-3 sm:px-6 py-3 bg-gray-50 border-2 border-gray-200/90 rounded-sm transition-all shadow-md${className}`}
         >
-            <h2 className="text-gray-500 font-bold text-lg sm:text-xl">
-                {showcase.description}
-            </h2>
+            <header className="flex-start gap-2">
+                <h2 className="text-gray-500 font-bold text-lg sm:text-xl">
+                    {showcase.description}{' '}
+                </h2>
+                {isAuthor && (
+                    <span className="inline-block px-2 py-1 text-base bg-main-500 text-white rounded-full">
+                        Yours
+                    </span>
+                )}
+            </header>
             <div className="flex flex-row m-0">
                 <div className="flex content-center mr-5">
                     <BsFillPersonFill className="m-1" />
@@ -105,7 +116,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                     <h5>{getDateTimeFormat(showcase.postedAt, false)}</h5>
                 </div>
             </div>
-            <div className="grid grid-cols-8 gap-4">
+            <div className="grid grid-cols-8 gap-3 items-center">
                 <div className="col-span-7">
                     {compare ? (
                         <div className="grid gap-2 md:grid-cols-1 lg:grid-cols-2">
@@ -149,21 +160,25 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                 </div>
                 <div className="col-span-1 flex flex-col justify-center m-auto text-center text-gray-400">
                     <div>
-                        <IoIosArrowUp
-                            className={`text-3xl sm:text-[3rem] hover:text-main-500 cursor-pointer ${
-                                userVote?.type === 'up' ? 'text-main-500' : ''
-                            }`}
-                            onClick={() => handleUserVote('up')}
-                        />
+                        <div className="flex-center px-1 py-1 rounded-full hover:bg-slate-200/90">
+                            <IoIosArrowUp
+                                className={`text-3xl sm:text-[3rem] hover:text-main-500 cursor-pointer ${
+                                    userVote?.type === 'up' ? 'text-main-500' : ''
+                                }`}
+                                onClick={() => handleUserVote('up')}
+                            />
+                        </div>
                         <h2 className="font-semibold text-xl sm:text-2xl text-gray-600">
                             {totalVotes}
                         </h2>
-                        <IoIosArrowDown
-                            className={`text-3xl sm:text-[3rem] hover:text-main-500 cursor-pointer ${
-                                userVote?.type === 'down' ? 'text-main-500' : ''
-                            }`}
-                            onClick={() => handleUserVote('down')}
-                        />
+                        <div className="flex-center py-1 rounded-full hover:bg-slate-200/90">
+                            <IoIosArrowDown
+                                className={`text-3xl sm:text-[2.75rem] hover:text-main-500 cursor-pointer ${
+                                    userVote?.type === 'down' ? 'text-main-500' : ''
+                                }`}
+                                onClick={() => handleUserVote('down')}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -194,6 +209,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                         <h5>Compare With Yours</h5>
                     </div>
                 </div>
+                {isAuthor && <SocialShareButton />}
             </div>
             {showComment ? (
                 <div className="mt-3 flex flex-col gap-2">
@@ -210,5 +226,35 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
 // Cummon btn class for showing comments and showing comparison
 const btnClass =
     'flex w-full sm:w-fit px-3 py-[0.3rem] rounded-full hover:text-white transition-all cursor-pointer';
+
+// Button to share the showcase in SNS
+const SocialShareButton: React.FC = () => {
+    const [showPanel, setShowPanel] = useState<boolean>(false);
+    const { exercise, userSubmission } = useShowcase();
+
+    return (
+        <div className="flex-center relative">
+            <div
+                className={`${btnClass} ${
+                    showPanel ? 'text-pink-700 font-semibold' : ''
+                } hover:bg-pink-600`}
+                onClick={() => setShowPanel((ps) => !ps)}
+            >
+                <BsShare className="m-1 mr-2" />
+                <h5>Share</h5>
+            </div>
+            {showPanel && (
+                <SocialPanel
+                    onClose={() => setShowPanel(false)}
+                    className="bottom-[130%] left-[50%] -translate-x-[50%]"
+                    title={`${exercise?.name} solution showcase`}
+                    tags={[...(exercise?.tags || []), 'Showcase']}
+                    source={userSubmission?.code}
+                    via={AppProperty.APP_NAME}
+                />
+            )}
+        </div>
+    );
+};
 
 export default ShowcaseCard;

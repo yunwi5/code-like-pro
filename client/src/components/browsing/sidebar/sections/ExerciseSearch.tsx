@@ -17,6 +17,18 @@ const ExerciseSearch: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
+    const handleSearchText = (newText: string) => {
+        setLocalSearchingState((prev) => ({ ...prev, text: newText }));
+        // If the text is empty, clear the search and show all exercises
+        if (newText.trim() === '')
+            dispatch(
+                exerciseBrowsingActions.setSearching({
+                    ...localSearchingState,
+                    text: '',
+                }),
+            );
+    };
+
     const handleSearch = () => {
         dispatch(exerciseBrowsingActions.setSearching({ ...localSearchingState }));
     };
@@ -29,9 +41,7 @@ const ExerciseSearch: React.FC = () => {
                 setLocalSearchingState((prev) => ({ ...prev, key: newKey as any }))
             }
             textValue={localSearchingState.text}
-            onTextChange={(newText: string) =>
-                setLocalSearchingState((prev) => ({ ...prev, text: newText }))
-            }
+            onTextChange={handleSearchText}
             onSearch={handleSearch}
         />
     );
