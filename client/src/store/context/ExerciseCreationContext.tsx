@@ -52,7 +52,9 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
 
     const [name, setName] = useState(exercise?.name || '');
     const [prompt, setPrompt] = useState(exercise?.prompt || '');
-    const [language, setLanguage] = useState<Language>(exercise?.language || Language.C);
+    const [language, setLanguage] = useState<Language>(
+        exercise?.language || Language.PYTHON,
+    );
     const [difficulty, setDifficulty] = useState<Difficulty>(
         exercise?.difficulty || Difficulty.EASY,
     );
