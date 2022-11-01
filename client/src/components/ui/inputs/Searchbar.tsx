@@ -26,8 +26,14 @@ const Searchbar: React.FC<Props> = ({
     onSearch = () => {},
     className = '',
 }) => {
-    const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Handle only the event from the input
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const text = e.target.value;
+        handleTextChange(text);
+    };
+
+    // Handle all text change including clearing text
+    const handleTextChange = (text: string) => {
         onTextChange(text);
         if (text.trim() === '') onSearch();
     };
@@ -63,11 +69,11 @@ const Searchbar: React.FC<Props> = ({
                             placeholder="Search your words"
                             className="input w-full h-full"
                             value={textValue}
-                            onChange={handleTextChange}
+                            onChange={handleInputChange}
                         />
                         {/* Search clear button */}
                         <div
-                            onClick={() => onTextChange('')}
+                            onClick={() => handleTextChange('')}
                             className={`${styles.clear} absolute top-[50%] right-2 -translate-y-[54%] flex-center w-[2.1rem] h-[2.1rem] hover:bg-gray-200 hover:shadow-md transition-all rounded-full cursor-pointer`}
                         >
                             <MdClose className="text-gray-600/90 text-2xl" />
