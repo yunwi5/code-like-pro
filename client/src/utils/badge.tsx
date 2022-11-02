@@ -25,6 +25,13 @@ export const BadgeRarityPoints: { [key: string]: RarityBreakpoint } = {
     [BadgeRarity.UR]: RARITY_UR_CUT,
 };
 
+export const BadgeRarityFullNames = {
+    [BadgeRarity.UR]: 'Ultimate Rare',
+    [BadgeRarity.SR]: 'Super Rare',
+    [BadgeRarity.R]: 'Rare',
+    [BadgeRarity.N]: 'Normal',
+};
+
 export const compareByRarity = (r1: BadgeRarity, r2: BadgeRarity) => {
     return (BadgeRarityPoints[r1] || 0) - (BadgeRarityPoints[r2] || 0);
 };

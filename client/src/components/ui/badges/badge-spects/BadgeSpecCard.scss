@@ -1,0 +1,65 @@
+.badge-spec {
+    transition: all 0.3s ease-in-out;
+
+    img {
+        transition: all 0.3s ease-in-out;
+    }
+
+    h3 {
+        transition: all 0.3s ease-in-out;
+    }
+
+    &:hover {
+        box-shadow: 0 4px 13px rgba(0, 0, 0, 0.3) !important;
+
+        img {
+            transition: all 0.3s ease-in-out;
+            transform: scale(120%);
+        }
+
+        h3 {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(0.5rem);
+        }
+    }
+}
+
+.ur-spec {
+    .short-name {
+        color: #eab308;
+    }
+
+    .full-name {
+        color: #ca8a04;
+    }
+}
+
+.sr-spec {
+    .short-name {
+        color: #0ea5e9;
+    }
+
+    .full-name {
+        color: #0284c7;
+    }
+}
+
+.r-spec {
+    .short-name {
+        color: #3b82f6;
+    }
+
+    .full-name {
+        color: #2563eb;
+    }
+}
+
+.n-spec {
+    .short-name {
+        color: #6b7280;
+    }
+
+    .full-name {
+        color: #4b5563;
+    }
+}
