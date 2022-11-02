@@ -11,6 +11,7 @@ import Comparisons from '../components/home/comparisons/Comparisons';
 import ScrollProgress from '../components/home/ScrollProgress';
 import HomeFeatures from '../components/home/features/HomeFeatures';
 import HomeDiscussions from '../components/home/discussions/HomeDiscussions';
+import HomeBadges from '../components/home/badges/HomeBadges';
 
 const leftInVariants = {
     initial: { opacity: 0, x: -300 },
@@ -82,8 +83,9 @@ const Home: React.FC = () => {
                     <TopUsers />
                 </motion.div>
             </div>
+            <HomeBadges />
             <motion.div
-                variants={leftInVariants}
+                variants={rightInVariants}
                 initial="initial"
                 whileInView="animate"
                 transition={{ duration: 1 }}

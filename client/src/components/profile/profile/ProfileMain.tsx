@@ -133,7 +133,7 @@ const ProfileMainBody = () => {
 
                 {/* Profile badges */}
                 {showBadges && (
-                    <div className="flex flex-col mt-10 mb-3">
+                    <div id="badges" className="flex flex-col mt-10 mb-3">
                         <Badges
                             heading={<h2 className="text-2xl">My Badges</h2>}
                             badges={badges || []}
