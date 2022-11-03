@@ -47,7 +47,7 @@ function constructLanguageFileSpec(language, sourceCode, testCaseCode) {
             ...commonSpec,
             sourcecode: sourceCode + '\n\n' + testCaseCode,
         };
-    } else if (language === Language.CPP) {
+    } else if (language === Language.CPP || language === Language.C) {
         return {
             ...commonSpec,
             sourcecode: getCppFileContent(sourceCode, testCaseCode),

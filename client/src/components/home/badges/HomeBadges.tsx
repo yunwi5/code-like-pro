@@ -5,7 +5,7 @@ import BadgeSpecs from '../../ui/badges/badge-spects/BadgeSpecs';
 // Badge introduction and badge rarity explanations
 const HomeBadges: React.FC = () => {
     return (
-        <section className="mt-20">
+        <section className="mt-[6.5rem]">
             <h2
                 className={`mb-5 lg:mb-12 px-2 sm:px-10 text-center text-3xl text-gray-500 font-semibold capitalize`}
             >
