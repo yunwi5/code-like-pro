@@ -12,6 +12,7 @@ import PageNavigation from '../../ui/PageNavigation';
 import BadgeSorter from '../../ui/sorting/BadgeSorter';
 import BadgeDetail from './BadgeDetail';
 import styles from './Badges.module.scss';
+import BadgesInfo from '../../ui/badges/badges-info/BadgesInfo';
 
 interface Props {
     badges: IBadge[];
@@ -56,15 +57,18 @@ const Badges: React.FC<Props> = ({
     const layoutStyle = badges.length >= 3 ? styles.grid : styles.flex;
 
     return (
-        <section>
-            <div className="mb-2 flex justify-between items-start sm:items-center flex-col sm:flex-row">
-                {heading}
+        <section className={className}>
+            <div className="mb-2 flex flex-col sm:flex-row gap-y-2 justify-between items-start sm:items-center">
+                <div className="flex-start">
+                    {heading}
+                    <BadgesInfo className="ml-2 mr-auto" />
+                </div>
                 <BadgeSorter
                     sortingState={sortingState}
                     setSortingState={setSortingState}
                 />
             </div>
-            <div className={`${layoutStyle} ${className}`}>
+            <div className={`${layoutStyle} mt-4`}>
                 {currentPageBadges.map((badge, idx) => (
                     <motion.div
                         key={badge._id}
