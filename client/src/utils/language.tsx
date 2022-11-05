@@ -46,10 +46,6 @@ export function getLanguageIcon(language: Language, params?: SvgParams) {
         // All other languages codes are just our client style names in lowercase.
         case Language.JAVA:
             return <JavaIcon {...params} />;
-        case Language.PHP:
-            return <PhpIcon {...params} />;
-        case Language.PASCAL:
-            return <PascalIcon {...params} />;
     }
 }
 

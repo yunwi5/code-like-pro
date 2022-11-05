@@ -1,4 +1,4 @@
-import { Difficulty, Language, ProgrammingTopic } from '../../enums';
+import { Difficulty, Language } from '../../enums';
 
 // Interface that stores the information for exercise cards on the browsing page.
 // Different from IExercise object that is used on exercise creation page and attemp page.

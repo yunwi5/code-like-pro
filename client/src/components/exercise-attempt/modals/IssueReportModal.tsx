@@ -44,7 +44,6 @@ const IssueReportModal: React.FC<{ visible: boolean; onClose: () => void }> = ({
         refetchExercise();
         setIsLoading(false);
         if (ok) {
-            console.log(data);
             toastNotify('Sending report successful!', 'success');
             onClose();
         } else {

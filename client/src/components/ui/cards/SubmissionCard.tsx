@@ -28,6 +28,7 @@ const SubmissionCard: React.FC<Props> = ({ submission, className }) => {
     return (
         <article
             className={`flex flex-col gap-2 px-4 py-2 text-gray-700 border-2 border-gray-200/90 transition-all rounded-sm shadow-md hover:shadow-lg cursor-pointer ${className}`}
+            onClick={() => navigate(getExerciseAttemptPageLink(exerciseId))}
         >
             {/* Header for submission datetime and status */}
             <header className="flex-between">
@@ -40,12 +41,7 @@ const SubmissionCard: React.FC<Props> = ({ submission, className }) => {
 
             {/* Submission exercise title and difficulty info */}
             <div className="flex-start gap-3">
-                <h3
-                    className="ext-base sm:text-[1.13rem] hover:text-blue-600"
-                    onClick={() => navigate(getExerciseAttemptPageLink(exerciseId))}
-                >
-                    {name}
-                </h3>
+                <h3 className="ext-base sm:text-[1.13rem] hover:text-blue-600">{name}</h3>
                 <div
                     className={`flex-center px-[0.4rem] py-[1.5px] sm:py-[2px] text-[0.8rem] sm:text-sm rounded-md ${difficultyClass}`}
                 >
