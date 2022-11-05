@@ -5,12 +5,12 @@ const Language = {
     CPP: 'cpp',
     JAVA: 'java',
     NODE_JS: 'nodejs',
-    PHP: 'php',
-    PASCAL: 'pascal',
+    // PHP: 'php',
+    // PASCAL: 'pascal',
 };
 
 // We will not support python2 and Octave
-const LanguageList = ['python3', 'c', 'cpp', 'java', 'nodejs', 'php', 'pascal'];
+const LanguageList = Object.values(Language);
 
 // Only difficulties that are allowed in this app.
 const Difficulty = {

@@ -1,5 +1,5 @@
 import { IExerciseWithId, ITestCase, ITestOutput } from '..';
-import { CreationSection, Difficulty, Language, ProgrammingTopic } from '../../enums';
+import { CreationSection, Difficulty, Language } from '../../enums';
 
 export interface IReadyStatus {
     status: 'success' | 'error';

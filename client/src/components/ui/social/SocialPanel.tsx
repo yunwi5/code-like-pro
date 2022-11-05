@@ -38,7 +38,7 @@ const SocialPanel: React.FC<Props> = (props) => {
     return (
         <ClickAwayListener onClickAway={onClose}>
             <div
-                className={`absolute z-100 flex-center gap-2 px-2 py-1 bg-white border-2 border-slate-200 shadow-md hover:shadow-lg transition-all rounded ${className}`}
+                className={`absolute z-100 flex-center gap-2 px-2 py-1 bg-white border-2 border-slate-200 shadow hover:shadow-md transition-all rounded ${className}`}
             >
                 <FacebookShareButton
                     url={url}
