@@ -1,10 +1,10 @@
 import React from 'react';
-import { IBadge } from '../../../models/interfaces';
-import { BadgeImageMap } from '../../../utils/badge';
+import { IBadge } from '../../../../models/interfaces';
+import { BadgeImageMap } from '../../../../utils/badge';
 
 // Toast badge reward component
 // Notification badge
-const NotificationBadge: React.FC<{ badge: IBadge }> = ({ badge }) => {
+const BadgeNotification: React.FC<{ badge: IBadge }> = ({ badge }) => {
     return (
         <div className="flex items-center gap-2">
             <div>
@@ -21,4 +21,4 @@ const NotificationBadge: React.FC<{ badge: IBadge }> = ({ badge }) => {
     );
 };
 
-export default NotificationBadge;
+export default BadgeNotification;

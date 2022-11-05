@@ -8,11 +8,11 @@ import { upwardStaggeringAnimations } from '../../../utils/animations';
 import { BadgeImageMap } from '../../../utils/badge';
 import { getDateFormat } from '../../../utils/datetime';
 import { sortBadges } from '../../../utils/sorting-utils/badge.sorting';
-import PageNavigation from '../../ui/PageNavigation';
-import BadgeSorter from '../../ui/sorting/BadgeSorter';
-import BadgeDetail from './BadgeDetail';
+import BadgeDetail from './badge-detail/BadgeDetail';
+import PageNavigation from '../PageNavigation';
+import BadgeSorter from '../sorting/BadgeSorter';
+import BadgesInfo from './badges-info/BadgesInfo';
 import styles from './Badges.module.scss';
-import BadgesInfo from '../../ui/badges/badges-info/BadgesInfo';
 
 interface Props {
     badges: IBadge[];

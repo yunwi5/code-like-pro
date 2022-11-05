@@ -2,7 +2,7 @@ import { BadgeImages } from '../assets/badgeImages';
 import { BadgeRarity } from '../models/enums';
 import { IBadge } from '../models/interfaces';
 import { customToastNotify } from './notification';
-import NotificationBadge from '../components/profile/badges/NotificationBadge';
+import NotificationBadge from '../components/ui/badges/badge-notification/BadgeNotification';
 
 export const RARITY_N_CUT = 1;
 export const RARITY_R_CUT = 5;
