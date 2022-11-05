@@ -10,9 +10,11 @@ function getOpenAndHiddenTestCounts(testCases: ITestCase[]) {
     return [openTestCasesCount, hiddenTestCasesCount];
 }
 
+// Generate test cases output messages
 function generateOutputMessages(testCases: ITestCase[], outputs: ITestOutput[]) {
     if (outputs.length < 1) return ['', ''];
-    const [openTestCasesCount, hiddenTestCasesCount] = getOpenAndHiddenTestCounts(testCases);
+    const [openTestCasesCount, hiddenTestCasesCount] =
+        getOpenAndHiddenTestCounts(testCases);
 
     let openTestCorrectCount = 0,
         hiddenTestCorrectCount = 0;
@@ -30,15 +32,17 @@ function generateOutputMessages(testCases: ITestCase[], outputs: ITestOutput[]) 
 
     return [
         <p className={`${allOpenTestsCorrect ? 'text-emerald-500' : 'text-rose-500'}`}>
-            Open Tests {openTestCorrectCount}/{openTestCasesCount} Correct
+            Open Test{openTestCorrectCount !== 1 && 's'} {openTestCorrectCount}/
+            {openTestCasesCount} Correct
         </p>,
         <p className={`${allHiddenTestsCorrect ? 'text-emerald-500' : 'text-rose-500'}`}>
-            Hidden Tests {hiddenTestCorrectCount}/{hiddenTestCasesCount} Correct
+            Hidden Test{hiddenTestCorrectCount !== 1 && 's'} {hiddenTestCorrectCount}/
+            {hiddenTestCasesCount} Correct
         </p>,
     ];
 }
 
-const TestCaseMessages = () => {
+const TestCaseMessages: React.FC = () => {
     const { exercise, testCaseOutputs } = useExerciseAttemptCtx();
 
     if (exercise == null) return null;
@@ -56,10 +60,12 @@ const TestCaseMessages = () => {
             {noTestCaseOutputs && (
                 <>
                     <p className="text-gray-600">
-                        <strong>{openTestCasesCount}</strong> Open Tests
+                        <strong>{openTestCasesCount}</strong> Open Test
+                        {openTestCasesCount !== 1 && 's'}
                     </p>
                     <p className="text-rose-500/90">
-                        <strong>{hiddenTestCasesCount}</strong> Hidden Tests
+                        <strong>{hiddenTestCasesCount}</strong> Hidden Test
+                        {hiddenTestCasesCount !== 1 && 's'}
                     </p>
                 </>
             )}

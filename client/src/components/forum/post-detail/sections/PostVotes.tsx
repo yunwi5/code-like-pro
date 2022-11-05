@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteForumPostVote, postForumPostVote } from '../../../../apis/forum.api';
 import { IForumPostPopulated, IVote } from '../../../../models/interfaces';
 import { useUserContext } from '../../../../store/context/UserContext';
+import PostShare from './PostShare';
 
 const PostVotes: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     const navigate = useNavigate();
@@ -67,6 +68,7 @@ const PostVotes: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
                 voteCount={downVoteCount}
                 onClick={() => handleUserVote('down')}
             />
+            <PostShare post={post} className="self-start ml-1" />
         </div>
     );
 };
