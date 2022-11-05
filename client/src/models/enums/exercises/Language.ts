@@ -4,8 +4,8 @@ export enum Language {
     JAVA = 'java',
     CPP = 'cpp',
     C = 'c',
-    PHP = 'php',
-    PASCAL = 'pascal',
+    // PHP = 'php',
+    // PASCAL = 'pascal',
     // Jobe server does not support C# and TypeScript code execution.
 }
 

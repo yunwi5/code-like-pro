@@ -38,7 +38,7 @@ const ModalOverlay: React.FC<OverlayProps> = (props) => {
                 y: !isHorizontal ? 150 : 0,
                 transition: { duration: 0.2 },
             }}
-            drag
+            // drag
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
             className={`z-[150] bg-white shadow rounded-md ${className}`}
         >

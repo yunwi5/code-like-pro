@@ -15,6 +15,7 @@ async function makeRequest(bodyData) {
         const data = await response.data;
         return data;
     } catch (err) {
+        console.log('Run code error');
         console.log(err.message);
         return {};
     }

@@ -36,8 +36,8 @@ export const LanguageColorMap = {
     [Language.JAVA]: PINK_300,
     [Language.JAVASCRIPT]: YELLOW_300,
     [Language.PYTHON]: SLATE_300,
-    [Language.PASCAL]: ORANGE_300,
-    [Language.PHP]: VIOLET_300,
+    // [Language.PASCAL]: ORANGE_300,
+    // [Language.PHP]: VIOLET_300,
 };
 
 export const StatusColorMap = {

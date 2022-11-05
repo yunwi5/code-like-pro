@@ -4,7 +4,7 @@ import { BsTrophy } from 'react-icons/bs';
 import useBadgeQuery from '../../../../../hooks/badges/useBadgeQuery';
 import { IRankingOrder, IUserInfo } from '../../../../../models/interfaces';
 import AnimationModal from '../../../modals/AnimationModal';
-import Badges from '../../../../profile/badges/Badges';
+import Badges from '../../../badges/Badges';
 import UserDetailHeader from './sections/UserDetailHeader';
 import UserProfileInfo from './sections/UserProfileInfo';
 
@@ -40,16 +40,17 @@ const UserDetailModal: React.FC<Props> = ({ open, userInfo, rankInfo, onClose })
 
                         {/* Show the badge section only if the user has some badges */}
                         {badges.length > 0 && (
-                            <>
-                                <h3 className="flex-start gap-1 mt-7 mb-3 text-2xl text-gray-700">
-                                    <BsTrophy className="text-main-500" /> Awarded Badges
-                                </h3>
-                                <Badges
-                                    badges={badges}
-                                    className="ml-1"
-                                    badgePerPage={6}
-                                />
-                            </>
+                            <Badges
+                                heading={
+                                    <h3 className="flex-start gap-1 text-2xl text-gray-700">
+                                        <BsTrophy className="text-main-500" /> Awarded
+                                        Badges
+                                    </h3>
+                                }
+                                badges={badges}
+                                className="mt-8 ml-1"
+                                badgePerPage={6}
+                            />
                         )}
                     </div>
 

@@ -4,6 +4,7 @@ const { Language } = require('../models/enums');
 function getSourceFilename(language) {
     if (language === Language.CPP) return 'test.cpp';
     if (language === Language.JAVA) return 'Test.java';
+    if (language === Language.PHP) return 'Test.php';
     return 'test';
 }
 

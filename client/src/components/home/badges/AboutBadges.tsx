@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { BsArrowRight, BsQuestionSquare, BsTrophy } from 'react-icons/bs';
+import { BsQuestionSquare, BsTrophy } from 'react-icons/bs';
 import { MdOutlineCollectionsBookmark } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import BadgeLink from './BadgeLink';

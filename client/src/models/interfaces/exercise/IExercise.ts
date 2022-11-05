@@ -1,5 +1,5 @@
 import { IComment, ITestCase } from '..';
-import { Difficulty, Language, ProgrammingTopic } from '../../enums';
+import { Difficulty, Language } from '../../enums';
 import { IUser } from '../user/IUser';
 
 export interface IExercise {
