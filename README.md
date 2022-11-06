@@ -8,6 +8,17 @@ Deployed on Vercel [https://code-like-pro.vercel.app](https://code-like-pro.verc
 
 <br />
 
+## Project Presentation & Report
+We have created a presentation video that explains the features of the application with a demo video, and a report that explains application design, implementations, testing, results, conlucions and future works in detail.
+
+### Project presentation link
+[https://www.youtube.com/watch?v=sou5i3j2AHM](https://www.youtube.com/watch?v=sou5i3j2AHM)
+
+### Project report link
+[https://docs.google.com/document/d/1aDNSr4h9E48OY81hSTE8PAy4G4AxVh-A/edit#heading=h.8qr8o3pkkyg6](https://docs.google.com/document/d/1aDNSr4h9E48OY81hSTE8PAy4G4AxVh-A/edit#heading=h.8qr8o3pkkyg6)
+
+<br />
+
 ## Getting Started
 
 Both frontend and backend require Node.js JavaScript runtime environment to run the application locally. <br />
