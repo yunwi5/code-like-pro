@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useUpdateEffect from '../../../hooks/useUpdateEffect';
 import { CreationSection } from '../../../models/enums';
 import { ITestCaseProps } from '../../../models/interfaces';
@@ -7,6 +7,7 @@ import { getEmptyTestCase } from '../../../utils/exercise-utils/testcase';
 import Button from '../../ui/buttons/Button';
 import TestCase from '../../ui/test-cases/TestCase';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
+import CreationHelp from '../creation-help/CreationHelp';
 
 const CreationTestCases: React.FC = () => {
     const { testCases, language, setTestCases, testCaseOutputs } =
@@ -32,8 +33,12 @@ const CreationTestCases: React.FC = () => {
     }, [testCases.length]);
 
     const title = (
-        <div className="flex-between mb-5">
-            <span>Test Cases</span> <Button onClick={addTestCase}>+ Test Case</Button>
+        <div className="flex-between mb-2">
+            <span>Test Cases</span>{' '}
+            <CreationHelp defaultLanguage={language} className="ml-1 mr-auto" />{' '}
+            <Button className="!py-2 text-base md:text-lg" onClick={addTestCase}>
+                + Test Case
+            </Button>
         </div>
     );
 

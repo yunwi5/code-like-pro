@@ -60,7 +60,12 @@ const CppHelp: React.FC = () => {
                     own <mark className="mark">classes</mark> or{' '}
                     <mark className="mark">structs</mark> if needed.
                 </p>
-                <CodeEditor value={cppSolution} language={language} readOnly={true} />
+                <CodeEditor
+                    value={cppSolution}
+                    language={language}
+                    readOnly={true}
+                    height="10rem"
+                />
             </div>
 
             <div>

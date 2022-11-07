@@ -29,8 +29,8 @@ const CreationHelpModal: React.FC<Props> = ({ open, onClose, defaultLanguage }) 
         >
             <section className="flex flex-col text-gray-700">
                 <header className="px-7 py-4 shadow-md border-b-2 border-main-400">
-                    <h2 className="text-2xl flex-start gap-2 capitalize">
-                        <BsInfoSquareFill className="text-main-400 text-3xl" />
+                    <h2 className="text-xl sm:text-2xl flex-start gap-2 capitalize">
+                        <BsInfoSquareFill className="text-main-400 text-[1.2em]" />
                         Help for exercise creation
                     </h2>
                 </header>

@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiHelpCircle } from 'react-icons/fi';
 import { Language } from '../../../models/enums';
 import CreationHelpModal from './CreationHelpModal';
 
 interface Props {
-    open: boolean;
-    setVisible: (visible: boolean) => void;
     defaultLanguage?: Language;
+    className?: string;
 }
 
-const CreationHelp: React.FC<Props> = ({ open, setVisible, defaultLanguage }) => {
+const CreationHelp: React.FC<Props> = (props) => {
+    const { defaultLanguage, className = '' } = props;
+    // Help modal visibility
+    const [showModal, setShowModal] = useState(false);
+
     return (
-        <div className="text-gray-600 text-base">
+        <div className={`text-gray-600 text-base ${className}`}>
             <button
-                onClick={() => setVisible(true)}
+                onClick={() => setShowModal(true)}
                 className="flex-center gap-1 group px-3 py-[0.3rem] font-semibold rounded-full hover:bg-main-400 hover:text-white hover:shadow-md"
             >
                 <FiHelpCircle className="text-main-500 group-hover:text-main-50 text-[1.3em]" />
@@ -21,8 +24,9 @@ const CreationHelp: React.FC<Props> = ({ open, setVisible, defaultLanguage }) =>
             </button>
 
             <CreationHelpModal
-                open={open}
-                onClose={() => setVisible(false)}
+                key={defaultLanguage}
+                open={showModal}
+                onClose={() => setShowModal(false)}
                 defaultLanguage={defaultLanguage}
             />
         </div>
