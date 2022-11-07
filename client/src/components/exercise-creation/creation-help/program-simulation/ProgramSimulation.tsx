@@ -26,8 +26,7 @@ function getOutputIcon(correct: boolean | undefined) {
 const ProgramSimulation: React.FC<Props> = (props) => {
     const { code, language, testCase, runCode } = props;
     const [showOutput, setShowOutput] = useState(false);
-
-    // result
+    // Test output
     const [output, setOutput] = useState<ITestOutput | null>(null);
 
     const handleCodeRun = async () => {
@@ -46,6 +45,7 @@ const ProgramSimulation: React.FC<Props> = (props) => {
         });
     };
 
+    // success or error icons
     const outputIcon = (
         <span className="text-[1.2em]">{getOutputIcon(output?.correct)}</span>
     );
@@ -68,6 +68,7 @@ const ProgramSimulation: React.FC<Props> = (props) => {
                     readOnly={true}
                     className="!shadow-none !border-none"
                     value={code}
+                    height="10rem"
                     language={language}
                     showHeader={false}
                 />

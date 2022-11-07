@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { BsInfoSquareFill } from 'react-icons/bs';
 import { Language } from '../../../models/enums';
 import AnimationModal from '../../ui/modals/AnimationModal';
+import CHelp from './languages-help/CHelp';
+import CppHelp from './languages-help/CppHelp';
+import JavaHelp from './languages-help/JavaHelp';
+import JavaScriptHelp from './languages-help/JavaScriptHelp';
 import PythonHelp from './languages-help/PythonHelp';
 import LanguageMenu from './sections/LanguageMenu';
 
@@ -61,8 +65,16 @@ const CreationHelpModal: React.FC<Props> = ({ open, onClose, defaultLanguage }) 
 // Language help documentation for each language supported
 function getLanguageHelp(language: Language) {
     switch (language) {
+        case Language.C:
+            return <CHelp />;
+        case Language.CPP:
+            return <CppHelp />;
+        case Language.JAVA:
+            return <JavaHelp />;
         case Language.PYTHON:
             return <PythonHelp />;
+        case Language.JAVASCRIPT:
+            return <JavaScriptHelp />;
         default:
             return <PythonHelp />;
     }

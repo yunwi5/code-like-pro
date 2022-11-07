@@ -2,31 +2,40 @@ import React from 'react';
 import { runTestCases } from '../../../../apis/submission.api';
 import { Language } from '../../../../models/enums';
 import { ITestCase } from '../../../../models/interfaces';
+import { indentEachLine } from '../../../../utils/string-utils/string-manipulation';
 import CodeEditor from '../../../ui/editor/CodeEditor';
 import TestCase from '../../../ui/test-cases/TestCase';
 import ProgramSimulation from '../program-simulation/ProgramSimulation';
 
-const pythonSolution = `
-# Write all your solution related code here
-def getSum(*numArgs):
-    return sum(numArgs)
-`.trimStart();
+const cSolution = `
+#include <stdio.h>
+
+int getSum(int a, int b) {
+    return a + b;
+}`.trimStart();
 
 const testCase: ITestCase = {
     name: 'Test Case',
-    code: 'total = getSum(2,3,5,10)\nprint(total)\n',
+    code: 'int total = getSum(5,15);\nprintf("%d", total);\n',
     expectedOutput: '20',
 };
 
-const language = Language.PYTHON;
+const language = Language.C;
+const languageName = 'C';
 
-const overallCode = `${pythonSolution}\n#Your testing code\n${testCase.code}`;
+const overallCode = `
+${cSolution}
 
-const PythonHelp: React.FC = () => {
+int main() {
+\t//Your testing code
+${indentEachLine(testCase.code)}
+}`.trimStart();
+
+const CHelp: React.FC = () => {
     // Run the example code
     const runCode = async () => {
         const { ok, data } = await runTestCases({
-            code: pythonSolution,
+            code: cSolution,
             language,
             testCases: [testCase],
         });
@@ -37,25 +46,26 @@ const PythonHelp: React.FC = () => {
     return (
         <article className="flex flex-col gap-7">
             <h3 className="flex-start gap-1 text-slate-600 text-2xl -mb-5">
-                {/* {getLanguageIcon(language, { width: '35px', height: '35px' })} */}
-                Python Challenge Guide
+                {languageName} Challenge Guide
             </h3>
             <div>
                 <p className="mb-3">
-                    In Python, it is easy and straightforward to create a new programming
-                    challenge. Let's say we want to create a challenge that asks a user to
-                    create a function called <mark className="mark">getSum</mark>&nbsp;
-                    which returns the sum of the arguments passed in.
+                    In {languageName}, we do some internal job to execute your program.
+                    Let's say we want to create a challenge that asks users to create a
+                    function called <mark className="mark">getSum</mark>&nbsp; which
+                    returns the sum of the arguments passed in.
                 </p>
-                <CodeEditor value={pythonSolution} language={language} readOnly={true} />
+                <CodeEditor value={cSolution} language={language} readOnly={true} />
             </div>
 
             <div>
                 <p className="mb-3">
                     Next, we will define an example test case that will verify our
-                    solution as well as users' solution the users will write when they
-                    attempt the challenge. The testing is based on matching the standard
-                    output of expected and actual outputs.
+                    solution as well as users' solution the users will submit. The test
+                    correctness is based on matching the standard output of expected and
+                    actual outputs. Your testing code will be placed inside the{' '}
+                    <mark className="mark">main</mark> method to run the solution code you
+                    wrote. This means please do not define the main method on your own!
                 </p>
                 <TestCase
                     language={language}
@@ -69,8 +79,12 @@ const PythonHelp: React.FC = () => {
                 <p className="mb-3">
                     Once we define the solution code and the test case, the following is
                     the structure of the resulting program that will be executed when you
-                    run the code. In Python, we include your solution code first, then we
-                    insert the testcase below to run your solution code.
+                    run the code. In {languageName}, we include your solution code such as
+                    {'  '}
+                    <mark className="mark">functions</mark>,{' '}
+                    <mark className="mark">structs</mark> in advance, then we insert the
+                    testcase inside the <mark className="mark">main</mark> method below to
+                    run the program.
                 </p>
                 <ProgramSimulation
                     code={overallCode}
@@ -83,4 +97,4 @@ const PythonHelp: React.FC = () => {
     );
 };
 
-export default PythonHelp;
+export default CHelp;
