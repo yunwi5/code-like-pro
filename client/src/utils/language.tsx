@@ -32,7 +32,7 @@ export function prettierLanguageNames(langCodes: string[] | readonly string[]): 
 }
 
 // Find the icon for each language.
-type SvgParams = { width?: string; height?: string; className?: string };
+type SvgParams = { width?: string; height?: string; size?: string; className?: string };
 export function getLanguageIcon(language: Language, params?: SvgParams) {
     switch (language) {
         case Language.C:

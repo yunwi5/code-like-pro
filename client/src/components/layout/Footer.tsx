@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppProperty } from '../../constants/app';
 import {
     FacebookIcon,
@@ -75,17 +75,18 @@ interface SocialIconProps {
 
 const SocialIcon: React.FC<SocialIconProps> = ({ icon, label, href }) => {
     return (
-        <HoverLabel
-            label={
-                <Link to={href ?? '#'} className="hover:text-yellow-300">
-                    {label}
-                </Link>
-            }
-        >
-            <div className="transition-all hover:scale-110 hover:brightness-125">
-                {icon}
-            </div>
-        </HoverLabel>
+        <a href={href ?? '#'} target="_blank">
+            <HoverLabel
+                label={
+                    // Open in a new tab
+                    <span className="hover:text-yellow-300">{label}</span>
+                }
+            >
+                <div className="transition-all hover:scale-110 hover:brightness-125">
+                    {icon}
+                </div>
+            </HoverLabel>
+        </a>
     );
 };
 

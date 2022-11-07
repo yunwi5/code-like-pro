@@ -5,15 +5,23 @@ import { LanguageStartingTemplate } from '../../../utils/language';
 import { removeAllSpaces } from '../../../utils/string-utils/string-manipulation';
 import CodeEditor from '../../ui/editor/CodeEditor';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
+import CreationHelp from '../creation-help/CreationHelp';
 
 const CreationSolution: React.FC = () => {
     const { language, solutionCode, setSolutionCode } = useExerciseCreationContext();
 
     const handleChange = (value: string | undefined) => setSolutionCode(value ?? '');
 
+    const heading = (
+        <div className="flex-between gap-2">
+            <span>Solution Code</span>
+            <CreationHelp defaultLanguage={language} />
+        </div>
+    );
+
     return (
         <CreationSectionContainer
-            title="Solution Code"
+            title={heading}
             testId="solution-code"
             id={CreationSection.SOLUTION_CODE}
         >

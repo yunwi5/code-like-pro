@@ -13,10 +13,19 @@ interface Props {
     onDelete?: () => void;
     output?: ITestOutput | undefined;
     readOnly?: boolean;
+    boxHeight?: string;
 }
 
 const TestCase: React.FC<Props> = (props) => {
-    const { language, testCase, onUpdate, onDelete, output, readOnly = false } = props;
+    const {
+        language,
+        testCase,
+        onUpdate,
+        onDelete,
+        output,
+        readOnly = false,
+        boxHeight = '10rem',
+    } = props;
     const [isShrinked, setIsShrinked] = useState(false);
 
     const handleCodeChange = (code: string) => {
@@ -36,7 +45,7 @@ const TestCase: React.FC<Props> = (props) => {
         <ExpectedOutput
             onOutputChange={handleOutputChange}
             expectedOutput={testCase.expectedOutput}
-            className={output ? 'min-h-[6rem]' : 'min-h-[10rem]'}
+            className={output ? 'min-h-[6rem]' : boxHeight}
             readOnly={readOnly}
         />
     );
@@ -44,7 +53,7 @@ const TestCase: React.FC<Props> = (props) => {
     return (
         <div
             id={testCase?._id}
-            className={`flex flex-col gap-2 px-3 py-2 bg-gray-200 rounded-sm shadow-md focus-within:shadow-md ${statusClass}`}
+            className={`flex flex-col gap-2 px-3 pt-2 pb-3 bg-gray-200 rounded-sm shadow-md focus-within:shadow-md ${statusClass}`}
         >
             <TestCaseHeading
                 name={testCase?.name || ''}
@@ -56,14 +65,14 @@ const TestCase: React.FC<Props> = (props) => {
                 <>
                     <div className="flex flex-col lg:flex-row flex-wrap gap-3 justify-between">
                         {/* Testcase code editor */}
-                        <div className="flex-1 overflow-hidden">
+                        <div className="flex-1 overflow-hidden shadow-md">
                             <p className="px-2 py-1 bg-gray-300">Code</p>
                             <CodeEditor
                                 language={language}
                                 onChange={handleCodeChange}
                                 showHeader={false}
                                 value={testCase.code}
-                                height={'10rem'}
+                                height={boxHeight}
                                 validation={false}
                                 readOnly={readOnly}
                             />
@@ -121,25 +130,25 @@ const TestCaseHeading: React.FC<HeadingProps> = (props) => {
 
 // Expected output block
 interface ExpectedOutputProps {
-    onOutputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    expectedOutput: string;
     readOnly: boolean;
+    expectedOutput: string;
+    onOutputChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     className?: string;
 }
-const ExpectedOutput: React.FC<ExpectedOutputProps> = ({
+export const ExpectedOutput: React.FC<ExpectedOutputProps> = ({
     onOutputChange,
     expectedOutput,
     className = '',
     readOnly,
 }) => {
     return (
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col">
             <p className="px-2 py-1 bg-gray-300">Expected Output</p>
             <textarea
                 onChange={onOutputChange}
                 value={expectedOutput}
                 rows={3}
-                className={`text-sm min-w-[100%] !px-3 py-2 input ${
+                className={`grow shrink text-sm min-w-[100%] !px-3 py-2 input ${
                     readOnly && 'focus:!outline-none'
                 } ${className}`}
             />
