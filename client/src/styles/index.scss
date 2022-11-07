@@ -89,6 +89,9 @@ code {
     .flex-start {
         @apply flex justify-start items-center;
     }
+    .flex-end {
+        @apply flex justify-end items-center;
+    }
     .flex-between {
         @apply flex justify-between items-center;
     }
@@ -99,7 +102,7 @@ code {
         @apply focus:outline focus:outline-2 focus:outline-main-300;
     }
     .input {
-        @apply px-2 py-2 min-h-[2.5rem] border-2 border-gray-300 bg-gray-50 rounded-sm shadow-md focus:shadow-lg focus:outline focus:outline-2 focus:outline-main-300;
+        @apply px-2 py-2 min-h-[2.5rem] border-2 border-gray-300 bg-gray-50 rounded-sm shadow-md focus:shadow-lg focus:outline focus:outline-2 focus:border-transparent;
     }
     .btn {
         @apply px-3 py-2 text-lg transition-all rounded-sm shadow hover:shadow-md cursor-pointer;
@@ -133,5 +136,8 @@ code {
     }
     .card {
         @apply rounded-sm transition-all shadow-md hover:shadow-lg;
+    }
+    .mark {
+        @apply px-1 bg-slate-200 text-main-400 rounded;
     }
 }

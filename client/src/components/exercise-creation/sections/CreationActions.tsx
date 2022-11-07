@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import { IReadyStatus } from '../../../models/interfaces';
 import Button from '../../ui/buttons/Button';
 import RingLoader from 'react-spinners/RingLoader';
 import { useNavigate } from 'react-router-dom';
 import { getExerciseAttemptPageLink } from '../../../utils/links';
+import { FaRegLightbulb } from 'react-icons/fa';
+import CreationHelpModal from '../creation-help/CreationHelpModal';
 
 const btnClass = 'min-w-[10rem]';
 
@@ -54,7 +56,34 @@ const CreationActions: React.FC = () => {
                 </Button>
             )}
             {!!readyStatus && <StatusMessage readyStatus={readyStatus} />}
+
+            {/* Help modal for exercise creation */}
+            <HelpButton />
         </div>
+    );
+};
+
+const HelpButton: React.FC = () => {
+    const { language } = useExerciseCreationContext();
+    // Help modal visibility
+    const [showModal, setShowModal] = useState(false);
+
+    return (
+        <>
+            <button
+                onClick={() => setShowModal(true)}
+                className="group flex-center gap-1 group px-3 mt-1 py-[0.3rem] font-semibold rounded-full hover:bg-main-400 hover:text-white hover:shadow-md"
+            >
+                <FaRegLightbulb className="text-[1.2em] text-main-500 group-hover:text-white" />
+                Help
+            </button>
+            <CreationHelpModal
+                key={language}
+                open={showModal}
+                onClose={() => setShowModal(false)}
+                defaultLanguage={language}
+            />
+        </>
     );
 };
 
