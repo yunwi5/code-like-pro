@@ -37,7 +37,7 @@ const JavaScriptHelp: React.FC = () => {
 
     return (
         <article className="flex flex-col gap-7">
-            <h3 className="flex-start gap-1 text-slate-600 text-2xl -mb-5">
+            <h3 className="flex-start gap-1 text-slate-600 text-xl sm:text-2xl -mb-5">
                 JavaScript Challenge Guide
             </h3>
             <div>
