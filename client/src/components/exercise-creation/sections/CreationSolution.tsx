@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CreationSection, Language } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import { LanguageStartingTemplate } from '../../../utils/language';
 import { removeAllSpaces } from '../../../utils/string-utils/string-manipulation';
 import CodeEditor from '../../ui/editor/CodeEditor';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
+import CreationHelp from '../creation-help/CreationHelp';
 
 const CreationSolution: React.FC = () => {
     const { language, solutionCode, setSolutionCode } = useExerciseCreationContext();
+    // Help modal visibility
+    const [showHelpModal, setShowHelpModal] = useState(false);
 
     const handleChange = (value: string | undefined) => setSolutionCode(value ?? '');
 
+    const heading = (
+        <div className="flex-between gap-2">
+            <span>Solution Code</span>
+            <CreationHelp open={showHelpModal} setVisible={setShowHelpModal} />
+        </div>
+    );
+
     return (
         <CreationSectionContainer
-            title="Solution Code"
+            title={heading}
             testId="solution-code"
             id={CreationSection.SOLUTION_CODE}
         >
