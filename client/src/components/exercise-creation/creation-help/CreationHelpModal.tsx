@@ -42,7 +42,10 @@ const CreationHelpModal: React.FC<Props> = ({ open, onClose, defaultLanguage }) 
                     />
 
                     {/* Language specific documentation */}
-                    <div className="mt-1 px-3 lg:px-7 max-h-[30rem] overflow-y-scroll">
+                    <div
+                        id="modal-scroll"
+                        className="mt-1 px-3 lg:px-7 max-h-[30rem] overflow-y-scroll"
+                    >
                         {getLanguageHelp(selectedLanguage)}
                     </div>
 

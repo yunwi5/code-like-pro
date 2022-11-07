@@ -84,8 +84,8 @@ const CppHelp: React.FC = () => {
                 <p className="mb-3">
                     Once we define the solution code and the test case, the following is
                     the structure of the resulting program that will be executed when you
-                    run the code. In {languageName}, we include your asdfasdfsolution code
-                    such as {'  '}
+                    run the code. In {languageName}, we include your solution code such as{' '}
+                    {'  '}
                     <mark className="mark">functions</mark>,{' '}
                     <mark className="mark">classes</mark> or{' '}
                     <mark className="mark">structs</mark> in advance, then we insert the

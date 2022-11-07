@@ -51,7 +51,7 @@ const CppHelp: React.FC = () => {
     };
 
     return (
-        <article className="flex flex-col gap-7">
+        <article className="flex flex-col gap-8">
             <h3 className="flex-start gap-1 text-slate-600 text-2xl -mb-5">
                 {languageName} Challenge Guide
             </h3>
@@ -65,7 +65,12 @@ const CppHelp: React.FC = () => {
                     you can define your own classes if needed. You can test all of them in
                     the test cases.
                 </p>
-                <CodeEditor value={javaSolution} language={language} readOnly={true} />
+                <CodeEditor
+                    value={javaSolution}
+                    language={language}
+                    readOnly={true}
+                    height="11rem"
+                />
             </div>
 
             <div>
