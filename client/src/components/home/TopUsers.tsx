@@ -21,7 +21,7 @@ const TopUsers: React.FC = () => {
                         <h1 className="text-text-main-500 text-4xl my-2">Top Users</h1>
                         <h2 className="lg:w-[70%] my-2 leading-7">
                             Top ranked users who are essentially the most talented
-                            programmers in our platform
+                            programmers in our platform.
                         </h2>
                         <ArrowLink to="/ranking">Ranking</ArrowLink>
                     </div>

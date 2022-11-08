@@ -30,7 +30,7 @@ const BadgeSpecInfo = [
     {
         rarity: BadgeRarity.UR,
         description:
-            'This is the badge of ultimate rarity. The UR level badges are awarded for our top users such as the one ranked 1st or those who created/solved 30+ exercises.',
+            'This is the badge of ultimate rarity. The UR level badges are awarded for our top users such as the one ranked 1st or those who creating/solved 30+ exercises.',
     },
     {
         rarity: BadgeRarity.SR,
