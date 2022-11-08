@@ -35,6 +35,9 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
     const liked: boolean = likedExerciseIdSet.has(exercise?._id || '');
     const difficultyStyle = getDifficultyColorClass(exercise.difficulty);
 
+    // Navigate to exercise attempt page for this exercise
+    const navigateToAttempt = () => navigate(getExerciseAttemptPageLink(exercise._id));
+
     // Group of edit & delete buttons displayed only if the user is the author.
     const exerciseControl = exercise?.isAuthorized ? (
         <ExerciseControl
@@ -49,12 +52,15 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
     return (
         <>
             <article
-                onClick={() => navigate(getExerciseAttemptPageLink(exercise._id))}
+                onClick={!exercise?.isAuthorized ? navigateToAttempt : undefined}
                 className={`flex flex-col gap-4 px-4 py-2 text-gray-700 hover:bg-gray-200 border-2 border-gray-200/90 rounded-sm transition-all shadow-md hover:shadow-lg cursor-pointer ${className}`}
             >
                 {/* Exercise name, difficulty and language */}
                 <header className="flex-start gap-3">
-                    <h3 className="text-base sm:text-[1.13rem] hover:text-blue-600">
+                    <h3
+                        onClick={navigateToAttempt}
+                        className="text-base sm:text-[1.13rem] hover:text-blue-600"
+                    >
                         {exercise.name}
                     </h3>
                     <div

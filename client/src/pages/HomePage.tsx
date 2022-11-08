@@ -12,6 +12,7 @@ import ScrollProgress from '../components/home/ScrollProgress';
 import HomeFeatures from '../components/home/features/HomeFeatures';
 import HomeDiscussions from '../components/home/discussions/HomeDiscussions';
 import HomeBadges from '../components/home/badges/HomeBadges';
+import JoinUs from '../components/home/join-us/JoinUs';
 
 const leftInVariants = {
     initial: { opacity: 0, x: -300 },
@@ -92,6 +93,15 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
             >
                 <HomeDiscussions />
+            </motion.div>
+            <motion.div
+                variants={leftInVariants}
+                initial="initial"
+                whileInView="animate"
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+            >
+                <JoinUs />
             </motion.div>
         </>
     );

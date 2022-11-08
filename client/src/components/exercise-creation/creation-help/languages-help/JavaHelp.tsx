@@ -52,7 +52,7 @@ const CppHelp: React.FC = () => {
 
     return (
         <article className="flex flex-col gap-8">
-            <h3 className="flex-start gap-1 text-slate-600 text-2xl -mb-5">
+            <h3 className="flex-start gap-1 text-slate-600 text-xl sm:text-2xl -mb-5">
                 {languageName} Challenge Guide
             </h3>
             <div>
