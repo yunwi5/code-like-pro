@@ -1,4 +1,4 @@
-import { BadgeImages } from '../assets/badgeImages';
+import { BadgeImages } from '../assets/badge-images';
 import { BadgeRarity } from '../models/enums';
 import { IBadge } from '../models/interfaces';
 import { customToastNotify } from './notification';

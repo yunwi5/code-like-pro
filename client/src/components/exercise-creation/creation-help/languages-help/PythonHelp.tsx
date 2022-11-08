@@ -36,8 +36,7 @@ const PythonHelp: React.FC = () => {
 
     return (
         <article className="flex flex-col gap-7">
-            <h3 className="flex-start gap-1 text-slate-600 text-2xl -mb-5">
-                {/* {getLanguageIcon(language, { width: '35px', height: '35px' })} */}
+            <h3 className="flex-start gap-1 text-slate-600 text-xl sm:text-2xl -mb-5">
                 Python Challenge Guide
             </h3>
             <div>

@@ -13,16 +13,17 @@ const TopExercises: React.FC = () => {
         [exercises],
     );
     return (
-        <div className="h-fit w-full">
-            <div className="lg:grid lg:grid-cols-3 h-full py-3 lg:py-8 px-4 sm:px-10 md:px-16 md:grid-cols-1">
+        <section className="h-fit w-[clamp(20rem,85rem,97vw)] mx-auto">
+            <div className="lg:grid lg:grid-cols-3 h-full py-3 lg:py-8 px-4 sm:px-10 md:grid-cols-1">
                 <div className="col-span-1 flex justify-center items-start lg:items-center flex-col content-center xl:pl-16">
                     <div>
                         <h1 className="text-text-main-500 text-3xl my-2">
                             Top Exercises
                         </h1>
-                        <h2 className="lg:w-2/4 mt-4 mb-2 leading-7 sm:w-full">
-                            Browse the top rated exercises created by students tailor made
-                            for the courses you are taking
+                        <h2 className="lg:w-[65%] mt-4 mb-2 leading-7 sm:w-full">
+                            Top rated exercises created by our creative programmers who
+                            are activaly participating to make our platform more
+                            contentful!
                         </h2>
                         <ArrowLink to="/browse">Explore</ArrowLink>
                     </div>
@@ -33,7 +34,7 @@ const TopExercises: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
