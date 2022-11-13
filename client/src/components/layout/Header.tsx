@@ -151,7 +151,7 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
                     className="w-fit link-underline-effect mt-4 mr-8 block lg:inline-block lg:mt-0 text-gray-500 font-semibold hover:text-main-600 transition-all"
                     activeClassName="!text-main-500"
                 >
-                    Explore
+                    Challenges
                 </ActiveNavLink>
                 <ActiveNavLink
                     to="/create-exercise"
