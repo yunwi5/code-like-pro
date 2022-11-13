@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import ExerciseInfoNav from './ExerciseInfoNav';
+import ExerciseInfoNav from './sections/ExerciseInfoNav';
 import ExercisePrompt from './sections/exercise-prompt/ExercisePrompt';
 import ExerciseIssueReports from './sections/ExerciseIssueReports';
 import PreviousSubmission from './sections/PreviousSubmission';
-import TestCasesDisplay from './sections/TestCasesDisplay';
+import TestCasesDisplay from './sections/test-cases/AttemptTestCases';
 
 export enum SubSection {
     PROMPT = 'Prompt',

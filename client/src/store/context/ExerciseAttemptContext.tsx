@@ -2,7 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { postSubmission, runTestCases } from '../../apis/submission.api';
 import ShowcaseInviteModal from '../../components/exercise-attempt/modals/ShowcaseInviteModal';
 import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
-import { IExerciseWithId, ITestOutput, IUserSubmission } from '../../models/interfaces';
+import {
+    IExerciseWithId,
+    ITestCase,
+    ITestOutput,
+    IUserSubmission,
+} from '../../models/interfaces';
 import { getCorrectTestCaseCount } from '../../utils/exercise-utils/testcase';
 import { toastNotify } from '../../utils/notification';
 
@@ -16,19 +21,9 @@ interface IExerciseAttemptCtx {
     runCode: () => void;
     submitCode: () => void;
     refetchExercise: () => void;
+    customTests: ITestCase[];
+    setCustomTests: React.Dispatch<React.SetStateAction<ITestCase[]>>;
 }
-
-const ExerciseAttemptContext = React.createContext<IExerciseAttemptCtx>({
-    exercise: null,
-    isLoading: false,
-    testCaseOutputs: [],
-    userSolution: '',
-    userSubmission: null,
-    setUserSolution: () => {},
-    runCode: () => {},
-    submitCode: () => {},
-    refetchExercise: () => {},
-});
 
 export const useExerciseAttemptCtx = () => useContext(ExerciseAttemptContext);
 
@@ -46,28 +41,33 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     children,
 }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [userSolution, setUserSolution] = useState(
-        previousSubmission?.code ?? exercise.startingTemplate,
-    );
+    const [userSolution, setUserSolution] = useState(exercise.startingTemplate);
     const [userSubmission, setUserSubmission] = useState<IUserSubmission | null>(
         previousSubmission ?? null,
     );
     const [testCaseOutputs, setTestCaseOutputs] = useState<ITestOutput[]>([]);
-    const { qualifySolvingBadges } = useBadgeQualification();
 
+    const [customTests, setCustomTests] = useState<ITestCase[]>([]);
+
+    // Solving badge qualifying detection
+    const { qualifySolvingBadges } = useBadgeQualification();
     // Showcase invite modal to encourage users to join the showcase, after they get correct.
     const [showInviteModal, setShowInviteModal] = useState(false);
 
     const runCode = async () => {
         // output of the test cases => actual output, status like correctness
         setIsLoading(true);
+
+        // Test cases combining custom tests by user and original tests by creator
+        const testCases = customTests.concat(exercise.testCases);
+
         const {
             ok,
             data: outputs,
             message,
         } = await runTestCases({
             code: userSolution,
-            testCases: exercise.testCases,
+            testCases,
             language: exercise.language,
         });
         setIsLoading(false);
@@ -75,12 +75,13 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         if (ok && outputs) {
             setTestCaseOutputs(outputs);
             const { correct } = getCorrectTestCaseCount(outputs);
+            setCustomTests((tests) =>
+                tests.map((test) => ({ ...test, hasOutput: true })),
+            );
             toastNotify(
                 `You got ${correct} tests correct out of ${outputs.length} tests!`,
             );
-        } else {
-            toastNotify(`Oops, ${message}`, 'error');
-        }
+        } else toastNotify(`Oops, ${message}`, 'error');
     };
 
     const submitCode = async () => {
@@ -95,6 +96,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         if (ok && newSubmission) {
             setUserSubmission(newSubmission);
             if (newSubmission.correct) {
+                toastNotify("You got all creator's test cases correct!", 'success');
                 setShowInviteModal(true);
             } else {
                 toastNotify(
@@ -126,6 +128,8 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         runCode,
         submitCode,
         refetchExercise,
+        customTests,
+        setCustomTests,
     };
 
     return (
@@ -138,3 +142,17 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         </ExerciseAttemptContext.Provider>
     );
 };
+
+const ExerciseAttemptContext = React.createContext<IExerciseAttemptCtx>({
+    exercise: null,
+    isLoading: false,
+    testCaseOutputs: [],
+    userSolution: '',
+    userSubmission: null,
+    setUserSolution: () => {},
+    runCode: () => {},
+    submitCode: () => {},
+    refetchExercise: () => {},
+    customTests: [],
+    setCustomTests: () => {},
+});

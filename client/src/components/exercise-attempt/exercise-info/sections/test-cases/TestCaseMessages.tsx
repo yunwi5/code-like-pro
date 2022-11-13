@@ -1,6 +1,6 @@
 import React from 'react';
-import { ITestCase, ITestOutput } from '../../../../models/interfaces';
-import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import { ITestCase, ITestOutput } from '../../../../../models/interfaces';
+import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 
 function getOpenAndHiddenTestCounts(testCases: ITestCase[]) {
     const openTestCases = testCases.filter((ex) => !ex.hidden);

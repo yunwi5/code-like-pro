@@ -1,11 +1,25 @@
 import { ITestCase, ITestOutput } from '../../models/interfaces';
 
+// Creater's test case
 export function getEmptyTestCase(testCaseNumber?: number): ITestCase {
     return {
         _id: `test-case-${testCaseNumber}`,
         code: '',
         expectedOutput: '',
     };
+}
+
+// User defined custom test case
+export function getEmptyCustomTestCase(testCaseNumber?: number): ITestCase {
+    const newCustomTest: ITestCase = {
+        _id: `custom-test-case-${testCaseNumber}`,
+        name: `Custom Test ${(testCaseNumber ?? 0) + 1}`,
+        code: '',
+        expectedOutput: '',
+        custom: true,
+        hasOutput: false,
+    };
+    return newCustomTest;
 }
 
 export function getInitialTestCaseArray(): ITestCase[] {

@@ -40,6 +40,7 @@ const TestCase: React.FC<Props> = (props) => {
     const handleHidden = () => onUpdate && onUpdate({ hidden: !testCase.hidden });
 
     const statusClass = getStatusClass(output);
+    const paddingClass = readOnly ? 'pb-3' : 'pb-[0.35rem]';
 
     const expectedOutput = (
         <ExpectedOutput
@@ -53,7 +54,7 @@ const TestCase: React.FC<Props> = (props) => {
     return (
         <div
             id={testCase?._id}
-            className={`flex flex-col gap-2 px-3 pt-2 pb-3 bg-gray-200 rounded-sm shadow-md focus-within:shadow-md ${statusClass}`}
+            className={`flex flex-col gap-2 px-3 pt-2 bg-gray-200 rounded-sm shadow-md focus-within:shadow-md ${paddingClass} ${statusClass}`}
         >
             <TestCaseHeading
                 name={testCase?.name || ''}

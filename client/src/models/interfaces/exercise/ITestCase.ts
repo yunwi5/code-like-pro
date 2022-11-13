@@ -5,7 +5,13 @@ export interface ITestCase {
     expectedOutput: string;
     hidden?: boolean;
     error?: string | null;
+    custom?: boolean; // True if user custom test they add while attempt
+    hasOutput?: boolean;
 }
+
+// export interface ITestCaseWithOutput extends ITestCase {
+//     actualOutput: string;
+// }
 
 // Object consists of only optional props for a property update purpose
 export interface ITestCaseProps {

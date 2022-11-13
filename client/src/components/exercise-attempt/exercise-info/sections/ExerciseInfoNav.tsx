@@ -2,7 +2,7 @@ import React from 'react';
 import { BsFileCode } from 'react-icons/bs';
 import { GoIssueOpened, GoNote } from 'react-icons/go';
 import { IoIosFlask } from 'react-icons/io';
-import { SubSection, SubSectionList } from './ExerciseInfoSection';
+import { SubSection, SubSectionList } from '../ExerciseInfoSection';
 
 interface Props {
     activeSubSection: SubSection;
