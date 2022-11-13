@@ -56,7 +56,7 @@ const Header = () => {
                 <NavLink
                     to="/"
                     onClick={() => setShowMobileDropdownMenu(false)}
-                    className="flex-start gap-2 text-xl tracking-tight hover:cursor-pointer"
+                    className="flex-start gap-1 sm:gap-2 text-xl tracking-tight hover:cursor-pointer"
                 >
                     <Logo size={25} />
                     CodeLikePro
@@ -76,6 +76,9 @@ const Header = () => {
 
             {/* User profile info and navigation on the right side of the header. */}
             {isLoggedIn && <UserProfileNav />}
+            {!isLoggedIn && (
+                <LoginButton className="text-sm sm:text-base !px-2 !py-[0.3rem] lg:hidden" />
+            )}
         </header>
     );
 };
@@ -180,26 +183,34 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
             <div className="flex flex-col lg:flex-row gap-3 max-w-[7rem] lg:max-w-none mt-4 lg:mt-0">
                 {!isLoggedIn && (
                     <>
-                        <NavLink
-                            to="/login"
-                            className="flex-start gap-[0.35rem] px-3 py-[0.35rem] bg-transparent hover:bg-main-600 text-main-600 font-regular hover:text-white border border-main-500 hover:border-transparent rounded shadow-sm"
-                        >
-                            <FiLogIn className="text-[1.1em]" />
-                            Login
-                        </NavLink>
-                        <NavLink
-                            to="/register"
-                            className="flex-start gap-[0.35rem] px-3 py-[0.35rem] bg-main-500 hover:bg-main-600 text-gray-50 font-regular border border-main-500 hover:border-transparent rounded shadow-sm"
-                        >
-                            <FaUserPlus className="text-[1.1em]" />
-                            Register
-                        </NavLink>
+                        <LoginButton />
+                        <RegisterButton />
                     </>
                 )}
             </div>
         </nav>
     );
 };
+
+const LoginButton: React.FC<{ className?: string }> = ({ className = '' }) => (
+    <NavLink
+        to="/login"
+        className={`flex-start gap-[0.35rem] px-3 py-[0.35rem] bg-transparent hover:bg-main-600 text-main-600 hover:text-white border border-main-500 hover:border-transparent rounded shadow-sm ${className}`}
+    >
+        <FiLogIn className="text-[1.1em]" />
+        Login
+    </NavLink>
+);
+
+const RegisterButton = () => (
+    <NavLink
+        to="/register"
+        className="flex-start gap-[0.35rem] px-3 py-[0.35rem] bg-main-500 hover:bg-main-600 text-gray-50 font-regular border border-main-500 hover:border-transparent rounded shadow-sm"
+    >
+        <FaUserPlus className="text-[1.1em]" />
+        Register
+    </NavLink>
+);
 
 // Forum nav item which has a nested nav list of forum categories.
 const ForumNavItem: React.FC = () => {
