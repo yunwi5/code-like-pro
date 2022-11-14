@@ -1,13 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ITestCase, ITestCaseProps, ITestOutput } from '../../../../../models/interfaces';
+import { ITestCaseProps, ITestCaseWithOutput } from '../../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 import { listItemAnimations } from '../../../../../utils/animations';
 import TestCase from '../../../../ui/test-cases/TestCase';
-
-export interface ITestCaseWithOutput extends ITestCase {
-    output?: ITestOutput;
-}
 
 interface Props {
     testCasesWithOutputs: ITestCaseWithOutput[];

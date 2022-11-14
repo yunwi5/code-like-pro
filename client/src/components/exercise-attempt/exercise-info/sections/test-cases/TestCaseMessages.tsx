@@ -1,5 +1,5 @@
 import React from 'react';
-import { ITestCase, ITestOutput } from '../../../../../models/interfaces';
+import { ITestCase, ITestCaseWithOutput } from '../../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 
 function getOpenAndHiddenTestCounts(testCases: ITestCase[]) {
@@ -11,19 +11,19 @@ function getOpenAndHiddenTestCounts(testCases: ITestCase[]) {
 }
 
 // Generate test cases output messages
-function generateOutputMessages(testCases: ITestCase[], outputs: ITestOutput[]) {
-    if (outputs.length < 1) return ['', ''];
+function generateOutputMessages(testCases: ITestCaseWithOutput[]) {
+    if (testCases.length < 1) return ['', ''];
+
     const [openTestCasesCount, hiddenTestCasesCount] =
         getOpenAndHiddenTestCounts(testCases);
 
     let openTestCorrectCount = 0,
         hiddenTestCorrectCount = 0;
-    testCases.forEach((test, idx) => {
-        let output = outputs[idx];
+    testCases.forEach((test) => {
         if (!test.hidden) {
-            if (output.correct) openTestCorrectCount++;
+            if (test.output?.correct) openTestCorrectCount++;
         } else {
-            if (output.correct) hiddenTestCorrectCount++;
+            if (test.output?.correct) hiddenTestCorrectCount++;
         }
     });
 
@@ -42,15 +42,17 @@ function generateOutputMessages(testCases: ITestCase[], outputs: ITestOutput[]) 
     ];
 }
 
-const TestCaseMessages: React.FC<{ testCases: ITestCase[] }> = ({ testCases }) => {
+const TestCaseMessages: React.FC<{ testCasesWithOutputs: ITestCaseWithOutput[] }> = ({
+    testCasesWithOutputs,
+}) => {
     const { testCaseOutputs } = useExerciseAttemptCtx();
 
     // Only display non hidden test cases.
     const [openTestCasesCount, hiddenTestCasesCount] =
-        getOpenAndHiddenTestCounts(testCases);
+        getOpenAndHiddenTestCounts(testCasesWithOutputs);
 
     const noTestCaseOutputs = testCaseOutputs.length === 0;
-    const outputMessages = generateOutputMessages(testCases, testCaseOutputs);
+    const outputMessages = generateOutputMessages(testCasesWithOutputs);
 
     return (
         <div className="flex flex-wrap gap-5 px-6 py-2">
