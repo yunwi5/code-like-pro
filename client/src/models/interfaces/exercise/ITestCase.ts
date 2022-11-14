@@ -5,6 +5,8 @@ export interface ITestCase {
     expectedOutput: string;
     hidden?: boolean;
     error?: string | null;
+    custom?: boolean; // True if user custom test they add while attempt
+    hasOutput?: boolean;
 }
 
 // Object consists of only optional props for a property update purpose

@@ -1,6 +1,6 @@
 import React from 'react';
-import { ITestCase, ITestOutput } from '../../../../models/interfaces';
-import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import { ITestCase, ITestOutput } from '../../../../../models/interfaces';
+import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 
 function getOpenAndHiddenTestCounts(testCases: ITestCase[]) {
     const openTestCases = testCases.filter((ex) => !ex.hidden);
@@ -42,18 +42,15 @@ function generateOutputMessages(testCases: ITestCase[], outputs: ITestOutput[]) 
     ];
 }
 
-const TestCaseMessages: React.FC = () => {
-    const { exercise, testCaseOutputs } = useExerciseAttemptCtx();
-
-    if (exercise == null) return null;
+const TestCaseMessages: React.FC<{ testCases: ITestCase[] }> = ({ testCases }) => {
+    const { testCaseOutputs } = useExerciseAttemptCtx();
 
     // Only display non hidden test cases.
-    const [openTestCasesCount, hiddenTestCasesCount] = getOpenAndHiddenTestCounts(
-        exercise.testCases,
-    );
+    const [openTestCasesCount, hiddenTestCasesCount] =
+        getOpenAndHiddenTestCounts(testCases);
 
     const noTestCaseOutputs = testCaseOutputs.length === 0;
-    const outputMessages = generateOutputMessages(exercise.testCases, testCaseOutputs);
+    const outputMessages = generateOutputMessages(testCases, testCaseOutputs);
 
     return (
         <div className="flex flex-wrap gap-5 px-6 py-2">
