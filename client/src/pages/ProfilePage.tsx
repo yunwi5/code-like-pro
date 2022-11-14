@@ -32,7 +32,7 @@ const ProfilePage: React.FC = () => {
                     <h1 className="hidden sm:block mb-3 pl-2 sm:pl-0 text-gray-600 text-3xl self-start">
                         {activeSection}
                     </h1>
-                    <div className="flex flex-col lg:flex-row sm:bg-gray-50 rounded-md overflow-hidden sm:shadow-md">
+                    <div className="flex flex-col lg:flex-row sm:bg-gray-50 rounded-md sm:shadow-md">
                         <ProfileNav activeSection={activeSection} />
                         <Outlet />
                     </div>
