@@ -46,7 +46,6 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         previousSubmission ?? null,
     );
     const [testCaseOutputs, setTestCaseOutputs] = useState<ITestOutput[]>([]);
-
     const [customTests, setCustomTests] = useState<ITestCase[]>([]);
 
     // Solving badge qualifying detection
@@ -75,6 +74,8 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         if (ok && outputs) {
             setTestCaseOutputs(outputs);
             const { correct } = getCorrectTestCaseCount(outputs);
+
+            // Now, all custom tests have corresponding outputs
             setCustomTests((tests) =>
                 tests.map((test) => ({ ...test, hasOutput: true })),
             );
@@ -111,9 +112,10 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     useEffect(() => {
         if (!previousSubmission) return;
         setUserSubmission(previousSubmission);
-        setUserSolution(previousSubmission.code);
+        // setUserSolution(previousSubmission.code);
     }, [previousSubmission]);
 
+    // Solving badge detection with useEffect
     useEffect(() => {
         qualifySolvingBadges();
     }, [userSubmission, qualifySolvingBadges]);

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import {
     IExerciseWithId,
     ITestCase,
@@ -6,21 +5,22 @@ import {
     ITestOutput,
 } from '../../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
-import { listItemAnimations } from '../../../../../utils/animations';
 import { getEmptyCustomTestCase } from '../../../../../utils/exercise-utils/testcase';
-import TestCase from '../../../../ui/test-cases/TestCase';
 import TestCaseMessages from './TestCaseMessages';
+import TestCasesList from './TestCasesList';
 import TestCaseUserActions from './TestCaseUserActions';
 
 function getExistingTestsWithNames(exercise: IExerciseWithId) {
-    let testIndex = 0;
+    let openTestIndex = 0;
     return exercise.testCases.map((testCase) => {
-        if (!testCase.hidden) testIndex++;
-        return { ...testCase, name: `Test Case ${testIndex}` };
+        if (!testCase.hidden) openTestIndex++;
+        return { ...testCase, name: `Test Case ${openTestIndex}` };
     });
 }
 
-function mapTestCaseAndOutput(testCases: ITestCase[], outputs: ITestOutput[]) {
+// Match input test case and test output.
+// It should ignore the input test cases that do not have output yet (ones just created from users)
+function matchTestCaseAndOutput(testCases: ITestCase[], outputs: ITestOutput[]) {
     let outputIndex = 0;
     // Map test case and its corresponding output
     const testCaseWithOutputs = testCases.map((test) => {
@@ -68,52 +68,24 @@ const AttemptTestCases: React.FC = () => {
     // Combine existing tests with new user custom tests
     const combinedTestCases = customTests.concat(existingTests);
     // Merge corresponding output to each test case
-    const testCasesWithOutputs = mapTestCaseAndOutput(combinedTestCases, testCaseOutputs);
+    const testCasesWithOutputs = matchTestCaseAndOutput(
+        combinedTestCases,
+        testCaseOutputs,
+    );
 
     return (
         <section className="flex-1 overflow-y-scroll bg-white pt-2 pb-5">
             <div className="flex flex-wrap justify-between items-center">
-                <TestCaseMessages />
+                <TestCaseMessages testCases={combinedTestCases} />
                 <TestCaseUserActions onAddCase={addCustomTest} />
             </div>
-            <ul className="flex flex-col gap-4 px-2 xl:px-4 py-2">
-                {testCasesWithOutputs.map((testCase, idx) => {
-                    // Only display non hidden test cases.
-                    if (!testCase.custom && testCase.hidden) return null;
 
-                    return (
-                        <motion.div
-                            key={idx}
-                            variants={listItemAnimations}
-                            initial="initial"
-                            animate="animate"
-                            exit="exit"
-                            transition={{ duration: 0.3, delay: idx * 0.1 }}
-                        >
-                            {testCase.custom ? (
-                                <TestCase
-                                    key={`${testCase.name}-${idx}`}
-                                    language={exercise.language}
-                                    testCase={testCase}
-                                    output={testCase.output}
-                                    onUpdate={(props: ITestCaseProps) =>
-                                        updateCustomTestCase(props, idx)
-                                    }
-                                    onDelete={() => deleteCustomTestCase(idx)}
-                                />
-                            ) : (
-                                <TestCase
-                                    key={`test-case-${idx}`}
-                                    language={exercise.language}
-                                    testCase={testCase}
-                                    output={testCase.output}
-                                    readOnly={true}
-                                />
-                            )}
-                        </motion.div>
-                    );
-                })}
-            </ul>
+            {/* List of testcases combining creator's tests and user defined custom tests. */}
+            <TestCasesList
+                testCasesWithOutputs={testCasesWithOutputs}
+                updateCustomTestCase={updateCustomTestCase}
+                deleteCustomTestCase={deleteCustomTestCase}
+            />
         </section>
     );
 };

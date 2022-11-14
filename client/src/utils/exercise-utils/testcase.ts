@@ -1,6 +1,6 @@
 import { ITestCase, ITestOutput } from '../../models/interfaces';
 
-// Creater's test case
+// Creater's initial test case
 export function getEmptyTestCase(testCaseNumber?: number): ITestCase {
     return {
         _id: `test-case-${testCaseNumber}`,
