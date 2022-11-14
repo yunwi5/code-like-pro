@@ -1,3 +1,5 @@
+import { ITestOutput } from './ITestOutput';
+
 export interface ITestCase {
     _id?: string;
     name?: string;
@@ -7,6 +9,10 @@ export interface ITestCase {
     error?: string | null;
     custom?: boolean; // True if user custom test they add while attempt
     hasOutput?: boolean;
+}
+
+export interface ITestCaseWithOutput extends ITestCase {
+    output?: ITestOutput;
 }
 
 // Object consists of only optional props for a property update purpose

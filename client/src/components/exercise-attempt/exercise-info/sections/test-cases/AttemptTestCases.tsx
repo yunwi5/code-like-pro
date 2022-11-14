@@ -76,7 +76,7 @@ const AttemptTestCases: React.FC = () => {
     return (
         <section className="flex-1 overflow-y-scroll bg-white pt-2 pb-5">
             <div className="flex flex-wrap justify-between items-center">
-                <TestCaseMessages testCases={combinedTestCases} />
+                <TestCaseMessages testCasesWithOutputs={testCasesWithOutputs} />
                 <TestCaseUserActions onAddCase={addCustomTest} />
             </div>
 
