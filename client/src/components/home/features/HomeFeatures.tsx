@@ -53,11 +53,11 @@ const HomeFeatures: React.FC = () => {
     const navigate = useNavigate();
 
     return (
-        <section className="flex-center mx-auto my-20 py-10 text-gray-600 bg-gray-100">
+        <section className="flex-center mx-auto my-10 lg:my-20 py-4 sm:py-8 md:py-10 text-gray-600 bg-gray-100">
             <div className="w-[min(80rem,95vw)]">
                 {/* Banners for letters animations */}
                 <FeaturesBanner />
-                <div className="relative mt-5 min-h-[min(85vh,35rem)]">
+                <div className="relative mt-5 min-h-[30rem]">
                     <AnimateSharedLayout>
                         {/* Images are absolute positions for large screen sizes (1024px or above) */}
                         {/* Images are in the grid layout for smaller screen sizes (<= 1023px) */}
@@ -71,6 +71,7 @@ const HomeFeatures: React.FC = () => {
                                 onClick={() => navigate(getExerciseCreationPageLink())}
                                 variants={image}
                                 src={AppImages.ExerciseCreation}
+                                delay={0.2}
                                 alt="Exercise Creation"
                                 className="lg:top-[1rem] lg:left-[1rem] lg:h-[12rem] lg:w-[calc(12rem*1.67)]"
                             />
@@ -80,6 +81,7 @@ const HomeFeatures: React.FC = () => {
                                 onClick={() => navigate(getShowcaseInvitesPageLink())}
                                 variants={image}
                                 src={AppImages.Showcases}
+                                delay={0.35}
                                 alt="User Showcases"
                                 className="lg:bottom-[1rem] lg:left-[1rem] lg:h-[13.5rem] lg:w-[calc(13.5rem*1.67)]"
                             />
@@ -100,7 +102,7 @@ const HomeFeatures: React.FC = () => {
                                 }
                                 variants={image}
                                 src={AppImages.Statistics}
-                                delay={0.5}
+                                delay={0.35}
                                 alt="Progress statistics"
                                 className="lg:top-[1rem] lg:right-[1rem] lg:h-[10rem] lg:w-[20rem]"
                             />
@@ -110,7 +112,7 @@ const HomeFeatures: React.FC = () => {
                                 onClick={() => navigate('/ranking')}
                                 variants={image}
                                 src={AppImages.Ranking}
-                                delay={0.5}
+                                delay={0.75}
                                 alt="Global rankings"
                                 className="lg:bottom-[1rem] lg:right-[1rem] lg:h-[12rem] lg:w-[calc(12rem*1.67)]"
                             />

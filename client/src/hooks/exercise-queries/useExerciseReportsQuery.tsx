@@ -1,16 +1,18 @@
-import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getExerciseReports } from '../../apis/exercise.api';
 
-function useExerciseReportsQuery(exerciseId: string, refetchInterval: number = 1000) {
+function useExerciseReportsQuery(
+    exerciseId: string | undefined,
+    refetchInterval: number = 1000,
+) {
     const queryClient = useQueryClient();
 
     // Use React-Query to fetch the comments data of this exercise.
     const reportsQueryKey = `exercise-${exerciseId}-reports`;
     const { data: response, isLoading } = useQuery(
         [reportsQueryKey],
-        () => getExerciseReports(exerciseId),
-        { refetchInterval },
+        () => getExerciseReports(exerciseId || ''),
+        { refetchInterval, enabled: !!exerciseId },
     );
 
     const { data: reports, message: error } = response || {};

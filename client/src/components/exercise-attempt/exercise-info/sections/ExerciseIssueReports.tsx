@@ -1,18 +1,19 @@
 import React, { useMemo } from 'react';
 import { FaSmile } from 'react-icons/fa';
-
-import useExerciseReportsQuery from '../../../../hooks/exercise-queries/useExerciseReportsQuery';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { GoIssueClosed } from 'react-icons/go';
+
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { compareByVotes } from '../../../../utils/sorting-utils';
 import IssueReportList from '../../../ui/lists/IssueReportList';
-import { GoIssueClosed } from 'react-icons/go';
+import { IIssueReport } from '../../../../models/interfaces';
 
-const ExerciseIssueReports: React.FC = () => {
+const ExerciseIssueReports: React.FC<{ reports: IIssueReport[]; isLoading: boolean }> = ({
+    reports,
+    isLoading,
+}) => {
     const { exercise } = useExerciseAttemptCtx();
     if (exercise == null) return null;
-
-    const { reports, isLoading } = useExerciseReportsQuery(exercise._id);
 
     // Sort the reports by votes descending always.
     const sortedReports = useMemo(() => {
@@ -20,7 +21,10 @@ const ExerciseIssueReports: React.FC = () => {
     }, [reports]);
 
     return (
-        <section className="flex-1 flex flex-col gap-3 px-4 py-5 overflow-y-scroll bg-white">
+        <section
+            style={{ transform: 'translate3d(0, 0, 0)' }}
+            className="flex-1 flex flex-col gap-3 px-4 py-5 overflow-y-scroll bg-white"
+        >
             <div className="flex flex-wrap justify-between items-center">
                 <h2 className="flex-start gap-1 text-gray-600 text-xl capitalize">
                     <GoIssueClosed /> Be aware of these issues!
