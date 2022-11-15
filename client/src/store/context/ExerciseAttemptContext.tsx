@@ -15,6 +15,7 @@ interface IExerciseAttemptCtx {
     exercise: IExerciseWithId | null;
     isLoading: boolean;
     testCaseOutputs: ITestOutput[];
+    setTestCaseOutputs: React.Dispatch<React.SetStateAction<ITestOutput[]>>;
     userSolution: string;
     userSubmission: IUserSubmission | null;
     setUserSolution: React.Dispatch<React.SetStateAction<string>>;
@@ -42,9 +43,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
 }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [userSolution, setUserSolution] = useState(exercise.startingTemplate);
-    const [userSubmission, setUserSubmission] = useState<IUserSubmission | null>(
-        previousSubmission ?? null,
-    );
+    const [userSubmission, setUserSubmission] = useState<IUserSubmission | null>(null);
     const [testCaseOutputs, setTestCaseOutputs] = useState<ITestOutput[]>([]);
     const [customTests, setCustomTests] = useState<ITestCase[]>([]);
 
@@ -109,10 +108,10 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         }
     };
 
+    // Restore previous user submission
     useEffect(() => {
         if (!previousSubmission) return;
         setUserSubmission(previousSubmission);
-        // setUserSolution(previousSubmission.code);
     }, [previousSubmission]);
 
     // Solving badge detection with useEffect
@@ -123,6 +122,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     const value = {
         exercise,
         testCaseOutputs,
+        setTestCaseOutputs,
         isLoading,
         userSolution,
         userSubmission,
@@ -145,10 +145,12 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     );
 };
 
+// Placeholder context value before the actual context is loaded.
 const ExerciseAttemptContext = React.createContext<IExerciseAttemptCtx>({
     exercise: null,
     isLoading: false,
     testCaseOutputs: [],
+    setTestCaseOutputs: () => {},
     userSolution: '',
     userSubmission: null,
     setUserSolution: () => {},

@@ -44,7 +44,7 @@ function matchTestCaseAndOutput(testCases: ITestCase[], outputs: ITestOutput[]) 
 // Displaying list of test cases for the user view.
 // Should not allow users to modify or delete any test cases.
 const AttemptTestCases: React.FC = () => {
-    const { exercise, testCaseOutputs, customTests, setCustomTests } =
+    const { exercise, testCaseOutputs, setTestCaseOutputs, customTests, setCustomTests } =
         useExerciseAttemptCtx();
     if (exercise == null) return null;
 
@@ -62,6 +62,9 @@ const AttemptTestCases: React.FC = () => {
     };
 
     const deleteCustomTestCase = (targetIndex: number) => {
+        setTestCaseOutputs((prevOutputs) =>
+            prevOutputs.filter((_, idx) => idx !== targetIndex),
+        );
         setCustomTests((prevList) => prevList.filter((_, idx) => idx !== targetIndex));
     };
 
@@ -74,7 +77,10 @@ const AttemptTestCases: React.FC = () => {
     );
 
     return (
-        <section className="flex-1 overflow-y-scroll bg-white pt-2 pb-5">
+        <section
+            style={{ transform: 'translate3d(0, 0, 0)' }}
+            className="flex-1 overflow-y-scroll bg-white pt-2 pb-5"
+        >
             <div className="flex flex-wrap justify-between items-center">
                 <TestCaseMessages testCasesWithOutputs={testCasesWithOutputs} />
                 <TestCaseUserActions onAddCase={addCustomTest} />

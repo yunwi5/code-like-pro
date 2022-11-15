@@ -8,12 +8,14 @@ const ExercisePrompt: React.FC = () => {
     const { exercise } = useExerciseAttemptCtx();
 
     return (
-        <section className="flex-1 flex flex-col gap-8 overflow-y-scroll px-5 py-4 bg-white">
+        <section
+            style={{ transform: 'translate3d(0, 0, 0)' }}
+            className="flex-1 flex flex-col gap-8 overflow-y-scroll px-5 py-4 bg-white"
+        >
             <ExercisePromptHeader />
             <TextEditor
                 className="read-only-editor"
                 value={exercise?.prompt || ''}
-                onChange={() => {}}
                 readOnly={true}
                 placeholder={'Write something awesome...'}
             />
