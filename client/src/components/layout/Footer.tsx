@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppProperty } from '../../constants/app';
 import {
     FacebookIcon,
@@ -29,7 +29,7 @@ const socialIcons = [
     {
         icon: <GithubIcon width={iconWidth} />,
         label: 'GitHub',
-        href: 'https://github.com/yunwi5/CS399_Group7_Project13',
+        href: 'https://github.com/yunwi5/code-like-pro',
     },
 ];
 
@@ -76,12 +76,7 @@ interface SocialIconProps {
 const SocialIcon: React.FC<SocialIconProps> = ({ icon, label, href }) => {
     return (
         <a href={href ?? '#'} target="_blank">
-            <HoverLabel
-                label={
-                    // Open in a new tab
-                    <span className="hover:text-yellow-300">{label}</span>
-                }
-            >
+            <HoverLabel label={<span className="hover:text-yellow-300">{label}</span>}>
                 <div className="transition-all hover:scale-110 hover:brightness-125">
                     {icon}
                 </div>
