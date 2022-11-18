@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function saveToLocalStorage(key: string, value: any) {
     localStorage.setItem(key, JSON.stringify(value));
@@ -19,7 +19,7 @@ function getFromLocalStorage(key: string) {
 function useLocalStorage<T>(
     key: string,
     initialValue: any,
-): [T, (newValue: any) => void] {
+): [T, React.Dispatch<React.SetStateAction<T>>] {
     const [value, setValue] = useState<T>(() => {
         const storedValue = getFromLocalStorage(key);
         // If a value already exists, the initialValue param should be ignored.
@@ -31,14 +31,11 @@ function useLocalStorage<T>(
         }
     });
 
-    const handleChange = (newValue: any) => {
-        setValue(() => {
-            saveToLocalStorage(key, newValue);
-            return newValue;
-        });
-    };
+    useEffect(() => {
+        saveToLocalStorage(key, value);
+    }, [key, value]);
 
-    return [value, handleChange];
+    return [value, setValue];
 }
 
 export default useLocalStorage;

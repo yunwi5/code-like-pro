@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { postSubmission, runTestCases } from '../../apis/submission.api';
 import ShowcaseInviteModal from '../../components/exercise-attempt/modals/ShowcaseInviteModal';
 import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import {
     IExerciseWithId,
     ITestCase,
@@ -45,7 +46,10 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     const [userSolution, setUserSolution] = useState(exercise.startingTemplate);
     const [userSubmission, setUserSubmission] = useState<IUserSubmission | null>(null);
     const [testCaseOutputs, setTestCaseOutputs] = useState<ITestOutput[]>([]);
-    const [customTests, setCustomTests] = useState<ITestCase[]>([]);
+    const [customTests, setCustomTests] = useLocalStorage<ITestCase[]>(
+        `${exercise._id}-custom-tests`,
+        [],
+    );
 
     // Solving badge qualifying detection
     const { qualifySolvingBadges } = useBadgeQualification();
@@ -74,10 +78,8 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
             setTestCaseOutputs(outputs);
             const { correct } = getCorrectTestCaseCount(outputs);
 
-            // Now, all custom tests have corresponding outputs
-            setCustomTests((tests) =>
-                tests.map((test) => ({ ...test, hasOutput: true })),
-            );
+            // Now, all custom tests have corresponding outputs so turn hasOutput flag to true
+            setCustomTests(customTests.map((test) => ({ ...test, hasOutput: true })));
             toastNotify(
                 `You got ${correct} tests correct out of ${outputs.length} tests!`,
             );
