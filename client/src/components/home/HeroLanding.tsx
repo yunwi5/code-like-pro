@@ -22,9 +22,11 @@ const HeroLanding: React.FC = () => {
             loop: false,
             typingSpeed: 60,
         });
-        typeWriter.typeString('Programming exercises created for students by students');
+        typeWriter.typeString(
+            'Fully featured platform to practice your programming skills via challenges',
+        );
         typeWriter.start().then(async () => {
-            // Remove the type blinking 1s after the animation finishes
+            // Remove the blinking effect 1s after the animation finishes
             await sleep(1000);
             setTypingFinished(true);
         });
@@ -40,8 +42,9 @@ const HeroLanding: React.FC = () => {
                     )}
                 </h1>
                 <h2 className="text-base lg:text-xl text-gray-500">
-                    A practice website for programming students where the exercises
-                    themselves are created by the students.
+                    A practical website for programmers where they create their own
+                    challenges, solve challenges from other programmers, and showcase
+                    their solutions.
                 </h2>
 
                 <div className="flex flex-col sm:flex-row gap-4 w-[90%] sm:w-fit">
