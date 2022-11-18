@@ -43,6 +43,7 @@ const TestCasesList: React.FC<Props> = ({
                                 onUpdate={(props: ITestCaseProps) =>
                                     updateCustomTestCase(props, idx)
                                 }
+                                hiddenDisabled={true}
                                 onDelete={() => deleteCustomTestCase(idx)}
                             />
                         ) : (
