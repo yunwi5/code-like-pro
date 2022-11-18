@@ -20,7 +20,7 @@ const ExercisePrompt: React.FC = () => {
                 placeholder={'Write something awesome...'}
             />
 
-            {/* Display exercise relevant tags and courses at the end. */}
+            {/* Display exercise relevant tags */}
             <footer className="-mt-3 flex flex-col gap-6">
                 <TagList title="Relevant Tags:" tags={exercise?.tags || []} />
             </footer>

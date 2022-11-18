@@ -29,7 +29,7 @@ const EditorWorkspace: React.FC<{ index: number }> = ({ index }) => {
 
     // If the solution is empty at the beginning, apply the starting template from the creator.
     useEffect(() => {
-        if (!localSolution) setLocalSolution(exercise?.startingTemplate);
+        if (!localSolution) setLocalSolution(exercise?.startingTemplate || '');
     }, [exercise?.startingTemplate, localSolution, setLocalSolution]);
 
     return (

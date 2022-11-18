@@ -2,8 +2,7 @@ import { IComment, ITestCase } from '..';
 import { Difficulty, Language } from '../../enums';
 import { IUser } from '../user/IUser';
 
-export interface IExercise {
-    _id?: string;
+export interface IExerciseDraft {
     name: string;
     language: Language;
     difficulty: Difficulty;
@@ -11,8 +10,11 @@ export interface IExercise {
     solutionCode: string;
     startingTemplate: string;
     tags: string[];
-    courses: string[];
     testCases: ITestCase[];
+}
+
+export interface IExercise extends IExerciseDraft {
+    _id?: string;
     author?: IUser;
     createdAt: string; // ISO date for exercise creation
     liked: string[]; // list of user ids who liked the exercise unpopulated

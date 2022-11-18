@@ -2,6 +2,7 @@ import { AppProperty } from '../constants/app';
 import {
     IComment,
     IExercise,
+    IExerciseDraft,
     IExerciseWithId,
     IIssueReport,
     IShowCase,
@@ -23,14 +24,14 @@ export async function getExerciseById(id: string) {
     });
 }
 
-export async function postExercise(exercise: IExercise) {
+export async function postExercise(exercise: IExerciseDraft) {
     return await postRequest<IExerciseWithId>({
         url: API_DOMAIN,
         body: exercise,
     });
 }
 
-export async function putExercise(id: string, updatedExercise: IExercise) {
+export async function putExercise(id: string, updatedExercise: IExerciseDraft) {
     return await putRequest<IExerciseWithId>({
         url: `${API_DOMAIN}/${id}`,
         body: updatedExercise,
