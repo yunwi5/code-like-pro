@@ -5,8 +5,8 @@ import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { CreationSection, Difficulty, Language } from '../../models/enums';
 import {
-    IExercise,
     IExerciseCreationContext,
+    IExerciseDraft,
     IExerciseWithId,
     IReadyStatus,
     ITestCase,
@@ -25,7 +25,6 @@ export const ExerciseCreationContext = React.createContext<IExerciseCreationCont
     runCode: () => {},
     testCases: [],
     tags: [],
-    courses: [],
 } as any);
 
 export const useExerciseCreationContext = () => useContext(ExerciseCreationContext);
@@ -45,7 +44,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
 }) => {
     // Construct a unique key for the exercise draft so that exercise drafts do not conlict each other.
     const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${exercise ? `-${exercise._id}` : ''}`;
-    const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExercise | ''>(
+    const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExerciseDraft | ''>(
         draftKey,
         '',
     );
@@ -63,9 +62,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
     const [startingTemplate, setStartingTemplate] = useState(
         exercise?.startingTemplate || '',
     );
-
     const [tags, setTags] = useState<string[]>(exercise?.tags || []);
-    const [courses, setCourses] = useState<string[]>(exercise?.courses || []);
 
     const [testCases, setTestCases] = useState<ITestCase[]>(
         exercise?.testCases || getInitialTestCaseArray(),
@@ -88,7 +85,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
     // creation badge reward if qualified
     const { qualifyCreationBadges } = useBadgeQualification();
 
-    const createExerciseObject = () => ({
+    const createExerciseObject = (): IExerciseDraft => ({
         name,
         language,
         difficulty,
@@ -96,7 +93,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
         solutionCode,
         startingTemplate,
         tags,
-        courses,
         // Remove id and error from test cases.
         testCases: testCases.map((testCase) => ({
             ...testCase,
@@ -163,7 +159,7 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
             return;
         }
 
-        const exercise: any = createExerciseObject();
+        const exercise: IExerciseDraft = createExerciseObject();
 
         setIsLoading(true);
         // If the exercise already exists, send PUT request, otherwise send POST request.
@@ -192,7 +188,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
         setLanguage(exerciseDraft.language as Language);
         setDifficulty(exerciseDraft.difficulty);
         setTags(exerciseDraft.tags);
-        setCourses(exerciseDraft.courses || []);
         setPrompt(exerciseDraft.prompt);
         setTestCases(exerciseDraft.testCases);
         setStartingTemplate(exerciseDraft.startingTemplate);
@@ -217,8 +212,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
         setTestCases,
         tags,
         setTags,
-        courses,
-        setCourses,
         startingTemplate,
         setStartingTemplate,
         solutionCode,

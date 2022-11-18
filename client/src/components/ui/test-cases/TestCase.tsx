@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Language } from '../../../models/enums';
 import CodeEditor from '../editor/CodeEditor';
 import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
@@ -14,9 +14,10 @@ interface Props {
     output?: ITestOutput | undefined;
     readOnly?: boolean;
     boxHeight?: string;
+    hiddenDisabled?: boolean;
 }
 
-const TestCase: React.FC<Props> = (props) => {
+const TestCase: FC<Props> = (props) => {
     const {
         language,
         testCase,
@@ -25,6 +26,7 @@ const TestCase: React.FC<Props> = (props) => {
         output,
         readOnly = false,
         boxHeight = '10rem',
+        hiddenDisabled = false,
     } = props;
     const [isShrinked, setIsShrinked] = useState(false);
 
@@ -94,6 +96,7 @@ const TestCase: React.FC<Props> = (props) => {
                         <TestCaseControl
                             onHidden={handleHidden}
                             hidden={testCase.hidden || false}
+                            disabled={hiddenDisabled}
                             onDelete={onDelete}
                         />
                     )}
@@ -110,7 +113,7 @@ interface HeadingProps {
     isShrinked: boolean;
     setIsShrinked: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const TestCaseHeading: React.FC<HeadingProps> = (props) => {
+const TestCaseHeading: FC<HeadingProps> = (props) => {
     const { name, output, isShrinked, setIsShrinked } = props;
 
     return (
@@ -136,7 +139,7 @@ interface ExpectedOutputProps {
     onOutputChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     className?: string;
 }
-export const ExpectedOutput: React.FC<ExpectedOutputProps> = ({
+export const ExpectedOutput: FC<ExpectedOutputProps> = ({
     onOutputChange,
     expectedOutput,
     className = '',
@@ -162,7 +165,7 @@ interface OutputProps {
     output: ITestOutput;
 }
 // Actual output should always be readonly mode.
-const ActualOutput: React.FC<OutputProps> = ({ output }) => {
+const ActualOutput: FC<OutputProps> = ({ output }) => {
     // If there is a std error, show error traceback instead of an output for more meaningful feedback.
     const error = output.error;
     const errorClass = error ? 'bg-rose-50 text-rose-700' : '';
@@ -183,14 +186,20 @@ const ActualOutput: React.FC<OutputProps> = ({ output }) => {
 interface ControlProps {
     onHidden(): void;
     hidden: boolean;
+    disabled: boolean;
     onDelete?: () => void;
 }
 // Controlling hidden test and remove test functionalities
-const TestCaseControl: React.FC<ControlProps> = ({ onHidden, hidden, onDelete }) => {
+const TestCaseControl: FC<ControlProps> = ({ onHidden, hidden, disabled, onDelete }) => {
     return (
         <div className="flex-between">
             <p className="flex">
-                <input type="checkbox" onChange={onHidden} checked={hidden ?? false} />
+                <input
+                    type="checkbox"
+                    disabled={disabled}
+                    onChange={onHidden}
+                    checked={hidden ?? false}
+                />
                 &ensp;Hidden&nbsp;
                 <span className="hidden md:inline">Test</span>
             </p>

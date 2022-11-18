@@ -29,7 +29,7 @@ const RankingPage: React.FC = () => {
                 <title>User Rankings | {AppProperty.APP_NAME}</title>
                 <meta
                     name="description"
-                    content={`Ranking page of ${AppProperty.APP_NAME} where users can browse their rankings in courses.`}
+                    content={`Ranking page of ${AppProperty.APP_NAME} where users can browse their rankings.`}
                 />
             </Helmet>
             <RankingContainer />
