@@ -18,7 +18,7 @@ const TopUsers: React.FC = () => {
                 </div>
                 <div className="min-w-[15rem] flex lg:justify-center items-start lg:items-center flex-col text-left">
                     <div className="flex flex-col justify-start">
-                        <h1 className="text-text-main-500 text-4xl my-2">Top Users</h1>
+                        <h1 className="my-2 text-gray-600 text-4xl">Top Users</h1>
                         <h2 className="lg:w-[70%] my-2 leading-7">
                             Top ranked users who are essentially the most talented
                             programmers in our platform.

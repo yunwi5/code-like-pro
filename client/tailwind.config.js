@@ -23,10 +23,6 @@ module.exports = {
                     200: '#f2f2f2',
                     700: '#bdbdbd',
                 },
-                'text-main': {
-                    500: '#655A5A',
-                    700: '#4a4242',
-                },
             },
             screens: {
                 xs: '400px',
