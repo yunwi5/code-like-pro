@@ -13,7 +13,7 @@ export function getEmptyTestCase(testCaseNumber?: number): ITestCase {
 export function getEmptyCustomTestCase(testCaseNumber?: number): ITestCase {
     const newCustomTest: ITestCase = {
         _id: `custom-test-case-${testCaseNumber}`,
-        name: `Custom Test ${(testCaseNumber ?? 0) + 1}`,
+        name: `Custom Test`,
         code: '',
         expectedOutput: '',
         custom: true,

@@ -62,10 +62,14 @@ const AttemptTestCases: React.FC = () => {
     };
 
     const deleteCustomTestCase = (targetIndex: number) => {
-        setTestCaseOutputs((prevOutputs) =>
-            prevOutputs.filter((_, idx) => idx !== targetIndex),
-        );
         setCustomTests((prevList) => prevList.filter((_, idx) => idx !== targetIndex));
+
+        const testToDelete = customTests[targetIndex];
+        // Delete the corresponding output ONLY IF the test has its output (otherwise bug)
+        if (testToDelete.hasOutput)
+            setTestCaseOutputs((prevOutputs) =>
+                prevOutputs.filter((_, idx) => idx !== targetIndex),
+            );
     };
 
     // Combine existing tests with new user custom tests
