@@ -1,4 +1,4 @@
-import { ITestCase, ITestOutput } from '../../models/interfaces';
+import { ITestCase, ITestCaseWithOutput, ITestOutput } from '../../models/interfaces';
 
 // Creater's initial test case
 export function getEmptyTestCase(testCaseNumber?: number): ITestCase {
@@ -35,6 +35,12 @@ export function testCasesEmpty(testCases: ITestCase[]) {
     return testCases.every((testCase) => testCaseEmpty(testCase));
 }
 
+// Needs to be updated to handle comments removal for more strict comparison
+export function isSameTestCase(testA: ITestCase, testB: ITestCase) {
+    const codeSame = testA.code.trim() === testB.code.trim();
+    return codeSame;
+}
+
 // Analyse and validate test cases result
 export function analyzeTestCasesResult(
     testCases: ITestCase[],
@@ -69,4 +75,20 @@ export function getCorrectTestCaseCount(testCaseOutputs: ITestOutput[]) {
         if (result.correct) correct++;
     });
     return { correct };
+}
+
+export function checkTestCaseMergeable(
+    existingTests: ITestCase[],
+    newTestWithOutput: ITestCaseWithOutput,
+) {
+    if (!newTestWithOutput.output?.correct) {
+        return { message: 'Your testcase output is not correct!', mergeable: false };
+    }
+
+    const duplicatedTest = existingTests.find((test) =>
+        isSameTestCase(newTestWithOutput, test),
+    );
+    if (duplicatedTest != null)
+        return { mergeable: false, message: 'The test already exists!' };
+    return { mergeable: true, message: 'This test is mergeable!' };
 }

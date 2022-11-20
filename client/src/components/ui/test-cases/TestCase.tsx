@@ -7,6 +7,7 @@ import { ITestCase, ITestCaseProps, ITestOutput } from '../../../models/interfac
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 
 interface Props {
+    className?: string;
     language: Language;
     testCase: ITestCase;
     onUpdate?: (props: ITestCaseProps) => void;
@@ -15,10 +16,13 @@ interface Props {
     readOnly?: boolean;
     boxHeight?: string;
     hiddenDisabled?: boolean;
+    headingLabel?: JSX.Element;
+    headingMessage?: JSX.Element | string;
 }
 
 const TestCase: FC<Props> = (props) => {
     const {
+        className = '',
         language,
         testCase,
         onUpdate,
@@ -27,6 +31,8 @@ const TestCase: FC<Props> = (props) => {
         readOnly = false,
         boxHeight = '10rem',
         hiddenDisabled = false,
+        headingLabel,
+        headingMessage,
     } = props;
     const [isShrinked, setIsShrinked] = useState(false);
 
@@ -56,13 +62,15 @@ const TestCase: FC<Props> = (props) => {
     return (
         <div
             id={testCase?._id}
-            className={`flex flex-col gap-2 px-3 pt-2 bg-gray-200 rounded-sm shadow-md focus-within:shadow-md ${paddingClass} ${statusClass}`}
+            className={`flex flex-col gap-2 px-3 pt-2 bg-gray-200 rounded-sm shadow-md focus-within:shadow-md ${paddingClass} ${statusClass} ${className}`}
         >
             <TestCaseHeading
                 name={testCase?.name || ''}
                 output={output}
                 isShrinked={isShrinked}
                 setIsShrinked={setIsShrinked}
+                customLabel={headingLabel}
+                message={headingMessage}
             />
             {!isShrinked && (
                 <>
@@ -112,23 +120,36 @@ interface HeadingProps {
     output: ITestOutput | undefined;
     isShrinked: boolean;
     setIsShrinked: React.Dispatch<React.SetStateAction<boolean>>;
+    customLabel?: JSX.Element;
+    message?: JSX.Element | string;
 }
 const TestCaseHeading: FC<HeadingProps> = (props) => {
-    const { name, output, isShrinked, setIsShrinked } = props;
+    const { name, output, isShrinked, setIsShrinked, customLabel, message } = props;
+
+    // Display default status label only if there is an output and the custom label is undefined
+    const displayStatusLabel = !!output && !customLabel;
 
     return (
-        <h3 className="text-lg flex items-center justify-between">
-            {name}
-            <span className="text-2xl ml-3 mr-auto">
-                {!!output &&
-                    (output.correct ? (
-                        <AiOutlineCheck className="text-green-700" />
-                    ) : (
-                        <AiOutlineClose className="text-rose-700" />
-                    ))}
-            </span>
-            <ExpandShrinkToggler isShrinked={isShrinked} setIsShrinked={setIsShrinked} />
-        </h3>
+        <div>
+            <h3 className="text-lg flex items-center justify-between">
+                {name}
+                <span className="text-2xl ml-3">
+                    {displayStatusLabel &&
+                        (output.correct ? (
+                            <AiOutlineCheck className="text-green-700" />
+                        ) : (
+                            <AiOutlineClose className="text-rose-700" />
+                        ))}
+                </span>
+                {customLabel}
+                <ExpandShrinkToggler
+                    className="ml-auto"
+                    isShrinked={isShrinked}
+                    setIsShrinked={setIsShrinked}
+                />
+            </h3>
+            {message}
+        </div>
     );
 };
 

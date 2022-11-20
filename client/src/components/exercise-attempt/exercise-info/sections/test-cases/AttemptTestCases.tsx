@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import {
     IExerciseWithId,
     ITestCase,
     ITestCaseProps,
+    ITestCaseWithOutput,
     ITestOutput,
 } from '../../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 import { getEmptyCustomTestCase } from '../../../../../utils/exercise-utils/testcase';
+import TestCasesMergeModal from '../../../modals/TestCasesMergeModal';
 import TestCaseMessages from './TestCaseMessages';
 import TestCasesList from './TestCasesList';
 import TestCaseUserActions from './TestCaseUserActions';
@@ -35,10 +38,7 @@ function matchTestCaseAndOutput(testCases: ITestCase[], outputs: ITestOutput[]) 
         };
     });
 
-    const nonHiddenTests = testCaseWithOutputs.filter(
-        (test) => test.custom || !test.hidden,
-    );
-    return nonHiddenTests;
+    return testCaseWithOutputs;
 }
 
 // Displaying list of test cases for the user view.
@@ -46,6 +46,8 @@ function matchTestCaseAndOutput(testCases: ITestCase[], outputs: ITestOutput[]) 
 const AttemptTestCases: React.FC = () => {
     const { exercise, testCaseOutputs, setTestCaseOutputs, customTests, setCustomTests } =
         useExerciseAttemptCtx();
+    const [showMergeModal, setShowMergeModal] = useState(false);
+
     if (exercise == null) return null;
 
     const existingTests = getExistingTestsWithNames(exercise);
@@ -75,10 +77,16 @@ const AttemptTestCases: React.FC = () => {
     // Combine existing tests with new user custom tests
     const combinedTestCases = customTests.concat(existingTests);
     // Merge corresponding output to each test case
-    const testCasesWithOutputs = matchTestCaseAndOutput(
+    const testCasesWithOutputs: ITestCaseWithOutput[] = matchTestCaseAndOutput(
         combinedTestCases,
         testCaseOutputs,
     );
+    // Hidden tests should not be displayed during attempt.
+    const nonHiddenTests = testCasesWithOutputs.filter(
+        (test) => test.custom || !test.hidden,
+    );
+
+    const mergeReady = testCasesWithOutputs.every((test) => test.output?.correct);
 
     return (
         <section
@@ -87,14 +95,28 @@ const AttemptTestCases: React.FC = () => {
         >
             <div className="flex flex-wrap justify-between items-center">
                 <TestCaseMessages testCasesWithOutputs={testCasesWithOutputs} />
-                <TestCaseUserActions onAddCase={addCustomTest} />
+                <TestCaseUserActions
+                    onAddCase={addCustomTest}
+                    onMerge={() => setShowMergeModal(true)}
+                    mergeReady={mergeReady}
+                />
             </div>
 
             {/* List of testcases combining creator's tests and user defined custom tests. */}
             <TestCasesList
-                testCasesWithOutputs={testCasesWithOutputs}
+                testCasesWithOutputs={nonHiddenTests}
                 updateCustomTestCase={updateCustomTestCase}
                 deleteCustomTestCase={deleteCustomTestCase}
+            />
+
+            {/* Modal for adding user tests to existing tests */}
+            <TestCasesMergeModal
+                open={showMergeModal}
+                onClose={() => setShowMergeModal(false)}
+                onAddTest={addCustomTest}
+                onUpdateTest={updateCustomTestCase}
+                onDeleteTest={deleteCustomTestCase}
+                testCasesWithOutputs={testCasesWithOutputs}
             />
         </section>
     );
