@@ -24,7 +24,7 @@ const HomeDiscussions: React.FC = () => {
                         initial={{
                             opacity: 0.3,
                             scale: 1.2,
-                            y: idx < 6 ? 350 : 200,
+                            y: 350,
                             boxShadow: '30px 50px 30px rgba(0, 0, 0, 0.3)',
                         }}
                         whileInView={{
