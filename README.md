@@ -1,4 +1,4 @@
-# COMPSCI 399 CodeLikePro
+# CodeLikePro
 
 ## About
 A practice website for programming students where they create their own exercises, solve exercises from other programmers, 
