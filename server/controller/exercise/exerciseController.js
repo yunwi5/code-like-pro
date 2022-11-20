@@ -7,7 +7,31 @@ const ShowCase = require('../../models/ShowCase');
 const User = require('../../models/User');
 
 const { constructLanguageFileSpec } = require('../../utils/languageSupport');
+const { filterDuplicatedTests } = require('../../utils/testCase.util');
 const makeRequest = require('../../utils/makeRequest');
+
+const validateTestCases = async ({ testCases, language, solutionCode }) => {
+    // Iterate through each test case and make request to JOBE server
+    const testCasePromises = testCases.map((testCase) => {
+        // Append test case to solution code and check if output is right
+        const body = {
+            run_spec: constructLanguageFileSpec(language, solutionCode, testCase.code),
+        };
+
+        const result = makeRequest(body);
+        return result;
+    });
+
+    const testCaseResults = await Promise.all(testCasePromises);
+
+    for (let i = 0; i < testCaseResults.length; i++) {
+        if (testCaseResults[i].stdout.trim() != testCases[i].expectedOutput.trim()) {
+            return false;
+        }
+    }
+
+    return true;
+};
 
 const postExercise = async (req, res) => {
     const exerciseBody = req.body;
@@ -19,7 +43,6 @@ const postExercise = async (req, res) => {
     let language = exercise.language;
 
     // Iterate through each test case and make request to JOBE server
-
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
         const body = {
@@ -179,6 +202,44 @@ const getExerciseSubmissions = async (req, res) => {
     } catch (err) {
         console.log(err.message);
         res.status(400).json(err.message);
+    }
+};
+
+/* 
+POST: Merge custom tests from users
+Req body: Array<{code: string, expectedOutput: string, hidden: boolean}>
+*/
+const mergeCustomTests = async (req, res) => {
+    const exerciseId = req.params.id;
+    try {
+        // Get the target exercise
+        const exercise = await Exercise.findById(exerciseId);
+
+        const customTests = req.body;
+        // validate custom tests
+        const testsValid = await validateTestCases({
+            testCases: customTests,
+            language: exercise.language,
+            solutionCode: exercise.solutionCode,
+        });
+
+        if (!testsValid)
+            return res.status(403).json({ message: 'Some custom tests are not correct' });
+
+        // Check if there are any duplicated test code except the comments
+        // If there are duplicates, remove those duplicates
+        const updatedTests = exercise.testCases.concat(customTests);
+        const nonDuplicatedTests = filterDuplicatedTests(updatedTests);
+        const insertedCount = nonDuplicatedTests.length - exercise.testCases.length;
+
+        // Update exercise
+        exercise.testCases = nonDuplicatedTests;
+        await exercise.save();
+
+        return res.status(201).json({ exercise, insertedCount });
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -371,6 +432,7 @@ const controller = {
     deleteExercise,
     getTopExercises,
     getExerciseSubmissions,
+    mergeCustomTests,
     getExerciseReports,
     postExerciseReport,
     toggleLikeExercise,
