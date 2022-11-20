@@ -1,10 +1,11 @@
 import React from 'react';
 import { BsArrowRight } from 'react-icons/bs';
-import { MdOutlineCheck } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+
 import { HomeImages } from '../../../assets/home-images';
 import { AppProperty } from '../../../constants/app';
 import Button from '../../ui/buttons/Button';
+import JoinBenefits from './JoinBenefits';
 
 // Layout breakpoint is lg - 1024px
 // Column layout < 1024px, row layout >= 1024px;
@@ -35,14 +36,7 @@ const JoinUs: React.FC = () => {
                         </h3>
                     </div>
 
-                    <ul className="max-w-[35rem] lg:max-w-none my-5 flex flex-col gap-2">
-                        {joinUsFeatures.map((feature, idx) => (
-                            <li key={idx} className="flex">
-                                <MdOutlineCheck className="inline-block mr-1 text-emerald-500 text-2xl" />
-                                <span className="font-semibold">{feature}</span>
-                            </li>
-                        ))}
-                    </ul>
+                    <JoinBenefits />
 
                     <Link to={'/register'} className="mt-auto lg:mb-2">
                         <Button className="w-full lg:w-fit px-5 flex-center gap-3 rounded text-white">
@@ -76,11 +70,5 @@ const JoinUsImage: React.FC<{ className?: string }> = ({ className = '' }) => (
         </p>
     </div>
 );
-
-const joinUsFeatures = [
-    'Unlimited capability to create new programming exercises.',
-    'Unlimited access to programming challenges created by others for you to solve.',
-    'Customized profile customization and comprehensive progress analytics entirely with no extra costs.',
-];
 
 export default JoinUs;
