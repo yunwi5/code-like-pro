@@ -180,6 +180,76 @@ describe('Exercises', () => {
         });
     });
 
+    describe('POST exercise tests merge', () => {
+        let createdExercise;
+
+        beforeAll(async () => {
+            createdExercise = await createExercise(app, cookie);
+        });
+
+        it('Cannot merge invalid tests', async () => {
+            const invalidTests = [
+                {
+                    code: 'printMessage("Wrong test")',
+                    expectedOutput: 'none',
+                    hidden: true,
+                },
+            ];
+
+            const response = await request(app)
+                .post(`/api/exercise/${createdExercise._id}/test-merge`)
+                .set('cookie', cookie)
+                .send(invalidTests);
+
+            // Status should be forbidden 403
+            expect(response.statusCode).toBe(403);
+        });
+
+        it('Does not merge duplicated tests', async () => {
+            // Already existing tests
+            const duplicatedTests = [
+                { code: 'printMessage("Hi")', expectedOutput: 'Hi', hidden: false },
+                { code: 'printMessage("Hello")', expectedOutput: 'Hello', hidden: true },
+            ];
+
+            const response = await request(app)
+                .post(`/api/exercise/${createdExercise._id}/test-merge`)
+                .set('cookie', cookie)
+                .send(duplicatedTests);
+
+            expect(response.statusCode).toBe(200);
+
+            const { insertedCount } = response.body;
+            expect(insertedCount).toBe(0);
+        });
+
+        it('Can merge valid tests', async () => {
+            const additionalTests = [
+                {
+                    code: 'printMessage("New test1")',
+                    expectedOutput: 'New test1',
+                    hidden: true,
+                },
+                {
+                    code: 'printMessage("New test2")',
+                    expectedOutput: 'New test2',
+                    hidden: false,
+                },
+            ];
+
+            const response = await request(app)
+                .post(`/api/exercise/${createdExercise._id}/test-merge`)
+                .set('cookie', cookie)
+                .send(additionalTests);
+
+            expect(response.statusCode).toBe(201);
+
+            const { exercise, insertedCount } = response.body;
+            expect(insertedCount).toBe(2);
+            expect(exercise).toBeTruthy();
+        });
+    });
+
     describe('DELETE an exercise', () => {
         it('Can delete an exercise', async () => {
             const createdExercise = await createExercise(app, cookie);
@@ -207,7 +277,6 @@ describe('Exercises', () => {
 
             // Create a sample showcase that depends on this exercise
             const createdShowcase = await createShowcase(app, cookie, createdExercise);
-            console.log({ createdShowcase });
 
             // Delete the exercise that owns the showcase
             await request(app)

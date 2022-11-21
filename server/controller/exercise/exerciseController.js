@@ -10,6 +10,7 @@ const { constructLanguageFileSpec } = require('../../utils/languageSupport');
 const { filterDuplicatedTests } = require('../../utils/testCase.util');
 const makeRequest = require('../../utils/makeRequest');
 
+// Helper function to validate test cases
 const validateTestCases = async ({ testCases, language, solutionCode }) => {
     // Iterate through each test case and make request to JOBE server
     const testCasePromises = testCases.map((testCase) => {
@@ -29,7 +30,6 @@ const validateTestCases = async ({ testCases, language, solutionCode }) => {
             return false;
         }
     }
-
     return true;
 };
 
@@ -40,26 +40,15 @@ const postExercise = async (req, res) => {
 
     const testCases = exercise.testCases;
     const solutionCode = exercise.solutionCode;
-    let language = exercise.language;
+    const language = exercise.language;
 
-    // Iterate through each test case and make request to JOBE server
-    const testCasePromises = testCases.map((testCase) => {
-        // Append test case to solution code and check if output is right
-        const body = {
-            run_spec: constructLanguageFileSpec(language, solutionCode, testCase.code),
-        };
-
-        const result = makeRequest(body);
-        return result;
+    const testCasesPassed = await validateTestCases({
+        testCases,
+        language,
+        solutionCode,
     });
-
-    const testCaseResults = await Promise.all(testCasePromises);
-
-    for (let i = 0; i < testCaseResults.length; i++) {
-        if (testCaseResults[i].stdout.trim() != testCases[i].expectedOutput.trim()) {
-            return res.status(400).json({ message: 'Some test cases failed.' });
-        }
-    }
+    if (!testCasesPassed)
+        return res.status(400).json({ message: 'Some test cases failed.' });
 
     await exercise.save();
 
@@ -97,26 +86,15 @@ const updateExercise = async (req, res) => {
     const exerciseBody = req.body;
     const testCases = exerciseBody.testCases;
     const solutionCode = exerciseBody.solutionCode;
+    const language = exerciseBody.language;
 
-    let language = exerciseBody.language;
-
-    const testCasePromises = testCases.map((testCase) => {
-        // Append test case to solution code and check if output is right
-        const body = {
-            run_spec: constructLanguageFileSpec(language, solutionCode, testCase.code),
-        };
-
-        const result = makeRequest(body);
-        return result;
+    const testCasesPassed = await validateTestCases({
+        testCases,
+        language,
+        solutionCode,
     });
-
-    const testCaseResults = await Promise.all(testCasePromises);
-
-    for (let i = 0; i < testCaseResults.length; i++) {
-        if (testCaseResults[i].stdout.trim() != testCases[i].expectedOutput.trim()) {
-            return res.status(400).json({ message: 'Some test cases failed.' });
-        }
-    }
+    if (!testCasesPassed)
+        return res.status(400).json({ message: 'Some test cases failed.' });
 
     let updatedExercise;
     try {
@@ -236,6 +214,7 @@ const mergeCustomTests = async (req, res) => {
         exercise.testCases = nonDuplicatedTests;
         await exercise.save();
 
+        if (insertedCount === 0) return res.status(200).json({ exercise, insertedCount });
         return res.status(201).json({ exercise, insertedCount });
     } catch (err) {
         console.log(err.message);
