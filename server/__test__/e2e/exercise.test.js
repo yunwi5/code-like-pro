@@ -187,42 +187,6 @@ describe('Exercises', () => {
             createdExercise = await createExercise(app, cookie);
         });
 
-        it('Cannot merge invalid tests', async () => {
-            const invalidTests = [
-                {
-                    code: 'printMessage("Wrong test")',
-                    expectedOutput: 'none',
-                    hidden: true,
-                },
-            ];
-
-            const response = await request(app)
-                .post(`/api/exercise/${createdExercise._id}/test-merge`)
-                .set('cookie', cookie)
-                .send(invalidTests);
-
-            // Status should be forbidden 403
-            expect(response.statusCode).toBe(403);
-        });
-
-        it('Does not merge duplicated tests', async () => {
-            // Already existing tests
-            const duplicatedTests = [
-                { code: 'printMessage("Hi")', expectedOutput: 'Hi', hidden: false },
-                { code: 'printMessage("Hello")', expectedOutput: 'Hello', hidden: true },
-            ];
-
-            const response = await request(app)
-                .post(`/api/exercise/${createdExercise._id}/test-merge`)
-                .set('cookie', cookie)
-                .send(duplicatedTests);
-
-            expect(response.statusCode).toBe(200);
-
-            const { insertedCount } = response.body;
-            expect(insertedCount).toBe(0);
-        });
-
         it('Can merge valid tests', async () => {
             const additionalTests = [
                 {
@@ -247,6 +211,50 @@ describe('Exercises', () => {
             const { exercise, insertedCount } = response.body;
             expect(insertedCount).toBe(2);
             expect(exercise).toBeTruthy();
+        });
+
+        it('Cannot post with empty body', async () => {
+            const response = await request(app)
+                .post(`/api/exercise/${createdExercise._id}/test-merge`)
+                .set('cookie', cookie);
+
+            expect(response.statusCode).toBe(400);
+        });
+
+        it('Cannot merge invalid tests', async () => {
+            const invalidTests = [
+                {
+                    code: 'printMessage("Wrong test")',
+                    expectedOutput: 'none',
+                    hidden: true,
+                },
+            ];
+
+            const response = await request(app)
+                .post(`/api/exercise/${createdExercise._id}/test-merge`)
+                .set('cookie', cookie)
+                .send(invalidTests);
+
+            // Status should be forbidden 403
+            expect(response.statusCode).toBe(403);
+        });
+
+        it('Does not merge duplicated tests', async () => {
+            // Already existing tests should not be merged
+            const duplicatedTests = [
+                { code: 'printMessage("Hi")', expectedOutput: 'Hi', hidden: false },
+                { code: 'printMessage("Hello")', expectedOutput: 'Hello', hidden: true },
+            ];
+
+            const response = await request(app)
+                .post(`/api/exercise/${createdExercise._id}/test-merge`)
+                .set('cookie', cookie)
+                .send(duplicatedTests);
+
+            expect(response.statusCode).toBe(200);
+
+            const { insertedCount } = response.body;
+            expect(insertedCount).toBe(0);
         });
     });
 
