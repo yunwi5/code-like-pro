@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { postSubmission, runTestCases } from '../../apis/submission.api';
-import ShowcaseInviteModal from '../../components/exercise-attempt/modals/ShowcaseInviteModal';
+import AttemptSuccessModal from '../../components/exercise-attempt/modals/AttemptSuccessModal';
 import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import {
@@ -54,7 +54,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     // Solving badge qualifying detection
     const { qualifySolvingBadges } = useBadgeQualification();
     // Showcase invite modal to encourage users to join the showcase, after they get correct.
-    const [showInviteModal, setShowInviteModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const runCode = async () => {
         // output of the test cases => actual output, status like correctness
@@ -99,7 +99,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
             setUserSubmission(newSubmission);
             if (newSubmission.correct) {
                 toastNotify("You got all creator's test cases correct!", 'success');
-                setShowInviteModal(true);
+                setShowSuccessModal(true);
             } else {
                 toastNotify(
                     `Submission status is incorrect. Debug your code and try again!`,
@@ -139,10 +139,10 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     return (
         <ExerciseAttemptContext.Provider value={value}>
             {children}
-            <ShowcaseInviteModal
-                open={showInviteModal}
-                onClose={() => setShowInviteModal(false)}
-            ></ShowcaseInviteModal>
+            <AttemptSuccessModal
+                open={showSuccessModal}
+                onClose={() => setShowSuccessModal(false)}
+            />
         </ExerciseAttemptContext.Provider>
     );
 };

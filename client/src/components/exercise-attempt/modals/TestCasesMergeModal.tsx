@@ -5,10 +5,12 @@ import { VscRunAll } from 'react-icons/vsc';
 import { ClipLoader } from 'react-spinners';
 
 import { postTestCasesMerge } from '../../../apis/exercise.api';
-import { ITestCaseProps, ITestCaseWithOutput } from '../../../models/interfaces';
+import { ITestCaseWithOutput } from '../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { listItemAnimations } from '../../../utils/animations';
 import { toastNotify } from '../../../utils/notification';
+import useCustomTests from '../hooks/useCustomTests';
+import useTestCasesWithOutputs from '../hooks/useTestCasesWithOutputs';
 import Button from '../../ui/buttons/Button';
 import AnimationModal from '../../ui/modals/AnimationModal';
 import TestCase from '../../ui/test-cases/TestCase';
@@ -17,10 +19,6 @@ import MergeableTestCase from '../../ui/test-cases/MergeableTestCase';
 interface Props {
     open: boolean;
     onClose: () => void;
-    testCasesWithOutputs: ITestCaseWithOutput[];
-    onAddTest: () => void;
-    onUpdateTest: (props: ITestCaseProps, index: number) => void;
-    onDeleteTest: (targetIndex: number) => void;
 }
 
 const renameTestCases = (tests: ITestCaseWithOutput[]): ITestCaseWithOutput[] => {
@@ -38,14 +36,7 @@ const renameTestCases = (tests: ITestCaseWithOutput[]): ITestCaseWithOutput[] =>
     return renamedTests;
 };
 
-const TestCasesMergeModal: FC<Props> = ({
-    open,
-    onClose,
-    testCasesWithOutputs,
-    onAddTest,
-    onUpdateTest,
-    onDeleteTest,
-}) => {
+const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
     const {
         exercise,
         customTests,
@@ -53,6 +44,8 @@ const TestCasesMergeModal: FC<Props> = ({
         isLoading: runCodeLoading,
     } = useExerciseAttemptCtx();
 
+    const testCasesWithOutputs = useTestCasesWithOutputs();
+    const { addCustomTest, updateCustomTest, deleteCustomTest } = useCustomTests();
     const [requestLoading, setRequestLoading] = useState(false);
 
     if (exercise == null) return null;
@@ -77,6 +70,7 @@ const TestCasesMergeModal: FC<Props> = ({
                     } merged successfully!`,
                     'success',
                 );
+            onClose();
         } else {
             toastNotify(`Error: ${message}`, 'error');
         }
@@ -88,7 +82,7 @@ const TestCasesMergeModal: FC<Props> = ({
         <AnimationModal
             open={open}
             onClose={onClose}
-            className="!rounded-md w-[clamp(25rem,45rem,96vw)] overflow-hidden"
+            className="!rounded-md w-[clamp(25rem,50rem,96vw)] overflow-hidden"
         >
             <section className="flex flex-col text-gray-700">
                 <header className="px-7 py-4 shadow-md border-b-2 border-gray-200">
@@ -112,7 +106,7 @@ const TestCasesMergeModal: FC<Props> = ({
                             </p>
 
                             <Button
-                                onClick={onAddTest}
+                                onClick={addCustomTest}
                                 className="min-w-[4rem] ml-auto mr-2 !py-1 !rounded-md"
                                 size="small"
                                 mode="empty"
@@ -151,8 +145,8 @@ const TestCasesMergeModal: FC<Props> = ({
                                                 key={`${testCase.name}-${idx}`}
                                                 exercise={exercise}
                                                 testCase={testCase}
-                                                onUpdateTest={onUpdateTest}
-                                                onDeleteTest={onDeleteTest}
+                                                onUpdateTest={updateCustomTest}
+                                                onDeleteTest={deleteCustomTest}
                                                 index={idx}
                                             />
                                         ) : (
