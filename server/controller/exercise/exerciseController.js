@@ -77,7 +77,7 @@ const getExerciseByID = async (req, res) => {
     if (exercise != null) {
         res.status(200).json(exercise);
     } else {
-        res.status(404).json(`Exercise ${req.params.id} not found`);
+        res.status(404).json({ message: `Exercise ${req.params.id} not found` });
     }
 };
 
@@ -116,7 +116,9 @@ const deleteExercise = async (req, res) => {
 
         // If the exercise is not found, return 404
         if (exercise == null)
-            return res.status(404).send(`Exercise ${req.params.id} not found`);
+            return res
+                .status(404)
+                .json({ message: `Exercise ${req.params.id} not found` });
 
         // Shoud clear up all the entities that rely on this exercise
         const showcaseIds = exercise.showCases;
@@ -140,7 +142,9 @@ const deleteExercise = async (req, res) => {
     } catch (err) {
         console.log(err.message);
         if (err instanceof mongoose.Error) {
-            return res.status(404).send(`Exercise ${req.params.id} not found`);
+            return res
+                .status(404)
+                .json({ message: `Exercise ${req.params.id} not found` });
         }
         return res.status(500).json({ message: 'Something went wrong' });
     }
@@ -179,7 +183,7 @@ const getExerciseSubmissions = async (req, res) => {
         else throw new Error('Submissions should be an array...');
     } catch (err) {
         console.log(err.message);
-        res.status(400).json(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -258,7 +262,8 @@ const postExerciseReport = async (req, res) => {
         console.log(err.message);
     }
 
-    if (exercise == null) return res.status(404).json(`Exercise ${exerciseId} not found`);
+    if (exercise == null)
+        return res.status(404).json({ message: `Exercise ${exerciseId} not found` });
 
     exercise.reports.push(report);
     const p1 = report.save();
@@ -318,7 +323,7 @@ const getExerciseShowcases = async (req, res) => {
         return res.status(200).json(showCases);
     } catch (err) {
         console.log(err.message);
-        return res.status(404).json(`Exercise ${exerciseId} not found`);
+        return res.status(404).json({ message: `Exercise ${exerciseId} not found` });
     }
 };
 
@@ -330,7 +335,8 @@ const postExerciseShowcase = async (req, res) => {
 
     try {
         const exercise = await Exercise.findById(exerciseId).populate('showCases');
-        if (exercise == null) return res.status(404).json('Exercise not found');
+        if (exercise == null)
+            return res.status(404).json({ message: `Exercise ${exerciseId} not found` });
 
         // Identify if the user previosuly made the showcase for this exercise.
         let showCase = exercise.showCases.find(
@@ -359,7 +365,7 @@ const postExerciseShowcase = async (req, res) => {
         if (err instanceof mongoose.Error) {
             return res.status(400).json({ message: 'Bad request' });
         }
-        return res.status(500).json('Invalid exercise id');
+        return res.status(500).json({ message: 'Invalid exercise id' });
     }
 };
 
@@ -378,7 +384,7 @@ const getExerciseComments = async (req, res) => {
         res.status(200).json(comments);
     } catch (err) {
         console.log(err.message);
-        res.status(404).json('Exercise was not found.');
+        res.status(404).json({ message: 'Exercise was not found' });
     }
 };
 
@@ -394,7 +400,8 @@ const postExerciseComment = async (req, res) => {
 
         // Find the exercise and push the new comment to its 'comments' list.
         const exercise = await Exercise.findById(exerciseId);
-        if (exercise == null) return res.status(404).json('Exercise not found');
+        if (exercise == null)
+            return res.status(404).json({ message: 'Exercise not found' });
 
         exercise.comments.push(newComment);
         const commentPromise = newComment.save();
@@ -403,7 +410,15 @@ const postExerciseComment = async (req, res) => {
         res.status(201).json(newComment);
     } catch (err) {
         console.log(err.message);
-        res.status(400).json(err.message);
+        if (err instanceof mongoose.Error.CastError) {
+            return res.status(404).json({ message: 'Non existing showcase id' });
+        }
+        if (err instanceof mongoose.Error) {
+            return res
+                .status(400)
+                .json({ message: 'Invalid or missing comment properties' });
+        }
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 

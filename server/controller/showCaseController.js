@@ -24,7 +24,7 @@ const getShowCaseByID = async (req, res) => {
     if (showCase != null) {
         res.status(200).json(showCase);
     } else {
-        res.status(404).json(`Showcase ${req.params.id} not found`);
+        res.status(404).json({ message: `Showcase ${req.params.id} not found` });
     }
 };
 
@@ -37,10 +37,10 @@ const deleteShowCase = async (req, res) => {
     }
 
     if (result != null) {
-        return res.status(200).send('Delete successful.');
+        return res.status(200).json({ message: 'Delete successful.' });
     } else {
         // If there is an error, or the show case was not found.
-        res.status(404).send(`ShowCase ${req.params.id} not found`);
+        res.status(404).json({ message: `ShowCase ${req.params.id} not found` });
     }
 };
 
@@ -69,7 +69,7 @@ const updateShowCase = async (req, res) => {
                 .json({ message: 'Invalid shwowcase id or properties' });
         }
 
-        return res.status(500).json({ message: 'Something went wrong' });
+        return res.status(500).json({ message: 'Showcase not found' });
     }
 };
 
@@ -88,7 +88,7 @@ const getComments = async (req, res) => {
         res.status(200).json(showCase.comments);
     } else {
         // If there is an error, or the show case was not found
-        res.status(404).send(`Showcase ${req.params.id} not found`);
+        res.status(404).json({ message: `Showcase ${req.params.id} not found` });
     }
 };
 
@@ -106,7 +106,7 @@ const postComment = async (req, res) => {
     if (showCase != null) {
         showCase.comments.push(comment._id);
     } else {
-        return res.status(404).json(`Showcase ${req.params.id} not found`);
+        return res.status(404).json({ message: `Showcase ${req.params.id} not found` });
     }
     await comment.save();
     await showCase.save();
@@ -120,7 +120,8 @@ const postVote = async (req, res) => {
     try {
         const showCase = await ShowCase.findById(req.params.id);
         // Check if show case exists, return 404 if not
-        if (showCase == null) res.status(404).send(`Showcase ${req.params.id} not found`);
+        if (showCase == null)
+            res.status(404).json({ message: `Showcase ${req.params.id} not found` });
 
         // See if there is already an existing vote made by the user
         const foundVote = showCase.votes.find(
@@ -139,7 +140,7 @@ const postVote = async (req, res) => {
         res.status(201).json(showCase);
     } catch (err) {
         console.log(err.message);
-        res.status(404).json(err.message);
+        res.status(404).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -147,7 +148,8 @@ const deleteVote = async (req, res) => {
     try {
         const showCase = await ShowCase.findById(req.params.id).populate('votes');
         // Check if show case exists, return 404 if not
-        if (showCase == null) res.status(404).send(`Showcase ${req.params.id} not found`);
+        if (showCase == null)
+            res.status(404).json({ message: `Showcase ${req.params.id} not found` });
 
         // Find index of existing vote made by the user, if there is one
         const foundIndex = showCase.votes.findIndex(
@@ -165,7 +167,7 @@ const deleteVote = async (req, res) => {
         }
     } catch (err) {
         console.log(err.message);
-        res.status(404).json(err.message);
+        res.status(404).json({ message: 'Showcase not found' });
     }
 };
 
