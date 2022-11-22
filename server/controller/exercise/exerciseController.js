@@ -151,7 +151,7 @@ Query string: amount, indicating the number of top exercises the frontend wants.
 const getTopExercises = async (req, res) => {
     let amount = parseInt(req.query.amount);
     if (isNaN(amount) || !amount)
-        // Give defautl amount if the amount query string is invalid.
+        // Give default amount if the amount query string is invalid.
         amount = 5;
 
     const topRanked = await Exercise.aggregate()
@@ -192,6 +192,10 @@ const mergeCustomTests = async (req, res) => {
     try {
         // Get the target exercise
         const exercise = await Exercise.findById(exerciseId);
+        if (exercise.testCases.length >= 30)
+            return res
+                .status(406)
+                .json({ message: 'The exercise already has at least 30 test cases!' });
 
         const customTests = req.body;
         // validate custom tests
@@ -207,7 +211,7 @@ const mergeCustomTests = async (req, res) => {
         // Check if there are any duplicated test code except the comments
         // If there are duplicates, remove those duplicates
         const updatedTests = exercise.testCases.concat(customTests);
-        const nonDuplicatedTests = filterDuplicatedTests(updatedTests);
+        const nonDuplicatedTests = filterDuplicatedTests(updatedTests).slice(0, 30);
         const insertedCount = nonDuplicatedTests.length - exercise.testCases.length;
 
         // Update exercise
