@@ -85,6 +85,10 @@ export function checkTestCaseMergeable(
     newTestWithOutput: ITestCaseWithOutput,
     language: Language,
 ) {
+    if (newTestWithOutput.code.trim() === '')
+        return { message: 'Your testcase should not be empty!', mergeable: false };
+    if (!newTestWithOutput.output)
+        return { message: 'Please run your code first!', mergeable: false };
     if (!newTestWithOutput.output?.correct) {
         return { message: 'Your testcase output is not correct!', mergeable: false };
     }

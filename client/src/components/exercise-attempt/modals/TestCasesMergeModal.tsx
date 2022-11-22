@@ -40,8 +40,10 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
     const {
         exercise,
         customTests,
+        setCustomTests,
         runCode,
         isLoading: runCodeLoading,
+        refetchExercise,
     } = useExerciseAttemptCtx();
 
     const testCasesWithOutputs = useTestCasesWithOutputs();
@@ -70,6 +72,8 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
                     } merged successfully!`,
                     'success',
                 );
+            setCustomTests([]);
+            refetchExercise();
             onClose();
         } else {
             toastNotify(`Error: ${message}`, 'error');

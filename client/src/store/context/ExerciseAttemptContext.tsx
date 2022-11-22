@@ -115,8 +115,6 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         setUserSubmission(previousSubmission);
     }, [previousSubmission]);
 
-    console.log({ userSolution, customTests });
-
     // Solving badge detection with useEffect
     useEffect(() => {
         qualifySolvingBadges();
