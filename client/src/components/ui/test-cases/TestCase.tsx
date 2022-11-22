@@ -213,7 +213,7 @@ interface ControlProps {
 // Controlling hidden test and remove test functionalities
 const TestCaseControl: FC<ControlProps> = ({ onHidden, hidden, disabled, onDelete }) => {
     return (
-        <div className="flex-between">
+        <div className="-mt-1 flex-between">
             <p className="flex">
                 <input
                     type="checkbox"

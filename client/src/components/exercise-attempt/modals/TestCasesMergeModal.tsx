@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { GoGitMerge } from 'react-icons/go';
 import { VscRunAll } from 'react-icons/vsc';
@@ -45,12 +45,12 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
     } = useExerciseAttemptCtx();
 
     const testCasesWithOutputs = useTestCasesWithOutputs();
-    const { addCustomTest, updateCustomTest, deleteCustomTest } = useCustomTests();
+    const { addCustomTest } = useCustomTests();
     const [requestLoading, setRequestLoading] = useState(false);
 
     if (exercise == null) return null;
 
-    const mergeTestCases = async () => {
+    const mergeTestCases = useCallback(async () => {
         const newTests = customTests.map((test) => ({
             ...test,
             custom: undefined,
@@ -74,9 +74,14 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
         } else {
             toastNotify(`Error: ${message}`, 'error');
         }
-    };
+    }, [exercise._id, customTests, onClose]);
 
-    const renamedTests = renameTestCases(testCasesWithOutputs);
+    const renamedTests = useMemo(
+        () => renameTestCases(testCasesWithOutputs),
+        [testCasesWithOutputs],
+    );
+
+    if (!open) return null;
 
     return (
         <AnimationModal
@@ -145,8 +150,6 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
                                                 key={`${testCase.name}-${idx}`}
                                                 exercise={exercise}
                                                 testCase={testCase}
-                                                onUpdateTest={updateCustomTest}
-                                                onDeleteTest={deleteCustomTest}
                                                 index={idx}
                                             />
                                         ) : (

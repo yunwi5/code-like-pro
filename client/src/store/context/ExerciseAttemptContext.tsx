@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { postSubmission, runTestCases } from '../../apis/submission.api';
 import AttemptSuccessModal from '../../components/exercise-attempt/modals/AttemptSuccessModal';
 import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
@@ -50,13 +50,12 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         `${exercise._id}-custom-tests`,
         [],
     );
-
     // Solving badge qualifying detection
     const { qualifySolvingBadges } = useBadgeQualification();
     // Showcase invite modal to encourage users to join the showcase, after they get correct.
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-    const runCode = async () => {
+    const runCode = useCallback(async () => {
         // output of the test cases => actual output, status like correctness
         setIsLoading(true);
 
@@ -84,9 +83,9 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
                 `You got ${correct} tests correct out of ${outputs.length} tests!`,
             );
         } else toastNotify(`Oops, ${message}`, 'error');
-    };
+    }, [customTests, exercise.testCases, userSolution, exercise.language]);
 
-    const submitCode = async () => {
+    const submitCode = useCallback(async () => {
         setIsLoading(true);
         const {
             ok,
@@ -108,13 +107,15 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         } else {
             toastNotify(`Oops, ${message}`, 'error');
         }
-    };
+    }, [exercise._id, userSolution]);
 
     // Restore previous user submission
     useEffect(() => {
         if (!previousSubmission) return;
         setUserSubmission(previousSubmission);
     }, [previousSubmission]);
+
+    console.log({ userSolution, customTests });
 
     // Solving badge detection with useEffect
     useEffect(() => {

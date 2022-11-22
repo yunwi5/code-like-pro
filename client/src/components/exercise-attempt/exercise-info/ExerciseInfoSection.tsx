@@ -28,7 +28,7 @@ const ExerciseInfoSection: React.FC = () => {
     // So that users can see the output of their tests immediately without having to switch to testCases sectio manually.
     useEffect(() => {
         if (testCaseOutputs.length > 0) setActiveSubSection(SubSection.TEST_CASES);
-    }, [testCaseOutputs]);
+    }, [testCaseOutputs.length]);
 
     return (
         <div className="flex-1 flex flex-col text-gray-700">

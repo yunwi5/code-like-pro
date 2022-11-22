@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 import {
     IExerciseWithId,
     ITestCaseProps,
     ITestCaseWithOutput,
 } from '../../../models/interfaces';
+import useCustomTests from '../../exercise-attempt/hooks/useCustomTests';
 import { checkTestCaseMergeable } from '../../../utils/exercise-utils/testcase';
 import TestCase from './TestCase';
 
@@ -15,29 +16,40 @@ const MergeableTestCaseStyle = {
 const MergeableTestCase: FC<{
     exercise: IExerciseWithId;
     testCase: ITestCaseWithOutput;
-    onUpdateTest: (props: ITestCaseProps, index: number) => void;
-    onDeleteTest: (targetIndex: number) => void;
     index: number;
-}> = ({ exercise, testCase, onUpdateTest, onDeleteTest, index }) => {
-    const { mergeable, message } = checkTestCaseMergeable(exercise.testCases, testCase);
-    const label = mergeable ? (
-        <label
-            className={`${MergeableTestCaseStyle.labelBtn} bg-emerald-500 hover:bg-emerald-600`}
-        >
-            Mergeable
-        </label>
-    ) : (
-        <label
-            className={`${MergeableTestCaseStyle.labelBtn} bg-pink-500 hover:bg-pink-600`}
-        >
-            Not Mergeable
-        </label>
+}> = ({ exercise, testCase, index }) => {
+    const { updateCustomTest, deleteCustomTest } = useCustomTests();
+
+    const { mergeable, message } = useMemo(
+        () => checkTestCaseMergeable(exercise.testCases, testCase, exercise.language),
+        [exercise, testCase],
     );
 
-    const mergeableMessage = (
-        <p className={`mt-2 ${mergeable ? 'text-emerald-500' : 'text-rose-500'}`}>
-            {message}
-        </p>
+    const label = useMemo(
+        () =>
+            mergeable ? (
+                <label
+                    className={`${MergeableTestCaseStyle.labelBtn} bg-emerald-500 hover:bg-emerald-600`}
+                >
+                    Mergeable
+                </label>
+            ) : (
+                <label
+                    className={`${MergeableTestCaseStyle.labelBtn} bg-pink-500 hover:bg-pink-600`}
+                >
+                    Not Mergeable
+                </label>
+            ),
+        [mergeable],
+    );
+
+    const mergeableMessage = useMemo(
+        () => (
+            <p className={`mt-2 ${mergeable ? 'text-emerald-500' : 'text-rose-500'}`}>
+                {message}
+            </p>
+        ),
+        [mergeable, message],
     );
 
     return (
@@ -49,8 +61,8 @@ const MergeableTestCase: FC<{
             output={testCase.output}
             headingLabel={label}
             headingMessage={mergeableMessage}
-            onUpdate={(props: ITestCaseProps) => onUpdateTest(props, index)}
-            onDelete={() => onDeleteTest(index)}
+            onUpdate={(props: ITestCaseProps) => updateCustomTest(props, index)}
+            onDelete={() => deleteCustomTest(index)}
         />
     );
 };

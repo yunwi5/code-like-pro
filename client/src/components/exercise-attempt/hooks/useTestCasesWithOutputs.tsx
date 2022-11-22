@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
     IExerciseWithId,
     ITestCase,
@@ -39,13 +40,15 @@ function useTestCasesWithOutputs(): ITestCaseWithOutput[] {
     const { exercise, testCaseOutputs, customTests } = useExerciseAttemptCtx();
     if (exercise == null) return [];
 
-    const existingTests = getExistingTestsWithNames(exercise);
+    const existingTests = useMemo(() => getExistingTestsWithNames(exercise), [exercise]);
+
     // Combine existing tests with new user custom tests
     const combinedTestCases = customTests.concat(existingTests);
+
     // Merge corresponding output to each test case
-    const testCasesWithOutputs: ITestCaseWithOutput[] = matchTestCaseAndOutput(
-        combinedTestCases,
-        testCaseOutputs,
+    const testCasesWithOutputs: ITestCaseWithOutput[] = useMemo(
+        () => matchTestCaseAndOutput(combinedTestCases, testCaseOutputs),
+        [combinedTestCases, testCaseOutputs],
     );
     return testCasesWithOutputs;
 }

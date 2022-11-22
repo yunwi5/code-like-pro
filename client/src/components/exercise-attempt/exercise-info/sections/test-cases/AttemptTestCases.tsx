@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ITestCaseWithOutput } from '../../../../../models/interfaces';
 import useCustomTests from '../../../hooks/useCustomTests';
 import useTestCasesWithOutputs from '../../../hooks/useTestCasesWithOutputs';
@@ -14,11 +14,16 @@ const AttemptTestCases: React.FC = () => {
     const { addCustomTest, updateCustomTest, deleteCustomTest } = useCustomTests();
 
     const testCasesWithOutputs: ITestCaseWithOutput[] = useTestCasesWithOutputs();
+
     // Hidden tests should not be displayed during attempt.
-    const nonHiddenTests = testCasesWithOutputs.filter(
-        (test) => test.custom || !test.hidden,
+    const nonHiddenTests = useMemo(
+        () => testCasesWithOutputs.filter((test) => test.custom || !test.hidden),
+        [testCasesWithOutputs],
     );
-    const mergeReady = testCasesWithOutputs.every((test) => test.output?.correct);
+    const mergeReady: boolean = useMemo(
+        () => testCasesWithOutputs.every((test) => test.output?.correct),
+        [testCasesWithOutputs],
+    );
 
     return (
         <section

@@ -1,4 +1,6 @@
+import { Language } from '../../models/enums';
 import { ITestCase, ITestCaseWithOutput, ITestOutput } from '../../models/interfaces';
+import { removeCommentLines } from '../string-utils/string-manipulation';
 
 // Creater's initial test case
 export function getEmptyTestCase(testCaseNumber?: number): ITestCase {
@@ -36,9 +38,10 @@ export function testCasesEmpty(testCases: ITestCase[]) {
 }
 
 // Needs to be updated to handle comments removal for more strict comparison
-export function isSameTestCase(testA: ITestCase, testB: ITestCase) {
-    const codeSame = testA.code.trim() === testB.code.trim();
-    return codeSame;
+export function isSameTestCase(testA: ITestCase, testB: ITestCase, language: Language) {
+    const testANoComments = removeCommentLines(testA.code, language);
+    const testBNoComments = removeCommentLines(testB.code, language);
+    return testANoComments.trim() === testBNoComments.trim();
 }
 
 // Analyse and validate test cases result
@@ -80,13 +83,14 @@ export function getCorrectTestCaseCount(testCaseOutputs: ITestOutput[]) {
 export function checkTestCaseMergeable(
     existingTests: ITestCase[],
     newTestWithOutput: ITestCaseWithOutput,
+    language: Language,
 ) {
     if (!newTestWithOutput.output?.correct) {
         return { message: 'Your testcase output is not correct!', mergeable: false };
     }
 
     const duplicatedTest = existingTests.find((test) =>
-        isSameTestCase(newTestWithOutput, test),
+        isSameTestCase(newTestWithOutput, test, language),
     );
     if (duplicatedTest != null)
         return { mergeable: false, message: 'The test already exists!' };

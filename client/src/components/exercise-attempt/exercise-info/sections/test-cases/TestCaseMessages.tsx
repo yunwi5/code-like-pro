@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ITestCase, ITestCaseWithOutput } from '../../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 
 function getOpenAndHiddenTestCounts(testCases: ITestCase[]) {
-    const openTestCases = testCases.filter((ex) => !ex.hidden);
+    const openTestCases: ITestCase[] = testCases.filter((ex) => !ex.hidden);
 
     const openTestCasesCount = openTestCases.length;
     const hiddenTestCasesCount = testCases.length - openTestCasesCount;
@@ -48,11 +48,16 @@ const TestCaseMessages: React.FC<{ testCasesWithOutputs: ITestCaseWithOutput[] }
     const { testCaseOutputs } = useExerciseAttemptCtx();
 
     // Only display non hidden test cases.
-    const [openTestCasesCount, hiddenTestCasesCount] =
-        getOpenAndHiddenTestCounts(testCasesWithOutputs);
+    const [openTestCasesCount, hiddenTestCasesCount] = useMemo(
+        () => getOpenAndHiddenTestCounts(testCasesWithOutputs),
+        [testCasesWithOutputs],
+    );
 
     const noTestCaseOutputs = testCaseOutputs.length === 0;
-    const outputMessages = generateOutputMessages(testCasesWithOutputs);
+    const outputMessages = useMemo(
+        () => generateOutputMessages(testCasesWithOutputs),
+        [testCasesWithOutputs],
+    );
 
     return (
         <div className="flex flex-wrap gap-5 px-6 py-2">

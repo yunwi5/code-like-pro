@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
 import { getDifficultyColorClass } from '../../../../../utils/difficulty';
 import StatusCircle from '../../../../ui/icons/StatusCircle';
@@ -9,7 +9,10 @@ const ExercisePromptHeader: React.FC = () => {
 
     if (exercise == null) return null;
 
-    const colorClass = getDifficultyColorClass(exercise.difficulty);
+    const colorClass = useMemo(
+        () => getDifficultyColorClass(exercise.difficulty),
+        [exercise.difficulty],
+    );
 
     return (
         <header>
