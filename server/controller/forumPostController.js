@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const ForumPost = require('../models/ForumPost');
 const Comment = require('../models/Comment');
 
@@ -16,7 +17,7 @@ const getForumPosts = async (req, res) => {
         res.status(200).json(forumPosts);
     } catch (err) {
         console.log(err.message);
-        res.status(400).json(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -28,7 +29,7 @@ const getForumPostByCategory = async (req, res) => {
         res.status(200).json(forumPosts);
     } catch (err) {
         console.log(err.message);
-        res.status(400).json(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -49,7 +50,7 @@ const getForumPostById = async (req, res) => {
         res.status(200).json(forumPost);
     } catch (err) {
         console.log(err.message);
-        res.status(500).send('Something went wrong');
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -67,9 +68,9 @@ const updateForumPost = async (req, res) => {
             const updatedDetails = req.body;
 
             if (req.user._id.toString() != forumPost.author.toString()) {
-                res.status(400).send(
-                    'Error, user does not have permission to edit forum post',
-                );
+                res.status(400).json({
+                    message: 'Error, user does not have permission to edit forum post',
+                });
             }
 
             forumPost = await ForumPost.findByIdAndUpdate(req.params.id, updatedDetails, {
@@ -79,10 +80,10 @@ const updateForumPost = async (req, res) => {
             res.status(200).json(forumPost);
         } catch (err) {
             console.log(err.message);
-            res.status(500).json(err.message);
+            res.status(500).json({ message: 'Something went wrong...' });
         }
     } else {
-        res.status(404).send(`Forum post ${forumId} was not found`);
+        res.status(404).json({ message: `Forum post ${forumId} was not found` });
     }
 };
 
@@ -99,7 +100,9 @@ const deleteForumPost = async (req, res) => {
     if (forum != null) {
         try {
             if (forum.author?.toString() !== req.user._id.toString()) {
-                return res.status(401).send(`You are not the author of the post!`);
+                return res
+                    .status(401)
+                    .json({ message: `You are not the author of the post!` });
             }
 
             // Delete all the comments of this post, as they are now redundant.
@@ -107,13 +110,13 @@ const deleteForumPost = async (req, res) => {
             const p2 = forum.remove();
             await Promise.all([p1, p2]);
 
-            res.status(200).send('Deleted');
+            res.status(200).json({ message: 'Deleted' });
         } catch (err) {
             console.log(err.message);
-            res.status(500).send('Something went wrong');
+            res.status(500).json({ message: 'Something went wrong' });
         }
     } else {
-        res.status(404).send(`Forum post ${forumId} was not found`);
+        res.status(404).json({ message: `Forum post ${forumId} was not found` });
     }
 };
 
@@ -127,7 +130,9 @@ const postForumPostComment = async (req, res) => {
         const comment = new Comment({ user: userId, text });
         const forumPost = await ForumPost.findById(forumId);
         if (forumPost == null)
-            return res.status(404).send(`Forum post ${forumId} was not found`);
+            return res
+                .status(404)
+                .json({ message: `Forum post ${forumId} was not found` });
 
         // Push the comment at the end of the 'comments' array
         forumPost.comments.push(comment);
@@ -137,7 +142,7 @@ const postForumPostComment = async (req, res) => {
         res.status(201).json(comment);
     } catch (err) {
         console.log(err.message);
-        res.status(500).send('Something went wrong');
+        res.status(500).json({ message: 'Something went wrong' });
     }
 };
 
@@ -154,7 +159,7 @@ const deleteForumPostComment = async (req, res) => {
 
         const [_, forumPost] = await Promise.all([commentPromise, forumPostPromise]);
         if (forumPost == null)
-            return res.status(404).send(`Forum ${forumId} was not found`);
+            return res.status(404).json({ message: `Forum ${forumId} was not found` });
 
         // Remove the comment id from the array of 'comments' of the ForumPost
         forumPost.comments = forumPost.comments.filter(
@@ -162,10 +167,10 @@ const deleteForumPostComment = async (req, res) => {
         );
 
         await forumPost.save();
-        res.status(200).send('Forum post comment deleted');
+        res.status(200).json({ message: 'Forum post comment deleted' });
     } catch (err) {
         console.log(err.message);
-        res.status(500).send('Something went wrong');
+        res.status(500).json({ message: 'Something went wrong' });
     }
 };
 
@@ -177,7 +182,7 @@ const postVote = async (req, res) => {
         const forumPost = await ForumPost.findById(req.params.id);
         // Check if show case exists, return 404 if not
         if (forumPost == null)
-            res.status(404).send(`Forum post ${req.params.id} not found`);
+            res.status(404).json({ message: `Forum post ${req.params.id} not found` });
 
         // See if there is already an existing vote made by the user
         const foundVote = forumPost.votes.find(
@@ -196,7 +201,10 @@ const postVote = async (req, res) => {
         res.status(201).json(forumPost);
     } catch (err) {
         console.log(err.message);
-        res.status(404).json(err.message);
+        if (err instanceof mongoose.Error) {
+            return res.status(404).json({ message: 'Non existing forum post id' });
+        }
+        res.status(404).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -205,7 +213,7 @@ const deleteVote = async (req, res) => {
         const forumPost = await ForumPost.findById(req.params.id).populate('votes');
         // Check if show case exists, return 404 if not
         if (forumPost == null)
-            res.status(404).send(`Forum post ${req.params.id} not found`);
+            res.status(404).json({ message: `Forum post ${req.params.id} not found` });
 
         // Find index of existing vote made by the user, if there is one
         const foundIndex = forumPost.votes.findIndex(
@@ -223,7 +231,7 @@ const deleteVote = async (req, res) => {
         }
     } catch (err) {
         console.log(err.message);
-        res.status(404).json(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 

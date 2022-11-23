@@ -9,7 +9,8 @@ const postReportVote = async (req, res) => {
     try {
         const report = await ExerciseReport.findById(reportId).populate('votes');
         // If there is no existing report of the param id, return 404.
-        if (report == null) return res.status(404).json(`Report ${reportId} not found`);
+        if (report == null)
+            return res.status(404).json({ message: `Report ${reportId} not found` });
 
         // Check if there is an existing vote to this report by the user.
         const foundVote = report.votes.find(
@@ -29,7 +30,7 @@ const postReportVote = async (req, res) => {
         res.status(201).json(report);
     } catch (err) {
         console.log(err.message);
-        res.status(400).json(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -53,7 +54,8 @@ const deleteReportVote = async (req, res) => {
             return res.status(200).json(report);
         }
     } catch (err) {
-        res.status(500).send(err.message);
+        console.log(err.message);
+        res.status(500).send({ message: 'Something went wrong...' });
     }
 };
 

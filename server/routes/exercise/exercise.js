@@ -5,6 +5,7 @@ const { ensureAuthenticated } = require('../../middleware/auth');
 const catchAsync = require('../../middleware/catchAsync');
 const {
     validateExerciseBody,
+    validateTestCasesBody,
     validateCommentBody,
 } = require('../../middleware/validateRequest');
 
@@ -35,6 +36,14 @@ router.delete('/:id', ensureAuthenticated, catchAsync(exerciseController.deleteE
 
 // Submission history of the exercise from any users.
 router.get('/:id/submission', catchAsync(exerciseController.getExerciseSubmissions));
+
+// Merging custom tests from users who attempt the exercise
+router.post(
+    '/:id/test-merge',
+    ensureAuthenticated,
+    validateTestCasesBody,
+    catchAsync(exerciseController.mergeCustomTests),
+);
 
 // User issue report for the exercise
 router

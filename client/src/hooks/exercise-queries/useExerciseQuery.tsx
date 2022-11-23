@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getExerciseById } from '../../apis/exercise.api';
 
@@ -20,7 +20,10 @@ function useExerciseQuery(exerciseId: string) {
     if (error) console.log(error);
 
     // Refetch the exercise data for an immediate update on UI.
-    const refetchExercise = () => queryClient.invalidateQueries([exerciseQueryKey]);
+    const refetchExercise = useCallback(
+        () => queryClient.invalidateQueries([exerciseQueryKey]),
+        [exerciseQueryKey],
+    );
 
     return { exercise, isLoading, error: message, refetch: refetchExercise };
 }

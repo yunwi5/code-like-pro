@@ -1,7 +1,20 @@
 import React, { useEffect } from 'react';
 import useLocalStorage from '../../../../hooks/useLocalStorage';
+import { Language } from '../../../../models/enums';
+import { IExerciseWithId } from '../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import CodeEditor from '../../../ui/editor/CodeEditor';
+
+function getIndexedStartingTemplate(
+    exercise: IExerciseWithId | null,
+    solutionIndex: number,
+) {
+    let solution = `${exercise?.language === Language.PYTHON ? '#' : '//'} Solution ${
+        solutionIndex + 1
+    }\n`;
+    if (exercise?.startingTemplate) solution = `${solution}${exercise.startingTemplate}`;
+    return solution;
+}
 
 // Code editor workspace where users can write coding solution
 const EditorWorkspace: React.FC<{ index: number }> = ({ index }) => {
@@ -12,7 +25,7 @@ const EditorWorkspace: React.FC<{ index: number }> = ({ index }) => {
     const localStorageKey = `user-solution-${exercise?._id}-${index}`;
     const [localSolution, setLocalSolution] = useLocalStorage<string>(
         localStorageKey,
-        exercise?.startingTemplate || '',
+        getIndexedStartingTemplate(exercise, index),
     );
 
     // Whenever the code changes, set user solution as well as set value to the localStorage.

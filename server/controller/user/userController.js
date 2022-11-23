@@ -47,7 +47,7 @@ const getUserById = async (req, res) => {
         res.status(200).json(user);
     } catch (err) {
         console.log(err.message);
-        res.status(404).json(`User ${req.params.id} not found`);
+        res.status(404).json({ message: `User ${req.params.id} not found` });
     }
 };
 
@@ -83,7 +83,7 @@ const getUserDetailById = async (req, res) => {
     if (user != null) {
         res.status(200).json(user);
     } else {
-        res.status(404).json(`User ${req.params.id} not found`);
+        res.status(404).json({ message: `User ${req.params.id} not found` });
     }
 };
 

@@ -185,6 +185,7 @@ const getCoursesUserRankings = async (req, res) => {
     // Adding ranking data for exercise creations.
     addCreationPoints(userRankingDataMap, exercises);
 
+    const subs = submissions.filter((sub) => !!sub.exercise);
     // Adding ranking data for exercise solving.
     addSolvingPoints(userRankingDataMap, subs);
 

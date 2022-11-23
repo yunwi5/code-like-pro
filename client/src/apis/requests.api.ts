@@ -9,7 +9,7 @@ type ReqParams = { url: string; headers?: AxiosRequestConfig };
 // Request params for POST &  PUT & PATCH requests
 type ReqBodyParams = { url: string; body: any; headers?: AxiosRequestConfig };
 
-export async function getRequest<T>({ url, headers }: ReqParams) {
+export async function getRequest<T>({ url }: ReqParams) {
     let data: T | null = null;
     try {
         const response = await axios.get<T>(url, authConfig);
@@ -24,7 +24,7 @@ export async function getRequest<T>({ url, headers }: ReqParams) {
 }
 
 // There can be more params in the future.
-export async function postRequest<T>({ url, body, headers }: ReqBodyParams) {
+export async function postRequest<T>({ url, body }: ReqBodyParams) {
     let data: T | null = null;
     try {
         const response = await axios.post<T>(url, body, authConfig);
@@ -38,7 +38,7 @@ export async function postRequest<T>({ url, body, headers }: ReqBodyParams) {
     }
 }
 
-export async function putRequest<T>({ url, body, headers }: ReqBodyParams) {
+export async function putRequest<T>({ url, body }: ReqBodyParams) {
     let data: T | null = null;
     try {
         let response = await axios.put<T>(url, body, authConfig);
@@ -51,7 +51,7 @@ export async function putRequest<T>({ url, body, headers }: ReqBodyParams) {
     }
 }
 
-export async function patchRequest<T>({ url, body, headers }: ReqBodyParams) {
+export async function patchRequest<T>({ url, body }: ReqBodyParams) {
     let data: T | null = null;
     try {
         let response = await axios.patch<T>(url, body, authConfig);
@@ -64,7 +64,7 @@ export async function patchRequest<T>({ url, body, headers }: ReqBodyParams) {
     }
 }
 
-export async function deleteRequest<T>({ url, headers }: ReqParams) {
+export async function deleteRequest<T>({ url }: ReqParams) {
     let data: T | null = null;
     try {
         let response = await axios.delete<T>(url, authConfig);
@@ -80,9 +80,7 @@ export async function deleteRequest<T>({ url, headers }: ReqParams) {
 // Extract error meessage from the response, if the request throws an error.
 function extractErrorMessage(error: any): string {
     console.log('Response error:', error);
-    let responseError = error.message ?? error.response.data.message;
-    if (typeof responseError !== 'string') {
-        responseError = responseError?.message || 'Something went wrong...';
-    }
+    const responseError =
+        error.response?.data?.message || error.message || 'Something went wrong...';
     return responseError;
 }

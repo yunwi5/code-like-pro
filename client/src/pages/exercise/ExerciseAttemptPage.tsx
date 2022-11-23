@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -26,10 +26,14 @@ const ExerciseAttemptPage: React.FC = () => {
     } = useExerciseQuery(exerciseId);
 
     // Previous user submission data from the context. Either user submission or null.
-    let userSubmission = submissionMap[exerciseId] && {
-        ...submissionMap[exerciseId],
-        exercise: exerciseId,
-    };
+    const userSubmission = useMemo(
+        () =>
+            submissionMap[exerciseId] && {
+                ...submissionMap[exerciseId],
+                exercise: exerciseId,
+            },
+        [submissionMap, exerciseId],
+    );
 
     // If the exercise does not exist, or if there is an exercise error, redirect to the browsing page.
     useEffect(() => {

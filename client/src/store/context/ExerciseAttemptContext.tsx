@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { postSubmission, runTestCases } from '../../apis/submission.api';
-import ShowcaseInviteModal from '../../components/exercise-attempt/modals/ShowcaseInviteModal';
+import AttemptSuccessModal from '../../components/exercise-attempt/modals/AttemptSuccessModal';
 import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import {
@@ -50,13 +50,12 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         `${exercise._id}-custom-tests`,
         [],
     );
-
     // Solving badge qualifying detection
     const { qualifySolvingBadges } = useBadgeQualification();
     // Showcase invite modal to encourage users to join the showcase, after they get correct.
-    const [showInviteModal, setShowInviteModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-    const runCode = async () => {
+    const runCode = useCallback(async () => {
         // output of the test cases => actual output, status like correctness
         setIsLoading(true);
 
@@ -84,9 +83,9 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
                 `You got ${correct} tests correct out of ${outputs.length} tests!`,
             );
         } else toastNotify(`Oops, ${message}`, 'error');
-    };
+    }, [customTests, exercise.testCases, userSolution, exercise.language]);
 
-    const submitCode = async () => {
+    const submitCode = useCallback(async () => {
         setIsLoading(true);
         const {
             ok,
@@ -99,7 +98,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
             setUserSubmission(newSubmission);
             if (newSubmission.correct) {
                 toastNotify("You got all creator's test cases correct!", 'success');
-                setShowInviteModal(true);
+                setShowSuccessModal(true);
             } else {
                 toastNotify(
                     `Submission status is incorrect. Debug your code and try again!`,
@@ -108,7 +107,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         } else {
             toastNotify(`Oops, ${message}`, 'error');
         }
-    };
+    }, [exercise._id, userSolution]);
 
     // Restore previous user submission
     useEffect(() => {
@@ -139,10 +138,10 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     return (
         <ExerciseAttemptContext.Provider value={value}>
             {children}
-            <ShowcaseInviteModal
-                open={showInviteModal}
-                onClose={() => setShowInviteModal(false)}
-            ></ShowcaseInviteModal>
+            <AttemptSuccessModal
+                open={showSuccessModal}
+                onClose={() => setShowSuccessModal(false)}
+            />
         </ExerciseAttemptContext.Provider>
     );
 };

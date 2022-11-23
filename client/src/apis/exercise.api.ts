@@ -6,6 +6,7 @@ import {
     IExerciseWithId,
     IIssueReport,
     IShowCase,
+    ITestCase,
     IUserSubmission,
     IVote,
 } from '../models/interfaces';
@@ -44,10 +45,18 @@ export async function deleteExercise(id: string) {
     });
 }
 
-//Get top 3 exercises
+//Get top exercises
 export async function getTopExercises(amount: number = 3) {
     return await getRequest<IExerciseWithId[]>({
         url: `${API_DOMAIN}/top?amount=${amount}`,
+    });
+}
+
+// Merge user custom test cases to existing test cases
+export async function postTestCasesMerge(id: string, newTests: ITestCase[]) {
+    return await postRequest<{ exercise: IExercise; insertedCount: number }>({
+        url: `${API_DOMAIN}/${id}/test-merge`,
+        body: newTests,
     });
 }
 
