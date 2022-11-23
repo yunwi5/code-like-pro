@@ -7,7 +7,7 @@ import { MdCelebration } from 'react-icons/md';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { getShowcasePageLink } from '../../../utils/links';
 import AnimationModal from '../../ui/modals/AnimationModal';
-import TestCasesMergeModal from './TestCasesMergeModal';
+import TestCasesMergeModal from './merge-modal/TestCasesMergeModal';
 
 interface Props {
     open: boolean;

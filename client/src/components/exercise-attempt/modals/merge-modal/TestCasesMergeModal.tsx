@@ -1,20 +1,17 @@
-import { FC, useCallback, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import { GoGitMerge } from 'react-icons/go';
 import { VscRunAll } from 'react-icons/vsc';
 import { ClipLoader } from 'react-spinners';
 
-import { postTestCasesMerge } from '../../../apis/exercise.api';
-import { ITestCaseWithOutput } from '../../../models/interfaces';
-import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import { listItemAnimations } from '../../../utils/animations';
-import { toastNotify } from '../../../utils/notification';
-import useCustomTests from '../hooks/useCustomTests';
-import useTestCasesWithOutputs from '../hooks/useTestCasesWithOutputs';
-import Button from '../../ui/buttons/Button';
-import AnimationModal from '../../ui/modals/AnimationModal';
-import TestCase from '../../ui/test-cases/TestCase';
-import MergeableTestCase from '../../ui/test-cases/MergeableTestCase';
+import { postTestCasesMerge } from '../../../../apis/exercise.api';
+import { ITestCaseWithOutput } from '../../../../models/interfaces';
+import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import { toastNotify } from '../../../../utils/notification';
+import useCustomTests from '../../hooks/useCustomTests';
+import useTestCasesWithOutputs from '../../hooks/useTestCasesWithOutputs';
+import Button from '../../../ui/buttons/Button';
+import AnimationModal from '../../../ui/modals/AnimationModal';
+import MergeableTestCasesList from './MergeableTestCasesList';
 
 interface Props {
     open: boolean;
@@ -132,42 +129,10 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
                                 </Button>
                             )}
                         </div>
-
-                        <div className="flex flex-col gap-4">
-                            {renamedTests.map((testCase, idx) => {
-                                // Only display non hidden test cases.
-                                if (!testCase.custom && testCase.hidden) return null;
-
-                                return (
-                                    <motion.div
-                                        key={idx}
-                                        variants={listItemAnimations}
-                                        initial="initial"
-                                        animate="animate"
-                                        exit="exit"
-                                        transition={{ duration: 0.3, delay: idx * 0.1 }}
-                                    >
-                                        {testCase.custom ? (
-                                            <MergeableTestCase
-                                                key={`${testCase.name}-${idx}`}
-                                                exercise={exercise}
-                                                testCase={testCase}
-                                                index={idx}
-                                            />
-                                        ) : (
-                                            <TestCase
-                                                key={`${testCase.name}-${idx}`}
-                                                className="!bg-gray-200 opacity-60"
-                                                language={exercise.language}
-                                                testCase={testCase}
-                                                output={testCase.output}
-                                                readOnly={true}
-                                            />
-                                        )}
-                                    </motion.div>
-                                );
-                            })}
-                        </div>
+                        <MergeableTestCasesList
+                            exercise={exercise}
+                            testCases={renamedTests}
+                        />
                     </div>
 
                     {/* Action buttons for moving to showcase page or closing modal */}
@@ -196,4 +161,8 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
     );
 };
 
-export default TestCasesMergeModal;
+// Second one is arePropsEqual function
+export default React.memo(
+    TestCasesMergeModal,
+    (prevProps, nextProps) => prevProps.open === nextProps.open,
+);
