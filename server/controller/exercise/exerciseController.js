@@ -7,19 +7,12 @@ const ShowCase = require('../../models/ShowCase');
 const User = require('../../models/User');
 
 const { constructLanguageFileSpec } = require('../../utils/languageSupport');
+const { filterDuplicatedTests } = require('../../utils/testCase.util');
 const makeRequest = require('../../utils/makeRequest');
 
-const postExercise = async (req, res) => {
-    const exerciseBody = req.body;
-    const exercise = new Exercise(exerciseBody);
-    exercise.author = req.user._id;
-
-    const testCases = exercise.testCases;
-    const solutionCode = exercise.solutionCode;
-    let language = exercise.language;
-
+// Helper function to validate test cases
+const validateTestCases = async ({ testCases, language, solutionCode }) => {
     // Iterate through each test case and make request to JOBE server
-
     const testCasePromises = testCases.map((testCase) => {
         // Append test case to solution code and check if output is right
         const body = {
@@ -34,9 +27,28 @@ const postExercise = async (req, res) => {
 
     for (let i = 0; i < testCaseResults.length; i++) {
         if (testCaseResults[i].stdout.trim() != testCases[i].expectedOutput.trim()) {
-            return res.status(400).json({ message: 'Some test cases failed.' });
+            return false;
         }
     }
+    return true;
+};
+
+const postExercise = async (req, res) => {
+    const exerciseBody = req.body;
+    const exercise = new Exercise(exerciseBody);
+    exercise.author = req.user._id;
+
+    const testCases = exercise.testCases;
+    const solutionCode = exercise.solutionCode;
+    const language = exercise.language;
+
+    const testCasesPassed = await validateTestCases({
+        testCases,
+        language,
+        solutionCode,
+    });
+    if (!testCasesPassed)
+        return res.status(400).json({ message: 'Some test cases failed.' });
 
     await exercise.save();
 
@@ -65,7 +77,7 @@ const getExerciseByID = async (req, res) => {
     if (exercise != null) {
         res.status(200).json(exercise);
     } else {
-        res.status(404).json(`Exercise ${req.params.id} not found`);
+        res.status(404).json({ message: `Exercise ${req.params.id} not found` });
     }
 };
 
@@ -74,26 +86,15 @@ const updateExercise = async (req, res) => {
     const exerciseBody = req.body;
     const testCases = exerciseBody.testCases;
     const solutionCode = exerciseBody.solutionCode;
+    const language = exerciseBody.language;
 
-    let language = exerciseBody.language;
-
-    const testCasePromises = testCases.map((testCase) => {
-        // Append test case to solution code and check if output is right
-        const body = {
-            run_spec: constructLanguageFileSpec(language, solutionCode, testCase.code),
-        };
-
-        const result = makeRequest(body);
-        return result;
+    const testCasesPassed = await validateTestCases({
+        testCases,
+        language,
+        solutionCode,
     });
-
-    const testCaseResults = await Promise.all(testCasePromises);
-
-    for (let i = 0; i < testCaseResults.length; i++) {
-        if (testCaseResults[i].stdout.trim() != testCases[i].expectedOutput.trim()) {
-            return res.status(400).json({ message: 'Some test cases failed.' });
-        }
-    }
+    if (!testCasesPassed)
+        return res.status(400).json({ message: 'Some test cases failed.' });
 
     let updatedExercise;
     try {
@@ -115,7 +116,9 @@ const deleteExercise = async (req, res) => {
 
         // If the exercise is not found, return 404
         if (exercise == null)
-            return res.status(404).send(`Exercise ${req.params.id} not found`);
+            return res
+                .status(404)
+                .json({ message: `Exercise ${req.params.id} not found` });
 
         // Shoud clear up all the entities that rely on this exercise
         const showcaseIds = exercise.showCases;
@@ -139,7 +142,9 @@ const deleteExercise = async (req, res) => {
     } catch (err) {
         console.log(err.message);
         if (err instanceof mongoose.Error) {
-            return res.status(404).send(`Exercise ${req.params.id} not found`);
+            return res
+                .status(404)
+                .json({ message: `Exercise ${req.params.id} not found` });
         }
         return res.status(500).json({ message: 'Something went wrong' });
     }
@@ -150,7 +155,7 @@ Query string: amount, indicating the number of top exercises the frontend wants.
 const getTopExercises = async (req, res) => {
     let amount = parseInt(req.query.amount);
     if (isNaN(amount) || !amount)
-        // Give defautl amount if the amount query string is invalid.
+        // Give default amount if the amount query string is invalid.
         amount = 5;
 
     const topRanked = await Exercise.aggregate()
@@ -178,7 +183,50 @@ const getExerciseSubmissions = async (req, res) => {
         else throw new Error('Submissions should be an array...');
     } catch (err) {
         console.log(err.message);
-        res.status(400).json(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
+    }
+};
+
+/* 
+POST: Merge custom tests from users
+Req body: Array<{code: string, expectedOutput: string, hidden: boolean}>
+*/
+const mergeCustomTests = async (req, res) => {
+    const exerciseId = req.params.id;
+    try {
+        // Get the target exercise
+        const exercise = await Exercise.findById(exerciseId);
+        if (exercise.testCases.length >= 30)
+            return res
+                .status(406)
+                .json({ message: 'The exercise already has at least 30 test cases!' });
+
+        const customTests = req.body;
+        // validate custom tests
+        const testsValid = await validateTestCases({
+            testCases: customTests,
+            language: exercise.language,
+            solutionCode: exercise.solutionCode,
+        });
+
+        if (!testsValid)
+            return res.status(403).json({ message: 'Some custom tests are not correct' });
+
+        // Check if there are any duplicated test code except the comments
+        // If there are duplicates, remove those duplicates
+        const updatedTests = exercise.testCases.concat(customTests);
+        const nonDuplicatedTests = filterDuplicatedTests(updatedTests).slice(0, 30);
+        const insertedCount = nonDuplicatedTests.length - exercise.testCases.length;
+
+        // Update exercise
+        exercise.testCases = nonDuplicatedTests;
+        await exercise.save();
+
+        if (insertedCount === 0) return res.status(200).json({ exercise, insertedCount });
+        return res.status(201).json({ exercise, insertedCount });
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -214,7 +262,8 @@ const postExerciseReport = async (req, res) => {
         console.log(err.message);
     }
 
-    if (exercise == null) return res.status(404).json(`Exercise ${exerciseId} not found`);
+    if (exercise == null)
+        return res.status(404).json({ message: `Exercise ${exerciseId} not found` });
 
     exercise.reports.push(report);
     const p1 = report.save();
@@ -274,7 +323,7 @@ const getExerciseShowcases = async (req, res) => {
         return res.status(200).json(showCases);
     } catch (err) {
         console.log(err.message);
-        return res.status(404).json(`Exercise ${exerciseId} not found`);
+        return res.status(404).json({ message: `Exercise ${exerciseId} not found` });
     }
 };
 
@@ -286,7 +335,8 @@ const postExerciseShowcase = async (req, res) => {
 
     try {
         const exercise = await Exercise.findById(exerciseId).populate('showCases');
-        if (exercise == null) return res.status(404).json('Exercise not found');
+        if (exercise == null)
+            return res.status(404).json({ message: `Exercise ${exerciseId} not found` });
 
         // Identify if the user previosuly made the showcase for this exercise.
         let showCase = exercise.showCases.find(
@@ -315,7 +365,7 @@ const postExerciseShowcase = async (req, res) => {
         if (err instanceof mongoose.Error) {
             return res.status(400).json({ message: 'Bad request' });
         }
-        return res.status(500).json('Invalid exercise id');
+        return res.status(500).json({ message: 'Invalid exercise id' });
     }
 };
 
@@ -334,7 +384,7 @@ const getExerciseComments = async (req, res) => {
         res.status(200).json(comments);
     } catch (err) {
         console.log(err.message);
-        res.status(404).json('Exercise was not found.');
+        res.status(404).json({ message: 'Exercise was not found' });
     }
 };
 
@@ -350,7 +400,8 @@ const postExerciseComment = async (req, res) => {
 
         // Find the exercise and push the new comment to its 'comments' list.
         const exercise = await Exercise.findById(exerciseId);
-        if (exercise == null) return res.status(404).json('Exercise not found');
+        if (exercise == null)
+            return res.status(404).json({ message: 'Exercise not found' });
 
         exercise.comments.push(newComment);
         const commentPromise = newComment.save();
@@ -359,7 +410,15 @@ const postExerciseComment = async (req, res) => {
         res.status(201).json(newComment);
     } catch (err) {
         console.log(err.message);
-        res.status(400).json(err.message);
+        if (err instanceof mongoose.Error.CastError) {
+            return res.status(404).json({ message: 'Non existing showcase id' });
+        }
+        if (err instanceof mongoose.Error) {
+            return res
+                .status(400)
+                .json({ message: 'Invalid or missing comment properties' });
+        }
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -371,6 +430,7 @@ const controller = {
     deleteExercise,
     getTopExercises,
     getExerciseSubmissions,
+    mergeCustomTests,
     getExerciseReports,
     postExerciseReport,
     toggleLikeExercise,

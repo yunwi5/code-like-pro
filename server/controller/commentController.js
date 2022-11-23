@@ -8,7 +8,8 @@ const getReplyComments = async (req, res) => {
     try {
         const comment = await Comment.findById(commentId);
         // If the comment was not found, return 404.
-        if (comment == null) return res.status(404).json('Comment not found.');
+        if (comment == null)
+            return res.status(404).json({ message: 'Comment not found' });
 
         const replyComments = await Comment.find({ replyTo: comment }).populate({
             path: 'user',
@@ -17,7 +18,10 @@ const getReplyComments = async (req, res) => {
         return res.status(200).json(replyComments);
     } catch (err) {
         console.log(err.message);
-        res.status(400).json(err.message);
+        if (err instanceof mongoose.Error.CastError) {
+            return res.status(404).json({ message: 'Non existing showcase id' });
+        }
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -30,7 +34,8 @@ const postReplyComment = async (req, res) => {
         // Find the existing comment by the id from params.
         const comment = await Comment.findById(commentId);
         // If the comment was not found, return 404.
-        if (comment == null) return res.status(404).json('Comment not found.');
+        if (comment == null)
+            return res.status(404).json({ message: 'Comment not found' });
 
         // SubComment that replies to the existing comment of the param id.
         const replyComment = new Comment({ text, user: req.user, replyTo: comment });
@@ -38,7 +43,10 @@ const postReplyComment = async (req, res) => {
         res.status(201).json(replyComment);
     } catch (err) {
         console.log(err.message);
-        res.status(404).json(err.message);
+        if (err instanceof mongoose.Error.CastError) {
+            return res.status(404).json({ message: 'Non existing showcase id' });
+        }
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -49,11 +57,14 @@ const patchComment = async (req, res) => {
 
     try {
         const comment = await Comment.findById(commentId);
-        if (comment == null) return res.status(404).json('Comment not found');
+        if (comment == null)
+            return res.status(404).json({ message: 'Comment not found' });
 
         // If the user is not the author of the comment, do not authorize the operation.
         if (comment.user.toString() !== req.user._id.toString()) {
-            return res.status(401).json('You are not the author of the comment');
+            return res
+                .status(401)
+                .json({ message: 'You are not the author of the comment' });
         }
 
         // Replace the old text to the new text from req.
@@ -61,13 +72,13 @@ const patchComment = async (req, res) => {
         await comment.save();
         res.status(200).json(comment);
     } catch (err) {
+        console.log(err.message);
         if (err instanceof mongoose.Error.CastError) {
             return res.status(404).json({ message: 'Invalid comment id' });
         } else if (err instanceof mongoose.Error) {
             return res.status(400).json({ message: 'Bad request' });
         }
-
-        res.status(500).json(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -78,11 +89,14 @@ const deleteComment = async (req, res) => {
     try {
         // Find the comment
         const comment = await Comment.findById(commentId);
-        if (comment == null) return res.status(404).json('Comment not found');
+        if (comment == null)
+            return res.status(404).json({ message: 'Comment not found' });
 
         // If the user is not the author of the comment, do not authorize.
         if (comment.user.toString() !== req.user._id.toString()) {
-            return res.status(401).json('You are not the author of the comment');
+            return res
+                .status(401)
+                .json({ message: 'You are not the author of the comment' });
         }
 
         // Delete the comment itself.
@@ -97,7 +111,7 @@ const deleteComment = async (req, res) => {
             return res.status(404).json({ message: 'Invalid comment id' });
         }
         console.log(err.message);
-        res.status(400).json(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -110,7 +124,8 @@ const voteComment = async (req, res) => {
     try {
         const comment = await Comment.findById(commentId).populate('votes');
         // If there is no existing comment of the param id, return 404.
-        if (comment == null) return res.status(404).json('Comment not found');
+        if (comment == null)
+            return res.status(404).json({ message: 'Comment not found' });
 
         // Check if there is an existing vote to this comment by the user.
         const foundVote = comment.votes.find(
@@ -130,7 +145,7 @@ const voteComment = async (req, res) => {
         res.status(201).json(comment);
     } catch (err) {
         console.log(err.message);
-        res.status(400).json(err.message);
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 
@@ -155,7 +170,11 @@ const cancelVoteComment = async (req, res) => {
             return res.status(200).json(comment);
         }
     } catch (err) {
-        res.status(500).send(err.message);
+        console.log(err.message);
+        if (err instanceof mongoose.Error.CastError) {
+            return res.status(404).json({ message: 'Invalid comment id' });
+        }
+        res.status(500).json({ message: 'Something went wrong...' });
     }
 };
 

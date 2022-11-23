@@ -30,7 +30,6 @@ const postSignUp = async (req, res) => {
 
     // validation passed
     const newUser = new User({ email, name, password: hashedPassword });
-    console.log('new user:', newUser);
     await newUser.save();
 
     const userToReturn = getUserToReturn(newUser);

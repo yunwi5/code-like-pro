@@ -1,4 +1,6 @@
-import { ITestCase, ITestOutput } from '../../models/interfaces';
+import { Language } from '../../models/enums';
+import { ITestCase, ITestCaseWithOutput, ITestOutput } from '../../models/interfaces';
+import { removeCommentLines } from '../string-utils/string-manipulation';
 
 // Creater's initial test case
 export function getEmptyTestCase(testCaseNumber?: number): ITestCase {
@@ -35,6 +37,13 @@ export function testCasesEmpty(testCases: ITestCase[]) {
     return testCases.every((testCase) => testCaseEmpty(testCase));
 }
 
+// Needs to be updated to handle comments removal for more strict comparison
+export function isSameTestCase(testA: ITestCase, testB: ITestCase, language: Language) {
+    const testANoComments = removeCommentLines(testA.code, language);
+    const testBNoComments = removeCommentLines(testB.code, language);
+    return testANoComments.trim() === testBNoComments.trim();
+}
+
 // Analyse and validate test cases result
 export function analyzeTestCasesResult(
     testCases: ITestCase[],
@@ -69,4 +78,25 @@ export function getCorrectTestCaseCount(testCaseOutputs: ITestOutput[]) {
         if (result.correct) correct++;
     });
     return { correct };
+}
+
+export function checkTestCaseMergeable(
+    existingTests: ITestCase[],
+    newTestWithOutput: ITestCaseWithOutput,
+    language: Language,
+) {
+    if (newTestWithOutput.code.trim() === '')
+        return { message: 'Your testcase should not be empty!', mergeable: false };
+    if (!newTestWithOutput.output)
+        return { message: 'Please run your code first!', mergeable: false };
+    if (!newTestWithOutput.output?.correct) {
+        return { message: 'Your testcase output is not correct!', mergeable: false };
+    }
+
+    const duplicatedTest = existingTests.find((test) =>
+        isSameTestCase(newTestWithOutput, test, language),
+    );
+    if (duplicatedTest != null)
+        return { mergeable: false, message: 'The test already exists!' };
+    return { mergeable: true, message: 'This test is mergeable!' };
 }

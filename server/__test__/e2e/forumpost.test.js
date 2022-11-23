@@ -165,7 +165,7 @@ describe('Forumpost', () => {
             expect(foundIndex).toBeLessThan(0);
         });
 
-        it('Cannot like non-existing showcase', async () => {
+        it('Cannot like non-existing post', async () => {
             const response = await request(app)
                 .post(`/api/forumPost/invalid-id/vote`)
                 .set('cookie', cookie)
