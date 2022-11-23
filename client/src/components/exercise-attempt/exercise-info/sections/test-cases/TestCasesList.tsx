@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ITestCaseProps, ITestCaseWithOutput } from '../../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
@@ -80,4 +80,7 @@ const TestCasesList: React.FC<Props> = ({
     );
 };
 
-export default TestCasesList;
+// If the render resutls are different, react updates the DOM
+export default React.memo(TestCasesList, (prevProps, nextProps) => {
+    return prevProps.testCasesWithOutputs === nextProps.testCasesWithOutputs;
+});

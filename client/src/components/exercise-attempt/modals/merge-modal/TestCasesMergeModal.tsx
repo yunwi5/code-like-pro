@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import { GoGitMerge } from 'react-icons/go';
 import { VscRunAll } from 'react-icons/vsc';
 import { ClipLoader } from 'react-spinners';
@@ -161,4 +161,8 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
     );
 };
 
-export default TestCasesMergeModal;
+// Second one is arePropsEqual function
+export default React.memo(
+    TestCasesMergeModal,
+    (prevProps, nextProps) => prevProps.open === nextProps.open,
+);
