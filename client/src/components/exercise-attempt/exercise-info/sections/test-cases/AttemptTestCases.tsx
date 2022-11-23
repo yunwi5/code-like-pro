@@ -7,6 +7,13 @@ import TestCaseMessages from './TestCaseMessages';
 import TestCasesList from './TestCasesList';
 import TestCaseUserActions from './TestCaseUserActions';
 
+const areTestsMergeable = (testCasesWithOutputs: ITestCaseWithOutput[]): boolean => {
+    return (
+        testCasesWithOutputs.some((test) => test.custom) &&
+        testCasesWithOutputs.every((test) => test.output?.correct)
+    );
+};
+
 // Displaying list of test cases for the user view.
 // Should not allow users to modify or delete any test cases.
 const AttemptTestCases: React.FC = () => {
@@ -21,7 +28,7 @@ const AttemptTestCases: React.FC = () => {
         [testCasesWithOutputs],
     );
     const mergeReady: boolean = useMemo(
-        () => testCasesWithOutputs.every((test) => test.output?.correct),
+        () => areTestsMergeable(testCasesWithOutputs),
         [testCasesWithOutputs],
     );
 

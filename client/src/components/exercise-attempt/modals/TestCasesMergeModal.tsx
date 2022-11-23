@@ -85,8 +85,6 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
         [testCasesWithOutputs],
     );
 
-    if (!open) return null;
-
     return (
         <AnimationModal
             open={open}
@@ -101,7 +99,7 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
                     </h2>
                 </header>
                 <div className="flex flex-col gap-2 pt-2 pb-4 text-slate-700 bg-slate-100">
-                    <div className="max-h-[25rem] max-w-[100%] flex flex-col gap-3 px-7 py-2 overflow-y-scroll">
+                    <div className="max-h-[30rem] max-w-[100%] flex flex-col gap-3 px-7 py-2 overflow-y-scroll">
                         <p>
                             You can add your custom tests to the existing challenge to
                             enhance our tests! But, the maximum number of tests that the

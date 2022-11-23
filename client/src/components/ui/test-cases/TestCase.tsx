@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { Language } from '../../../models/enums';
 import CodeEditor from '../editor/CodeEditor';
 import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
@@ -36,16 +36,22 @@ const TestCase: FC<Props> = (props) => {
     } = props;
     const [isShrinked, setIsShrinked] = useState(false);
 
-    const handleCodeChange = (code: string) => {
-        onUpdate && onUpdate({ code });
-    };
+    const handleCodeChange = useCallback(
+        (code: string) => onUpdate && onUpdate({ code }),
+        [onUpdate],
+    );
 
-    const handleOutputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const expectedOutput: string = e.target.value;
-        onUpdate && onUpdate({ expectedOutput });
-    };
+    const handleOutputChange = useCallback(
+        (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            onUpdate && onUpdate({ expectedOutput: e.target.value }),
+        [onUpdate],
+    );
 
-    const handleHidden = () => onUpdate && onUpdate({ hidden: !testCase.hidden });
+    const handleHidden = () =>
+        useCallback(
+            () => onUpdate && onUpdate({ hidden: !testCase.hidden }),
+            [testCase, onUpdate],
+        );
 
     const statusClass = getStatusClass(output);
     const paddingClass = readOnly ? 'pb-3' : 'pb-[0.35rem]';
