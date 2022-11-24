@@ -21,7 +21,11 @@ const ProfileAvatarOptions: React.FC<{ onClose: () => void }> = ({ onClose }) =>
                     onClick={() => handleAvatarSelect(pictureOption)}
                     className="px-1 py-1 w-[6rem] hover:bg-gray-100"
                 >
-                    <img src={pictureOption} className="object-cover w-[5rem] h-[5rem]" />
+                    <img
+                        alt="User avatar option"
+                        src={pictureOption}
+                        className="object-cover w-[5rem] h-[5rem]"
+                    />
                 </div>
             ))}
         </div>

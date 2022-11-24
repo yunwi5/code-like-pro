@@ -44,6 +44,7 @@ const ProfileView: React.FC<Props> = ({
                 <ProfilePicture
                     onClick={handleModal(true)}
                     picture={user.pictureUrl ?? userInfo?.pictureUrl}
+                    alt={`${user.name} profile`}
                     size={size ?? '2.5rem'}
                 />
                 <span onClick={handleModal(true)} className={styles['user-name']}>

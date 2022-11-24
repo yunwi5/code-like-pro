@@ -11,7 +11,7 @@ const BadgeNotification: React.FC<{ badge: IBadge }> = ({ badge }) => {
                 <img
                     className="h-[9rem] max-w-[15rem] object-cover"
                     src={BadgeImageMap[badge.rarity]}
-                    alt={badge.name}
+                    alt={`Badge ${badge.name}`}
                 />
             </div>
             <h3>

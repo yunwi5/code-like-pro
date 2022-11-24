@@ -5,6 +5,7 @@ import { wrap } from 'popmotion';
 
 import { mod } from '../../../utils/number';
 import { AppImages } from '../../../assets/app-images';
+import { AppProperty } from '../../../constants/app';
 import './Carousel.scss';
 
 const variants = {
@@ -89,6 +90,7 @@ export const Carousel: React.FC = () => {
                         <motion.img
                             key={page}
                             src={images[imageIndex]}
+                            alt={`${AppProperty.APP_NAME} Features`}
                             custom={direction}
                             variants={variants}
                             className="lg:h-full md:w-3/4 lg:w-full max-w-[90vw] object-cover"

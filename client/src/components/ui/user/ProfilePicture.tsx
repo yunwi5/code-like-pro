@@ -61,23 +61,4 @@ const ProfilePicture: React.FC<Props> = ({
     );
 };
 
-// Check if the image path is valid, to prevent broken image to be displayed.
-// function isValidImagePath(pictureUrl: string | undefined) {
-//     if (!pictureUrl) return false;
-
-//     // External image url pattern
-//     const externalUrlPattern =
-//         /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-
-//     // App internal avatar path pattern
-//     const avatarPattern = /\/src\/assets\/avatars\/.+/;
-
-//     // If the pictureUrl is a valid image path, return true
-//     if (pictureUrl.match(externalUrlPattern) || pictureUrl.match(avatarPattern))
-//         return true;
-
-//     // if the pictureUrl is invalid, return false
-//     return false;
-// }
-
 export default ProfilePicture;

@@ -144,7 +144,7 @@ const BadgeCard: React.FC<{ badge: IBadge; onClick?: () => void; className: stri
                 width="100%"
                 className="h-fit"
                 src={BadgeImageMap[badge.rarity]}
-                alt={badge.name}
+                alt={`Badge ${badge.name}`}
             />
             <h5 className="font-semibold text-lg text-main-400 whitespace-nowrap">
                 {badge.name}
