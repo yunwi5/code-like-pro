@@ -1,21 +1,10 @@
-# COMPSCI 399 CodeLikePro
+# CodeLikePro
 
 ## About
 A practice website for programming students where they create their own exercises, solve exercises from other programmers, 
 and showcase their solutions. <br />
 
 Deployed on Vercel [https://code-like-pro.vercel.app](https://code-like-pro.vercel.app)
-
-<br />
-
-## Project Presentation & Report
-We have created a presentation video that explains the features of the application with a demo video, and a report that explains application design, implementations, testing, results, conlucions and future works in detail.
-
-### Project presentation link
-[https://www.youtube.com/watch?v=sou5i3j2AHM](https://www.youtube.com/watch?v=sou5i3j2AHM)
-
-### Project report link
-[https://docs.google.com/document/d/1aDNSr4h9E48OY81hSTE8PAy4G4AxVh-A/edit#heading=h.8qr8o3pkkyg6](https://docs.google.com/document/d/1aDNSr4h9E48OY81hSTE8PAy4G4AxVh-A/edit#heading=h.8qr8o3pkkyg6)
 
 <br />
 
@@ -248,7 +237,7 @@ Our application has been deployed to the following URL: <br />
 Our app currently offers various features to help students improve their programming skills, 
 but there are several extensions ideas for future releases based on the feedback from our users.
 
-### User Adding Their Own Test Cases
+### User Adding Their Own Test Cases - In Progress
 This extension would let users add more test cases while attempting the exercise. 
 Currently, only the author of the exercise can create test cases. 
 A new feature allows users to add their own test cases while attempting the exercise, and possibly add them to the existing exercise if they pass all the existing tests. 
@@ -270,23 +259,12 @@ These extensions will be implemented one by one in the future releases!
 
 <br />
 
-## Team Members
-
-| Member                                               | Roles                                            |
-| ---------------------------------------------------- | -------------------------------------------------|
-| [JD Briones](https://github.com/jeed02)              | Team Leader, Frontend Developer, UI/UXDesigner   |
-| [Yunkeun Jo](https://github.com/yunwi5)              | Fullstack Developer, UI/UX Designer              |
-| [Amo Li](https://github.com/Amotys)                  | Frontend Developer                               |
-| [Daniel McAnulty](https://github.com/DanielMcAnulty) | Backend Developer                                |
-| [Irene Chen](https://github.com/irenechen20015)      | Backend Developer                                |
-
-<br />
 
 ## Acknowledgements
 
 Special acknowledgement to our client <strong>Paul Denny</strong> who gave us an amazing project opportunity and constantly gave us great feedback.
 <br />
-Acknowledgement to COMPSCI 399 lecturer <strong>Asma Shakil</strong> who gave us great feedback on our project throughout the semester.
+Acknowledgement to <strong>Asma Shakil</strong> who gave us great feedback on our project throughout the semester.
 <br />
 Acknowledgement to Vercel that powers our frontend application. 
 <br />
