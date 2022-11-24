@@ -72,7 +72,7 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
 
     return (
         <article className="flex-1 flex gap-4 text-gray-799">
-            <ProfilePicture picture={comment.user.pictureUrl} />
+            <ProfilePicture picture={comment.user.pictureUrl} alt={comment.user.name} />
             <div className="flex-1">
                 <header className="flex gap-3 items-center">
                     <h3>{comment.user.name}</h3>

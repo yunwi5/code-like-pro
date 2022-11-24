@@ -5,6 +5,7 @@ import { IUserSubmissionPopulated } from '../../../models/interfaces';
 import { listItemAnimations } from '../../../utils/animations';
 import SubmissionCard from '../cards/SubmissionCard';
 import PageNavigation from '../PageNavigation';
+import EmptyMessage from '../labels/EmptyMessage';
 
 interface Props {
     submissions: IUserSubmissionPopulated[];
@@ -15,7 +16,7 @@ const SUBMISSION_PER_PAGE = 7;
 
 const SubmissionList: React.FC<Props> = ({ submissions }) => {
     const {
-        array: currentPageExercises,
+        array: currentPageSubmissions,
         page,
         setPage,
         maxPage,
@@ -32,7 +33,7 @@ const SubmissionList: React.FC<Props> = ({ submissions }) => {
         <section>
             <div className="flex flex-col gap-5 mb-8">
                 <AnimatePresence>
-                    {currentPageExercises.map((sub, idx) => (
+                    {currentPageSubmissions.map((sub, idx) => (
                         <motion.div
                             key={sub._id}
                             variants={listItemAnimations}
@@ -48,6 +49,10 @@ const SubmissionList: React.FC<Props> = ({ submissions }) => {
                         </motion.div>
                     ))}
                 </AnimatePresence>
+
+                {submissions.length === 0 && (
+                    <EmptyMessage message="No submissions yet" />
+                )}
             </div>
 
             <PageNavigation

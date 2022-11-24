@@ -5,7 +5,6 @@ import { ClipLoader } from 'react-spinners';
 import { IComment } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import Button from '../buttons/Button';
-import TextEditor from '../editor/text-editor/TextEditor';
 import ProfilePicture from '../user/ProfilePicture';
 
 interface Props {
@@ -71,7 +70,10 @@ const CommentForm: React.FC<Props> = (props) => {
 
     return (
         <form className={`flex gap-3 ${className}`} onSubmit={handleSubmit}>
-            <ProfilePicture picture={userDetail?.pictureUrl} />
+            <ProfilePicture
+                picture={userDetail?.pictureUrl}
+                alt={userDetail?.name || 'User profile'}
+            />
             <div className="flex-1 flex flex-col gap-2">
                 <div>
                     <div className="relative border-b-[3px] border-gray-300 input-underline-effect">

@@ -4,6 +4,7 @@ import usePagination from '../../../hooks/usePagination';
 import { IComment } from '../../../models/interfaces';
 import MainComment from '../comments/MainComment';
 import PageNavigation from '../PageNavigation';
+import EmptyMessage from '../labels/EmptyMessage';
 
 interface Props {
     comments: IComment[];
@@ -46,6 +47,8 @@ const CommentList: FC<Props> = ({
                         </motion.div>
                     ))}
                 </AnimatePresence>
+
+                {comments.length === 0 && <EmptyMessage message="No comments yet" />}
             </div>
             <PageNavigation
                 className={`mt-auto`}

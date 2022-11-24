@@ -5,6 +5,7 @@ import { IExercise, IShowCase } from '../../../models/interfaces';
 import { listItemAnimations } from '../../../utils/animations';
 import ShowcaseCard from '../cards/ShowcaseCard';
 import PageNavigation from '../PageNavigation';
+import EmptyMessage from '../labels/EmptyMessage';
 
 // Default value of exercisePerPage which is applied when the prop was not given.
 const SHOWCASE_PER_PAGE = 10;
@@ -52,6 +53,8 @@ const ShowcaseList: React.FC<Props> = ({
                         />
                     </motion.div>
                 ))}
+
+                {showcases.length === 0 && <EmptyMessage message="No showcases yet" />}
             </div>
 
             {/* Show page navigatio only if there are more than 1 page amount of showcases. */}

@@ -16,7 +16,7 @@ const ProfileAvatar: React.FC = () => {
                     picture={currentPicture}
                     size={isAvatarImage(currentPicture) ? '12rem' : '13rem'}
                     alt="Profile picture"
-                ></ProfilePicture>
+                />
             </div>
             <p className="text-lg">Avatar</p>
         </div>

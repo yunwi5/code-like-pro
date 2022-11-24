@@ -5,6 +5,7 @@ import { IExerciseCard } from '../../../models/interfaces';
 import { listItemAnimations } from '../../../utils/animations';
 import ExerciseCard from '../cards/ExerciseCard';
 import PageNavigation from '../PageNavigation';
+import EmptyMessage from '../labels/EmptyMessage';
 
 // Default value of exercisePerPage which is applied when the prop was not given.
 const EXERCISE_PER_PAGE = 10;
@@ -48,12 +49,17 @@ const ExerciseList: React.FC<Props> = ({
                         />
                     </motion.div>
                 ))}
+
+                {exercises.length === 0 && <EmptyMessage message="No challenges yet" />}
             </div>
-            <PageNavigation
-                currentPage={page}
-                totalPages={maxPage}
-                onChangePage={handlePage}
-            />
+
+            {exercises.length > exercisePerPage && (
+                <PageNavigation
+                    currentPage={page}
+                    totalPages={maxPage}
+                    onChangePage={handlePage}
+                />
+            )}
         </section>
     );
 };

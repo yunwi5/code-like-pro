@@ -5,6 +5,7 @@ import { wrap } from 'popmotion';
 
 import { mod } from '../../../utils/number';
 import { AppImages } from '../../../assets/app-images';
+import { AppProperty } from '../../../constants/app';
 import './Carousel.scss';
 
 const variants = {
@@ -74,8 +75,8 @@ export const Carousel: React.FC = () => {
 
     return (
         <div className="flex-center overflow-hidden flex-col mt-5 lg:max-h-[30rem]">
-            <h1 className="text-gray-600 text-xl sm:text-3xl mb-5">
-                Create. Solve. Showcase.
+            <h1 className="text-gray-700 text-xl sm:text-3xl mb-5">
+                Create. Solve. Showcase
             </h1>
             <div className="carousel flex-between gap-1 relative lg:h-[70vh] max-w-[100vw]">
                 <div
@@ -89,6 +90,7 @@ export const Carousel: React.FC = () => {
                         <motion.img
                             key={page}
                             src={images[imageIndex]}
+                            alt={`${AppProperty.APP_NAME} Features`}
                             custom={direction}
                             variants={variants}
                             className="lg:h-full md:w-3/4 lg:w-full max-w-[90vw] object-cover"
