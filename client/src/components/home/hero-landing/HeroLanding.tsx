@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { SiAzuredataexplorer } from 'react-icons/si';
 
-import { Typewriter } from '../../models/classes/TypeWriter';
-import Carousel from './carousel/Carousel';
-import { sleep } from '../../utils/promise';
-import { useUserContext } from '../../store/context/UserContext';
+import { Typewriter } from '../../../models/classes/TypeWriter';
+import Carousel from '../carousel/Carousel';
+import { sleep } from '../../../utils/promise';
+import { useUserContext } from '../../../store/context/UserContext';
 import './HeroLanding.scss';
 
 const HeroLanding: React.FC = () => {
