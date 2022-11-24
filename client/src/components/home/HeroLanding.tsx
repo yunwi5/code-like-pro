@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { HiOutlineArrowRight } from 'react-icons/hi';
+import { SiAzuredataexplorer } from 'react-icons/si';
 
 import { Typewriter } from '../../models/classes/TypeWriter';
 import Carousel from './carousel/Carousel';
 import { sleep } from '../../utils/promise';
 import { useUserContext } from '../../store/context/UserContext';
-import { SiAzuredataexplorer } from 'react-icons/si';
+import './HeroLanding.scss';
 
 const HeroLanding: React.FC = () => {
     const isLoggedIn = !!useUserContext().userDetail?._id;
@@ -41,7 +42,7 @@ const HeroLanding: React.FC = () => {
                         <span className="blink ml-[0.15rem] h-[0.95em]"></span>
                     )}
                 </h1>
-                <h2 className="text-base lg:text-xl text-gray-500">
+                <h2 className="text-base lg:text-xl text-gray-600">
                     A practical website for programmers where they create their own
                     challenges, solve challenges from other programmers, and showcase
                     their solutions.
@@ -70,6 +71,9 @@ const HeroLanding: React.FC = () => {
             >
                 <Carousel />
             </motion.div>
+
+            <div className="landing-circle landing-circle-left" />
+            <div className="landing-circle landing-circle-right" />
         </section>
     );
 };
