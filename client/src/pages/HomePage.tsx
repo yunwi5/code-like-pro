@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 
 import { AppProperty } from '../constants/app';
-import HeroLanding from '../components/home/HeroLanding';
 import TopExercises from '../components/home/TopExercises';
 import TopUsers from '../components/home/TopUsers';
 import Strengths from '../components/home/strengths/Strengths';
@@ -13,6 +12,7 @@ import HomeFeatures from '../components/home/features/HomeFeatures';
 import HomeDiscussions from '../components/home/discussions/HomeDiscussions';
 import HomeBadges from '../components/home/badges/HomeBadges';
 import JoinUs from '../components/home/join-us/JoinUs';
+import HeroLanding from '../components/home/hero-landing/HeroLanding';
 
 const leftInVariants = {
     initial: { opacity: 0, x: -300 },

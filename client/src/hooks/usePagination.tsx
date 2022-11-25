@@ -1,7 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
+type Props<T> = { array: T[]; itemPerPage: number; scrollEnabled?: boolean };
+
 // Custom hook for managing pagination like pagination for exercise list.
-function usePagination<T>({ array, itemPerPage }: { array: T[]; itemPerPage: number }) {
+function usePagination<T>({ array, itemPerPage, scrollEnabled = true }: Props<T>) {
     // State for pagination. Pagination is index based.
     const [page, setPage] = useState(0);
 
@@ -13,7 +15,7 @@ function usePagination<T>({ array, itemPerPage }: { array: T[]; itemPerPage: num
 
         // When the page changes, scroll to the top of the page.
         let timer = setTimeout(() => {
-            window.scroll({ top: 50, behavior: 'instant' as any });
+            if (scrollEnabled) window.scroll({ top: 50, behavior: 'instant' as any });
             clearTimeout(timer);
         }, 2);
     };
