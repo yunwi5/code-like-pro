@@ -48,7 +48,11 @@ const Badges: React.FC<Props> = ({
         maxPage,
         page,
         setPage,
-    } = usePagination({ itemPerPage: badgePerPage, array: sortedBadges });
+    } = usePagination({
+        itemPerPage: badgePerPage,
+        array: sortedBadges,
+        scrollEnabled: false,
+    });
 
     // Show pagination only if there are more than 1 page amount of badges
     const showPagination = badges.length > badgePerPage;

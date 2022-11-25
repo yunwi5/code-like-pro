@@ -16,7 +16,7 @@ const MergeableTestCasesList: React.FC<Props> = ({ testCases, exercise }) => {
         page,
         setPage,
         maxPage,
-    } = usePagination({ array: testCases, itemPerPage: 8 });
+    } = usePagination({ array: testCases, itemPerPage: 8, scrollEnabled: false });
 
     return (
         <div>
