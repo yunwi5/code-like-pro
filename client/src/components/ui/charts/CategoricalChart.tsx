@@ -56,14 +56,26 @@ const CategoricalChart: React.FC<Props> = (props) => {
                 position: legendPosition || ('bottom' as const),
             },
         },
+        scale: {
+            // precision has always no decimal for this project
+            ticks: {
+                precision: 0,
+            },
+        },
     };
 
+    // Different configurations for bar chart
     const barOptions = {
         responsive: true,
-        // maintainAspectRatio: false, // experimental
         plugins: {
             legend: {
                 position: legendPosition || ('top' as const),
+            },
+        },
+        scale: {
+            // precision has always no decimal for this project
+            ticks: {
+                precision: 0,
             },
         },
         scales: {
