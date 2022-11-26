@@ -6,7 +6,7 @@ import { likeExerciseRequest } from '../../../../apis/exercise.api';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../../store/context/UserContext';
 import { getLanguageIcon, prettierLanguageName } from '../../../../utils/language';
-import HoveringLabel from '../../../ui/labels/HoveringLabel';
+import HoveringLabel from '../../../ui/tooltip/HoveringLabel';
 import IssueReportModal from '../../modals/IssueReportModal';
 import DifficultyRatingButton from './DifficultyRatingButton';
 import ExerciseSettings from './ExerciseSettings';

@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { IBadge } from '../../../../models/interfaces';
 import { BadgeImageMap } from '../../../../utils/badge';
 import { getDateFormat } from '../../../../utils/datetime';
-import HoveringLabel from '../../labels/HoveringLabel';
+import HoveringLabel from '../../tooltip/HoveringLabel';
 
 interface Props {
     badge: IBadge;

@@ -2,16 +2,16 @@ import React, { useMemo, useState } from 'react';
 import { IExerciseWithId } from '../../../../../models/interfaces';
 import {
     getDifficultyBtnClass,
-    getDifficultyByUserRatings,
+    getAverageDifficultyByRatings,
 } from '../../../../../utils/difficulty';
-import HoveringLabel from '../../../../ui/labels/HoveringLabel';
+import HoveringLabel from '../../../../ui/tooltip/HoveringLabel';
 import DifficultyModal from '../../../modals/difficulty-modal/DifficultyModal';
 
 const PromptDifficultyLabel: React.FC<{ exercise: IExerciseWithId }> = ({ exercise }) => {
     const [showDifficultyModal, setShowDifficultyModal] = useState(false);
 
     const { averageDifficulty } = useMemo(
-        () => getDifficultyByUserRatings(exercise),
+        () => getAverageDifficultyByRatings(exercise),
         [exercise],
     );
 

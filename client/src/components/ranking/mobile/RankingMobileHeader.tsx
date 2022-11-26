@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 import { useLocation } from 'react-router-dom';
-import HoveringLabel from '../../ui/labels/HoveringLabel';
+import HoveringLabel from '../../ui/tooltip/HoveringLabel';
 import Backdrop from '../../ui/modals/Backdrop';
 import RankingSideBar from '../RankingSideBar';
 import RankingHeader from '../sections/RankingHeader';

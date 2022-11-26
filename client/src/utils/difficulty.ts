@@ -1,6 +1,8 @@
-import { Difficulty } from '../models/enums';
+import { Difficulty, DifficultyList } from '../models/enums';
 import { IDifficultyVote, IExerciseWithId } from '../models/interfaces';
 import { round } from './number';
+
+export const MAX_DIFFICULTY_VALUE = DifficultyList.length;
 
 // Display different color for different difficulties.
 // Function for UI design purpose.
@@ -66,27 +68,8 @@ export function mapNumericValueToDifficulty(value: number) {
     }
 }
 
-export function appendCreatorsDifficultyChoice(
-    exercise: IExerciseWithId,
-): IDifficultyVote[] {
-    const difficultyVotes = (exercise.difficultyVotes || []).concat([
-        {
-            type: exercise.difficulty,
-            user: exercise.author._id,
-        },
-    ]);
-    return difficultyVotes;
-}
-
-export function getDifficultyByUserRatings(exercise: IExerciseWithId) {
-    let difficultyVotes: IDifficultyVote[];
-
-    try {
-        difficultyVotes = appendCreatorsDifficultyChoice(exercise);
-    } catch (err) {
-        console.log((err as any).message);
-        return { averageDifficulty: Difficulty.EASY, averageRating: 0 };
-    }
+export function getAverageDifficultyByRatings(exercise: IExerciseWithId) {
+    const difficultyVotes: IDifficultyVote[] = exercise.difficultyVotes || [];
 
     const averageRating =
         difficultyVotes.reduce(
@@ -95,6 +78,17 @@ export function getDifficultyByUserRatings(exercise: IExerciseWithId) {
         ) / difficultyVotes.length;
 
     const averageDifficulty = mapNumericValueToDifficulty(averageRating);
-    const averageRounded = round(averageRating, 1);
-    return { averageDifficulty, averageRating: averageRounded };
+    const averageRatingRounded = round(averageRating, 1);
+    return { averageDifficulty, averageRating, averageRatingRounded };
+}
+
+export function getOverallDifficulty(exercise: IExerciseWithId) {
+    const { averageRating } = getAverageDifficultyByRatings(exercise);
+    const creatorRating = mapDifficultyToNumericValue(exercise.difficulty);
+
+    const overallRating = creatorRating * 0.25 + averageRating * 0.75;
+    const overallDifficulty = mapNumericValueToDifficulty(overallRating);
+    const overallRatingRounded = round(overallRating, 1);
+
+    return { overallDifficulty, overallRating, overallRatingRounded };
 }

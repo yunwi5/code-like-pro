@@ -1,7 +1,7 @@
 import { BsShuffle } from 'react-icons/bs';
 import { IExerciseCard } from '../../../models/interfaces';
 import { shuffleList } from '../../../utils/random';
-import HoveringLabel from '../../ui/labels/HoveringLabel';
+import HoveringLabel from '../../ui/tooltip/HoveringLabel';
 import DifficultyFilter from './sections/DifficultyFilter';
 import ExerciseSearch from './sections/ExerciseSearch';
 import ExerciseSorter from './sections/ExerciseSorter';

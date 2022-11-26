@@ -10,7 +10,7 @@ import { IExerciseWithId } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getShowcasePageLink } from '../../../utils/links';
 import CodeEditor from '../editor/CodeEditor';
-import HoveringLabel from '../labels/HoveringLabel';
+import HoveringLabel from '../tooltip/HoveringLabel';
 import LanguageLabel from '../icons/LanguageIcon';
 
 interface Props {

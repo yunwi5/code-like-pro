@@ -2,7 +2,7 @@ import React from 'react';
 import { GoGitMerge } from 'react-icons/go';
 import { HiPlus } from 'react-icons/hi';
 
-import HoveringLabel from '../../../../ui/labels/HoveringLabel';
+import HoveringLabel from '../../../../ui/tooltip/HoveringLabel';
 
 interface Props {
     onAddCase(): void;

@@ -4,17 +4,12 @@ import { BsBarChartFill } from 'react-icons/bs';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../../store/context/UserContext';
 import { DifficultyTextColorMap } from '../../../../utils/colors';
-import { DifficultyList } from '../../../../models/enums';
-import {
-    appendCreatorsDifficultyChoice,
-    getDifficultyByUserRatings,
-} from '../../../../utils/difficulty';
+import { getOverallDifficulty, MAX_DIFFICULTY_VALUE } from '../../../../utils/difficulty';
 import AnimationModal from '../../../ui/modals/AnimationModal';
 import DifficultyRatingForm from './DifficultyRatingForm';
 import DifficultyVoteChart from './DifficultyVoteChart';
 import RateAgain from './RateAgain';
-
-const MAX_DIFFICULTY_VALUE = DifficultyList.length;
+import DifficultyAdjustmentInfo from './DifficultyAdjustmentInfo';
 
 interface Props {
     open: boolean;
@@ -37,9 +32,9 @@ const DifficultyModal: FC<Props> = ({ open, onClose }) => {
     };
 
     // Difficulty votes including creator's choice
-    const difficultyVotes = appendCreatorsDifficultyChoice(exercise);
+    const difficultyVotes = exercise.difficultyVotes || [];
 
-    const { averageDifficulty, averageRating } = getDifficultyByUserRatings(exercise);
+    const { overallDifficulty, overallRatingRounded } = getOverallDifficulty(exercise);
 
     useEffect(() => {
         if (!!userDifficultyVote?.type) setShowForm(false);
@@ -60,38 +55,23 @@ const DifficultyModal: FC<Props> = ({ open, onClose }) => {
                 </header>
                 <div className="flex flex-col gap-2 px-7 pt-3 pb-6 text-slate-700 bg-slate-100">
                     <div className="grid grid-cols-1 xs:grid-cols-2 text-base capitalize">
-                        <h3 className="flex-start gap-2 text-lg">
-                            Average Difficulty:{' '}
+                        <h3 className="flex-start items-center gap-2 text-lg">
+                            Overall Difficulty:{' '}
                             <span
                                 style={{
                                     color: DifficultyTextColorMap[
-                                        averageDifficulty || exercise.difficulty
+                                        overallDifficulty || exercise.difficulty
                                     ],
                                 }}
                                 className="font-semibold"
                             >
-                                {averageDifficulty}&nbsp;
+                                {overallDifficulty}&nbsp;
                                 <span className="text-base">
-                                    ({averageRating} / {MAX_DIFFICULTY_VALUE})
+                                    ({overallRatingRounded} / {MAX_DIFFICULTY_VALUE})
                                 </span>
                             </span>
+                            <DifficultyAdjustmentInfo exercise={exercise} />
                         </h3>
-
-                        {/* <h3 className="flex-end gap-2">
-                            Creator's Difficulty:{' '}
-                            <span
-                                style={{
-                                    color: DifficultyTextColorMap[exercise.difficulty],
-                                }}
-                                className="font-semibold"
-                            >
-                                {averageDifficulty}&nbsp;
-                                <span className="text-base">
-                                    ({mapDifficultyToNumericValue(exercise.difficulty)} /{' '}
-                                    {MAX_DIFFICULTY_VALUE})
-                                </span>
-                            </span>
-                        </h3> */}
                     </div>
 
                     <p>

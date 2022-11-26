@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { IForumPost } from '../../../models/interfaces';
 import { getForumPostLink } from '../../../utils/links';
-import HoveringLabel from '../labels/HoveringLabel';
+import HoveringLabel from '../tooltip/HoveringLabel';
 import TagsGroup from '../labels/TagsGroup';
 import ForumPostSpec from '../spec/ForumPostSpec';
 import ProfilePicture from '../user/ProfilePicture';

@@ -7,7 +7,7 @@ import {
     GithubIcon,
     TwitterIcon,
 } from '../../assets/svg-icons/social-svgs';
-import HoverLabel from '../ui/labels/HoveringLabel';
+import HoverLabel from '../ui/tooltip/HoveringLabel';
 import { Logo } from '../../assets';
 import useWindowSize from '../../hooks/useWindowSize';
 
