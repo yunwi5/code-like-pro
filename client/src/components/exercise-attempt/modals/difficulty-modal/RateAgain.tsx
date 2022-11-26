@@ -2,7 +2,6 @@ import { memo, FC } from 'react';
 import { BiEditAlt } from 'react-icons/bi';
 import { IDifficultyVote } from '../../../../models/interfaces';
 import { DifficultyTextColorMap } from '../../../../utils/colors';
-import { mapDifficultyToNumericValue } from '../../../../utils/difficulty';
 import Button from '../../../ui/buttons/Button';
 
 const RateAgain: FC<{
@@ -28,10 +27,7 @@ const RateAgain: FC<{
                         }}
                         className="font-semibold"
                     >
-                        {userDifficultyVote.type}&nbsp;
-                        <span className="text-base">
-                            ({mapDifficultyToNumericValue(userDifficultyVote.type)} / 4)
-                        </span>
+                        {userDifficultyVote.type}
                     </span>
                 </p>
             )}

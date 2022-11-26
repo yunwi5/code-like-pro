@@ -8,7 +8,6 @@ import { DifficultyList } from '../../../../models/enums';
 import {
     appendCreatorsDifficultyChoice,
     getDifficultyByUserRatings,
-    mapDifficultyToNumericValue,
 } from '../../../../utils/difficulty';
 import AnimationModal from '../../../ui/modals/AnimationModal';
 import DifficultyRatingForm from './DifficultyRatingForm';
@@ -107,6 +106,8 @@ const DifficultyModal: FC<Props> = ({ open, onClose }) => {
                         <DifficultyRatingForm
                             exercise={exercise}
                             onSubmit={HandleVoteSubmit}
+                            onCancel={() => setShowForm(false)}
+                            defaultValue={userDifficultyVote?.type}
                         />
                     )}
                     {!showForm && (

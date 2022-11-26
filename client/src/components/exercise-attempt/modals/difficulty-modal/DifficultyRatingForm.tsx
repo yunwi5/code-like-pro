@@ -12,12 +12,25 @@ import {
 } from '../../../../utils/difficulty';
 import { toastNotify } from '../../../../utils/notification';
 import Button from '../../../ui/buttons/Button';
+import CancelButton from '../../../ui/buttons/CancelButton';
 
-type Props = { exercise: IExerciseWithId; onSubmit: () => void };
+type Props = {
+    exercise: IExerciseWithId;
+    onSubmit: () => void;
+    onCancel: () => void;
+    defaultValue?: Difficulty;
+};
 
-const DifficultyRatingForm: FC<Props> = ({ exercise, onSubmit }) => {
+const DifficultyRatingForm: FC<Props> = ({
+    exercise,
+    onSubmit,
+    onCancel,
+    defaultValue,
+}) => {
     const { userDetail } = useUserContext();
-    const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(null);
+    const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(
+        defaultValue ?? null,
+    );
     const [loading, setLoading] = useState(false);
 
     const handleDifficultySelect = (difficulty: Difficulty) => {
@@ -48,7 +61,7 @@ const DifficultyRatingForm: FC<Props> = ({ exercise, onSubmit }) => {
     return (
         <form
             onSubmit={handleSubmitVote}
-            className="mt-5 pb-3 flex flex-wrap justify-between"
+            className="mt-5 pb-3 flex flex-wrap gap-y-3 justify-between"
         >
             <label className="mr-8 text-gray-600 font-semibold">
                 <FiStar className="inline-block mr-1 text-[1.2em] text-main-500" />
@@ -76,7 +89,8 @@ const DifficultyRatingForm: FC<Props> = ({ exercise, onSubmit }) => {
             </div>
 
             {selectedDifficulty && (
-                <div className="mt-3 flex-end basis-full">
+                <div className="flex-end gap-1 basis-full">
+                    <CancelButton onCancel={onCancel} />
                     {loading ? (
                         <ClipLoader size={35} color="#5552e4" />
                     ) : (
