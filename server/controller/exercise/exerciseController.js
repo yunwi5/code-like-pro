@@ -436,7 +436,7 @@ const exerciseController = {
     postDifficultyVote: async (req, res) => {
         const exerciseId = req.params.id;
         const userId = req.user._id;
-        const { difficulty } = req.body;
+        const { type } = req.body;
 
         try {
             const exercise = await Exercise.findById(exerciseId).select({
@@ -453,13 +453,13 @@ const exerciseController = {
             if (currentUserVote == null) {
                 // Create a new vote
                 const newVote = {
-                    type: difficulty,
+                    type: type,
                     user: userId,
                 };
                 votes.push(newVote);
             } else {
                 // Update the vote
-                currentUserVote.type = difficulty;
+                currentUserVote.type = type;
                 statusCode = 200;
             }
             exercise.difficultyVotes = votes;

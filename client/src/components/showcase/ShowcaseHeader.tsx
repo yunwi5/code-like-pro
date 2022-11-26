@@ -2,7 +2,7 @@ import { FaListUl } from 'react-icons/fa';
 import { GrRotateLeft } from 'react-icons/gr';
 import { useNavigate } from 'react-router-dom';
 import { useShowcase } from '../../store/context/ShowcaseContext';
-import { getDifficultyColorClass } from '../../utils/difficulty';
+import { getDifficultyBtnClass } from '../../utils/difficulty';
 import { getBrowsingPageLink, getExerciseAttemptPageLink } from '../../utils/links';
 import Button from '../ui/buttons/Button';
 import ExerciseSpec from '../ui/spec/ExerciseSpec';
@@ -15,7 +15,7 @@ const ShowcaseHeader = () => {
 
     if (!exercise) return null;
 
-    const colorClass = getDifficultyColorClass(exercise.difficulty);
+    const colorClass = getDifficultyBtnClass(exercise.difficulty);
 
     return (
         <header className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3 px-4 py-3 bg-gray-100 rounded shadow">

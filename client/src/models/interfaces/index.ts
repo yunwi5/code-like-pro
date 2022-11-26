@@ -4,6 +4,7 @@ export * from './exercise/IExercise';
 export * from './exercise/IExerciseCard';
 export * from './exercise/ITestOutput';
 export * from './exercise/IIssueReport';
+export * from './exercise/IDifficultyVote';
 
 // Forum related interfaces
 export * from './forum/IForumPost';

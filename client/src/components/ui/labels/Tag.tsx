@@ -13,7 +13,7 @@ interface Props {
 const Tag: React.FC<Props> = ({ name, onDelete, className }) => {
     return (
         <div
-            className={`text-[0.85rem] w-fit flex-center gap-1 px-2 py-1 bg-gray-100 border-2 border-gray-200/90 hover:border-gray-600/90 hover:bg-gray-600/90 hover:text-white hover:shadow-md rounded-full shadow hover:shadow-md ${
+            className={`text-[0.85rem] w-fit flex-center gap-1 px-2 py-1 bg-gray-200/90 border-2 hover:bg-gray-600/90 hover:text-white rounded-full shadow hover:shadow-md ${
                 className ?? ''
             }`}
         >

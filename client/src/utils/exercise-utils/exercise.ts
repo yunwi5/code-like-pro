@@ -1,4 +1,5 @@
 import { IExerciseCard, IExerciseWithId } from '../../models/interfaces';
+import { getDifficultyByUserRatings } from '../difficulty';
 
 // Optional overriding attributes such as giving the authorized access.
 type Attributes = { isAuthorized?: boolean; author?: { _id: string; name: string } };
@@ -14,7 +15,8 @@ export function mapExerciseToExerciseCard(
         stars: exercise.liked.length,
         prompt: exercise.prompt,
         language: exercise.language,
-        difficulty: exercise.difficulty,
+        // Average difficulty rating
+        difficulty: getDifficultyByUserRatings(exercise).averageDifficulty,
         createdAt: exercise.createdAt,
         tags: exercise.tags,
         author: exercise.author,

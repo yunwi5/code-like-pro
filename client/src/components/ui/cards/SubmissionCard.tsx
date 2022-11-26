@@ -4,7 +4,7 @@ import { FiCheck } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 
 import { IUserSubmissionPopulated } from '../../../models/interfaces';
-import { getDifficultyColorClass } from '../../../utils/difficulty';
+import { getDifficultyBtnClass } from '../../../utils/difficulty';
 import { getExerciseAttemptPageLink } from '../../../utils/links';
 import { BsFileEarmarkCodeFill } from 'react-icons/bs';
 import { getDateTimeFormat } from '../../../utils/datetime';
@@ -20,7 +20,7 @@ const SubmissionCard: React.FC<Props> = ({ submission, className }) => {
     const { difficulty, name, _id: exerciseId } = submission.exercise;
 
     // Apply different color styles for different difficulties.
-    const difficultyClass = getDifficultyColorClass(difficulty);
+    const difficultyClass = getDifficultyBtnClass(difficulty);
 
     // Human readable datetime format.
     const dateTimeFormat = getDateTimeFormat(submission.postedAt);

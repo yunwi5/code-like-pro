@@ -12,10 +12,10 @@ const TagList: React.FC<Props> = ({ title, tags, className = '' }) => {
     return (
         <div className={className}>
             {tags.length > 0 && (
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-2">
                     <p className="flex-start gap-1">
                         <BsFillTagsFill className="text-slate-500" />
-                        {title ?? 'Related Tags:'}
+                        {title}
                     </p>
                     <ul className="flex flex-wrap gap-x-3 gap-y-2">
                         {tags.map((tag, idx) => (

@@ -11,7 +11,7 @@ const YELLOW_300 = '#fde047';
 const EMERALD_300 = '#6ee7b7';
 const SKY_300 = '#7dd3fc';
 const BLUE_300 = '#93c5fd';
-const STONE_300 = '#d6d3d1';
+const STONE_300 = '#a8a29e';
 const GRAY_300 = '#d1d5db';
 const SLATE_300 = '#cbd5e1';
 const VIOLET_300 = '#c4b5fd';
@@ -19,8 +19,11 @@ const PURPLE_300 = '#d8b4fe';
 const FUCHSIA_300 = '#f0abfc';
 const PINK_300 = '#f9a8d4';
 
-const SKY_500 = '#0ea5e9';
-const BLUE_500 = '#3b82f6';
+const ROSE_600 = '#f43f5e';
+const EMERALD_600 = '#059669';
+const SKY_600 = '#0284c7';
+const BLUE_600 = '#2563eb';
+const STONE_600 = '#44403c';
 
 // Map difficulties to hex colors for data analysis
 export const DifficultyColorMap = {
@@ -28,6 +31,13 @@ export const DifficultyColorMap = {
     [Difficulty.MEDIUM]: SKY_300,
     [Difficulty.HARD]: ROSE_300,
     [Difficulty.EXPERT]: STONE_300,
+};
+
+export const DifficultyTextColorMap = {
+    [Difficulty.EASY]: EMERALD_600,
+    [Difficulty.MEDIUM]: SKY_600,
+    [Difficulty.HARD]: ROSE_600,
+    [Difficulty.EXPERT]: STONE_600,
 };
 
 export const LanguageColorMap = {
@@ -51,12 +61,12 @@ export const ProgrammingTopicColorMap = {
 
 export const ExerciseAttemptColor = {
     fillColor: `${SKY_300}77`,
-    outlineColor: SKY_500,
+    outlineColor: SKY_600,
 };
 
 export const ExerciseCreationColor = {
     fillColor: `${BLUE_300}77`,
-    outlineColor: BLUE_500,
+    outlineColor: BLUE_600,
 };
 
 const LightColorList = [

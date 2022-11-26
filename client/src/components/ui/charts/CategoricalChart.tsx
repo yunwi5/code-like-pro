@@ -24,16 +24,6 @@ ChartJS.register(
     Legend,
 ); // registration
 
-const barOptions = {
-    responsive: true,
-    // maintainAspectRatio: false, // experimental
-    plugins: {
-        legend: {
-            position: 'top' as const,
-        },
-    },
-};
-
 interface Props {
     chartType?: 'pie' | 'doughnut' | 'bar';
     dataArray: IChartData[];
@@ -41,6 +31,8 @@ interface Props {
     height?: string;
     legendPosition?: 'top' | 'left' | 'right' | 'bottom';
     chartLabel?: string;
+    axesLabelColors?: any[];
+    style?: any;
 }
 
 const CategoricalChart: React.FC<Props> = (props) => {
@@ -51,14 +43,34 @@ const CategoricalChart: React.FC<Props> = (props) => {
         height = '400px',
         chartLabel = 'Analysis',
         legendPosition,
+        axesLabelColors,
+        style,
     } = props;
-    const { labels, data, backgroundColors, borderColors } = generateChartDataset(dataArray);
+    const { labels, data, backgroundColors, borderColors } =
+        generateChartDataset(dataArray);
 
     const options = {
         responsive: true,
         plugins: {
             legend: {
                 position: legendPosition || ('bottom' as const),
+            },
+        },
+    };
+
+    const barOptions = {
+        responsive: true,
+        // maintainAspectRatio: false, // experimental
+        plugins: {
+            legend: {
+                position: legendPosition || ('top' as const),
+            },
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: axesLabelColors,
+                },
             },
         },
     };
@@ -93,17 +105,23 @@ const CategoricalChart: React.FC<Props> = (props) => {
                     {chartType === 'pie' && (
                         <Pie
                             className="max-w-[100%]"
+                            style={style}
                             width={width}
                             height={height}
                             options={options}
                             data={dataset}
                         />
                     )}
-                    {chartType === 'doughnut' && <Doughnut options={options} data={dataset} />}
+                    {chartType === 'doughnut' && (
+                        <Doughnut style={style} options={options} data={dataset} />
+                    )}
                     {chartType === 'bar' && (
                         <Bar
+                            style={style}
                             className="max-h-[22.5rem] max-w-[100%]"
                             options={barOptions}
+                            width={width}
+                            height={height}
                             data={dataset}
                         />
                     )}

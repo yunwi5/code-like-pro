@@ -1,8 +1,10 @@
 import { Difficulty } from '../models/enums';
+import { IDifficultyVote, IExerciseWithId } from '../models/interfaces';
+import { round } from './number';
 
 // Display different color for different difficulties.
 // Function for UI design purpose.
-export function getDifficultyColorClass(difficulty: Difficulty) {
+export function getDifficultyBtnClass(difficulty: Difficulty) {
     switch (difficulty) {
         case Difficulty.EASY:
             return 'text-emerald-400 border-2 border-emerald-400 hover:text-emerald-50 hover:bg-emerald-400';
@@ -14,6 +16,20 @@ export function getDifficultyColorClass(difficulty: Difficulty) {
             return 'text-stone-500 border-2 border-stone-500 hover:text-stone-50 hover:bg-stone-500';
         default:
             return 'text-main-400 border-2 border-main-400 hover:text-main-50 hover:bg-main-400';
+    }
+}
+
+// When the difficulty filter is active, apply these active classes for each difficulty for different styles than non-active classes.
+export function getDifficultyActiveClass(difficulty: Difficulty) {
+    switch (difficulty) {
+        case Difficulty.EASY:
+            return '!text-emerald-50 !bg-emerald-400';
+        case Difficulty.MEDIUM:
+            return '!text-sky-50 !bg-sky-400';
+        case Difficulty.HARD:
+            return '!text-rose-50 !bg-rose-400';
+        case Difficulty.EXPERT:
+            return '!text-stone-50 !bg-stone-500';
     }
 }
 
@@ -30,6 +46,55 @@ export function mapDifficultyToNumericValue(difficulty: Difficulty) {
         case Difficulty.EXPERT:
             return 4;
         default:
-            return -1;
+            return 0;
     }
+}
+
+export function mapNumericValueToDifficulty(value: number) {
+    const rounded = Math.round(value);
+    switch (rounded) {
+        case 1:
+            return Difficulty.EASY;
+        case 2:
+            return Difficulty.MEDIUM;
+        case 3:
+            return Difficulty.HARD;
+        case 4:
+            return Difficulty.EXPERT;
+        default:
+            return Difficulty.EASY;
+    }
+}
+
+export function appendCreatorsDifficultyChoice(
+    exercise: IExerciseWithId,
+): IDifficultyVote[] {
+    const difficultyVotes = (exercise.difficultyVotes || []).concat([
+        {
+            type: exercise.difficulty,
+            user: exercise.author._id,
+        },
+    ]);
+    return difficultyVotes;
+}
+
+export function getDifficultyByUserRatings(exercise: IExerciseWithId) {
+    let difficultyVotes: IDifficultyVote[];
+
+    try {
+        difficultyVotes = appendCreatorsDifficultyChoice(exercise);
+    } catch (err) {
+        console.log((err as any).message);
+        return { averageDifficulty: Difficulty.EASY, averageRating: 0 };
+    }
+
+    const averageRating =
+        difficultyVotes.reduce(
+            (acc, curr) => acc + mapDifficultyToNumericValue(curr.type),
+            0,
+        ) / difficultyVotes.length;
+
+    const averageDifficulty = mapNumericValueToDifficulty(averageRating);
+    const averageRounded = round(averageRating, 1);
+    return { averageDifficulty, averageRating: averageRounded };
 }

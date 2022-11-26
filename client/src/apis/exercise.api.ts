@@ -1,4 +1,5 @@
 import { AppProperty } from '../constants/app';
+import { Difficulty } from '../models/enums';
 import {
     IComment,
     IExercise,
@@ -108,6 +109,14 @@ export async function postExerciseComment(id: string, comment: { text: string })
     return await postRequest<IComment>({
         url: `${API_DOMAIN}/${id}/comment`,
         body: comment,
+    });
+}
+
+// POST exercise difficulty vote
+export async function postExerciseDifficultyVote(id: string, difficulty: Difficulty) {
+    return await postRequest<IExerciseWithId>({
+        url: `${API_DOMAIN}/${id}/difficulty-vote`,
+        body: { type: difficulty },
     });
 }
 

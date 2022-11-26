@@ -5,6 +5,7 @@ import { ClipLoader } from 'react-spinners';
 import { IComment } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import Button from '../buttons/Button';
+import CancelButton from '../buttons/CancelButton';
 import ProfilePicture from '../user/ProfilePicture';
 
 interface Props {
@@ -95,13 +96,7 @@ const CommentForm: React.FC<Props> = (props) => {
                             <ClipLoader color="#3c38e0" size={30} />
                         ) : (
                             <>
-                                <button
-                                    type="button"
-                                    onClick={handleCancel}
-                                    className="btn btn-small border-2 border-gray-500 hover:bg-gray-500 hover:text-white"
-                                >
-                                    Cancel
-                                </button>
+                                <CancelButton onCancel={handleCancel} />
                                 <Button type="submit" className="" size="small">
                                     Comment!
                                 </Button>

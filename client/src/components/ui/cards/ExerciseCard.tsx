@@ -5,7 +5,7 @@ import { MdReportProblem } from 'react-icons/md';
 import { BsClock, BsFillTagsFill } from 'react-icons/bs';
 
 import { IExerciseCard } from '../../../models/interfaces';
-import { getDifficultyColorClass } from '../../../utils/difficulty';
+import { getDifficultyBtnClass } from '../../../utils/difficulty';
 import { useNavigate } from 'react-router-dom';
 import { getExerciseAttemptPageLink, getExerciseEditLink } from '../../../utils/links';
 import { deleteExercise } from '../../../apis/exercise.api';
@@ -33,7 +33,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
 
     // Check if the exercise is liked by the user.
     const liked: boolean = likedExerciseIdSet.has(exercise?._id || '');
-    const difficultyStyle = getDifficultyColorClass(exercise.difficulty);
+    const difficultyStyle = getDifficultyBtnClass(exercise.difficulty);
 
     // Navigate to exercise attempt page for this exercise
     const navigateToAttempt = () => navigate(getExerciseAttemptPageLink(exercise._id));
