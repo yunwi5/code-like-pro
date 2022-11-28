@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 // Language and difficulty enums available for this app
 const { LanguageList, DifficultyList } = require('./enums');
+const { DifficultyVoteSchema } = require('./DifficultyVote');
 
 const TestCaseSchema = new Schema({
     code: {
@@ -63,6 +64,7 @@ const ExerciseSchema = new Schema({
     reports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ExerciseReport' }],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
     showCases: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ShowCase' }],
+    difficultyVotes: { type: [DifficultyVoteSchema], required: true, default: [] },
 });
 
 const Exercise = mongoose.model('Exercise', ExerciseSchema);

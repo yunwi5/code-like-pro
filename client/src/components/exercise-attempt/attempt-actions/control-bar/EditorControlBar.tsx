@@ -6,8 +6,9 @@ import { likeExerciseRequest } from '../../../../apis/exercise.api';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../../store/context/UserContext';
 import { getLanguageIcon, prettierLanguageName } from '../../../../utils/language';
-import HoveringLabel from '../../../ui/labels/HoveringLabel';
+import HoveringLabel from '../../../ui/tooltip/HoveringLabel';
 import IssueReportModal from '../../modals/IssueReportModal';
+import DifficultyRatingButton from './DifficultyRatingButton';
 import ExerciseSettings from './ExerciseSettings';
 
 // Control header that let users set language settings, favorite and report functionalities.
@@ -55,7 +56,7 @@ const EditorControlBar: React.FC = () => {
                 <HoveringLabel
                     className="ml-auto z-50"
                     label={
-                        <span className="text-base hover:text-yellow-300">Favorite</span>
+                        <span className="!text-sm hover:text-yellow-300">Favorite</span>
                     }
                 >
                     <div
@@ -70,15 +71,14 @@ const EditorControlBar: React.FC = () => {
                 <HoveringLabel
                     className="ml-2 z-50"
                     onClick={() => setShowReportModal(true)}
-                    label={
-                        <span className="text-base hover:text-yellow-300">Report</span>
-                    }
+                    label={<span className="!text-sm hover:text-yellow-300">Report</span>}
                 >
                     <div className="icon-box w-[2rem] h-[2rem] border-main-500 text-main-400 hover:bg-main-400 hover:text-main-50">
                         <GoAlert />
                     </div>
                 </HoveringLabel>
 
+                {!isAuthor && <DifficultyRatingButton />}
                 {isAuthor && <ExerciseSettings />}
             </div>
             <IssueReportModal

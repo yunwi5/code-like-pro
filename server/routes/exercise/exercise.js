@@ -76,4 +76,11 @@ router
         catchAsync(exerciseController.postExerciseComment),
     );
 
+// User vote on exercise difficulty
+router.post(
+    '/:id/difficulty-vote',
+    ensureAuthenticated,
+    catchAsync(exerciseController.postDifficultyVote),
+);
+
 module.exports = router;

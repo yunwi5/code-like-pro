@@ -6,7 +6,7 @@ import { deleteReportVote, postReportVote } from '../../../apis/report.api';
 import { IIssueReport, IVote } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import VoteButtons from '../buttons/VoteButtons';
-import HoveringLabel from '../labels/HoveringLabel';
+import HoveringLabel from '../tooltip/HoveringLabel';
 
 const IssueReportCard: React.FC<{ report: IIssueReport; className?: string }> = ({
     report,

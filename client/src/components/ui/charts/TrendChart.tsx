@@ -29,13 +29,18 @@ ChartJS.register(
 export const options = {
     responsive: true,
     plugins: {
-        scales: {
-            y: {
-                beginAtZero: true,
-            },
-        },
         legend: {
             position: 'top' as const, // control data labels position
+        },
+    },
+    scale: {
+        ticks: {
+            precision: 0,
+        },
+    },
+    scales: {
+        y: {
+            beginAtZero: true,
         },
     },
 };
@@ -68,7 +73,11 @@ const TrendChart: React.FC<Props> = (props) => {
 
     return (
         <div>
-            <Line className="max-h-[20rem] max-w-[100%]" options={options} data={dataset} />
+            <Line
+                className="max-h-[20rem] max-w-[100%]"
+                options={options}
+                data={dataset}
+            />
         </div>
     );
 };

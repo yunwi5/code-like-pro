@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { ITestCase, ITestCaseWithOutput } from '../../../../../models/interfaces';
-import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
+import { ITestCase, ITestCaseWithOutput } from '../../../../models/interfaces';
+import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 
 function getOpenAndHiddenTestCounts(testCases: ITestCase[]) {
     const openTestCases: ITestCase[] = testCases.filter((ex) => !ex.hidden);

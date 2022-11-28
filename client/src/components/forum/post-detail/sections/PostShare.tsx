@@ -4,7 +4,7 @@ import { BsShare } from 'react-icons/bs';
 import { AppProperty } from '../../../../constants/app';
 import { IForumPostPopulated } from '../../../../models/interfaces';
 import { getForumPostLink } from '../../../../utils/links';
-import HoveringLabel from '../../../ui/labels/HoveringLabel';
+import HoveringLabel from '../../../ui/tooltip/HoveringLabel';
 import SocialPanel from '../../../ui/social/SocialPanel';
 
 interface Props {
@@ -25,7 +25,6 @@ const PostShare: React.FC<Props> = ({ post, className = '' }) => {
                     >
                         <BsShare className="m-1 mr-2" />
                     </div>
-                    {/* <h5>Share</h5> */}
                 </button>
             </HoveringLabel>
 

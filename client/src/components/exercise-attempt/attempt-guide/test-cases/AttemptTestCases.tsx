@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
-import { ITestCaseWithOutput } from '../../../../../models/interfaces';
-import useCustomTests from '../../../hooks/useCustomTests';
-import useTestCasesWithOutputs from '../../../hooks/useTestCasesWithOutputs';
-import TestCasesMergeModal from '../../../modals/merge-modal/TestCasesMergeModal';
+import { ITestCaseWithOutput } from '../../../../models/interfaces';
+import useCustomTests from '../../hooks/useCustomTests';
+import useTestCasesWithOutputs from '../../hooks/useTestCasesWithOutputs';
+import TestCasesMergeModal from '../../modals/merge-modal/TestCasesMergeModal';
 import TestCaseMessages from './TestCaseMessages';
 import TestCasesList from './TestCasesList';
 import TestCaseUserActions from './TestCaseUserActions';
