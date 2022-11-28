@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import EditorControlBar from './sections/EditorControlBar';
-import EditorActions from './sections/EditorActions';
-import EditorWorkspace from './sections/EditorWorkspace';
+import EditorControlBar from './control-bar/EditorControlBar';
+import EditorActions from './editor-actions/EditorActions';
+import EditorWorkspace from './editor-workspace/EditorWorkspace';
 
 // Exercise attempt output section where users mainly code their solution (right side on the desktop screen)
-const EditorOutputSection: React.FC = () => {
+const AttemptActionsSection: React.FC = () => {
     // Solution number (index) that is currently selected by the user.
     // There are possibly 3 different solutions that the user can write for this exercise.
     const [solutionIndex, setSolutionIndex] = useState(0);
@@ -42,4 +42,4 @@ const EditorOutputSection: React.FC = () => {
     );
 };
 
-export default EditorOutputSection;
+export default AttemptActionsSection;

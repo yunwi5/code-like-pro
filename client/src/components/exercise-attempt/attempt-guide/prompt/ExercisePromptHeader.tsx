@@ -1,6 +1,6 @@
 import React from 'react';
-import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
-import ExerciseSpec from '../../../../ui/spec/ExerciseSpec';
+import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import ExerciseSpec from '../../../ui/spec/ExerciseSpec';
 import PromptDifficultyLabel from './PromptDifficultyLabel';
 
 const ExercisePromptHeader: React.FC = () => {

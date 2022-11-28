@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import useExerciseReportsQuery from '../../../hooks/exercise-queries/useExerciseReportsQuery';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import ExerciseInfoNav from './sections/ExerciseInfoNav';
-import ExercisePrompt from './sections/exercise-prompt/ExercisePrompt';
-import ExerciseIssueReports from './sections/ExerciseIssueReports';
-import PreviousSubmission from './sections/PreviousSubmission';
-import TestCasesDisplay from './sections/test-cases/AttemptTestCases';
+import ExerciseInfoNav from './layout/ExerciseInfoNav';
+import ExercisePrompt from './prompt/ExercisePrompt';
+import ExerciseIssueReports from './issue-reports/ExerciseIssueReports';
+import PreviousSubmission from './previous-submission/PreviousSubmission';
+import TestCasesDisplay from './test-cases/AttemptTestCases';
 
 export enum SubSection {
     PROMPT = 'Prompt',
@@ -17,7 +17,7 @@ export enum SubSection {
 export const SubSectionList = Object.freeze(Object.values(SubSection));
 
 // Left side of the code editor page.
-const ExerciseInfoSection: React.FC = () => {
+const AttemptGuideSection: React.FC = () => {
     const { testCaseOutputs, exercise } = useExerciseAttemptCtx();
     const [activeSubSection, setActiveSubSection] = useState(SubSection.PROMPT);
 
@@ -46,4 +46,4 @@ const ExerciseInfoSection: React.FC = () => {
     );
 };
 
-export default ExerciseInfoSection;
+export default AttemptGuideSection;

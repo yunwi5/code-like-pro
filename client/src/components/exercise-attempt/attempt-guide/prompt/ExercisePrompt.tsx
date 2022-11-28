@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { BsBarChartFill } from 'react-icons/bs';
-import { useExerciseAttemptCtx } from '../../../../../store/context/ExerciseAttemptContext';
-import TextEditor from '../../../../ui/editor/text-editor/TextEditor';
-import TagList from '../../../../ui/lists/TagList';
-import DifficultyModal from '../../../modals/difficulty-modal/DifficultyModal';
+import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
+import TextEditor from '../../../ui/editor/text-editor/TextEditor';
+import TagList from '../../../ui/lists/TagList';
+import DifficultyModal from '../../modals/difficulty-modal/DifficultyModal';
 import ExercisePromptHeader from './ExercisePromptHeader';
 
 const ExercisePrompt: React.FC = () => {
