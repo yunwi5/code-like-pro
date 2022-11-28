@@ -16,7 +16,7 @@ const style = {
     tooltipDark: 'bg-gray-700/[95] border-gray-800 text-gray-50',
     exitIcon: 'absolute top-[0.6rem] right-[0.6rem] text-2xl cursor-pointer',
     exitIconLight: 'text-gray-600 hover:text-main-500',
-    exitIconDark: 'text-white hover:text-main-50',
+    exitIconDark: 'text-white hover:text-main-100',
 };
 
 const InfoTooltip: FC<Props> = ({ theme, content, className = '' }) => {
