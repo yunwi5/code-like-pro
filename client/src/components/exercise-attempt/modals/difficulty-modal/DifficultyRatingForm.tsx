@@ -41,11 +41,10 @@ const DifficultyRatingForm: FC<Props> = ({
 
     const handleSubmitVote = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!selectedDifficulty) return;
-        if (!userDetail) return toastNotify('You should login first!', 'error');
+        if (!selectedDifficulty || !userDetail) return;
 
         setLoading(true);
-        const { ok, data, message } = await postExerciseDifficultyVote(
+        const { ok, message } = await postExerciseDifficultyVote(
             exercise._id,
             selectedDifficulty,
         );

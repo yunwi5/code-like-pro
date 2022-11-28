@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { IoCloseSharp } from 'react-icons/io5';
 import { TbBulb } from 'react-icons/tb';
 import { Difficulty } from '../../../../models/enums';
 import { IExerciseWithId } from '../../../../models/interfaces';
-import { DifficultyTextColorMap } from '../../../../utils/colors';
+import { DifficultyColorMap } from '../../../../utils/colors';
 import {
     getAverageDifficultyByRatings,
     getOverallDifficulty,
@@ -23,7 +22,7 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
 
     const content = (
         <div className="flex flex-col gap-2 w-[25rem] text-base normal-case">
-            <h3 className="text-lg font-semibold text-main-500">
+            <h3 className="text-lg font-semibold text-main-200">
                 <TbBulb className="inline-block mr-1 text-[1.2em] -translate-y-[2px]" />
                 How the overall difficulty is calculated
             </h3>
@@ -38,7 +37,7 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
                     Creator's Difficulty:{' '}
                     <span
                         style={{
-                            color: DifficultyTextColorMap[exercise.difficulty],
+                            color: DifficultyColorMap[exercise.difficulty],
                         }}
                         className="font-semibold"
                     >
@@ -52,7 +51,7 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
                     Average Difficulty:{' '}
                     <span
                         style={{
-                            color: DifficultyTextColorMap[
+                            color: DifficultyColorMap[
                                 averageDifficulty || exercise.difficulty
                             ],
                         }}
@@ -71,7 +70,7 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
                 {averageRatingRounded} x 0.75 ={' '}
                 <span
                     className="font-semibold"
-                    style={{ color: DifficultyTextColorMap[overallDifficulty] }}
+                    style={{ color: DifficultyColorMap[overallDifficulty] }}
                 >
                     {overallDifficulty} ({overallRatingRounded} / {MAX_DIFFICULTY_VALUE})
                 </span>
@@ -85,7 +84,7 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
                         <span
                             key={`${difficulty}-${range}`}
                             className="font-semibold"
-                            style={{ color: DifficultyTextColorMap[difficulty] }}
+                            style={{ color: DifficultyColorMap[difficulty] }}
                         >
                             {difficulty}&ensp;{range}
                         </span>
@@ -95,7 +94,7 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
         </div>
     );
 
-    return <InfoTooltip content={content} />;
+    return <InfoTooltip content={content} theme="dark" />;
 };
 
 const difficultyRanges = [
