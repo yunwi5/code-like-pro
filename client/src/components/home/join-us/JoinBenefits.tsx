@@ -8,6 +8,7 @@ const JoinBenefits: FC = () => {
             {joinUsFeatures.map((feature, idx) => (
                 <motion.li
                     initial={{ opacity: 0, y: 200 }}
+                    viewport={{ once: true }}
                     whileInView={{
                         opacity: 1,
                         y: 0,
