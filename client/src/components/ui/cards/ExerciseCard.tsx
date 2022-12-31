@@ -15,7 +15,7 @@ import DeleteModal from '../modals/variations/DeleteModal';
 import LanguageLabel from '../icons/LanguageIcon';
 import EditButton from '../buttons/icon-buttons/EditButton';
 import DeleteButton from '../buttons/icon-buttons/DeleteButton';
-import useExerciseSubmissionsQuery from '../../../hooks/exercise/useExerciseSubmissionsQuery';
+import useExerciseSubmissionsQuery from '../../../hooks/exercise/exercise-submissions.tsx/useExerciseSubmissionsQuery';
 import { getSubmissionStats } from '../../../utils/user-submission';
 import { getDateFormat } from '../../../utils/datetime';
 

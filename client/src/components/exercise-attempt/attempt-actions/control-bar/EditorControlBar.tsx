@@ -22,7 +22,7 @@ const EditorControlBar: React.FC = () => {
         // Needs to send the request to the server that the user liked it or not.
         setLiked((ps) => !ps);
         if (exercise == null) return;
-        await likeExerciseRequest(exercise?._id);
+        await likeExerciseRequest(exercise._id);
         refetchExercise();
     };
 
