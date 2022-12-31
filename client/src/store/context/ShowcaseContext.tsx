@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import useExerciseCommentsQuery from '../../hooks/comment/exercise-comments/useExerciseCommentsQuery';
-import useExerciseShowcaseQuery from '../../hooks/showcase/useExerciseShowcaseQuery';
+import useExerciseShowcaseQuery from '../../hooks/showcase/exercise-showcases/useExerciseShowcaseQuery';
 import {
     IComment,
     IExerciseWithId,

@@ -1,11 +1,12 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getExerciseShowcases } from '../../apis/exercise.api';
+import { getExerciseShowcases } from '../../../apis/exercise.api';
+import { getExerciseShowcasesKey } from '../keys';
 
 function useExerciseShowcaseQuery(exerciseId: string, refetchInterval: number = 1000) {
     const queryClient = useQueryClient();
 
     // Use React-Query to fetch the showcase data of this exercise.
-    const showcaseQueryKey = `exercise-${exerciseId}-showcase`;
+    const showcaseQueryKey = getExerciseShowcasesKey(exerciseId);
     const { data: response, isLoading } = useQuery(
         [showcaseQueryKey],
         () => getExerciseShowcases(exerciseId),
