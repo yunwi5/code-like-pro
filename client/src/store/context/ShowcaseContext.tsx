@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import useExerciseCommentsQuery from '../../hooks/exercise/useExerciseCommentsQuery';
+import useExerciseCommentsQuery from '../../hooks/exercise/exercise-comments/useExerciseCommentsQuery';
 import useExerciseShowcaseQuery from '../../hooks/showcase/useExerciseShowcaseQuery';
 import {
     IComment,

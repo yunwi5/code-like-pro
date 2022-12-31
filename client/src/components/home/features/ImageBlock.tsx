@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import useWindowSize from '../../../hooks/useWindowSize';
+import useWindowSize from '../../../hooks/ui/useWindowSize';
 
 const imageClass =
     'relative lg:absolute overflow-hidden rounded-sm border-[1.5px] border-gray-300 shadow hover:!opacity-100 hover:z-20';

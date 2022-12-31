@@ -10,9 +10,11 @@ import { toastNotify } from '../../../utils/notification';
 
 interface Props {
     comment: IComment;
+    onUpdate?: (id: string, updateProp: { text: string }) => void;
+    onDelete?: (id: string) => void;
 }
 
-const MainComment: React.FC<Props> = ({ comment }) => {
+const MainComment: React.FC<Props> = ({ comment, onUpdate, onDelete }) => {
     const [showReplyComments, setShowReplyComments] = useState(false);
 
     // Fetch reply (sub) comments.
@@ -39,7 +41,12 @@ const MainComment: React.FC<Props> = ({ comment }) => {
 
     return (
         <div className="pb-2 border-b-2 border-b-gray-300/80">
-            <CommentCard comment={comment} onReply={toggleShowReplyComments} />
+            <CommentCard
+                comment={comment}
+                onReply={toggleShowReplyComments}
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+            />
             <button
                 onClick={toggleShowReplyComments}
                 className="flex items-center my-1 ml-9 px-3 py-2 text-main-500 font-semibold border border-transparent rounded-full hover:bg-main-50 hover:border-main-400 hover:shadow"

@@ -8,6 +8,8 @@ import EmptyMessage from '../labels/EmptyMessage';
 
 interface Props {
     comments: IComment[];
+    onUpdateComment?: (id: string, updateProp: { text: string }) => void;
+    onDeleteComment?: (id: string) => void;
     commentPerPage?: number;
     className?: string;
 }
@@ -17,6 +19,8 @@ const DEFAULT_PER_PAGE = 7;
 
 const CommentList: FC<Props> = ({
     comments,
+    onUpdateComment,
+    onDeleteComment,
     commentPerPage = DEFAULT_PER_PAGE,
     className = '',
 }) => {
@@ -39,11 +43,15 @@ const CommentList: FC<Props> = ({
                     {currentPageComments.map((comment) => (
                         // Animate delete action that removes the comment from the DOM
                         <motion.div
+                            key={comment._id}
                             transition={{ duration: 0.2 }}
                             exit={{ opacity: 0, x: 300 }}
-                            key={comment._id}
                         >
-                            <MainComment comment={comment} />
+                            <MainComment
+                                comment={comment}
+                                onUpdate={onUpdateComment}
+                                onDelete={onDeleteComment}
+                            />
                         </motion.div>
                     ))}
                 </AnimatePresence>
