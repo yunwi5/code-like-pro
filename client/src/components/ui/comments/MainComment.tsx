@@ -42,7 +42,7 @@ const MainComment: React.FC<Props> = ({ comment }) => {
             <CommentCard comment={comment} onReply={toggleShowReplyComments} />
             <button
                 onClick={toggleShowReplyComments}
-                className="flex items-center mt-3 pl-12 text-main-500 text-sm font-semibold"
+                className="flex items-center my-1 ml-9 px-3 py-2 text-main-500 font-semibold border border-transparent rounded-full hover:bg-main-50 hover:border-main-400 hover:shadow"
             >
                 {showReplyComments ? (
                     <IoMdArrowDropup className="text-xl" />
@@ -61,7 +61,7 @@ const MainComment: React.FC<Props> = ({ comment }) => {
                             <CommentCard comment={reply} />
                         </div>
                     ))}
-                    <div className="flex gap-2 mt-3">
+                    <div className="flex gap-2 mb-6">
                         <CommentReplyLine />
                         <CommentForm onSubmit={handleSubmitReply} className="flex-1" />
                     </div>
