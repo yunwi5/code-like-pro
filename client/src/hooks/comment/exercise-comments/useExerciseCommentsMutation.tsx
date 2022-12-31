@@ -1,12 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { getExerciseCommentsKey } from '../keys';
 import { postExerciseComment } from '../../../apis/exercise.api';
+import * as CommentAPI from '../../../apis/comment.api';
 import { toastNotify } from '../../../utils/notification';
 import { IComment } from '../../../models/interfaces';
-import {
-    deleteComment as deleteCommentRequest,
-    patchComment,
-} from '../../../apis/comment.api';
+import { getExerciseCommentsKey } from '../keys';
 
 function useExerciseCommentsMutation(exerciseId: string) {
     const queryKey = getExerciseCommentsKey(exerciseId);
@@ -36,11 +33,14 @@ function useExerciseCommentsMutation(exerciseId: string) {
             );
         } else toastNotify(`Oops, ${message}`, 'error');
 
-        refetchComments();
+        refetch();
     };
 
     const updateComment = async (commentId: string, updateProp: { text: string }) => {
-        const { ok, data: updatedComment } = await patchComment(commentId, updateProp);
+        const { ok, data: updatedComment } = await CommentAPI.patchComment(
+            commentId,
+            updateProp,
+        );
 
         if (ok && updatedComment) {
             queryClient.setQueryData(
@@ -63,11 +63,11 @@ function useExerciseCommentsMutation(exerciseId: string) {
             toastNotify('Oops, something went wrong...', 'error');
         }
 
-        refetchComments();
+        refetch();
     };
 
     const deleteComment = async (commentId: string) => {
-        const { ok } = await deleteCommentRequest(commentId);
+        const { ok } = await CommentAPI.deleteComment(commentId);
         if (ok) {
             queryClient.setQueryData(
                 [queryKey],
@@ -83,10 +83,10 @@ function useExerciseCommentsMutation(exerciseId: string) {
             toastNotify('Oops, something went wrong...', 'error');
         }
 
-        refetchComments();
+        refetch();
     };
 
-    const refetchComments = () => queryClient.refetchQueries([queryKey]);
+    const refetch = () => queryClient.refetchQueries([queryKey]);
 
     return { postComment, updateComment, deleteComment };
 }

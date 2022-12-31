@@ -3,6 +3,8 @@ import { IComment } from '../models/interfaces';
 
 const API_DOMAIN = '/comment';
 
+export type CommentProp = { text: string };
+
 // Patch/edit the comment of the param id
 export async function patchComment(commentId: string, commentProp: { text: string }) {
     return await patchRequest<IComment>({

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
-import { getReplyComments, postReplyComment } from '../../../apis/comment.api';
 import { IComment } from '../../../models/interfaces';
 import CommentCard from '../cards/CommentCard';
 import CommentForm from './CommentForm';
-import { toastNotify } from '../../../utils/notification';
 import useReplyCommentsQuery from '../../../hooks/comment/reply-comments/useReplyCommentsQuery';
+import useReplyCommentsMutation from '../../../hooks/comment/reply-comments/useReplyCommentsMutation';
 
 interface Props {
     comment: IComment;
@@ -19,16 +17,10 @@ const MainComment: React.FC<Props> = ({ comment, onUpdate, onDelete }) => {
     const [showReplyComments, setShowReplyComments] = useState(false);
 
     const { replyComments } = useReplyCommentsQuery(comment._id);
+    const { postReplyComment, updateReplyComment, deleteReplyComment } =
+        useReplyCommentsMutation(comment._id);
 
-    // Handle adding reply comments.
-    const handleSubmitReply = async (text: string) => {
-        // Send Http POST request to send the new reply comment to the server.
-        const newComment = { text };
-
-        const { ok, message } = await postReplyComment(comment._id, newComment);
-        if (ok) toastNotify('Posted your reply!', 'success');
-        else toastNotify(message || 'Something went wrong...', 'error');
-    };
+    const handleSubmitReply = async (text: string) => postReplyComment({ text });
 
     const toggleShowReplyComments = () => setShowReplyComments((ps) => !ps);
 
@@ -58,7 +50,11 @@ const MainComment: React.FC<Props> = ({ comment, onUpdate, onDelete }) => {
                     {replyComments.map((reply) => (
                         <div key={reply._id} className="flex gap-2">
                             <CommentReplyLine />
-                            <CommentCard comment={reply} />
+                            <CommentCard
+                                comment={reply}
+                                onUpdate={updateReplyComment}
+                                onDelete={deleteReplyComment}
+                            />
                         </div>
                     ))}
                     <div className="flex gap-2 mb-6">
