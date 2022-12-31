@@ -83,13 +83,15 @@ const DifficultyRatingForm: FC<Props> = ({
 
             {selectedDifficulty && (
                 <div className="flex-end gap-1 basis-full">
-                    <CancelButton onCancel={onCancel} />
                     {loading ? (
                         <ClipLoader size={35} color="#5552e4" />
                     ) : (
-                        <Button size="small" className="!py-1">
-                            Submit Rating
-                        </Button>
+                        <>
+                            <CancelButton onCancel={onCancel} />
+                            <Button size="small" className="!py-1">
+                                Submit Rating
+                            </Button>
+                        </>
                     )}
                 </div>
             )}
