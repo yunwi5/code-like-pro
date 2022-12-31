@@ -1,8 +1,7 @@
-import { AppProperty } from '../constants/app';
 import { postRequest } from './requests.api';
 import { ITestCase, ITestOutput, IUserSubmission } from '../models/interfaces';
 
-const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/submission`;
+const API_DOMAIN = `/submission`;
 
 // Request body: {code: string, language: string (language_code),  testCases: Array<{code, expectedOutput}>}
 type RunRequestBody = { code: string; language: string; testCases: ITestCase[] };

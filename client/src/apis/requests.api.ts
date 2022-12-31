@@ -5,7 +5,7 @@ import { authConfig } from './config';
 const api = axios.create({
     baseURL: `${AppProperty.SERVER_DOMAIN}/api`,
 });
-
+    
 // Request params for GET & DELETE requests
 type ReqParams = { url: string; headers?: AxiosRequestConfig };
 // Request params for POST &  PUT & PATCH requests

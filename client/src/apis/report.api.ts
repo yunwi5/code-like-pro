@@ -1,8 +1,7 @@
-import { AppProperty } from '../constants/app';
 import { IIssueReport } from '../models/interfaces';
-import { deleteRequest, getRequest, postRequest, putRequest } from './requests.api';
+import { deleteRequest, postRequest } from './requests.api';
 
-const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/report`;
+const API_DOMAIN = `/report`;
 
 export function postReportVote(reportId: string, vote: { type: 'up' | 'down' }) {
     return postRequest<IIssueReport>({

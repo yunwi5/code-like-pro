@@ -1,12 +1,11 @@
-import { AppProperty } from '../constants/app';
 import { getRequest, postRequest } from './requests.api';
 import { IBadge } from '../models/interfaces';
 import { RarityBreakpoint } from '../utils/badge';
 
-const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/badge`;
+const API_DOMAIN = '/badge';
 
 export async function getBadges(id: string) {
-    const url = `${AppProperty.SERVER_DOMAIN}/api/user/${id}/badge`;
+    const url = `/user/${id}/badge`;
     return await getRequest<IBadge[]>({ url });
 }
 

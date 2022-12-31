@@ -1,8 +1,7 @@
-import { AppProperty } from '../constants/app';
 import { IUserDetail, IUserInfo } from '../models/interfaces';
 import { getRequest, patchRequest } from './requests.api';
 
-const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/user`;
+const API_DOMAIN = '/user';
 
 // GET detailed information including creations, submissions, and favorites.
 export async function getUserDetail(userId: string) {

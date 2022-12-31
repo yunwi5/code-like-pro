@@ -1,8 +1,7 @@
-import { AppProperty } from '../constants/app';
 import { deleteRequest, getRequest, patchRequest, postRequest } from './requests.api';
 import { IComment } from '../models/interfaces';
 
-const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/comment`;
+const API_DOMAIN = '/comment';
 
 // Patch/edit the comment of the param id
 export async function patchComment(commentId: string, commentProp: { text: string }) {
