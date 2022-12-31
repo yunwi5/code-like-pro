@@ -46,8 +46,6 @@ export const LanguageColorMap = {
     [Language.JAVA]: PINK_300,
     [Language.JAVASCRIPT]: YELLOW_300,
     [Language.PYTHON]: SLATE_300,
-    // [Language.PASCAL]: ORANGE_300,
-    // [Language.PHP]: VIOLET_300,
 };
 
 export const StatusColorMap = {
@@ -59,15 +57,25 @@ export const ProgrammingTopicColorMap = {
     [ProgrammingTopic.ARITHMETIC]: '',
 };
 
-export const ExerciseAttemptColor = {
-    fillColor: `${SKY_300}77`,
-    outlineColor: SKY_600,
+export const ExerciseCreationColor = {
+    backgroundColor: `${BLUE_300}77`,
+    borderColor: BLUE_600,
 };
 
-export const ExerciseCreationColor = {
-    fillColor: `${BLUE_300}77`,
-    outlineColor: BLUE_600,
+export const ExerciseAttemptColor = {
+    backgroundColor: `${SKY_300}15`,
+    borderColor: SKY_600,
 };
+
+export const SuccessColor = {
+    backgroundColor: `${EMERALD_300}15`,
+    borderColor: EMERALD_600,
+};
+
+export const FailureColor = {
+    backgroundColor: `${ROSE_300}15`,
+    borderColor: ROSE_600,
+}; 
 
 const LightColorList = [
     ROSE_300,

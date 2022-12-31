@@ -18,13 +18,10 @@ import {
 } from '../../utils/analysis-utils/trend-analysis';
 
 export class UserAnalyzer {
-    exercises: IExerciseWithId[]; // List of exercises user has created.
-    submissions: IUserSubmissionPopulated[];
-
-    constructor(exercises: IExerciseWithId[], submissions: IUserSubmissionPopulated[]) {
-        this.exercises = exercises;
-        this.submissions = submissions;
-    }
+    constructor(
+        public exercises: IExerciseWithId[],
+        public submissions: IUserSubmissionPopulated[],
+    ) {}
 
     getDifficultyProportion(): IChartData[] {
         // return list of difficulty proportion of the exercises user has attempted
@@ -63,23 +60,35 @@ export class UserAnalyzer {
             default:
                 return getDailyExerciseCreationTrendData(this.exercises, numPeriods);
         }
-        // return trend data of user exercise creations as a list
     }
 
-    getExerciseAttemptTrend(trendMode: TrendPeriodMode, numPeriods: number = 5): IChartData[] {
+    getExerciseAttemptTrend(
+        trendMode: TrendPeriodMode,
+        numPeriods: number = 5,
+        correctStatus: boolean | null = null,
+    ): IChartData[] {
+        const submissionsFiltered = this.getSubmissionsByCorrectStatus(correctStatus);
+
         // There are four trend analysis modes for exercise attempt trend analysis: Day, Week, Month and Year.
         switch (trendMode) {
             case TrendPeriodMode.DAY:
-                return getDailyExerciseAttemptTrendData(this.submissions, numPeriods);
+                return getDailyExerciseAttemptTrendData(submissionsFiltered, numPeriods);
             case TrendPeriodMode.WEEK:
-                return getWeeklyExerciseAttemptTrendData(this.submissions, numPeriods);
+                return getWeeklyExerciseAttemptTrendData(submissionsFiltered, numPeriods);
             case TrendPeriodMode.MONTH:
-                return getMonthlyExerciseAttemptTrendData(this.submissions, numPeriods);
+                return getMonthlyExerciseAttemptTrendData(
+                    submissionsFiltered,
+                    numPeriods,
+                );
             case TrendPeriodMode.YEAR:
-                return getYearlyExerciseAttemptTrendData(this.submissions, numPeriods);
+                return getYearlyExerciseAttemptTrendData(submissionsFiltered, numPeriods);
             default:
-                return getDailyExerciseAttemptTrendData(this.submissions, numPeriods);
+                return getDailyExerciseAttemptTrendData(submissionsFiltered, numPeriods);
         }
-        // return trend data of user exercise attempts as a list
+    }
+
+    getSubmissionsByCorrectStatus(correctStatus: boolean | null) {
+        if (correctStatus === null) return this.submissions;
+        return this.submissions.filter((sub) => sub.correct === correctStatus);
     }
 }

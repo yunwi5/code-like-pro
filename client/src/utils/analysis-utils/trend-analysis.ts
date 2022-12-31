@@ -187,7 +187,7 @@ function getRecentDaysDataAsList(numPeriods: number): [DateTime[], IChartData[]]
     // Create a list of recent days for trend.
     const recentDaysList: DateTime[] = [];
     for (let i = 0; i < numPeriods; i++) {
-        const recentDay = today.plus({ days: -i });
+        const recentDay = today.minus({ days: i });
         recentDaysList.push(recentDay);
     }
     // The oldest day is the first element, the most recent day is the last element
@@ -207,7 +207,7 @@ function getRecentWeeksDataAsList(numPeriods: number): [DateTime[], IChartData[]
     // create a list of recent weeks for trend.
     const recentWeeksList: DateTime[] = [];
     for (let i = 0; i < numPeriods; i++) {
-        const recentWeek = weekEnding.plus({ weeks: -i });
+        const recentWeek = weekEnding.minus({ weeks: i });
         recentWeeksList.push(recentWeek);
     }
     // The oldest week is the first element, the most recent week is the last element

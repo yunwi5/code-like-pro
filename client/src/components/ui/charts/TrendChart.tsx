@@ -12,7 +12,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-import { IChartData } from '../../../models/interfaces';
+import { ITrendDataset } from '../../../models/interfaces';
 import { generateChartDataset } from '../../../utils/analysis-utils';
 
 ChartJS.register(
@@ -46,29 +46,27 @@ export const options = {
 };
 
 interface Props {
-    dataArray: IChartData[];
-    fillColor: string; // chart fill color
-    outlineColor: string; // chart outline color
-    chartLabel: string;
+    trendDatasets: ITrendDataset[];
 }
 
 const TrendChart: React.FC<Props> = (props) => {
-    const { dataArray, fillColor, outlineColor, chartLabel } = props;
+    const { trendDatasets } = props;
 
-    const { labels, data } = generateChartDataset(dataArray, false);
+    if (trendDatasets.length === 0) return null;
+
+    const { labels } = generateChartDataset(trendDatasets[0].dataArray, false);
 
     const dataset = {
         labels,
-        datasets: [
-            {
-                label: chartLabel,
-                data: data,
-                fill: true,
-                backgroundColor: fillColor,
-                borderColor: outlineColor,
-                borderWidth: 1.5,
-            },
-        ],
+        datasets: trendDatasets.map((dataset) => ({
+            label: dataset.label,
+            data: generateChartDataset(dataset.dataArray, false).data,
+            fill: true,
+            backgroundColor: dataset.backgroundColor,
+            borderColor: dataset.borderColor,
+            borderWidth: dataset.borderWidth ?? 1.5,
+            tension: 0.2,
+        })),
     };
 
     return (

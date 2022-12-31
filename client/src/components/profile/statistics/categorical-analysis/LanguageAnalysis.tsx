@@ -3,7 +3,7 @@ import { IChartData } from '../../../../models/interfaces';
 import { useAnalysisContext } from '../../../../store/context/AnalysisContext';
 import { useUserContext } from '../../../../store/context/UserContext';
 import { getDateFormat } from '../../../../utils/datetime';
-import { getLanguageIcon, prettierLanguageName } from '../../../../utils/language';
+import { prettierLanguageName } from '../../../../utils/language';
 import { getMostRecentSubmission } from '../../../../utils/user-submission';
 import CategoricalChart from '../../../ui/charts/CategoricalChart';
 import LanguageLabel from '../../../ui/labels/LanguageLabel';
@@ -68,7 +68,7 @@ const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({
                 <div className="flex-start flex-wrap gap-2 text-base">
                     <h5 className="font-semibold">Languages:</h5>
                     {usedLanguages.map((lang) => (
-                        <LanguageLabel language={lang as any} />
+                        <LanguageLabel key={lang} language={lang as any} />
                     ))}
                 </div>
             )}

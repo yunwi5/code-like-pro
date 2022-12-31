@@ -34,3 +34,4 @@ export * from './context/IUserContext';
 
 // Data Analysis interfaces
 export * from './analysis/IChartData';
+export * from './analysis/ITrendDataset';
