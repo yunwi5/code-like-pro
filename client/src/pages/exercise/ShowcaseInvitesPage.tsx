@@ -12,13 +12,13 @@ import ShowCaseInvites from '../../components/showcase-invites/ShowCaseInvites';
 const ShowcaseInvitesPage: React.FC = () => {
     useAuth();
     const navigate = useNavigate();
-    const { userDetail, submissionMap } = useUserContext();
+    const { isLoading: userLoading, userDetail, submissionMap } = useUserContext();
 
-    const { isLoading, exercises, error } = useExerciseListQuery();
+    const { isLoading: exercisesLoading, exercises, error } = useExerciseListQuery();
 
     // If there is an error from the fetching, redirect to the 5home page.
     useEffect(() => {
-        if (!isLoading && !!error) {
+        if (!exercisesLoading && !!error) {
             navigate('/');
             toastNotify(
                 'Sorry, something went wrong in fetching exercise data...',
@@ -43,6 +43,7 @@ const ShowcaseInvitesPage: React.FC = () => {
             </Helmet>
             <div className="flex-center min-h-[83vh]">
                 <ShowCaseInvites
+                    isLoading={userLoading || exercisesLoading}
                     createdExercises={createdExercises}
                     solvedExercises={solvedExercises}
                 />

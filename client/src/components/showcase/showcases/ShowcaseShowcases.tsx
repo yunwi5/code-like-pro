@@ -48,8 +48,11 @@ const ShowcaseShowcases: React.FC = () => {
                     {showcases.length} Showcases
                 </h5>
             </div>
-            {showcasesLoading && <ShowcaseLoader />}
-            <ShowcaseList showcases={sortedShowcases} exercise={exercise} />
+            {showcasesLoading ? (
+                <ShowcaseLoader />
+            ) : (
+                <ShowcaseList showcases={sortedShowcases} exercise={exercise} />
+            )}
         </div>
     );
 };
