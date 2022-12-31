@@ -7,14 +7,16 @@ function useReplyCommentsQuery(commentId: string, refetchInterval: number = 1000
 
     // Fetch reply (sub) comments.
     const commentQueryKey = getReplyCommentsKey(commentId);
-    const { data, isLoading, error } = useQuery(
-        [commentQueryKey],
-        () => getReplyComments(commentId).then((res) => res.data),
-        { refetchInterval },
-    );
+    const {
+        data: response,
+        isLoading,
+        error,
+    } = useQuery([commentQueryKey], () => getReplyComments(commentId), {
+        refetchInterval,
+    });
     if (error) console.log(error);
 
-    const replyComments = data || [];
+    const replyComments = response?.data || [];
 
     const refetch = () => queryClient.refetchQueries([commentQueryKey]);
 

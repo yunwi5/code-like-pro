@@ -1,12 +1,12 @@
-import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getShowcaseComments } from '../../apis/exercise.api';
+import { getShowcaseComments } from '../../../apis/exercise.api';
+import { getShowcaseCommentsKey } from '../keys';
 
 function useShowcaseCommentQuery(showcaseId: string, refetchInterval: number = 1000) {
     const queryClient = useQueryClient();
 
     // Use React-Query to fetch the comment data of this showcase.
-    const showcaseQueryKey = `exercise-${showcaseId}-showcase`;
+    const showcaseQueryKey = getShowcaseCommentsKey(showcaseId);
     const { data: response, isLoading } = useQuery(
         [showcaseQueryKey],
         () => getShowcaseComments(showcaseId),

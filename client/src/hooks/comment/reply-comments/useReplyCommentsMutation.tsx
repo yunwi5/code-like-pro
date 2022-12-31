@@ -3,13 +3,15 @@ import { useQueryClient } from '@tanstack/react-query';
 import * as CommentAPI from '../../../apis/comment.api';
 import { CommentProp } from '../../../apis/comment.api';
 import { toastNotify } from '../../../utils/notification';
-import { IComment } from '../../../models/interfaces';
 import { getReplyCommentsKey } from '../keys';
+import useListQueryCacheUpdate from '../../cache/useListQueryCacheUpdate';
 
 function useReplyCommentsMutation(commentId: string) {
     const queryClient = useQueryClient();
 
     const commentQueryKey = getReplyCommentsKey(commentId);
+    const { addItemToCache, updateItemInCache, deleteItemInCache } =
+        useListQueryCacheUpdate(commentQueryKey);
 
     const postReplyComment = async (commentProp: CommentProp) => {
         const {
@@ -20,13 +22,7 @@ function useReplyCommentsMutation(commentId: string) {
 
         if (ok && newComment) {
             toastNotify('Posted your reply!', 'success');
-            queryClient.setQueryData(
-                [commentQueryKey],
-                (oldData: IComment[] | undefined) => {
-                    if (!oldData) return oldData;
-                    return [...oldData, newComment];
-                },
-            );
+            addItemToCache(newComment);
         } else {
             toastNotify(message || 'Something went wrong...', 'error');
         }
@@ -44,19 +40,7 @@ function useReplyCommentsMutation(commentId: string) {
         );
 
         if (ok && updatedComment) {
-            queryClient.setQueryData(
-                [commentQueryKey],
-                (oldData: IComment[] | undefined) => {
-                    if (!oldData) return oldData;
-
-                    const newComments = [...oldData];
-                    const index = newComments.findIndex((c) => c._id === replyCommentId);
-                    if (index < 0) return oldData;
-
-                    newComments[index] = updatedComment;
-                    return newComments;
-                },
-            );
+            updateItemInCache(updatedComment);
         } else {
             toastNotify('Oops, something went wrong...', 'error');
         }
@@ -67,13 +51,7 @@ function useReplyCommentsMutation(commentId: string) {
     const deleteReplyComment = async (replyCommentId: string) => {
         const { ok } = await CommentAPI.deleteComment(replyCommentId);
         if (ok) {
-            queryClient.setQueryData(
-                [commentQueryKey],
-                (oldData: IComment[] | undefined) => {
-                    if (!oldData) return oldData;
-                    return oldData.filter((c) => c._id !== replyCommentId);
-                },
-            );
+            deleteItemInCache(replyCommentId);
         } else {
             toastNotify('Oops, something went wrong...', 'error');
         }

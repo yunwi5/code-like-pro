@@ -1,24 +1,26 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { postExerciseComment } from '../../../apis/exercise.api';
-import * as CommentAPI from '../../../apis/comment.api';
-import { toastNotify } from '../../../utils/notification';
-import { getExerciseCommentsKey } from '../keys';
-import useListQueryCacheUpdate from '../../cache/useListQueryCacheUpdate';
 
-function useExerciseCommentsMutation(exerciseId: string) {
+import useListQueryCacheUpdate from '../../cache/useListQueryCacheUpdate';
+import { CommentProp } from '../../../apis/comment.api';
+import * as CommentAPI from '../../../apis/comment.api';
+import { postShowcaseComment } from '../../../apis/exercise.api';
+import { toastNotify } from '../../../utils/notification';
+import { getShowcaseCommentsKey } from '../keys';
+
+function useShowcaseCommentsMutation(showcaseId: string) {
     const queryClient = useQueryClient();
 
-    const queryKey = getExerciseCommentsKey(exerciseId);
+    // Use React-Query to fetch the comment data of this showcase.
+    const showcaseQueryKey = getShowcaseCommentsKey(showcaseId);
     const { addItemToCache, updateItemInCache, deleteItemInCache } =
-        useListQueryCacheUpdate(queryKey);
+        useListQueryCacheUpdate(showcaseQueryKey);
 
-    const postComment = async (commentProp: { text: string }) => {
-        // Send Http POST request to add the user's comment to the server.
+    const postComment = async (commentProp: CommentProp) => {
         const {
             ok,
             message,
             data: newComment,
-        } = await postExerciseComment(exerciseId, commentProp);
+        } = await postShowcaseComment(showcaseId, commentProp);
 
         if (ok && newComment) {
             toastNotify('Post comment!', 'success');
@@ -26,11 +28,9 @@ function useExerciseCommentsMutation(exerciseId: string) {
         } else {
             toastNotify(`Oops, ${message}`, 'error');
         }
-
-        refetch();
     };
 
-    const updateComment = async (commentId: string, updateProp: { text: string }) => {
+    const updateComment = async (commentId: string, updateProp: CommentProp) => {
         const { ok, data: updatedComment } = await CommentAPI.patchComment(
             commentId,
             updateProp,
@@ -56,9 +56,9 @@ function useExerciseCommentsMutation(exerciseId: string) {
         refetch();
     };
 
-    const refetch = () => queryClient.refetchQueries([queryKey]);
+    const refetch = () => queryClient.refetchQueries([showcaseQueryKey]);
 
     return { postComment, updateComment, deleteComment };
 }
 
-export default useExerciseCommentsMutation;
+export default useShowcaseCommentsMutation;
