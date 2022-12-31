@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
 import { likeExerciseRequest } from '../../../../apis/exercise.api';
@@ -10,10 +9,12 @@ import HoveringLabel from '../../../ui/tooltip/HoveringLabel';
 import IssueReportModal from '../../modals/IssueReportModal';
 import DifficultyRatingButton from './DifficultyRatingButton';
 import ExerciseSettings from './ExerciseSettings';
+import ExerciseFavorite from './ExerciseFavorite';
 
 // Control header that let users set language settings, favorite and report functionalities.
 const EditorControlBar: React.FC = () => {
-    const { likedExerciseIdSet, userDetail } = useUserContext();
+    const { userDetail } = useUserContext();
+    const userId = userDetail?._id;
     const { exercise, refetchExercise } = useExerciseAttemptCtx();
     const [showReportModal, setShowReportModal] = useState(false);
 
@@ -30,11 +31,12 @@ const EditorControlBar: React.FC = () => {
 
     // Set the user liked status initially based on the previous liked exercises of the user.
     useEffect(() => {
-        setLiked(likedExerciseIdSet.has(exercise?._id || ''));
-    }, [likedExerciseIdSet, exercise?._id]);
+        if (!exercise?._id || !userId) return;
+        setLiked(exercise?.liked.includes(userId));
+    }, [exercise?._id, userId]);
 
     // Check if the user is an author of this exercise. If author, show the settings option.
-    const isAuthor = !!userDetail?.exercises.find((ex) => ex._id === exercise?._id);
+    const isAuthor = exercise?.author._id === userId;
 
     if (!exercise) return null;
 
@@ -53,19 +55,11 @@ const EditorControlBar: React.FC = () => {
                 </div>
 
                 {/* Favorite toggler */}
-                <HoveringLabel
-                    className="ml-auto z-50"
-                    label={
-                        <span className="!text-sm hover:text-yellow-300">Favorite</span>
-                    }
-                >
-                    <div
-                        onClick={handleLiked}
-                        className="icon-box ml-auto w-[2rem] h-[2rem] border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-yellow-50"
-                    >
-                        {liked ? <AiFillStar /> : <AiOutlineStar />}
-                    </div>
-                </HoveringLabel>
+                <ExerciseFavorite
+                    key={`exercise-favorite-${exercise.liked.join('.')}`}
+                    liked={liked}
+                    onToggleLike={handleLiked}
+                />
 
                 {/* Report button */}
                 <HoveringLabel
@@ -78,7 +72,7 @@ const EditorControlBar: React.FC = () => {
                     </div>
                 </HoveringLabel>
 
-                {!isAuthor && <DifficultyRatingButton />}
+                <DifficultyRatingButton />
                 {isAuthor && <ExerciseSettings />}
             </div>
             <IssueReportModal
