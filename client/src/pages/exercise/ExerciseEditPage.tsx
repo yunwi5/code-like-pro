@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { ClipLoader } from 'react-spinners';
 
+import useExerciseQuery from '../../hooks/exercise/exercise/useExerciseQuery';
 import ExerciseCreationMain from '../../components/exercise-creation/ExerciseCreationMain';
 import { AppProperty } from '../../constants/app';
 import useAuth from '../../hooks/useAuth';
 import { ExerciseCreationContextProvider } from '../../store/context/ExerciseCreationContext';
 import { toastNotify } from '../../utils/notification';
-import { ClipLoader } from 'react-spinners';
-import useExerciseQuery from '../../hooks/exercise/useExerciseQuery';
 
 const ExerciseEditPage = () => {
     useAuth();

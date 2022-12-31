@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { FiStar } from 'react-icons/fi';
 import { ClipLoader } from 'react-spinners';
 
-import { postExerciseDifficultyVote } from '../../../../apis/exercise.api';
+import useExerciseMutation from '../../../../hooks/exercise/exercise/useExerciseMutation';
 import { Difficulty, DifficultyList } from '../../../../models/enums';
 import { IExerciseWithId } from '../../../../models/interfaces';
 import { useUserContext } from '../../../../store/context/UserContext';
@@ -10,7 +10,6 @@ import {
     getDifficultyActiveClass,
     getDifficultyBtnClass,
 } from '../../../../utils/difficulty';
-import { toastNotify } from '../../../../utils/notification';
 import Button from '../../../ui/buttons/Button';
 import CancelButton from '../../../ui/buttons/CancelButton';
 
@@ -28,6 +27,8 @@ const DifficultyRatingForm: FC<Props> = ({
     defaultValue,
 }) => {
     const { userDetail } = useUserContext();
+    const { postDifficultyVote } = useExerciseMutation(exercise._id);
+
     const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(
         defaultValue ?? null,
     );
@@ -44,17 +45,10 @@ const DifficultyRatingForm: FC<Props> = ({
         if (!selectedDifficulty || !userDetail) return;
 
         setLoading(true);
-        const { ok, message } = await postExerciseDifficultyVote(
-            exercise._id,
-            selectedDifficulty,
-        );
+        const ok = await postDifficultyVote(selectedDifficulty);
+
         setLoading(false);
-        if (ok) {
-            toastNotify('Rating submitted!', 'success');
-            onSubmit();
-        } else {
-            toastNotify(`Error: ${message}`, 'error');
-        }
+        if (ok) onSubmit();
     };
 
     return (

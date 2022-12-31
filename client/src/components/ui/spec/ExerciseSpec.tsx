@@ -4,7 +4,7 @@ import { AiFillStar, AiFillCheckCircle } from 'react-icons/ai';
 import { BsClock } from 'react-icons/bs';
 
 import { IExerciseWithId } from '../../../models/interfaces';
-import useExerciseSubmissionsQuery from '../../../hooks/exercise/useExerciseSubmissionsQuery';
+import useExerciseSubmissionsQuery from '../../../hooks/exercise/exercise-submissions.tsx/useExerciseSubmissionsQuery';
 import { getSubmissionStats } from '../../../utils/user-submission';
 import { getDateFormat } from '../../../utils/datetime';
 import ProfileView from '../user/profile-view/ProfileView';

@@ -290,7 +290,10 @@ const exerciseController = {
         const userId = req.user._id;
 
         try {
-            const exercisePromise = Exercise.findById(exerciseId);
+            const exercisePromise = Exercise.findById(exerciseId).populate({
+                path: 'author',
+                select: ['name', 'pictureUrl'],
+            });
             const userPromise = User.findById(userId);
             const [exercise, user] = await Promise.all([exercisePromise, userPromise]);
 
@@ -439,10 +442,7 @@ const exerciseController = {
         const { type } = req.body;
 
         try {
-            const exercise = await Exercise.findById(exerciseId).select({
-                testCases: 0,
-                prompt: 0,
-            });
+            const exercise = await Exercise.findById(exerciseId);
             const votes = exercise.difficultyVotes || [];
 
             const currentUserVote = votes.find(

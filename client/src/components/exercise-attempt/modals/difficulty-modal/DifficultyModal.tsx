@@ -17,7 +17,7 @@ interface Props {
 }
 
 const DifficultyModal: FC<Props> = ({ open, onClose }) => {
-    const { exercise, refetchExercise } = useExerciseAttemptCtx();
+    const { exercise } = useExerciseAttemptCtx();
     const { userDetail } = useUserContext();
     const userDifficultyVote = exercise?.difficultyVotes?.find(
         (vote) => vote.user === userDetail?._id,
@@ -26,10 +26,7 @@ const DifficultyModal: FC<Props> = ({ open, onClose }) => {
 
     if (exercise == null) return null;
 
-    const HandleVoteSubmit = () => {
-        refetchExercise();
-        setShowForm(false);
-    };
+    const HandleVoteSubmit = () => setShowForm(false);
 
     // Difficulty votes including creator's choice
     const difficultyVotes = exercise.difficultyVotes || [];

@@ -67,13 +67,16 @@ const postSubmission = async (req, res) => {
         user: req.user._id,
     });
 
+    let status;
     if (userSubmission == null) {
         // If the existing submission is not found, create one.
         userSubmission = new UserSubmission({ code: submission.code });
+        status = 201;
     } else {
         // If found, update the submission rather than creating a new one.
         userSubmission.code = submission.code;
         userSubmission.postedAt = Date.now();
+        status = 200;
     }
 
     const exercise = await Exercise.findById(exerciseId);
@@ -112,7 +115,7 @@ const postSubmission = async (req, res) => {
     userSubmission.user = user;
     await userSubmission.save();
 
-    res.status(201).json(userSubmission);
+    res.status(status).json(userSubmission);
 };
 
 const controller = {

@@ -1,12 +1,13 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getExerciseById } from '../../apis/exercise.api';
+import { getExerciseById } from '../../../apis/exercise.api';
+import { getExerciseKey } from '../keys';
 
 // Custom hook for fetching exercise data with React Query.
 function useExerciseQuery(exerciseId: string) {
     // Get QueryClient and construct the query key.
     const queryClient = useQueryClient();
-    const exerciseQueryKey = `exercise-${exerciseId}`;
+    const exerciseQueryKey = getExerciseKey(exerciseId);
 
     // Fetch the exercise data
     const {

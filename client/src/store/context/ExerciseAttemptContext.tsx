@@ -1,8 +1,9 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { postSubmission, runTestCases } from '../../apis/submission.api';
-import AttemptSuccessModal from '../../components/exercise-attempt/modals/AttemptSuccessModal';
+
+import { runTestCases } from '../../apis/submission.api';
 import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import useExerciseSubmissionsMutation from '../../hooks/exercise/exercise-submissions.tsx/useExerciseSubmissionsMutation';
 import {
     IExerciseWithId,
     ITestCase,
@@ -10,6 +11,7 @@ import {
     IUserSubmission,
 } from '../../models/interfaces';
 import { getCorrectTestCaseCount } from '../../utils/exercise-utils/testcase';
+import AttemptSuccessModal from '../../components/exercise-attempt/modals/AttemptSuccessModal';
 import { toastNotify } from '../../utils/notification';
 
 interface IExerciseAttemptCtx {
@@ -50,6 +52,9 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
         `${exercise._id}-custom-tests`,
         [],
     );
+
+    const { postSubmission } = useExerciseSubmissionsMutation(exercise._id);
+
     // Solving badge qualifying detection
     const { qualifySolvingBadges } = useBadgeQualification();
     // Showcase invite modal to encourage users to join the showcase, after they get correct.
@@ -87,27 +92,20 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
 
     const submitCode = useCallback(async () => {
         setIsLoading(true);
-        const {
-            ok,
-            data: newSubmission,
-            message,
-        } = await postSubmission(exercise._id, { code: userSolution });
+        const [ok, newSubmission] = await postSubmission(userSolution);
         setIsLoading(false);
 
         if (ok && newSubmission) {
             setUserSubmission(newSubmission);
             if (newSubmission.correct) {
-                toastNotify("You got all creator's test cases correct!", 'success');
                 setShowSuccessModal(true);
             } else {
                 toastNotify(
                     `Submission status is incorrect. Debug your code and try again!`,
                 );
             }
-        } else {
-            toastNotify(`Oops, ${message}`, 'error');
         }
-    }, [exercise._id, userSolution]);
+    }, [postSubmission, userSolution]);
 
     // Restore previous user submission
     useEffect(() => {
