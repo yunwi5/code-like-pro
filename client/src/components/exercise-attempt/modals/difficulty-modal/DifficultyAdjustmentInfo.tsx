@@ -18,7 +18,8 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
         getAverageDifficultyByRatings(exercise);
     const { overallDifficulty, overallRatingRounded } = getOverallDifficulty(exercise);
 
-    const creatorDifficultyValue = mapDifficultyToNumericValue(exercise.difficulty);
+    const creatorDifficulty = exercise.difficulty;
+    const creatorDifficultyValue = mapDifficultyToNumericValue(creatorDifficulty);
 
     const content = (
         <div className="flex flex-col gap-2 w-[25rem] text-base normal-case">
@@ -41,7 +42,7 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
                         }}
                         className="font-semibold"
                     >
-                        {averageDifficulty}&nbsp;
+                        {creatorDifficulty}&nbsp;
                         <span className="text-base">
                             ({creatorDifficultyValue} / {MAX_DIFFICULTY_VALUE})
                         </span>
