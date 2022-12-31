@@ -6,7 +6,7 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import { ForumNav } from '../../components/forum';
 import PostCreationMain from '../../components/forum/post-creation/PostCreationMain';
 import { AppProperty } from '../../constants/app';
-import useForumPostQuery from '../../hooks/forum-queries/useForumPostQuery';
+import useForumPostQuery from '../../hooks/forum/useForumPostQuery';
 import { PostCreationContextProvider } from '../../store/context/PostCreationContext';
 import { toastNotify } from '../../utils/notification';
 

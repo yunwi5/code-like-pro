@@ -9,7 +9,7 @@ import {
 } from '../../assets/svg-icons/social-svgs';
 import HoverLabel from '../ui/tooltip/HoveringLabel';
 import { Logo } from '../../assets';
-import useWindowSize from '../../hooks/useWindowSize';
+import useWindowSize from '../../hooks/ui/useWindowSize';
 
 // Footer links do not have real links at the moment.
 // Main purpose is to avoid duplicated styles.

@@ -7,8 +7,8 @@ interface IVotingItem {
     postedAt: string; // ISO date
 }
 
-export function sortVotingItems(
-    comments: IVotingItem[],
+export function sortVotingItems<T extends IVotingItem>(
+    comments: T[],
     sortingKey: VotingItemSortingKey,
     direction: SortingDirection,
 ) {

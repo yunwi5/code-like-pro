@@ -1,21 +1,23 @@
 import React, { useMemo, useState } from 'react';
 
-import { postExerciseComment } from '../../../apis/exercise.api';
 import { useUserContext } from '../../../store/context/UserContext';
 import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
 import { IComment } from '../../../models/interfaces';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
-import { toastNotify } from '../../../utils/notification';
 import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import CommentForm from '../../ui/comments/CommentForm';
 import CommentList from '../../ui/lists/CommentList';
 import CommentSelectOptions from './CommentSelectOptions';
 import CommentSorter from '../../ui/sorting/VotingItemSorter';
 import ShowcaseLoader from '../ShowcaseLoader';
+import useExerciseCommentsMutation from '../../../hooks/comment/exercise-comments/useExerciseCommentsMutation';
 
 const ShowcaseDiscussions: React.FC = () => {
     const { userDetail } = useUserContext();
-    const { exercise, comments, commentsLoading, refetchQuery } = useShowcase();
+    const { exercise, comments, commentsLoading } = useShowcase();
+    const { postComment, updateComment, deleteComment } = useExerciseCommentsMutation(
+        exercise?._id || '',
+    );
 
     const [sortingState, setSortingState] = useState({
         key: VotingItemSortingKey.DATETIME,
@@ -25,18 +27,11 @@ const ShowcaseDiscussions: React.FC = () => {
 
     // Handle comment submission from the user.
     const handleSubmitComment = async (text: string) => {
-        // Send Http POST request to send the user comment to the server.
-        const newComment = { text }; // Comment only requires 'text' prop when sending it to the server.
         if (!exercise) return;
 
-        // Send Http POST request to add the user's comment to the server.
-        const { ok, message } = await postExerciseComment(exercise._id, newComment);
-
-        if (ok) toastNotify('Post comment!', 'success');
-        else toastNotify(`Oops, ${message}`, 'error');
-
-        // Refetch the comments data from the server as the comments should be updated with the new comment.
-        refetchQuery('comments');
+        // Send Http POST request to send the user comment to the server.
+        const newComment = { text };
+        postComment(newComment);
     };
 
     // If user choose 'My Comments' option, then only select the user's comments.
@@ -50,11 +45,11 @@ const ShowcaseDiscussions: React.FC = () => {
     // Whenver sorting state changes, sort the comments again.
     const sortedComments = useMemo(() => {
         // Pass sorting key and direction to sort the list of comments.
-        return sortVotingItems(
+        return sortVotingItems<IComment>(
             selectedComments,
             sortingState.key,
             sortingState.direction,
-        ).slice() as IComment[];
+        ).slice();
     }, [sortingState, selectedComments]);
 
     return (
@@ -84,7 +79,11 @@ const ShowcaseDiscussions: React.FC = () => {
             {commentsLoading ? (
                 <ShowcaseLoader />
             ) : (
-                <CommentList comments={sortedComments} />
+                <CommentList
+                    comments={sortedComments}
+                    onUpdateComment={updateComment}
+                    onDeleteComment={deleteComment}
+                />
             )}
         </div>
     );

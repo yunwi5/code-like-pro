@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getForumPostById } from '../../apis/forum.api';
 

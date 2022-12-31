@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { BsFillReplyFill } from 'react-icons/bs';
 
 import {
@@ -19,10 +19,12 @@ import ProfilePicture from '../user/ProfilePicture';
 
 interface Props {
     comment: IComment;
+    onUpdate?: (id: string, updateProp: { text: string }) => void;
+    onDelete?: (id: string) => void;
     onReply?: () => void;
 }
 
-const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
+const CommentCard: FC<Props> = ({ comment, onReply, onUpdate, onDelete }) => {
     const { userDetail } = useUserContext();
     const userId = userDetail?._id;
     const [votes, setVotes] = useState<IVote[]>(comment.votes);
@@ -59,12 +61,16 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
     };
 
     const handleDeleteComment = async () => {
-        const { ok } = await deleteComment(comment._id);
-        if (!ok)
-            toastNotify(
-                'Oops, something went wrong while deleting your comment...',
-                'error',
-            );
+        if (onDelete) {
+            onDelete(comment._id);
+        } else {
+            const { ok } = await deleteComment(comment._id);
+            if (!ok)
+                toastNotify(
+                    'Oops, something went wrong while deleting your comment...',
+                    'error',
+                );
+        }
     };
 
     // Check if the user is the author of the comment.
@@ -108,6 +114,7 @@ const CommentCard: React.FC<Props> = ({ comment, onReply }) => {
 
             <CommentEditModal
                 open={modal === 'edit'}
+                onUpdate={onUpdate}
                 onClose={() => setModal(null)}
                 comment={comment}
             />

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ForumNav } from '../../components/forum';
 import GlobalForumMain from '../../components/forum/global-forum/GlobalForumMain';
 import { AppProperty } from '../../constants/app';
-import useForumQuery from '../../hooks/forum-queries/useForumQuery';
+import useForumQuery from '../../hooks/forum/useForumQuery';
 import { forumActions } from '../../store/redux/forum-slice';
 import { useAppDispatch } from '../../store/redux/store';
 import { toastNotify } from '../../utils/notification';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useExerciseReportsQuery from '../../../hooks/exercise-queries/useExerciseReportsQuery';
+import useExerciseReportsQuery from '../../../hooks/exercise/useExerciseReportsQuery';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import ExerciseInfoNav from './layout/ExerciseInfoNav';
 import ExercisePrompt from './prompt/ExercisePrompt';

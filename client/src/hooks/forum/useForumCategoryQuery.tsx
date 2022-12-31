@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ForumCategory } from '../../models/enums';
 import { getForumPostsForCategory } from '../../apis/forum.api';

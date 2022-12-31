@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import MoonLoader from 'react-spinners/MoonLoader';
-import useForumPostQuery from '../../../hooks/forum-queries/useForumPostQuery';
+import useForumPostQuery from '../../../hooks/forum/useForumPostQuery';
 import { toastNotify } from '../../../utils/notification';
 import PostBody from './sections/PostBody';
 import PostComments from './sections/PostComments';
