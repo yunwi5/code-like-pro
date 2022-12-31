@@ -16,7 +16,7 @@ import {
 } from '../../../apis/exercise.api';
 import { useUserContext } from '../../../store/context/UserContext';
 import CommentCard from './CommentCard';
-import useShowcaseCommentQuery from '../../../hooks/exercise-queries/useShowcaseCommentQuery';
+import useShowcaseCommentQuery from '../../../hooks/showcase/useShowcaseCommentQuery';
 import CommentForm from '../comments/CommentForm';
 import { toastNotify } from '../../../utils/notification';
 import { useShowcase } from '../../../store/context/ShowcaseContext';

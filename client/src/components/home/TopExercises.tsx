@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import useExerciseTopQuery from '../../hooks/exercise-queries/useExerciseTopQuery';
+import useExerciseTopQuery from '../../hooks/exercise/useExerciseTopQuery';
 import ExerciseList from '../ui/lists/ExerciseList';
 import { IExerciseCard } from '../../models/interfaces';
 import { mapExercisesToExerciseCards } from '../../utils/exercise-utils/exercise';

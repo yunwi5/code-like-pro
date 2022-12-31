@@ -8,7 +8,7 @@ import { AppProperty } from '../../constants/app';
 import { IExerciseCard } from '../../models/interfaces';
 import { toastNotify } from '../../utils/notification';
 import { mapExercisesToExerciseCards } from '../../utils/exercise-utils/exercise';
-import useExerciseListQuery from '../../hooks/exercise-queries/useExerciseListQuery';
+import useExerciseListQuery from '../../hooks/exercise/useExerciseListQuery';
 
 const BrowsingPage: React.FC = () => {
     const navigate = useNavigate();

@@ -8,7 +8,7 @@ import useAuth from '../../hooks/useAuth';
 import { ExerciseCreationContextProvider } from '../../store/context/ExerciseCreationContext';
 import { toastNotify } from '../../utils/notification';
 import { ClipLoader } from 'react-spinners';
-import useExerciseQuery from '../../hooks/exercise-queries/useExerciseQuery';
+import useExerciseQuery from '../../hooks/exercise/useExerciseQuery';
 
 const ExerciseEditPage = () => {
     useAuth();

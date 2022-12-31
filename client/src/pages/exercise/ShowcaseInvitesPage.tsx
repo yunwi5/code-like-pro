@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppProperty } from '../../constants/app';
 import useAuth from '../../hooks/useAuth';
-import useExerciseListQuery from '../../hooks/exercise-queries/useExerciseListQuery';
+import useExerciseListQuery from '../../hooks/exercise/useExerciseListQuery';
 import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification';
 import ShowCaseInvites from '../../components/showcase-invites/ShowCaseInvites';
