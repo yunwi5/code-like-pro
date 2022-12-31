@@ -20,7 +20,7 @@ import ProfilePicture from '../user/ProfilePicture';
 interface Props {
     comment: IComment;
     onUpdate?: (id: string, updateProp: { text: string }) => void;
-    onDelete?: (id: string) => void;
+    onDelete?: (id: string) => Promise<void> | void;
     onReply?: () => void;
 }
 
@@ -62,7 +62,7 @@ const CommentCard: FC<Props> = ({ comment, onReply, onUpdate, onDelete }) => {
 
     const handleDeleteComment = async () => {
         if (onDelete) {
-            onDelete(comment._id);
+            await onDelete(comment._id);
         } else {
             const { ok } = await deleteComment(comment._id);
             if (!ok)

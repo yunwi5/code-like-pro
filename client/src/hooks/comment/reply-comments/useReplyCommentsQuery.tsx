@@ -13,6 +13,7 @@ function useReplyCommentsQuery(commentId: string, refetchInterval: number = 1000
         error,
     } = useQuery([commentQueryKey], () => getReplyComments(commentId), {
         refetchInterval,
+        enabled: !!commentId,
     });
     if (error) console.log(error);
 

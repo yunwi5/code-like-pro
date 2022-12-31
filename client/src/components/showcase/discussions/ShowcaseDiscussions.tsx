@@ -31,7 +31,7 @@ const ShowcaseDiscussions: React.FC = () => {
 
         // Send Http POST request to send the user comment to the server.
         const newComment = { text };
-        postComment(newComment);
+        await postComment(newComment);
     };
 
     // If user choose 'My Comments' option, then only select the user's comments.
