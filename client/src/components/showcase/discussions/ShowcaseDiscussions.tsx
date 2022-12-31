@@ -81,9 +81,11 @@ const ShowcaseDiscussions: React.FC = () => {
                 </h5>
             </div>
 
-            {commentsLoading && <ShowcaseLoader />}
-            {/* Render the list of comments with pagination. */}
-            <CommentList comments={sortedComments} />
+            {commentsLoading ? (
+                <ShowcaseLoader />
+            ) : (
+                <CommentList comments={sortedComments} />
+            )}
         </div>
     );
 };
