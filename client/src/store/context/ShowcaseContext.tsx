@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+
 import useExerciseCommentsQuery from '../../hooks/comment/exercise-comments/useExerciseCommentsQuery';
 import useExerciseShowcaseQuery from '../../hooks/showcase/exercise-showcases/useExerciseShowcaseQuery';
 import {
@@ -8,8 +9,6 @@ import {
     IUserSubmissionPopulated,
 } from '../../models/interfaces';
 
-type QueryOption = 'comments' | 'showcases';
-
 interface IShowcaseContext {
     exercise: IExerciseWithId | null;
     userSubmission: IUserSubmissionPopulated | null;
@@ -17,7 +16,6 @@ interface IShowcaseContext {
     showcases: IShowCase[];
     commentsLoading: boolean;
     showcasesLoading: boolean;
-    refetchQuery: (option: QueryOption) => void;
 }
 
 const ShowcaseContext = React.createContext<IShowcaseContext>({
@@ -27,7 +25,6 @@ const ShowcaseContext = React.createContext<IShowcaseContext>({
     showcases: [],
     commentsLoading: false,
     showcasesLoading: false,
-    refetchQuery: () => {},
 });
 
 // Custom hook to access shwocase context data dirctly.
@@ -44,24 +41,14 @@ export const ShowcaseContextProvider: React.FC<Props> = ({
     userSubmission = null,
     children,
 }) => {
-    // Use React-Query to fetch the comments data of this exercise.
-    const {
-        comments,
-        refetch: refetchComments,
-        isLoading: commentsLoading,
-    } = useExerciseCommentsQuery(exercise._id, 800);
+    const { comments, isLoading: commentsLoading } = useExerciseCommentsQuery(
+        exercise._id,
+        800,
+    );
 
-    const {
-        showcases,
-        refetch: refetchShowcases,
-        isLoading: showcasesLoading,
-    } = useExerciseShowcaseQuery(exercise._id);
-
-    // Refetch comment or showcase data from the server using custom query hooks.
-    const refetchQuery = (option: QueryOption) => {
-        if (option === 'comments') refetchComments();
-        if (option === 'showcases') refetchShowcases();
-    };
+    const { showcases, isLoading: showcasesLoading } = useExerciseShowcaseQuery(
+        exercise._id,
+    );
 
     const value = {
         exercise,
@@ -70,7 +57,6 @@ export const ShowcaseContextProvider: React.FC<Props> = ({
         showcases,
         commentsLoading,
         showcasesLoading,
-        refetchQuery,
     };
 
     return <ShowcaseContext.Provider value={value}>{children}</ShowcaseContext.Provider>;
