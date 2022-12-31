@@ -10,7 +10,7 @@ import CommentList from '../../ui/lists/CommentList';
 import CommentSelectOptions from './CommentSelectOptions';
 import CommentSorter from '../../ui/sorting/VotingItemSorter';
 import ShowcaseLoader from '../ShowcaseLoader';
-import useExerciseCommentsMutation from '../../../hooks/exercise/exercise-comments/useExerciseCommentsMutation';
+import useExerciseCommentsMutation from '../../../hooks/comment/exercise-comments/useExerciseCommentsMutation';
 
 const ShowcaseDiscussions: React.FC = () => {
     const { userDetail } = useUserContext();

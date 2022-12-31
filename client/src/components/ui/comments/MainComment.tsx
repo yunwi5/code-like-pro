@@ -7,6 +7,7 @@ import { IComment } from '../../../models/interfaces';
 import CommentCard from '../cards/CommentCard';
 import CommentForm from './CommentForm';
 import { toastNotify } from '../../../utils/notification';
+import useReplyCommentsQuery from '../../../hooks/comment/reply-comments/useReplyCommentsQuery';
 
 interface Props {
     comment: IComment;
@@ -17,22 +18,14 @@ interface Props {
 const MainComment: React.FC<Props> = ({ comment, onUpdate, onDelete }) => {
     const [showReplyComments, setShowReplyComments] = useState(false);
 
-    // Fetch reply (sub) comments.
-    const commentKey = `comment-${comment._id}`;
-    const { data, error } = useQuery(
-        [commentKey],
-        () => getReplyComments(comment._id).then((res) => res.data),
-        { refetchInterval: 1000 },
-    );
-    if (error) console.log(error);
-    const replyComments = data || [];
+    const { replyComments } = useReplyCommentsQuery(comment._id);
 
     // Handle adding reply comments.
     const handleSubmitReply = async (text: string) => {
         // Send Http POST request to send the new reply comment to the server.
         const newComment = { text };
 
-        const { ok, data, message } = await postReplyComment(comment._id, newComment);
+        const { ok, message } = await postReplyComment(comment._id, newComment);
         if (ok) toastNotify('Posted your reply!', 'success');
         else toastNotify(message || 'Something went wrong...', 'error');
     };
