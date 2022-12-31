@@ -90,7 +90,7 @@ export async function likeExerciseRequest(id: string) {
 }
 
 // POST: post user showcase solution
-type ShowcaseProps = { code: string; description: string };
+export type ShowcaseProps = { code: string; description: string };
 export async function postExerciseShowCase(id: string, showcaseProps: ShowcaseProps) {
     return await postRequest<IShowCase>({
         url: `${EXERCISE_API_DOMAIN}/${id}/showcase`,

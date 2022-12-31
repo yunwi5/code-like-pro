@@ -1,11 +1,11 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AppProperty } from '../constants/app';
 import { authConfig } from './config';
 
 const api = axios.create({
     baseURL: `${AppProperty.SERVER_DOMAIN}/api`,
 });
-    
+
 // Request params for GET & DELETE requests
 type ReqParams = { url: string; headers?: AxiosRequestConfig };
 // Request params for POST &  PUT & PATCH requests
@@ -16,7 +16,7 @@ export async function getRequest<T>({ url }: ReqParams) {
     try {
         const response = await api.get<T>(url, authConfig);
         data = response.data;
-        return { ok: true, data, response };
+        return { ok: true, data, status: response.status };
     } catch (err) {
         // 400 ~ 500
         let message = extractErrorMessage(err);
@@ -27,11 +27,9 @@ export async function getRequest<T>({ url }: ReqParams) {
 
 // There can be more params in the future.
 export async function postRequest<T>({ url, body }: ReqBodyParams) {
-    let data: T | null = null;
     try {
         const response = await api.post<T>(url, body, authConfig);
-        data = response.data;
-        return { ok: true, data };
+        return { ok: true, data: response.data, status: response.status };
     } catch (err) {
         let message = extractErrorMessage(err);
         console.log(message);
@@ -44,7 +42,7 @@ export async function putRequest<T>({ url, body }: ReqBodyParams) {
     try {
         let response = await api.put<T>(url, body, authConfig);
         data = response.data;
-        return { ok: true, data };
+        return { ok: true, data, status: response.status };
     } catch (err) {
         let message = extractErrorMessage(err);
         console.log(message);
@@ -57,7 +55,7 @@ export async function patchRequest<T>({ url, body }: ReqBodyParams) {
     try {
         let response = await api.patch<T>(url, body, authConfig);
         data = response.data;
-        return { ok: true, data };
+        return { ok: true, data, status: response.status };
     } catch (err) {
         let message = extractErrorMessage(err);
         console.log(message);
@@ -70,7 +68,7 @@ export async function deleteRequest<T>({ url }: ReqParams) {
     try {
         let response = await api.delete<T>(url, authConfig);
         data = response.data;
-        return { ok: true, data };
+        return { ok: true, data, status: response.status };
     } catch (err) {
         let message = extractErrorMessage(err);
         console.log(message);

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { FaLaptopCode } from 'react-icons/fa';
-import { postExerciseShowCase } from '../../../apis/exercise.api';
 import useBadgeQualification from '../../../hooks/badges/useBadgeQualification';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
-import { toastNotify } from '../../../utils/notification';
 import CodeEditor from '../../ui/editor/CodeEditor';
 import CustomInput from '../../ui/inputs/CustomInput';
 import FormModal from '../../ui/modals/variations/FormModal';
+import useExerciseShowcasesMutation from '../../../hooks/showcase/exercise-showcases/useExerciseShowcasesMutation';
 
 interface Props {
     visible: boolean;
@@ -14,8 +13,11 @@ interface Props {
 }
 
 const ShowcasePostModal: React.FC<Props> = ({ visible, onClose }) => {
-    const { userSubmission, exercise, refetchQuery } = useShowcase();
+    const { userSubmission, exercise } = useShowcase();
+
+    const { postShowcase } = useExerciseShowcasesMutation(exercise?._id || '');
     const { qualifyShowcaseBadges } = useBadgeQualification();
+
     const [description, setDescription] = useState('');
     const [error, setError] = useState<null | string>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -33,20 +35,10 @@ const ShowcasePostModal: React.FC<Props> = ({ visible, onClose }) => {
         };
 
         setIsLoading(true);
-        // Send Http POST request to add user showcase.
-        const { ok, data, message } = await postExerciseShowCase(
-            exercise._id,
-            showCaseProps,
-        );
+        const ok = await postShowcase(showCaseProps);
         if (ok) {
-            toastNotify('Your showcase was posted!', 'success');
-            // Refetch showcases with update datat
-            refetchQuery('showcases');
-            // Try showcase badges qualification (if new badge requirements are met)
             qualifyShowcaseBadges();
             onClose();
-        } else {
-            toastNotify(`Sorry there is an error: ${message}.`, 'error');
         }
         setIsLoading(false);
     };
