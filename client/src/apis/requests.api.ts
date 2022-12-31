@@ -1,9 +1,11 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { AppProperty } from '../constants/app';
 import { authConfig } from './config';
 
-// Helper functions for HTTP requests that abstract the request processes.
-// Reduce the amount of code for writing http requst.
-
+const api = axios.create({
+    baseURL: `${AppProperty.SERVER_DOMAIN}/api`,
+});
+    
 // Request params for GET & DELETE requests
 type ReqParams = { url: string; headers?: AxiosRequestConfig };
 // Request params for POST &  PUT & PATCH requests
@@ -12,7 +14,7 @@ type ReqBodyParams = { url: string; body: any; headers?: AxiosRequestConfig };
 export async function getRequest<T>({ url }: ReqParams) {
     let data: T | null = null;
     try {
-        const response = await axios.get<T>(url, authConfig);
+        const response = await api.get<T>(url, authConfig);
         data = response.data;
         return { ok: true, data, response };
     } catch (err) {
@@ -27,11 +29,10 @@ export async function getRequest<T>({ url }: ReqParams) {
 export async function postRequest<T>({ url, body }: ReqBodyParams) {
     let data: T | null = null;
     try {
-        const response = await axios.post<T>(url, body, authConfig);
+        const response = await api.post<T>(url, body, authConfig);
         data = response.data;
         return { ok: true, data };
     } catch (err) {
-        // If the status is 400~500 range, the returned data from the server may contain message
         let message = extractErrorMessage(err);
         console.log(message);
         return { ok: false, message };
@@ -41,7 +42,7 @@ export async function postRequest<T>({ url, body }: ReqBodyParams) {
 export async function putRequest<T>({ url, body }: ReqBodyParams) {
     let data: T | null = null;
     try {
-        let response = await axios.put<T>(url, body, authConfig);
+        let response = await api.put<T>(url, body, authConfig);
         data = response.data;
         return { ok: true, data };
     } catch (err) {
@@ -54,7 +55,7 @@ export async function putRequest<T>({ url, body }: ReqBodyParams) {
 export async function patchRequest<T>({ url, body }: ReqBodyParams) {
     let data: T | null = null;
     try {
-        let response = await axios.patch<T>(url, body, authConfig);
+        let response = await api.patch<T>(url, body, authConfig);
         data = response.data;
         return { ok: true, data };
     } catch (err) {
@@ -67,7 +68,7 @@ export async function patchRequest<T>({ url, body }: ReqBodyParams) {
 export async function deleteRequest<T>({ url }: ReqParams) {
     let data: T | null = null;
     try {
-        let response = await axios.delete<T>(url, authConfig);
+        let response = await api.delete<T>(url, authConfig);
         data = response.data;
         return { ok: true, data };
     } catch (err) {

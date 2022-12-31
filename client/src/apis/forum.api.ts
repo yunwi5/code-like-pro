@@ -1,4 +1,3 @@
-import { AppProperty } from '../constants/app';
 import { ForumCategory } from '../models/enums';
 import {
     IForumPostProps,
@@ -9,7 +8,7 @@ import {
 } from '../models/interfaces';
 import { deleteRequest, getRequest, patchRequest, postRequest } from './requests.api';
 
-const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/forumPost`;
+const API_DOMAIN = '/forumPost';
 
 export function postForumPost(newPost: IForumPostProps) {
     return postRequest<IForumPost>({ url: `${API_DOMAIN}`, body: newPost });
@@ -45,7 +44,7 @@ export async function postForumPostComment(id: string, comment: { text: string }
 // POST vote for forum post
 export async function postForumPostVote(id: string, vote: { type: 'up' | 'down' }) {
     return await postRequest<IVote>({
-        url: `${AppProperty.SERVER_DOMAIN}/api/forumPost/${id}/vote`,
+        url: `${API_DOMAIN}/${id}/vote`,
         body: vote,
     });
 }
@@ -53,6 +52,6 @@ export async function postForumPostVote(id: string, vote: { type: 'up' | 'down' 
 // DELETE vote for forum post
 export function deleteForumPostVote(postId: string) {
     return deleteRequest<IVote>({
-        url: `${AppProperty.SERVER_DOMAIN}/api/forumPost/${postId}/vote`,
+        url: `${API_DOMAIN}/${postId}/vote`,
     });
 }

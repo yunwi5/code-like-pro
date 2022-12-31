@@ -1,8 +1,7 @@
-import { AppProperty } from '../constants/app';
 import { IUser } from '../models/interfaces/user/IUser';
 import { getRequest, postRequest } from './requests.api';
 
-const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/auth`;
+const API_DOMAIN = '/auth';
 
 type RegisterProp = { email: string; name: string; password: string };
 export async function registerRequest(body: RegisterProp) {

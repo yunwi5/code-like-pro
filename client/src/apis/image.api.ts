@@ -1,7 +1,6 @@
-import { AppProperty } from '../constants/app';
 import { postRequest } from './requests.api';
 
-const API_DOMAIN = `${AppProperty.SERVER_DOMAIN}/api/image`;
+const API_DOMAIN = `/image`;
 
 export function postExercisePromptImage(body: { image: string; exerciseId?: string }) {
     return postRequest<any>({ url: `${API_DOMAIN}/exercise`, body });
