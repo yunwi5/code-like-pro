@@ -18,15 +18,11 @@ export interface IForumPost extends IForumPostProps {
     _id: string;
     createdAt: string; // ISO
     author: { _id: string; name: string; pictureUrl: string };
-    comments: string[];
+    comments: string[] | IComment[]; // type does not matter here
     votes: IVote[];
 }
 
 // Comment populated
-export interface IForumPostPopulated extends IForumPostProps {
-    _id: string;
-    createdAt: string; // ISO
-    author: { _id: string; name: string; pictureUrl: string };
+export interface IForumPostPopulated extends IForumPost {
     comments: IComment[];
-    votes: IVote[];
 }
