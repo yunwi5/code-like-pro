@@ -11,7 +11,7 @@ import { IForumPostPopulated, IVote } from '../../../../models/interfaces';
 import { useUserContext } from '../../../../store/context/UserContext';
 import PostShare from './PostShare';
 
-const PostVotes: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
+const PostViewerActions: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     const navigate = useNavigate();
     const { userDetail } = useUserContext();
     const userId = userDetail?._id;
@@ -100,4 +100,4 @@ const VoteIcon: React.FC<VoteIconProps> = ({ voted, type, voteCount, onClick }) 
     </div>
 );
 
-export default PostVotes;
+export default PostViewerActions;
