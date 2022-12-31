@@ -1,9 +1,9 @@
 import React from 'react';
 import { RiEmotionSadLine } from 'react-icons/ri';
 
-type Props = { message: string; className: string };
+type Props = { message: string; className?: string };
 
-const EmptyMessage: React.FC<Props> = React.memo(({ message, className }) => (
+const EmptyMessage: React.FC<Props> = React.memo(({ message, className = '' }) => (
     <h5
         className={`flex-center gap-2 mt-12 text-xl capitalize font-semibold ${className}`}
     >
