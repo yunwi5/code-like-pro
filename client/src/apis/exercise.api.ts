@@ -83,7 +83,7 @@ export async function getExerciseReports(id: string) {
 }
 
 export async function likeExerciseRequest(id: string) {
-    return await postRequest<IExercise>({
+    return await postRequest<IExerciseWithId>({
         url: `${EXERCISE_API_DOMAIN}/${id}/like`,
         body: {},
     });

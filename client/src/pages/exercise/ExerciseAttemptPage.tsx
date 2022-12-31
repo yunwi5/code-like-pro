@@ -4,12 +4,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 import useAuth from '../../hooks/useAuth';
+import useExerciseQuery from '../../hooks/exercise/exercise/useExerciseQuery';
 import { useUserContext } from '../../store/context/UserContext';
 import { AppProperty } from '../../constants/app';
 import { ExerciseAttemptCtxProvider } from '../../store/context/ExerciseAttemptContext';
 import { toastNotify } from '../../utils/notification';
 import ExerciseAttemptMain from '../../components/exercise-attempt/ExerciseAttemptMain';
-import useExerciseQuery from '../../hooks/exercise/useExerciseQuery';
 
 const ExerciseAttemptPage: React.FC = () => {
     useAuth();

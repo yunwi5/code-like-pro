@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 
 import useAuth from '../../hooks/useAuth';
-import useExerciseQuery from '../../hooks/exercise/useExerciseQuery';
+import useExerciseQuery from '../../hooks/exercise/exercise/useExerciseQuery';
 import ShowcaseMain from '../../components/showcase/ShowcaseMain';
 import { AppProperty } from '../../constants/app';
 import { IUserSubmissionPopulated } from '../../models/interfaces';

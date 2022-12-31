@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import { likeExerciseRequest } from '../../../../apis/exercise.api';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../../store/context/UserContext';
 import { getLanguageIcon, prettierLanguageName } from '../../../../utils/language';
@@ -8,22 +7,22 @@ import DifficultyRatingButton from './DifficultyRatingButton';
 import ExerciseSettings from './ExerciseSettings';
 import ExerciseFavorite from './ExerciseFavorite';
 import ExerciseReportButton from './ExerciseReportButton';
+import useExerciseMutation from '../../../../hooks/exercise/exercise/useExerciseMutation';
 
 // Control header that let users set language settings, favorite and report functionalities.
 const EditorControlBar: React.FC = () => {
     const { userDetail } = useUserContext();
     const userId = userDetail?._id;
-    const { exercise, refetchExercise } = useExerciseAttemptCtx();
+
+    const { exercise } = useExerciseAttemptCtx();
+    const { postExerciseLike } = useExerciseMutation(exercise?._id || '');
 
     // State for whether the user liked the exercise or not.
     const [liked, setLiked] = useState(false);
 
     const handleLiked = async () => {
-        // Needs to send the request to the server that the user liked it or not.
         setLiked((ps) => !ps);
-        if (exercise == null) return;
-        await likeExerciseRequest(exercise._id);
-        refetchExercise();
+        await postExerciseLike();
     };
 
     // Set the user liked status initially based on the previous liked exercises of the user.
