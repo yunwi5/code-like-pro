@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { FaBug } from 'react-icons/fa';
 
+import useExerciseReportsMutation from '../../../hooks/exercise/exercise-reports/useExerciseReportsMutation';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CustomTextArea from '../../ui/inputs/CustomTextArea';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import { postExerciseReport } from '../../../apis/exercise.api';
-import { toastNotify } from '../../../utils/notification';
 import FormModal from '../../ui/modals/variations/FormModal';
 
 const IssueCategories = [
+    'Bugs In General',
     'Incorrect Difficulty',
     'Incorrect Topic',
     'Bugs In Test Cases',
@@ -18,13 +18,16 @@ const IssueCategories = [
     'Others',
 ];
 
+const DEFAULT_CATEGORY = 'Bugs In General';
+
 const IssueReportModal: React.FC<{ visible: boolean; onClose: () => void }> = ({
     visible,
     onClose,
 }) => {
-    const { exercise, refetchExercise } = useExerciseAttemptCtx();
+    const { exercise } = useExerciseAttemptCtx();
+    const { postReport } = useExerciseReportsMutation(exercise?._id);
 
-    const [issueCategory, setIssueCategory] = useState('Incorrect Difficulty'); // Incorrect Difficulty by default
+    const [issueCategory, setIssueCategory] = useState(DEFAULT_CATEGORY); // Incorrect Difficulty by default
     const [description, setDescription] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -37,19 +40,18 @@ const IssueReportModal: React.FC<{ visible: boolean; onClose: () => void }> = ({
         }
 
         setIsLoading(true);
-        let { ok, data, message } = await postExerciseReport(exercise._id, {
+        const postError = await postReport({
             category: issueCategory,
             description,
         });
-        refetchExercise();
         setIsLoading(false);
-        if (ok) {
-            toastNotify('Sending report successful!', 'success');
+
+        if (!postError) {
             onClose();
+            setIssueCategory(DEFAULT_CATEGORY);
+            setDescription('');
         } else {
-            message = message || 'Something went wrong...';
-            setError(message);
-            toastNotify(message, 'error');
+            setError(postError);
         }
     };
 

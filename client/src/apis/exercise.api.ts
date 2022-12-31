@@ -68,7 +68,7 @@ export async function getExerciseSubmissions(id: string) {
     });
 }
 
-type ReportProps = { category: string; description: string };
+export type ReportProps = { category: string; description: string };
 export async function postExerciseReport(id: string, reportBody: ReportProps) {
     return await postRequest<IIssueReport>({
         url: `${EXERCISE_API_DOMAIN}/${id}/report`,
