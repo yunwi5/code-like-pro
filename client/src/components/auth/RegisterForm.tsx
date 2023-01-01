@@ -7,23 +7,32 @@ import { toastNotify } from '../../utils/notification';
 import {
     invalidateEmail,
     invalidatePassword,
+    invalidatePasswordConfirm,
     invalidateUsername,
 } from '../../utils/string-utils/validation';
 import AuthCard from './AuthCard';
 
-type IRegisterState = { email: string; password: string; name: string };
+type IRegisterState = {
+    email: string;
+    name: string;
+    password: string;
+    passwordConfirm: string;
+};
+
 const RegisterForm = () => {
     const navigate = useNavigate();
     const { storeJwtData } = useUserContext();
     const [registerState, setRegisterState] = useState({
         email: '',
-        password: '',
         name: '',
+        password: '',
+        passwordConfirm: '',
     });
     const [errorState, setErrorState] = useState({
         email: '',
-        password: '',
         name: '',
+        password: '',
+        passwordConfirm: '',
         overall: '',
     });
     const [doLogin, setDoLogin] = useState(true);
@@ -35,11 +44,17 @@ const RegisterForm = () => {
     // Handle form validation
     const doValidation = (state: IRegisterState, key: string) => {
         if (key === 'email' || key === 'all')
-            errorState.email = invalidateEmail(state.email) || '';
+            errorState.email = invalidateEmail(state.email);
         if (key === 'name' || key === 'all')
-            errorState.name = invalidateUsername(state.name) || '';
+            errorState.name = invalidateUsername(state.name);
         if (key === 'password' || key === 'all')
-            errorState.password = invalidatePassword(state.password) || '';
+            errorState.password = invalidatePassword(state.password);
+        if (key === 'passwordConfirm' || key === 'all')
+            errorState.passwordConfirm = invalidatePasswordConfirm(
+                state.password,
+                state.passwordConfirm,
+            );
+
         setErrorState({ ...errorState, overall: '' });
         return errorState;
     };
