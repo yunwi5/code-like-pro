@@ -1,10 +1,11 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getForumPostById } from '../../apis/forum.api';
+import { getForumPostById } from '../../../apis/forum.api';
+import { getForumPostKey } from '../keys';
 
 function useForumPostQuery(postId: string, refetchInterval?: number) {
     const queryClient = useQueryClient();
 
-    const postQueryKey = `foum-post-${postId}`;
+    const postQueryKey = getForumPostKey(postId);
     const { data: response, isLoading } = useQuery(
         [postQueryKey],
         () => getForumPostById(postId),

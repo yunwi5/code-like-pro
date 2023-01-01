@@ -9,8 +9,8 @@ import useReplyCommentsMutation from '../../../hooks/comment/reply-comments/useR
 
 interface Props {
     comment: IComment;
-    onUpdate?: (id: string, updateProp: { text: string }) => void;
-    onDelete?: (id: string) => void;
+    onUpdate: (id: string, updateProp: { text: string }) => void;
+    onDelete: (id: string) => void;
 }
 
 const MainComment: React.FC<Props> = ({ comment, onUpdate, onDelete }) => {

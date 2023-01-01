@@ -23,34 +23,37 @@ function useShowcaseCommentsMutation(showcaseId: string) {
         } = await postShowcaseComment(showcaseId, commentProp);
 
         if (ok && newComment) {
-            toastNotify('Post comment!', 'success');
+            toastNotify('Post showcase comment!', 'success');
             addItemToCache(newComment);
         } else {
             toastNotify(`Oops, ${message}`, 'error');
         }
+
+        refetch();
     };
 
     const updateComment = async (commentId: string, updateProp: CommentProp) => {
-        const { ok, data: updatedComment } = await CommentAPI.patchComment(
-            commentId,
-            updateProp,
-        );
+        const {
+            ok,
+            message,
+            data: updatedComment,
+        } = await CommentAPI.patchComment(commentId, updateProp);
 
         if (ok && updatedComment) {
             updateItemInCache(updatedComment);
         } else {
-            toastNotify('Oops, something went wrong...', 'error');
+            toastNotify(`Oops, ${message}`, 'error');
         }
 
         refetch();
     };
 
     const deleteComment = async (commentId: string) => {
-        const { ok } = await CommentAPI.deleteComment(commentId);
+        const { ok, message } = await CommentAPI.deleteComment(commentId);
         if (ok) {
             deleteItemInCache(commentId);
         } else {
-            toastNotify('Oops, something went wrong...', 'error');
+            toastNotify(`Oops, ${message}`, 'error');
         }
 
         refetch();
