@@ -55,7 +55,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         const { ok, data } = await getLoginSuccess();
         setUser(() => {
             setIsLoading(false);
-            if (ok && data) return data.user;
+            if (ok && data) return data;
             return null;
         });
     }, []);
