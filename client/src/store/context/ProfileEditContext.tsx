@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
+
+import useUserDetailMutation from '../../hooks/user/user-detail/useUserDetailMutation';
 import { deleteImageByUrl, postUserImage } from '../../apis/image.api';
-import { patchUserDetail } from '../../apis/user.api';
 import { isAvatarImage } from '../../utils/image';
 import { toastNotify } from '../../utils/notification';
 import { useUserContext } from './UserContext';
@@ -44,7 +45,9 @@ export const useProfileEditContext = () => useContext(ProfileEditContext);
 export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
-    const { userDetail, refetchDetail } = useUserContext();
+    const { userDetail } = useUserContext();
+    const { updateUserDetail } = useUserDetailMutation(userDetail?._id || '');
+
     const [isLoading, setIsLoading] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -84,17 +87,11 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
         }
 
         // Send some HTTP Request to edit the profile.
-        const { ok } = await patchUserDetail({
+        await updateUserDetail({
             name: profileName,
             pictureUrl: imageToUpload,
             description,
         });
-        if (ok) {
-            toastNotify('Profile updated!', 'success');
-            refetchDetail();
-        } else
-            toastNotify('Something went wrong while updating your profile...', 'error');
-
         setIsLoading(false);
     };
 
@@ -104,6 +101,7 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
         if (!userDetail) return;
         setProfileName(userDetail.name);
         setDescription(userDetail.description);
+
         if (userDetail.pictureUrl) setPicture(userDetail.pictureUrl);
         setPreviewSource(null);
     };

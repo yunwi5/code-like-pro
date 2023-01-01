@@ -1,8 +1,8 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import useUserQuery from '../../hooks/user/user-detail/useUserDetailQuery';
 import { getLoginSuccess, loginRequest, logoutRequest } from '../../apis/auth.api';
-import useUserQuery from '../../hooks/user/useUserDetailQuery';
 import { IUser, IUserContext } from '../../models/interfaces';
 import { createSubmissionMap } from '../../utils/user-submission';
 

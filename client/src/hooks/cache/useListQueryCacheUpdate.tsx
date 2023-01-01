@@ -7,7 +7,7 @@ function useListQueryCacheUpdate<T extends ObjectWithId>(queryKey: string) {
     const queryClient = useQueryClient();
 
     const addItemToCache = (newItem: T) => {
-        queryClient.setQueriesData([queryKey], (oldData: { data: T[] } | undefined) => {
+        queryClient.setQueryData([queryKey], (oldData: { data: T[] } | undefined) => {
             if (!oldData) return oldData;
 
             const newItems = [...oldData.data, newItem];

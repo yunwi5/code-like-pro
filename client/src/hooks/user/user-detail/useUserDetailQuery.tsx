@@ -1,12 +1,15 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getUserDetail } from '../../apis/user.api';
+import { getUserDetail } from '../../../apis/user.api';
+import { getUserDetailKey } from '../keys';
 
 function useUserDetailQuery(userId: string | undefined, refetchInterval?: number) {
     const queryClient = useQueryClient();
 
+    const userQueryKey = getUserDetailKey(userId || '');
+
     // Fetch user detail with ReactQuery only if the user is authenticated and user state is not null.
     const { data: userDetail, error } = useQuery(
-        ['user-detail', { id: userId }],
+        [userQueryKey],
         () => getUserDetail(userId || '').then((res) => res.data),
         {
             enabled: !!userId,
@@ -15,7 +18,7 @@ function useUserDetailQuery(userId: string | undefined, refetchInterval?: number
     );
 
     const refetchDetail = () => {
-        queryClient.refetchQueries([['user-detail', { id: userId }]]);
+        queryClient.refetchQueries([userQueryKey]);
     };
 
     if (error) console.log(error);

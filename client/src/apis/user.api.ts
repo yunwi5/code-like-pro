@@ -1,4 +1,4 @@
-import { IUserDetail, IUserInfo } from '../models/interfaces';
+import { IUser, IUserDetail, IUserInfo } from '../models/interfaces';
 import { getRequest, patchRequest } from './requests.api';
 
 const API_DOMAIN = '/user';
@@ -13,7 +13,7 @@ export function getUserInfo(userId: string) {
     return getRequest<IUserInfo>({ url: `${API_DOMAIN}/${userId}` });
 }
 
-type PatchBody = { name: string; pictureUrl: string; description: string };
-export async function patchUserDetail(body: PatchBody) {
-    return await patchRequest({ url: API_DOMAIN, body });
+export type UserDetailProps = { name: string; pictureUrl: string; description: string };
+export async function patchUserDetail(body: UserDetailProps) {
+    return await patchRequest<IUser>({ url: API_DOMAIN, body });
 }
