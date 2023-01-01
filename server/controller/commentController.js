@@ -56,12 +56,15 @@ const patchComment = async (req, res) => {
     const { text } = req.body;
 
     try {
-        const comment = await Comment.findById(commentId);
+        const comment = await Comment.findById(commentId).populate({
+            path: 'user',
+            select: ['name', 'pictureUrl'],
+        });
         if (comment == null)
             return res.status(404).json({ message: 'Comment not found' });
 
         // If the user is not the author of the comment, do not authorize the operation.
-        if (comment.user.toString() !== req.user._id.toString()) {
+        if (comment.user._id.toString() !== req.user._id.toString()) {
             return res
                 .status(401)
                 .json({ message: 'You are not the author of the comment' });
