@@ -12,8 +12,6 @@ export const AppProperty = {
     GOOGLE_CLIENT_ID: import.meta.env.VITE_GOOGLE_CLIENT_ID,
 };
 
-if (AppProperty.GOOGLE_CLIENT_ID) {
-    console.log('Google client ID is VALID');
-} else {
-    console.log('Google client ID is EMPTY!');
+if (!AppProperty.GOOGLE_CLIENT_ID) {
+    console.error('Google client ID is EMPTY!');
 }

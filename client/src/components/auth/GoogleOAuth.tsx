@@ -42,7 +42,7 @@ const GoogleOAuth = () => {
             <Button type="button" className="btn-social w-full">
                 <div className="flex align-center justify-between">
                     <div className="w-[25px]"></div>
-                    Sign in with Google
+                    Continue with Google
                     <GoogleIcon height="25" width="25" />
                 </div>
             </Button>
