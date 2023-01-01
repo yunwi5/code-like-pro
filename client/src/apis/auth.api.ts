@@ -1,21 +1,17 @@
 import { CredentialResponse } from '@react-oauth/google';
-import jwtDecode from 'jwt-decode';
 import { getRequest, postRequest } from './requests.api';
 import { IUser } from '../models/interfaces/user/IUser';
-import { IGoogleCredential } from '../models/interfaces';
 
 const API_DOMAIN = '/auth';
 
 export type AuthResponseData = { access_token: string; user: IUser };
 
 export const createOrGetGoogleUser = async (response: CredentialResponse) => {
-    const googleCredential = jwtDecode<IGoogleCredential>(response.credential || '');
-    console.log('select_by', response.select_by);
-    console.log(googleCredential);
+    if (!response.credential) return { ok: false, message: 'No credentials found' };
 
     return await postRequest<AuthResponseData>({
         url: `${API_DOMAIN}/google`,
-        body: googleCredential,
+        body: { credential: response.credential },
     });
 };
 

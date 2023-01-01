@@ -11,9 +11,10 @@ const ensureAuthenticated = (req, res, next) => {
             console.log('decodedData:', decodedData);
 
             const user = {
-                _id: decodedData.id,
+                _id: decodedData._id,
                 name: decodedData.name,
                 email: decodedData.email,
+                pictureUrl: decodedData.pictureUrl,
             };
             req.user = user;
         } else {

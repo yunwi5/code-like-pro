@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const jwtDecode = require('jwt-decode');
 
 const User = require('../../models/User');
 const keys = require('../../config/keys');
@@ -7,9 +8,10 @@ const keys = require('../../config/keys');
 const signJwtToken = (user) => {
     return jwt.sign(
         {
-            id: user._id,
+            _id: user._id,
             email: user.email,
             name: user.name,
+            pictureUrl: user.pictureUrl || '',
         },
         keys.JwtSecret,
         { expiresIn: '1h' },
@@ -17,11 +19,8 @@ const signJwtToken = (user) => {
 };
 
 const postGoogleAuth = async (req, res) => {
-    // {name: string, email: string, sub: string, picture: string, email_verified: boolean}
-    const googleCredentials = req.body;
-
-    // better to decode the credential on the backend for security
-    const { name, email, sub, picture, email_verified } = googleCredentials;
+    const { credential } = req.body;
+    const { name, email, sub, picture, email_verified } = jwtDecode(credential);
 
     if (!email_verified) return res.status(403).json({ message: 'Email not verified' });
 
@@ -65,18 +64,6 @@ const postLogin = async (req, res) => {
     }
 };
 
-// Authentication itself is done by the passport middleware
-// Only need to find the user that matches this email
-// const postLogin = async (req, res) => {
-//     const { email } = req.body;
-
-//     const user = await User.findOne({ email });
-//     const userToReturn = getUserToReturn(user);
-
-//     return res.status(200).json(userToReturn);
-// };
-
-// Incoming request data validation is done by the middleware.
 const postSignUp = async (req, res) => {
     const { email, name, password } = req.body;
 
@@ -90,7 +77,6 @@ const postSignUp = async (req, res) => {
     }
 
     // encrypt password
-    // generate salt with 10
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
 
@@ -102,27 +88,11 @@ const postSignUp = async (req, res) => {
     res.status(201).json({ access_token: token, user: getUserToReturn(newUser) });
 };
 
-// const getLogout = (req, res, next) => {
-//     // logout function now takes callback function
-//     req.logout((err) => {
-//         if (err) next(err);
-//         res.status(200).json({ message: 'Logout successful' });
-//     });
-// };
-
 const getAuthSuccess = (req, res) => {
     console.log('req.user:', req.user);
 
     res.status(200).json({ user: req.user });
 };
-
-// const getAuthFailure = (req, res) => {
-//     const statusCode = req.statusCode ?? 401;
-//     res.status(statusCode).json({
-//         success: false,
-//         message: 'Authentication did not work...',
-//     });
-// };
 
 // Helper function
 // Do not return password
@@ -137,8 +107,6 @@ const controller = {
     postLogin,
     postSignUp,
     getAuthSuccess,
-    // getLogout,
-    // getAuthFailure,
 };
 
 module.exports = controller;
