@@ -10,7 +10,7 @@ function useForumPostMutation({ _id: postId, category }: IForumPostPopulated) {
 
     const updateCommentVotes = async (newVotes: IVote[]) => {
         // Update individual post
-        queryClient.setQueriesData(
+        queryClient.setQueryData(
             [postQueryKey],
             (oldPostData: { data: IForumPostPopulated } | undefined) => {
                 if (!oldPostData) return oldPostData;
@@ -24,7 +24,7 @@ function useForumPostMutation({ _id: postId, category }: IForumPostPopulated) {
         );
 
         // Update specific post item in the category posts
-        queryClient.setQueriesData(
+        queryClient.setQueryData(
             [postCategoryQueryKey],
             (oldPostListData: { data: IForumPost[] } | undefined) => {
                 if (!oldPostListData) return oldPostListData;

@@ -1,7 +1,6 @@
-import { AvatarImagesList } from '../assets/avatars';
-
+// detecting app avatar image works for now
 export function isAvatarImage(picture: string) {
-    return AvatarImagesList.includes(picture);
+    return picture.includes('/assets/avatar');
 }
 
 export const toBase64Image = (file: File) =>
