@@ -53,8 +53,7 @@ Please make the .env file inside the `/server` directory (if it does not exist a
 * MongoDB Atlas - Connection to cloud database requires MONGO_USERNAME and MONGO_PASSWORD environment variables set up in <code>/server/.env</code> file for a successful connection.
 * Google OAuth - For google authentication, Google cloud requires client credentials GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables in <code>/server/.env</code> file.
 * Cloudinary - For image uploading, place cloudinary credentials CLOUDINARY_CLOUD_NAME, CLOUDINARY_KEY and CLOUDINARY_SECRET in <code>/server/.env</code> file for cloudinary image uploading set up. The backend application still runs without these variables but cannot use image uploading functionality in that case.
-* Session - For cookie session name and secret, environment variables SESSION_NAME and SESSION_SECRET can be added in <code>/server/.env</code> file. However, these variables are optional and the server gives default values for session name and secret if there are no corresponding environment variables. These variables are recommended for production environment for security purpose. 
-
+* Jwt Authentication - For Jwt auth, you need the variable JWT_SECRET in <code>/server/.env</code> file.
 
 ### Testing
 
@@ -173,6 +172,7 @@ For each dependency, we list human readable package name, followed by official `
 10. React Icons - react-icons 4.4.0
 11. Luxon - luxon 3.0.3
 12. Sass - sass 1.54.5 
+13. Google OAuth - @react-oauth/google 0.5.1
 
 The full dependencies of the frontend is available on `/client/package.json` file. <br />
 Please revise `/client/package.json` if you want to view the available scripts, full dependencies and dev dependencies.
@@ -191,13 +191,10 @@ Please revise `/client/package.json` if you want to view the available scripts, 
 1. Axios - axios 0.27.2
 2. BcryptJs - bcryptjs 2.4.3
 3. Mongoose ORM - mongoose 6.4.0
-4. Express Session - express-session 1.17.3
-5. Passport JS - passport 0.6.0
-6. Passport Google OAuth - passport-google-oauth20 2.0.0
-7. Passport Logal - passport-local 1.0.0
-8. Dotenv - dotenv 16.0.1
-9. Cloudinary - cloudinary 1.32.0
-10. Yup - yup 0.32.11
+4. JWT - jsonwebtoken 9.0.0
+5. Dotenv - dotenv 16.0.1
+6. Cloudinary - cloudinary 1.32.0
+7. Yup - yup 0.32.11
 
 #### Testing Libraries
 1. Jest - jest 29.1.2
