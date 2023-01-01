@@ -8,4 +8,6 @@ export const AppProperty = {
 
     // Production frontend domain
     CLIENT_DOMAIN: 'https://code-like-pro.vercel.app',
+
+    GOOGLE_CLIENT_ID: import.meta.env.VITE_GOOGLE_CLIENT_ID,
 };

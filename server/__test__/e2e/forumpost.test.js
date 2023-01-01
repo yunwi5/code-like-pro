@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { configureTestApp, closeTestApp } = require('./config');
-const { createUser, createExercise } = require('./createData');
+const { createUser } = require('./createData');
 
 let app = null;
 let user = null;

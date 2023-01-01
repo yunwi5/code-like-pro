@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
@@ -34,13 +34,8 @@ const { ProfileMain, ProfileFavorites, ProfileStatistics, MyCreations, MySubmiss
 const { PostDetail } = ForumPages;
 
 function App() {
-    const { user, loginBySession } = useUserContext();
+    const { user } = useUserContext();
     const isLoggedIn = !!user;
-
-    // When the user refreshes the page, login the user on the client side with the stored session.
-    useEffect(() => {
-        loginBySession();
-    }, [loginBySession]);
 
     return (
         <div className="App">
@@ -51,7 +46,7 @@ function App() {
                     <Route path="/" element={<HomePage />} />
 
                     {/* Auth pages login & register. Do not show if the user is already logged in. */}
-                    <Route path="/login" element={<LoginPage />} />
+                    {!isLoggedIn && <Route path="/login" element={<LoginPage />} />}
                     {!isLoggedIn && <Route path="/register" element={<RegisterPage />} />}
 
                     {/* User profile pages */}

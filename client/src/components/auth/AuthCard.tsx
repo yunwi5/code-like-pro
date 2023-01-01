@@ -7,7 +7,7 @@ import { MdEmail } from 'react-icons/md';
 
 import AuthInput from '../ui/inputs/AuthInput';
 import Button from '../ui/buttons/Button';
-import GoogleLogin from './GoogleLogin';
+import GoogleOAuth from './GoogleOAuth';
 
 const btnClass = 'min-w-[10rem] my-3 w-full';
 
@@ -103,7 +103,8 @@ const AuthCard = (props: {
                                 </Link>
                             </p>
                         )}
-                        <GoogleLogin />
+
+                        <GoogleOAuth />
                     </form>
                 </div>
             </div>

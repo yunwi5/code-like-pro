@@ -1,13 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-const session = require('express-session');
 
-const MongoStore = require('connect-mongo');
 const errorHandler = require('../middleware/errorHandler');
-const keys = require('./keys');
 const router = require('../routes/index');
 const authRouter = require('../routes/auth/auth');
-const authGoogleRouter = require('../routes/auth/authGoogle');
 const exerciseRouter = require('../routes/exercise/exercise');
 const userSubmissionRouter = require('../routes/user/userSubmission');
 const commentRouter = require('../routes/comment');
@@ -19,17 +15,6 @@ const imageRouter = require('../routes/image');
 const forumPostRouter = require('../routes/forumPost');
 const badgeRouter = require('../routes/badge');
 
-// Mongo session store for better session storage (default is in-memory session which is not efficient)
-const store = MongoStore.create({
-    mongoUrl: keys.MongoURI,
-    secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
-    touchAfter: 24 * 60 * 60, // lazy update the session, by limiting a period of time
-});
-
-store.on('error', function (e) {
-    console.log('Session store error', e);
-});
-
 const createApp = () => {
     const app = express();
 
@@ -38,36 +23,12 @@ const createApp = () => {
         cors({
             origin: true,
             methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
-            credentials: true, // IMPORTANT to set to true for session authentication
         }),
     );
 
     // Allow express to parse JSON
     app.use(express.json({ limit: '50mb' }));
     app.use(express.urlencoded({ limit: '50mb', extended: false }));
-
-    const sessionConfig = {
-        store,
-        name: process.env.SESSION_NAME || 'thisshouldnotbeasessionname',
-        secret: process.env.SESSION_SECRET || 'thisshouldnotbeasecret',
-        resave: false,
-        saveUninitialized: true,
-        cookie: {
-            httpOnly: true, // We use JS to access the APIs, so should be false
-            secure: app.get('env') !== 'production' ? false : true, // If true, it only works in https protocal. True in production.
-            maxAge: 1000 * 60 * 60 * 48,
-        },
-    };
-
-    // cookie: { httpOnly: true, secure: true, maxAge: 1000 * 60 * 60 * 48, sameSite: 'none' }
-    if (app.get('env') === 'production') {
-        sessionConfig.cookie.sameSite = 'none'; // sameSite 'none' only for production
-        sessionConfig.proxy = true; // Required for hosting providers like Heroku & Digital Ocean (regarding X-Forwarded-For)
-        app.enable('trust proxy', true);
-    }
-
-    // Express Session
-    app.use(session(sessionConfig));
 
     // Register default error handler
     app.use(errorHandler);
@@ -76,10 +37,8 @@ const createApp = () => {
 };
 
 const registerRoutes = (app) => {
-    // register all the routers of this app
     app.use('/api', router);
     app.use('/api/auth', authRouter);
-    app.use('/api/auth/google', authGoogleRouter);
 
     app.use('/api/exercise', exerciseRouter);
     app.use('/api/submission', userSubmissionRouter);
