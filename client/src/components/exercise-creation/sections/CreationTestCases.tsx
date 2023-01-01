@@ -34,8 +34,7 @@ const CreationTestCases: React.FC = () => {
 
     const title = (
         <div className="flex-between mb-2">
-            <span>Test Cases</span>{' '}
-            <CreationHelp defaultLanguage={language} className="ml-1 mr-auto" />{' '}
+            <span>Test Cases</span>
             <Button className="!py-2 text-base md:text-lg" onClick={addTestCase}>
                 + Test Case
             </Button>
