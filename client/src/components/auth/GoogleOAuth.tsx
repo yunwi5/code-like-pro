@@ -13,7 +13,7 @@ const GoogleOAuth = () => {
     const { storeJwtData } = useUserContext();
 
     const handleLoginSuccess = async (res: CredentialResponse) => {
-        const { ok, data } = await createOrGetGoogleUser(res);
+        const { ok, data, message } = await createOrGetGoogleUser(res);
         if (ok && data) {
             toastNotify(
                 `Welcome to ${AppProperty.APP_NAME}, ${data.user.name}!`,
@@ -22,10 +22,7 @@ const GoogleOAuth = () => {
             storeJwtData(data.access_token, data.user);
             navigate('/');
         } else {
-            toastNotify(
-                'Something went wrong while login to your Google account..',
-                'error',
-            );
+            toastNotify(`Oops, ${message}`, 'error');
         }
     };
 

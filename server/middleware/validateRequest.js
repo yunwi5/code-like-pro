@@ -1,4 +1,8 @@
-const { loginBodySchema, signUpBodySchema } = require('../schemas/authSchemas');
+const {
+    loginBodySchema,
+    signUpBodySchema,
+    googleAuthSchema,
+} = require('../schemas/authSchemas');
 const { exerciseBodySchema } = require('../schemas/exerciseSchemas');
 const { testCasesSchema } = require('../schemas/testCasesSchema');
 const { showcaseBodySchema } = require('../schemas/showcaseSchema');
@@ -26,6 +30,10 @@ const validateLoginBody = async (req, res, next) => {
 // validate sign up request body that is name & email & password
 const validateSignUpBody = async (req, res, next) => {
     return await validateBody(req, res, next, signUpBodySchema);
+};
+
+const validateGoogleAuthBody = async (req, res, next) => {
+    return await validateBody(req, res, next, googleAuthSchema);
 };
 
 const validateExerciseBody = async (req, res, next) => {
@@ -67,6 +75,7 @@ const validateForumpostBody = async (req, res, next) => {
 module.exports = {
     validateLoginBody,
     validateSignUpBody,
+    validateGoogleAuthBody,
     validateExerciseBody,
     validateTestCasesBody,
     validateRunCodeBody,

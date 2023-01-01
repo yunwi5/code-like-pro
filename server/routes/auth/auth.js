@@ -4,13 +4,14 @@ const authController = require('../../controller/auth/authController');
 const catchAsync = require('../../middleware/catchAsync');
 const { ensureAuthenticated } = require('../../middleware/auth');
 const {
+    validateGoogleAuthBody,
     validateLoginBody,
     validateSignUpBody,
 } = require('../../middleware/validateRequest');
 
 const router = Router();
 
-router.post('/google', catchAsync(authController.postGoogleAuth));
+router.post('/google', validateGoogleAuthBody, catchAsync(authController.postGoogleAuth));
 
 router.post('/login', validateLoginBody, catchAsync(authController.postLogin));
 
