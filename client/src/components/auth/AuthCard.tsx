@@ -8,20 +8,29 @@ import { MdEmail } from 'react-icons/md';
 import AuthInput from '../ui/inputs/AuthInput';
 import Button from '../ui/buttons/Button';
 import GoogleOAuth from './GoogleOAuth';
+import DoLoginOption from './DoLoginOption';
 
 const btnClass = 'min-w-[10rem] my-3 w-full';
 
 type AuthFormState = { email: string; password: string; name?: string };
 type AuthErrorState = { email: string; name?: string; password: string; overall: string };
 
-const AuthCard = (props: {
+type Props = {
     isLogin: boolean;
     onSubmit: (e: React.FormEvent) => void;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     formState: AuthFormState; // form state that stores current value for each input
     errorState?: AuthErrorState; // form state that stores error for each input
     isLoading?: boolean;
-}) => {
+    doLogin?: boolean;
+    setDoLogin?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const AuthCard = (props: Props) => {
+    const { doLogin, setDoLogin } = props;
+
+    const showDoLogin = doLogin != null && setDoLogin;
+
     return (
         <div className="flex justify-center">
             <div className="absolute z-0 bg-main-400 min-h-[max(65%,30rem)] min-w-[min(26rem,92vw)] md:w-1/3 xl:w-1/4 translate-x-2 translate-y-2" />
@@ -30,10 +39,10 @@ const AuthCard = (props: {
                     <h1 className="logo text-2xl font-light">CodeLikePro</h1>
 
                     <div>
-                        <h2 className="text-lg mt-3">
+                        <h2 className="text-xl mt-3">
                             {props.isLogin ? 'Login' : 'Register'}
                         </h2>
-                        <p className="text-xs font-light">
+                        <p className="text-sm font-light">
                             {props.isLogin
                                 ? 'Sign in to your account'
                                 : 'Create an account'}
@@ -71,6 +80,10 @@ const AuthCard = (props: {
                             icon={<ImKey />}
                         />
 
+                        {showDoLogin && (
+                            <DoLoginOption doLogin={doLogin} setDoLogin={setDoLogin} />
+                        )}
+
                         {props.errorState?.overall && (
                             <p className="text-rose-500 text-left">
                                 {props.errorState.overall}
@@ -83,7 +96,7 @@ const AuthCard = (props: {
                         </Button>
 
                         {props.isLogin ? (
-                            <p className="text-xs font-light mr-auto m-0">
+                            <p className="text-sm font-light mr-auto m-0">
                                 Don't have an Account?{' '}
                                 <Link
                                     to="/register"
@@ -93,7 +106,7 @@ const AuthCard = (props: {
                                 </Link>
                             </p>
                         ) : (
-                            <p className="text-xs font-light mr-auto m-0">
+                            <p className="text-sm font-light mr-auto m-0">
                                 Already have an Account?{' '}
                                 <Link
                                     to="/login"

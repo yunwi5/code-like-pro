@@ -26,6 +26,7 @@ const RegisterForm = () => {
         name: '',
         overall: '',
     });
+    const [doLogin, setDoLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
     // Check if the form is initially submitted by the user.
@@ -69,9 +70,14 @@ const RegisterForm = () => {
 
         // If register is success, redirect to the login page.
         if (ok && data) {
-            storeJwtData(data.access_token, data.user);
             toastNotify('Register successful!', 'success');
-            navigate('/');
+
+            if (doLogin) {
+                storeJwtData(data.access_token, data.user);
+                navigate('/');
+            } else {
+                navigate('/login');
+            }
         } else {
             setErrorState({
                 ...errorState,
@@ -88,6 +94,8 @@ const RegisterForm = () => {
             onSubmit={handleSubmit}
             onChange={handleChange}
             isLoading={isLoading}
+            doLogin={doLogin}
+            setDoLogin={setDoLogin}
         />
     );
 };
