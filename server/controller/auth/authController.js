@@ -99,8 +99,7 @@ const postSignUp = async (req, res) => {
     await newUser.save();
 
     const token = signJwtToken(newUser);
-    const userToReturn = getUserToReturn({ access_token: token, user: newUser });
-    res.status(201).json(userToReturn);
+    res.status(201).json({ access_token: token, user: getUserToReturn(newUser) });
 };
 
 // const getLogout = (req, res, next) => {
