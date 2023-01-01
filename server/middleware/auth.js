@@ -22,7 +22,6 @@ const ensureAuthenticated = (req, res, next) => {
 
         next();
     } catch (err) {
-        console.log(err.message.red.underline);
         return res.status(401).json({ message: 'User not authenticated!' });
     }
 };

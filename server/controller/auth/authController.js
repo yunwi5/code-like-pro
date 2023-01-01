@@ -37,8 +37,11 @@ const postGoogleAuth = async (req, res) => {
         // sign up
         // password should be optional perhaps
         const newUser = new User({ email, name, pictureUrl: picture, password: sub });
+        console.log('New google user:', newUser);
         await newUser.save();
-        res.status(201).json(getUserToReturn(newUser));
+
+        const token = signJwtToken(newUser);
+        res.status(201).json({ access_token: token, user: getUserToReturn(newUser) });
     }
 };
 

@@ -4,18 +4,13 @@ import { createOrGetGoogleUser } from '../../apis/auth.api';
 import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification';
 import { AppProperty } from '../../constants/app';
+import { GoogleIcon } from '../../assets/svg-icons/social-svgs';
+import Button from '../ui/buttons/Button';
 
 const GoogleOAuth = () => {
     const navigate = useNavigate();
 
     const { storeJwtData } = useUserContext();
-    // const login = useGoogleLogin({
-    //     onSuccess: (tokenResponse) => {
-    //         console.log(tokenResponse);
-    //     },
-    //     onError: () => console.log('Google Oauth error!'),
-    //     flow: 'auth-code',
-    // });
 
     const handleLoginSuccess = async (res: CredentialResponse) => {
         const { ok, data } = await createOrGetGoogleUser(res);
@@ -35,16 +30,26 @@ const GoogleOAuth = () => {
     };
 
     return (
-        <>
-            <GoogleLogin onSuccess={handleLoginSuccess} />
-            {/* <Button type="button" onClick={() => login()} className="btn-social mt-10">
+        <div className="relative mt-10">
+            {/* Transparent button that only handles google auth functionality */}
+            <div className="absolute top-0 left-0 w-full h-[50px] opacity-0">
+                <GoogleLogin
+                    onSuccess={handleLoginSuccess}
+                    onError={() => toastNotify('Google OAuth went wrong...', 'error')}
+                    width="100%"
+                    useOneTap
+                />
+            </div>
+
+            {/* Custom UI button that is visible to the user. */}
+            <Button type="button" className="btn-social w-full">
                 <div className="flex align-center justify-between">
                     <div className="w-[25px]"></div>
                     Sign in with Google
                     <GoogleIcon height="25" width="25" />
                 </div>
-            </Button> */}
-        </>
+            </Button>
+        </div>
     );
 };
 
