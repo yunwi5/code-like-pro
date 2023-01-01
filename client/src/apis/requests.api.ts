@@ -1,34 +1,44 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { AppProperty } from '../constants/app';
-import { authConfig } from './config';
+import { getJwtUserLocally } from '../utils/localStorage';
 
 const api = axios.create({
     baseURL: `${AppProperty.SERVER_DOMAIN}/api`,
 });
 
-// Request params for GET & DELETE requests
-type ReqParams = { url: string; headers?: AxiosRequestConfig };
-// Request params for POST &  PUT & PATCH requests
-type ReqBodyParams = { url: string; body: any; headers?: AxiosRequestConfig };
+api.interceptors.request.use((req) => {
+    const jwtData = getJwtUserLocally();
+    if (req.headers && jwtData?.access_token) {
+        req.headers.Authorization = `Bearer ${jwtData.access_token}`;
+    }
+
+    return req;
+});
+
+interface ReqParams {
+    url: string;
+    headers?: AxiosRequestConfig;
+}
+
+interface ReqBodyParams extends ReqParams {
+    body: any;
+}
 
 export async function getRequest<T>({ url }: ReqParams) {
-    let data: T | null = null;
     try {
-        const response = await api.get<T>(url, authConfig);
-        data = response.data;
+        const response = await api.get<T>(url);
+        const data = response.data;
         return { ok: true, data, status: response.status };
     } catch (err) {
-        // 400 ~ 500
         let message = extractErrorMessage(err);
         console.log(message);
         return { ok: false, message };
     }
 }
 
-// There can be more params in the future.
 export async function postRequest<T>({ url, body }: ReqBodyParams) {
     try {
-        const response = await api.post<T>(url, body, authConfig);
+        const response = await api.post<T>(url, body);
         return { ok: true, data: response.data, status: response.status };
     } catch (err) {
         let message = extractErrorMessage(err);
@@ -38,10 +48,9 @@ export async function postRequest<T>({ url, body }: ReqBodyParams) {
 }
 
 export async function putRequest<T>({ url, body }: ReqBodyParams) {
-    let data: T | null = null;
     try {
-        let response = await api.put<T>(url, body, authConfig);
-        data = response.data;
+        let response = await api.put<T>(url, body);
+        const data = response.data;
         return { ok: true, data, status: response.status };
     } catch (err) {
         let message = extractErrorMessage(err);
@@ -51,10 +60,9 @@ export async function putRequest<T>({ url, body }: ReqBodyParams) {
 }
 
 export async function patchRequest<T>({ url, body }: ReqBodyParams) {
-    let data: T | null = null;
     try {
-        let response = await api.patch<T>(url, body, authConfig);
-        data = response.data;
+        let response = await api.patch<T>(url, body);
+        const data = response.data;
         return { ok: true, data, status: response.status };
     } catch (err) {
         let message = extractErrorMessage(err);
@@ -64,10 +72,9 @@ export async function patchRequest<T>({ url, body }: ReqBodyParams) {
 }
 
 export async function deleteRequest<T>({ url }: ReqParams) {
-    let data: T | null = null;
     try {
-        let response = await api.delete<T>(url, authConfig);
-        data = response.data;
+        let response = await api.delete<T>(url);
+        const data = response.data;
         return { ok: true, data, status: response.status };
     } catch (err) {
         let message = extractErrorMessage(err);
@@ -78,7 +85,6 @@ export async function deleteRequest<T>({ url }: ReqParams) {
 
 // Extract error meessage from the response, if the request throws an error.
 function extractErrorMessage(error: any): string {
-    console.log('Response error:', error);
     const responseError =
         error.response?.data?.message || error.message || 'Something went wrong...';
     return responseError;

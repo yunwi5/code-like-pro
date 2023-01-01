@@ -13,7 +13,8 @@ export interface IUserContext {
     isLoading: boolean;
     login: (loginState: LoginState) => Promise<ResponseType>;
     logout: () => void;
-    loginBySession: () => void;
+    storeJwtData: (jwtToken: string, user: IUser) => void;
+
     refetchDetail: () => void;
     likedExerciseIdSet: Set<string>;
     submissionMap: { [key: string]: IUserSubmissionPopulated };

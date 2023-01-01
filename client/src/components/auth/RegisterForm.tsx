@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerRequest } from '../../apis/auth.api';
 
+import { useUserContext } from '../../store/context/UserContext';
+import { registerRequest } from '../../apis/auth.api';
 import { toastNotify } from '../../utils/notification';
 import {
     invalidateEmail,
@@ -13,6 +14,7 @@ import AuthCard from './AuthCard';
 type IRegisterState = { email: string; password: string; name: string };
 const RegisterForm = () => {
     const navigate = useNavigate();
+    const { storeJwtData } = useUserContext();
     const [registerState, setRegisterState] = useState({
         email: '',
         password: '',
@@ -66,9 +68,10 @@ const RegisterForm = () => {
         setIsLoading(false);
 
         // If register is success, redirect to the login page.
-        if (ok) {
-            navigate('/login');
+        if (ok && data) {
+            storeJwtData(data.access_token, data.user);
             toastNotify('Register successful!', 'success');
+            navigate('/');
         } else {
             setErrorState({
                 ...errorState,

@@ -7,7 +7,8 @@ const API_DOMAIN = '/auth';
 export type AuthResponseData = { access_token: string; user: IUser };
 
 export const createOrGetGoogleUser = async (response: CredentialResponse) => {
-    if (!response.credential) return { ok: false, message: 'No credentials found' };
+    if (!response.credential)
+        return { ok: false, data: null, message: 'No credentials found' };
 
     return await postRequest<AuthResponseData>({
         url: `${API_DOMAIN}/google`,
@@ -28,14 +29,8 @@ export async function loginRequest(body: LoginProps) {
     return await postRequest<AuthResponseData>({ url: `${API_DOMAIN}/login`, body });
 }
 
-// Try login with the existing session.
 export async function getLoginSuccess() {
     return await getRequest<IUser>({
         url: `${API_DOMAIN}/login/success`,
     });
-}
-
-// Send the logout request to the server to clear the session.
-export async function logoutRequest() {
-    return await getRequest<{ message: string }>({ url: `${API_DOMAIN}/logout` });
 }
