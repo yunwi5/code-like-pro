@@ -24,8 +24,8 @@ const AuthCard = (props: {
 }) => {
     return (
         <div className="flex justify-center">
-            <div className="absolute z-0 bg-main-400 min-h-[max(65%,30rem)] min-w-[min(22rem,90vw)] md:w-1/4 translate-x-2 translate-y-2"></div>
-            <div className="absolute z-1 flex justify-center p-6 min-h-[max(65%,30rem)] min-w-[min(22rem,90vw)] md:w-1/4 bg-grey-300">
+            <div className="absolute z-0 bg-main-400 min-h-[max(65%,30rem)] min-w-[min(26rem,92vw)] md:w-1/3 xl:w-1/4 translate-x-2 translate-y-2" />
+            <div className="absolute z-1 flex justify-center px-4 sm:px-6 py-6 min-h-[max(65%,30rem)] min-w-[min(26rem,92vw)] md:w-1/3 xl:w-1/4 bg-grey-300">
                 <div className="text-center w-full">
                     <h1 className="logo text-2xl font-light">CodeLikePro</h1>
 
