@@ -1,15 +1,10 @@
 import { FC, useState } from 'react';
 import { BsFillReplyFill } from 'react-icons/bs';
 
-import {
-    deleteComment,
-    deleteCommentVote,
-    postCommentVote,
-} from '../../../apis/comment.api';
+import { deleteCommentVote, postCommentVote } from '../../../apis/comment.api';
 import { IComment, IVote } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getDateTimeFormat } from '../../../utils/datetime';
-import { toastNotify } from '../../../utils/notification';
 import DeleteButton from '../buttons/icon-buttons/DeleteButton';
 import EditButton from '../buttons/icon-buttons/EditButton';
 import VoteButtons from '../buttons/VoteButtons';
@@ -19,8 +14,8 @@ import ProfilePicture from '../user/ProfilePicture';
 
 interface Props {
     comment: IComment;
-    onUpdate?: (id: string, updateProp: { text: string }) => void;
-    onDelete?: (id: string) => Promise<void> | void;
+    onUpdate: (id: string, updateProp: { text: string }) => void;
+    onDelete: (id: string) => Promise<void> | void;
     onReply?: () => void;
 }
 
@@ -28,6 +23,7 @@ const CommentCard: FC<Props> = ({ comment, onReply, onUpdate, onDelete }) => {
     const { userDetail } = useUserContext();
     const userId = userDetail?._id;
     const [votes, setVotes] = useState<IVote[]>(comment.votes);
+
     // Set modal either none, edit modal or delete modal.
     const [modal, setModal] = useState<null | 'edit' | 'delete'>(null);
 
@@ -61,16 +57,7 @@ const CommentCard: FC<Props> = ({ comment, onReply, onUpdate, onDelete }) => {
     };
 
     const handleDeleteComment = async () => {
-        if (onDelete) {
-            await onDelete(comment._id);
-        } else {
-            const { ok } = await deleteComment(comment._id);
-            if (!ok)
-                toastNotify(
-                    'Oops, something went wrong while deleting your comment...',
-                    'error',
-                );
-        }
+        await onDelete(comment._id);
     };
 
     // Check if the user is the author of the comment.

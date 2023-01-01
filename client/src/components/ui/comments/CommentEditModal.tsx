@@ -1,26 +1,19 @@
 import React from 'react';
 import { RiEditBoxLine } from 'react-icons/ri';
-import { patchComment } from '../../../apis/comment.api';
 import { IComment } from '../../../models/interfaces';
-import { toastNotify } from '../../../utils/notification';
 import AnimationModal from '../modals/AnimationModal';
 import CommentForm from './CommentForm';
 
 interface Props {
     open: boolean;
-    onUpdate?: (id: string, updateProp: { text: string }) => Promise<void> | void;
+    onUpdate: (id: string, updateProp: { text: string }) => Promise<void> | void;
     onClose: () => void;
     comment: IComment;
 }
 
 const CommentEditModal: React.FC<Props> = ({ open, onUpdate, onClose, comment }) => {
     const handleEdit = async (text: string) => {
-        if (onUpdate) {
-            await onUpdate(comment._id, { text });
-        } else {
-            const { ok } = await patchComment(comment._id, { text });
-            if (!ok) toastNotify('Oops, something went wrong...', 'error');
-        }
+        await onUpdate(comment._id, { text });
         onClose();
     };
 

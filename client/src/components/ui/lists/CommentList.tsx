@@ -8,8 +8,8 @@ import EmptyMessage from '../labels/EmptyMessage';
 
 interface Props {
     comments: IComment[];
-    onUpdateComment?: (id: string, updateProp: { text: string }) => void;
-    onDeleteComment?: (id: string) => void;
+    onUpdateComment: (id: string, updateProp: { text: string }) => void;
+    onDeleteComment: (id: string) => void;
     commentPerPage?: number;
     className?: string;
 }
