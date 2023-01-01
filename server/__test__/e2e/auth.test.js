@@ -77,7 +77,6 @@ describe('Authentication', () => {
 
         it('Cannot login with missing attributes', async () => {
             const response = await request(app).post('/api/auth/login').send({});
-            // If the required attributes are missing, it returns 400 even before reaching passport authentication.
             expect(response.statusCode).toBe(400);
         });
 

@@ -5,12 +5,15 @@ const MongodbURI = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.7
 
 const keys = {
     // Connect to the cloud database if the password env variale exists, otherwise connect to local mongodb.
-    MongoURI: MONGO_PASSWORD ? MongodbURI : 'mongodb://localhost:27017/code-like-pro', // connection string to local mongodb server
+    MongoURI:
+        MONGO_USERNAME && MONGO_PASSWORD
+            ? MongodbURI
+            : 'mongodb://localhost:27017/code-like-pro',
     ClientBaseURL:
         process.env.NODE_ENV === 'production'
             ? 'https://code-like-pro.vercel.app'
             : 'http://localhost:3000',
-    JwtSecret: process.JWT_SECRET || 'jwt-secret',
+    JwtSecret: process.JWT_SECRET ?? 'jwt-secret',
 };
 
 module.exports = keys;
