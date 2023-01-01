@@ -6,6 +6,8 @@ export * from './exercise/ITestOutput';
 export * from './exercise/IIssueReport';
 export * from './exercise/IDifficultyVote';
 
+export * from './user/IUserSubmission';
+
 // Forum related interfaces
 export * from './forum/IForumPost';
 
@@ -14,7 +16,7 @@ export * from './user/IUser';
 export * from './user/IUserDetail';
 export * from './user/IUserInfo';
 
-export * from './user/IUserSubmission';
+export * from './IGoogleCredential';
 
 // Showcae related interfaces
 export * from './showcase/IVote';

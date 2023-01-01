@@ -68,7 +68,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
 
             setUser(() => {
                 setIsLoading(false);
-                if (ok && data) return data;
+                if (ok && data?.user) return data.user;
                 return null;
             });
             return { ok, data, message };

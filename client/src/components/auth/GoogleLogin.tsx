@@ -1,4 +1,3 @@
-import React from 'react';
 import { GoogleIcon } from '../../assets/svg-icons/social-svgs';
 import { AppProperty } from '../../constants/app';
 import Button from '../ui/buttons/Button';

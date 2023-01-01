@@ -10,6 +10,7 @@ const keys = {
         process.env.NODE_ENV === 'production'
             ? 'https://code-like-pro.vercel.app'
             : 'http://localhost:3000',
+    JwtSecret: process.JWT_SECRET || 'jwt-secret',
 };
 
 module.exports = keys;

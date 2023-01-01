@@ -1,6 +1,6 @@
 // External modules
 require('colors'); // colors to highlight console output like db connection
-const passport = require('passport');
+// const passport = require('passport');
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
 // Internal modules
 const { createApp, registerRoutes } = require('./config/app');
 const connectDB = require('./config/db');
-const passportStrategy = require('./config/passport');
+// const passportStrategy = require('./config/passport');
 
 const app = createApp();
 
@@ -16,11 +16,11 @@ const app = createApp();
 connectDB();
 
 // Passport auth initialization
-passportStrategy(passport);
+// passportStrategy(passport);
 
 // Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Register routers
 // IMPORTANT: register routers after the passport configuration (otherwise session is not set up correctly)
