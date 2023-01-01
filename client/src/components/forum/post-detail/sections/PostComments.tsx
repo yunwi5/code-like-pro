@@ -1,14 +1,17 @@
 import React, { useMemo, useState } from 'react';
-import { postForumPostComment } from '../../../../apis/forum.api';
+import useForumPostCommentsMutation from '../../../../hooks/forum/forum-post/useForumPostCommentsMutation';
 import { SortingDirection, VotingItemSortingKey } from '../../../../models/enums';
 import { IComment, IForumPostPopulated } from '../../../../models/interfaces';
-import { toastNotify } from '../../../../utils/notification';
 import { sortVotingItems } from '../../../../utils/sorting-utils/voting-items.sorting';
 import CommentForm from '../../../ui/comments/CommentForm';
 import CommentList from '../../../ui/lists/CommentList';
 import VotingItemSorter from '../../../ui/sorting/VotingItemSorter';
 
 const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
+    const { postComment, updateComment, deleteComment } = useForumPostCommentsMutation(
+        post._id,
+    );
+
     const [sortingState, setSortingState] = useState({
         key: VotingItemSortingKey.DATETIME,
         direction: SortingDirection.DESCENDING,
@@ -17,24 +20,20 @@ const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     // Handle comment submission from the user.
     const handleSubmitComment = async (text: string) => {
         // Send Http POST request to send the user comment to the server.
-        const newComment = { text }; // Comment only requires 'text' prop when sending it to the server.
+        const commentProp = { text }; // Comment only requires 'text' prop when sending it to the server.
         if (!post) return;
 
-        // Send Http POST request to add the user's comment to the server.
-        const { ok, message } = await postForumPostComment(post._id, newComment);
-
-        if (ok) toastNotify('Post comment!', 'success');
-        else toastNotify(`Oops, ${message}`, 'error');
+        await postComment(commentProp);
     };
 
     // Whenver sorting state changes, sort the comments again.
     const sortedComments = useMemo(() => {
         // Pass sorting key and direction to sort the list of comments.
-        return sortVotingItems(
+        return sortVotingItems<IComment>(
             post.comments,
             sortingState.key,
             sortingState.direction,
-        ).slice() as IComment[];
+        ).slice();
     }, [sortingState, post.comments]);
 
     return (
@@ -56,7 +55,12 @@ const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
             <CommentForm inputType="textarea" onSubmit={handleSubmitComment} />
 
             {/* Render the list of comments with pagination. */}
-            <CommentList comments={sortedComments} className="mt-8" />
+            <CommentList
+                comments={sortedComments}
+                onUpdateComment={updateComment}
+                onDeleteComment={deleteComment}
+                className="mt-8"
+            />
         </div>
     );
 };

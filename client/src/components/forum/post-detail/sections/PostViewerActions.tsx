@@ -6,7 +6,8 @@ import {
     AiOutlineLike,
 } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { deleteForumPostVote, postForumPostVote } from '../../../../apis/forum.api';
+
+import useForumPostMutation from '../../../../hooks/forum/forum-post/useForumPostMutation';
 import { IForumPostPopulated, IVote } from '../../../../models/interfaces';
 import { useUserContext } from '../../../../store/context/UserContext';
 import PostShare from './PostShare';
@@ -15,6 +16,8 @@ const PostViewerActions: React.FC<{ post: IForumPostPopulated }> = ({ post }) =>
     const navigate = useNavigate();
     const { userDetail } = useUserContext();
     const userId = userDetail?._id;
+
+    const { postVote, deleteVote } = useForumPostMutation(post);
     const [votes, setVotes] = useState<IVote[]>(post?.votes || []);
 
     const handleUserVote = async (type: 'up' | 'down') => {
@@ -25,23 +28,19 @@ const PostViewerActions: React.FC<{ post: IForumPostPopulated }> = ({ post }) =>
             // If the user has no votes so far, add a new vote.
             const newVote = { type, user: userId };
             setVotes([...votes, newVote]);
-
-            // Send request to post the comment vote by this user.
-            await postForumPostVote(post._id, { type });
+            await postVote(type);
         } else {
             const userVote = votes[userVoteIndex];
 
             if (userVote.type === type) {
                 // Cancel voting.
                 setVotes(votes.filter((vote) => vote.user !== userId));
-
-                // Send DELETE request to cancel the vote on this comment.
-                await deleteForumPostVote(post._id);
+                await deleteVote();
             } else {
                 // If the user already has vote on this comment, modify the vote and create a new array.
                 votes[userVoteIndex].type = type;
                 setVotes([...votes]);
-                await postForumPostVote(post._id, { type });
+                await postVote(type);
             }
         }
     };

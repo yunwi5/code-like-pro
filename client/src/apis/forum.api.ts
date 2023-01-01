@@ -43,7 +43,7 @@ export async function postForumPostComment(id: string, comment: { text: string }
 
 // POST vote for forum post
 export async function postForumPostVote(id: string, vote: { type: 'up' | 'down' }) {
-    return await postRequest<IVote>({
+    return await postRequest<IForumPost>({
         url: `${API_DOMAIN}/${id}/vote`,
         body: vote,
     });
@@ -51,7 +51,7 @@ export async function postForumPostVote(id: string, vote: { type: 'up' | 'down' 
 
 // DELETE vote for forum post
 export function deleteForumPostVote(postId: string) {
-    return deleteRequest<IVote>({
+    return deleteRequest<IForumPost>({
         url: `${API_DOMAIN}/${postId}/vote`,
     });
 }
