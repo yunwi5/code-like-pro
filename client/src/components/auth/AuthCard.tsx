@@ -12,8 +12,20 @@ import DoLoginOption from './DoLoginOption';
 
 const btnClass = 'min-w-[10rem] my-3 w-full';
 
-type AuthFormState = { email: string; password: string; name?: string };
-type AuthErrorState = { email: string; name?: string; password: string; overall: string };
+type AuthFormState = {
+    email: string;
+    password: string;
+    name?: string;
+    passwordConfirm?: string;
+};
+
+type AuthErrorState = {
+    email: string;
+    name?: string;
+    password: string;
+    passwordConfirm?: string;
+    overall: string;
+};
 
 type Props = {
     isLogin: boolean;
@@ -79,6 +91,18 @@ const AuthCard = (props: Props) => {
                             error={props.errorState?.password}
                             icon={<ImKey />}
                         />
+
+                        {!props.isLogin && (
+                            <AuthInput
+                                type="password"
+                                placeholder="Password Confirm"
+                                onChange={props.onChange}
+                                value={props.formState.passwordConfirm}
+                                name="passwordConfirm"
+                                error={props.errorState?.passwordConfirm}
+                                icon={<ImKey />}
+                            />
+                        )}
 
                         {showDoLogin && (
                             <DoLoginOption doLogin={doLogin} setDoLogin={setDoLogin} />
