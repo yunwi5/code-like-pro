@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { IExercise, IShowCase, IVote } from '../../../models/interfaces';
+import React, { useMemo, useState } from 'react';
+import useShowcaseCommentsMutation from '../../../hooks/showcase/showcase-comments/useShowcaseCommentsMutation';
+import { IComment, IExercise, IShowCase, IVote } from '../../../models/interfaces';
 import CodeEditor from '../editor/CodeEditor';
 import { getDateTimeFormat } from '../../../utils/datetime';
 import {
@@ -9,20 +10,17 @@ import {
     BsFileCode,
     BsShare,
 } from 'react-icons/bs';
-import {
-    postVoteRequest,
-    deleteShowcaseVote,
-    postShowcaseComment,
-} from '../../../apis/exercise.api';
+import { postVoteRequest, deleteShowcaseVote } from '../../../apis/exercise.api';
 import { useUserContext } from '../../../store/context/UserContext';
 import CommentCard from './CommentCard';
 import useShowcaseCommentQuery from '../../../hooks/showcase/showcase-comments/useShowcaseCommentQuery';
 import CommentForm from '../comments/CommentForm';
-import { toastNotify } from '../../../utils/notification';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import SocialPanel from '../social/SocialPanel';
 import { AppProperty } from '../../../constants/app';
+import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
+import { SortingDirection, VotingItemSortingKey } from '../../../models/enums';
 
 interface Props {
     showcase: IShowCase;
@@ -40,6 +38,9 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
     const [compare, setCompare] = useState<Boolean>(false);
 
     const { showcaseComments } = useShowcaseCommentQuery(showcase._id);
+    const { postComment, updateComment, deleteComment } = useShowcaseCommentsMutation(
+        showcase._id,
+    );
 
     const handleUserVote = async (type: 'up' | 'down') => {
         if (!userId) return;
@@ -72,15 +73,21 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
 
     const handleSubmitComment = async (text: string) => {
         // Send Http POST request to send the user comment to the server.
-        const newComment = { text }; // Comment only requires 'text' prop when sending it to the server.
+        const commentProp = { text }; // Comment only requires 'text' prop when sending it to the server.
         if (!showcase) return;
 
-        // Send Http POST request to add the user's comment to the server.
-        const { ok, message } = await postShowcaseComment(showcase._id, newComment);
-
-        if (ok) toastNotify('Post comment!', 'success');
-        else toastNotify(`Oops, ${message}`, 'error');
+        await postComment(commentProp);
     };
+
+    const sortedShowcaseComments = useMemo(
+        () =>
+            sortVotingItems<IComment>(
+                showcaseComments,
+                VotingItemSortingKey.VOTES,
+                SortingDirection.DESCENDING,
+            ),
+        [showcaseComments],
+    );
 
     const isAuthor = showcase.user._id === userDetail?._id;
     const userVote = votes.find((vote) => vote.user === userId);
@@ -126,7 +133,6 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                                 </h5>
                                 <CodeEditor
                                     className="flex-1 border-transparent focus-within:border-main-300 shadow-none"
-                                    onChange={() => {}}
                                     showHeader={false}
                                     language={exercise.language}
                                     value={showcase.code}
@@ -139,7 +145,6 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                                 </h5>
                                 <CodeEditor
                                     className="flex-1 border-transparent focus-within:border-main-300 shadow-none"
-                                    onChange={() => {}}
                                     showHeader={false}
                                     language={exercise.language}
                                     value={userSubmission?.code}
@@ -150,7 +155,6 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                     ) : (
                         <CodeEditor
                             className="flex-1 border-gray-200 focus-within:border-main-300 shadow-none"
-                            onChange={() => {}}
                             showHeader={false}
                             language={exercise.language}
                             value={showcase.code}
@@ -211,14 +215,19 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                 </div>
                 {isAuthor && <SocialShareButton />}
             </div>
-            {showComment ? (
+            {showComment && (
                 <div className="mt-3 flex flex-col gap-2">
                     <CommentForm onSubmit={handleSubmitComment} className="mb-5" />
-                    {showcaseComments.map((comment) => (
-                        <CommentCard comment={comment} />
+                    {sortedShowcaseComments.map((comment) => (
+                        <CommentCard
+                            key={comment._id}
+                            comment={comment}
+                            onUpdate={updateComment}
+                            onDelete={deleteComment}
+                        />
                     ))}
                 </div>
-            ) : null}
+            )}
         </article>
     );
 };

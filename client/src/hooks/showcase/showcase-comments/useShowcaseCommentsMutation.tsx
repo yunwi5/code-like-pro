@@ -23,11 +23,13 @@ function useShowcaseCommentsMutation(showcaseId: string) {
         } = await postShowcaseComment(showcaseId, commentProp);
 
         if (ok && newComment) {
-            toastNotify('Post comment!', 'success');
+            toastNotify('Post showcase comment!', 'success');
             addItemToCache(newComment);
         } else {
             toastNotify(`Oops, ${message}`, 'error');
         }
+
+        refetch();
     };
 
     const updateComment = async (commentId: string, updateProp: CommentProp) => {
