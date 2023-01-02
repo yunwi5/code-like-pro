@@ -57,7 +57,7 @@ const HeroLanding: React.FC = () => {
                     </Link>
                     <Link
                         to={'browse'}
-                        className="btn text-lg md:text-xl min-w-[10.5rem] flex-center gap-2 bg-purple-500 hover:bg-purple-600  !text-white !rounded"
+                        className="btn text-lg md:text-xl min-w-[10.5rem] flex-center gap-2 bg-purple-600 hover:bg-purple-700  !text-white !rounded"
                     >
                         Explore <SiAzuredataexplorer />
                     </Link>

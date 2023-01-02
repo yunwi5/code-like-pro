@@ -115,6 +115,7 @@ const strengthsList = [
             'Any users can start creating their own exercises without any extra steps. Creating your own exercises will help you enhance your problem design aspects as well as testing aspects.',
         icon: <FaRegEdit />,
         link: '/create-exercise',
+        linkText: 'Create exercise',
     },
     {
         id: '2',
@@ -123,6 +124,7 @@ const strengthsList = [
             'We provide feature-rich code editor support for all our users. It has convenient view of test cases, syntax highlighting, and autocompletions like an IDE.',
         icon: <SiVisualstudiocode />,
         link: '/browse',
+        linkText: 'Find exercises',
     },
     {
         id: '3',
@@ -131,6 +133,7 @@ const strengthsList = [
             'User profile pages support detailed statistics to let users able to track their progress of their work. They can also view their favorites, creations and submissions history.',
         icon: <FaRegChartBar />,
         link: '/profile',
+        linkText: 'View stats',
     },
     {
         id: '4',
@@ -139,6 +142,7 @@ const strengthsList = [
             'For each exercise, users can showcase their solution in the user showcasing space. Users can get inspirations from clever solutions made by other users!',
         icon: <FaLaptopCode />,
         link: '/showcase-invites',
+        linkText: 'View showcases',
     },
     {
         id: '5',
@@ -147,6 +151,7 @@ const strengthsList = [
             'To increase the competitions among the users, we have a global ranking system. Users get more ranking points as they create and solve more exercises, giving them greater motivations.',
         icon: <IoPodiumOutline />,
         link: '/ranking',
+        linkText: 'View rankings',
     },
     {
         id: '6',
@@ -155,6 +160,7 @@ const strengthsList = [
             'We maximized the opportunity for users to interact each other. We have a discussion space for each exercise to discuss varioius problem solving aspects, as well as global discussion forum.',
         icon: <AiOutlineUsergroupAdd />,
         link: '/forum',
+        linkText: 'View forums',
     },
 ];
 

@@ -11,7 +11,7 @@ interface Props {
 const BadgeSpecCard: React.FC<Props> = ({ rarity, description }) => {
     return (
         <article
-            className={`${`${rarity.toLowerCase()}-spec`} badge-spec flex flex-col items-center px-2 py-2 gap-3 transition-all rounded text-gray-500`}
+            className={`${`${rarity.toLowerCase()}-spec`} badge-spec flex flex-col items-center px-2 py-2 gap-3 transition-all rounded`}
         >
             <div className="shrink-0">
                 <img
@@ -24,7 +24,7 @@ const BadgeSpecCard: React.FC<Props> = ({ rarity, description }) => {
                 <span className="short-name text-[1.3em]">{rarity}</span>&ensp;
                 <span className="full-name">{BadgeRarityFullNames[rarity]}</span>
             </h3>
-            <p className="-mt-1 text-center">{description}</p>
+            <p className="-mt-1 text-center text-gray-600">{description}</p>
         </article>
     );
 };

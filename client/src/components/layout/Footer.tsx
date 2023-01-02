@@ -74,14 +74,18 @@ interface SocialIconProps {
 }
 
 const SocialIcon: React.FC<SocialIconProps> = ({ icon, label, href }) => {
+
+    const redirectTolink = () => {
+        window.open(href, '_blank');
+    };
+
     return (
-        <a href={href ?? '#'} target="_blank">
-            <HoverLabel label={<span className="hover:text-yellow-300">{label}</span>}>
-                <div className="transition-all hover:scale-110 hover:brightness-125">
-                    {icon}
-                </div>
-            </HoverLabel>
-        </a>
+        <div
+            onClick={redirectTolink}
+            className="transition-all hover:scale-110 hover:brightness-125"
+        >
+            {icon}
+        </div>
     );
 };
 

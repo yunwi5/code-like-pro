@@ -7,9 +7,10 @@ interface Props {
     icon: React.ReactNode;
     content: string;
     link?: string;
+    linkText?: string;
 }
 
-const StrengthCard: React.FC<Props> = ({ heading, icon, content, link }) => {
+const StrengthCard: React.FC<Props> = ({ heading, icon, content, link, linkText }) => {
     return (
         <>
             <span className={`${styles.icon} transition-all text-[4rem] text-main-400`}>
@@ -22,7 +23,7 @@ const StrengthCard: React.FC<Props> = ({ heading, icon, content, link }) => {
                     className="px-2 py-[0.3rem] w-fit transition-all rounded-sm hover:bg-blue-100/90 text-blue-500 hover:text-blue-600 hover:shadow"
                     to={link}
                 >
-                    Learn More
+                    {linkText ?? 'Learn More'}
                 </Link>
             )}
         </>

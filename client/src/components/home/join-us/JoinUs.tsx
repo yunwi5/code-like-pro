@@ -23,9 +23,9 @@ const JoinUs: React.FC = () => {
 
                 <div className="flex flex-col self-stretch">
                     <div className="capitalize">
-                        <h5 className="-mb-2 lg:mb-1 text-xl font-bold text-indigo-600">
+                        <p className="-mb-2 lg:mb-1 text-xl font-bold text-indigo-600">
                             Try {AppProperty.APP_NAME} today
-                        </h5>
+                        </p>
                         <h3 className="hidden lg:block text-4xl font-bold text-gray-600">
                             The opportunity to learn{' '}
                             <span className="text-main-400/90">

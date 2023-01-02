@@ -7,10 +7,10 @@ const banner = {
 };
 
 const messages = [
-    { text: 'Creative problem designer', color: 'text-main-400' },
-    { text: 'Powerful Programmer', color: 'text-violet-500' },
-    { text: 'Best problem solver', color: 'text-purple-500' },
-    { text: 'Strong program tester', color: 'text-pink-500' },
+    { text: 'Creative problem designer', color: 'text-main-500' },
+    { text: 'Powerful Programmer', color: 'text-violet-600' },
+    { text: 'Best problem solver', color: 'text-purple-600' },
+    { text: 'Strong program tester', color: 'text-pink-600' },
 ];
 
 const MESSAGE_INTERVAL = 5000;
@@ -32,7 +32,7 @@ const FeaturesBanner: React.FC = () => {
     const selectedMessage = messages[messageIndex];
 
     return (
-        <h1 className="flex flex-col md:flex-row items-start md:items-center gap-3 pl-4 text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-gray-500 whitespace-nowrap font-semibold">
+        <h1 className="flex flex-col md:flex-row items-start md:items-center gap-3 pl-4 text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-gray-600 whitespace-nowrap font-semibold">
             <p>Become The</p>
             <div className="px-3 py-1 xl:py-2 h-[2.5rem] md:h-[2.75rem] lg:h-[3rem] xl:h-[3.75rem] w-fit transition-all border-2 border-slate-400 rounded-2xl text-main-400 font-bold shadow">
                 <AnimatePresence>
