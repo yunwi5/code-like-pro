@@ -7,7 +7,6 @@ import {
     GithubIcon,
     TwitterIcon,
 } from '../../assets/svg-icons/social-svgs';
-import HoverLabel from '../ui/tooltip/HoveringLabel';
 import { Logo } from '../../assets';
 import useWindowSize from '../../hooks/ui/useWindowSize';
 
@@ -74,17 +73,21 @@ interface SocialIconProps {
 }
 
 const SocialIcon: React.FC<SocialIconProps> = ({ icon, label, href }) => {
-
     const redirectTolink = () => {
-        window.open(href, '_blank');
+        Object.assign(document.createElement('a'), {
+            href: href,
+            target: '_blank',
+            rel: 'noopener noreferrer',
+        }).click();
     };
 
     return (
         <div
             onClick={redirectTolink}
-            className="transition-all hover:scale-110 hover:brightness-125"
+            className="transition-all hover:scale-110 hover:brightness-125 relative"
         >
             {icon}
+            <span className="absolute text-white">{label}</span>
         </div>
     );
 };
