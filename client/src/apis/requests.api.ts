@@ -85,7 +85,6 @@ export async function deleteRequest<T>({ url }: ReqParams) {
 
 // Extract error meessage from the response, if the request throws an error.
 function extractErrorMessage(error: any): string {
-    const responseError =
-        error.response?.data?.message || error.message || 'Something went wrong...';
+    const responseError = error.response?.data?.message || 'Something went wrong...';
     return responseError;
 }

@@ -72,13 +72,14 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         const jwtData = getJwtUserLocally();
         if (jwtData) {
             setUser(jwtData.user);
-        }
-    }, []);
 
-    useEffect(() => {
-        getLoginSuccess().then((res) => {
-            if (!res.ok) setUser(null);
-        });
+            getLoginSuccess().then((res) => {
+                if (!res.ok) {
+                    setUser(null);
+                    clearJwtUserLocally();
+                }
+            });
+        }
     }, []);
 
     const value = {
