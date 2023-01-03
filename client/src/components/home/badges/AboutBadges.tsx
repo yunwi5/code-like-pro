@@ -9,14 +9,14 @@ const AboutBadges: React.FC<{ className?: string }> = ({ className = '' }) => {
         <div className={`pt-3 lg:pt-14 flex flex-col gap-4 text-gray-600 ${className}`}>
             {BadgeMotives.map((motive, idx) => (
                 <motion.div
-                    key={motive.heading}
+                    key={motive.paragraph}
                     initial={{ opacity: 0, x: -300 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
                     viewport={{ once: true }}
                     className="flex flex-col gap-1 px-2 py-2"
                 >
-                    <h3 className="flex-start gap-2 text-gray-500 text-xl font-semibold capitalize">
+                    <h3 className="flex-start gap-2 text-gray-500 text-lg xs:text-xl font-semibold capitalize">
                         <span className="text-[1.05em] text-main-400 hover:text-main-400 hover:scale-125 transition-all cursor-pointer">
                             {motive.icon}
                         </span>{' '}
@@ -33,7 +33,12 @@ const AboutBadges: React.FC<{ className?: string }> = ({ className = '' }) => {
 const BadgeMotives = [
     {
         icon: <BsTrophy />,
-        heading: 'Greater motivations for programming',
+        heading: (
+            <>
+                Greater motivations{' '}
+                <span className="hidden sm:inline">for programming</span>
+            </>
+        ),
         paragraph:
             'Programming badges are to give greater motivations to our programming users to engage more in our programming activities.',
     },
