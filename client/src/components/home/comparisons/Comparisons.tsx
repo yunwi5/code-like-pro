@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
 import { MdOutlineCheck } from 'react-icons/md';
+
+import useWindowSize from '../../../hooks/ui/useWindowSize';
 import { Logo } from '../../../assets';
 
 const variants = {
@@ -19,6 +21,8 @@ const variants = {
 
 const Comparisons: React.FC = () => {
     const scrollRef = useRef<null | HTMLDivElement>(null);
+    const { width } = useWindowSize();
+    const enableAnimation = width > 800;
 
     return (
         <section className="flex flex-col gap-8 items-center py-8 md:px-10">
@@ -49,7 +53,7 @@ const Comparisons: React.FC = () => {
                         {features.map((feature, idx) => (
                             <motion.div
                                 key={idx}
-                                variants={variants}
+                                variants={enableAnimation ? variants : undefined}
                                 initial="initial"
                                 whileInView="animate"
                                 transition={{

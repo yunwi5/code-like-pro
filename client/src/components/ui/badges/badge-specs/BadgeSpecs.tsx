@@ -11,13 +11,10 @@ const BadgeSpecs: React.FC<{ className?: string }> = ({ className = '' }) => {
             {BadgeSpecInfo.map((badge, idx) => (
                 <motion.div
                     key={badge.rarity}
-                    initial={{ opacity: 0.1, y: 300 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: idx * 0.15 }}
-                    viewport={{
-                        once: true,
-                        margin: `0px 0px 200px 0px`,
-                    }}
+                    initial={{ y: 50 }}
+                    whileInView={{ y: 0 }}
+                    transition={{ duration: 0.35, delay: idx * 0.15 }}
+                    viewport={{ once: true }}
                 >
                     <BadgeSpecCard key={badge.rarity} {...badge} />
                 </motion.div>
