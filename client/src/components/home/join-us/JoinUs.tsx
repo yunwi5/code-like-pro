@@ -19,7 +19,7 @@ const JoinUs: React.FC = () => {
             {/* Join us user message section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 justify-items-center gap-x-6 xl:gap-x-20 gap-y-6 lg:px-5 w-[clamp(25rem,80rem,97vw)]">
                 {/* Join us image mobile */}
-                <JoinUsImage className="lg:hidden mb-3 max-w-[35rem]" />
+                <JoinUsImage className="lg:hidden mb-0 sm:mb-3 max-w-[min(35rem,95vw)]" />
 
                 <div className="flex flex-col self-stretch">
                     <div className="capitalize">
@@ -57,8 +57,8 @@ const JoinUsImage: React.FC<{ className?: string }> = ({ className = '' }) => (
     <div
         className={`group relative flex flex-col justify-center items-center pb-2 ${className}`}
     >
-        <img className="w-full object-cover" src={HomeImages.JoinUs} alt="Join Us" />
-        <p className="group mt-2 px-3 py-1 absolute top-[97%] left-[50%] translate-x-[-50%] -translate-y-[15rem] group-hover:translate-y-0 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-all">
+        <img src={HomeImages.JoinUs} alt="Join Us" className="w-full object-cover" />
+        <p className="group mt-2 px-3 py-1 absolute top-[95%] sm:top-[97%] left-[50%] translate-x-[-50%] -translate-y-[15rem] group-hover:translate-y-0 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-all">
             Image by{' '}
             <a
                 target="_blank"
