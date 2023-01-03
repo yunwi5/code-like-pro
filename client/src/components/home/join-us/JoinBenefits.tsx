@@ -4,7 +4,7 @@ import { MdOutlineCheck } from 'react-icons/md';
 
 const JoinBenefits: FC = () => {
     return (
-        <ul className="max-w-[35rem] lg:max-w-none my-5 flex flex-col gap-2">
+        <ul className="max-w-[min(35rem,95vw)] lg:max-w-none my-5 flex flex-col gap-2">
             {joinUsFeatures.map((feature, idx) => (
                 <motion.li
                     initial={{ opacity: 0, y: 200 }}
