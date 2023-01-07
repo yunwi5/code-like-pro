@@ -69,7 +69,7 @@ const Strengths: React.FC = () => {
                         className={`px-2 py-3 flex flex-col items-center gap-3 hover:bg-gray-50 cursor-pointer ${styles.strength}`}
                     >
                         <div className="flex flex-col gap-3 items-center">
-                            <StrengthCard key={idx} {...strength} />
+                            <StrengthCard {...strength} />
                         </div>
                     </motion.div>
                 ))}

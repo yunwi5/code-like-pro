@@ -33,7 +33,6 @@ const CreationSectionContainer: React.FC<Props> = ({
     return (
         <section
             className={`flex flex-col gap-3 ${className ?? ''}`}
-            data-testId={testId}
             id={id}
             ref={sectionRef}
         >
