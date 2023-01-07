@@ -3,9 +3,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
 
-// Layout component imports
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
+import ScrollToTop from './components/utils/ScrollToTop';
+
 // Profile nested pages
 import ProfilePages from './components/profile';
 import ForumPages from './components/forum';
@@ -40,6 +41,7 @@ function App() {
     return (
         <div className="App">
             <Header />
+            <ScrollToTop />
             <Suspense fallback={<LoadingFallback />}>
                 <Routes>
                     {/* Home page */}
