@@ -14,7 +14,7 @@ const signJwtToken = (user) => {
             pictureUrl: user.pictureUrl || '',
         },
         keys.JwtSecret,
-        { expiresIn: '1h' },
+        { expiresIn: '1d' },
     );
 };
 
