@@ -45,8 +45,10 @@ export function getShowcaseInvitesPageLink() {
     return `/showcase-invites`;
 }
 
-// Global forum links
-// Forum category page link (i.e. Interviews, Technologies)
+export function getForumLink() {
+    return '/forum';
+}
+
 export function getForumCategoryLink(section: ForumCategory) {
     return `/forum/${section}`;
 }

@@ -9,9 +9,11 @@ import { AppProperty } from '../../constants/app';
 import useForumPostQuery from '../../hooks/forum/forum-post/useForumPostQuery';
 import { PostCreationContextProvider } from '../../store/context/PostCreationContext';
 import { toastNotify } from '../../utils/notification';
+import useAuth from '../../hooks/useAuth';
+import { getForumLink } from '../../utils/links';
 
-/* Page for editing an existing forum post written by the current user. */
 const PostEditPage: React.FC = () => {
+    const { user } = useAuth();
     const navigate = useNavigate();
     const postId = useParams().id;
 
@@ -21,9 +23,16 @@ const PostEditPage: React.FC = () => {
         // If there is an error, redirect to the home page.
         if (!!error || !postId) {
             toastNotify(`Oops, something went wrong while loading your post...`, 'error');
-            navigate('/');
+            navigate(getForumLink());
         }
     }, [error, postId, navigate]);
+
+    useEffect(() => {
+        if (!post || !user) return;
+        if (post.author._id !== user._id) {
+            navigate(getForumLink());
+        }
+    }, [post]);
 
     return (
         <>

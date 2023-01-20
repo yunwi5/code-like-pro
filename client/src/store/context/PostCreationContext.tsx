@@ -104,7 +104,7 @@ export const PostCreationContextProvider: React.FC<Props> = ({
         const promise = createdPost
             ? patchForumPost(createdPost._id, postProps)
             : postForumPost(postProps);
-        const { ok, data } = await promise;
+        const { ok, data, message } = await promise;
         setIsLoading(false);
 
         if (ok && data) {
@@ -112,7 +112,7 @@ export const PostCreationContextProvider: React.FC<Props> = ({
             setCreatedPost(data);
             setPostDraft(''); // clear post draft, once the post is published
         } else {
-            toastNotify('Something went wrong while saving your post...', 'error');
+            toastNotify(`Oops, ${message}`, 'error');
         }
     };
 
