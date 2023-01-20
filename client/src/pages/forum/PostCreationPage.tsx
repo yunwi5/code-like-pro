@@ -6,9 +6,10 @@ import PostCreationMain from '../../components/forum/post-creation/PostCreationM
 import { AppProperty } from '../../constants/app';
 import { ForumCategory, ForumCategoryList } from '../../models/enums';
 import { PostCreationContextProvider } from '../../store/context/PostCreationContext';
+import useAuth from '../../hooks/useAuth';
 
-/* Page for creating a new forum post */
 const PostCreationPage: React.FC = () => {
+    useAuth();
     const [searchParams, _] = useSearchParams();
     const defaultCategory = getDefaultCategory(searchParams);
 
