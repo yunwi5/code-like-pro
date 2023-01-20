@@ -152,3 +152,16 @@
         }
     }
 }
+
+// toolbar heading
+.ql-snow .ql-picker.ql-header .ql-picker-item::before {
+    font-size: 1.2em !important;
+}
+
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
+    font-weight: 700 !important;
+}
+
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+    font-weight: 600 !important;
+}
