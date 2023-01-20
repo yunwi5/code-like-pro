@@ -6,32 +6,6 @@ hljs.configure({
     languages: ['javascript', 'python', 'cpp', 'c', 'php', 'java'],
 });
 
-// Custom Undo button icon component for Quill editor. You can import it directly
-// from 'quill/assets/icons/undo.svg' but I found that a number of loaders do not
-// handle them correctly
-const CustomUndo = () => (
-    <svg viewBox="0 0 18 18">
-        <polygon className="ql-fill ql-stroke" points="6 10 4 12 2 10 6 10" />
-        <path className="ql-stroke" d="M8.09,13.91A4.6,4.6,0,0,0,9,14,5,5,0,1,0,4,9" />
-    </svg>
-);
-
-// Redo button icon component for Quill editor
-const CustomRedo = () => (
-    <svg viewBox="0 0 18 18">
-        <polygon className="ql-fill ql-stroke" points="12 10 14 12 16 10 12 10" />
-        <path className="ql-stroke" d="M9.91,13.91A4.6,4.6,0,0,1,9,14a5,5,0,1,1,5-5" />
-    </svg>
-);
-
-// Undo and redo functions for Custom Toolbar
-function undoChange(this: any) {
-    this.quill.history.undo();
-}
-function redoChange(this: any) {
-    this.quill.history.redo();
-}
-
 const fontSizeArr = [
     '10px',
     '12px',
@@ -72,10 +46,6 @@ export const modules = {
     },
     toolbar: {
         container: '#toolbar',
-        handlers: {
-            undo: undoChange,
-            redo: redoChange,
-        },
     },
     history: {
         delay: 500,
@@ -142,14 +112,11 @@ export const QuillToolbar = () => (
         <span className="ql-formats">
             <button className="ql-list" value="ordered" />
             <button className="ql-list" value="bullet" />
-            <button className="ql-indent" value="-1" />
-            <button className="ql-indent" value="+1" />
         </span>
         <span className="ql-formats">
             <button className="ql-script" value="super" />
             <button className="ql-script" value="sub" />
             <button className="ql-blockquote" />
-            <button className="ql-direction" />
         </span>
         <span className="ql-formats">
             <select className="ql-align" />
@@ -159,20 +126,9 @@ export const QuillToolbar = () => (
         <span className="ql-formats">
             <button className="ql-link" />
             <button className="ql-image" />
-            {/* <button className="ql-video" /> */}
         </span>
         <span className="ql-formats">
-            {/* <button className="ql-formula" /> */}
             <button className="ql-code-block" />
-            <button className="ql-clean" />
-        </span>
-        <span className="ql-formats">
-            <button className="ql-undo">
-                <CustomUndo />
-            </button>
-            <button className="ql-redo">
-                <CustomRedo />
-            </button>
         </span>
     </div>
 );
