@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { ImKey } from 'react-icons/im';
 import { FaUserAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
@@ -9,6 +8,7 @@ import AuthInput from '../ui/inputs/AuthInput';
 import Button from '../ui/buttons/Button';
 import GoogleOAuth from './GoogleOAuth';
 import DoLoginOption from './DoLoginOption';
+import PasswordInput from '../ui/inputs/PasswordInput';
 
 type AuthFormState = {
     email: string;
@@ -42,7 +42,7 @@ const AuthCard = (props: Props) => {
     const showDoLogin = doLogin != null && setDoLogin;
 
     return (
-        <div className="absolute z-1 flex justify-center px-4 sm:px-6 pt-6 pb-12 min-h-[max(65%,30rem)] min-w-[min(28rem,92vw)] md:w-1/3 xl:w-1/4 bg-grey-300 after:absolute after:top-[0.55rem] after:left-2 after:z-[-1] after:shadow-lg after:w-full after:h-full after:bg-main-400">
+        <div className="absolute z-1 flex justify-center px-2 sm:px-6 pt-6 pb-12 min-h-[max(65%,30rem)] min-w-[min(28rem,92vw)] md:w-1/3 xl:w-1/4 bg-grey-300 after:hidden sm:after:block after:absolute after:top-[0.55rem] after:left-2 after:z-[-1] after:w-full after:h-full after:bg-main-400 after:shadow-lg">
             <div className="text-center w-full">
                 <h1 className="logo text-2xl font-light">CodeLikePro</h1>
 
@@ -81,25 +81,22 @@ const AuthCard = (props: Props) => {
                             icon={<MdEmail />}
                             error={props.errorState?.email}
                         />
-                        <AuthInput
-                            type="password"
+
+                        <PasswordInput
                             placeholder="Password"
                             onChange={props.onChange}
                             value={props.formState.password}
                             name="password"
                             error={props.errorState?.password}
-                            icon={<ImKey />}
                         />
 
                         {!props.isLogin && (
-                            <AuthInput
-                                type="password"
+                            <PasswordInput
                                 placeholder="Password Confirm"
                                 onChange={props.onChange}
                                 value={props.formState.passwordConfirm}
                                 name="passwordConfirm"
                                 error={props.errorState?.passwordConfirm}
-                                icon={<ImKey />}
                             />
                         )}
                     </div>

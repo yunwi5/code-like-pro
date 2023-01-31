@@ -29,13 +29,13 @@ const AuthInput = (props: AuthInputProps) => {
                 placeholder={placeholder}
             />
             {icon && (
-                <span
+                <div
                     className={
-                        'absolute text-[1rem] text-gray-400 top-[calc(3.25rem/2)] right-2 -translate-y-[50%]'
+                        'absolute text-[1.15rem] text-gray-400 top-[calc(3rem/2)] right-2 -translate-y-[50%]'
                     }
                 >
                     {icon}
-                </span>
+                </div>
             )}
 
             {error && <p className="text-left text-rose-500 text-sm">{error}</p>}
