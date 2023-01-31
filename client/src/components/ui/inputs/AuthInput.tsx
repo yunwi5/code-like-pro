@@ -18,7 +18,7 @@ const AuthInput = (props: AuthInputProps) => {
     const errorClass = error ? '!border-rose-400 !bg-rose-50 focus:outline-none' : '';
 
     return (
-        <div className="relative flex flex-col gap-1 my-3">
+        <div className="relative flex flex-col gap-1">
             <input
                 className={`w-full px-4 py-6 h-9 bg-grey-200/90 border-grey-700 border-b-[1.5px] rounded-sm ${errorClass}`}
                 id={id}

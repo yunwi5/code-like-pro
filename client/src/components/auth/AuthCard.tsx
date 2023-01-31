@@ -42,7 +42,7 @@ const AuthCard = (props: Props) => {
     const showDoLogin = doLogin != null && setDoLogin;
 
     return (
-        <div className="absolute z-1 flex justify-center px-4 sm:px-6 pt-6 pb-12 min-h-[max(65%,30rem)] min-w-[min(28rem,92vw)] md:w-1/3 xl:w-1/4 bg-grey-300 after:absolute after:top-0 after:left-0 after:z-[-1] after:shadow-lg after:w-full after:h-full after:bg-main-400 after:translate-x-2 after:translate-y-[0.6rem]">
+        <div className="absolute z-1 flex justify-center px-4 sm:px-6 pt-6 pb-12 min-h-[max(65%,30rem)] min-w-[min(28rem,92vw)] md:w-1/3 xl:w-1/4 bg-grey-300 after:absolute after:top-[0.55rem] after:left-2 after:z-[-1] after:shadow-lg after:w-full after:h-full after:bg-main-400">
             <div className="text-center w-full">
                 <h1 className="logo text-2xl font-light">CodeLikePro</h1>
 
@@ -56,47 +56,53 @@ const AuthCard = (props: Props) => {
                 </div>
 
                 <form className="flex flex-col w-full mt-3" onSubmit={props.onSubmit}>
-                    {!props.isLogin && (
+                    <div
+                        className={`flex flex-col ${
+                            props.isLogin ? 'gap-6' : 'gap-4'
+                        } mb-3`}
+                    >
+                        {!props.isLogin && (
+                            <AuthInput
+                                type="text"
+                                placeholder="Username"
+                                onChange={props.onChange}
+                                value={props.formState.name}
+                                error={props.errorState?.name}
+                                name="name"
+                                icon={<FaUserAlt />}
+                            />
+                        )}
                         <AuthInput
-                            type="text"
-                            placeholder="Username"
+                            type="email"
+                            placeholder="Email"
                             onChange={props.onChange}
-                            value={props.formState.name}
-                            error={props.errorState?.name}
-                            name="name"
-                            icon={<FaUserAlt />}
+                            value={props.formState.email}
+                            name="email"
+                            icon={<MdEmail />}
+                            error={props.errorState?.email}
                         />
-                    )}
-                    <AuthInput
-                        type="email"
-                        placeholder="Email"
-                        onChange={props.onChange}
-                        value={props.formState.email}
-                        name="email"
-                        icon={<MdEmail />}
-                        error={props.errorState?.email}
-                    />
-                    <AuthInput
-                        type="password"
-                        placeholder="Password"
-                        onChange={props.onChange}
-                        value={props.formState.password}
-                        name="password"
-                        error={props.errorState?.password}
-                        icon={<ImKey />}
-                    />
-
-                    {!props.isLogin && (
                         <AuthInput
                             type="password"
-                            placeholder="Password Confirm"
+                            placeholder="Password"
                             onChange={props.onChange}
-                            value={props.formState.passwordConfirm}
-                            name="passwordConfirm"
-                            error={props.errorState?.passwordConfirm}
+                            value={props.formState.password}
+                            name="password"
+                            error={props.errorState?.password}
                             icon={<ImKey />}
                         />
-                    )}
+
+                        {!props.isLogin && (
+                            <AuthInput
+                                type="password"
+                                placeholder="Password Confirm"
+                                onChange={props.onChange}
+                                value={props.formState.passwordConfirm}
+                                name="passwordConfirm"
+                                error={props.errorState?.passwordConfirm}
+                                icon={<ImKey />}
+                            />
+                        )}
+                    </div>
 
                     {showDoLogin && (
                         <DoLoginOption doLogin={doLogin} setDoLogin={setDoLogin} />
