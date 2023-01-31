@@ -122,27 +122,17 @@ const AuthCard = (props: Props) => {
                         {!props.isLoading && (props.isLogin ? 'Login' : 'Register')}
                     </Button>
 
-                    {props.isLogin ? (
-                        <p className="text-sm font-light mr-auto m-0">
-                            Don't have an Account?
-                            <Link
-                                to="/register"
-                                className="ml-1 font-semibold text-main-500 link-underline-effect-thin"
-                            >
-                                Sign up here
-                            </Link>
-                        </p>
-                    ) : (
-                        <p className="text-sm font-light mr-auto m-0">
-                            Already have an Account?{' '}
-                            <Link
-                                to="/login"
-                                className="ml-1 font-semibold text-main-500 link-underline-effect-thin"
-                            >
-                                Log in here
-                            </Link>
-                        </p>
-                    )}
+                    <p className="m-0 mr-auto text-sm text-gray-500">
+                        {props.isLogin
+                            ? "Don't have an Account? "
+                            : 'Already have an Account? '}
+                        <Link
+                            to={props.isLogin ? '/register' : '/login'}
+                            className="ml-1 font-semibold text-main-500 link-underline-effect-thin"
+                        >
+                            {props.isLogin ? 'Sign up here' : 'Log in here'}
+                        </Link>
+                    </p>
 
                     <GoogleOAuth />
                 </form>

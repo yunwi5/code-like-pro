@@ -16,7 +16,7 @@ const DoLoginOption: FC<Props> = ({ doLogin, setDoLogin }) => {
                 checked={doLogin}
                 onChange={() => setDoLogin((ps) => !ps)}
             />
-            <label className="text-sm font-light" htmlFor="do-login">
+            <label className="text-sm text-gray-500" htmlFor="do-login">
                 Get logged in after register
             </label>
         </div>
