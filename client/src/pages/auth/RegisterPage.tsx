@@ -12,7 +12,7 @@ const RegisterPage = () => {
                     content={`Registration page of ${AppProperty.APP_NAME} where users can create a new account.`}
                 />
             </Helmet>
-            <main className="flex justify-center min-h-[80vh] px-3 md:px-5 xl:px-10 py-10 text-gray-700">
+            <main className="flex-center min-h-[max(85vh,35rem)] px-3 md:px-5 xl:px-10 py-10 text-gray-700">
                 <RegisterForm />
             </main>
         </>
