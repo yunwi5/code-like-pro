@@ -5,10 +5,10 @@ import { FaUserAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
 import AuthInput from '../ui/inputs/AuthInput';
+import PasswordInput from '../ui/inputs/PasswordInput';
 import Button from '../ui/buttons/Button';
 import GoogleOAuth from './GoogleOAuth';
 import DoLoginOption from './DoLoginOption';
-import PasswordInput from '../ui/inputs/PasswordInput';
 
 type AuthFormState = {
     email: string;
@@ -25,7 +25,7 @@ type AuthErrorState = {
     overall: string;
 };
 
-type Props = {
+type AuthCardProps = {
     isLogin: boolean;
     onSubmit: (e: React.FormEvent) => void;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -36,8 +36,17 @@ type Props = {
     setDoLogin?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const AuthCard = (props: Props) => {
-    const { doLogin, setDoLogin } = props;
+const AuthCard = (props: AuthCardProps) => {
+    const {
+        isLogin,
+        onSubmit,
+        onChange,
+        formState,
+        errorState,
+        isLoading,
+        doLogin,
+        setDoLogin,
+    } = props;
 
     const showDoLogin = doLogin != null && setDoLogin;
 
@@ -47,27 +56,21 @@ const AuthCard = (props: Props) => {
                 <h1 className="logo text-2xl font-light">CodeLikePro</h1>
 
                 <div>
-                    <h2 className="text-xl mt-3">
-                        {props.isLogin ? 'Login' : 'Register'}
-                    </h2>
+                    <h2 className="text-xl mt-3">{isLogin ? 'Login' : 'Register'}</h2>
                     <p className="text-sm font-light">
-                        {props.isLogin ? 'Sign in to your account' : 'Create an account'}
+                        {isLogin ? 'Sign in to your account' : 'Create an account'}
                     </p>
                 </div>
 
-                <form className="flex flex-col w-full mt-3" onSubmit={props.onSubmit}>
-                    <div
-                        className={`flex flex-col ${
-                            props.isLogin ? 'gap-6' : 'gap-4'
-                        } mb-3`}
-                    >
-                        {!props.isLogin && (
+                <form className="flex flex-col w-full mt-3" onSubmit={onSubmit}>
+                    <div className={`flex flex-col ${isLogin ? 'gap-6' : 'gap-4'} mb-3`}>
+                        {!isLogin && (
                             <AuthInput
                                 type="text"
                                 placeholder="Username"
-                                onChange={props.onChange}
-                                value={props.formState.name}
-                                error={props.errorState?.name}
+                                onChange={onChange}
+                                value={formState.name}
+                                error={errorState?.name}
                                 name="name"
                                 icon={<FaUserAlt />}
                             />
@@ -75,28 +78,28 @@ const AuthCard = (props: Props) => {
                         <AuthInput
                             type="email"
                             placeholder="Email"
-                            onChange={props.onChange}
-                            value={props.formState.email}
+                            onChange={onChange}
+                            value={formState.email}
                             name="email"
                             icon={<MdEmail />}
-                            error={props.errorState?.email}
+                            error={errorState?.email}
                         />
 
                         <PasswordInput
                             placeholder="Password"
-                            onChange={props.onChange}
-                            value={props.formState.password}
+                            onChange={onChange}
+                            value={formState.password}
                             name="password"
-                            error={props.errorState?.password}
+                            error={errorState?.password}
                         />
 
-                        {!props.isLogin && (
+                        {!isLogin && (
                             <PasswordInput
                                 placeholder="Password Confirm"
-                                onChange={props.onChange}
-                                value={props.formState.passwordConfirm}
+                                onChange={onChange}
+                                value={formState.passwordConfirm}
                                 name="passwordConfirm"
-                                error={props.errorState?.passwordConfirm}
+                                error={errorState?.passwordConfirm}
                             />
                         )}
                     </div>
@@ -105,29 +108,27 @@ const AuthCard = (props: Props) => {
                         <DoLoginOption doLogin={doLogin} setDoLogin={setDoLogin} />
                     )}
 
-                    {props.errorState?.overall && (
-                        <p className="text-rose-500 text-left">
-                            {props.errorState.overall}
-                        </p>
+                    {errorState?.overall && (
+                        <p className="text-rose-500 text-left">{errorState.overall}</p>
                     )}
 
                     <Button
                         type="submit"
                         className={'min-w-[10rem] my-3 py-[0.7rem] w-full'}
                     >
-                        {props.isLoading && <ClipLoader color="#fff" size={30} />}
-                        {!props.isLoading && (props.isLogin ? 'Login' : 'Register')}
+                        {isLoading && <ClipLoader color="#fff" size={30} />}
+                        {!isLoading && (isLogin ? 'Login' : 'Register')}
                     </Button>
 
                     <p className="m-0 mr-auto text-sm text-gray-500">
-                        {props.isLogin
+                        {isLogin
                             ? "Don't have an Account? "
                             : 'Already have an Account? '}
                         <Link
-                            to={props.isLogin ? '/register' : '/login'}
+                            to={isLogin ? '/register' : '/login'}
                             className="ml-1 font-semibold text-main-500 link-underline-effect-thin"
                         >
-                            {props.isLogin ? 'Sign up here' : 'Log in here'}
+                            {isLogin ? 'Sign up here' : 'Log in here'}
                         </Link>
                     </p>
 
