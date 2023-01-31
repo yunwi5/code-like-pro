@@ -42,7 +42,7 @@ const AuthCard = (props: Props) => {
     const showDoLogin = doLogin != null && setDoLogin;
 
     return (
-        <div className="absolute z-1 flex justify-center px-2 sm:px-6 pt-6 pb-12 min-h-[max(65%,30rem)] min-w-[min(28rem,92vw)] md:w-1/3 xl:w-1/4 bg-grey-300 after:hidden sm:after:block after:absolute after:top-[0.55rem] after:left-2 after:z-[-1] after:w-full after:h-full after:bg-main-400 after:shadow-lg">
+        <div className="absolute flex justify-center px-2 sm:px-6 pt-6 pb-12 min-w-[min(28rem,92vw)] xl:w-1/4 bg-grey-300 after:hidden sm:after:block after:absolute after:top-[0.55rem] after:left-2 after:z-[-1] after:w-full after:h-full after:bg-main-400 after:shadow-[7px_8px_1px_rgba(0,0,0,0.3)]">
             <div className="text-center w-full">
                 <h1 className="logo text-2xl font-light">CodeLikePro</h1>
 
