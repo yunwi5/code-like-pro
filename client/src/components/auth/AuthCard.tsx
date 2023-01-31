@@ -10,8 +10,6 @@ import Button from '../ui/buttons/Button';
 import GoogleOAuth from './GoogleOAuth';
 import DoLoginOption from './DoLoginOption';
 
-const btnClass = 'min-w-[10rem] my-3 w-full';
-
 type AuthFormState = {
     email: string;
     password: string;
@@ -44,106 +42,104 @@ const AuthCard = (props: Props) => {
     const showDoLogin = doLogin != null && setDoLogin;
 
     return (
-        <div className="flex justify-center">
-            <div className="absolute z-0 bg-main-400 min-h-[max(65%,30rem)] min-w-[min(26rem,92vw)] md:w-1/3 xl:w-1/4 translate-x-2 translate-y-2" />
-            <div className="absolute z-1 flex justify-center px-4 sm:px-6 py-6 min-h-[max(65%,30rem)] min-w-[min(26rem,92vw)] md:w-1/3 xl:w-1/4 bg-grey-300">
-                <div className="text-center w-full">
-                    <h1 className="logo text-2xl font-light">CodeLikePro</h1>
+        <div className="absolute z-1 flex justify-center px-4 sm:px-6 pt-6 pb-12 min-h-[max(65%,30rem)] min-w-[min(28rem,92vw)] md:w-1/3 xl:w-1/4 bg-grey-300 after:absolute after:top-0 after:left-0 after:z-[-1] after:shadow-lg after:w-full after:h-full after:bg-main-400 after:translate-x-2 after:translate-y-[0.6rem]">
+            <div className="text-center w-full">
+                <h1 className="logo text-2xl font-light">CodeLikePro</h1>
 
-                    <div>
-                        <h2 className="text-xl mt-3">
-                            {props.isLogin ? 'Login' : 'Register'}
-                        </h2>
-                        <p className="text-sm font-light">
-                            {props.isLogin
-                                ? 'Sign in to your account'
-                                : 'Create an account'}
-                        </p>
-                    </div>
+                <div>
+                    <h2 className="text-xl mt-3">
+                        {props.isLogin ? 'Login' : 'Register'}
+                    </h2>
+                    <p className="text-sm font-light">
+                        {props.isLogin ? 'Sign in to your account' : 'Create an account'}
+                    </p>
+                </div>
 
-                    <form className="flex flex-col w-full" onSubmit={props.onSubmit}>
-                        {!props.isLogin && (
-                            <AuthInput
-                                type="text"
-                                placeholder="Username"
-                                onChange={props.onChange}
-                                value={props.formState.name}
-                                error={props.errorState?.name}
-                                name="name"
-                                icon={<FaUserAlt />}
-                            />
-                        )}
+                <form className="flex flex-col w-full mt-3" onSubmit={props.onSubmit}>
+                    {!props.isLogin && (
                         <AuthInput
-                            type="email"
-                            placeholder="Email"
+                            type="text"
+                            placeholder="Username"
                             onChange={props.onChange}
-                            value={props.formState.email}
-                            name="email"
-                            icon={<MdEmail />}
-                            error={props.errorState?.email}
+                            value={props.formState.name}
+                            error={props.errorState?.name}
+                            name="name"
+                            icon={<FaUserAlt />}
                         />
+                    )}
+                    <AuthInput
+                        type="email"
+                        placeholder="Email"
+                        onChange={props.onChange}
+                        value={props.formState.email}
+                        name="email"
+                        icon={<MdEmail />}
+                        error={props.errorState?.email}
+                    />
+                    <AuthInput
+                        type="password"
+                        placeholder="Password"
+                        onChange={props.onChange}
+                        value={props.formState.password}
+                        name="password"
+                        error={props.errorState?.password}
+                        icon={<ImKey />}
+                    />
+
+                    {!props.isLogin && (
                         <AuthInput
                             type="password"
-                            placeholder="Password"
+                            placeholder="Password Confirm"
                             onChange={props.onChange}
-                            value={props.formState.password}
-                            name="password"
-                            error={props.errorState?.password}
+                            value={props.formState.passwordConfirm}
+                            name="passwordConfirm"
+                            error={props.errorState?.passwordConfirm}
                             icon={<ImKey />}
                         />
+                    )}
 
-                        {!props.isLogin && (
-                            <AuthInput
-                                type="password"
-                                placeholder="Password Confirm"
-                                onChange={props.onChange}
-                                value={props.formState.passwordConfirm}
-                                name="passwordConfirm"
-                                error={props.errorState?.passwordConfirm}
-                                icon={<ImKey />}
-                            />
-                        )}
+                    {showDoLogin && (
+                        <DoLoginOption doLogin={doLogin} setDoLogin={setDoLogin} />
+                    )}
 
-                        {showDoLogin && (
-                            <DoLoginOption doLogin={doLogin} setDoLogin={setDoLogin} />
-                        )}
+                    {props.errorState?.overall && (
+                        <p className="text-rose-500 text-left">
+                            {props.errorState.overall}
+                        </p>
+                    )}
 
-                        {props.errorState?.overall && (
-                            <p className="text-rose-500 text-left">
-                                {props.errorState.overall}
-                            </p>
-                        )}
+                    <Button
+                        type="submit"
+                        className={'min-w-[10rem] my-3 py-[0.7rem] w-full'}
+                    >
+                        {props.isLoading && <ClipLoader color="#fff" size={30} />}
+                        {!props.isLoading && (props.isLogin ? 'Login' : 'Register')}
+                    </Button>
 
-                        <Button type="submit" className={btnClass}>
-                            {props.isLoading && <ClipLoader color="#fff" size={30} />}
-                            {!props.isLoading && (props.isLogin ? 'Login' : 'Register')}
-                        </Button>
+                    {props.isLogin ? (
+                        <p className="text-sm font-light mr-auto m-0">
+                            Don't have an Account?
+                            <Link
+                                to="/register"
+                                className="ml-1 font-semibold text-main-500 link-underline-effect-thin"
+                            >
+                                Sign up here
+                            </Link>
+                        </p>
+                    ) : (
+                        <p className="text-sm font-light mr-auto m-0">
+                            Already have an Account?{' '}
+                            <Link
+                                to="/login"
+                                className="ml-1 font-semibold text-main-500 link-underline-effect-thin"
+                            >
+                                Log in here
+                            </Link>
+                        </p>
+                    )}
 
-                        {props.isLogin ? (
-                            <p className="text-sm font-light mr-auto m-0">
-                                Don't have an Account?{' '}
-                                <Link
-                                    to="/register"
-                                    className="ml-1 font-semibold text-main-500 link-underline-effect-thin"
-                                >
-                                    Sign up here
-                                </Link>
-                            </p>
-                        ) : (
-                            <p className="text-sm font-light mr-auto m-0">
-                                Already have an Account?{' '}
-                                <Link
-                                    to="/login"
-                                    className="ml-1 font-semibold text-main-500 link-underline-effect-thin"
-                                >
-                                    Log in here
-                                </Link>
-                            </p>
-                        )}
-
-                        <GoogleOAuth />
-                    </form>
-                </div>
+                    <GoogleOAuth />
+                </form>
             </div>
         </div>
     );

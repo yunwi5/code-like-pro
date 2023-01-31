@@ -13,7 +13,7 @@ const LoginPage = () => {
                     content={`Login page of ${AppProperty.APP_NAME} where users can log into their accounts.`}
                 />
             </Helmet>
-            <main className="flex justify-center lg:gap-8 xl:gap-[7.5%] mb-6 min-h-[max(80vh,35rem)] px-3 md:px-5 xl:px-10 py-16 text-gray-700">
+            <main className="flex-center lg:gap-8 xl:gap-[7.5%] mb-6 min-h-[max(85vh,35rem)] px-3 md:px-5 xl:px-10 py-16 text-gray-700">
                 <LoginForm />
             </main>
         </>
