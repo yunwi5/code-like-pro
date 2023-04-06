@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 
 interface Props {
@@ -17,7 +17,7 @@ const ActiveLink: React.FC<Props> = ({
   children,
   onClick,
 }) => {
-  const pathname = useRouter().pathname;
+  const pathname = usePathname();
   const isActive = pathname === href;
 
   return (
