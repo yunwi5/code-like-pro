@@ -11,142 +11,142 @@
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: 'Red Hat Display', sans-serif;
-    scroll-behavior: smooth;
-    min-height: 100vh;
-    overflow-x: hidden;
+  font-family: 'Red Hat Display', sans-serif;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  overflow-x: hidden;
 
-    // firefox scrollbar
-    scrollbar-width: thin;
-    scrollbar-color: rgba($color-main-300, 0.8) #f9f9f9;
+  // firefox scrollbar
+  scrollbar-width: thin;
+  scrollbar-color: rgba($color-main-300, 0.8) #f9f9f9;
+}
+
+body {
+  min-height: 100vh;
 }
 
 // Chrome like browser scrollbars
 *::-webkit-scrollbar {
-    width: 7.5px;
-    height: 100%;
+  width: 7.5px;
+  height: 100%;
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: rgba($color-main-300, 0.7);
-    border-radius: 30px;
+  background-color: rgba($color-main-300, 0.7);
+  border-radius: 30px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-    background-color: $color-main-300;
+  background-color: $color-main-300;
 }
 
 *::-webkit-scrollbar-track {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 // Mouse selection color
 ::selection {
-    background-color: $color-main-400;
-    color: #f9f9f9;
+  background-color: $color-main-400;
+  color: #f9f9f9;
 }
 
 .logo {
-    font-family: 'Red Hat Mono', monospace;
-    font-weight: 400;
+  font-family: 'Red Hat Mono', monospace;
+  font-weight: 400;
 }
 
 .main-font {
-    font-family: 'Red Hat Display', sans-serif;
+  font-family: 'Red Hat Display', sans-serif;
 }
 
 // Default input styles
 input,
 textarea,
 select {
-    &:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-    }
-    &:focus {
-        outline: 0.12rem solid #7b79f7;
-    }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  &:focus {
+    outline: 0.12rem solid #7b79f7;
+  }
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 
-    &:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-    }
-}
-
-.App {
-    min-height: 100vh;
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 @layer components {
-    .flex-center {
-        @apply flex justify-center items-center;
-    }
-    .flex-start {
-        @apply flex justify-start items-center;
-    }
-    .flex-end {
-        @apply flex justify-end items-center;
-    }
-    .flex-between {
-        @apply flex justify-between items-center;
-    }
-    .pos-center {
-        @apply top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%];
-    }
-    .focus-main {
-        @apply focus:outline focus:outline-2 focus:outline-main-300;
-    }
-    .input {
-        @apply px-2 py-2 min-h-[2.5rem] border-2 border-gray-300 bg-gray-50 rounded-sm shadow-md focus:shadow-lg focus:outline focus:outline-2 focus:border-transparent;
-    }
-    .btn {
-        @apply px-3 py-2 text-lg transition-all rounded-sm shadow hover:shadow-md cursor-pointer;
-    }
-    .btn-fill {
-        @apply text-gray-50 bg-main-400 hover:bg-main-500 border-2 border-main-400 hover:border-main-500;
-    }
-    .btn-empty {
-        @apply text-main-600 border-2 border-main-400 bg-main-50/20 hover:bg-main-500 hover:text-main-50;
-    }
-    .btn-small {
-        @apply px-2 py-[0.3rem] text-base;
-    }
-    .btn-large {
-        @apply px-4 py-2 text-xl;
-    }
-    .btn-social {
-        @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200 border-transparent hover:border-transparent;
-    }
-    .btn-disabled {
-        @apply opacity-50 cursor-not-allowed;
-    }
-    .btn-dark {
-        @apply bg-gray-700/[88] text-gray-50 hover:bg-gray-800 hover:text-white;
-    }
-    .btn-light {
-        @apply bg-white text-gray-600 hover:bg-gray-50 hover:text-main-500;
-    }
-    .icon-box {
-        @apply flex-center text-2xl border-[1.5px] rounded-sm shadow-md transition-all cursor-pointer;
-    }
-    .card {
-        @apply rounded-sm transition-all shadow-md hover:shadow-lg;
-    }
-    .mark {
-        @apply px-1 bg-slate-200 text-main-400 rounded;
-    }
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .flex-start {
+    @apply flex justify-start items-center;
+  }
+  .flex-end {
+    @apply flex justify-end items-center;
+  }
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+  .pos-center {
+    @apply top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%];
+  }
+  .focus-main {
+    @apply focus:outline focus:outline-2 focus:outline-main-300;
+  }
+  .input {
+    @apply px-2 py-2 min-h-[2.5rem] border-2 border-gray-300 bg-gray-50 rounded-sm shadow-md focus:shadow-lg focus:outline focus:outline-2 focus:border-transparent;
+  }
+  .btn {
+    @apply px-3 py-2 text-lg transition-all rounded-sm shadow hover:shadow-md cursor-pointer;
+  }
+  .btn-fill {
+    @apply text-gray-50 bg-main-400 hover:bg-main-500 border-2 border-main-400 hover:border-main-500;
+  }
+  .btn-empty {
+    @apply text-main-600 border-2 border-main-400 bg-main-50/20 hover:bg-main-500 hover:text-main-50;
+  }
+  .btn-small {
+    @apply px-2 py-[0.3rem] text-base;
+  }
+  .btn-large {
+    @apply px-4 py-2 text-xl;
+  }
+  .btn-social {
+    @apply bg-grey-500 text-main-400 px-3 py-2 text-lg transition-all shadow-sm hover:shadow-md cursor-pointer hover:bg-grey-200 border-transparent hover:border-transparent;
+  }
+  .btn-disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+  .btn-dark {
+    @apply bg-gray-700/[88] text-gray-50 hover:bg-gray-800 hover:text-white;
+  }
+  .btn-light {
+    @apply bg-white text-gray-600 hover:bg-gray-50 hover:text-main-500;
+  }
+  .icon-box {
+    @apply flex-center text-2xl border-[1.5px] rounded-sm shadow-md transition-all cursor-pointer;
+  }
+  .card {
+    @apply rounded-sm transition-all shadow-md hover:shadow-lg;
+  }
+  .mark {
+    @apply px-1 bg-slate-200 text-main-400 rounded;
+  }
 }
