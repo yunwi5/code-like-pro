@@ -1,4 +1,4 @@
-import { deleteRequest, getRequest, patchRequest, postRequest } from './requests.api';
+import { deleteRequest, getRequest, patchRequest, postRequest } from './common-requests';
 import { IComment } from '../models/interfaces';
 
 const API_DOMAIN = '/comment';

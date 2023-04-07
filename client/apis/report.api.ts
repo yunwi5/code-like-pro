@@ -1,5 +1,5 @@
 import { IIssueReport } from '../models/interfaces';
-import { deleteRequest, postRequest } from './requests.api';
+import { deleteRequest, postRequest } from './common-requests';
 
 const API_DOMAIN = `/report`;
 

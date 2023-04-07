@@ -1,4 +1,4 @@
-import { getRequest } from './requests.api';
+import { getRequest } from './common-requests';
 import { IRanking } from '../models/interfaces';
 import { ProgrammingTopic } from '../models/enums';
 

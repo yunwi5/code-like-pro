@@ -1,4 +1,4 @@
-import { postRequest } from './requests.api';
+import { postRequest } from './common-requests';
 
 const API_DOMAIN = `/image`;
 
