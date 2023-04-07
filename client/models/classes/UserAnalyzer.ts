@@ -5,7 +5,7 @@ import {
     getLanguageChartDataArray,
     getSubmissionStatusDataArray,
     getTopicChartDataArray,
-} from '../../utils/analysis-utils/categorical-analysis';
+} from '../../utils/analysis-utils/categorical-analysis.util';
 import {
     getDailyExerciseAttemptTrendData,
     getDailyExerciseCreationTrendData,
@@ -15,7 +15,7 @@ import {
     getWeeklyExerciseCreationTrendData,
     getYearlyExerciseAttemptTrendData,
     getYearlyExerciseCreationTrendData,
-} from '../../utils/analysis-utils/trend-analysis';
+} from '../../utils/analysis-utils/trend-analysis.util';
 
 export class UserAnalyzer {
     constructor(

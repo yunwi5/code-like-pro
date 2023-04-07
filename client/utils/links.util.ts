@@ -6,7 +6,7 @@ import {
     ShowCaseSection,
 } from '../models/enums';
 import { IForumPost, IForumPostPopulated } from '../models/interfaces';
-import { ProfileLinkMap } from './profile';
+import { ProfileLinkMap } from './profile.util';
 import { convertToUrlString } from './string-utils/url.util';
 
 export function getBrowsingPageLink() {

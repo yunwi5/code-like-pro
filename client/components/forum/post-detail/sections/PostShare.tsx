@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { BsShare } from 'react-icons/bs';
 import { AppProperty } from '../../../../constants/app';
 import { IForumPostPopulated } from '../../../../models/interfaces';
-import { getForumPostLink } from '../../../../utils/links';
+import { getForumPostLink } from '../../../../utils/links.util';
 import HoveringLabel from '../../../ui/tooltip/HoveringLabel';
 import SocialPanel from '../../../ui/social/SocialPanel';
 

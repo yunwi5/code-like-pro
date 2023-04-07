@@ -1,4 +1,4 @@
-import { getProfileSectionIcon, ProfileLinkMap } from '../../utils/profile';
+import { getProfileSectionIcon, ProfileLinkMap } from '../../utils/profile.util';
 import ActiveLink from '../ui/links/ActiveLink';
 import { ProfileSection, ProfileSectionList } from '../../models/enums';
 import { useState } from 'react';

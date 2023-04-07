@@ -1,6 +1,6 @@
 import { Language } from '../../models/enums';
 import { ITestCase, ITestCaseWithOutput, ITestOutput } from '../../models/interfaces';
-import { removeCommentLines } from '../string-utils/string-manipulation';
+import { removeCommentLines } from '../string-utils/string-manipulation.util';
 
 // Creater's initial test case
 export function getEmptyTestCase(testCaseNumber?: number): ITestCase {

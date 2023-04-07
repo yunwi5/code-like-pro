@@ -1,6 +1,6 @@
 import { Difficulty, DifficultyList } from '../models/enums';
 import { IDifficultyVote, IExerciseWithId } from '../models/interfaces';
-import { round } from './number';
+import { round } from './number.util';
 
 export const MAX_DIFFICULTY_VALUE = DifficultyList.length;
 

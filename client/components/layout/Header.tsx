@@ -7,9 +7,9 @@ import Link from 'next/link';
 
 import { Logo } from '../../assets';
 import { ForumCategoryList, ProfileSectionList } from '../../models/enums';
-import { ForumIcons } from '../../utils/forum';
-import { getForumCategoryLink } from '../../utils/links';
-import { ProfileLinkMap } from '../../utils/profile';
+import { ForumIcons } from '../../utils/forum.util';
+import { getForumCategoryLink } from '../../utils/links.util';
+import { ProfileLinkMap } from '../../utils/profile.util';
 import { useUserContext } from '../../store/context/UserContext';
 import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
 import ActiveLink from '../ui/links/ActiveLink';

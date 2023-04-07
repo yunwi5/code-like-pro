@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { AppProperty } from '../constants/app';
-import { getJwtUserLocally } from '../utils/localStorage';
+import { getJwtUserLocally } from '../utils/localStorage.util';
 
 const api = axios.create({
     baseURL: `${AppProperty.SERVER_DOMAIN}/api`,

@@ -1,8 +1,8 @@
 import { Quill } from 'react-quill';
 import ImageUploader from 'quill-image-uploader';
 import { postExercisePromptImage } from '../../../../apis/image.api';
-import { customToastNotify, toastNotify } from '../../../../utils/notification';
-import { toBase64Image } from '../../../../utils/image';
+import { customToastNotify, toastNotify } from '../../../../utils/notification.util';
+import { toBase64Image } from '../../../../utils/image.util';
 import { toast } from 'react-toastify';
 
 // Image uploader module

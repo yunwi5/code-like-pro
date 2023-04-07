@@ -4,12 +4,12 @@ import { useRouter } from 'next/navigation';
 import useUserQuery from '../../hooks/user/user-detail/useUserDetailQuery';
 import { getLoginSuccess, loginRequest } from '../../apis/auth.api';
 import { IUser, IUserContext } from '../../models/interfaces';
-import { createSubmissionMap } from '../../utils/user-submission';
+import { createSubmissionMap } from '../../utils/user-submission.util';
 import {
   clearJwtUserLocally,
   getJwtUserLocally,
   saveJwtUserLocally,
-} from '../../utils/localStorage';
+} from '../../utils/localStorage.util';
 
 type LoginState = { email: string; password: string };
 
