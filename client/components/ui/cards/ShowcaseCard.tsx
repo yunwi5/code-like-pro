@@ -18,7 +18,7 @@ import CommentForm from '../comments/CommentForm';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import SocialPanel from '../social/SocialPanel';
-import { AppProperty } from '../../../constants/app';
+import { AppProperty } from '../../../constants';
 import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import { SortingDirection, VotingItemSortingKey } from '../../../models/enums';
 

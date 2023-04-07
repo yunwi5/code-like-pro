@@ -5,7 +5,7 @@ import { wrap } from 'popmotion';
 
 import { mod } from '../../../utils/number.util';
 import { AppImages } from '../../../assets/app-images';
-import { AppProperty } from '../../../constants/app';
+import { AppProperty } from '../../../constants';
 import './Carousel.scss';
 
 const variants = {

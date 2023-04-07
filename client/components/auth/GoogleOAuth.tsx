@@ -3,7 +3,7 @@ import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { createOrGetGoogleUser } from '../../apis/auth.api';
 import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification.util';
-import { AppProperty } from '../../constants/app';
+import { AppProperty } from '../../constants';
 import { GoogleIcon } from '../../assets/svg-icons/social-svgs';
 import Button from '../ui/buttons/Button';
 

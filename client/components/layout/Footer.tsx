@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { AppProperty } from '../../constants/app';
+import { AppProperty } from '../../constants';
 import {
   FacebookIcon,
   InstagramIcon,
