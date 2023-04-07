@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { AppProperty } from '../constants/app';
+import { AppProperty } from '../constants';
 import { getJwtUserLocally } from '../utils/localStorage.util';
 
 type ReqParams = {
