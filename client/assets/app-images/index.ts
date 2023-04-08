@@ -6,12 +6,12 @@ import Ranking from './ranking.jpg';
 import Statistics from './statistics.jpg';
 
 export const AppImages = {
-    ExerciseCreation,
-    ExerciseAttempt,
-    Showcases,
-    Ranking,
-    ExerciseBrowsing,
-    Statistics,
+  ExerciseCreation,
+  ExerciseAttempt,
+  Showcases,
+  Ranking,
+  ExerciseBrowsing,
+  Statistics,
 };
 
 export const AppImagesList = Object.values(AppImages);

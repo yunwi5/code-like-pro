@@ -5,13 +5,13 @@ import TextEditor from '../../ui/editor/text-editor/TextEditor';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
 const CreationPrompt: React.FC = () => {
-    const { prompt, setPrompt } = useExerciseCreationContext();
+  const { prompt, setPrompt } = useExerciseCreationContext();
 
-    return (
-        <CreationSectionContainer title="Prompt" id={CreationSection.PROMPT}>
-            <TextEditor onChange={setPrompt} value={prompt} />
-        </CreationSectionContainer>
-    );
+  return (
+    <CreationSectionContainer title="Prompt" id={CreationSection.PROMPT}>
+      <TextEditor onChange={setPrompt} value={prompt} />
+    </CreationSectionContainer>
+  );
 };
 
 export default CreationPrompt;

@@ -14,18 +14,18 @@ import Default from './default.jpg';
 export const DefaultProfile = Default;
 
 export const AvatarImages = {
-    Avatar1,
-    Avatar2,
-    Avatar4,
-    Avatar5,
-    Avatar6,
-    Avatar7,
-    Avatar8,
-    Avatar9,
-    Avatar10,
-    Avatar11,
-    Avatar12,
+  Avatar1,
+  Avatar2,
+  Avatar4,
+  Avatar5,
+  Avatar6,
+  Avatar7,
+  Avatar8,
+  Avatar9,
+  Avatar10,
+  Avatar11,
+  Avatar12,
 };
 
 export const AvatarImagesList = Object.values(AvatarImages);
-export const AvatarImageSrcList = AvatarImagesList.map((image) => image.src); 
+export const AvatarImageSrcList = AvatarImagesList.map((image) => image.src);

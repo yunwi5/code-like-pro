@@ -4,11 +4,11 @@ import exerciseBrowsingSlice from './browsing-slice';
 import forumBrowsingSlice from './forum-slice';
 
 const store = configureStore({
-    reducer: {
-        browsing: exerciseBrowsingSlice.reducer,
-        forum: forumBrowsingSlice.reducer,
-    },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  reducer: {
+    browsing: exerciseBrowsingSlice.reducer,
+    forum: forumBrowsingSlice.reducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 export default store;
