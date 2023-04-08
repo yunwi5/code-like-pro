@@ -1,6 +1,6 @@
+import { useTopicParam } from '@/hooks/utils/useTopicParam';
 import Link from 'next/link';
 import { ProgrammingTopicList } from '../../models/enums';
-import { useTopicParam } from '../../pages/ranking/TopicRankingPage';
 import { getGlobalRankigLink, getTopicRankingLink } from '../../utils/links.util';
 import ActiveLink from '../ui/links/ActiveLink';
 import RankingHeader from './sections/RankingHeader';
