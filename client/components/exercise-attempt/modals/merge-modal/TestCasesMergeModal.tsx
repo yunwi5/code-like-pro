@@ -47,8 +47,6 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
   const { addCustomTest } = useCustomTests();
   const [requestLoading, setRequestLoading] = useState(false);
 
-  if (exercise == null) return null;
-
   const mergeTestCases = useCallback(async () => {
     const newTests = customTests.map((test) => ({
       ...test,
@@ -57,7 +55,7 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
     }));
 
     setRequestLoading(true);
-    const { ok, data, message } = await postTestCasesMerge(exercise._id, newTests);
+    const { ok, data, message } = await postTestCasesMerge(exercise!._id, newTests);
     setRequestLoading(false);
 
     if (ok && data) {
@@ -75,12 +73,14 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
     } else {
       toastNotify(`Error: ${message}`, 'error');
     }
-  }, [exercise._id, customTests, onClose]);
+  }, [exercise?._id, customTests, onClose]);
 
   const renamedTests = useMemo(
     () => renameTestCases(testCasesWithOutputs),
     [testCasesWithOutputs],
   );
+
+  if (exercise == null) return null;
 
   return (
     <AnimationModal

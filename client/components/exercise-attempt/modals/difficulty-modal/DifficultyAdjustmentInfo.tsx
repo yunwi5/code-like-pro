@@ -29,13 +29,13 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
       </h3>
 
       <p>
-        We consider creator's difficulty <strong>(25%)</strong> and users' average
-        difficulty ratings <strong>(75%)</strong>
+        We consider creator&apos;s difficulty <strong>(25%)</strong> and users&apos;
+        average difficulty ratings <strong>(75%)</strong>
       </p>
 
       <div>
         <h4 className="flex-start gap-2">
-          Creator's Difficulty:{' '}
+          Creator&apos;s Difficulty:{' '}
           <span
             style={{
               color: DifficultyColorMap[exercise.difficulty],

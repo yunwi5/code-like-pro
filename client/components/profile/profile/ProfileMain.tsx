@@ -138,6 +138,7 @@ const ProfileMainBody = () => {
   );
 };
 
+// eslint-disable-next-line react/display-name
 const ProfileHeader = React.memo(() => (
   <div className="flex flex-col">
     <h2 className="text-2xl">My Profile</h2>

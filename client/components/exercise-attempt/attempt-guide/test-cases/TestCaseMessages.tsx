@@ -31,11 +31,17 @@ function generateOutputMessages(testCases: ITestCaseWithOutput[]) {
   const allHiddenTestsCorrect = hiddenTestCorrectCount === hiddenTestCasesCount;
 
   return [
-    <p className={`${allOpenTestsCorrect ? 'text-emerald-500' : 'text-rose-500'}`}>
+    <p
+      key={'tests-correct'}
+      className={`${allOpenTestsCorrect ? 'text-emerald-500' : 'text-rose-500'}`}
+    >
       Open Test{openTestCorrectCount !== 1 && 's'} {openTestCorrectCount}/
       {openTestCasesCount} Correct
     </p>,
-    <p className={`${allHiddenTestsCorrect ? 'text-emerald-500' : 'text-rose-500'}`}>
+    <p
+      key={'tests-incorrect'}
+      className={`${allHiddenTestsCorrect ? 'text-emerald-500' : 'text-rose-500'}`}
+    >
       Hidden Test{hiddenTestCorrectCount !== 1 && 's'} {hiddenTestCorrectCount}/
       {hiddenTestCasesCount} Correct
     </p>,

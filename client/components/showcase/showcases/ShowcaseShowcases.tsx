@@ -12,14 +12,12 @@ import { useUserContext } from '../../../store/context/UserContext';
 const ShowcaseShowcases: React.FC = () => {
   const { userDetail } = useUserContext();
   const { exercise, showcases, showcasesLoading } = useShowcase();
-  // Showcase badge reward
   const { qualifyShowcaseBadges } = useBadgeQualification();
 
   const [sortingState, setSortingState] = useState({
     key: VotingItemSortingKey.VOTES,
     direction: SortingDirection.DESCENDING,
   });
-  if (!exercise) return null;
 
   // Whenver sorting state changes, sort the showcases again.
   const sortedShowcases = useMemo(() => {
@@ -36,10 +34,11 @@ const ShowcaseShowcases: React.FC = () => {
     qualifyShowcaseBadges();
   }, [currentUserShowcase, qualifyShowcaseBadges]);
 
+  if (!exercise) return null;
+
   return (
     <div className="flex flex-col px-1 md:px-4">
       <div className="flex flex-wrap flex-row justify-between items-center gap-x-3 mb-5">
-        {/* Component that handles the selection of sorting key and direction from the user. */}
         <VotingItemSorter sortingState={sortingState} setSortingState={setSortingState} />
         <h5 className="text-gray-500 font-bold text-lg">{showcases.length} Showcases</h5>
       </div>
