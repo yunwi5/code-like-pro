@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { createOrGetGoogleUser } from '../../apis/auth.api';
 import { useUserContext } from '../../store/context/UserContext';
@@ -6,9 +5,10 @@ import { toastNotify } from '../../utils/notification.util';
 import { AppProperty } from '../../constants';
 import { GoogleIcon } from '../../assets/svg-icons/social-svgs';
 import Button from '../ui/buttons/Button';
+import { useRouter } from 'next/router';
 
 const GoogleOAuth = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const { storeJwtData } = useUserContext();
 
@@ -17,7 +17,7 @@ const GoogleOAuth = () => {
     if (ok && data) {
       toastNotify(`Welcome to ${AppProperty.APP_NAME}, ${data.user.name}!`, 'success');
       storeJwtData(data.access_token, data.user);
-      navigate('/');
+      router.push('/');
     } else {
       toastNotify(`Oops, ${message}`, 'error');
     }

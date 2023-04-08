@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "prettier": "prettier --write '**/*.{ts,tsx,scss}'",
     "test:e2e": "npx cypress open"
   },
   "dependencies": {
@@ -25,7 +26,7 @@
     "highlight.js": "^11.6.0",
     "luxon": "^3.0.3",
     "monaco-editor": "^0.34.0",
-    "next": "13.2.4",
+    "next": "13.3.0",
     "quill-image-uploader": "^1.2.3",
     "react": "18.2.0",
     "react-chartjs-2": "^4.3.1",

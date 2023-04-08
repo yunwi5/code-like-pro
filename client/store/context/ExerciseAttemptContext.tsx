@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import { runTestCases } from '../../apis/submission.api';
 import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/utils/useLocalStorage';
 import useExerciseSubmissionsMutation from '../../hooks/exercise/exercise-submissions.tsx/useExerciseSubmissionsMutation';
 import {
   IExerciseWithId,

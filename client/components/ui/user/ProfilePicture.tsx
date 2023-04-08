@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
-import useForceRerender from '../../../hooks/useForceRerender';
+import useForceRerender from '../../../hooks/utils/useForceRerender';
 import Image from 'next/image';
 
 interface Props {

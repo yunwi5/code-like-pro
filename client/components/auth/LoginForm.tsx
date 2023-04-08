@@ -1,5 +1,5 @@
+import Router, { useRouter } from 'next/router';
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification.util';
@@ -11,7 +11,7 @@ import AuthCard from './AuthCard';
 
 type LoginState = { email: string; password: string };
 const LoginForm = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { login, isLoading } = useUserContext();
   const [loginState, setLoginState] = useState({ email: '', password: '' });
   const [errorState, setErrorState] = useState({ email: '', password: '', overall: '' });
@@ -52,7 +52,7 @@ const LoginForm = () => {
 
     // If the login is success, redirect to the home page.
     if (ok && data) {
-      navigate('/');
+      router.replace('/');
       toastNotify('Login Successful!', 'success');
     } else {
       setErrorState((prev) => ({

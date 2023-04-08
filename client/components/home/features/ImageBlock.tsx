@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import useWindowSize from '../../../hooks/ui/useWindowSize';
 
 const imageClass =
@@ -8,7 +8,7 @@ const imageClass =
 interface ImageProps {
   variants: any;
   className: string;
-  src: string;
+  src: StaticImageData;
   alt: string;
   onClick?: () => void;
   delay?: number;

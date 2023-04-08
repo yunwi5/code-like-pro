@@ -4,42 +4,42 @@ import { getBadges } from '../../apis/badge.api';
 import { IBadge } from '../../models/interfaces';
 
 function useBadgeQuery(userId: string | undefined) {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-    const { isLoading, data: response } = useQuery(
-        ['badges', userId],
-        () => getBadges(userId || ''),
-        {
-            refetchOnWindowFocus: true, // refetch whenever the user focuses on the window.
-            enabled: !!userId,
-        },
-    );
+  const { isLoading, data: response } = useQuery(
+    ['badges', userId],
+    () => getBadges(userId || ''),
+    {
+      refetchOnWindowFocus: true, // refetch whenever the user focuses on the window.
+      enabled: !!userId,
+    },
+  );
 
-    const { data: badges = [], message: error } = response || {};
+  const { data: badges = [], message: error } = response || {};
 
-    const processedBadges = useMemo(() => {
-        const noDuplicates: IBadge[] = [];
-        for (const badge of badges) {
-            if (
-                !noDuplicates.find(
-                    (b) => b.rarity === badge.rarity && b.category === badge.category,
-                )
-            ) {
-                noDuplicates.push(badge);
-            }
-        }
-        return noDuplicates;
-    }, [badges]);
+  const processedBadges = useMemo(() => {
+    const noDuplicates: IBadge[] = [];
+    for (const badge of badges) {
+      if (
+        !noDuplicates.find(
+          (b) => b.rarity === badge.rarity && b.category === badge.category,
+        )
+      ) {
+        noDuplicates.push(badge);
+      }
+    }
+    return noDuplicates;
+  }, [badges]);
 
-    // Refetch data of the query key
-    const refetch = useCallback(
-        () => queryClient.refetchQueries(['badges', userId]),
-        [queryClient],
-    );
+  // Refetch data of the query key
+  const refetch = useCallback(
+    () => queryClient.refetchQueries(['badges', userId]),
+    [queryClient],
+  );
 
-    if (error) console.log(error);
+  if (error) console.log(error);
 
-    return { isLoading, refetch, badges: processedBadges, error };
+  return { isLoading, refetch, badges: processedBadges, error };
 }
 
 export default useBadgeQuery;

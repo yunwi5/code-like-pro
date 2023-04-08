@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { IoMdCreate } from 'react-icons/io';
-import { Link } from 'react-router-dom';
 
 import {
   ForumPostSortingKey,
@@ -107,7 +107,7 @@ const GlobalForumPostsControl: React.FC = () => {
 
 const NewPostButton: React.FC<{ className?: string }> = ({ className = '' }) => (
   <Link
-    to={getForumPostCreateLink()}
+    href={getForumPostCreateLink()}
     className={`btn btn-small btn-fill sm:min-h-[2.65rem] ml-auto flex-center gap-1 ${className}`}
   >
     <IoMdCreate className="text-[1.5em] sm:text-[1.2em]" />

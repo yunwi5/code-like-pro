@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { IForumPost } from '../../../models/interfaces';
 import { getForumPostLink } from '../../../utils/links.util';
 import HoveringLabel from '../tooltip/HoveringLabel';
 import TagsGroup from '../labels/TagsGroup';
 import ForumPostSpec from '../spec/ForumPostSpec';
 import ProfilePicture from '../user/ProfilePicture';
+import Link from 'next/link';
 
 const ForumPostCard: React.FC<{ post: IForumPost }> = ({ post }) => {
   return (
@@ -18,7 +18,7 @@ const ForumPostCard: React.FC<{ post: IForumPost }> = ({ post }) => {
       <div className="flex flex-col gap-2">
         <h3 className="w-fit text-gray-600/90">
           <HoveringLabel label="Read It" className="hover:text-main-500 text-base">
-            <Link to={getForumPostLink(post)} className="text-lg lg:text-xl">
+            <Link href={getForumPostLink(post)} className="text-lg lg:text-xl">
               {post.name}
             </Link>
           </HoveringLabel>

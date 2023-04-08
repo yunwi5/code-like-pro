@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { postExercise, putExercise } from '../../apis/exercise.api';
 import { runTestCases } from '../../apis/submission.api';
 import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/utils/useLocalStorage';
 import { CreationSection, Difficulty, Language } from '../../models/enums';
 import {
   IExerciseCreationContext,

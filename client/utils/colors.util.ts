@@ -1,8 +1,8 @@
 import {
-    Difficulty,
-    Language,
-    ProgrammingTopic,
-    SubmissionStatus,
+  Difficulty,
+  Language,
+  ProgrammingTopic,
+  SubmissionStatus,
 } from '../models/enums';
 
 const ROSE_300 = '#fda4af';
@@ -27,74 +27,74 @@ const STONE_600 = '#44403c';
 
 // Map difficulties to hex colors for data analysis
 export const DifficultyColorMap = {
-    [Difficulty.EASY]: EMERALD_300,
-    [Difficulty.MEDIUM]: SKY_300,
-    [Difficulty.HARD]: ROSE_300,
-    [Difficulty.EXPERT]: STONE_300,
+  [Difficulty.EASY]: EMERALD_300,
+  [Difficulty.MEDIUM]: SKY_300,
+  [Difficulty.HARD]: ROSE_300,
+  [Difficulty.EXPERT]: STONE_300,
 };
 
 export const DifficultyTextColorMap = {
-    [Difficulty.EASY]: EMERALD_600,
-    [Difficulty.MEDIUM]: SKY_600,
-    [Difficulty.HARD]: ROSE_600,
-    [Difficulty.EXPERT]: STONE_600,
+  [Difficulty.EASY]: EMERALD_600,
+  [Difficulty.MEDIUM]: SKY_600,
+  [Difficulty.HARD]: ROSE_600,
+  [Difficulty.EXPERT]: STONE_600,
 };
 
 export const LanguageColorMap = {
-    [Language.C]: SKY_300,
-    [Language.CPP]: BLUE_300,
-    [Language.JAVA]: PINK_300,
-    [Language.JAVASCRIPT]: YELLOW_300,
-    [Language.PYTHON]: SLATE_300,
+  [Language.C]: SKY_300,
+  [Language.CPP]: BLUE_300,
+  [Language.JAVA]: PINK_300,
+  [Language.JAVASCRIPT]: YELLOW_300,
+  [Language.PYTHON]: SLATE_300,
 };
 
 export const StatusColorMap = {
-    [SubmissionStatus.CORRECT]: EMERALD_300,
-    [SubmissionStatus.INCORRECT]: ROSE_300,
+  [SubmissionStatus.CORRECT]: EMERALD_300,
+  [SubmissionStatus.INCORRECT]: ROSE_300,
 };
 
 export const ProgrammingTopicColorMap = {
-    [ProgrammingTopic.ARITHMETIC]: '',
+  [ProgrammingTopic.ARITHMETIC]: '',
 };
 
 export const ExerciseCreationColor = {
-    backgroundColor: `${BLUE_300}77`,
-    borderColor: BLUE_600,
+  backgroundColor: `${BLUE_300}77`,
+  borderColor: BLUE_600,
 };
 
 export const ExerciseAttemptColor = {
-    backgroundColor: `${SKY_300}15`,
-    borderColor: SKY_600,
+  backgroundColor: `${SKY_300}15`,
+  borderColor: SKY_600,
 };
 
 export const SuccessColor = {
-    backgroundColor: `${EMERALD_300}15`,
-    borderColor: EMERALD_600,
+  backgroundColor: `${EMERALD_300}15`,
+  borderColor: EMERALD_600,
 };
 
 export const FailureColor = {
-    backgroundColor: `${ROSE_300}15`,
-    borderColor: ROSE_600,
-}; 
+  backgroundColor: `${ROSE_300}15`,
+  borderColor: ROSE_600,
+};
 
 const LightColorList = [
-    ROSE_300,
-    ORANGE_300,
-    YELLOW_300,
-    EMERALD_300,
-    SKY_300,
-    BLUE_300,
-    STONE_300,
-    GRAY_300,
-    SLATE_300,
-    VIOLET_300,
-    PURPLE_300,
-    FUCHSIA_300,
-    PINK_300,
+  ROSE_300,
+  ORANGE_300,
+  YELLOW_300,
+  EMERALD_300,
+  SKY_300,
+  BLUE_300,
+  STONE_300,
+  GRAY_300,
+  SLATE_300,
+  VIOLET_300,
+  PURPLE_300,
+  FUCHSIA_300,
+  PINK_300,
 ];
 
 // Return the light color based on the index. Used for programming topics.
 export function getLightColorByIndex(index: number) {
-    const colorIndex = index % LightColorList.length;
-    return LightColorList[colorIndex];
+  const colorIndex = index % LightColorList.length;
+  return LightColorList[colorIndex];
 }

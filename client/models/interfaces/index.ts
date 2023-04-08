@@ -18,7 +18,7 @@ export * from './user/IUserInfo';
 
 // Auth interfaces
 export * from './auth/IGoogleCredential';
-export * from './auth/IJwtData'
+export * from './auth/IJwtData';
 
 // Showcae related interfaces
 export * from './showcase/IVote';

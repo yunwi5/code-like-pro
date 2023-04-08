@@ -1,5 +1,6 @@
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import MoonLoader from 'react-spinners/MoonLoader';
 import useForumPostQuery from '../../../hooks/forum/forum-post/useForumPostQuery';
 import { toastNotify } from '../../../utils/notification.util';
@@ -8,7 +9,7 @@ import PostComments from './sections/PostComments';
 
 /* Post browsing on the right side of the forum page */
 const PostDetail: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const postId = useParams().id;
 
   const { post, error } = useForumPostQuery(postId || '', 1000);
@@ -16,10 +17,10 @@ const PostDetail: React.FC = () => {
   useEffect(() => {
     // If there is an error, redirect to the home page.
     if (!!error) {
-      navigate('/');
+      router.replace('/');
       toastNotify('Somethine went wrong while loading the post...', 'error');
     }
-  }, [error, navigate]);
+  }, [error, router]);
 
   return (
     <section className="flex flex-col gap-5">

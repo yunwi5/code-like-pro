@@ -1,5 +1,5 @@
+import Link from 'next/link';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { BsCheckCircleFill } from 'react-icons/bs';
 
 import { ForumCategory } from '../../../models/enums';
@@ -21,8 +21,8 @@ const ForumCard: React.FC<{ forum: ForumCategory }> = ({ forum }) => (
       <BsCheckCircleFill className="text-gray-50 text-2xl" />
       <p className="text-center text-[0.95rem]">{ForumDescriptions[forum]}</p>
       <Link
+        href={getForumCategoryLink(forum)}
         className="text-blue-300 hover:text-blue-200"
-        to={getForumCategoryLink(forum)}
       >
         Explore
       </Link>

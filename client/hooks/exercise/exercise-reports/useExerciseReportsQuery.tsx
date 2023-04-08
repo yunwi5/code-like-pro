@@ -3,25 +3,25 @@ import { getExerciseReports } from '../../../apis/exercise.api';
 import { getExerciseReportsKey } from '../keys';
 
 function useExerciseReportsQuery(
-    exerciseId: string | undefined,
-    refetchInterval: number = 1000,
+  exerciseId: string | undefined,
+  refetchInterval: number = 1000,
 ) {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-    // Use React-Query to fetch the comments data of this exercise.
-    const reportsQueryKey = getExerciseReportsKey(exerciseId || '');
-    const { data: response, isLoading } = useQuery(
-        [reportsQueryKey],
-        () => getExerciseReports(exerciseId || ''),
-        { refetchInterval, enabled: !!exerciseId },
-    );
+  // Use React-Query to fetch the comments data of this exercise.
+  const reportsQueryKey = getExerciseReportsKey(exerciseId || '');
+  const { data: response, isLoading } = useQuery(
+    [reportsQueryKey],
+    () => getExerciseReports(exerciseId || ''),
+    { refetchInterval, enabled: !!exerciseId },
+  );
 
-    const { data: reports, message: error } = response || {};
-    if (error) console.log(error);
+  const { data: reports, message: error } = response || {};
+  if (error) console.log(error);
 
-    const refetch = () => queryClient.refetchQueries([reportsQueryKey]);
+  const refetch = () => queryClient.refetchQueries([reportsQueryKey]);
 
-    return { reports: reports || [], error, isLoading, refetch };
+  return { reports: reports || [], error, isLoading, refetch };
 }
 
 export default useExerciseReportsQuery;

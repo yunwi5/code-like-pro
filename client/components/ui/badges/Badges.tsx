@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import usePagination from '../../../hooks/usePagination';
+import usePagination from '../../../hooks/utils/usePagination';
 import { BadgeSortingKey, SortingDirection } from '../../../models/enums';
 import { IBadge } from '../../../models/interfaces';
 import { upwardStaggeringAnimations } from '../../../utils/animations.util';

@@ -1,6 +1,6 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
 import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 
 import { IForumPost, IForumPostPopulated } from '../../../../models/interfaces';
@@ -20,7 +20,7 @@ interface Props {
 
 // Post naigation (previous, next) and settings.
 const PostControl: React.FC<Props> = ({ post, className = '' }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { userDetail } = useUserContext();
   const { posts } = useForumBrowsing();
 
@@ -34,7 +34,7 @@ const PostControl: React.FC<Props> = ({ post, className = '' }) => {
   return (
     <div className={`flex justify-between items-center gap-3 text-[0.9rem] ${className}`}>
       <button
-        onClick={() => prevPost && navigate(getForumPostLink(prevPost))}
+        onClick={() => prevPost && router.push(getForumPostLink(prevPost))}
         disabled={!prevPost}
         className={`${navButtonClass} ${!prevPost ? navButtonDisabledClass : ''}`}
       >
@@ -42,7 +42,7 @@ const PostControl: React.FC<Props> = ({ post, className = '' }) => {
         Previous
       </button>
       <button
-        onClick={() => nextPost && navigate(getForumPostLink(nextPost))}
+        onClick={() => nextPost && router.push(getForumPostLink(nextPost))}
         disabled={!nextPost}
         className={`${navButtonClass} ${!nextPost ? navButtonDisabledClass : ''}`}
       >

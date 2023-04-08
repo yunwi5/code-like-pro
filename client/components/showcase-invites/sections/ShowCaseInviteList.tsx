@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import usePagination from '../../../hooks/usePagination';
+import usePagination from '../../../hooks/utils/usePagination';
 import { IExerciseWithId } from '../../../models/interfaces';
 import ShowCaseInviteCard from '../../ui/cards/ShowCaseInviteCard';
 import PageNavigation from '../../ui/PageNavigation';

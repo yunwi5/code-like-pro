@@ -1,6 +1,7 @@
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { IoMdCreate } from 'react-icons/io';
-import { useNavigate, useParams } from 'react-router-dom';
 import {
   ForumPostSortingKey,
   SearchKey,
@@ -15,7 +16,7 @@ import Searchbar from '../../../ui/inputs/Searchbar';
 
 // Sidebar component for setting searching and sorting states globally.
 const ForumPostsControl: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const forumCategory = useParams().category;
   const { sorting, searching } = useAppSelector((state) => state.forum);
   const dispatch = useAppDispatch();
@@ -69,7 +70,7 @@ const ForumPostsControl: React.FC = () => {
           Most Likes
         </button>
         <Button
-          onClick={() => navigate(getForumPostCreateLink(forumCategory as any))}
+          onClick={() => router.push(getForumPostCreateLink(forumCategory as any))}
           mode="empty"
           className="ml-auto !border-transparent !shadow-none flex-center gap-1"
           size="small"

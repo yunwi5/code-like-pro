@@ -1,5 +1,5 @@
+import Link from 'next/link';
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { FaLaptopCode } from 'react-icons/fa';
 import { GoGitMerge } from 'react-icons/go';
 import { MdCelebration } from 'react-icons/md';
@@ -39,7 +39,7 @@ const AttemptSuccessModal: FC<Props> = ({ open, onClose }) => {
           </h2>
         </header>
         <div className="flex flex-col gap-2 px-7 pt-3 pb-6 text-slate-700 bg-slate-200/90">
-          <h3 className="text-xl font-semibold">Here's what you can do next</h3>
+          <h3 className="text-xl font-semibold">Here&apos;s what you can do next</h3>
 
           <div className="flex flex-col gap-1">
             <h4 className={styles.sectionHeading}>
@@ -75,7 +75,7 @@ const AttemptSuccessModal: FC<Props> = ({ open, onClose }) => {
                 the challenge.
               </li>
             </ul>
-            <Link to={getShowcasePageLink(exerciseId)} className={styles.btn}>
+            <Link href={getShowcasePageLink(exerciseId)} className={styles.btn}>
               Join Showcase
             </Link>
           </div>

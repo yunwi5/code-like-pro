@@ -44,6 +44,12 @@ const ProfileMainBody = () => {
     onSubmitProfile,
   } = useProfileEditContext();
 
+  // Current user ranking data
+  const userRankData = useMemo(() => {
+    if (!userDetail) return null;
+    return getUserRank(userDetail._id);
+  }, [userDetail?._id, rankingOrder]);
+
   // Loading state
   if (!userDetail) return <ProfileLoader />;
 
@@ -51,12 +57,6 @@ const ProfileMainBody = () => {
   const solvedExercisesCount = userDetail.submissions.filter((sub) => sub.correct).length;
   const createdExerciseCount = userDetail.exercises.length;
   const usedLanguages = getUsedLanguagesByUser(userDetail.submissions);
-
-  // Current user ranking data
-  const userRankData = useMemo(() => {
-    if (!userDetail) return null;
-    return getUserRank(userDetail._id);
-  }, [userDetail._id, rankingOrder]);
 
   // Show badges only if it is not EDIT mode, and there are at least 1 badges.
   const showBadges = !isEditing && (badges?.length || 0) > 0;

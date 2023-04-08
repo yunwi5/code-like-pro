@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { deleteExercise } from '../../../../apis/exercise.api';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
@@ -7,11 +6,12 @@ import { getExerciseEditLink } from '../../../../utils/links.util';
 import { toastNotify } from '../../../../utils/notification.util';
 import DeleteModal from '../../../ui/modals/variations/DeleteModal';
 import SettingsButton from '../../../ui/buttons/SettingsButton';
+import { useRouter } from 'next/router';
 
 // Button on the editor page control bar, which is displayed only to the author of the exercis
 // To trigger the edit and delete action of the exercise they created.
 const ExerciseSettings: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { exercise } = useExerciseAttemptCtx();
 
   // State for poping up the delete modal for the delete action.
@@ -20,7 +20,7 @@ const ExerciseSettings: React.FC = () => {
   if (!exercise) return null;
 
   const handleDeleteAction = () => {
-    navigate('/browse');
+    router.push('/browse');
     toastNotify(`Successfully delete exercise ${exercise.name}`);
   };
 

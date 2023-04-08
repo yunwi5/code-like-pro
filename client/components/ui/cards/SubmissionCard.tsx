@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FiCheck } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 
@@ -9,6 +8,7 @@ import { getExerciseAttemptPageLink } from '../../../utils/links.util';
 import { BsFileEarmarkCodeFill } from 'react-icons/bs';
 import { getDateTimeFormat } from '../../../utils/datetime.util';
 import StatusLabel from '../labels/StatusLabel';
+import { useRouter } from 'next/router';
 
 interface Props {
   submission: IUserSubmissionPopulated;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const SubmissionCard: React.FC<Props> = ({ submission, className }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { difficulty, name, _id: exerciseId } = submission.exercise;
 
   // Apply different color styles for different difficulties.
@@ -28,7 +28,7 @@ const SubmissionCard: React.FC<Props> = ({ submission, className }) => {
   return (
     <article
       className={`flex flex-col gap-2 px-4 py-2 text-gray-700 border-2 border-gray-200/90 transition-all rounded-sm shadow-md hover:shadow-lg cursor-pointer ${className}`}
-      onClick={() => navigate(getExerciseAttemptPageLink(exerciseId))}
+      onClick={() => router.push(getExerciseAttemptPageLink(exerciseId))}
     >
       {/* Header for submission datetime and status */}
       <header className="flex-between">

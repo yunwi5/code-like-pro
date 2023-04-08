@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { patchForumPost, postForumPost } from '../../apis/forum.api';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/utils/useLocalStorage';
 import { ForumCategory, ForumPostType } from '../../models/enums';
 import {
   IForumPostProps,

@@ -4,55 +4,55 @@ import { IForumPost } from '../../models/interfaces';
 
 // Forum post search state
 export interface IForumSearchState {
-    key: SearchKey;
-    text: string;
+  key: SearchKey;
+  text: string;
 }
 
 // Forum post sorting state
 export interface IForumSortingState {
-    key: ForumPostSortingKey;
-    direction: SortingDirection;
+  key: ForumPostSortingKey;
+  direction: SortingDirection;
 }
 
 interface IForumState {
-    isLoading: boolean;
-    posts: IForumPost[];
-    searching: IForumSearchState;
-    sorting: IForumSortingState;
+  isLoading: boolean;
+  posts: IForumPost[];
+  searching: IForumSearchState;
+  sorting: IForumSortingState;
 }
 
 const initialState: IForumState = {
-    isLoading: true,
-    posts: [],
-    searching: { key: SearchKey.TITLE, text: '' },
-    sorting: {
-        key: ForumPostSortingKey.DATETIME,
-        direction: SortingDirection.DESCENDING,
-    },
+  isLoading: true,
+  posts: [],
+  searching: { key: SearchKey.TITLE, text: '' },
+  sorting: {
+    key: ForumPostSortingKey.DATETIME,
+    direction: SortingDirection.DESCENDING,
+  },
 };
 
 const forumSlice = createSlice({
-    name: 'forum-browsing',
-    initialState,
-    reducers: {
-        setLoading(state, action: PayloadAction<boolean>) {
-            state.isLoading = action.payload;
-        },
-        setPosts(state, action: PayloadAction<IForumPost[]>) {
-            state.posts = action.payload;
-            state.isLoading = false;
-        },
-        setSorting(state, action: PayloadAction<IForumSortingState>) {
-            state.sorting = action.payload;
-        },
-        setSearching(state, action: PayloadAction<IForumSearchState>) {
-            state.searching = action.payload;
-        },
-        clear(state) {
-            state.sorting = initialState.sorting;
-            state.searching = initialState.searching;
-        },
+  name: 'forum-browsing',
+  initialState,
+  reducers: {
+    setLoading(state, action: PayloadAction<boolean>) {
+      state.isLoading = action.payload;
     },
+    setPosts(state, action: PayloadAction<IForumPost[]>) {
+      state.posts = action.payload;
+      state.isLoading = false;
+    },
+    setSorting(state, action: PayloadAction<IForumSortingState>) {
+      state.sorting = action.payload;
+    },
+    setSearching(state, action: PayloadAction<IForumSearchState>) {
+      state.searching = action.payload;
+    },
+    clear(state) {
+      state.sorting = initialState.sorting;
+      state.searching = initialState.searching;
+    },
+  },
 });
 
 export const forumActions = forumSlice.actions;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { ForumCategory, ForumCategorySection } from '../../../models/enums';
 import { getForumPostCreateLink } from '../../../utils/links.util';
 import ForumPostsSidebar from '../sidebar/ForumPostsSidebar';
@@ -64,7 +65,7 @@ const DefaultContent: React.FC<{ category: ForumCategory }> = ({ category }) => 
   <div className="flex-1 flex-center flex-col gap-3">
     <h2 className="text-gray-600 text-2xl capitalize">Try writing your own posts!</h2>
     <Link
-      to={getForumPostCreateLink(category)}
+      href={getForumPostCreateLink(category)}
       className="btn bg-slate-200/80 hover:bg-slate-200 text-main-500 rounded !text-xl"
     >
       Make One!

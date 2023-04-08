@@ -1,4 +1,4 @@
 export interface IVote {
-    user: string; // user id
-    type: 'up' | 'down';
+  user: string; // user id
+  type: 'up' | 'down';
 }

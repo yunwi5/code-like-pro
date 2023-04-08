@@ -1,5 +1,5 @@
+import Link from 'next/link';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import MoonLoader from 'react-spinners/MoonLoader';
 import { usePostCreationContext } from '../../../../store/context/PostCreationContext';
 import { getForumPostLink } from '../../../../utils/links.util';
@@ -17,7 +17,7 @@ const PostFormActions: React.FC = () => {
       )}
       {!isLoading && createdPost && (
         <Link
-          to={getForumPostLink(createdPost)}
+          href={getForumPostLink(createdPost)}
           className="btn btn-empty"
           onClick={savePost}
         >
