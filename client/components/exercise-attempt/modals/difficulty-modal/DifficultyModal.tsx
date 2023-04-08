@@ -27,18 +27,18 @@ const DifficultyModal: FC<Props> = ({ open, onClose }) => {
   );
   const [showForm, setShowForm] = useState<boolean>(!userDifficultyVote);
 
-  if (exercise == null) return null;
-
   const HandleVoteSubmit = () => setShowForm(false);
 
   // Difficulty votes including creator's choice
-  const difficultyVotes = exercise.difficultyVotes || [];
-
-  const { overallDifficulty, overallRatingRounded } = getOverallDifficulty(exercise);
+  const difficultyVotes = exercise?.difficultyVotes || [];
 
   useEffect(() => {
     if (!!userDifficultyVote?.type) setShowForm(false);
   }, [open, userDifficultyVote?.type]);
+
+  if (exercise == null) return null;
+
+  const { overallDifficulty, overallRatingRounded } = getOverallDifficulty(exercise);
 
   return (
     <AnimationModal

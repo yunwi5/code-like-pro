@@ -15,11 +15,10 @@ const MySubmission: React.FC = () => {
   const submissions = userDetail?.submissions;
   const [searchText, setSearchText] = useState('');
 
-  // Loading state
-  if (!submissions) return <ProfileLoader />;
-
   const searchedSubmissions = useMemo(() => {
-    return submissions.filter((sub) => searchIncludes(sub.exercise.name, searchText));
+    return (submissions ?? []).filter((sub) =>
+      searchIncludes(sub.exercise.name, searchText),
+    );
   }, [submissions, searchText]);
 
   // Sort the submissions by date (recent to oldest)
@@ -28,6 +27,8 @@ const MySubmission: React.FC = () => {
       .sort((subA, subB) => compareByDateTime(subB.postedAt, subA.postedAt))
       .slice();
   }, [searchedSubmissions]);
+
+  if (!submissions) return <ProfileLoader />;
 
   return (
     <ProfileSectionContainer>

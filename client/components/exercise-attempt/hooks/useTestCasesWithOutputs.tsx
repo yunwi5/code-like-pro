@@ -38,18 +38,20 @@ function matchTestCaseAndOutput(testCases: ITestCase[], outputs: ITestOutput[]) 
 // Match testcase and outputs for the exercise the user is currently attempting
 function useTestCasesWithOutputs(): ITestCaseWithOutput[] {
   const { exercise, testCaseOutputs, customTests } = useExerciseAttemptCtx();
-  if (exercise == null) return [];
 
-  const existingTests = useMemo(() => getExistingTestsWithNames(exercise), [exercise]);
+  const existingTests = useMemo(
+    () => exercise && getExistingTestsWithNames(exercise),
+    [exercise],
+  );
 
-  // Combine existing tests with new user custom tests
-  const combinedTestCases = customTests.concat(existingTests);
+  const combinedTestCases = customTests.concat(existingTests ?? []);
 
   // Merge corresponding output to each test case
   const testCasesWithOutputs: ITestCaseWithOutput[] = useMemo(
     () => matchTestCaseAndOutput(combinedTestCases, testCaseOutputs),
     [combinedTestCases, testCaseOutputs],
   );
+
   return testCasesWithOutputs;
 }
 

@@ -13,12 +13,13 @@ const ExerciseIssueReports: React.FC<{ reports: IIssueReport[]; isLoading: boole
   isLoading,
 }) => {
   const { exercise } = useExerciseAttemptCtx();
-  if (exercise == null) return null;
 
   // Sort the reports by votes descending always.
   const sortedReports = useMemo(() => {
     return reports.sort((a, b) => compareByVotes(b.votes, a.votes));
   }, [reports]);
+
+  if (exercise == null) return null;
 
   return (
     <section
@@ -42,7 +43,7 @@ const ExerciseIssueReports: React.FC<{ reports: IIssueReport[]; isLoading: boole
   );
 };
 
-// Message to be displayed if there are no issue reports
+// eslint-disable-next-line react/display-name
 const NoReportsMessage = React.memo(() => (
   <div className="h-[20rem] flex-center gap-2 text-lg">
     <FaSmile className="text-main-500 text-xl" />

@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { memo, FC } from 'react';
 import { BiEditAlt } from 'react-icons/bi';
 import { IDifficultyVote } from '../../../../models/interfaces';

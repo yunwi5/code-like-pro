@@ -39,7 +39,7 @@ const PreviousSubmission: React.FC = () => {
       {!userSubmission && (
         <div className="h-[20rem] flex-center gap-1 text-lg text-gray-600">
           <IoMdInformationCircle className="text-main-400 text-[1.2em]" />
-          <p>You don't have any submissions yet!</p>
+          <p>You don&apos;t have any submissions yet!</p>
         </div>
       )}
     </section>

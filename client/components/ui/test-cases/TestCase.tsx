@@ -47,11 +47,10 @@ const TestCase: FC<Props> = (props) => {
     [onUpdate],
   );
 
-  const handleHidden = () =>
-    useCallback(
-      () => onUpdate && onUpdate({ hidden: !testCase.hidden }),
-      [testCase, onUpdate],
-    );
+  const handleHidden = useCallback(
+    () => onUpdate && onUpdate({ hidden: !testCase.hidden }),
+    [testCase, onUpdate],
+  );
 
   const statusClass = getStatusClass(output);
   const paddingClass = readOnly ? 'pb-3' : 'pb-[0.35rem]';

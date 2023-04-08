@@ -60,7 +60,6 @@ const CategoryForumMain: React.FC<Props> = ({ category }) => {
   );
 };
 
-// Default content to be displayed if no post is selected on the forum page.
 const DefaultContent: React.FC<{ category: ForumCategory }> = ({ category }) => (
   <div className="flex-1 flex-center flex-col gap-3">
     <h2 className="text-gray-600 text-2xl capitalize">Try writing your own posts!</h2>

@@ -109,7 +109,7 @@ const CategoricalChart: React.FC<Props> = (props) => {
       {datasetIsEmpty && (
         <h3 className="flex-center flex-col text-2xl h-[18rem]">
           <AiFillRobot className="text-main-400" />
-          <span className="text-gray-500">You don't have data yet!</span>
+          <span className="text-gray-500">You don&apos;t have data yet!</span>
         </h3>
       )}
       {!datasetIsEmpty && (

@@ -43,9 +43,9 @@ const JavaScriptHelp: React.FC = () => {
       <div>
         <p className="mb-3">
           In JavaScript (Node Js), it is easy and straightforward to create a new
-          programming challenge. Let's say we want to create a challenge that asks a user
-          to create a function called <mark className="mark">getSum</mark>&nbsp; which
-          returns the sum of the arguments passed in.
+          programming challenge. Let&apos;s say we want to create a challenge that asks a
+          user to create a function called <mark className="mark">getSum</mark>&nbsp;
+          which returns the sum of the arguments passed in.
         </p>
         <CodeEditor value={jsSolution} language={language} readOnly={true} />
       </div>
@@ -53,8 +53,9 @@ const JavaScriptHelp: React.FC = () => {
       <div>
         <p className="mb-3">
           Next, we will define an example test case that will verify our solution as well
-          as users' solution the users will write when they attempt the challenge. The
-          testing is based on matching the standard output of expected and actual outputs.
+          as users&apos; solution the users will write when they attempt the challenge.
+          The testing is based on matching the standard output of expected and actual
+          outputs.
         </p>
         <TestCase
           language={language}

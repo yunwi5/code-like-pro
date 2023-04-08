@@ -53,8 +53,8 @@ const CppHelp: React.FC = () => {
       </h3>
       <div>
         <p className="mb-3">
-          In {languageName}, we do some internal job to execute your program. Let's say we
-          want to create a challenge that asks users to create a function called{' '}
+          In {languageName}, we do some internal job to execute your program. Let&apos;s
+          say we want to create a challenge that asks users to create a function called{' '}
           <mark className="mark">getSum</mark>&nbsp; which returns the sum of the
           arguments passed in. You could also define your own{' '}
           <mark className="mark">classes</mark> or <mark className="mark">structs</mark>{' '}
@@ -71,7 +71,7 @@ const CppHelp: React.FC = () => {
       <div>
         <p className="mb-3">
           Next, we will define an example test case that will verify our solution as well
-          as users' solution the users will submit. The test correctness is based on
+          as users&apos; solution the users will submit. The test correctness is based on
           matching the standard output of expected and actual outputs. Your testing code
           will be placed inside the <mark className="mark">main</mark> method to run the
           solution code you wrote. This means please do not define the main method on your
