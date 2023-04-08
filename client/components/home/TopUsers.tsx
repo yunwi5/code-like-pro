@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import useRanking from '../../hooks/ranking/useRanking';
 import RankingPodium from '../ranking/sections/RankingPodium';
