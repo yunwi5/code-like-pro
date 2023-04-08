@@ -12,6 +12,7 @@ const TopExercises: React.FC = () => {
     () => mapExercisesToExerciseCards(exercises),
     [exercises],
   );
+
   return (
     <section className="h-fit w-[clamp(20rem,85rem,97vw)] mx-auto">
       <div className="lg:grid lg:grid-cols-3 h-full py-3 lg:py-8 px-4 sm:px-10 md:grid-cols-1">

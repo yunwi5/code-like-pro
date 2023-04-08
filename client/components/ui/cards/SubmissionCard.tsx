@@ -8,7 +8,7 @@ import { getExerciseAttemptPageLink } from '../../../utils/links.util';
 import { BsFileEarmarkCodeFill } from 'react-icons/bs';
 import { getDateTimeFormat } from '../../../utils/datetime.util';
 import StatusLabel from '../labels/StatusLabel';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   submission: IUserSubmissionPopulated;

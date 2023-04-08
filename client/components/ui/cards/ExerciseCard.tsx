@@ -20,7 +20,7 @@ import DeleteButton from '../buttons/icon-buttons/DeleteButton';
 import useExerciseSubmissionsQuery from '../../../hooks/exercise/exercise-submissions.tsx/useExerciseSubmissionsQuery';
 import { getSubmissionStats } from '../../../utils/user-submission.util';
 import { getDateFormat } from '../../../utils/datetime.util';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   exercise: IExerciseCard;
@@ -34,14 +34,11 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
   const { correctRate } = getSubmissionStats(submissions || []);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  // Check if the exercise is liked by the user.
   const liked: boolean = likedExerciseIdSet.has(exercise?._id || '');
   const difficultyStyle = getDifficultyBtnClass(exercise.difficulty);
 
-  // Navigate to exercise attempt page for this exercise
   const navigateToAttempt = () => router.push(getExerciseAttemptPageLink(exercise._id));
 
-  // Group of edit & delete buttons displayed only if the user is the author.
   const exerciseControl = exercise?.isAuthorized ? (
     <ExerciseControl
       onEdit={() => router.push(getExerciseEditLink(exercise._id))}
@@ -49,7 +46,6 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
     />
   ) : null;
 
-  // Only display the first 5 tags
   const tags = exercise.tags.sort().slice(0, 5);
 
   return (

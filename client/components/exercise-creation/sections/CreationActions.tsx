@@ -6,7 +6,7 @@ import RingLoader from 'react-spinners/RingLoader';
 import { getExerciseAttemptPageLink } from '../../../utils/links.util';
 import { FaRegLightbulb } from 'react-icons/fa';
 import CreationHelpModal from '../creation-help/CreationHelpModal';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const btnClass = 'min-w-[10rem]';
 

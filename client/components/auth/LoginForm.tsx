@@ -1,4 +1,4 @@
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 
 import { useUserContext } from '../../store/context/UserContext';

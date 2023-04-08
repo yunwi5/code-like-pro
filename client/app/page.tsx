@@ -1,19 +1,18 @@
-'use client';
-import { UserContextProvider } from '@/store/context/UserContext';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { NextPage } from 'next';
+import { AppProperty } from '@/constants';
+import HomeMain from '@/components/home/HomeMain';
 
-const queryClient = new QueryClient();
+export const metadata = {
+  title: `Home | ${AppProperty.APP_NAME}`,
+  description: `Home page of ${AppProperty.APP_NAME} where users can see detailed information about programming exercises on the website.`,
+};
 
-export default function Home() {
-  return <h1 className="text-main-500 text-4xl">Hello world</h1>;
-}
+const Home: NextPage = () => {
+  return (
+    <main>
+      <HomeMain />
+    </main>
+  );
+};
 
-// const Providers = ({ children }: { children: React.ReactNode }) => {
-//   return (
-//     <Provider store={store}>
-//       <GoogleOAuthProvider clientId={AppProperty.GOOGLE_CLIENT_ID}>
-//         <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-//       </GoogleOAuthProvider>
-//     </Provider>
-//   );
-// };
+export default Home;

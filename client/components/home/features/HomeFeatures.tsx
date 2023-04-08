@@ -11,7 +11,7 @@ import FeaturesBanner from './FeaturesBanner';
 import ImageBlock from './ImageBlock';
 import './ImageBlock.scss';
 import { ProfileSection } from '../../../models/enums';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 // Image container animation for children staggering
 const container = {
@@ -55,12 +55,9 @@ const HomeFeatures: React.FC = () => {
   return (
     <section className="flex-center mx-auto my-10 lg:my-20 py-4 sm:py-8 md:py-10 text-gray-600 bg-gray-100">
       <div className="w-[min(80rem,95vw)]">
-        {/* Banners for letters animations */}
         <FeaturesBanner />
         <div className="relative mt-5 min-h-[30rem]">
           <AnimateSharedLayout>
-            {/* Images are absolute positions for large screen sizes (1024px or above) */}
-            {/* Images are in the grid layout for smaller screen sizes (<= 1023px) */}
             <motion.div
               variants={container}
               animate="show"

@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { deleteForumPost } from '../../../../apis/forum.api';
 import { IForumPostPopulated } from '../../../../models/interfaces';

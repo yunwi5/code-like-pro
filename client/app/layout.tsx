@@ -20,6 +20,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Providers>{children}</Providers>
         <Footer />
         <ScrollToTop />
+        <div id='modal'></div>
       </body>
     </html>
   );

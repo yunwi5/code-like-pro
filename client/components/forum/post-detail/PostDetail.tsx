@@ -1,5 +1,5 @@
 import { useParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import MoonLoader from 'react-spinners/MoonLoader';
 import useForumPostQuery from '../../../hooks/forum/forum-post/useForumPostQuery';

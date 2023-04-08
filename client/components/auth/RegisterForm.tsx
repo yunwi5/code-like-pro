@@ -10,7 +10,7 @@ import {
   invalidateUsername,
 } from '../../utils/string-utils/validation.util';
 import AuthCard from './AuthCard';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 type IRegisterState = {
   email: string;

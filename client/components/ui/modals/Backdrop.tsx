@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 /* BackDrop */
@@ -8,7 +9,14 @@ interface BackdropProps {
 }
 
 const Backdrop: React.FC<BackdropProps> = ({ onClose, className = '', children }) => {
-  const portalElement = document.getElementById('modal') as HTMLElement;
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const element = document.getElementById('modal') as HTMLElement;
+    setPortalElement(element);
+  }, []);
+
+  if (portalElement === null) return null;
 
   const BackdropComponent = (
     <div

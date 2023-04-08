@@ -51,15 +51,12 @@ export const Carousel: React.FC = () => {
   // detect it as an entirely new image. So you can infinitely paginate as few as 1 images.
   const imageIndex = wrap(0, images.length, page);
 
-  const paginate = useCallback(
-    (newDirection: number) => {
-      setPage(([prevPage, _]) => [
-        mod(prevPage + newDirection, images.length),
-        newDirection < 0 ? -1 : 1,
-      ]);
-    },
-    [images.length],
-  );
+  const paginate = useCallback((newDirection: number) => {
+    setPage(([prevPage, _]) => [
+      mod(prevPage + newDirection, images.length),
+      newDirection < 0 ? -1 : 1,
+    ]);
+  }, []);
 
   // Every 4s, transition to other pages automatically
   // For automatic animation effects
