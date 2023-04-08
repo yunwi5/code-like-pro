@@ -20,7 +20,7 @@ import DeleteButton from '../buttons/icon-buttons/DeleteButton';
 import useExerciseSubmissionsQuery from '../../../hooks/exercise/exercise-submissions.tsx/useExerciseSubmissionsQuery';
 import { getSubmissionStats } from '../../../utils/user-submission.util';
 import { getDateFormat } from '../../../utils/datetime.util';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   exercise: IExerciseCard;
@@ -35,7 +35,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   // Check if the exercise is liked by the user.
-  const liked: boolean = likedExerciseIdSet.has(exercise?._id || '');
+  const liked: boolean = likedExerciseIdSet?.has(exercise?._id || '');
   const difficultyStyle = getDifficultyBtnClass(exercise.difficulty);
 
   // Navigate to exercise attempt page for this exercise

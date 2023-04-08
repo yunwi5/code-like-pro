@@ -6,7 +6,7 @@ import { getExerciseEditLink } from '../../../../utils/links.util';
 import { toastNotify } from '../../../../utils/notification.util';
 import DeleteModal from '../../../ui/modals/variations/DeleteModal';
 import SettingsButton from '../../../ui/buttons/SettingsButton';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 // Button on the editor page control bar, which is displayed only to the author of the exercis
 // To trigger the edit and delete action of the exercise they created.
@@ -27,7 +27,7 @@ const ExerciseSettings: React.FC = () => {
   return (
     <>
       <SettingsButton
-        onEdit={() => navigate(getExerciseEditLink(exercise?._id))}
+        onEdit={() => router.push(getExerciseEditLink(exercise?._id))}
         onDelete={() => setShowDeleteModal(true)}
         className="ml-2 -mr-2"
       />

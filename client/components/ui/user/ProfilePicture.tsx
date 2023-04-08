@@ -53,6 +53,7 @@ const ProfilePicture: React.FC<Props> = ({
       {picture && alt && (
         <Image
           ref={imageRef}
+          fill
           src={picture}
           alt={alt}
           className={`min-w-full min-h-full object-cover ${imageValid ? '' : 'hidden'}`}

@@ -76,6 +76,7 @@ const Strengths: React.FC = () => {
         <AnimatePresence>
           {selectedItem && (
             <motion.div
+              key={selectedId}
               layoutId={selectedItem.id}
               drag
               dragConstraints={constraintRef}
@@ -84,10 +85,7 @@ const Strengths: React.FC = () => {
               exit={{ opacity: 0 }}
               className="fixed w-[min(30rem,95vw)] h-[20rem] top-[calc(50%-10rem)] left-[calc(50%-min(15rem,47.5vw))] bg-gray-50 rounded-md z-[200]"
             >
-              <div
-                key={selectedId}
-                className="h-full z-[200] relative flex flex-col justify-center items-center gap-3 px-5 py-5"
-              >
+              <div className="h-full z-[200] relative flex flex-col justify-center items-center gap-3 px-5 py-5">
                 <motion.div
                   onClick={() => setSelectedId(null)}
                   className="absolute top-3 right-3 w-[1.8rem] h-[1.8rem] flex-center rounded-full bg-main-100/80 hover:bg-main-100 cursor-pointer"
@@ -98,7 +96,7 @@ const Strengths: React.FC = () => {
               </div>
             </motion.div>
           )}
-          {selectedId && <Backdrop onClose={() => setSelectedId(null)} />}
+          {selectedId && <Backdrop key="backdrop" onClose={() => setSelectedId(null)} />}
         </AnimatePresence>
       </AnimateSharedLayout>
     </section>

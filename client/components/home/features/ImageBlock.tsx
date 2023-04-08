@@ -1,3 +1,4 @@
+'use client';
 import { motion } from 'framer-motion';
 import Image, { StaticImageData } from 'next/image';
 import useWindowSize from '../../../hooks/ui/useWindowSize';
@@ -33,8 +34,7 @@ export const ImageBlock = ({
       whileInView="show"
       whileHover={{ scale: width >= 1024 ? 1.1 : 1, transition: { duration: 0.5 } }}
       transition={{
-        ease: [0.6, 0.01, -0.05, 0.95],
-        duration: 1.6,
+        ease: 'easeIn',
         delay,
       }}
       viewport={{ once: true }}

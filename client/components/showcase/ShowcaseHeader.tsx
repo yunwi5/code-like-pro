@@ -6,7 +6,7 @@ import { getBrowsingPageLink, getExerciseAttemptPageLink } from '../../utils/lin
 import Button from '../ui/buttons/Button';
 import ExerciseSpec from '../ui/spec/ExerciseSpec';
 import LanguageLabel from '../ui/icons/LanguageIcon';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 /* Header layout breakpoint is lg - 1024px  */
 const ShowcaseHeader = () => {
