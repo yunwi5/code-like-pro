@@ -3,15 +3,15 @@ import { useExerciseCreationContext } from '../../../store/context/ExerciseCreat
 import { IReadyStatus } from '../../../models/interfaces';
 import Button from '../../ui/buttons/Button';
 import RingLoader from 'react-spinners/RingLoader';
-import { useNavigate } from 'react-router-dom';
 import { getExerciseAttemptPageLink } from '../../../utils/links.util';
 import { FaRegLightbulb } from 'react-icons/fa';
 import CreationHelpModal from '../creation-help/CreationHelpModal';
+import { useRouter } from 'next/router';
 
 const btnClass = 'min-w-[10rem]';
 
 const CreationActions: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { saveDraft, saveExercise, runCode, isLoading, createdExercise, readyStatus } =
     useExerciseCreationContext();
 
@@ -47,7 +47,7 @@ const CreationActions: React.FC = () => {
       {showPublishedResult && (
         <Button
           mode="empty"
-          onClick={() => navigate(getExerciseAttemptPageLink(createdExercise._id))}
+          onClick={() => router.push(getExerciseAttemptPageLink(createdExercise._id))}
           className={btnClass}
         >
           Published Result

@@ -1,5 +1,5 @@
+import { useParams } from 'next/navigation';
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { ForumCategory, ForumCategoryList } from '../../models/enums';
 import { ForumIcons } from '../../utils/forum.util';
 import { getForumCategoryLink } from '../../utils/links.util';
@@ -18,7 +18,7 @@ const ForumNav: React.FC = () => {
       <div className="hidden sm:flex flex-wrap gap-3 mb-8">
         {ForumCategoryList.map((forum) => (
           <ActiveLink
-            to={getForumCategoryLink(forum)}
+            href={getForumCategoryLink(forum)}
             key={forum}
             activeClassName="nav-item-active !bg-slate-600 hover:!bg-slate-700/90 text-white"
             className="nav-item card flex-center gap-2 grow px-3 py-2 capitalize lg:text-lg bg-slate-200/90 text-gray-600 hover:!bg-slate-600 hover:text-white cursor-pointer"
@@ -62,7 +62,7 @@ const MobileForumDropdown: React.FC = () => {
             <ActiveLink
               key={forum}
               onClick={() => setMobileDropdownVisible(false)}
-              to={getForumCategoryLink(forum)}
+              href={getForumCategoryLink(forum)}
               activeClassName="!bg-gray-200/70"
               className="px-3 py-2 hover:bg-gray-100"
             >

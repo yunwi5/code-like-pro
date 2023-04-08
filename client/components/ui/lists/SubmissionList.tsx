@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import usePagination from '../../../hooks/usePagination';
+import usePagination from '../../../hooks/utils/usePagination';
 import { IUserSubmissionPopulated } from '../../../models/interfaces';
 import { listItemAnimations } from '../../../utils/animations.util';
 import SubmissionCard from '../cards/SubmissionCard';

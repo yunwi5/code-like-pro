@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { AiFillWechat } from 'react-icons/ai';
 import { BsCodeSlash } from 'react-icons/bs';
 import { FaLaptopCode, FaUserEdit } from 'react-icons/fa';
@@ -12,6 +11,7 @@ import { getShowcasePageLink } from '../../../utils/links.util';
 import CodeEditor from '../editor/CodeEditor';
 import HoveringLabel from '../tooltip/HoveringLabel';
 import LanguageLabel from '../icons/LanguageIcon';
+import Link from 'next/link';
 
 interface Props {
   exercise: IExerciseWithId;
@@ -34,7 +34,7 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
       {/* Card header that displays exercise title, language and author */}
       <header className="flex flex-wrap items-center gap-2">
         <h3 className="text-gray-600 text-lg sm:text-xl hover:text-main-500 cursor-pointer">
-          <Link to={getShowcasePageLink(exercise._id)}>{exercise.name}</Link>
+          <Link href={getShowcasePageLink(exercise._id)}>{exercise.name}</Link>
         </h3>
         <span className="text-sm cursor-pointer">
           <LanguageLabel language={exercise.language} />
@@ -62,14 +62,14 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
       {/* Listing showcase page links with its associated sections as query strings. */}
       <footer className="flex flex-col md:flex-row gap-2">
         <Link
-          to={getShowcasePageLink(exercise._id, ShowCaseSection.MODEL_ANSWER)}
+          href={getShowcasePageLink(exercise._id, ShowCaseSection.MODEL_ANSWER)}
           className="flex-start gap-2 px-3 py-1 transition-all hover:bg-main-500/90 hover:text-white hover:shadow rounded-full"
         >
           <TbBulb className="text-lg" />
           Model Answer
         </Link>
         <Link
-          to={getShowcasePageLink(exercise._id, ShowCaseSection.SHOWCASES)}
+          href={getShowcasePageLink(exercise._id, ShowCaseSection.SHOWCASES)}
           className="flex-start gap-2 px-3 py-1 transition-all hover:bg-purple-600 hover:text-white hover:shadow rounded-full"
         >
           <FaLaptopCode className="text-lg" />
@@ -77,7 +77,7 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
           {(exercise.showCases?.length || 0) !== 1 && 's'}
         </Link>
         <Link
-          to={getShowcasePageLink(exercise._id, ShowCaseSection.DISCUSSIONS)}
+          href={getShowcasePageLink(exercise._id, ShowCaseSection.DISCUSSIONS)}
           className="flex-start gap-2 px-2 py-1 transition-all hover:bg-pink-600 hover:text-white hover:shadow rounded-full"
         >
           <AiFillWechat className="text-lg" />

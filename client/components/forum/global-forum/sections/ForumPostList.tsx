@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import PuffLoader from 'react-spinners/PuffLoader';
 
 import useForumBrowsing from '../../../../hooks/useForumBrowsing';
-import usePagination from '../../../../hooks/usePagination';
+import usePagination from '../../../../hooks/utils/usePagination';
 import { IForumPost } from '../../../../models/interfaces';
 import { useAppSelector } from '../../../../store/redux/store';
 import { listItemAnimations } from '../../../../utils/animations.util';

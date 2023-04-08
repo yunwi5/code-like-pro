@@ -1,5 +1,5 @@
+import Link from 'next/link';
 import { RiEmotionSadLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
 
 import { IExerciseWithId } from '../../../models/interfaces';
 import {
@@ -23,7 +23,7 @@ const ShowCaseInviteMessage: React.FC<MessageProps> = ({ exercises, inviteMode }
         showcased.
       </h2>
       <Link
-        to={
+        href={
           inviteMode === 'created' ? getExerciseCreationPageLink() : getBrowsingPageLink()
         }
         className="btn btn-empty"

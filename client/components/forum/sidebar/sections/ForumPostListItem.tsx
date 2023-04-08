@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
 import { FaUserEdit } from 'react-icons/fa';
 import { MdDateRange } from 'react-icons/md';
 
@@ -9,12 +8,12 @@ import { ForumPostTypeIcons } from '../../../../utils/forum.util';
 import { getForumPostLink } from '../../../../utils/links.util';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
 import { getVoteCounts } from '../../../../utils/votes.util';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
 const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
   const postId = useParams().id;
-  // Check if the post is currently browsed by the user on the right side.
   const isActive = postId === post._id;
-  // Apply different styles if it is active.
   const activeClass = isActive ? 'border-l-[5px] border-l-main-300 bg-slate-200' : '';
 
   const { upVoteCount, downVoteCount } = getVoteCounts(post.votes || []);
@@ -30,7 +29,7 @@ const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
             'text-gray-600 text-base lg:text-lg hover:text-main-500 cursor-pointer'
           }
         >
-          <Link to={getForumPostLink(post)}>{post.name}</Link>
+          <Link href={getForumPostLink(post)}>{post.name}</Link>
         </h3>
       </header>
       <ul className="text-sm md:text-[0.925rem] mt-4 lg:mt-2 flex flex-wrap gap-x-4 gap-y-2">

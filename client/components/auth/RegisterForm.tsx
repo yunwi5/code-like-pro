@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { useUserContext } from '../../store/context/UserContext';
 import { registerRequest } from '../../apis/auth.api';
@@ -11,6 +10,7 @@ import {
   invalidateUsername,
 } from '../../utils/string-utils/validation.util';
 import AuthCard from './AuthCard';
+import { useRouter } from 'next/router';
 
 type IRegisterState = {
   email: string;
@@ -20,7 +20,7 @@ type IRegisterState = {
 };
 
 const RegisterForm = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { storeJwtData } = useUserContext();
   const [registerState, setRegisterState] = useState({
     email: '',
@@ -87,9 +87,9 @@ const RegisterForm = () => {
 
       if (doLogin) {
         storeJwtData(data.access_token, data.user);
-        navigate('/');
+        router.replace('/');
       } else {
-        navigate('/login');
+        router.push('/login');
       }
     } else {
       setErrorState({

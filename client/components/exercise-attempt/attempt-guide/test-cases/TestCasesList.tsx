@@ -4,7 +4,7 @@ import { ITestCaseProps, ITestCaseWithOutput } from '../../../../models/interfac
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { listItemAnimations } from '../../../../utils/animations.util';
 import TestCase from '../../../ui/test-cases/TestCase';
-import usePagination from '../../../../hooks/usePagination';
+import usePagination from '../../../../hooks/utils/usePagination';
 import PageNavigation from '../../../ui/PageNavigation';
 
 interface Props {

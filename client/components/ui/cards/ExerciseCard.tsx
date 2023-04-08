@@ -6,7 +6,6 @@ import { BsClock, BsFillTagsFill } from 'react-icons/bs';
 
 import { IExerciseCard } from '../../../models/interfaces';
 import { getDifficultyBtnClass } from '../../../utils/difficulty.util';
-import { useNavigate } from 'react-router-dom';
 import {
   getExerciseAttemptPageLink,
   getExerciseEditLink,
@@ -21,6 +20,7 @@ import DeleteButton from '../buttons/icon-buttons/DeleteButton';
 import useExerciseSubmissionsQuery from '../../../hooks/exercise/exercise-submissions.tsx/useExerciseSubmissionsQuery';
 import { getSubmissionStats } from '../../../utils/user-submission.util';
 import { getDateFormat } from '../../../utils/datetime.util';
+import { useRouter } from 'next/router';
 
 interface Props {
   exercise: IExerciseCard;
@@ -28,7 +28,7 @@ interface Props {
 }
 
 const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { likedExerciseIdSet } = useUserContext();
   const { submissions } = useExerciseSubmissionsQuery(exercise?._id || '');
   const { correctRate } = getSubmissionStats(submissions || []);
@@ -39,12 +39,12 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
   const difficultyStyle = getDifficultyBtnClass(exercise.difficulty);
 
   // Navigate to exercise attempt page for this exercise
-  const navigateToAttempt = () => navigate(getExerciseAttemptPageLink(exercise._id));
+  const navigateToAttempt = () => router.push(getExerciseAttemptPageLink(exercise._id));
 
   // Group of edit & delete buttons displayed only if the user is the author.
   const exerciseControl = exercise?.isAuthorized ? (
     <ExerciseControl
-      onEdit={() => navigate(getExerciseEditLink(exercise._id))}
+      onEdit={() => router.push(getExerciseEditLink(exercise._id))}
       onDelete={() => setShowDeleteModal(true)}
     />
   ) : null;

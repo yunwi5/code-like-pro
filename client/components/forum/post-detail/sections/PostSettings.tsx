@@ -1,5 +1,5 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { deleteForumPost } from '../../../../apis/forum.api';
 import { IForumPostPopulated } from '../../../../models/interfaces';
 import { getForumPostEditLink } from '../../../../utils/links.util';
@@ -9,7 +9,7 @@ import DeleteModal from '../../../ui/modals/variations/DeleteModal';
 
 // Post edit and deleting settings for post author control
 const PostSettings: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   // State for poping up the delete modal for the delete action.
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -17,7 +17,7 @@ const PostSettings: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
   if (!post) return null;
 
   const handleDeleteAction = () => {
-    navigate('/forum');
+    router.push('/forum');
     toastNotify(`Successfully delete post ${post.name}`);
   };
 
@@ -25,7 +25,7 @@ const PostSettings: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
     <>
       <SettingsButton
         className="ml-auto"
-        onEdit={() => navigate(getForumPostEditLink(post?._id))}
+        onEdit={() => router.push(getForumPostEditLink(post?._id))}
         onDelete={() => setShowDeleteModal(true)}
       />
 

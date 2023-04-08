@@ -1,16 +1,16 @@
 import { FaListUl } from 'react-icons/fa';
 import { GrRotateLeft } from 'react-icons/gr';
-import { useNavigate } from 'react-router-dom';
 import { useShowcase } from '../../store/context/ShowcaseContext';
 import { getDifficultyBtnClass } from '../../utils/difficulty.util';
 import { getBrowsingPageLink, getExerciseAttemptPageLink } from '../../utils/links.util';
 import Button from '../ui/buttons/Button';
 import ExerciseSpec from '../ui/spec/ExerciseSpec';
 import LanguageLabel from '../ui/icons/LanguageIcon';
+import { useRouter } from 'next/router';
 
 /* Header layout breakpoint is lg - 1024px  */
 const ShowcaseHeader = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { exercise } = useShowcase();
 
   if (!exercise) return null;
@@ -37,7 +37,7 @@ const ShowcaseHeader = () => {
       {/* Header action buttons. Try again & Back to list. Layout breakpoint is xs - 400px */}
       <div className="self-stretch lg:self-center flex-col xs:flex-row gap-2 hidden xs:flex">
         <Button
-          onClick={() => navigate(getExerciseAttemptPageLink(exercise._id))}
+          onClick={() => router.push(getExerciseAttemptPageLink(exercise._id))}
           mode="empty"
           className="grow md:grow-0 !text-base lg:text-lg"
         >
@@ -47,7 +47,7 @@ const ShowcaseHeader = () => {
           </span>
         </Button>
         <Button
-          onClick={() => navigate(getBrowsingPageLink())}
+          onClick={() => router.push(getBrowsingPageLink())}
           mode="fill"
           className="grow md:grow-0 !text-base lg:text-lg min-w-[10rem]"
         >

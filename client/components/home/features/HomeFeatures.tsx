@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { AnimateSharedLayout, motion } from 'framer-motion';
 
 import { AppImages } from '../../../assets/app-images';
@@ -12,6 +11,7 @@ import FeaturesBanner from './FeaturesBanner';
 import ImageBlock from './ImageBlock';
 import './ImageBlock.scss';
 import { ProfileSection } from '../../../models/enums';
+import { useRouter } from 'next/router';
 
 // Image container animation for children staggering
 const container = {
@@ -50,7 +50,7 @@ const imageMain = {
 };
 
 const HomeFeatures: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <section className="flex-center mx-auto my-10 lg:my-20 py-4 sm:py-8 md:py-10 text-gray-600 bg-gray-100">
@@ -68,7 +68,7 @@ const HomeFeatures: React.FC = () => {
             >
               {/* Top left image */}
               <ImageBlock
-                onClick={() => navigate(getExerciseCreationPageLink())}
+                onClick={() => router.push(getExerciseCreationPageLink())}
                 variants={image}
                 src={AppImages.ExerciseCreation}
                 delay={0.2}
@@ -78,7 +78,7 @@ const HomeFeatures: React.FC = () => {
 
               {/* Bottom left image */}
               <ImageBlock
-                onClick={() => navigate(getShowcaseInvitesPageLink())}
+                onClick={() => router.push(getShowcaseInvitesPageLink())}
                 variants={image}
                 src={AppImages.Showcases}
                 delay={0.35}
@@ -88,7 +88,7 @@ const HomeFeatures: React.FC = () => {
 
               {/* Main middle image */}
               <ImageBlock
-                onClick={() => navigate('/browse')}
+                onClick={() => router.push('/browse')}
                 variants={imageMain}
                 src={AppImages.ExerciseAttempt}
                 alt="Exercise workspace"
@@ -97,7 +97,7 @@ const HomeFeatures: React.FC = () => {
 
               {/* Top right image */}
               <ImageBlock
-                onClick={() => navigate(getProfileLink(ProfileSection.STATISTICS))}
+                onClick={() => router.push(getProfileLink(ProfileSection.STATISTICS))}
                 variants={image}
                 src={AppImages.Statistics}
                 delay={0.35}
@@ -107,7 +107,7 @@ const HomeFeatures: React.FC = () => {
 
               {/* Bottom right image */}
               <ImageBlock
-                onClick={() => navigate('/ranking')}
+                onClick={() => router.push('/ranking')}
                 variants={image}
                 src={AppImages.Ranking}
                 delay={0.75}
