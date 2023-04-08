@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 type AnimationDirection = 'vertical' | 'horizontal';
 
@@ -67,10 +68,16 @@ interface ModalProps {
   className?: string;
 }
 
-const portalElement = document.getElementById('modal') as HTMLElement;
-
 const AnimationModal: React.FC<ModalProps> = (props) => {
   const { open, direction = 'horizontal', onClose, className, children } = props;
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const fetchedElement = document.getElementById('modal') as HTMLElement;
+    setPortalElement(fetchedElement);
+  }, []);
+
+  if (portalElement === null) return null;
 
   return (
     <>

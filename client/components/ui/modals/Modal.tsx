@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Backdrop from './Backdrop';
 
@@ -21,7 +22,14 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = (props) => {
-  const portalElement = document.getElementById('modal') as HTMLElement;
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const selectedElement = document.getElementById('modal') as HTMLElement;
+    setPortalElement(selectedElement);
+  }, []);
+
+  if (portalElement === null) return null;
 
   return (
     <>
