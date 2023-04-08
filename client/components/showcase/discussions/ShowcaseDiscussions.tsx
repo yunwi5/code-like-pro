@@ -40,7 +40,7 @@ const ShowcaseDiscussions: React.FC = () => {
     if (!showOnlyMyComments) return comments;
     // If showOnlyMyComments == true, show only current user's comments.
     return comments.filter((comment) => comment.user._id === userDetail?._id);
-  }, [showOnlyMyComments, comments, userDetail?._id]);
+  }, [showOnlyMyComments, comments]);
 
   // Whenver sorting state changes, sort the comments again.
   const sortedComments = useMemo(() => {
