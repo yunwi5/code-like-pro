@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ForumCategory, ForumCategoryList } from '../../models/enums';
-import { ForumIcons } from '../../utils/forum';
-import { getForumCategoryLink } from '../../utils/links';
+import { ForumIcons } from '../../utils/forum.util';
+import { getForumCategoryLink } from '../../utils/links.util';
 import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
 import ActiveLink from '../ui/links/ActiveLink';
 import './ForumNav.scss';

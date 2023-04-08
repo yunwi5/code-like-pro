@@ -9,7 +9,7 @@ import {
     getLightColorByIndex,
     LanguageColorMap,
     StatusColorMap,
-} from '../colors';
+} from '../colors.util';
 
 export function getLanguageChartDataArray(
     submissions: IUserSubmissionPopulated[],

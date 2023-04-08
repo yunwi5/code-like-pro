@@ -1,7 +1,7 @@
 import { compareByName, compareByDateTime } from '.';
 import { BadgeSortingKey, SortingDirection } from '../../models/enums';
 import { IBadge } from '../../models/interfaces';
-import { compareByRarity } from '../badge';
+import { compareByRarity } from '../badge.util';
 
 // Sort forums based on forum post sorting key and sorting direction
 export function sortBadges(

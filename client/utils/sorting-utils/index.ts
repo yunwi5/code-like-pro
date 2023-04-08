@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import { Difficulty } from '../../models/enums';
 import { IVote } from '../../models/interfaces';
-import { mapDifficultyToNumericValue } from '../difficulty';
+import { mapDifficultyToNumericValue } from '../difficulty.util';
 
 export function compareByName<T extends { name: string }>(obj1: T, obj2: T) {
     return obj1.name.trim().toLowerCase() < obj2.name.trim().toLowerCase() ? -1 : 1;

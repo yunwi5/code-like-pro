@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ProgrammingTopicList } from '../../models/enums';
 import { useTopicParam } from '../../pages/ranking/TopicRankingPage';
-import { getGlobalRankigLink, getTopicRankingLink } from '../../utils/links';
+import { getGlobalRankigLink, getTopicRankingLink } from '../../utils/links.util';
 import ActiveLink from '../ui/links/ActiveLink';
 import RankingHeader from './sections/RankingHeader';
 

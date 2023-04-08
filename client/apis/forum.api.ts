@@ -6,7 +6,7 @@ import {
     IForumPostPopulated,
     IVote,
 } from '../models/interfaces';
-import { deleteRequest, getRequest, patchRequest, postRequest } from './requests.api';
+import { deleteRequest, getRequest, patchRequest, postRequest } from './common-requests';
 
 const API_DOMAIN = '/forumPost';
 

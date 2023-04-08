@@ -10,7 +10,7 @@ import {
     IUserSubmission,
     IVote,
 } from '../models/interfaces';
-import { deleteRequest, getRequest, postRequest, putRequest } from './requests.api';
+import { deleteRequest, getRequest, postRequest, putRequest } from './common-requests';
 
 const EXERCISE_API_DOMAIN = '/exercise';
 const SHOWCASE_API_DOMAIN = '/showcase';

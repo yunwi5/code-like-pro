@@ -1,6 +1,6 @@
-import { getRequest, postRequest } from './requests.api';
+import { getRequest, postRequest } from './common-requests';
 import { IBadge } from '../models/interfaces';
-import { RarityBreakpoint } from '../utils/badge';
+import { RarityBreakpoint } from '../utils/badge.util';
 
 const API_DOMAIN = '/badge';
 

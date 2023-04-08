@@ -1,5 +1,5 @@
 import { IExerciseCard, IExerciseWithId } from '../../models/interfaces';
-import { getOverallDifficulty } from '../difficulty';
+import { getOverallDifficulty } from '../difficulty.util';
 
 // Optional overriding attributes such as giving the authorized access.
 type Attributes = { isAuthorized?: boolean; author?: { _id: string; name: string } };

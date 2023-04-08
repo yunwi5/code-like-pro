@@ -2,7 +2,7 @@ import { FiLogOut } from 'react-icons/fi';
 
 import { ProfileSectionList } from '../../../../models/enums';
 import { useUserContext } from '../../../../store/context/UserContext';
-import { getProfileSectionIcon, ProfileLinkMap } from '../../../../utils/profile';
+import { getProfileSectionIcon, ProfileLinkMap } from '../../../../utils/profile.util';
 import ProfileMenuHeader from './ProfileMenuHeader';
 import styles from './ProfileDropdownMenu.module.scss';
 import Link from 'next/link';
