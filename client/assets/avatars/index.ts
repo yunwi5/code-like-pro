@@ -28,3 +28,4 @@ export const AvatarImages = {
 };
 
 export const AvatarImagesList = Object.values(AvatarImages);
+export const AvatarImageSrcList = AvatarImagesList.map((image) => image.src); 
