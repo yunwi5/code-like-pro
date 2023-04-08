@@ -13,6 +13,7 @@ import PageNavigation from '../PageNavigation';
 import BadgeSorter from '../sorting/BadgeSorter';
 import BadgesInfo from './badges-info/BadgesInfo';
 import styles from './Badges.module.scss';
+import Image from 'next/image';
 
 interface Props {
   badges: IBadge[];
@@ -141,9 +142,8 @@ const BadgeCard: React.FC<{ badge: IBadge; onClick?: () => void; className: stri
       onClick={onClick}
       className={`${styles.card} flex flex-col items-center px-2 pt-0 pb-2 rounded shadow-md hover:shadow-lg cursor-pointer ${className}`}
     >
-      <img
-        width="100%"
-        className="h-fit"
+      <Image
+        className="w-full h-fit"
         src={BadgeImageMap[badge.rarity]}
         alt={`Badge ${badge.name}`}
       />

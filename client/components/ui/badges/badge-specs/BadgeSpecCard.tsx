@@ -2,6 +2,7 @@ import React from 'react';
 import { BadgeRarity } from '../../../../models/enums';
 import { BadgeImageMap, BadgeRarityFullNames } from '../../../../utils/badge.util';
 import './BadgeSpecCard.scss';
+import Image from 'next/image';
 
 interface Props {
   rarity: BadgeRarity;
@@ -14,7 +15,7 @@ const BadgeSpecCard: React.FC<Props> = ({ rarity, description }) => {
       className={`${`${rarity.toLowerCase()}-spec`} badge-spec flex flex-col items-center px-2 py-2 gap-3 transition-all rounded`}
     >
       <div className="shrink-0">
-        <img
+        <Image
           src={BadgeImageMap[rarity]}
           alt={`Badge ${rarity}`}
           className="object-cover lg:h-[8rem] lg:w-[10rem] max-h-[15rem] max-w-[11rem]"
