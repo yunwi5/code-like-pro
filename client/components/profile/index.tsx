@@ -1,15 +1,7 @@
-import { lazy } from 'react';
+import dynamic from 'next/dynamic';
 
-const ProfileMain = lazy(() => import('./profile/ProfileMain'));
-const ProfileStatistics = lazy(() => import('./statistics/ProfileStatistics'));
-const ProfileFavorites = lazy(() => import('./favorites/ProfileFavorites'));
-const MyCreations = lazy(() => import('./my-creations/MyCreations'));
-const MySubmission = lazy(() => import('./my-submissions/MySubmission'));
-
-export default {
-  ProfileMain,
-  ProfileFavorites,
-  ProfileStatistics,
-  MyCreations,
-  MySubmission,
-};
+export const ProfileMain = dynamic(() => import('./profile/ProfileMain'));
+export const ProfileStatistics = dynamic(() => import('./statistics/ProfileStatistics'));
+export const ProfileFavorites = dynamic(() => import('./favorites/ProfileFavorites'));
+export const MyCreations = dynamic(() => import('./my-creations/MyCreations'));
+export const MySubmission = dynamic(() => import('./my-submissions/MySubmission'));

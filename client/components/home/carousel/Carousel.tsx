@@ -87,7 +87,7 @@ export const Carousel: React.FC = () => {
           <AnimatePresence initial={false} custom={direction}>
             <motion.img
               key={page}
-              src={images[imageIndex]}
+              src={images[imageIndex].src}
               alt={`${AppProperty.APP_NAME} Features`}
               custom={direction}
               variants={variants}
