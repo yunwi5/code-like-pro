@@ -57,7 +57,7 @@ async function wrapRequest<T>(
   } catch (err) {
     let message = extractErrorMessage(err);
     console.log(message);
-    if (catchErrors) {
+    if (catchErrors == false) {
       throw err;
     }
     return { ok: false, message };
