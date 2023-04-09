@@ -1,20 +1,27 @@
-import React, { useEffect, useState } from 'react';
+'use client';
+import React, { useEffect, useMemo, useState } from 'react';
+import useExerciseListQuery from '@/hooks/exercise/useExerciseListQuery';
+import { mapExercisesToExerciseCards } from '@/utils/exercise-utils/exercise';
 import useBrowsing from '../../hooks/useExerciseBrowsing';
-import { IExerciseCard } from '../../models/interfaces';
+import { IExerciseCard, IExerciseWithId } from '../../models/interfaces';
 import ExerciseList from '../ui/lists/ExerciseList';
 import BrowsingHeader from './header/BrowsingHeader';
 import BrowsingSidebar from './sidebar/BrowsingSidebar';
 
 interface Props {
-  exercises: IExerciseCard[];
+  exercises: IExerciseWithId[];
 }
 
-const BrowsingMain: React.FC<Props> = ({ exercises }) => {
-  const { exercises: processedExercises } = useBrowsing(exercises);
-  // Sidebar visibility for mobile screen sizes
-  const [showSidebar, setShowSidebar] = useState(false);
+const BrowsingMain: React.FC<Props> = ({ exercises: initialExercisesData }) => {
+  const { exercises } = useExerciseListQuery(initialExercisesData);
 
-  // Shuffled exercises when the user clicks the shuffle button on the sidebar
+  const exerciseCards: IExerciseCard[] = useMemo(
+    () => mapExercisesToExerciseCards(exercises),
+    [exercises],
+  );
+
+  const { exercises: processedExercises } = useBrowsing(exerciseCards);
+  const [showSidebar, setShowSidebar] = useState(false);
   const [shuffledExercises, setShuffledExercises] = useState(processedExercises);
 
   const handleSuffle = (randomized: IExerciseCard[]) => setShuffledExercises(randomized);
