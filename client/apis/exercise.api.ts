@@ -15,7 +15,6 @@ import { deleteRequest, getRequest, postRequest, putRequest, ReqOptions } from '
 const EXERCISE_API_DOMAIN = '/exercise';
 const SHOWCASE_API_DOMAIN = '/showcase';
 
-// fetch exercise list from the backend
 export async function getExercises(options?: ReqOptions) {
   return await getRequest<IExerciseWithId[]>({ url: EXERCISE_API_DOMAIN, options });
 }
@@ -24,10 +23,15 @@ export async function getExercisesData() {
   return getExercises({ catchErrors: false }).then((res) => res.data);
 }
 
-export async function getExerciseById(id: string) {
+export async function getExerciseById(id: string, options?: ReqOptions) {
   return await getRequest<IExerciseWithId | undefined>({
     url: `${EXERCISE_API_DOMAIN}/${id}`,
+    options,
   });
+}
+
+export async function getExerciseByIdData(id: string) {
+  return getExerciseById(id, { catchErrors: false }).then((res) => res.data);
 }
 
 export async function postExercise(exercise: IExerciseDraft) {
@@ -50,14 +54,12 @@ export async function deleteExercise(id: string) {
   });
 }
 
-//Get top exercises
 export async function getTopExercises(amount: number = 3) {
   return await getRequest<IExerciseWithId[]>({
     url: `${EXERCISE_API_DOMAIN}/top?amount=${amount}`,
   });
 }
 
-// Merge user custom test cases to existing test cases
 export async function postTestCasesMerge(id: string, newTests: ITestCase[]) {
   return await postRequest<{ exercise: IExercise; insertedCount: number }>({
     url: `${EXERCISE_API_DOMAIN}/${id}/test-merge`,
@@ -65,7 +67,6 @@ export async function postTestCasesMerge(id: string, newTests: ITestCase[]) {
   });
 }
 
-// GET: submission history of an exercise as a UserSubmission[]
 export async function getExerciseSubmissions(id: string) {
   return await getRequest<IUserSubmission[]>({
     url: `${EXERCISE_API_DOMAIN}/${id}/submission`,
@@ -93,7 +94,6 @@ export async function likeExerciseRequest(id: string) {
   });
 }
 
-// POST: post user showcase solution
 export type ShowcaseProps = { code: string; description: string };
 export async function postExerciseShowCase(id: string, showcaseProps: ShowcaseProps) {
   return await postRequest<IShowCase>({
@@ -119,7 +119,6 @@ export async function postExerciseComment(id: string, comment: { text: string })
   });
 }
 
-// POST exercise difficulty vote
 export async function postExerciseDifficultyVote(id: string, difficulty: Difficulty) {
   return await postRequest<IExerciseWithId>({
     url: `${EXERCISE_API_DOMAIN}/${id}/difficulty-vote`,
@@ -127,7 +126,6 @@ export async function postExerciseDifficultyVote(id: string, difficulty: Difficu
   });
 }
 
-// POST vote for showcase
 export async function postVoteRequest(id: string, vote: { type: 'up' | 'down' }) {
   return await postRequest<IVote>({
     url: `${SHOWCASE_API_DOMAIN}/${id}/vote`,
@@ -135,14 +133,12 @@ export async function postVoteRequest(id: string, vote: { type: 'up' | 'down' })
   });
 }
 
-// DELETE vote for showcase
 export function deleteShowcaseVote(id: string) {
   return deleteRequest<IVote>({
     url: `${SHOWCASE_API_DOMAIN}/${id}/vote`,
   });
 }
 
-// GET showcase comments
 export async function getShowcaseComments(id: string) {
   return await getRequest<IComment[]>({
     url: `${SHOWCASE_API_DOMAIN}/${id}/comment`,
