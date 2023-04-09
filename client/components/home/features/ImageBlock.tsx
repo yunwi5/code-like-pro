@@ -24,7 +24,6 @@ export const ImageBlock = ({
   src,
   alt,
 }: ImageProps) => {
-  const { width } = useWindowSize();
   return (
     <motion.div
       onClick={onClick}
@@ -32,7 +31,7 @@ export const ImageBlock = ({
       variants={variants}
       initial="hidden"
       whileInView="show"
-      whileHover={{ scale: width >= 1024 ? 1.1 : 1, transition: { duration: 0.5 } }}
+      whileHover={{ scale: 1.15, transition: { duration: 0.5 } }}
       transition={{
         ease: 'easeIn',
         delay,
