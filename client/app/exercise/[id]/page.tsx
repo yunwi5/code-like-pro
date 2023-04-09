@@ -6,6 +6,9 @@ import React from 'react';
 
 type ExerciseAttemptPageProps = { params: { id: string } };
 
+export const revalidate = 60,
+  fetchCache = 'auto';
+
 export async function generateMetadata({
   params: { id },
 }: ExerciseAttemptPageProps): Promise<Metadata> {

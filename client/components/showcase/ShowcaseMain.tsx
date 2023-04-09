@@ -10,7 +10,6 @@ import ShowcaseNav from './ShowcaseNav';
 import ShowcaseShowcases from './showcases/ShowcaseShowcases';
 
 const ShowcaseMain: React.FC = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const section = parseUrlString(searchParams.get('section')) as ShowCaseSection;
@@ -20,14 +19,21 @@ const ShowcaseMain: React.FC = () => {
   const [showPostModal, setShowPostModal] = useState(false);
 
   useEffect(() => {
-    if (section) setActiveSection(parseUrlString(section) as any);
-  }, [section]);
-
-  useEffect(() => {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set('section', activeSection);
-    router.push(`${pathname}?${newSearchParams.toString()}`);
-  }, [activeSection, router, pathname, searchParams]);
+    window.history.pushState({}, '', `${pathname}?${newSearchParams.toString()}`);
+  }, [activeSection, pathname, searchParams]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const oldSection = parseUrlString(params.get('section')) as ShowCaseSection;
+      setActiveSection(oldSection);
+    };
+    window.addEventListener('popstate', handlePopState);
+
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   return (
     <div className="flex flex-col gap-5 w-[95vw] lg:w-[92vw] xl:w-[85vw] max-w-[80rem] text-gray-700">
