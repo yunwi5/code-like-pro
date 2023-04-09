@@ -19,7 +19,6 @@ const ExerciseAttemptMain: FC<ExerciseAttemptContainerProps> = ({
 }) => {
   useAuth();
   const { submissionMap } = useUserContext();
-
   const { exercise = initialExerciseData, refetch } = useExerciseQuery(exerciseId);
 
   const userSubmission = useMemo(
