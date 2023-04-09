@@ -20,57 +20,55 @@ import {
 } from '../../utils/exercise-utils/testcase';
 import { toastNotify } from '../../utils/notification.util';
 
-export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>({
-  setActiveSection: () => {},
-  setName: () => {},
-  runCode: () => {},
-  testCases: [],
-  tags: [],
-} as any);
+export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>(
+  null!,
+);
 
 export const useExerciseCreationContext = () => useContext(ExerciseCreationContext);
-
-export const DRAFT_LOCAL_STORATE_KEY = 'exercise_creation_draft';
 
 interface Props {
   children: React.ReactNode;
   exercise?: IExerciseWithId; // initial exercise (if in edit mode)
 }
 
+export const DRAFT_LOCAL_STORATE_KEY = 'exercise_creation_draft';
+
 // Context for sharing and storing user exercise creation data.
 // Each exercise creation related component can use this context to receive or update the data.
 export const ExerciseCreationContextProvider: React.FC<Props> = ({
   children,
-  exercise,
+  exercise: existingExercise,
 }) => {
-  const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${exercise ? `-${exercise._id}` : ''}`;
+  const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${
+    existingExercise ? `-${existingExercise._id}` : ''
+  }`;
   const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExerciseDraft | ''>(
     draftKey,
     '',
   );
 
-  const [name, setName] = useState(exercise?.name || '');
-  const [prompt, setPrompt] = useState(exercise?.prompt || '');
+  const [name, setName] = useState(existingExercise?.name || '');
+  const [prompt, setPrompt] = useState(existingExercise?.prompt || '');
   const [language, setLanguage] = useState<Language>(
-    exercise?.language || Language.PYTHON,
+    existingExercise?.language || Language.PYTHON,
   );
   const [difficulty, setDifficulty] = useState<Difficulty>(
-    exercise?.difficulty || Difficulty.EASY,
+    existingExercise?.difficulty || Difficulty.EASY,
   );
 
-  const [solutionCode, setSolutionCode] = useState(exercise?.solutionCode || '');
+  const [solutionCode, setSolutionCode] = useState(existingExercise?.solutionCode || '');
   const [startingTemplate, setStartingTemplate] = useState(
-    exercise?.startingTemplate || '',
+    existingExercise?.startingTemplate || '',
   );
-  const [tags, setTags] = useState<string[]>(exercise?.tags || []);
+  const [tags, setTags] = useState<string[]>(existingExercise?.tags || []);
 
   const [testCases, setTestCases] = useState<ITestCase[]>(
-    exercise?.testCases || getInitialTestCaseArray(),
+    existingExercise?.testCases || getInitialTestCaseArray(),
   );
   const [testCaseOutputs, setTestCaseOutputs] = useState<ITestOutput[]>([]);
 
   const [createdExercise, setCreatedExercise] = useState<null | IExerciseWithId>(
-    exercise ?? null,
+    existingExercise ?? null,
   );
 
   // State for loading while sending a request to the server. Loading state should not let users to click 'Run Code' or 'Save Challenge' buttons.
@@ -177,10 +175,8 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
 
   // Runs on mount.
   useEffect(() => {
-    // If there is no draft initially, return.
     if (!exerciseDraft) return;
-    // If there is an initial exercise (edit mode), do not use the draft data.
-    if (exercise) return;
+    if (existingExercise) return;
     setName(exerciseDraft.name);
     setLanguage(exerciseDraft.language as Language);
     setDifficulty(exerciseDraft.difficulty);
