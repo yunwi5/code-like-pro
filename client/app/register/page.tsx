@@ -8,7 +8,7 @@ export const metadata = {
   description: `Registration page of ${AppProperty.APP_NAME} where users can create a new account.`,
 };
 
-const page: NextPage = () => {
+const RegisterPage: NextPage = () => {
   return (
     <main className="flex-center min-h-[max(85vh,35rem)] px-3 md:px-5 xl:px-10 py-10 text-gray-700">
       <RegisterForm />
@@ -16,4 +16,4 @@ const page: NextPage = () => {
   );
 };
 
-export default page;
+export default RegisterPage;
