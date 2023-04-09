@@ -4,7 +4,7 @@ import ShowcaseMainContainer from '@/components/showcase/ShowcaseMainContainer';
 import { AppProperty } from '@/constants';
 
 export const metadata = {
-  title: `ShowCase | ${AppProperty.APP_NAME}`,
+  title: `Showcase | ${AppProperty.APP_NAME}`,
   description:
     "Showcase page of a programming exercise where users can showcase their code, view other users' coding solutions and discuss the efficiency.",
 };

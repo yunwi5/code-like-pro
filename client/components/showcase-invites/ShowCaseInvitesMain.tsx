@@ -1,28 +1,33 @@
+'use client';
 import React, { useMemo, useState } from 'react';
+import BounceLoader from 'react-spinners/BounceLoader';
 import { IExerciseWithId } from '../../models/interfaces';
 import { compareByName } from '../../utils/sorting-utils';
 import ShowCaseInviteHeader from './sections/ShowCaseInviteHeader';
 import ShowCaseInviteList from './sections/ShowCaseInviteList';
 import ShowcaseListOptions from './sections/ShowCaseListOptions';
 import ShowCaseInviteMessage from './sections/ShowcaseInviteMessage';
+import useAuth from '@/hooks/utils/useAuth';
+import { useUserContext } from '@/store/context/UserContext';
+import useExerciseListQuery from '@/hooks/exercise/useExerciseListQuery';
 
 interface Props {
-  isLoading: boolean;
-  createdExercises: IExerciseWithId[];
-  solvedExercises: IExerciseWithId[];
+  exercises: IExerciseWithId[];
 }
 
-// Page for listing available showcases for users to join.
-const ShowCaseInvites: React.FC<Props> = ({
-  isLoading,
-  createdExercises,
-  solvedExercises,
-}) => {
-  // Display either creatd exercises or solved ones depending on the selection.
+const ShowCaseInvitesMain: React.FC<Props> = ({ exercises: initialExercisesData }) => {
+  useAuth();
+  const { isLoading, user, submissionMap } = useUserContext();
+  const { exercises, error } = useExerciseListQuery(initialExercisesData);
+  if (error) console.log(error);
   const [showCreatedExercises, setShowCreatedExercises] = useState(true);
 
-  // Selected showcase invited exercises either 'Created' or 'Solved' exercises by the user.
-  // Sort the list alphabtically.
+  const createdExercises = useMemo(
+    () => exercises.filter((ex) => ex.author._id === user?._id) || [],
+    [exercises, user?._id],
+  );
+  const solvedExercises = exercises.filter((ex) => submissionMap[ex._id]?.correct);
+
   const selectedExercises = useMemo(() => {
     const selected = showCreatedExercises ? createdExercises : solvedExercises;
     return selected.sort((a, b) => compareByName(a, b));
@@ -38,6 +43,11 @@ const ShowCaseInvites: React.FC<Props> = ({
         setShowCreatedExercises={setShowCreatedExercises}
         selectedExercises={selectedExercises}
       />
+      {isLoading && (
+        <div className="flex justify-center items-center my-10">
+          <BounceLoader size={90} color="#5552e4" />
+        </div>
+      )}
       {displayInviteMessage && (
         <ShowCaseInviteMessage
           exercises={selectedExercises}
@@ -52,4 +62,4 @@ const ShowCaseInvites: React.FC<Props> = ({
   );
 };
 
-export default ShowCaseInvites;
+export default ShowCaseInvitesMain;
