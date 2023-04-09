@@ -23,7 +23,7 @@ const ProfilePicture: React.FC<Props> = ({
   return (
     <div
       onClick={onClick}
-      className={`flex-center shrink-0 overflow-hidden rounded-full shadow bg-gray-200 ${className}`}
+      className={`relative flex-center shrink-0 overflow-hidden rounded-full shadow bg-gray-200 ${className}`}
       style={{ width: size, height: size }}
     >
       <FaUser className="text-gray-600 scale-90 translate-y-1" size={size} />
@@ -33,7 +33,7 @@ const ProfilePicture: React.FC<Props> = ({
           fill
           src={picture}
           alt={alt}
-          className={`min-w-full min-h-full object-cover ${imageValid ? '' : 'hidden'}`}
+          className={`object-cover ${imageValid ? '' : 'hidden'}`}
           onError={() => setImageValid(false)}
         />
       )}
