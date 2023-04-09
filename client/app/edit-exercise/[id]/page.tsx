@@ -8,6 +8,9 @@ export const metadata = {
   description: `Exercise edit page of ${AppProperty.APP_NAME} where users can edit their programming challenge in various programming languages.`,
 };
 
+export const revalidate = 60,
+  fetchCache = 'auto';
+
 type ExerciseEditPageProps = {
   params: { id: string };
 };
