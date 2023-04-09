@@ -1,5 +1,6 @@
+'use client';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
 import { useUserContext } from '../../store/context/UserContext';
 
 function useAuth() {
@@ -7,7 +8,6 @@ function useAuth() {
   const { user, isLoading } = useUserContext();
   const isLoggedIn = !!user;
 
-  // // If the user is not logged in, redirect to the login page.
   useEffect(() => {
     if (isLoading || isLoggedIn) return;
     router.push('/login');

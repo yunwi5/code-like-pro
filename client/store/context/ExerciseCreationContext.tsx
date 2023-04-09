@@ -1,3 +1,4 @@
+'use client';
 import React, { useContext, useEffect, useState } from 'react';
 import { postExercise, putExercise } from '../../apis/exercise.api';
 import { runTestCases } from '../../apis/submission.api';
@@ -42,7 +43,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
   children,
   exercise,
 }) => {
-  // Construct a unique key for the exercise draft so that exercise drafts do not conlict each other.
   const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${exercise ? `-${exercise._id}` : ''}`;
   const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExerciseDraft | ''>(
     draftKey,
