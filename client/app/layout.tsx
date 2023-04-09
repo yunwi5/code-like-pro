@@ -16,11 +16,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body>
-        <Header />
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
         <Footer />
         <ScrollToTop />
-        <div id='modal'></div>
+        <div id="modal"></div>
       </body>
     </html>
   );

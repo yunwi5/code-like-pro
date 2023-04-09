@@ -1,0 +1,19 @@
+import RegisterForm from '@/components/auth/RegisterForm';
+import { AppProperty } from '@/constants';
+import { NextPage } from 'next';
+import React from 'react';
+
+export const metadata = {
+  title: `Register | ${AppProperty.APP_NAME}`,
+  description: `Registration page of ${AppProperty.APP_NAME} where users can create a new account.`,
+};
+
+const page: NextPage = () => {
+  return (
+    <main className="flex-center min-h-[max(85vh,35rem)] px-3 md:px-5 xl:px-10 py-10 text-gray-700">
+      <RegisterForm />
+    </main>
+  );
+};
+
+export default page;
