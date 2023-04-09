@@ -10,14 +10,18 @@ import {
   IUserSubmission,
   IVote,
 } from '../models/interfaces';
-import { deleteRequest, getRequest, postRequest, putRequest } from './common-requests';
+import { deleteRequest, getRequest, postRequest, putRequest, ReqOptions } from './common-requests';
 
 const EXERCISE_API_DOMAIN = '/exercise';
 const SHOWCASE_API_DOMAIN = '/showcase';
 
 // fetch exercise list from the backend
-export async function getExercises() {
-  return await getRequest<IExerciseWithId[]>({ url: EXERCISE_API_DOMAIN });
+export async function getExercises(options?: ReqOptions) {
+  return await getRequest<IExerciseWithId[]>({ url: EXERCISE_API_DOMAIN, options });
+}
+
+export async function getExercisesData() {
+  return getExercises({ catchErrors: false }).then((res) => res.data);
 }
 
 export async function getExerciseById(id: string) {
