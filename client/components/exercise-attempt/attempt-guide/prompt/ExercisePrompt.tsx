@@ -42,7 +42,7 @@ const DifficultyPrompt: React.FC = () => {
 
         <button
           onClick={() => setShowDifficultyModal(true)}
-          className="px-3 py-[0.3rem] rounded-full shadow-md bg-gray-200 hover:bg-main-400 hover:text-white transition-all"
+          className="px-3 py-[0.3rem] text-[0.85rem] rounded-full shadow-md bg-gray-200 hover:bg-main-400 hover:text-white transition-all"
         >
           Rate Difficulty
         </button>
