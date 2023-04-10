@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
 import PuffLoader from 'react-spinners/PuffLoader';

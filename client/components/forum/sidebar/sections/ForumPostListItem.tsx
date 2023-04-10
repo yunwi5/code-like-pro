@@ -12,7 +12,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
 const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
-  const postId = useParams().id;
+  const postId = useParams().postId;
   const isActive = postId === post._id;
   const activeClass = isActive ? 'border-l-[5px] border-l-main-300 bg-slate-200' : '';
 

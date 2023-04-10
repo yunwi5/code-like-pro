@@ -1,12 +1,18 @@
+import { options } from './../components/ui/charts/TrendChart';
 import { ForumCategory } from '../models/enums';
 import {
   IForumPostProps,
   IForumPost,
   IComment,
   IForumPostPopulated,
-  IVote,
 } from '../models/interfaces';
-import { deleteRequest, getRequest, patchRequest, postRequest } from './common-requests';
+import {
+  deleteRequest,
+  getRequest,
+  patchRequest,
+  postRequest,
+  ReqOptions,
+} from './common-requests';
 
 const API_DOMAIN = '/forumPost';
 
@@ -14,16 +20,31 @@ export function postForumPost(newPost: IForumPostProps) {
   return postRequest<IForumPost>({ url: `${API_DOMAIN}`, body: newPost });
 }
 
-export function getForumPosts() {
-  return getRequest<IForumPost[]>({ url: API_DOMAIN });
+export function getForumPosts(options?: ReqOptions) {
+  return getRequest<IForumPost[]>({ url: API_DOMAIN, options });
 }
 
-export function getForumPostsForCategory(category: ForumCategory) {
-  return getRequest<IForumPost[]>({ url: `${API_DOMAIN}/category/${category}` });
+export async function getForumPostsData(options?: ReqOptions) {
+  return getForumPosts(options).then(({ data }) => data);
 }
 
-export function getForumPostById(id: string) {
-  return getRequest<IForumPostPopulated>({ url: `${API_DOMAIN}/${id}` });
+export function getForumCategoryPosts(category: ForumCategory, options?: ReqOptions) {
+  return getRequest<IForumPost[]>({ url: `${API_DOMAIN}/category/${category}`, options });
+}
+
+export async function getForumCategoryPostsData(
+  category: ForumCategory,
+  options?: ReqOptions,
+) {
+  return getForumCategoryPosts(category, options).then(({ data }) => data);
+}
+
+export function getForumPostById(id: string, options?: ReqOptions) {
+  return getRequest<IForumPostPopulated>({ url: `${API_DOMAIN}/${id}`, options });
+}
+
+export function getForumPostByIdData(id: string, options?: ReqOptions) {
+  return getForumPostById(id, options).then(({ data }) => data);
 }
 
 export function patchForumPost(id: string, postProps: IForumPostProps) {

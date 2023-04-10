@@ -9,3 +9,7 @@ export enum ForumCategory {
 }
 
 export const ForumCategoryList = Object.freeze(Object.values(ForumCategory));
+
+export const getForumCategory = (category: string) => {
+  return ForumCategoryList.find((cat) => cat.toLowerCase() === category.toLowerCase());
+};

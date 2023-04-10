@@ -1,21 +1,22 @@
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+'use client';
 import React, { useEffect } from 'react';
-import MoonLoader from 'react-spinners/MoonLoader';
+import { useRouter } from 'next/navigation';
 import useForumPostQuery from '../../../hooks/forum/forum-post/useForumPostQuery';
 import { toastNotify } from '../../../utils/notification.util';
 import PostBody from './sections/PostBody';
 import PostComments from './sections/PostComments';
+import { IForumPostPopulated } from '@/models/interfaces';
 
-/* Post browsing on the right side of the forum page */
-const PostDetail: React.FC = () => {
+type PostDetailProps = {
+  post: IForumPostPopulated;
+};
+
+const PostDetail: React.FC<PostDetailProps> = ({ post: initialPostData }) => {
   const router = useRouter();
-  const postId = useParams().id;
 
-  const { post, error } = useForumPostQuery(postId || '', 1000);
+  const { post = initialPostData, error } = useForumPostQuery(initialPostData._id, 1000);
 
   useEffect(() => {
-    // If there is an error, redirect to the home page.
     if (!!error) {
       router.replace('/');
       toastNotify('Somethine went wrong while loading the post...', 'error');
@@ -24,17 +25,8 @@ const PostDetail: React.FC = () => {
 
   return (
     <section className="flex flex-col gap-5">
-      {!post && (
-        <div className="flex-center mt-[10rem]">
-          <MoonLoader size={90} color="#5552e4" />
-        </div>
-      )}
-      {post && (
-        <>
-          <PostBody post={post} />
-          <PostComments post={post} />
-        </>
-      )}
+      <PostBody post={post} />
+      <PostComments post={post} />
     </section>
   );
 };

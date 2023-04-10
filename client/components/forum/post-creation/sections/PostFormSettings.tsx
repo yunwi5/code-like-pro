@@ -6,7 +6,7 @@ import {
   ForumPostTypeList,
 } from '../../../../models/enums';
 import { usePostCreationContext } from '../../../../store/context/PostCreationContext';
-import { capitalizeString } from '../../../../utils/string-utils/string-manipulation.util';
+import { capitalize } from '../../../../utils/string-utils/string-manipulation.util';
 import CustomSelect from '../../../ui/inputs/CustomSelect';
 
 const PostFormSettings: React.FC = () => {
@@ -26,7 +26,7 @@ const PostFormSettings: React.FC = () => {
         id="post-category"
         labelText="Forum Category"
         options={ForumCategoryList}
-        optionLabels={ForumCategoryList.map((cat) => capitalizeString(cat))}
+        optionLabels={ForumCategoryList.map((cat) => capitalize(cat))}
         value={category}
         className="flex-1"
         onChange={(category: string) => setCategory(category as ForumCategory)}

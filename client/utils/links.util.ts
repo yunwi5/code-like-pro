@@ -49,11 +49,11 @@ export function getForumLink() {
 }
 
 export function getForumCategoryLink(section: ForumCategory) {
-  return `/forum/${section}`;
+  return `/forum/category/${section}`;
 }
 
 export function getForumPostLink(post: IForumPost | IForumPostPopulated) {
-  return `/forum/${post.category}/${post._id}`;
+  return `/forum/category/${post.category}/${post._id}`;
 }
 
 // Link to creating new forum post. Can set default category through a query string.

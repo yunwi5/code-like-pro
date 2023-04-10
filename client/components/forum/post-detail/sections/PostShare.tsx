@@ -1,5 +1,5 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { BsShare } from 'react-icons/bs';
 import { AppProperty } from '../../../../constants';
 import { IForumPostPopulated } from '../../../../models/interfaces';
@@ -14,7 +14,7 @@ interface Props {
 
 const PostShare: React.FC<Props> = ({ post, className = '' }) => {
   const [showPanel, setShowPanel] = useState<boolean>(false);
-  const shareUrl = `${window.location.hostname}${getForumPostLink(post)}`;
+  const shareUrl = `${AppProperty.CLIENT_DOMAIN}${getForumPostLink(post)}`;
 
   return (
     <div className={`flex-center relative ${className}`}>
