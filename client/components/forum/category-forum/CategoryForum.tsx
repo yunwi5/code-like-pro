@@ -19,7 +19,7 @@ User can select either sidebar or post content by clicking the nav button.
 */
 const mobileHiddenClass = '!hidden lg:!flex';
 
-const CategoryForumMain: React.FC<Props> = ({ category }) => {
+const CategoryForum: React.FC<Props> = ({ category }) => {
   const postId = useParams().id;
   // Mobile selected section. In mobile, either sidebar or post content is displayed, but not both.
   const [selectedSection, setSelectedSection] = useState<ForumCategorySection>(
@@ -73,4 +73,4 @@ const DefaultContent: React.FC<{ category: ForumCategory }> = ({ category }) => 
   </div>
 );
 
-export default CategoryForumMain;
+export default CategoryForum;
