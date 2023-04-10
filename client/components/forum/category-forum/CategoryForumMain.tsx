@@ -53,7 +53,8 @@ const CategoryForumMain: React.FC<Props> = ({ category }) => {
           }`}
         >
           {!postId && <DefaultContent category={category as ForumCategory} />}
-          {postId && <Outlet />}
+          {/* Replace <Outlet /> with nested routes!!! */}
+          {/* {postId && <Outlet />} */}
         </section>
       </main>
     </div>
