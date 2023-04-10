@@ -33,7 +33,7 @@ const ProfilePicture: React.FC<Props> = ({
           fill
           src={picture}
           alt={alt ?? 'User profile picture'}
-          className={`object-cover ${imageValid ? '' : 'hidden'}`}
+          className={'object-cover'}
           onError={() => setImageValid(false)}
         />
       )}
