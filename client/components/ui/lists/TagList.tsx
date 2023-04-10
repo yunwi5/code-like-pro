@@ -12,8 +12,8 @@ const TagList: React.FC<Props> = ({ title, tags, className = '' }) => {
   return (
     <div className={className}>
       {tags.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          <p className="flex-start gap-1">
+        <div className="flex gap-2">
+          <p className="mt-2 self-start flex-start gap-1">
             <BsFillTagsFill className="text-slate-500" />
             {title}
           </p>
