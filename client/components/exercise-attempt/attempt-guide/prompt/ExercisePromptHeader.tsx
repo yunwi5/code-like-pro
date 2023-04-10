@@ -10,7 +10,7 @@ const ExercisePromptHeader: React.FC = () => {
   return (
     <header>
       <div className="flex-between">
-        <h2 className="flex-start flex-wrap gap-x-3 gap-y-1 text-xl md:text-2xl lg:text-3xl capitalize">
+        <h2 className="flex-start flex-wrap gap-x-3 gap-y-1 text-xl lg:text-2xl capitalize font-semibold text-gray-600">
           <span>{exercise.name}</span>
         </h2>
 
