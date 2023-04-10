@@ -1,6 +1,11 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 import { usePostCreationContext } from '../../../../store/context/PostCreationContext';
-import TextEditor from '../../../ui/editor/text-editor/TextEditor';
+
+const TextEditor = dynamic(
+  () => import('@/components/ui/editor/text-editor/TextEditor'),
+  { ssr: false },
+);
 
 const PostFormContent = () => {
   const { content, setContent } = usePostCreationContext();

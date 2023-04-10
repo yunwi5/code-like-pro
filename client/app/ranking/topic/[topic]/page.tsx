@@ -4,11 +4,13 @@ import { getTopicRankingData } from '@/apis/ranking.api';
 import RankingMain from '@/components/ranking/RankingMain';
 import { AppProperty } from '@/constants';
 import { ProgrammingTopic, ProgrammingTopicList } from '@/models/enums';
-import { deslugify } from '@/utils/string-utils/url.util';
+import { deslugify, slugify } from '@/utils/string-utils/url.util';
 
 type TopicRankingProps = {
   params: { topic: string };
 };
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params: { topic: topicParam },
@@ -19,6 +21,10 @@ export async function generateMetadata({
     title: `${topic} Ranking | ${AppProperty.APP_NAME}`,
     description: `Ranking page for a topic ${topic}, where users can browse their rankings for each specific programming topic.`,
   };
+}
+
+export async function generateStaticParams() {
+  return ProgrammingTopicList.map((topic) => ({ topic: slugify(topic) }));
 }
 
 async function TopicRanking({ params: { topic: topicQueryString } }: TopicRankingProps) {

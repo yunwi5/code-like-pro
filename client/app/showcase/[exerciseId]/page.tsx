@@ -1,6 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { getExerciseByIdData } from '@/apis/exercise.api';
+import { getExerciseByIdData, getExercisesData } from '@/apis/exercise.api';
 import ShowcaseMainContainer from '@/components/showcase/ShowcaseMainContainer';
 import { AppProperty } from '@/constants';
 
@@ -10,8 +10,14 @@ export const metadata = {
     "Showcase page of a programming exercise where users can showcase their code, view other users' coding solutions and discuss the efficiency.",
 };
 
-export const revalidate = 60,
-  fetchCache = 'auto';
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const exercises = await getExercisesData({ authDisabled: true });
+  if (exercises == null) return [];
+
+  return exercises.map((exercise) => ({ exerciseId: exercise._id }));
+}
 
 type ShowcasePageProps = {
   params: { exerciseId: string };
