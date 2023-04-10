@@ -7,7 +7,7 @@ import {
 } from '../models/enums';
 import { IForumPost, IForumPostPopulated } from '../models/interfaces';
 import { ProfileLinkMap } from './profile.util';
-import { convertToUrlString, slugify } from './string-utils/url.util';
+import { slugify } from './string-utils/url.util';
 
 export function getBrowsingPageLink() {
   return '/browse';
@@ -26,7 +26,6 @@ export function getExerciseEditLink(exerciseId: string) {
 }
 
 export function getProfileLink(profileSection: ProfileSection) {
-  if (!profileSection) return '/profile';
   return `/profile/${ProfileLinkMap[profileSection]}`;
 }
 
@@ -37,7 +36,7 @@ export function getShowcasePageLink(
 ) {
   // If the initial section is 'Showcase' or 'Discussions' users will direclty see that section
   // without having to go through the model answer.
-  const sectionQueryString = convertToUrlString(section);
+  const sectionQueryString = slugify(section);
   return `/showcase/${exerciseId}?section=${sectionQueryString}`;
 }
 
