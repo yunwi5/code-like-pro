@@ -1,10 +1,10 @@
 import { useParams } from 'next/navigation';
 import React, { useState } from 'react';
-import { ForumCategory, ForumCategoryList } from '../../models/enums';
-import { ForumIcons } from '../../utils/forum.util';
-import { getForumCategoryLink } from '../../utils/links.util';
-import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
-import ActiveLink from '../ui/links/ActiveLink';
+import { ForumCategory, ForumCategoryList } from '../../../models/enums';
+import { ForumIcons } from '../../../utils/forum.util';
+import { getForumCategoryLink } from '../../../utils/links.util';
+import HamburgerMenu from '../../ui/buttons/icon-buttons/HamburgerMenu';
+import ActiveLink from '../../ui/links/ActiveLink';
 import './ForumNav.scss';
 
 /* Forum category section navigation. Displayed on the very top displaying different forum options as navigation buttons. */

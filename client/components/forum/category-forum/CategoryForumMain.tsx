@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ForumCategory, ForumCategorySection } from '../../../models/enums';
 import { getForumPostCreateLink } from '../../../utils/links.util';
 import ForumPostsSidebar from '../sidebar/ForumPostsSidebar';
-import ForumNav from '../ForumNav';
+import ForumNav from '../nav/ForumNav';
 import MobileForumSectionSelect from './MobileForumSectionSelect';
 
 interface Props {
