@@ -30,6 +30,8 @@ export async function generateMetadata({ params: { postId } }: ForumCategoryPage
   };
 }
 
+export const revalidate = 120;
+
 export async function generateStaticParams() {
   const posts = await getForumPostsData({ catchErrors: false, authDisabled: true });
 

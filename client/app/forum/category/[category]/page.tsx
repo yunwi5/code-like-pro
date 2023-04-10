@@ -26,6 +26,8 @@ export async function generateMetadata({
   };
 }
 
+export const revalidate = 120;
+
 export function generateStaticParams() {
   return ForumCategoryList.map((category) => ({ category }));
 }
