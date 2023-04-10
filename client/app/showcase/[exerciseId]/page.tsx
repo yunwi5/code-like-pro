@@ -1,4 +1,5 @@
 import React from 'react';
+import { notFound } from 'next/navigation';
 import { getExerciseByIdData } from '@/apis/exercise.api';
 import ShowcaseMainContainer from '@/components/showcase/ShowcaseMainContainer';
 import { AppProperty } from '@/constants';
@@ -13,16 +14,16 @@ export const revalidate = 60,
   fetchCache = 'auto';
 
 type ShowcasePageProps = {
-  params: { id: string };
+  params: { exerciseId: string };
 };
 
-async function ShowcasePage({ params: { id } }: ShowcasePageProps) {
-  const exercise = await getExerciseByIdData(id);
-  if (exercise == null) throw new Error('Exercise not found!');
+async function ShowcasePage({ params: { exerciseId } }: ShowcasePageProps) {
+  const exercise = await getExerciseByIdData(exerciseId);
+  if (exercise == null) notFound();
 
   return (
     <div className="flex-center min-h-[83vh] my-5 sm:my-10">
-      <ShowcaseMainContainer exercise={exercise} exerciseId={id} />
+      <ShowcaseMainContainer exercise={exercise} exerciseId={exerciseId} />
     </div>
   );
 }
