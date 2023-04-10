@@ -1,8 +1,9 @@
+import React from 'react';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getExerciseByIdData } from '@/apis/exercise.api';
 import ExerciseAttemptMain from '@/components/exercise-attempt/ExerciseAttemptMain';
 import { AppProperty } from '@/constants';
-import { Metadata } from 'next';
-import React from 'react';
 
 type ExerciseAttemptPageProps = { params: { id: string } };
 
@@ -23,7 +24,7 @@ export async function generateMetadata({
 async function ExerciseAttemptPage({ params: { id } }: ExerciseAttemptPageProps) {
   const exercise = await getExerciseByIdData(id);
 
-  if (exercise == null) throw new Error('Exercise not found');
+  if (exercise == null) return notFound();
 
   return <ExerciseAttemptMain exerciseId={id} exercise={exercise} />;
 }

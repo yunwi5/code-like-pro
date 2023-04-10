@@ -25,7 +25,7 @@ function useRankingQuery({ topic, refetchInterval = 3000 }: Props) {
   const { data, message: error } = response || {};
   if (error) console.log(error);
 
-  return { ranking: data || [], isLoading, topic };
+  return { rankings: data, isLoading, topic };
 }
 
 export default useRankingQuery;

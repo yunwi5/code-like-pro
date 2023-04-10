@@ -1,3 +1,4 @@
+'use client';
 import { useTopicParam } from '@/hooks/utils/useTopicParam';
 import Link from 'next/link';
 import { ProgrammingTopicList } from '../../models/enums';

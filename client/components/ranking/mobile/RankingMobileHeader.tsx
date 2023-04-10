@@ -1,20 +1,19 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 import HoveringLabel from '../../ui/tooltip/HoveringLabel';
 import Backdrop from '../../ui/modals/Backdrop';
 import RankingSideBar from '../RankingSideBar';
 import RankingHeader from '../sections/RankingHeader';
-import { usePathname } from 'next/navigation';
+import { useTopicParam } from '@/hooks/utils/useTopicParam';
 
-// Header used for mobile screen size < 768px.
 const RankingMobileHeader: React.FC = () => {
-  const pathname = usePathname();
+  const topic = useTopicParam();
   const [showSidebar, setShowSidebar] = useState(false);
 
-  // Whenever the route changes, close the sidebar.
   useEffect(() => {
     setShowSidebar(false);
-  }, [pathname]);
+  }, [topic]);
 
   return (
     <div className="md:hidden relative flex justify-between px-3">

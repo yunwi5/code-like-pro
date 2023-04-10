@@ -4,7 +4,7 @@ import RankingPodium from '../ranking/sections/RankingPodium';
 import ArrowLink from '../ui/links/ArrowLink';
 
 const TopUsers: React.FC = () => {
-  const { rankingOrder } = useRanking({});
+  const { rankingOrder } = useRanking();
   const top3Users = rankingOrder.slice(0, 3);
 
   return (

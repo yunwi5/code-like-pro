@@ -1,4 +1,5 @@
 import React from 'react';
+import { notFound } from 'next/navigation';
 import ExerciseEditMain from '@/components/exercise-edit/ExerciseEditMain';
 import { getExerciseByIdData } from '@/apis/exercise.api';
 import { AppProperty } from '@/constants';
@@ -17,7 +18,7 @@ type ExerciseEditPageProps = {
 
 async function ExerciseEditPage({ params: { id } }: ExerciseEditPageProps) {
   const exercise = await getExerciseByIdData(id);
-  if (exercise == null) throw new Error('Exercise not found!');
+  if (exercise == null) notFound();
 
   return <ExerciseEditMain exerciseId={id} exercise={exercise} />;
 }
