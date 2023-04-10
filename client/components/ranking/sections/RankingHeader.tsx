@@ -12,11 +12,11 @@ const RankingHeader: React.FC<{ className?: string }> = ({ className = '' }) => 
   const headingLabel = useTopicParam() || 'Global';
 
   return (
-    <header className={`flex flex-col items-end h-[6.3rem] ${className}`}>
+    <header className={`flex flex-col items-start sm:items-end h-[6.3rem] ${className}`}>
       <div className={`${getHeadingLabelSize(headingLabel)}  text-right text-gray-500`}>
         {headingLabel}
       </div>
-      <div className="text-main-400 text-lg font-bold text-right">Rankings</div>
+      <div className="text-main-400 text-lg font-bold">Rankings</div>
     </header>
   );
 };

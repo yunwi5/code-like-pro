@@ -5,16 +5,15 @@ import HoveringLabel from '../../ui/tooltip/HoveringLabel';
 import Backdrop from '../../ui/modals/Backdrop';
 import RankingSideBar from '../RankingSideBar';
 import RankingHeader from '../sections/RankingHeader';
-import { usePathname } from 'next/navigation';
+import { useTopicParam } from '@/hooks/utils/useTopicParam';
 
 const RankingMobileHeader: React.FC = () => {
-  // REFACTOR THIS
-  const pathname = usePathname();
+  const topic = useTopicParam();
   const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
     setShowSidebar(false);
-  }, [pathname]);
+  }, [topic]);
 
   return (
     <div className="md:hidden relative flex justify-between px-3">

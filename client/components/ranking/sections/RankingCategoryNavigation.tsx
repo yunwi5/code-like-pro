@@ -29,7 +29,7 @@ const RankingCategoryNavigation: React.FC<Props> = (props) => {
           </button>
         ))}
       </div>
-      <h3 className="self-end pr-4 sm:pr-2 text-lg text-gray-500 font-semibold">
+      <h3 className="self-end pr-4 hidden sm:block text-lg text-gray-500 font-semibold">
         Total {rankingOrder.length} Users
       </h3>
     </section>
