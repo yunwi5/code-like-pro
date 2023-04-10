@@ -46,9 +46,9 @@ const ProfileMainBody = () => {
 
   // Current user ranking data
   const userRankData = useMemo(() => {
-    if (!userDetail) return null;
+    if (!userDetail?._id) return null;
     return getUserRank(userDetail._id);
-  }, [userDetail?._id, rankingOrder]);
+  }, [userDetail?._id, getUserRank]);
 
   // Loading state
   if (!userDetail) return <ProfileLoader />;
