@@ -18,7 +18,10 @@ type ShowcasePageProps = {
 };
 
 async function ShowcasePage({ params: { exerciseId } }: ShowcasePageProps) {
-  const exercise = await getExerciseByIdData(exerciseId);
+  const exercise = await getExerciseByIdData(exerciseId, {
+    catchErrors: false,
+    authDisabled: true,
+  });
   if (exercise == null) notFound();
 
   return (

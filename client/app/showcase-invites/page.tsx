@@ -13,7 +13,7 @@ export const revalidate = 60,
   fetchCache = 'auto';
 
 async function ShowcaseInvitePage() {
-  const exercises = await getExercisesData();
+  const exercises = await getExercisesData({ catchErrors: false, authDisabled: true });
   if (!exercises) throw new Error('Failed to fetch exercises data');
 
   return (

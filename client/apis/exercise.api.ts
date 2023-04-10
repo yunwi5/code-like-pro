@@ -19,8 +19,8 @@ export async function getExercises(options?: ReqOptions) {
   return await getRequest<IExerciseWithId[]>({ url: EXERCISE_API_DOMAIN, options });
 }
 
-export async function getExercisesData() {
-  return getExercises({ catchErrors: false }).then((res) => res.data);
+export async function getExercisesData(options?: ReqOptions) {
+  return getExercises(options).then((res) => res.data);
 }
 
 export async function getExerciseById(id: string, options?: ReqOptions) {
@@ -30,8 +30,8 @@ export async function getExerciseById(id: string, options?: ReqOptions) {
   });
 }
 
-export async function getExerciseByIdData(id: string) {
-  return getExerciseById(id, { catchErrors: false }).then((res) => res.data);
+export async function getExerciseByIdData(id: string, options?: ReqOptions) {
+  return getExerciseById(id, options).then((res) => res.data);
 }
 
 export async function postExercise(exercise: IExerciseDraft) {

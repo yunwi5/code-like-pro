@@ -22,7 +22,10 @@ export async function generateMetadata({
 }
 
 async function ExerciseAttemptPage({ params: { id } }: ExerciseAttemptPageProps) {
-  const exercise = await getExerciseByIdData(id);
+  const exercise = await getExerciseByIdData(id, {
+    catchErrors: false,
+    authDisabled: true,
+  });
 
   if (exercise == null) return notFound();
 

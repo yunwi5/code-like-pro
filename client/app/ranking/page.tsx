@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 async function Ranking() {
-  const rankingData = await getRankingData();
+  const rankingData = await getRankingData({ catchErrors: false, authDisabled: true });
   if (rankingData == null) throw new Error('Could not fetch ranking data');
 
   return <RankingMain rankings={rankingData} />;

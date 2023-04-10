@@ -27,7 +27,10 @@ async function TopicRanking({ params: { topic: topicQueryString } }: TopicRankin
     throw new Error('Non existing topic');
   }
 
-  const topicRankingData = await getTopicRankingData(topic);
+  const topicRankingData = await getTopicRankingData(topic, {
+    catchErrors: false,
+    authDisabled: true,
+  });
   if (topicRankingData == null) {
     throw new Error('Could not fetch topic ranking data');
   }

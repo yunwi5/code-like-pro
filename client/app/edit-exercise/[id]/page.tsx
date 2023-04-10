@@ -17,7 +17,10 @@ type ExerciseEditPageProps = {
 };
 
 async function ExerciseEditPage({ params: { id } }: ExerciseEditPageProps) {
-  const exercise = await getExerciseByIdData(id);
+  const exercise = await getExerciseByIdData(id, {
+    catchErrors: false,
+    authDisabled: true,
+  });
   if (exercise == null) notFound();
 
   return <ExerciseEditMain exerciseId={id} exercise={exercise} />;

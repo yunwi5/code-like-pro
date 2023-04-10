@@ -37,7 +37,8 @@
     "react-share": "^4.4.1",
     "react-spinners": "^0.13.4",
     "react-toastify": "^9.0.8",
-    "sass": "^1.54.5"
+    "sass": "^1.54.5",
+    "sharp": "^0.32.0"
   },
   "devDependencies": {
     "@testing-library/cypress": "^8.0.3",

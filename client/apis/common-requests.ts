@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AppProperty } from '../constants';
-import { getJwtUserLocally } from '../utils/localStorage.util';
+import { getJwtUserLocally } from '@/utils/localStorage.util';
 
 type ReqParams = {
   url: string;
@@ -12,47 +12,46 @@ type ReqParamsWithBody = ReqParams & { body: any };
 
 export type ReqOptions = {
   catchErrors?: boolean;
+  authDisabled?: boolean;
 };
 
 const api = axios.create({
   baseURL: `${AppProperty.SERVER_DOMAIN}/api`,
 });
 
-api.interceptors.request.use((req) => {
-  const jwtData = getJwtUserLocally();
-  if (req.headers && jwtData?.access_token) {
-    req.headers.Authorization = `Bearer ${jwtData.access_token}`;
-  }
-
-  return req;
-});
-
 export async function getRequest<T>({ url, options }: ReqParams) {
-  return wrapRequest(() => api.get<T>(url), options);
+  return wrapRequest((api: AxiosInstance) => api.get<T>(url), options);
 }
 
 export async function postRequest<T>({ url, body }: ReqParamsWithBody) {
-  return wrapRequest(() => api.post<T>(url, body));
+  return wrapRequest((api: AxiosInstance) => api.post<T>(url, body));
 }
 
 export async function putRequest<T>({ url, body }: ReqParamsWithBody) {
-  return wrapRequest(() => api.put<T>(url, body));
+  return wrapRequest((api: AxiosInstance) => api.put<T>(url, body));
 }
 
 export async function patchRequest<T>({ url, body }: ReqParamsWithBody) {
-  return wrapRequest(() => api.patch<T>(url, body));
+  return wrapRequest((api: AxiosInstance) => api.patch<T>(url, body));
 }
 
 export async function deleteRequest<T>({ url }: ReqParams) {
-  return wrapRequest(() => api.delete<T>(url));
+  return wrapRequest((api: AxiosInstance) => api.delete<T>(url));
 }
 
 async function wrapRequest<T>(
-  fn: () => Promise<AxiosResponse<T, any>>,
-  { catchErrors }: ReqOptions = { catchErrors: true },
+  fn: (api: AxiosInstance) => Promise<AxiosResponse<T, any>>,
+  { catchErrors, authDisabled }: ReqOptions = { catchErrors: true, authDisabled: false },
 ) {
   try {
-    const response = await fn();
+    if (authDisabled == false) {
+      const jwtData = getJwtUserLocally();
+      if (jwtData?.access_token) {
+        api.defaults.headers.common['Authorization'] = `Bearer ${jwtData.access_token}`;
+      }
+    }
+
+    const response = await fn(api);
     return { ok: true, data: response.data, status: response.status };
   } catch (err) {
     let message = extractErrorMessage(err);
