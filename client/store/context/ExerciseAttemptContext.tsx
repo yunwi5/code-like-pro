@@ -103,13 +103,11 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
     }
   }, [postSubmission, userSolution]);
 
-  // Restore previous user submission
   useEffect(() => {
     if (!previousSubmission) return;
     setUserSubmission(previousSubmission);
   }, [previousSubmission]);
 
-  // Solving badge detection with useEffect
   useEffect(() => {
     qualifySolvingBadges();
   }, [userSubmission, qualifySolvingBadges]);

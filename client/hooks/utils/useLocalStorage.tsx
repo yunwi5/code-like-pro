@@ -9,6 +9,7 @@ function useLocalStorage<T>(
 ): [T, React.Dispatch<React.SetStateAction<T>>] {
   const [value, setValue] = useState<T>(initialValue);
 
+  // REFACTOR THIS
   useEffect(() => {
     const storedValue = getFromLocalStorage<T>(key);
     if (storedValue == null) {
@@ -17,7 +18,8 @@ function useLocalStorage<T>(
     } else {
       setValue(storedValue);
     }
-  }, [key, initialValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     saveToLocalStorage(key, value);

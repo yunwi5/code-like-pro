@@ -6,20 +6,11 @@ import CreationSidebar from './sidebar/CreationSidebar';
 import CreationName from './sections/CreationName';
 import CreationActions from './sections/CreationActions';
 import CreationSettings from './sections/CreationSettings';
+import CreationSolution from './sections/CreationSolution';
+import CreationTemplate from './sections/CreationTemplate';
+import CreationTestCases from './sections/CreationTestCases';
 
 const CreationPrompt = dynamic(() => import('./sections/CreationPrompt'), { ssr: false });
-
-const CreationSolution = dynamic(() => import('./sections/CreationSolution'), {
-  ssr: false,
-});
-
-const CreationTemplate = dynamic(() => import('./sections/CreationTemplate'), {
-  ssr: false,
-});
-
-const CreationTestCases = dynamic(() => import('./sections/CreationTestCases'), {
-  ssr: false,
-});
 
 const ExerciseCreationMain = () => {
   useAuth();
