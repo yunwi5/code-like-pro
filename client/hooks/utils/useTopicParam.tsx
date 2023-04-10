@@ -1,14 +1,8 @@
-import { ProgrammingTopic, ProgrammingTopicList } from '@/models/enums';
-import { parseUrlString } from '@/utils/string-utils/url.util';
 import { useParams } from 'next/navigation';
+import { ProgrammingTopic, ProgrammingTopicList } from '@/models/enums';
+import { deslugify } from '@/utils/string-utils/url.util';
 
-export function useTopicParam() {
-  const topicUrlString = useParams().topic;
-  const topic = parseUrlString(topicUrlString);
-
-  if (ProgrammingTopicList.includes(topic as any)) {
-    return topic as ProgrammingTopic;
-  }
-
-  return undefined;
+export function useTopicParam(): ProgrammingTopic | null {
+  const topic = deslugify(useParams().topic ?? '');
+  return ProgrammingTopicList.includes(topic as any) ? (topic as ProgrammingTopic) : null;
 }

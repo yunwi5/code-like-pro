@@ -7,7 +7,7 @@ import {
 } from '../models/enums';
 import { IForumPost, IForumPostPopulated } from '../models/interfaces';
 import { ProfileLinkMap } from './profile.util';
-import { convertToUrlString } from './string-utils/url.util';
+import { convertToUrlString, slugify } from './string-utils/url.util';
 
 export function getBrowsingPageLink() {
   return '/browse';
@@ -74,6 +74,6 @@ export function getGlobalRankigLink() {
   return '/ranking';
 }
 export function getTopicRankingLink(topic: ProgrammingTopic) {
-  const topicUrlString = convertToUrlString(topic);
-  return `/ranking/topic/${topicUrlString}`;
+  const topicSlug = slugify(topic);
+  return `/ranking/topic/${topicSlug}`;
 }
