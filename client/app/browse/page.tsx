@@ -13,7 +13,8 @@ export const revalidate = 30,
   fetchCache = 'auto';
 
 async function BrowsingPage() {
-  const exercises = (await getExercisesData()) ?? [];
+  const exercises = await getExercisesData({ catchErrors: false, authDisabled: true });
+  if (exercises == null) throw new Error('Failed to fetch exercises data');
 
   return <BrowsingMain exercises={exercises} />;
 }

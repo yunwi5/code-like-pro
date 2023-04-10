@@ -7,16 +7,19 @@ function useLocalStorage<T>(
   key: string,
   initialValue: any,
 ): [T, React.Dispatch<React.SetStateAction<T>>] {
-  const [value, setValue] = useState<T>(() => {
+  const [value, setValue] = useState<T>(initialValue);
+
+  // REFACTOR THIS
+  useEffect(() => {
     const storedValue = getFromLocalStorage<T>(key);
-    // If a value already exists, the initialValue param should be ignored.
     if (storedValue == null) {
       saveToLocalStorage<T>(key, initialValue);
-      return initialValue;
+      setValue(initialValue);
     } else {
-      return storedValue;
+      setValue(storedValue);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     saveToLocalStorage(key, value);

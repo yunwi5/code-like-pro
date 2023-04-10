@@ -1,3 +1,4 @@
+'use client';
 import { GiProgression } from 'react-icons/gi';
 
 import { AnalysisContextProvider } from '../../../store/context/AnalysisContext';

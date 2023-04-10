@@ -4,11 +4,13 @@ import { getTopicRankingData } from '@/apis/ranking.api';
 import RankingMain from '@/components/ranking/RankingMain';
 import { AppProperty } from '@/constants';
 import { ProgrammingTopic, ProgrammingTopicList } from '@/models/enums';
-import { deslugify } from '@/utils/string-utils/url.util';
+import { deslugify, slugify } from '@/utils/string-utils/url.util';
 
 type TopicRankingProps = {
   params: { topic: string };
 };
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params: { topic: topicParam },
@@ -21,13 +23,20 @@ export async function generateMetadata({
   };
 }
 
+export async function generateStaticParams() {
+  return ProgrammingTopicList.map((topic) => ({ topic: slugify(topic) }));
+}
+
 async function TopicRanking({ params: { topic: topicQueryString } }: TopicRankingProps) {
   const topic = deslugify(topicQueryString) as ProgrammingTopic;
   if (topic == null || ProgrammingTopicList.includes(topic) === false) {
     throw new Error('Non existing topic');
   }
 
-  const topicRankingData = await getTopicRankingData(topic);
+  const topicRankingData = await getTopicRankingData(topic, {
+    catchErrors: false,
+    authDisabled: true,
+  });
   if (topicRankingData == null) {
     throw new Error('Could not fetch topic ranking data');
   }

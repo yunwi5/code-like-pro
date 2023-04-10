@@ -5,13 +5,11 @@ import { customToastNotify, toastNotify } from '../../../../utils/notification.u
 import { toBase64Image } from '../../../../utils/image.util';
 import { toast } from 'react-toastify';
 
-// Image uploader module
 Quill.register('modules/imageUploader', ImageUploader);
 
 export const imageUploader = {
   upload: async (file: any) => {
     try {
-      // Loading notification for uploading an image that takse time.
       const loadingId = 'loading-image';
       customToastNotify({
         message: 'Uploading image...',
@@ -22,7 +20,6 @@ export const imageUploader = {
 
       const image: any = await toBase64Image(file);
       const { ok, data } = await postExercisePromptImage({ image });
-      // We cancel the loading toast when it is done.
       toast.dismiss(loadingId);
       if (ok && data) {
         return data.url;

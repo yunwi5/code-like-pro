@@ -1,17 +1,17 @@
 'use client';
+import dynamic from 'next/dynamic';
 import useAuth from '@/hooks/utils/useAuth';
 import CreationHeader from './header/CreationHeader';
 import CreationSidebar from './sidebar/CreationSidebar';
 import CreationName from './sections/CreationName';
 import CreationActions from './sections/CreationActions';
-import CreationPrompt from './sections/CreationPrompt';
 import CreationSettings from './sections/CreationSettings';
 import CreationSolution from './sections/CreationSolution';
 import CreationTemplate from './sections/CreationTemplate';
 import CreationTestCases from './sections/CreationTestCases';
 
-// Main component for rendering the exercise creation page.
-// This page defines the overall layout for the page.
+const CreationPrompt = dynamic(() => import('./sections/CreationPrompt'), { ssr: false });
+
 const ExerciseCreationMain = () => {
   useAuth();
 
@@ -27,8 +27,6 @@ const ExerciseCreationMain = () => {
         {/* Component for rendering user starting template code */}
         <CreationTemplate />
         <CreationTestCases />
-        {/* Component for a set of buttons like 'Run Code', 'Save Changes' etc. */}
-        {/* Do not render sidebar for smaller screens < 1024px. */}
         <div className="lg:hidden">
           <CreationActions />
         </div>

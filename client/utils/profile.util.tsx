@@ -5,18 +5,19 @@ import { IoCreateOutline } from 'react-icons/io5';
 import { BsFileEarmarkCode } from 'react-icons/bs';
 
 import { ProfileSection } from '../models/enums';
+import { slugify } from './string-utils/url.util';
 
 export const ProfileLinkMap = {
-  [ProfileSection.PROFILE]: '',
-  [ProfileSection.STATISTICS]: 'statistics',
-  [ProfileSection.FAVORITES]: 'favorites',
-  [ProfileSection.MY_CREATIONS]: 'my-creations',
-  [ProfileSection.MY_SUBMISSIONS]: 'my-submissions',
+  [ProfileSection.MY_PROFILE]: slugify(ProfileSection.MY_PROFILE),
+  [ProfileSection.STATISTICS]: slugify(ProfileSection.STATISTICS),
+  [ProfileSection.FAVORITES]: slugify(ProfileSection.FAVORITES),
+  [ProfileSection.MY_CREATIONS]: slugify(ProfileSection.MY_CREATIONS),
+  [ProfileSection.MY_SUBMISSIONS]: slugify(ProfileSection.MY_SUBMISSIONS),
 };
 
 export function getProfileSectionIcon(section: ProfileSection, className: string = '') {
   switch (section) {
-    case ProfileSection.PROFILE:
+    case ProfileSection.MY_PROFILE:
       return <FaRegUserCircle className={`text-xl ${className}`} />;
     case ProfileSection.STATISTICS:
       return <GoGraph className={`text-xl ${className}`} />;

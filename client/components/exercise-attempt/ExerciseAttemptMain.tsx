@@ -1,10 +1,10 @@
 'use client';
+import React, { FC, useMemo } from 'react';
 import useExerciseQuery from '@/hooks/exercise/exercise/useExerciseQuery';
 import useAuth from '@/hooks/utils/useAuth';
 import { IExerciseWithId } from '@/models/interfaces';
 import { ExerciseAttemptCtxProvider } from '@/store/context/ExerciseAttemptContext';
 import { useUserContext } from '@/store/context/UserContext';
-import React, { FC, useMemo } from 'react';
 import AttemptActionsSection from './attempt-actions/AttemptActionsSection';
 import AttemptGuideSection from './attempt-guide/AttemptGuideSection';
 

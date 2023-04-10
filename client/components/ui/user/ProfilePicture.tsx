@@ -27,13 +27,13 @@ const ProfilePicture: React.FC<Props> = ({
       style={{ width: size, height: size }}
     >
       <FaUser className="text-gray-600 scale-90 translate-y-1" size={size} />
-      {picture && alt && (
+      {picture && imageValid && (
         <Image
           ref={imageRef}
           fill
           src={picture}
-          alt={alt}
-          className={`object-cover ${imageValid ? '' : 'hidden'}`}
+          alt={alt ?? 'User profile picture'}
+          className={'object-cover'}
           onError={() => setImageValid(false)}
         />
       )}

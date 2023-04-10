@@ -1,7 +1,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { ShowCaseSection } from '../../models/enums';
-import { parseUrlString } from '../../utils/string-utils/url.util';
+import { getShowCaseSection, ShowCaseSection } from '../../models/enums';
+import { deslugify, slugify } from '../../utils/string-utils/url.util';
 import ShowcaseDiscussions from './discussions/ShowcaseDiscussions';
 import ShowcasePostModal from './modal/ShowcasePostModal';
 import ShowcaseModelAnswer from './model-answer/ShowcaseModelAnswer';
@@ -12,7 +12,7 @@ import ShowcaseShowcases from './showcases/ShowcaseShowcases';
 const ShowcaseMain: React.FC = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const section = parseUrlString(searchParams.get('section')) as ShowCaseSection;
+  const section = getShowCaseSection(deslugify(searchParams.get('section') ?? ''));
   const [activeSection, setActiveSection] = useState<ShowCaseSection>(
     section ?? ShowCaseSection.MODEL_ANSWER,
   );
@@ -20,14 +20,14 @@ const ShowcaseMain: React.FC = () => {
 
   useEffect(() => {
     const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('section', activeSection);
+    newSearchParams.set('section', slugify(activeSection));
     window.history.pushState({}, '', `${pathname}?${newSearchParams.toString()}`);
   }, [activeSection, pathname, searchParams]);
 
   useEffect(() => {
     const handlePopState = () => {
       const params = new URLSearchParams(window.location.search);
-      const oldSection = parseUrlString(params.get('section')) as ShowCaseSection;
+      const oldSection = deslugify(params.get('section') ?? '') as ShowCaseSection;
       setActiveSection(oldSection);
     };
     window.addEventListener('popstate', handlePopState);

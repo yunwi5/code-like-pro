@@ -1,11 +1,16 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 
 import { IForumPostPopulated } from '../../../../models/interfaces';
-import TextEditor from '../../../ui/editor/text-editor/TextEditor';
 import TagsGroup from '../../../ui/labels/TagsGroup';
 import ForumPostSpec from '../../../ui/spec/ForumPostSpec';
 import PostControl from './PostControl';
 import PostViewerActions from './PostViewerActions';
+
+const TextEditor = dynamic(
+  () => import('@/components/ui/editor/text-editor/TextEditor'),
+  { ssr: false },
+);
 
 const PostBody: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
   return (
