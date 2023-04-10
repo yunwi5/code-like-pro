@@ -1,5 +1,5 @@
 export enum ProfileSection {
-  PROFILE = 'Profile',
+  MY_PROFILE = 'My Profile',
   STATISTICS = 'Statistics',
   FAVORITES = 'Favorites',
   MY_CREATIONS = 'My Creations',
@@ -7,3 +7,7 @@ export enum ProfileSection {
 }
 
 export const ProfileSectionList = Object.freeze(Object.values(ProfileSection));
+
+export const getProfileSection = (section: string) => {
+  return ProfileSectionList.find((s) => s.toLowerCase() === section.toLowerCase());
+}
