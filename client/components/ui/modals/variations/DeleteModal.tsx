@@ -27,14 +27,10 @@ const DeleteModal: React.FC<Props> = ({
 
   const handleDelete = async () => {
     setIsLoading(true);
-    // call the delete callback function to send the delete request to the server.
     await deleteFunction();
     setIsLoading(false);
 
-    // call the function to be called after the delete operation, if it exists.
     onDelete && onDelete();
-
-    // Close the modal after completing the delete request.
     onClose();
   };
 

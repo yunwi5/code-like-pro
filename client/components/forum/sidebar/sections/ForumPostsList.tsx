@@ -40,7 +40,7 @@ const ForumPostsList: React.FC = () => {
         currentPage={page}
         totalPages={maxPage}
         onChangePage={setPage}
-        className={`mt-auto ${posts.length < POST_PER_PAGE ? '!hidden' : ''}`}
+        className={`mt-auto ${posts.length <= POST_PER_PAGE ? '!hidden' : ''}`}
       />
     </div>
   );
