@@ -10,7 +10,6 @@ const PostFormHeader: React.FC = React.memo(() => {
         <IoCreate className="text-main-400 text-[1.2em]" /> Create{' '}
         <span className="hidden md:inline">Your Own</span> Post!
       </h1>
-      {/* Button to go back to previous page */}
       <BackButton className="text-xl" />
     </header>
   );

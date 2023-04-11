@@ -1,5 +1,6 @@
-import dynamic from 'next/dynamic';
+'use client';
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { usePostCreationContext } from '../../../../store/context/PostCreationContext';
 
 const TextEditor = dynamic(
