@@ -7,6 +7,8 @@ const TagsGroup: React.FC<{ tags: string[]; className?: string }> = ({
   tags,
   className = '',
 }) => {
+  if (tags.length === 0) return null;
+
   return (
     <ul className={`flex-start flex-wrap gap-2 text-[0.85rem] ${className}`}>
       <BsFillTagsFill className="text-lg text-slate-500" />
