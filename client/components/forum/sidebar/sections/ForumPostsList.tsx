@@ -7,7 +7,7 @@ import { useAppSelector } from '../../../../store/redux/store';
 import PageNavigation from '../../../ui/PageNavigation';
 import ForumPostListItem from './ForumPostListItem';
 
-const POST_PER_PAGE = 10;
+const POST_PER_PAGE = 8;
 
 /* List of forum posts on the sidebar*/
 const ForumPostsList: React.FC = () => {
@@ -24,21 +24,23 @@ const ForumPostsList: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col lg:max-w-[23rem]">
-      {/* Loading spinner while posts are loading */}
+    <div className="flex flex-col lg:max-w-[23rem] grow pb-2">
       {isLoading && (
         <div className="h-[50vh] flex-center">
           <PuffLoader size={200} color="#5552e4" />
         </div>
       )}
-      {!isLoading &&
-        currentPagePosts.map((post) => <ForumPostListItem key={post._id} post={post} />)}
+      <div>
+        {!isLoading &&
+          currentPagePosts.map((post) => (
+            <ForumPostListItem key={post._id} post={post} />
+          ))}
+      </div>
       <PageNavigation
         currentPage={page}
         totalPages={maxPage}
         onChangePage={setPage}
-        // If the page items are too small, do not display navigation.
-        className={`mt-14 ${posts.length < POST_PER_PAGE ? '!hidden' : ''}`}
+        className={`mt-auto ${posts.length < POST_PER_PAGE ? '!hidden' : ''}`}
       />
     </div>
   );

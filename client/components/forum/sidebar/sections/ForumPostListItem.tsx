@@ -20,7 +20,7 @@ const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
 
   return (
     <article
-      className={`flex flex-col gap-1 px-3 pt-3 pb-2 border-b-2 border-b-slate-300 ${activeClass}`}
+      className={`flex flex-col gap-1 px-3 pt-3 pb-2 border-b-2 last:border-b-0 border-b-slate-300 ${activeClass}`}
     >
       <header className="flex gap-2">
         <span className="text-main-400/80">{ForumPostTypeIcons[post.postType]}</span>

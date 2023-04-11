@@ -34,7 +34,7 @@ const CategoryForumPost: React.FC<Props> = ({ postId, children }) => {
         selectedSection={selectedSection}
         setSelectedSection={setSelectedSection}
       />
-      <main className="flex gap-5 justify-around min-h-[82.5vh]">
+      <main className="flex gap-5 justify-around min-h-[84.5vh] -mt-3">
         <ForumPostsSidebar
           className={`${
             selectedSection !== ForumCategorySection.SIDEBAR && mobileHiddenClass
