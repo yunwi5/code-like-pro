@@ -1,12 +1,12 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { IForumPost, IForumPostPopulated, IVote } from '../../../models/interfaces';
 import { deleteForumPostVote, postForumPostVote } from '../../../apis/forum.api';
-import { getForumPostCategoryKey, getForumPostKey } from '../keys';
+import { getForumPostKey, getForumPostsQueryKey } from '../keys';
 
 function useForumPostMutation({ _id: postId, category }: IForumPostPopulated) {
   const queryClient = useQueryClient();
   const postQueryKey = getForumPostKey(postId);
-  const postCategoryQueryKey = getForumPostCategoryKey(category);
+  const forumPostsQueryKey = getForumPostsQueryKey(category);
 
   const updateCommentVotes = async (newVotes: IVote[]) => {
     // Update individual post
@@ -23,15 +23,15 @@ function useForumPostMutation({ _id: postId, category }: IForumPostPopulated) {
       },
     );
 
-    // Update specific post item in the category posts
+    // Update category posts
     queryClient.setQueryData(
-      [postCategoryQueryKey],
-      (oldPostListData: { data: IForumPost[] } | undefined) => {
-        if (!oldPostListData) return oldPostListData;
+      [forumPostsQueryKey],
+      (oldPostList: IForumPost[] | undefined) => {
+        if (!oldPostList) return oldPostList;
 
-        const newPostList = [...oldPostListData.data];
+        const newPostList = [...oldPostList];
         const postIndex = newPostList.findIndex((p) => p._id === postId);
-        if (postIndex < 0) return oldPostListData;
+        if (postIndex < 0) return oldPostList;
 
         const newPost: IForumPost = {
           ...newPostList[postIndex],
@@ -39,7 +39,7 @@ function useForumPostMutation({ _id: postId, category }: IForumPostPopulated) {
         };
 
         newPostList[postIndex] = newPost;
-        return { ...oldPostListData, data: newPostList };
+        return newPostList;
       },
     );
 
@@ -61,7 +61,7 @@ function useForumPostMutation({ _id: postId, category }: IForumPostPopulated) {
 
   const refetchPost = () => queryClient.refetchQueries([postQueryKey]);
 
-  const refetchCategoryPosts = () => queryClient.refetchQueries([postCategoryQueryKey]);
+  const refetchCategoryPosts = () => queryClient.refetchQueries([forumPostsQueryKey]);
 
   return { postVote, deleteVote };
 }

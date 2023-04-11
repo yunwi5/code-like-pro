@@ -1,5 +1,5 @@
 import React from 'react';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import ExerciseEditMain from '@/components/exercise-edit/ExerciseEditMain';
 import { getExerciseByIdData, getExercisesData } from '@/apis/exercise.api';
 import { AppProperty } from '@/constants';
@@ -27,7 +27,7 @@ async function ExerciseEditPage({ params: { id } }: ExerciseEditPageProps) {
     catchErrors: false,
     authDisabled: true,
   });
-  if (exercise == null) notFound();
+  if (exercise == null) redirect('/');
 
   return <ExerciseEditMain exerciseId={id} exercise={exercise} />;
 }

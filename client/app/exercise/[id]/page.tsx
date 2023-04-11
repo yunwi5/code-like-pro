@@ -1,9 +1,10 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { getExerciseByIdData, getExercisesData } from '@/apis/exercise.api';
 import ExerciseAttemptMain from '@/components/exercise-attempt/ExerciseAttemptMain';
 import { AppProperty } from '@/constants';
+import { getBrowsingPageLink } from '@/utils/links.util';
 
 type ExerciseAttemptPageProps = { params: { id: string } };
 
@@ -33,7 +34,7 @@ async function ExerciseAttemptPage({ params: { id } }: ExerciseAttemptPageProps)
     authDisabled: true,
   });
 
-  if (exercise == null) return notFound();
+  if (exercise == null) return redirect(getBrowsingPageLink());
 
   return <ExerciseAttemptMain exerciseId={id} exercise={exercise} />;
 }

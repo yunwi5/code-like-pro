@@ -12,7 +12,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
 const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
-  const postId = useParams().id;
+  const postId = useParams().postId;
   const isActive = postId === post._id;
   const activeClass = isActive ? 'border-l-[5px] border-l-main-300 bg-slate-200' : '';
 
@@ -20,7 +20,7 @@ const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
 
   return (
     <article
-      className={`flex flex-col gap-1 px-3 pt-3 pb-2 border-b-2 border-b-slate-300 ${activeClass}`}
+      className={`flex flex-col gap-1 px-3 pt-3 pb-2 border-b-2 last:border-b-0 border-b-slate-300 ${activeClass}`}
     >
       <header className="flex gap-2">
         <span className="text-main-400/80">{ForumPostTypeIcons[post.postType]}</span>

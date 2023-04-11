@@ -1,3 +1,6 @@
-export const getForumPostKey = (postId: string) => `foum-post-${postId}`;
+import { ForumCategory } from './../../models/enums/forum/ForumCategory';
 
-export const getForumPostCategoryKey = (category: string) => `foum-category-${category}`;
+export const getForumPostsQueryKey = (category?: ForumCategory) =>
+  `forum-posts${category ? `-${category}` : ''}`;
+
+export const getForumPostKey = (postId: string) => `foum-post-${postId}`;
