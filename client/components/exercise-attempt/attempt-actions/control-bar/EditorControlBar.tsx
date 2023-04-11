@@ -25,11 +25,10 @@ const EditorControlBar: React.FC = () => {
     await postExerciseLike();
   };
 
-  // Set the user liked status initially based on the previous liked exercises of the user.
   useEffect(() => {
     if (!exercise?._id || !userId) return;
     setLiked(exercise?.liked.includes(userId));
-  }, [exercise?._id, userId]);
+  }, [exercise, userId]);
 
   // Check if the user is an author of this exercise. If author, show the settings option.
   const isAuthor = exercise?.author._id === userId;

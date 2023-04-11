@@ -1,18 +1,16 @@
-import { IExerciseWithId } from '@/models/interfaces';
 import { useQuery } from '@tanstack/react-query';
-import { getExercisesData } from '../../apis/exercise.api';
+import { getExercises } from '../../apis/exercise.api';
 
-function useExerciseListQuery(initialData?: IExerciseWithId[]) {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['exercises'],
-    queryFn: () => getExercisesData(),
-    initialData: initialData,
-    refetchOnWindowFocus: true,
+function useExerciseListQuery() {
+  const { isLoading, data: response } = useQuery(['exercises'], () => getExercises(), {
+    refetchOnWindowFocus: true, // refetch whenever the user focuses on the window.
   });
+
+  const { data: exercises, message: error } = response || {};
 
   if (error) console.log(error);
 
-  return { isLoading, exercises: data || [], error };
+  return { isLoading, exercises: exercises || [], error };
 }
 
 export default useExerciseListQuery;
