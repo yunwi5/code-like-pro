@@ -13,7 +13,7 @@ interface Props {
 }
 
 const BrowsingMain: React.FC<Props> = ({ exercises: initialExercisesData }) => {
-  const { exercises } = useExerciseListQuery(initialExercisesData);
+  const { exercises = initialExercisesData } = useExerciseListQuery();
 
   const exerciseCards: IExerciseCard[] = useMemo(
     () => mapExercisesToExerciseCards(exercises),
