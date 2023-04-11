@@ -1,9 +1,10 @@
 import React from 'react';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { getForumPostByIdData, getForumPostsData } from '@/apis/forum.api';
 import PostCreationMain from '@/components/forum/post-creation/PostCreationMain';
 import { AppProperty } from '@/constants';
 import { PostCreationContextProvider } from '@/store/context/PostCreationContext';
+import { getForumLink } from '@/utils/links.util';
 
 export const metadata = {
   title: `Edit Forum Post | ${AppProperty.APP_NAME}`,
@@ -27,7 +28,7 @@ async function ForumPostEditPage({ params: { postId } }: ForumCategoryPageProps)
     catchErrors: false,
     authDisabled: true,
   });
-  if (forumPost == null) notFound();
+  if (forumPost == null) redirect(getForumLink());
 
   return (
     <PostCreationContextProvider post={forumPost}>
