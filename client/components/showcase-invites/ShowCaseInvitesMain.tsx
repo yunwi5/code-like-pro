@@ -18,7 +18,7 @@ interface Props {
 const ShowCaseInvitesMain: React.FC<Props> = ({ exercises: initialExercisesData }) => {
   useAuth();
   const { isLoading, user, submissionMap } = useUserContext();
-  const { exercises, error } = useExerciseListQuery(initialExercisesData);
+  const { exercises = initialExercisesData, error } = useExerciseListQuery();
   if (error) console.log(error);
   const [showCreatedExercises, setShowCreatedExercises] = useState(true);
 

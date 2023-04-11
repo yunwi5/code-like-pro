@@ -1,5 +1,5 @@
 import React from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import {
   getForumCategoryPostsData,
   getForumPostByIdData,
@@ -11,6 +11,7 @@ import { getForumCategory } from '@/models/enums';
 import { deslugify } from '@/utils/string-utils/url.util';
 import { AppProperty } from '@/constants';
 import PostDetail from '@/components/forum/post-detail/PostDetail';
+import { getForumLink } from '@/utils/links.util';
 
 type ForumCategoryPageProps = {
   params: { category: string; postId: string };
@@ -30,7 +31,7 @@ export async function generateMetadata({ params: { postId } }: ForumCategoryPage
   };
 }
 
-export const revalidate = 120;
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const posts = await getForumPostsData({ catchErrors: false, authDisabled: true });
@@ -55,10 +56,10 @@ async function ForumCategoryPostPage({
     }),
   ]);
   if (forumPosts == null) throw new Error('Failed to fetch forum posts data.');
-  if (currentPost == null) notFound();
+  if (currentPost == null) redirect(getForumLink());
 
   return (
-    <ForumPostsContainer posts={forumPosts}>
+    <ForumPostsContainer posts={forumPosts} category={category}>
       <CategoryForumPost>
         <PostDetail post={currentPost} />
       </CategoryForumPost>

@@ -1,4 +1,6 @@
+'use client';
 import React, { useContext, useEffect, useState } from 'react';
+import useDefaultCategory from '@/hooks/utils/useDefaultCategory';
 import { patchForumPost, postForumPost } from '../../apis/forum.api';
 import useLocalStorage from '../../hooks/utils/useLocalStorage';
 import { ForumCategory, ForumPostType } from '../../models/enums';
@@ -8,6 +10,7 @@ import {
   IForumPostPopulated,
 } from '../../models/interfaces';
 import { toastNotify } from '../../utils/notification.util';
+import useAuth from '@/hooks/utils/useAuth';
 
 interface IPostCreationContext {
   name: string;
@@ -47,7 +50,6 @@ export const usePostCreationContext = () => useContext(PostCreationContext);
 
 interface Props {
   children: React.ReactNode;
-  defaultCategory?: ForumCategory;
   post?: IForumPost | IForumPostPopulated; // initial post (if in edit mode)
 }
 
@@ -55,29 +57,29 @@ const DRAFT_LOCAL_STORATE_KEY = 'post_creation_draft';
 
 export const PostCreationContextProvider: React.FC<Props> = ({
   children,
-  defaultCategory,
   post: initialPost,
 }) => {
-  const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${
-    initialPost ? `-${initialPost._id}` : ''
-  }`;
-  const [postDraft, setPostDraft] = useLocalStorage<IForumPostProps | ''>(draftKey, '');
-
+  useAuth();
   const [name, setName] = useState(initialPost?.name ?? '');
   const [postType, setPostType] = useState<ForumPostType>(
     initialPost?.postType ?? ForumPostType.QUESTION,
   );
+
+  const defaultCategory = useDefaultCategory();
   const [category, setCategory] = useState<ForumCategory>(
-    defaultCategory ?? initialPost?.category ?? ForumCategory.GENERAL,
+    initialPost?.category ?? defaultCategory ?? ForumCategory.GENERAL,
   );
-  // Forum post body text
+
+  const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${
+    initialPost ? `-${initialPost._id}` : ''
+  }`;
+  const [postDraft, setPostDraft] = useLocalStorage<IForumPostProps | ''>(draftKey, '');
   const [content, setContent] = useState(initialPost?.content ?? '');
   const [tags, setTags] = useState<string[]>(initialPost?.tags || []);
 
   const [createdPost, setCreatedPost] = useState<IForumPost | IForumPostPopulated | null>(
     initialPost ?? null,
   );
-
   const [isLoading, setIsLoading] = useState(false);
 
   const createPostObject = (): IForumPostProps => ({

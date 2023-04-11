@@ -59,13 +59,13 @@ export function getForumPostLink(post: IForumPost | IForumPostPopulated) {
 // Link to creating new forum post. Can set default category through a query string.
 export function getForumPostCreateLink(defaultCategory?: ForumCategory) {
   if (ForumCategoryList.includes(defaultCategory as any)) {
-    return `/create-post?default-category=${defaultCategory}`;
+    return `/forum/create-post?default-category=${defaultCategory}`;
   }
-  return '/create-post';
+  return '/forum/create-post';
 }
 
 export function getForumPostEditLink(postId: string) {
-  return `/edit-post/${postId}`;
+  return `/forum/edit-post/${postId}`;
 }
 
 // Ranking links

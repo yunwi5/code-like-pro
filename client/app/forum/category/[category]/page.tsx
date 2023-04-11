@@ -45,7 +45,7 @@ async function ForumCategoryPage({
   if (forumPosts == null) throw new Error('Failed to fetch forum posts data.');
 
   return (
-    <ForumPostsContainer posts={forumPosts}>
+    <ForumPostsContainer posts={forumPosts} category={category}>
       <CategoryForumPost>
         <DefaultContent category={category} />
       </CategoryForumPost>

@@ -1,5 +1,6 @@
-import Link from 'next/link';
+'use client';
 import React from 'react';
+import Link from 'next/link';
 import MoonLoader from 'react-spinners/MoonLoader';
 import { usePostCreationContext } from '../../../../store/context/PostCreationContext';
 import { getForumPostLink } from '../../../../utils/links.util';
