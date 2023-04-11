@@ -1,7 +1,6 @@
 import { getForumCategoryPostsData, getForumPostsData } from '@/apis/forum.api';
 import { ForumCategory } from '@/models/enums';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import React from 'react';
 import { getForumPostsQueryKey } from './keys';
 
 function useForumPostsQuery({

@@ -58,7 +58,7 @@ async function ForumCategoryPostPage({
   if (currentPost == null) notFound();
 
   return (
-    <ForumPostsContainer posts={forumPosts}>
+    <ForumPostsContainer posts={forumPosts} category={category}>
       <CategoryForumPost>
         <PostDetail post={currentPost} />
       </CategoryForumPost>
