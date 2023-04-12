@@ -1,4 +1,5 @@
 import React from 'react';
+
 import HoveringLabel from '../tooltip/HoveringLabel';
 
 interface Props {

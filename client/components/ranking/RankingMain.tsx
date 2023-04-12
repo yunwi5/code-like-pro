@@ -1,9 +1,11 @@
 'use client';
 import React, { FC } from 'react';
+
 import { ProgrammingTopic } from '@/models/enums';
 import { IRanking } from '@/models/interfaces';
 
 import useRanking from '../../hooks/ranking/useRanking';
+
 import RankingCategoryNavigation from './sections/RankingCategoryNavigation';
 import RankingPodium from './sections/RankingPodium';
 import RankingTable from './sections/RankingTable';

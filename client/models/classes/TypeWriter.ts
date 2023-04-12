@@ -12,10 +12,7 @@ export class Typewriter {
   private typingSpeed: number;
   private deletingSpeed: number;
 
-  constructor(
-    element: HTMLElement,
-    { loop = false, typingSpeed = 50, deletingSpeed = 50 } = {},
-  ) {
+  constructor(element: HTMLElement, { loop = false, typingSpeed = 50, deletingSpeed = 50 } = {}) {
     this.element = element;
     this.loop = loop;
     this.typingSpeed = typingSpeed;

@@ -1,11 +1,12 @@
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
-import useForumBrowsing from '../../../../hooks/useForumBrowsing';
+import { useRouter } from 'next/navigation';
 
+import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 import { IForumPost, IForumPostPopulated } from '../../../../models/interfaces';
 import { useUserContext } from '../../../../store/context/UserContext';
 import { getForumPostLink } from '../../../../utils/links.util';
+
 import PostSettings from './PostSettings';
 
 const navButtonClass =

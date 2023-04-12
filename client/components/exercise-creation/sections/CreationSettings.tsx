@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   CreationSection,
   Difficulty,
@@ -10,11 +11,11 @@ import { useExerciseCreationContext } from '../../../store/context/ExerciseCreat
 import { prettierLanguageNames } from '../../../utils/language.util';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
+
 import CreationTags from './CreationTags';
 
 const CreationSettings: React.FC = () => {
-  const { language, setLanguage, difficulty, setDifficulty } =
-    useExerciseCreationContext();
+  const { language, setLanguage, difficulty, setDifficulty } = useExerciseCreationContext();
 
   return (
     <CreationSectionContainer title="Settings" id={CreationSection.SETTINGS}>

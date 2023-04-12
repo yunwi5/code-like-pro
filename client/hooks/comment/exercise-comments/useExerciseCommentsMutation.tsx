@@ -14,11 +14,7 @@ function useExerciseCommentsMutation(exerciseId: string) {
 
   const postComment = async (commentProp: { text: string }) => {
     // Send Http POST request to add the user's comment to the server.
-    const {
-      ok,
-      message,
-      data: newComment,
-    } = await postExerciseComment(exerciseId, commentProp);
+    const { ok, message, data: newComment } = await postExerciseComment(exerciseId, commentProp);
 
     if (ok && newComment) {
       toastNotify('Post comment!', 'success');
@@ -31,10 +27,7 @@ function useExerciseCommentsMutation(exerciseId: string) {
   };
 
   const updateComment = async (commentId: string, updateProp: { text: string }) => {
-    const { ok, data: updatedComment } = await CommentAPI.patchComment(
-      commentId,
-      updateProp,
-    );
+    const { ok, data: updatedComment } = await CommentAPI.patchComment(commentId, updateProp);
 
     if (ok && updatedComment) {
       updateItemInCache(updatedComment);

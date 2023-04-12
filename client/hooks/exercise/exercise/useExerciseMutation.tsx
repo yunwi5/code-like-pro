@@ -1,9 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 
-import {
-  likeExerciseRequest,
-  postExerciseDifficultyVote,
-} from '../../../apis/exercise.api';
+import { likeExerciseRequest, postExerciseDifficultyVote } from '../../../apis/exercise.api';
 import { Difficulty } from '../../../models/enums';
 import { toastNotify } from '../../../utils/notification.util';
 import { getExerciseKey } from '../keys';
@@ -15,10 +12,8 @@ function useExerciseMutation(exerciseId: string) {
   const exerciseQueryKey = getExerciseKey(exerciseId);
 
   const updateExerciseCache = (updatedExercise: IExerciseWithId) => {
-    queryClient.setQueryData(
-      [exerciseQueryKey],
-      (oldData: { data: IExerciseWithId } | undefined) =>
-        oldData ? { ...oldData, data: updatedExercise } : oldData,
+    queryClient.setQueryData([exerciseQueryKey], (oldData: { data: IExerciseWithId } | undefined) =>
+      oldData ? { ...oldData, data: updatedExercise } : oldData,
     );
   };
 

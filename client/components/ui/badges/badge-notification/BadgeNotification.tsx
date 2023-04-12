@@ -1,7 +1,8 @@
 import React from 'react';
+import Image from 'next/image';
+
 import { IBadge } from '../../../../models/interfaces';
 import { BadgeImageMap } from '../../../../utils/badge.util';
-import Image from 'next/image';
 
 // Toast badge reward component
 // Notification badge

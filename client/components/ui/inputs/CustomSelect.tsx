@@ -34,12 +34,7 @@ const CustomSelect: React.FC<Props> = (props) => {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       {labelText && <label htmlFor={id}>{labelText}</label>}
-      <select
-        id={id}
-        value={value}
-        onChange={handleChange}
-        className={`input ${selectClassName}`}
-      >
+      <select id={id} value={value} onChange={handleChange} className={`input ${selectClassName}`}>
         {options.map((option, idx) => (
           <option key={idx} value={option}>
             {optionLabels[idx] ?? option}

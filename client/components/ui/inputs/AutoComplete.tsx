@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AiFillCaretDown } from 'react-icons/ai';
 import ClickAwayListener from 'react-click-away-listener';
+import { AiFillCaretDown } from 'react-icons/ai';
+
 import { filterListByString } from '../../../utils/filter-utils/string.filter';
 
 interface Props {

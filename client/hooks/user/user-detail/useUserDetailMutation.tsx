@@ -19,13 +19,10 @@ function useUserDetailMutation(userId: string) {
       toastNotify('Profile updated!', 'success');
 
       // update cache
-      queryClient.setQueryData(
-        [userQueryKey],
-        (oldUserDetail: IUserDetail | undefined) => {
-          if (!oldUserDetail) return oldUserDetail;
-          return { ...oldUserDetail, ...userDetailProps };
-        },
-      );
+      queryClient.setQueryData([userQueryKey], (oldUserDetail: IUserDetail | undefined) => {
+        if (!oldUserDetail) return oldUserDetail;
+        return { ...oldUserDetail, ...userDetailProps };
+      });
     } else {
       toastNotify('Something went wrong while updating your profile...', 'error');
     }

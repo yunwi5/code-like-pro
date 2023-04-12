@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+
 import { AppProperty } from '../../../constants';
 
 const banner = {
@@ -20,7 +21,7 @@ const FeaturesBanner: React.FC = () => {
 
   // Change message to be displayed every 4.5s with intervals
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       setMessageIndex((msgIndex) => {
         const nextIndex = (msgIndex + 1) % messages.length;
         return nextIndex;
@@ -48,13 +49,7 @@ const FeaturesBanner: React.FC = () => {
   );
 };
 
-const AnimatedLetters = ({
-  letters,
-  className,
-}: {
-  letters: string;
-  className: string;
-}) => {
+const AnimatedLetters = ({ letters, className }: { letters: string; className: string }) => {
   return (
     <motion.div
       className={`relative tracking-wide capitalize ${className}`}

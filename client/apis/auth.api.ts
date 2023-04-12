@@ -7,8 +7,7 @@ const API_DOMAIN = '/auth';
 export type AuthResponseData = { access_token: string; user: IUser };
 
 export const createOrGetGoogleUser = async (response: CredentialResponse) => {
-  if (!response.credential)
-    return { ok: false, data: null, message: 'No credentials found' };
+  if (!response.credential) return { ok: false, data: null, message: 'No credentials found' };
 
   return await postRequest<AuthResponseData>({
     url: `${API_DOMAIN}/google`,

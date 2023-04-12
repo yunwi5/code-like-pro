@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+
 import HomeBadges from '@/components/home/badges/HomeBadges';
 import Comparisons from '@/components/home/comparisons/Comparisons';
 import HomeFeatures from '@/components/home/features/HomeFeatures';
@@ -9,8 +10,9 @@ import JoinUs from '@/components/home/join-us/JoinUs';
 import Strengths from '@/components/home/strengths/Strengths';
 import TopExercises from '@/components/home/TopExercises';
 import TopUsers from '@/components/home/TopUsers';
-import ScrollProgress from './ScrollProgress';
+
 import HomeDiscussions from './discussions/HomeDiscussions';
+import ScrollProgress from './ScrollProgress';
 
 const leftInVariants = {
   initial: { opacity: 0, x: -300 },

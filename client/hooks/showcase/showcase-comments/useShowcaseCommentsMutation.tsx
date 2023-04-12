@@ -1,10 +1,10 @@
 import { useQueryClient } from '@tanstack/react-query';
 
-import useListQueryCacheUpdate from '../../cache/useListQueryCacheUpdate';
 import { CommentProp } from '../../../apis/comment.api';
 import * as CommentAPI from '../../../apis/comment.api';
 import { postShowcaseComment } from '../../../apis/exercise.api';
 import { toastNotify } from '../../../utils/notification.util';
+import useListQueryCacheUpdate from '../../cache/useListQueryCacheUpdate';
 import { getShowcaseCommentsKey } from '../keys';
 
 function useShowcaseCommentsMutation(showcaseId: string) {
@@ -16,11 +16,7 @@ function useShowcaseCommentsMutation(showcaseId: string) {
     useListQueryCacheUpdate(showcaseQueryKey);
 
   const postComment = async (commentProp: CommentProp) => {
-    const {
-      ok,
-      message,
-      data: newComment,
-    } = await postShowcaseComment(showcaseId, commentProp);
+    const { ok, message, data: newComment } = await postShowcaseComment(showcaseId, commentProp);
 
     if (ok && newComment) {
       toastNotify('Post showcase comment!', 'success');

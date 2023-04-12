@@ -1,14 +1,16 @@
 'use client';
 import dynamic from 'next/dynamic';
+
 import useAuth from '@/hooks/utils/useAuth';
+
 import CreationHeader from './header/CreationHeader';
-import CreationSidebar from './sidebar/CreationSidebar';
-import CreationName from './sections/CreationName';
 import CreationActions from './sections/CreationActions';
+import CreationName from './sections/CreationName';
 import CreationSettings from './sections/CreationSettings';
 import CreationSolution from './sections/CreationSolution';
 import CreationTemplate from './sections/CreationTemplate';
 import CreationTestCases from './sections/CreationTestCases';
+import CreationSidebar from './sidebar/CreationSidebar';
 
 const CreationPrompt = dynamic(() => import('./sections/CreationPrompt'), { ssr: false });
 

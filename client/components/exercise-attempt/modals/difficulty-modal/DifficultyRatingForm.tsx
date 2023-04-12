@@ -6,10 +6,7 @@ import useExerciseMutation from '../../../../hooks/exercise/exercise/useExercise
 import { Difficulty, DifficultyList } from '../../../../models/enums';
 import { IExerciseWithId } from '../../../../models/interfaces';
 import { useUserContext } from '../../../../store/context/UserContext';
-import {
-  getDifficultyActiveClass,
-  getDifficultyBtnClass,
-} from '../../../../utils/difficulty.util';
+import { getDifficultyActiveClass, getDifficultyBtnClass } from '../../../../utils/difficulty.util';
 import Button from '../../../ui/buttons/Button';
 import CancelButton from '../../../ui/buttons/CancelButton';
 
@@ -20,12 +17,7 @@ type Props = {
   defaultValue?: Difficulty;
 };
 
-const DifficultyRatingForm: FC<Props> = ({
-  exercise,
-  onSubmit,
-  onCancel,
-  defaultValue,
-}) => {
+const DifficultyRatingForm: FC<Props> = ({ exercise, onSubmit, onCancel, defaultValue }) => {
   const { userDetail } = useUserContext();
   const { postDifficultyVote } = useExerciseMutation(exercise._id);
 
@@ -50,10 +42,7 @@ const DifficultyRatingForm: FC<Props> = ({
   };
 
   return (
-    <form
-      onSubmit={handleSubmitVote}
-      className="mt-5 pb-3 flex flex-wrap gap-y-3 justify-between"
-    >
+    <form onSubmit={handleSubmitVote} className="mt-5 pb-3 flex flex-wrap gap-y-3 justify-between">
       <label className="mr-8 text-gray-600 font-semibold">
         <FiStar className="inline-block mr-1 text-[1.2em] text-main-500" />
         Rate the difficulty of <mark className="mark text-main-400">{exercise.name}</mark>
@@ -65,9 +54,7 @@ const DifficultyRatingForm: FC<Props> = ({
             key={difficulty}
             type="button"
             className={`px-2 py-1 rounded-md ${getDifficultyBtnClass(difficulty)} ${
-              selectedDifficulty === difficulty
-                ? getDifficultyActiveClass(difficulty)
-                : ''
+              selectedDifficulty === difficulty ? getDifficultyActiveClass(difficulty) : ''
             }`}
             onClick={() => handleDifficultySelect(difficulty)}
           >

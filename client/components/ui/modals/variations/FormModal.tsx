@@ -1,5 +1,6 @@
 import React from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
+
 import AnimationModal from '../AnimationModal';
 
 interface Props {
@@ -13,15 +14,7 @@ interface Props {
 }
 
 const FormModal: React.FC<Props> = (props) => {
-  const {
-    open,
-    heading,
-    onClose,
-    children,
-    onSubmit,
-    isLoading = false,
-    buttonText,
-  } = props;
+  const { open, heading, onClose, children, onSubmit, isLoading = false, buttonText } = props;
 
   return (
     <AnimationModal
@@ -36,10 +29,7 @@ const FormModal: React.FC<Props> = (props) => {
         </header>
 
         {/* Modal form body */}
-        <form
-          onSubmit={onSubmit}
-          className="flex flex-col gap-5 bg-slate-200/90 px-7 py-5"
-        >
+        <form onSubmit={onSubmit} className="flex flex-col gap-5 bg-slate-200/90 px-7 py-5">
           {children}
 
           {/* Action buttons for submission and closing modal */}

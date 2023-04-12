@@ -1,5 +1,6 @@
 import { Quill } from 'react-quill';
 import hljs from 'highlight.js';
+
 import { imageUploader } from './ImageUploader';
 
 hljs.configure({

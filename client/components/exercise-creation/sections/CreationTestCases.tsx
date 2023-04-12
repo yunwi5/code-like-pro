@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import useUpdateEffect from '../../../hooks/utils/useUpdateEffect';
 import { CreationSection } from '../../../models/enums';
 import { ITestCaseProps } from '../../../models/interfaces';
@@ -10,8 +11,7 @@ import CreationSectionContainer from '../containers/CreationSectionContainer';
 import CreationHelp from '../creation-help/CreationHelp';
 
 const CreationTestCases: React.FC = () => {
-  const { testCases, language, setTestCases, testCaseOutputs } =
-    useExerciseCreationContext();
+  const { testCases, language, setTestCases, testCaseOutputs } = useExerciseCreationContext();
 
   const addTestCase = () => {
     setTestCases((prevList) => [...prevList, getEmptyTestCase(testCases.length + 1)]);

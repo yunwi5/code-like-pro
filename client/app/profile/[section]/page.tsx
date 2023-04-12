@@ -1,25 +1,18 @@
 import React from 'react';
+import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
+
 import ProfileLayoutContainer from '@/components/profile/containers/ProfileLayoutContainer';
 import { AppProperty } from '@/constants';
 import { getProfileSection, ProfileSection, ProfileSectionList } from '@/models/enums';
 import { deslugify, slugify } from '@/utils/string-utils/url.util';
 
 const MyProfile = dynamic(() => import('@/components/profile/profile/ProfileMain'));
-const Favorites = dynamic(
-  () => import('@/components/profile/favorites/ProfileFavorites'),
-);
-const MyCreations = dynamic(
-  () => import('@/components/profile/my-creations/MyCreations'),
-);
-const MySubmissions = dynamic(
-  () => import('@/components/profile/my-submissions/MySubmission'),
-);
-const Statistics = dynamic(
-  () => import('@/components/profile/statistics/ProfileStatistics'),
-);
+const Favorites = dynamic(() => import('@/components/profile/favorites/ProfileFavorites'));
+const MyCreations = dynamic(() => import('@/components/profile/my-creations/MyCreations'));
+const MySubmissions = dynamic(() => import('@/components/profile/my-submissions/MySubmission'));
+const Statistics = dynamic(() => import('@/components/profile/statistics/ProfileStatistics'));
 
 type ProfilePageProps = {
   params: { section: string };

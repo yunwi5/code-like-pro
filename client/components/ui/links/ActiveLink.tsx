@@ -1,7 +1,7 @@
 'use client';
+import React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react';
 
 interface Props {
   href: string;
@@ -11,13 +11,7 @@ interface Props {
   onClick?: () => void;
 }
 
-const ActiveLink: React.FC<Props> = ({
-  href,
-  className,
-  activeClassName,
-  children,
-  onClick,
-}) => {
+const ActiveLink: React.FC<Props> = ({ href, className, activeClassName, children, onClick }) => {
   const pathname = usePathname();
   const isActive = pathname === href;
 

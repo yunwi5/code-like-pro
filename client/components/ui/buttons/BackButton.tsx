@@ -1,7 +1,7 @@
 'use client';
 import { FC } from 'react';
-import { useRouter } from 'next/navigation';
 import { FiArrowLeft } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
 
 const BackButton: FC<{ className?: string }> = ({ className = '' }) => {
   const router = useRouter();

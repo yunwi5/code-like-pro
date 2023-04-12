@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { FaSmile } from 'react-icons/fa';
-import ClipLoader from 'react-spinners/ClipLoader';
 import { GoIssueClosed } from 'react-icons/go';
+import ClipLoader from 'react-spinners/ClipLoader';
 
+import { IIssueReport } from '../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { compareByVotes } from '../../../../utils/sorting-utils';
 import IssueReportList from '../../../ui/lists/IssueReportList';
-import { IIssueReport } from '../../../../models/interfaces';
 
 const ExerciseIssueReports: React.FC<{ reports: IIssueReport[]; isLoading: boolean }> = ({
   reports,

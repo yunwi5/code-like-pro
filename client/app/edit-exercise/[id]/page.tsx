@@ -1,7 +1,8 @@
 import React from 'react';
 import { redirect } from 'next/navigation';
-import ExerciseEditMain from '@/components/exercise-edit/ExerciseEditMain';
+
 import { getExerciseByIdData, getExercisesData } from '@/apis/exercise.api';
+import ExerciseEditMain from '@/components/exercise-edit/ExerciseEditMain';
 import { AppProperty } from '@/constants';
 
 export const metadata = {

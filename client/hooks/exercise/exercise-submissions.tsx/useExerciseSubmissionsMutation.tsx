@@ -10,8 +10,7 @@ function useExerciseSubmissionsMutation(exerciseId: string) {
   const queryClient = useQueryClient();
 
   const submissionsQueryKey = getExerciseSubmissionsKey(exerciseId);
-  const { addItemToCache, updateItemInCache } =
-    useListQueryCacheUpdate(submissionsQueryKey);
+  const { addItemToCache, updateItemInCache } = useListQueryCacheUpdate(submissionsQueryKey);
 
   const postSubmission = async (
     userSolution: string,

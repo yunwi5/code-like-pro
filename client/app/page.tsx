@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
-import { AppProperty } from '@/constants';
+
 import HomeMain from '@/components/home/HomeMain';
+import { AppProperty } from '@/constants';
 
 export const metadata = {
   title: `Home | ${AppProperty.APP_NAME}`,

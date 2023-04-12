@@ -14,9 +14,6 @@ export function sortRankingArray(ranking: IRanking[], rankingCategory: RankingCa
   // Sort by Overall points, meaning sort by solvingPoints + creationPoints.
   return ranking.sort(
     (userA, userB) =>
-      userB.solvingPoints +
-      userB.creationPoints -
-      userA.solvingPoints -
-      userA.creationPoints,
+      userB.solvingPoints + userB.creationPoints - userA.solvingPoints - userA.creationPoints,
   );
 }

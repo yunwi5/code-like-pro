@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+
 import { BadgeRarity } from '../../../../models/enums';
+
 import BadgeSpecCard from './BadgeSpecCard';
 
 const BadgeSpecs: React.FC<{ className?: string }> = ({ className = '' }) => {
   return (
-    <div
-      className={`grow grid grid-cols-1 sm:grid-cols-2 gap-y-2 sm:gap-y-0 gap-x-3 ${className}`}
-    >
+    <div className={`grow grid grid-cols-1 sm:grid-cols-2 gap-y-2 sm:gap-y-0 gap-x-3 ${className}`}>
       {BadgeSpecInfo.map((badge, idx) => (
         <motion.div
           key={badge.rarity}

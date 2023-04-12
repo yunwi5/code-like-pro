@@ -1,8 +1,9 @@
-import '@/styles/global.scss';
 import Footer from '@/components/layout/Footer';
-import ScrollToTop from '@/components/utils/ScrollToTop';
 import Header from '@/components/layout/Header';
 import Providers from '@/components/Providers';
+import ScrollToTop from '@/components/utils/ScrollToTop';
+
+import '@/styles/global.scss';
 
 export const metadata = {
   title: 'Code Like Pro',

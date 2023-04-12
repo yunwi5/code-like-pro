@@ -2,10 +2,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getExerciseReports } from '../../../apis/exercise.api';
 import { getExerciseReportsKey } from '../keys';
 
-function useExerciseReportsQuery(
-  exerciseId: string | undefined,
-  refetchInterval: number = 1000,
-) {
+function useExerciseReportsQuery(exerciseId: string | undefined, refetchInterval: number = 1000) {
   const queryClient = useQueryClient();
 
   // Use React-Query to fetch the comments data of this exercise.

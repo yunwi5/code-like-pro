@@ -1,14 +1,15 @@
 import React from 'react';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+
 import { getForumCategoryPostsData } from '@/apis/forum.api';
 import CategoryForumPost from '@/components/forum/category-forum/CategoryForumPost';
 import ForumPostsContainer from '@/components/forum/ForumPostsContainer';
-import { ForumCategory, ForumCategoryList, getForumCategory } from '@/models/enums';
-import { deslugify } from '@/utils/string-utils/url.util';
 import { AppProperty } from '@/constants';
+import { ForumCategory, ForumCategoryList, getForumCategory } from '@/models/enums';
 import { getForumPostCreateLink } from '@/utils/links.util';
 import { capitalize } from '@/utils/string-utils/string-manipulation.util';
+import { deslugify } from '@/utils/string-utils/url.util';
 
 type ForumCategoryPageProps = {
   params: { category: string };
@@ -32,9 +33,7 @@ export function generateStaticParams() {
   return ForumCategoryList.map((category) => ({ category }));
 }
 
-async function ForumCategoryPage({
-  params: { category: categoryParam },
-}: ForumCategoryPageProps) {
+async function ForumCategoryPage({ params: { category: categoryParam } }: ForumCategoryPageProps) {
   const category = getForumCategory(deslugify(categoryParam));
   if (category == null) notFound();
 

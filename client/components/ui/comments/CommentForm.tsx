@@ -1,7 +1,8 @@
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineComment } from 'react-icons/ai';
 import { ClipLoader } from 'react-spinners';
+import { useRouter } from 'next/navigation';
+
 import { IComment } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import Button from '../buttons/Button';
@@ -17,13 +18,7 @@ interface Props {
 }
 
 const CommentForm: React.FC<Props> = (props) => {
-  const {
-    onSubmit,
-    inputType = 'input',
-    className = '',
-    defaultComment,
-    onCancel,
-  } = props;
+  const { onSubmit, inputType = 'input', className = '', defaultComment, onCancel } = props;
 
   const router = useRouter();
   const { userDetail } = useUserContext();
@@ -44,9 +39,8 @@ const CommentForm: React.FC<Props> = (props) => {
     setIsLoading(false);
   };
 
-  const handleTextChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => setText(e.target.value);
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setText(e.target.value);
 
   // Cancel adding comment. Call onCancel() callback which is called when the cancel action is triggered.
   const handleCancel = () => {
@@ -71,10 +65,7 @@ const CommentForm: React.FC<Props> = (props) => {
 
   return (
     <form className={`flex gap-3 ${className}`} onSubmit={handleSubmit}>
-      <ProfilePicture
-        picture={userDetail?.pictureUrl}
-        alt={userDetail?.name || 'User profile'}
-      />
+      <ProfilePicture picture={userDetail?.pictureUrl} alt={userDetail?.name || 'User profile'} />
       <div className="flex-1 flex flex-col gap-2">
         <div>
           <div className="relative border-b-[3px] border-gray-300 input-underline-effect">
@@ -84,9 +75,7 @@ const CommentForm: React.FC<Props> = (props) => {
               <textarea {...inputProps} rows={3} />
             )}
             <AiOutlineComment
-              className={`${commentIconClass} ${
-                inputType === 'textarea' ? '!top-4' : ''
-              }`}
+              className={`${commentIconClass} ${inputType === 'textarea' ? '!top-4' : ''}`}
             />
           </div>
         </div>

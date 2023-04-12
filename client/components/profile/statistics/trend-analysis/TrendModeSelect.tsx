@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { TrendPeriodMode, TrendPeriodModeList } from '../../../../models/enums';
 
 interface Props {

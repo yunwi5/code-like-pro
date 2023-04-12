@@ -1,9 +1,10 @@
 'use client';
 import { useState } from 'react';
-import { getProfileSectionIcon, ProfileLinkMap } from '../../../utils/profile.util';
-import ActiveLink from '../../ui/links/ActiveLink';
+
 import { ProfileSection, ProfileSectionList } from '../../../models/enums';
+import { getProfileSectionIcon, ProfileLinkMap } from '../../../utils/profile.util';
 import HamburgerMenu from '../../ui/buttons/icon-buttons/HamburgerMenu';
+import ActiveLink from '../../ui/links/ActiveLink';
 
 // Used in mobile screen size < 640px.
 const MobileProfileNavDropdown: React.FC<{ activeSection: ProfileSection }> = ({

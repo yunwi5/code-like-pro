@@ -1,12 +1,13 @@
 import { FaListUl } from 'react-icons/fa';
 import { GrRotateLeft } from 'react-icons/gr';
+import { useRouter } from 'next/navigation';
+
 import { useShowcase } from '../../store/context/ShowcaseContext';
 import { getDifficultyBtnClass } from '../../utils/difficulty.util';
 import { getBrowsingPageLink, getExerciseAttemptPageLink } from '../../utils/links.util';
 import Button from '../ui/buttons/Button';
-import ExerciseSpec from '../ui/spec/ExerciseSpec';
 import LanguageLabel from '../ui/icons/LanguageIcon';
-import { useRouter } from 'next/navigation';
+import ExerciseSpec from '../ui/spec/ExerciseSpec';
 
 /* Header layout breakpoint is lg - 1024px  */
 const ShowcaseHeader = () => {
@@ -24,9 +25,7 @@ const ShowcaseHeader = () => {
           <h2 className="flex-start flex-wrap gap-3 text-gray-700 text-lg md:text-xl lg:text-2xl capitalize">
             {exercise.name}
           </h2>
-          <label
-            className={`px-2 py-1 text-sm lg:text-base border-2 ${colorClass} rounded-lg`}
-          >
+          <label className={`px-2 py-1 text-sm lg:text-base border-2 ${colorClass} rounded-lg`}>
             {exercise.difficulty}
           </label>
           <LanguageLabel language={exercise.language} />

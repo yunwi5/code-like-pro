@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+
 import usePagination from '../../../hooks/utils/usePagination';
 import { IIssueReport } from '../../../models/interfaces';
 import { listItemAnimations } from '../../../utils/animations.util';

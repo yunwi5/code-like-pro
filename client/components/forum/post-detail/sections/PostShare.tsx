@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { BsShare } from 'react-icons/bs';
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { AppProperty } from '../../../../constants';
 import { IForumPostPopulated } from '../../../../models/interfaces';
 import { getForumPostLink } from '../../../../utils/links.util';
-import HoveringLabel from '../../../ui/tooltip/HoveringLabel';
 import SocialPanel from '../../../ui/social/SocialPanel';
+import HoveringLabel from '../../../ui/tooltip/HoveringLabel';
 
 interface Props {
   post: IForumPostPopulated;

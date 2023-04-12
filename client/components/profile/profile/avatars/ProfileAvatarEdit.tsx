@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import ClickAwayListener from 'react-click-away-listener';
 import { MdAddAPhoto, MdPhotoCamera } from 'react-icons/md';
 import { ClipLoader } from 'react-spinners';
 
-import { toastNotify } from '../../../../utils/notification.util';
-import { toBase64Image } from '../../../../utils/image.util';
-import ProfileAvatarOptions from './ProfileAvatarOptions';
-import FileInput from '../../../ui/inputs/FileInput';
 import { useProfileEditContext } from '../../../../store/context/ProfileEditContext';
-import ClickAwayListener from 'react-click-away-listener';
+import { toBase64Image } from '../../../../utils/image.util';
+import { toastNotify } from '../../../../utils/notification.util';
+import FileInput from '../../../ui/inputs/FileInput';
 
-const ProfileAvatarEdit: React.FC<{}> = ({}) => {
+import ProfileAvatarOptions from './ProfileAvatarOptions';
+
+const ProfileAvatarEdit: React.FC = () => {
   const { isLoading, setPreviewSource } = useProfileEditContext();
 
   const [fileInput, setFileInput] = useState<File | null>(null);
@@ -34,10 +35,7 @@ const ProfileAvatarEdit: React.FC<{}> = ({}) => {
 
   return (
     <div className="absolute top-0 -left-2 text-3xl text-gray-600/90">
-      <MdAddAPhoto
-        className="cursor-pointer"
-        onClick={() => setShowOptions((ps) => !ps)}
-      />
+      <MdAddAPhoto className="cursor-pointer" onClick={() => setShowOptions((ps) => !ps)} />
       {showOptions && (
         <ClickAwayListener onClickAway={() => setShowOptions(false)}>
           <div className="flex flex-col items-center gap-3 w-max absolute top-0 left-0 md:-left-[24rem] md:-translate-x-10 pb-3 px-2 rounded-md bg-white shadow-lg cursor-pointer">

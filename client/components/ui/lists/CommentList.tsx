@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+
 import usePagination from '../../../hooks/utils/usePagination';
 import { IComment } from '../../../models/interfaces';
 import MainComment from '../comments/MainComment';
-import PageNavigation from '../PageNavigation';
 import EmptyMessage from '../labels/EmptyMessage';
+import PageNavigation from '../PageNavigation';
 
 interface Props {
   comments: IComment[];
@@ -56,9 +57,7 @@ const CommentList: FC<Props> = ({
           ))}
         </AnimatePresence>
 
-        {comments.length === 0 && (
-          <EmptyMessage className="!mt-8 mb-4" message="No comments yet" />
-        )}
+        {comments.length === 0 && <EmptyMessage className="!mt-8 mb-4" message="No comments yet" />}
       </div>
       <PageNavigation
         className={`mt-auto`}

@@ -1,7 +1,9 @@
 import React from 'react';
 import { RiEditBoxLine } from 'react-icons/ri';
+
 import { IComment } from '../../../models/interfaces';
 import AnimationModal from '../modals/AnimationModal';
+
 import CommentForm from './CommentForm';
 
 interface Props {

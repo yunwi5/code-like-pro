@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { runTestCases } from '../../../../apis/submission.api';
 import { Language } from '../../../../models/enums';
 import { ITestCase } from '../../../../models/interfaces';
@@ -42,34 +43,27 @@ const PythonHelp: React.FC = () => {
       <div>
         <p className="mb-3">
           In Python, it is easy and straightforward to create a new programming challenge.
-          Let&apos;s say we want to create a challenge that asks a user to create a
-          function called <mark className="mark">getSum</mark>&nbsp; which returns the sum
-          of the arguments passed in.
+          Let&apos;s say we want to create a challenge that asks a user to create a function called{' '}
+          <mark className="mark">getSum</mark>&nbsp; which returns the sum of the arguments passed
+          in.
         </p>
         <CodeEditor value={pythonSolution} language={language} readOnly={true} />
       </div>
 
       <div>
         <p className="mb-3">
-          Next, we will define an example test case that will verify our solution as well
-          as users&apos; solution the users will write when they attempt the challenge.
-          The testing is based on matching the standard output of expected and actual
-          outputs.
+          Next, we will define an example test case that will verify our solution as well as
+          users&apos; solution the users will write when they attempt the challenge. The testing is
+          based on matching the standard output of expected and actual outputs.
         </p>
-        <TestCase
-          language={language}
-          testCase={testCase}
-          readOnly={true}
-          boxHeight="6rem"
-        />
+        <TestCase language={language} testCase={testCase} readOnly={true} boxHeight="6rem" />
       </div>
 
       <div>
         <p className="mb-3">
-          Once we define the solution code and the test case, the following is the
-          structure of the resulting program that will be executed when you run the code.
-          In Python, we include your solution code first, then we insert the testcase
-          below to run your solution code.
+          Once we define the solution code and the test case, the following is the structure of the
+          resulting program that will be executed when you run the code. In Python, we include your
+          solution code first, then we insert the testcase below to run your solution code.
         </p>
         <ProgramSimulation
           code={overallCode}

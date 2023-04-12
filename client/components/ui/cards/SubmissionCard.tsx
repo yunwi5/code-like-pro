@@ -1,14 +1,14 @@
 import React from 'react';
+import { BsFileEarmarkCodeFill } from 'react-icons/bs';
 import { FiCheck } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
+import { useRouter } from 'next/navigation';
 
 import { IUserSubmissionPopulated } from '../../../models/interfaces';
+import { getDateTimeFormat } from '../../../utils/datetime.util';
 import { getDifficultyBtnClass } from '../../../utils/difficulty.util';
 import { getExerciseAttemptPageLink } from '../../../utils/links.util';
-import { BsFileEarmarkCodeFill } from 'react-icons/bs';
-import { getDateTimeFormat } from '../../../utils/datetime.util';
 import StatusLabel from '../labels/StatusLabel';
-import { useRouter } from 'next/navigation';
 
 interface Props {
   submission: IUserSubmissionPopulated;

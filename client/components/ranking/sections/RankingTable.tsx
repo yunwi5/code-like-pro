@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
 import React from 'react';
+import { motion } from 'framer-motion';
+
 import usePagination from '../../../hooks/utils/usePagination';
 import { RankingCategory } from '../../../models/enums';
 import { IRanking } from '../../../models/interfaces';
@@ -19,7 +20,7 @@ function getDisplayRankingPoints(rank: IRanking, rankingCategory: RankingCategor
 
 const RankingTable: React.FC<Props> = ({ rankingOrder, rankingCategory }) => {
   const numOfUsersPerPage = 10;
-  let {
+  const {
     array: currentPageRanking,
     page: currentPage,
     setPage,

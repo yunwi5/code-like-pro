@@ -3,10 +3,7 @@ import { BsFillTagsFill } from 'react-icons/bs';
 
 // Group of tags rendered as a list in small sizes.
 // Mainly used in ExerciseCard and ForumPostCard components for rendering its tags in small sizes as a group.
-const TagsGroup: React.FC<{ tags: string[]; className?: string }> = ({
-  tags,
-  className = '',
-}) => {
+const TagsGroup: React.FC<{ tags: string[]; className?: string }> = ({ tags, className = '' }) => {
   if (tags.length === 0) return null;
 
   return (

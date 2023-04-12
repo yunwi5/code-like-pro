@@ -1,10 +1,6 @@
 import useUserInfoQuery from '../user/useUserInfoQuery';
 import useBadgeQuery from './useBadgeQuery';
-import {
-  postCreationBadge,
-  postShowcaseBadge,
-  postSolvingBadge,
-} from '../../apis/badge.api';
+import { postCreationBadge, postShowcaseBadge, postSolvingBadge } from '../../apis/badge.api';
 import { BadgeCategory, BadgeRarity } from '../../models/enums';
 import { useUserContext } from '../../store/context/UserContext';
 import {
@@ -35,9 +31,7 @@ function useBadgeQualification() {
 
   // Inspect creation badge qualification
   const qualifyCreationBadges = useCallback(async () => {
-    const ownedCreationBadges = badges.filter(
-      (b) => b.category === BadgeCategory.CREATION,
-    );
+    const ownedCreationBadges = badges.filter((b) => b.category === BadgeCategory.CREATION);
 
     const numberOfCreations = user?.createdExercises || 0;
     const possibleRarities = getRarityOptions(numberOfCreations);
@@ -83,9 +77,7 @@ function useBadgeQualification() {
   }, [badges, user, refetchBadges]);
 
   const qualifyShowcaseBadges = useCallback(async () => {
-    const ownedShowcaseBadges = badges.filter(
-      (b) => b.category === BadgeCategory.SHOWCASE,
-    );
+    const ownedShowcaseBadges = badges.filter((b) => b.category === BadgeCategory.SHOWCASE);
     const numberOfShowcases = user?.showCases || 0;
     const possibleRarities = getRarityOptions(numberOfShowcases);
 

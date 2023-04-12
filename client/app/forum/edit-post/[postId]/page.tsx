@@ -1,5 +1,6 @@
 import React from 'react';
 import { redirect } from 'next/navigation';
+
 import { getForumPostByIdData, getForumPostsData } from '@/apis/forum.api';
 import PostCreationMain from '@/components/forum/post-creation/PostCreationMain';
 import { AppProperty } from '@/constants';

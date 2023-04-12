@@ -1,10 +1,13 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
+
 import useExerciseListQuery from '@/hooks/exercise/useExerciseListQuery';
 import { mapExercisesToExerciseCards } from '@/utils/exercise-utils/exercise';
+
 import useBrowsing from '../../hooks/useExerciseBrowsing';
 import { IExerciseCard, IExerciseWithId } from '../../models/interfaces';
 import ExerciseList from '../ui/lists/ExerciseList';
+
 import BrowsingHeader from './header/BrowsingHeader';
 import BrowsingSidebar from './sidebar/BrowsingSidebar';
 

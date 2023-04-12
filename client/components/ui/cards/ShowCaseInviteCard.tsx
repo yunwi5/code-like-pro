@@ -3,15 +3,15 @@ import { AiFillWechat } from 'react-icons/ai';
 import { BsCodeSlash } from 'react-icons/bs';
 import { FaLaptopCode, FaUserEdit } from 'react-icons/fa';
 import { TbBulb } from 'react-icons/tb';
+import Link from 'next/link';
 
 import { ShowCaseSection } from '../../../models/enums';
 import { IExerciseWithId } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getShowcasePageLink } from '../../../utils/links.util';
 import CodeEditor from '../editor/CodeEditor';
-import HoveringLabel from '../tooltip/HoveringLabel';
 import LanguageLabel from '../icons/LanguageIcon';
-import Link from 'next/link';
+import HoveringLabel from '../tooltip/HoveringLabel';
 
 interface Props {
   exercise: IExerciseWithId;

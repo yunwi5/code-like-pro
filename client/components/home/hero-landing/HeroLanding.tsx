@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { SiAzuredataexplorer } from 'react-icons/si';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 import { Typewriter } from '../../../models/classes/TypeWriter';
-import Carousel from '../carousel/Carousel';
-import { sleep } from '../../../utils/promise.util';
 import { useUserContext } from '../../../store/context/UserContext';
+import { sleep } from '../../../utils/promise.util';
+import Carousel from '../carousel/Carousel';
+
 import './HeroLanding.scss';
-import Link from 'next/link';
 
 const HeroLanding: React.FC = () => {
   const isLoggedIn = !!useUserContext().userDetail?._id;
@@ -41,8 +42,8 @@ const HeroLanding: React.FC = () => {
           {!typingFinished && <span className="blink ml-[0.15rem] h-[0.95em]"></span>}
         </h1>
         <h2 className="text-base lg:text-xl text-gray-600">
-          A practical website for programmers where they create their own challenges,
-          solve challenges from other programmers, and showcase their solutions.
+          A practical website for programmers where they create their own challenges, solve
+          challenges from other programmers, and showcase their solutions.
         </h2>
 
         <div className="flex flex-col sm:flex-row gap-4 w-[90%] sm:w-fit">

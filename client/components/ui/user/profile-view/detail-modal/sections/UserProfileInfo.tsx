@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsInfoCircle } from 'react-icons/bs';
+
 import { IRankingOrder, IUserInfo } from '../../../../../../models/interfaces';
 import { getDateFormat } from '../../../../../../utils/datetime.util';
 import { numberSuffix } from '../../../../../../utils/number.util';
@@ -34,15 +35,9 @@ const UserProfileInfo: React.FC<Props> = ({ userInfo, rankInfo, numBadges }) => 
           </div>
         </InfoSection>
         <InfoSection label="Badges earned">{numBadges} badges</InfoSection>
-        <InfoSection label="Member since">
-          {getDateFormat(userInfo.createdAt)}
-        </InfoSection>
-        <InfoSection label="Challenges created">
-          {userInfo.createdExercises} challenges
-        </InfoSection>
-        <InfoSection label="Challenges solved">
-          {userInfo.solvedExercises} challenges
-        </InfoSection>
+        <InfoSection label="Member since">{getDateFormat(userInfo.createdAt)}</InfoSection>
+        <InfoSection label="Challenges created">{userInfo.createdExercises} challenges</InfoSection>
+        <InfoSection label="Challenges solved">{userInfo.solvedExercises} challenges</InfoSection>
 
         {/* Show user description only if it exists */}
         {userInfo.description?.trim() && (

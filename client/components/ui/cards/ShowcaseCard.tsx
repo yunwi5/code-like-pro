@@ -1,26 +1,22 @@
 import React, { useMemo, useState } from 'react';
-import useShowcaseCommentsMutation from '../../../hooks/showcase/showcase-comments/useShowcaseCommentsMutation';
-import { IComment, IExercise, IShowCase, IVote } from '../../../models/interfaces';
-import CodeEditor from '../editor/CodeEditor';
-import { getDateTimeFormat } from '../../../utils/datetime.util';
-import {
-  BsFillPersonFill,
-  BsClock,
-  BsFillChatLeftFill,
-  BsFileCode,
-  BsShare,
-} from 'react-icons/bs';
-import { postVoteRequest, deleteShowcaseVote } from '../../../apis/exercise.api';
-import { useUserContext } from '../../../store/context/UserContext';
-import CommentCard from './CommentCard';
-import useShowcaseCommentQuery from '../../../hooks/showcase/showcase-comments/useShowcaseCommentQuery';
-import CommentForm from '../comments/CommentForm';
-import { useShowcase } from '../../../store/context/ShowcaseContext';
+import { BsClock, BsFileCode, BsFillChatLeftFill, BsFillPersonFill, BsShare } from 'react-icons/bs';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import SocialPanel from '../social/SocialPanel';
+
+import { deleteShowcaseVote, postVoteRequest } from '../../../apis/exercise.api';
 import { AppProperty } from '../../../constants';
-import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
+import useShowcaseCommentQuery from '../../../hooks/showcase/showcase-comments/useShowcaseCommentQuery';
+import useShowcaseCommentsMutation from '../../../hooks/showcase/showcase-comments/useShowcaseCommentsMutation';
 import { SortingDirection, VotingItemSortingKey } from '../../../models/enums';
+import { IComment, IExercise, IShowCase, IVote } from '../../../models/interfaces';
+import { useShowcase } from '../../../store/context/ShowcaseContext';
+import { useUserContext } from '../../../store/context/UserContext';
+import { getDateTimeFormat } from '../../../utils/datetime.util';
+import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
+import CommentForm from '../comments/CommentForm';
+import CodeEditor from '../editor/CodeEditor';
+import SocialPanel from '../social/SocialPanel';
+
+import CommentCard from './CommentCard';
 
 interface Props {
   showcase: IShowCase;
@@ -38,9 +34,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
   const [compare, setCompare] = useState<Boolean>(false);
 
   const { showcaseComments } = useShowcaseCommentQuery(showcase._id);
-  const { postComment, updateComment, deleteComment } = useShowcaseCommentsMutation(
-    showcase._id,
-  );
+  const { postComment, updateComment, deleteComment } = useShowcaseCommentsMutation(showcase._id);
 
   const handleUserVote = async (type: 'up' | 'down') => {
     if (!userId) return;
@@ -104,9 +98,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
       className={`flex flex-col gap-3 px-3 sm:px-6 py-3 bg-gray-50 border-2 border-gray-200/90 rounded-sm transition-all shadow-md${className}`}
     >
       <header className="flex-start gap-2">
-        <h2 className="text-gray-500 font-bold text-lg sm:text-xl">
-          {showcase.description}{' '}
-        </h2>
+        <h2 className="text-gray-500 font-bold text-lg sm:text-xl">{showcase.description} </h2>
         {isAuthor && (
           <span className="inline-block px-2 py-1 text-base bg-main-500 text-white rounded-full">
             Yours
@@ -168,9 +160,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                 onClick={() => handleUserVote('up')}
               />
             </div>
-            <h2 className="font-semibold text-xl sm:text-2xl text-gray-600">
-              {totalVotes}
-            </h2>
+            <h2 className="font-semibold text-xl sm:text-2xl text-gray-600">{totalVotes}</h2>
             <div className="flex-center py-1 rounded-full hover:bg-slate-200/90">
               <IoIosArrowDown
                 className={`text-3xl sm:text-[2.75rem] hover:text-main-500 cursor-pointer ${

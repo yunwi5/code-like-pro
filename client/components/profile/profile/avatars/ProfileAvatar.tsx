@@ -1,8 +1,9 @@
 import React from 'react';
-import { useProfileEditContext } from '../../../../store/context/ProfileEditContext';
 
+import { useProfileEditContext } from '../../../../store/context/ProfileEditContext';
 import { isAvatarImage } from '../../../../utils/image.util';
 import ProfilePicture from '../../../ui/user/ProfilePicture';
+
 import ProfileAvatarEdit from './ProfileAvatarEdit';
 
 const ProfileAvatar: React.FC = () => {

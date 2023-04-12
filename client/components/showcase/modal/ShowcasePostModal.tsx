@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { FaLaptopCode } from 'react-icons/fa';
+
 import useBadgeQualification from '../../../hooks/badges/useBadgeQualification';
+import useExerciseShowcasesMutation from '../../../hooks/showcase/exercise-showcases/useExerciseShowcasesMutation';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
 import CodeEditor from '../../ui/editor/CodeEditor';
 import CustomInput from '../../ui/inputs/CustomInput';
 import FormModal from '../../ui/modals/variations/FormModal';
-import useExerciseShowcasesMutation from '../../../hooks/showcase/exercise-showcases/useExerciseShowcasesMutation';
 
 interface Props {
   visible: boolean;

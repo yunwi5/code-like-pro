@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { TrendPeriodMode } from '../../../../models/enums';
-import TrendModeSelect from './TrendModeSelect';
-import ExerciseCreationTrend from './ExerciseCreationTrend';
-import ExerciseAttemptTrend from './ExerciseAttemptTrend';
 import { FaRobot } from 'react-icons/fa';
+
+import { TrendPeriodMode } from '../../../../models/enums';
+
+import ExerciseAttemptTrend from './ExerciseAttemptTrend';
+import ExerciseCreationTrend from './ExerciseCreationTrend';
+import TrendModeSelect from './TrendModeSelect';
 
 type TrendSection = 'attempt' | 'create' | null;
 

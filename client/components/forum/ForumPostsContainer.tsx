@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
+
 import useForumPostsQuery from '@/hooks/forum/useForumPostsQuery';
 import { ForumCategory } from '@/models/enums';
 import { IForumPost } from '@/models/interfaces';

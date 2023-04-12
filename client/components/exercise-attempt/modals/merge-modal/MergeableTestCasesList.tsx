@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
+
+import usePagination from '../../../../hooks/utils/usePagination';
 import { IExerciseWithId, ITestCaseWithOutput } from '../../../../models/interfaces';
+import PageNavigation from '../../../ui/PageNavigation';
 import MergeableTestCase from '../../../ui/test-cases/MergeableTestCase';
 import TestCase from '../../../ui/test-cases/TestCase';
-import usePagination from '../../../../hooks/utils/usePagination';
-import PageNavigation from '../../../ui/PageNavigation';
 
 interface Props {
   testCases: ITestCaseWithOutput[];

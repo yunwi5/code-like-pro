@@ -1,15 +1,18 @@
 'use client';
 import React, { useMemo, useState } from 'react';
 import BounceLoader from 'react-spinners/BounceLoader';
-import { IExerciseWithId } from '../../models/interfaces';
-import { compareByName } from '../../utils/sorting-utils';
-import ShowCaseInviteHeader from './sections/ShowCaseInviteHeader';
-import ShowCaseInviteList from './sections/ShowCaseInviteList';
-import ShowcaseListOptions from './sections/ShowCaseListOptions';
-import ShowCaseInviteMessage from './sections/ShowcaseInviteMessage';
+
+import useExerciseListQuery from '@/hooks/exercise/useExerciseListQuery';
 import useAuth from '@/hooks/utils/useAuth';
 import { useUserContext } from '@/store/context/UserContext';
-import useExerciseListQuery from '@/hooks/exercise/useExerciseListQuery';
+
+import { IExerciseWithId } from '../../models/interfaces';
+import { compareByName } from '../../utils/sorting-utils';
+
+import ShowCaseInviteHeader from './sections/ShowCaseInviteHeader';
+import ShowCaseInviteList from './sections/ShowCaseInviteList';
+import ShowCaseInviteMessage from './sections/ShowcaseInviteMessage';
+import ShowcaseListOptions from './sections/ShowCaseListOptions';
 
 interface Props {
   exercises: IExerciseWithId[];

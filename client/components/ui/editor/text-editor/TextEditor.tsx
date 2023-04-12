@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import EditorToolbar, { modules, formats } from './EditorToolbar';
+
+import EditorToolbar, { formats, modules } from './EditorToolbar';
+
 // Text editor theme
 import 'react-quill/dist/quill.snow.css';
 // Code block syntax highlight theme
@@ -20,9 +22,7 @@ export const TextEditor: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`shadow-sm ${
-        readOnly ? 'read-only-editor' : ''
-      } ${className} overflow-visible`}
+      className={`shadow-sm ${readOnly ? 'read-only-editor' : ''} ${className} overflow-visible`}
     >
       <EditorToolbar />
       <ReactQuill

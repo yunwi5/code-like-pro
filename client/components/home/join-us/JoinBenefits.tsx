@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { motion } from 'framer-motion';
 import { MdOutlineCheck } from 'react-icons/md';
+import { motion } from 'framer-motion';
 
 const JoinBenefits: FC = () => {
   return (

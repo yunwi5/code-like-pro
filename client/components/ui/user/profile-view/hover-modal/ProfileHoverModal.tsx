@@ -10,6 +10,7 @@ import { numberSuffix } from '../../../../../utils/number.util';
 import Button from '../../../buttons/Button';
 import LanguageLabel from '../../../icons/LanguageIcon';
 import ProfilePicture from '../../ProfilePicture';
+
 import styles from './ProfileHoverModal.module.scss';
 
 interface Props {
@@ -53,8 +54,8 @@ const ProfileHoverModal: React.FC<Props> = ({
               Rank
             </strong>
             <p>
-              {rankInfo.creationPoints + rankInfo.solvingPoints} pts (
-              {numberSuffix(rankInfo.order)})
+              {rankInfo.creationPoints + rankInfo.solvingPoints} pts ({numberSuffix(rankInfo.order)}
+              )
             </p>
           </div>
         ) : (
@@ -74,12 +75,7 @@ const ProfileHoverModal: React.FC<Props> = ({
           </strong>
           <div className="flex items-center gap-2">
             {userInfo.languages?.sort().map((lang) => (
-              <LanguageLabel
-                key={lang}
-                className="text-sm"
-                language={lang}
-                size={'25px'}
-              />
+              <LanguageLabel key={lang} className="text-sm" language={lang} size={'25px'} />
             ))}
           </div>
         </div>

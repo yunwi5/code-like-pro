@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+
 import usePagination from '../../../hooks/utils/usePagination';
 import { IExerciseCard } from '../../../models/interfaces';
 import { listItemAnimations } from '../../../utils/animations.util';
 import ExerciseCard from '../cards/ExerciseCard';
-import PageNavigation from '../PageNavigation';
 import EmptyMessage from '../labels/EmptyMessage';
+import PageNavigation from '../PageNavigation';
 
 // Default value of exercisePerPage which is applied when the prop was not given.
 const EXERCISE_PER_PAGE = 10;
@@ -15,10 +16,7 @@ interface Props {
   exercisePerPage?: number;
 }
 
-const ExerciseList: React.FC<Props> = ({
-  exercises,
-  exercisePerPage = EXERCISE_PER_PAGE,
-}) => {
+const ExerciseList: React.FC<Props> = ({ exercises, exercisePerPage = EXERCISE_PER_PAGE }) => {
   // custom hook for paging
   const {
     array: currentPageExercises,
@@ -51,11 +49,7 @@ const ExerciseList: React.FC<Props> = ({
       </div>
 
       {exercises.length > exercisePerPage && (
-        <PageNavigation
-          currentPage={page}
-          totalPages={maxPage}
-          onChangePage={handlePage}
-        />
+        <PageNavigation currentPage={page} totalPages={maxPage} onChangePage={handlePage} />
       )}
     </section>
   );

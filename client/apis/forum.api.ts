@@ -1,11 +1,6 @@
 import { options } from './../components/ui/charts/TrendChart';
 import { ForumCategory } from '../models/enums';
-import {
-  IForumPostProps,
-  IForumPost,
-  IComment,
-  IForumPostPopulated,
-} from '../models/interfaces';
+import { IForumPostProps, IForumPost, IComment, IForumPostPopulated } from '../models/interfaces';
 import {
   deleteRequest,
   getRequest,
@@ -32,10 +27,7 @@ export function getForumCategoryPosts(category: ForumCategory, options?: ReqOpti
   return getRequest<IForumPost[]>({ url: `${API_DOMAIN}/category/${category}`, options });
 }
 
-export async function getForumCategoryPostsData(
-  category: ForumCategory,
-  options?: ReqOptions,
-) {
+export async function getForumCategoryPostsData(category: ForumCategory, options?: ReqOptions) {
   return getForumCategoryPosts(category, options).then(({ data }) => data);
 }
 

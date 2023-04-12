@@ -1,5 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
+
 import { getTopicRankingData } from '@/apis/ranking.api';
 import RankingMain from '@/components/ranking/RankingMain';
 import { AppProperty } from '@/constants';

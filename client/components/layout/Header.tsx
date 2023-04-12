@@ -1,16 +1,16 @@
 'use client';
 import { useState } from 'react';
-import { FiLogIn } from 'react-icons/fi';
 import { FaUserPlus } from 'react-icons/fa';
-import { usePathname } from 'next/navigation';
+import { FiLogIn } from 'react-icons/fi';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { Logo } from '../../assets';
 import { ForumCategoryList, ProfileSectionList } from '../../models/enums';
+import { useUserContext } from '../../store/context/UserContext';
 import { ForumIcons } from '../../utils/forum.util';
 import { getForumCategoryLink } from '../../utils/links.util';
 import { ProfileLinkMap } from '../../utils/profile.util';
-import { useUserContext } from '../../store/context/UserContext';
 import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
 import ActiveLink from '../ui/links/ActiveLink';
 import ProfileMenuHeader from '../ui/user/profile-nav/ProfileMenuHeader';
@@ -40,9 +40,7 @@ const Header = () => {
   const [showMobileDropdownMenu, setShowMobileDropdownMenu] = useState(false);
 
   // Get different styles for header by different pages.
-  const className = `${getHeaderPositionClass(pathname)} ${getHeaderPaddingClass(
-    pathname,
-  )}`;
+  const className = `${getHeaderPositionClass(pathname)} ${getHeaderPaddingClass(pathname)}`;
 
   return (
     <header
@@ -51,10 +49,7 @@ const Header = () => {
     >
       <div className="logo flex items-center flex-shrink-0 text-main-400">
         {/* Hamburger menu icon that toggles the mobile dropdown menu visibility. Only shown on the mobile screen size */}
-        <HamburgerMenu
-          visible={showMobileDropdownMenu}
-          setVisible={setShowMobileDropdownMenu}
-        />
+        <HamburgerMenu visible={showMobileDropdownMenu} setVisible={setShowMobileDropdownMenu} />
         <Link
           href="/"
           onClick={() => setShowMobileDropdownMenu(false)}
@@ -78,9 +73,7 @@ const Header = () => {
 
       {/* User profile info and navigation on the right side of the header. */}
       {isLoggedIn && <UserProfileNav />}
-      {!isLoggedIn && (
-        <LoginButton className="text-sm sm:text-base !px-2 !py-[0.3rem] lg:hidden" />
-      )}
+      {!isLoggedIn && <LoginButton className="text-sm sm:text-base !px-2 !py-[0.3rem] lg:hidden" />}
     </header>
   );
 };
@@ -147,9 +140,7 @@ const NavList: React.FC<{ className?: string }> = ({ className = '' }) => {
   const isLoggedIn = !!user;
 
   return (
-    <nav
-      className={`flex flex-col lg:flex-row flex-grow lg:items-center md:w-auto ${className}`}
-    >
+    <nav className={`flex flex-col lg:flex-row flex-grow lg:items-center md:w-auto ${className}`}>
       <div className="text-md flex-col lg:flex-row lg:text-center md:flex-grow">
         <ActiveLink
           href="/browse"
@@ -235,9 +226,7 @@ const ForumNavItem: React.FC = () => {
               href={getForumCategoryLink(forum)}
               className="flex-start gap-2 px-3 py-2 capitalize text-gray-500 hover:text-main-500 bg-gray-50 hover:bg-gray-100 border-b-2 border-gray-100"
             >
-              <span className="text-main-600/80 hover:text-main-500">
-                {ForumIcons[forum]}
-              </span>{' '}
+              <span className="text-main-600/80 hover:text-main-500">{ForumIcons[forum]}</span>{' '}
               {forum}
             </Link>
           ))}

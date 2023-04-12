@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { ProgrammingTopicList } from '../../../../models/enums';
 import { IExerciseCard } from '../../../../models/interfaces';
 import { exerciseBrowsingActions } from '../../../../store/redux/browsing-slice';
@@ -29,8 +30,7 @@ const TagsFilter: React.FC<{ exercises: IExerciseCard[] }> = ({ exercises }) => 
           const activeClass = tags.includes(tag) ? '!bg-gray-600/90 !text-gray-50' : '';
 
           // If the tag is too long, give it a bit smaller font size.
-          const textSizeClass =
-            tag.length > 15 ? 'sm:text-[0.835rem]' : 'sm:text-[0.9rem]';
+          const textSizeClass = tag.length > 15 ? 'sm:text-[0.835rem]' : 'sm:text-[0.9rem]';
 
           return (
             <li

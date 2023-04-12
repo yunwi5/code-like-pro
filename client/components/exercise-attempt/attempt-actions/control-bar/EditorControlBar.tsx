@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
+import useExerciseMutation from '../../../../hooks/exercise/exercise/useExerciseMutation';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../../store/context/UserContext';
 import { getLanguageIcon, prettierLanguageName } from '../../../../utils/language.util';
+
 import DifficultyRatingButton from './DifficultyRatingButton';
-import ExerciseSettings from './ExerciseSettings';
 import ExerciseFavorite from './ExerciseFavorite';
 import ExerciseReportButton from './ExerciseReportButton';
-import useExerciseMutation from '../../../../hooks/exercise/exercise/useExerciseMutation';
+import ExerciseSettings from './ExerciseSettings';
 
 // Control header that let users set language settings, favorite and report functionalities.
 const EditorControlBar: React.FC = () => {

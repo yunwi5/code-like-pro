@@ -1,9 +1,5 @@
 import { DateTime } from 'luxon';
-import {
-  IChartData,
-  IExerciseWithId,
-  IUserSubmissionPopulated,
-} from '../../models/interfaces';
+import { IChartData, IExerciseWithId, IUserSubmissionPopulated } from '../../models/interfaces';
 
 // Exercise attempt trend DAILY
 export function getDailyExerciseAttemptTrendData(
@@ -52,8 +48,7 @@ export function getWeeklyExerciseAttemptTrendData(
   submissions: IUserSubmissionPopulated[],
   numPeriods: number,
 ) {
-  const [recentWeeksList, recentWeeksChartDataList] =
-    getRecentWeeksDataAsList(numPeriods);
+  const [recentWeeksList, recentWeeksChartDataList] = getRecentWeeksDataAsList(numPeriods);
 
   submissions.forEach((sub, idx) => {
     const submissionWeekDt = DateTime.fromISO(sub.postedAt);
@@ -75,8 +70,7 @@ export function getWeeklyExerciseCreationTrendData(
   creations: IExerciseWithId[],
   numPeriods: number,
 ) {
-  const [recentWeeksList, recentWeeksChartDataList] =
-    getRecentWeeksDataAsList(numPeriods);
+  const [recentWeeksList, recentWeeksChartDataList] = getRecentWeeksDataAsList(numPeriods);
 
   creations.forEach((creation) => {
     const creationWeekDt = DateTime.fromISO(creation.createdAt).startOf('week');
@@ -98,8 +92,7 @@ export function getMontlyExerciseCreationTrendData(
   creations: IExerciseWithId[],
   numPeriods: number,
 ) {
-  const [recentMonthsList, recentMonthsChartDataList] =
-    getRecentMonthsDataAsList(numPeriods);
+  const [recentMonthsList, recentMonthsChartDataList] = getRecentMonthsDataAsList(numPeriods);
 
   creations.forEach((creation) => {
     const createdAt = DateTime.fromISO(creation.createdAt);
@@ -121,8 +114,7 @@ export function getMonthlyExerciseAttemptTrendData(
   submissions: IUserSubmissionPopulated[],
   numPeriods: number,
 ) {
-  const [recentMonthsList, recentMonthsChartDataList] =
-    getRecentMonthsDataAsList(numPeriods);
+  const [recentMonthsList, recentMonthsChartDataList] = getRecentMonthsDataAsList(numPeriods);
 
   submissions.forEach((sub) => {
     const submissionDt = DateTime.fromISO(sub.postedAt);
@@ -144,8 +136,7 @@ export function getYearlyExerciseCreationTrendData(
   creations: IExerciseWithId[],
   numPeriods: number,
 ) {
-  const [recentYearsList, recentYearsChartDataList] =
-    getRecentYearsDataAsList(numPeriods);
+  const [recentYearsList, recentYearsChartDataList] = getRecentYearsDataAsList(numPeriods);
 
   creations.forEach((creation) => {
     const createdDt = DateTime.fromISO(creation.createdAt);
@@ -167,8 +158,7 @@ export function getYearlyExerciseAttemptTrendData(
   submissions: IUserSubmissionPopulated[],
   numPeriods: number,
 ) {
-  const [recentYearsList, recentYearsChartDataList] =
-    getRecentYearsDataAsList(numPeriods);
+  const [recentYearsList, recentYearsChartDataList] = getRecentYearsDataAsList(numPeriods);
 
   submissions.forEach((sub) => {
     const submissionDt = DateTime.fromISO(sub.postedAt);

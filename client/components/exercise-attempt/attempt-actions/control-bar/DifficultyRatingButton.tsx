@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { BsBarChartFill } from 'react-icons/bs';
+
 import HoveringLabel from '../../../ui/tooltip/HoveringLabel';
 import DifficultyModal from '../../modals/difficulty-modal/DifficultyModal';
 

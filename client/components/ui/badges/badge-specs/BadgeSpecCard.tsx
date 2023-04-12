@@ -1,8 +1,10 @@
 import React from 'react';
+import Image from 'next/image';
+
 import { BadgeRarity } from '../../../../models/enums';
 import { BadgeImageMap, BadgeRarityFullNames } from '../../../../utils/badge.util';
+
 import './BadgeSpecCard.scss';
-import Image from 'next/image';
 
 interface Props {
   rarity: BadgeRarity;

@@ -2,6 +2,7 @@
 import { GiProgression } from 'react-icons/gi';
 
 import { AnalysisContextProvider } from '../../../store/context/AnalysisContext';
+
 import DifficultyAnalysis from './categorical-analysis/DifficultyAnalysis';
 import LanguageAnalysis from './categorical-analysis/LanguageAnalysis';
 import SubmissionStatusAnalysis from './categorical-analysis/SubmissionStatusAnalysis';

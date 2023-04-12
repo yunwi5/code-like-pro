@@ -1,5 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
+
 import LoginForm from '@/components/auth/LoginForm';
 import { AppProperty } from '@/constants';
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { AiFillWechat } from 'react-icons/ai';
+import { BiCodeAlt } from 'react-icons/bi';
 import { FaLaptopCode } from 'react-icons/fa';
 import { TbBulb } from 'react-icons/tb';
-import { BiCodeAlt } from 'react-icons/bi';
-import RoundButton from '../ui/buttons/RoundButton';
+
 import { ShowCaseSection, ShowCaseSectionList } from '../../models/enums';
+import RoundButton from '../ui/buttons/RoundButton';
 
 interface Props {
   activeSection: ShowCaseSection;
@@ -13,11 +14,7 @@ interface Props {
 }
 
 /* Showcase nav layout break point is md - 768px. */
-const ShowcaseNav: React.FC<Props> = ({
-  activeSection,
-  setActiveSection,
-  setShowPostModal,
-}) => {
+const ShowcaseNav: React.FC<Props> = ({ activeSection, setActiveSection, setShowPostModal }) => {
   return (
     <nav className="flex flex-col md:flex-row justify-between items-center gap-x-2 gap-y-4">
       {/* Showcase section navigation as a list */}

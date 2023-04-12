@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
-import { BiCategoryAlt, BiCommentDots } from 'react-icons/bi';
+import { BiCategoryAlt } from 'react-icons/bi';
 import { BsClock } from 'react-icons/bs';
 import { FaUserEdit } from 'react-icons/fa';
 
@@ -22,9 +22,7 @@ const ForumPostSpec: React.FC<Props> = ({ post, pictureUrl, className }) => {
   const { upVoteCount, downVoteCount } = getVoteCounts(post.votes || []);
 
   return (
-    <ul
-      className={`flex flex-wrap gap-x-2 md:gap-x-4 gap-y-2 text-sm md:text-base ${className}`}
-    >
+    <ul className={`flex flex-wrap gap-x-2 md:gap-x-4 gap-y-2 text-sm md:text-base ${className}`}>
       <li className={spectItemClass}>
         {pictureUrl ? (
           <ProfileView user={post.author} size={'1.65rem'} />

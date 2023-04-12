@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image, { StaticImageData } from 'next/image';
+
 import useWindowSize from '../../../hooks/ui/useWindowSize';
 
 const imageClass =
@@ -16,14 +17,7 @@ interface ImageProps {
 }
 
 // Custom image component for home page image animation
-export const ImageBlock = ({
-  onClick,
-  className,
-  variants,
-  delay,
-  src,
-  alt,
-}: ImageProps) => {
+export const ImageBlock = ({ onClick, className, variants, delay, src, alt }: ImageProps) => {
   return (
     <motion.div
       onClick={onClick}

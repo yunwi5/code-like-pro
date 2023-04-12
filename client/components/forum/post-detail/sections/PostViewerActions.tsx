@@ -1,15 +1,11 @@
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import {
-  AiFillDislike,
-  AiFillLike,
-  AiOutlineDislike,
-  AiOutlineLike,
-} from 'react-icons/ai';
+import { AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
+import { useRouter } from 'next/navigation';
 
 import useForumPostMutation from '../../../../hooks/forum/forum-post/useForumPostMutation';
 import { IForumPostPopulated, IVote } from '../../../../models/interfaces';
 import { useUserContext } from '../../../../store/context/UserContext';
+
 import PostShare from './PostShare';
 
 const PostViewerActions: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {

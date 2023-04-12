@@ -5,6 +5,7 @@ import {
   MdThumbDownAlt,
   MdThumbUpAlt,
 } from 'react-icons/md';
+
 import { IVote } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 

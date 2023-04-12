@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useTopicParam } from '@/hooks/utils/useTopicParam';
 
 // If the label is too long, reduce its font size depending on its length.

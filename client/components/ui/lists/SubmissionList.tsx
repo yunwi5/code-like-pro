@@ -1,11 +1,12 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+
 import usePagination from '../../../hooks/utils/usePagination';
 import { IUserSubmissionPopulated } from '../../../models/interfaces';
 import { listItemAnimations } from '../../../utils/animations.util';
 import SubmissionCard from '../cards/SubmissionCard';
-import PageNavigation from '../PageNavigation';
 import EmptyMessage from '../labels/EmptyMessage';
+import PageNavigation from '../PageNavigation';
 
 interface Props {
   submissions: IUserSubmissionPopulated[];
@@ -42,10 +43,7 @@ const SubmissionList: React.FC<Props> = ({ submissions }) => {
               exit={{ opacity: 0, transition: { duration: 0.3 } }}
               transition={{ duration: 0.3, delay: idx * 0.07 }}
             >
-              <SubmissionCard
-                submission={sub}
-                className={idx % 2 === 1 ? 'bg-gray-100' : ''}
-              />
+              <SubmissionCard submission={sub} className={idx % 2 === 1 ? 'bg-gray-100' : ''} />
             </motion.div>
           ))}
         </AnimatePresence>

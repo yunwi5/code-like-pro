@@ -1,8 +1,11 @@
 import React from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
+
 import Button from '../buttons/Button';
+
 import CustomSelect from './CustomSelect';
+
 import styles from './Searchbar.module.scss';
 
 interface Props {

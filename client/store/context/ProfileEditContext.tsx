@@ -122,7 +122,5 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
     cancelEdit: handleCancelEdit,
   };
 
-  return (
-    <ProfileEditContext.Provider value={value}>{children}</ProfileEditContext.Provider>
-  );
+  return <ProfileEditContext.Provider value={value}>{children}</ProfileEditContext.Provider>;
 };

@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+
 import { ITestCase, ITestCaseProps } from '../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { getEmptyCustomTestCase } from '../../../utils/exercise-utils/testcase';
@@ -29,9 +30,7 @@ function useCustomTests() {
       const testToDelete = customTests[targetIndex];
       // Delete the corresponding output ONLY IF the test has its output (otherwise bug)
       if (testToDelete.hasOutput)
-        setTestCaseOutputs((prevOutputs) =>
-          prevOutputs.filter((_, idx) => idx !== targetIndex),
-        );
+        setTestCaseOutputs((prevOutputs) => prevOutputs.filter((_, idx) => idx !== targetIndex));
     },
     [customTests, setCustomTests, setTestCaseOutputs],
   );

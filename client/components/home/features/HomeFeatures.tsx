@@ -1,17 +1,19 @@
 import React from 'react';
 import { AnimateSharedLayout, motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 import { AppImages } from '../../../assets/app-images';
+import { ProfileSection } from '../../../models/enums';
 import {
   getExerciseCreationPageLink,
   getProfileLink,
   getShowcaseInvitesPageLink,
 } from '../../../utils/links.util';
+
 import FeaturesBanner from './FeaturesBanner';
 import ImageBlock from './ImageBlock';
+
 import './ImageBlock.scss';
-import { ProfileSection } from '../../../models/enums';
-import { useRouter } from 'next/navigation';
 
 // Image container animation for children staggering
 const container = {

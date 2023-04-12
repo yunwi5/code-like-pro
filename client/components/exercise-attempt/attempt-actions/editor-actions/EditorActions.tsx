@@ -1,15 +1,14 @@
-import PropagateLoader from 'react-spinners/PropagateLoader';
 import { BsListUl } from 'react-icons/bs';
 import { RiSlideshow3Line } from 'react-icons/ri';
+import PropagateLoader from 'react-spinners/PropagateLoader';
+import Link from 'next/link';
 
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { getShowcasePageLink } from '../../../../utils/links.util';
 import Button from '../../../ui/buttons/Button';
-import Link from 'next/link';
 
 const EditorActions = () => {
-  const { runCode, isLoading, submitCode, userSubmission, exercise } =
-    useExerciseAttemptCtx();
+  const { runCode, isLoading, submitCode, userSubmission, exercise } = useExerciseAttemptCtx();
 
   const userGotCorrect = !!userSubmission?.correct;
 

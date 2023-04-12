@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ForumPostsControl from './sections/ForumPostsControl';
 import ForumPostsList from './sections/ForumPostsList';
 

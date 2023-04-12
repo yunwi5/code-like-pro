@@ -41,14 +41,9 @@ export const ShowcaseContextProvider: React.FC<Props> = ({
   userSubmission = null,
   children,
 }) => {
-  const { comments, isLoading: commentsLoading } = useExerciseCommentsQuery(
-    exercise._id,
-    800,
-  );
+  const { comments, isLoading: commentsLoading } = useExerciseCommentsQuery(exercise._id, 800);
 
-  const { showcases, isLoading: showcasesLoading } = useExerciseShowcaseQuery(
-    exercise._id,
-  );
+  const { showcases, isLoading: showcasesLoading } = useExerciseShowcaseQuery(exercise._id);
 
   const value = {
     exercise,

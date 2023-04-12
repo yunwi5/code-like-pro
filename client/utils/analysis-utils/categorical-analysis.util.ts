@@ -1,8 +1,4 @@
-import {
-  DifficultyList,
-  ProgrammingTopicList,
-  SubmissionStatus,
-} from '../../models/enums';
+import { DifficultyList, ProgrammingTopicList, SubmissionStatus } from '../../models/enums';
 import { IChartData, IUserSubmissionPopulated } from '../../models/interfaces';
 import {
   DifficultyColorMap,
@@ -11,9 +7,7 @@ import {
   StatusColorMap,
 } from '../colors.util';
 
-export function getLanguageChartDataArray(
-  submissions: IUserSubmissionPopulated[],
-): IChartData[] {
+export function getLanguageChartDataArray(submissions: IUserSubmissionPopulated[]): IChartData[] {
   const languageFreqMap: { [key: string]: number } = {};
   submissions.forEach((submission) => {
     const lang = submission.exercise.language;
@@ -26,9 +20,7 @@ export function getLanguageChartDataArray(
 export function getSubmissionStatusDataArray(submissions: IUserSubmissionPopulated[]) {
   const statusFreqMap: { [key: string]: number } = {};
   submissions.forEach((submission) => {
-    const status = submission.correct
-      ? SubmissionStatus.CORRECT
-      : SubmissionStatus.INCORRECT;
+    const status = submission.correct ? SubmissionStatus.CORRECT : SubmissionStatus.INCORRECT;
     if (status in statusFreqMap) statusFreqMap[status]++;
     else statusFreqMap[status] = 1;
   });
@@ -38,9 +30,7 @@ export function getSubmissionStatusDataArray(submissions: IUserSubmissionPopulat
   ]);
 }
 
-export function getDifficultyChartDataArray(
-  submissions: IUserSubmissionPopulated[],
-): IChartData[] {
+export function getDifficultyChartDataArray(submissions: IUserSubmissionPopulated[]): IChartData[] {
   const difficultyFreqMap: { [key: string]: number } = {};
   submissions.forEach((submission) => {
     const diff = submission.exercise.difficulty;
@@ -48,11 +38,7 @@ export function getDifficultyChartDataArray(
     else difficultyFreqMap[diff] = 1;
   });
 
-  return createChartDataArrayWithFixedLabels(
-    difficultyFreqMap,
-    DifficultyColorMap,
-    DifficultyList,
-  );
+  return createChartDataArrayWithFixedLabels(difficultyFreqMap, DifficultyColorMap, DifficultyList);
 }
 
 export function getTopicChartDataArray(submissions: IUserSubmissionPopulated[]) {

@@ -1,12 +1,13 @@
 'use client';
-import { AppProperty } from '@/constants';
-import { UserContextProvider } from '@/store/context/UserContext';
-import store from '@/store/redux/store';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { AppProperty } from '@/constants';
+import { UserContextProvider } from '@/store/context/UserContext';
+import store from '@/store/redux/store';
 
 const queryClient = new QueryClient();
 

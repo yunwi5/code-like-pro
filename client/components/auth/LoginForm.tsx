@@ -1,13 +1,11 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification.util';
-import {
-  invalidateEmail,
-  invalidatePassword,
-} from '../../utils/string-utils/validation.util';
+import { invalidateEmail, invalidatePassword } from '../../utils/string-utils/validation.util';
+
 import AuthCard from './AuthCard';
 
 type LoginState = { email: string; password: string };
@@ -22,8 +20,7 @@ const LoginForm = () => {
 
   // Handle form validation
   const doValidation = (state: LoginState, key: string) => {
-    if (key === 'email' || key === 'all')
-      errorState.email = invalidateEmail(state.email) || '';
+    if (key === 'email' || key === 'all') errorState.email = invalidateEmail(state.email) || '';
     if (key === 'password' || key === 'all')
       errorState.password = invalidatePassword(state.password) || '';
     setErrorState({ ...errorState, overall: '' });

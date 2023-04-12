@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
+
 import useLocalStorage from '../../../../hooks/utils/useLocalStorage';
 import { Language } from '../../../../models/enums';
 import { IExerciseWithId } from '../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import CodeEditor from '../../../ui/editor/CodeEditor';
 
-function getIndexedStartingTemplate(
-  exercise: IExerciseWithId | null,
-  solutionIndex: number,
-) {
+function getIndexedStartingTemplate(exercise: IExerciseWithId | null, solutionIndex: number) {
   let solution = `${exercise?.language === Language.PYTHON ? '#' : '//'} Solution ${
     solutionIndex + 1
   }\n`;

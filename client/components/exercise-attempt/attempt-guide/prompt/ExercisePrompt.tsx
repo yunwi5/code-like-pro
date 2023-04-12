@@ -1,15 +1,16 @@
-import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import { BsBarChartFill } from 'react-icons/bs';
+import dynamic from 'next/dynamic';
+
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import TagList from '../../../ui/lists/TagList';
 import DifficultyModal from '../../modals/difficulty-modal/DifficultyModal';
+
 import ExercisePromptHeader from './ExercisePromptHeader';
 
-const TextEditor = dynamic(
-  () => import('@/components/ui/editor/text-editor/TextEditor'),
-  { ssr: false },
-);
+const TextEditor = dynamic(() => import('@/components/ui/editor/text-editor/TextEditor'), {
+  ssr: false,
+});
 
 const ExercisePrompt: React.FC = () => {
   const { exercise } = useExerciseAttemptCtx();
@@ -53,10 +54,7 @@ const DifficultyPrompt: React.FC = () => {
         </button>
       </div>
 
-      <DifficultyModal
-        open={showDifficultyModal}
-        onClose={() => setShowDifficultyModal(false)}
-      />
+      <DifficultyModal open={showDifficultyModal} onClose={() => setShowDifficultyModal(false)} />
     </>
   );
 };

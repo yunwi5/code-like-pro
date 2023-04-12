@@ -5,8 +5,8 @@ import useExerciseSearch from '../../../hooks/useExerciseSearch';
 import { SearchKey, SearchKeyList } from '../../../models/enums';
 import { useUserContext } from '../../../store/context/UserContext';
 import { mapExercisesToExerciseCards } from '../../../utils/exercise-utils/exercise';
-import ExerciseList from '../../ui/lists/ExerciseList';
 import Searchbar from '../../ui/inputs/Searchbar';
+import ExerciseList from '../../ui/lists/ExerciseList';
 import ProfileSectionContainer from '../containers/ProfileSectionContainer';
 import ProfileLoader from '../ProfileLoader';
 

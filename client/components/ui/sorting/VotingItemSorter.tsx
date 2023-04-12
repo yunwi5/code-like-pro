@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { BsArrowLeft, BsSortUpAlt } from 'react-icons/bs';
 
 import {
+  SortingDirection,
   VotingItemSortingKey,
   VotingItemSortingKeyList,
-  SortingDirection,
 } from '../../../models/enums';
 import Sortingbar from '../inputs/Sortingbar';
 
@@ -18,11 +18,7 @@ interface Props {
 
 // Sorting helpter for voting item like comment and showcase items.
 // Can help items to be sorted by votes and date & time.
-const VotingItemSorter: React.FC<Props> = ({
-  sortingState,
-  setSortingState,
-  className = '',
-}) => {
+const VotingItemSorter: React.FC<Props> = ({ sortingState, setSortingState, className = '' }) => {
   const [showSorting, setShowSorting] = useState(false);
 
   const handleSortingKey = (key: VotingItemSortingKey) => {

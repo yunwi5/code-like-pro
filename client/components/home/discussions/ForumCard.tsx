@@ -1,10 +1,11 @@
-import Link from 'next/link';
 import React from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
+import Link from 'next/link';
 
 import { ForumCategory } from '../../../models/enums';
 import { ForumDescriptions, ForumIcons } from '../../../utils/forum.util';
 import { getForumCategoryLink } from '../../../utils/links.util';
+
 import styles from './HomeDiscussions.module.scss';
 
 const ForumCard: React.FC<{ forum: ForumCategory }> = ({ forum }) => (
@@ -20,10 +21,7 @@ const ForumCard: React.FC<{ forum: ForumCategory }> = ({ forum }) => (
     >
       <BsCheckCircleFill className="text-gray-50 text-2xl" />
       <p className="text-center text-[0.95rem]">{ForumDescriptions[forum]}</p>
-      <Link
-        href={getForumCategoryLink(forum)}
-        className="text-blue-300 hover:text-blue-200"
-      >
+      <Link href={getForumCategoryLink(forum)} className="text-blue-300 hover:text-blue-200">
         Explore
       </Link>
     </div>

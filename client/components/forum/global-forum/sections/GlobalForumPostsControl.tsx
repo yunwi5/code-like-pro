@@ -1,7 +1,7 @@
 'use client';
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { IoMdCreate } from 'react-icons/io';
+import Link from 'next/link';
 
 import {
   ForumPostSortingKey,
@@ -47,11 +47,9 @@ const GlobalForumPostsControl: React.FC = () => {
   };
 
   const isSortedByTitleAsc =
-    sorting.key === ForumPostSortingKey.TITLE &&
-    sorting.direction === SortingDirection.ASCENDING;
+    sorting.key === ForumPostSortingKey.TITLE && sorting.direction === SortingDirection.ASCENDING;
   const isSortedByTitleDesc =
-    sorting.key === ForumPostSortingKey.TITLE &&
-    sorting.direction === SortingDirection.DESCENDING;
+    sorting.key === ForumPostSortingKey.TITLE && sorting.direction === SortingDirection.DESCENDING;
   const isSortedByNewest = sorting.key === ForumPostSortingKey.DATETIME;
   const isSortedByLikes = sorting.key === ForumPostSortingKey.LIKES;
 
@@ -59,17 +57,13 @@ const GlobalForumPostsControl: React.FC = () => {
     <section className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-y-3">
       <div className="self-stretch flex gap-3">
         <button
-          onClick={() =>
-            handleSorting(ForumPostSortingKey.TITLE, SortingDirection.ASCENDING)
-          }
+          onClick={() => handleSorting(ForumPostSortingKey.TITLE, SortingDirection.ASCENDING)}
           className={`${isSortedByTitleAsc ? 'text-main-500' : ''} hover:text-main-400`}
         >
           Title A-Z
         </button>
         <button
-          onClick={() =>
-            handleSorting(ForumPostSortingKey.TITLE, SortingDirection.DESCENDING)
-          }
+          onClick={() => handleSorting(ForumPostSortingKey.TITLE, SortingDirection.DESCENDING)}
           className={`hidden lg:inline-block ${
             isSortedByTitleDesc ? 'text-main-500' : ''
           } hover:text-main-400`}

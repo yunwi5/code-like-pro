@@ -3,12 +3,13 @@ import Editor from '@monaco-editor/react';
 import monaco from 'monaco-editor';
 
 import { Language } from '../../../models/enums';
-import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
 import { prettierLanguageName } from '../../../utils/language.util';
+import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
+
 import styles from './CodeEditor.module.scss';
 
 type Monaco = typeof monaco;
-type CodeEditor = monaco.editor.IStandaloneCodeEditor;
+type MonacoCodeEditor = monaco.editor.IStandaloneCodeEditor;
 
 interface Props {
   onChange?: (value: string) => void;
@@ -34,10 +35,10 @@ const CodeEditor: React.FC<Props> = ({
   className = '',
   editorClassName = '',
 }) => {
-  const editorRef = useRef<CodeEditor>(null);
+  const editorRef = useRef<MonacoCodeEditor>(null);
   const [isShrinked, setIsShrinked] = useState(false);
 
-  const handleMount = (editor: CodeEditor, monaco: Monaco) => {
+  const handleMount = (editor: MonacoCodeEditor, monaco: Monaco) => {
     (editorRef as any).current = editor;
   };
 

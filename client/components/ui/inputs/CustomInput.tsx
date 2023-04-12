@@ -23,9 +23,7 @@ const CustomInput: React.FC<Props> = (props) => {
         }`}
         placeholder={placeholder}
         value={value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          onChange && onChange(e.target.value)
-        }
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(e.target.value)}
       />
       {error && <p className="text-rose-500">{error}</p>}
     </div>

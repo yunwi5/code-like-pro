@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
+
 import { IChartData } from '../../../../models/interfaces';
 import { useAnalysisContext } from '../../../../store/context/AnalysisContext';
 import CategoricalChart from '../../../ui/charts/CategoricalChart';
+
 import ProportionMessages from './ProportionMessages';
 
 const DifficultyAnalysis: React.FC<{ className?: string }> = ({ className = '' }) => {

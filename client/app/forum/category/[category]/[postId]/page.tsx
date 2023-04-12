@@ -1,5 +1,6 @@
 import React from 'react';
 import { notFound, redirect } from 'next/navigation';
+
 import {
   getForumCategoryPostsData,
   getForumPostByIdData,
@@ -7,11 +8,11 @@ import {
 } from '@/apis/forum.api';
 import CategoryForumPost from '@/components/forum/category-forum/CategoryForumPost';
 import ForumPostsContainer from '@/components/forum/ForumPostsContainer';
-import { getForumCategory } from '@/models/enums';
-import { deslugify } from '@/utils/string-utils/url.util';
-import { AppProperty } from '@/constants';
 import PostDetail from '@/components/forum/post-detail/PostDetail';
+import { AppProperty } from '@/constants';
+import { getForumCategory } from '@/models/enums';
 import { getForumLink } from '@/utils/links.util';
+import { deslugify } from '@/utils/string-utils/url.util';
 
 type ForumCategoryPageProps = {
   params: { category: string; postId: string };

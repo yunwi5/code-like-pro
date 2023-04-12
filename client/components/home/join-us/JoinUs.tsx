@@ -1,11 +1,12 @@
 import React from 'react';
 import { BsArrowRight } from 'react-icons/bs';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { HomeImages } from '../../../assets/home-images';
 import { AppProperty } from '../../../constants';
 import Button from '../../ui/buttons/Button';
+
 import JoinBenefits from './JoinBenefits';
 
 // Layout breakpoint is lg - 1024px
@@ -52,9 +53,7 @@ const JoinUs: React.FC = () => {
 };
 
 const JoinUsImage: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <div
-    className={`group relative flex flex-col justify-center items-center pb-2 ${className}`}
-  >
+  <div className={`group relative flex flex-col justify-center items-center pb-2 ${className}`}>
     <Image src={HomeImages.JoinUs} alt="Join Us" className="w-full object-cover" />
     <p className="group mt-2 px-3 py-1 absolute top-[95%] sm:top-[97%] left-[50%] translate-x-[-50%] -translate-y-[15rem] group-hover:translate-y-0 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-all">
       Image by{' '}
@@ -62,6 +61,7 @@ const JoinUsImage: React.FC<{ className?: string }> = ({ className = '' }) => (
         target="_blank"
         className="group-hover:text-main-500"
         href="https://www.freepik.com/free-vector/organic-flat-join-us-concept_13818812.htm#query=hiring%20recruitment%20join%20us&position=2&from_view=keyword"
+        rel="noreferrer"
       >
         Freepik
       </a>

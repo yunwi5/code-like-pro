@@ -1,12 +1,13 @@
-import Link from 'next/link';
 import { FC, useState } from 'react';
 import { FaLaptopCode } from 'react-icons/fa';
 import { GoGitMerge } from 'react-icons/go';
 import { MdCelebration } from 'react-icons/md';
+import Link from 'next/link';
 
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import { getShowcasePageLink } from '../../../utils/links.util';
 import AnimationModal from '../../ui/modals/AnimationModal';
+
 import TestCasesMergeModal from './merge-modal/TestCasesMergeModal';
 
 interface Props {
@@ -47,9 +48,7 @@ const AttemptSuccessModal: FC<Props> = ({ open, onClose }) => {
               Merge your custom test cases
             </h4>
             <ul className="mt-1 ml-10 list-disc">
-              <li>
-                You can merge your own tests you created while attempting the challenge.
-              </li>
+              <li>You can merge your own tests you created while attempting the challenge.</li>
             </ul>
             <button onClick={() => setShowMergeModal(true)} className={styles.btn}>
               Merge Custom Tests
@@ -67,12 +66,12 @@ const AttemptSuccessModal: FC<Props> = ({ open, onClose }) => {
                 <span className="text-main-500 capitalize">{exercise?.name}</span>.
               </li>
               <li>
-                You can view the model answer from the creator, showcase your own
-                solution, view the solutions from other users.
+                You can view the model answer from the creator, showcase your own solution, view the
+                solutions from other users.
               </li>
               <li>
-                You can upvote or downvote the solutions, and and also make comments on
-                the challenge.
+                You can upvote or downvote the solutions, and and also make comments on the
+                challenge.
               </li>
             </ul>
             <Link href={getShowcasePageLink(exerciseId)} className={styles.btn}>
@@ -92,10 +91,7 @@ const AttemptSuccessModal: FC<Props> = ({ open, onClose }) => {
         </div>
 
         {/* Modal for adding user tests to existing tests */}
-        <TestCasesMergeModal
-          open={showMergeModal}
-          onClose={() => setShowMergeModal(false)}
-        />
+        <TestCasesMergeModal open={showMergeModal} onClose={() => setShowMergeModal(false)} />
       </section>
     </AnimationModal>
   );

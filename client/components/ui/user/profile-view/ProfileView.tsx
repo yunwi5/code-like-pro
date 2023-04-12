@@ -1,9 +1,12 @@
 import React, { useMemo, useState } from 'react';
+
 import useRanking from '../../../../hooks/ranking/useRanking';
 import useUserInfoQuery from '../../../../hooks/user/useUserInfoQuery';
 import ProfilePicture from '../ProfilePicture';
+
 import UserDetailModal from './detail-modal/UserDetailModal';
 import ProfileHoverModal from './hover-modal/ProfileHoverModal';
+
 import styles from './ProfileView.module.scss';
 
 interface Props {
@@ -14,12 +17,7 @@ interface Props {
 }
 
 // Viewing other user's profile (including the user itself)
-const ProfileView: React.FC<Props> = ({
-  user,
-  size,
-  className = '',
-  hoverModalClassName,
-}) => {
+const ProfileView: React.FC<Props> = ({ user, size, className = '', hoverModalClassName }) => {
   const { user: userInfo } = useUserInfoQuery(user._id);
   const { getUserRank } = useRanking();
 

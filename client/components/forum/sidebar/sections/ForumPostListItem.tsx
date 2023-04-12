@@ -1,15 +1,15 @@
 import React from 'react';
+import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
 import { FaUserEdit } from 'react-icons/fa';
 import { MdDateRange } from 'react-icons/md';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 import { IForumPost } from '../../../../models/interfaces';
 import { getDateTimeFormat } from '../../../../utils/datetime.util';
 import { ForumPostTypeIcons } from '../../../../utils/forum.util';
 import { getForumPostLink } from '../../../../utils/links.util';
-import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
 import { getVoteCounts } from '../../../../utils/votes.util';
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
 
 const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
   const postId = useParams().postId;
@@ -24,11 +24,7 @@ const ForumPostListItem: React.FC<{ post: IForumPost }> = ({ post }) => {
     >
       <header className="flex gap-2">
         <span className="text-main-400/80">{ForumPostTypeIcons[post.postType]}</span>
-        <h3
-          className={
-            'text-gray-600 text-base lg:text-lg hover:text-main-500 cursor-pointer'
-          }
-        >
+        <h3 className={'text-gray-600 text-base lg:text-lg hover:text-main-500 cursor-pointer'}>
           <Link href={getForumPostLink(post)}>{post.name}</Link>
         </h3>
       </header>

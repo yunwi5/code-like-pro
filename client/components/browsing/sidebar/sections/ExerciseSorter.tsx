@@ -1,5 +1,6 @@
 import React from 'react';
-import { SortingDirectionList, ExerciseSortingKeyList } from '../../../../models/enums';
+
+import { ExerciseSortingKeyList, SortingDirectionList } from '../../../../models/enums';
 import { exerciseBrowsingActions } from '../../../../store/redux/browsing-slice';
 import { useAppDispatch, useAppSelector } from '../../../../store/redux/store';
 import CustomSelect from '../../../ui/inputs/CustomSelect';

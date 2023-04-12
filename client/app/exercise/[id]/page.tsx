@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
+
 import { getExerciseByIdData, getExercisesData } from '@/apis/exercise.api';
 import ExerciseAttemptMain from '@/components/exercise-attempt/ExerciseAttemptMain';
 import { AppProperty } from '@/constants';

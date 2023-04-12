@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
-import { IReadyStatus } from '../../../models/interfaces';
-import Button from '../../ui/buttons/Button';
-import RingLoader from 'react-spinners/RingLoader';
-import { getExerciseAttemptPageLink } from '../../../utils/links.util';
 import { FaRegLightbulb } from 'react-icons/fa';
-import CreationHelpModal from '../creation-help/CreationHelpModal';
+import RingLoader from 'react-spinners/RingLoader';
 import { useRouter } from 'next/navigation';
+
+import { IReadyStatus } from '../../../models/interfaces';
+import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
+import { getExerciseAttemptPageLink } from '../../../utils/links.util';
+import Button from '../../ui/buttons/Button';
+import CreationHelpModal from '../creation-help/CreationHelpModal';
 
 const btnClass = 'min-w-[10rem]';
 
@@ -35,9 +36,7 @@ const CreationActions: React.FC = () => {
             Run Code
           </Button>
           <Button
-            className={`${btnClass} ${
-              readyStatus?.status === 'error' ? 'btn-disabled' : ''
-            }`}
+            className={`${btnClass} ${readyStatus?.status === 'error' ? 'btn-disabled' : ''}`}
             onClick={saveExercise}
           >
             Save Challenge
