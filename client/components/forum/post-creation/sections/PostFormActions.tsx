@@ -1,7 +1,8 @@
 'use client';
 import React from 'react';
-import Link from 'next/link';
 import MoonLoader from 'react-spinners/MoonLoader';
+import Link from 'next/link';
+
 import { usePostCreationContext } from '../../../../store/context/PostCreationContext';
 import { getForumPostLink } from '../../../../utils/links.util';
 import Button from '../../../ui/buttons/Button';
@@ -17,11 +18,7 @@ const PostFormActions: React.FC = () => {
         </Button>
       )}
       {!isLoading && createdPost && (
-        <Link
-          href={getForumPostLink(createdPost)}
-          className="btn btn-empty"
-          onClick={savePost}
-        >
+        <Link href={getForumPostLink(createdPost)} className="btn btn-empty" onClick={savePost}>
           Published Post
         </Link>
       )}

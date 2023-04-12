@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { GoAlert } from 'react-icons/go';
 
-import IssueReportModal from '../../modals/IssueReportModal';
 import HoveringLabel from '../../../ui/tooltip/HoveringLabel';
+import IssueReportModal from '../../modals/IssueReportModal';
 
 const ExerciseReportButton = () => {
   const [showReportModal, setShowReportModal] = useState(false);
@@ -18,10 +18,7 @@ const ExerciseReportButton = () => {
           <GoAlert />
         </div>
       </HoveringLabel>
-      <IssueReportModal
-        visible={showReportModal}
-        onClose={() => setShowReportModal(false)}
-      />
+      <IssueReportModal visible={showReportModal} onClose={() => setShowReportModal(false)} />
     </>
   );
 };

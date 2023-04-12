@@ -1,14 +1,15 @@
 import React from 'react';
-import ClipLoader from 'react-spinners/ClipLoader';
-import Link from 'next/link';
 import { FaUserAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
+import ClipLoader from 'react-spinners/ClipLoader';
+import Link from 'next/link';
 
+import Button from '../ui/buttons/Button';
 import AuthInput from '../ui/inputs/AuthInput';
 import PasswordInput from '../ui/inputs/PasswordInput';
-import Button from '../ui/buttons/Button';
-import GoogleOAuth from './GoogleOAuth';
+
 import DoLoginOption from './DoLoginOption';
+import GoogleOAuth from './GoogleOAuth';
 
 type AuthFormState = {
   email: string;
@@ -37,16 +38,8 @@ type AuthCardProps = {
 };
 
 const AuthCard = (props: AuthCardProps) => {
-  const {
-    isLogin,
-    onSubmit,
-    onChange,
-    formState,
-    errorState,
-    isLoading,
-    doLogin,
-    setDoLogin,
-  } = props;
+  const { isLogin, onSubmit, onChange, formState, errorState, isLoading, doLogin, setDoLogin } =
+    props;
 
   const showDoLogin = doLogin != null && setDoLogin;
 
@@ -106,9 +99,7 @@ const AuthCard = (props: AuthCardProps) => {
 
           {showDoLogin && <DoLoginOption doLogin={doLogin} setDoLogin={setDoLogin} />}
 
-          {errorState?.overall && (
-            <p className="text-rose-500 text-left">{errorState.overall}</p>
-          )}
+          {errorState?.overall && <p className="text-rose-500 text-left">{errorState.overall}</p>}
 
           <Button type="submit" className={'min-w-[10rem] my-3 py-[0.7rem] w-full'}>
             {isLoading && <ClipLoader color="#fff" size={30} />}

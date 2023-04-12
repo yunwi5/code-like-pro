@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+
 import useForumPostCommentsMutation from '../../../../hooks/forum/forum-post/useForumPostCommentsMutation';
 import { SortingDirection, VotingItemSortingKey } from '../../../../models/enums';
 import { IComment, IForumPostPopulated } from '../../../../models/interfaces';
@@ -8,9 +9,7 @@ import CommentList from '../../../ui/lists/CommentList';
 import VotingItemSorter from '../../../ui/sorting/VotingItemSorter';
 
 const PostComments: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
-  const { postComment, updateComment, deleteComment } = useForumPostCommentsMutation(
-    post._id,
-  );
+  const { postComment, updateComment, deleteComment } = useForumPostCommentsMutation(post._id);
 
   const [sortingState, setSortingState] = useState({
     key: VotingItemSortingKey.DATETIME,

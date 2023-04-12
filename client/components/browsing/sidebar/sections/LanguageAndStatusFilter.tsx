@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+
 import { LanguageList, SubmissionStatusList } from '../../../../models/enums';
 import { exerciseBrowsingActions } from '../../../../store/redux/browsing-slice';
 import { useAppSelector } from '../../../../store/redux/store';
@@ -8,9 +9,7 @@ import CustomSelect from '../../../ui/inputs/CustomSelect';
 const languageOptions = ['All', ...LanguageList];
 
 const LanguageAndStatusFilter = () => {
-  const { language, submissionStatus } = useAppSelector(
-    (state) => state.browsing.filtering,
-  );
+  const { language, submissionStatus } = useAppSelector((state) => state.browsing.filtering);
   const dispatch = useDispatch();
 
   const handleLanguage = (lang: string) => {

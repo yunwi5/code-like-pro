@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BsQuestionCircle } from 'react-icons/bs';
+
 import BadgesInfoModal from './BadgesInfoModal';
 
 const BadgesInfo: React.FC<{ className?: string }> = ({ className = '' }) => {

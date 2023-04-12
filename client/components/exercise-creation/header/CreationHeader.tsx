@@ -1,5 +1,7 @@
 import { memo } from 'react';
+
 import { useExerciseCreationContext } from '@/store/context/ExerciseCreationContext';
+
 import BackButton from '../../ui/buttons/BackButton';
 
 const CreationHeader = () => {
@@ -25,9 +27,7 @@ const EditChallengeMessage = ({ exerciseName }: { exerciseName: string }) => (
     <span>
       Edit <span className="hidden md:inline">Your</span> Challenge
     </span>
-    <span className="lg:inline-block text-xl text-main-400 font-bold">
-      {exerciseName}
-    </span>
+    <span className="lg:inline-block text-xl text-main-400 font-bold">{exerciseName}</span>
   </span>
 );
 

@@ -10,17 +10,11 @@ function searchArrayByName<T extends { name: string }>(array: T[], text: string)
   return array.filter((ex) => searchIncludes(ex.name, text));
 }
 
-function searchArrayByAuthor<T extends { author?: { name: string } }>(
-  array: T[],
-  text: string,
-) {
+function searchArrayByAuthor<T extends { author?: { name: string } }>(array: T[], text: string) {
   return array.filter((ex) => searchIncludes(ex.author?.name || '', text));
 }
 
-export function searchExercises(
-  exercises: IExerciseCard[],
-  searchState: ISearchingState,
-) {
+export function searchExercises(exercises: IExerciseCard[], searchState: ISearchingState) {
   // Search by exercise name case-insensitive
   if (searchState.key === SearchKey.TITLE) {
     return searchArrayByName<IExerciseCard>(exercises, searchState.text);

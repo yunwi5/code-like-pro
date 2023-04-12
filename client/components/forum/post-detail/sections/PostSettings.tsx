@@ -1,5 +1,6 @@
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 import { deleteForumPost } from '../../../../apis/forum.api';
 import { IForumPostPopulated } from '../../../../models/interfaces';
 import { getForumPostEditLink } from '../../../../utils/links.util';

@@ -6,11 +6,9 @@ function useForumPostQuery(postId: string, refetchInterval?: number) {
   const queryClient = useQueryClient();
 
   const postQueryKey = getForumPostKey(postId);
-  const { data: response, isLoading } = useQuery(
-    [postQueryKey],
-    () => getForumPostById(postId),
-    { refetchInterval },
-  );
+  const { data: response, isLoading } = useQuery([postQueryKey], () => getForumPostById(postId), {
+    refetchInterval,
+  });
 
   const { data: post, message: error } = response || {};
   if (error) console.log(error);

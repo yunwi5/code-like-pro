@@ -1,13 +1,10 @@
-import { motion } from 'framer-motion';
 import React, { useEffect, useMemo, useState } from 'react';
 import { BsFileEarmarkCode } from 'react-icons/bs';
 import { IoMdInformationCircle } from 'react-icons/io';
+import { motion } from 'framer-motion';
+
 import { runTestCases } from '../../../../apis/submission.api';
-import {
-  IExerciseWithId,
-  ITestOutput,
-  IUserSubmission,
-} from '../../../../models/interfaces';
+import { IExerciseWithId, ITestOutput, IUserSubmission } from '../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { listItemAnimations } from '../../../../utils/animations.util';
 import { getDateTimeFormat } from '../../../../utils/datetime.util';
@@ -78,15 +75,11 @@ const SubmissionCard: React.FC<{
       <header className="flex justify-between items-center">
         <time className="text-gray-500 font-semibold">
           Submitted At{' '}
-          <span className="font-bold">
-            {getDateTimeFormat(userSubmission.postedAt, false)}
-          </span>
+          <span className="font-bold">{getDateTimeFormat(userSubmission.postedAt, false)}</span>
         </time>
         <StatusLabel correct={userSubmission.correct} showIcon={false} />
       </header>
-      <div
-        className={`flex-start py-[0.3rem] -mb-1 text-gray-600 gap-1 rounded transition-all`}
-      >
+      <div className={`flex-start py-[0.3rem] -mb-1 text-gray-600 gap-1 rounded transition-all`}>
         {getLanguageIcon(exercise.language, {
           width: '25px',
           height: '25px',

@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+
 import usePagination from '../../../hooks/utils/usePagination';
 import { IExerciseWithId } from '../../../models/interfaces';
+import { listItemAnimations } from '../../../utils/animations.util';
 import ShowCaseInviteCard from '../../ui/cards/ShowCaseInviteCard';
 import PageNavigation from '../../ui/PageNavigation';
-import { listItemAnimations } from '../../../utils/animations.util';
 
 interface Props {
   exercises: IExerciseWithId[];

@@ -72,10 +72,8 @@ export function getAverageDifficultyByRatings(exercise: IExerciseWithId) {
   const difficultyVotes: IDifficultyVote[] = exercise.difficultyVotes || [];
 
   const averageRating =
-    difficultyVotes.reduce(
-      (acc, curr) => acc + mapDifficultyToNumericValue(curr.type),
-      0,
-    ) / difficultyVotes.length;
+    difficultyVotes.reduce((acc, curr) => acc + mapDifficultyToNumericValue(curr.type), 0) /
+    difficultyVotes.length;
 
   const averageDifficulty = mapNumericValueToDifficulty(averageRating);
   const averageRatingRounded = round(averageRating, 1);

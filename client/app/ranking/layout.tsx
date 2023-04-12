@@ -1,4 +1,5 @@
 import React from 'react';
+
 import RankingMobileHeader from '@/components/ranking/mobile/RankingMobileHeader';
 import RankingSideBar from '@/components/ranking/RankingSideBar';
 

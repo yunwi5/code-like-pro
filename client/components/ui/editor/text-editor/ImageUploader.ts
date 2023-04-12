@@ -1,9 +1,10 @@
 import { Quill } from 'react-quill';
-import ImageUploader from 'quill-image-uploader';
-import { postExercisePromptImage } from '../../../../apis/image.api';
-import { customToastNotify, toastNotify } from '../../../../utils/notification.util';
-import { toBase64Image } from '../../../../utils/image.util';
 import { toast } from 'react-toastify';
+import ImageUploader from 'quill-image-uploader';
+
+import { postExercisePromptImage } from '../../../../apis/image.api';
+import { toBase64Image } from '../../../../utils/image.util';
+import { customToastNotify, toastNotify } from '../../../../utils/notification.util';
 
 Quill.register('modules/imageUploader', ImageUploader);
 

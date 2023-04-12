@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react';
+
 import { ITestCaseWithOutput } from '../../../../models/interfaces';
 import useCustomTests from '../../hooks/useCustomTests';
 import useTestCasesWithOutputs from '../../hooks/useTestCasesWithOutputs';
 import TestCasesMergeModal from '../../modals/merge-modal/TestCasesMergeModal';
+
 import TestCaseMessages from './TestCaseMessages';
 import TestCasesList from './TestCasesList';
 import TestCaseUserActions from './TestCaseUserActions';
@@ -54,10 +56,7 @@ const AttemptTestCases: React.FC = () => {
       />
 
       {/* Modal for adding user tests to existing tests */}
-      <TestCasesMergeModal
-        open={showMergeModal}
-        onClose={() => setShowMergeModal(false)}
-      />
+      <TestCasesMergeModal open={showMergeModal} onClose={() => setShowMergeModal(false)} />
     </section>
   );
 };

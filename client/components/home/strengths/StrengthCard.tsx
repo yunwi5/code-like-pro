@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
+
 import styles from './Strengths.module.scss';
 
 interface Props {
@@ -13,9 +14,7 @@ interface Props {
 const StrengthCard: React.FC<Props> = ({ heading, icon, content, link, linkText }) => {
   return (
     <>
-      <span className={`${styles.icon} transition-all text-[4rem] text-main-400`}>
-        {icon}
-      </span>
+      <span className={`${styles.icon} transition-all text-[4rem] text-main-400`}>{icon}</span>
       <h3 className={`text-2xl text-gray-500 capitalize`}>{heading}</h3>
       <p className={'text-center'}>{content}</p>
       {link && (

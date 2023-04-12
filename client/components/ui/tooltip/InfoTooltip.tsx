@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { BsFillInfoCircleFill } from 'react-icons/bs';
 import { IoCloseSharp } from 'react-icons/io5';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface Props {
   theme?: 'dark' | 'light';

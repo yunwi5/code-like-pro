@@ -1,7 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+
 import { ForumCategorySection } from '../../../models/enums';
 import ForumPostsSidebar from '../sidebar/ForumPostsSidebar';
+
 import MobileForumSectionSelect from './MobileForumSectionSelect';
 
 interface Props {
@@ -36,9 +38,7 @@ const CategoryForumPost: React.FC<Props> = ({ postId, children }) => {
       />
       <main className="flex gap-5 justify-around min-h-[84.5vh] -mt-3">
         <ForumPostsSidebar
-          className={`${
-            selectedSection !== ForumCategorySection.SIDEBAR && mobileHiddenClass
-          }`}
+          className={`${selectedSection !== ForumCategorySection.SIDEBAR && mobileHiddenClass}`}
         />
 
         <section

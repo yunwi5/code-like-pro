@@ -1,7 +1,10 @@
-import { IRanking } from '@/models/interfaces';
 import { useCallback, useMemo, useState } from 'react';
+
+import { IRanking } from '@/models/interfaces';
+
 import { ProgrammingTopic, RankingCategory } from '../../models/enums';
 import { sortRankingArray } from '../../utils/sorting-utils/ranking.sorting';
+
 import useRankingQuery from './useRankingQuery';
 
 interface Props {

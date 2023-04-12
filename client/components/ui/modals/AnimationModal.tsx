@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 
 type AnimationDirection = 'vertical' | 'horizontal';
 

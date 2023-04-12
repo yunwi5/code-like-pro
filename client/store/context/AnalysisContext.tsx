@@ -10,9 +10,7 @@ export const AnalysisContext = React.createContext<IAnalysisContext>({ analyzer:
 
 export const useAnalysisContext = () => useContext(AnalysisContext);
 
-export const AnalysisContextProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AnalysisContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { userDetail } = useUserContext();
   const [analyzer, setAnalyzer] = useState<UserAnalyzer | null>(null);
 
@@ -23,7 +21,5 @@ export const AnalysisContextProvider: React.FC<{ children: React.ReactNode }> = 
     setAnalyzer(newAnalyzer);
   }, [userDetail]);
 
-  return (
-    <AnalysisContext.Provider value={{ analyzer }}>{children}</AnalysisContext.Provider>
-  );
+  return <AnalysisContext.Provider value={{ analyzer }}>{children}</AnalysisContext.Provider>;
 };

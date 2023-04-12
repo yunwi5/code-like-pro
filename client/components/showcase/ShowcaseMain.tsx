@@ -1,13 +1,15 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
 import { getShowCaseSection, ShowCaseSection } from '../../models/enums';
 import { deslugify, slugify } from '../../utils/string-utils/url.util';
+
 import ShowcaseDiscussions from './discussions/ShowcaseDiscussions';
 import ShowcasePostModal from './modal/ShowcasePostModal';
 import ShowcaseModelAnswer from './model-answer/ShowcaseModelAnswer';
+import ShowcaseShowcases from './showcases/ShowcaseShowcases';
 import ShowcaseHeader from './ShowcaseHeader';
 import ShowcaseNav from './ShowcaseNav';
-import ShowcaseShowcases from './showcases/ShowcaseShowcases';
 
 const ShowcaseMain: React.FC = () => {
   const pathname = usePathname();
@@ -51,10 +53,7 @@ const ShowcaseMain: React.FC = () => {
         {activeSection === ShowCaseSection.SHOWCASES && <ShowcaseShowcases />}
       </main>
 
-      <ShowcasePostModal
-        visible={showPostModal}
-        onClose={() => setShowPostModal(false)}
-      />
+      <ShowcasePostModal visible={showPostModal} onClose={() => setShowPostModal(false)} />
     </div>
   );
 };

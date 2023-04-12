@@ -35,9 +35,9 @@ const BadgesInfoModal: React.FC<Props> = ({ open, onClose }) => {
                 Motives
               </h3>
               <p>
-                We offer badges in four rarity levels, and we give the badges to reward
-                your participation in our programming activities such as creatign
-                exercises, solving exercises and showcasing solutions.
+                We offer badges in four rarity levels, and we give the badges to reward your
+                participation in our programming activities such as creatign exercises, solving
+                exercises and showcasing solutions.
               </p>
             </div>
 

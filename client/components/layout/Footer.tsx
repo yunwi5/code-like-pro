@@ -1,15 +1,16 @@
 'use client';
 import React from 'react';
-import { AppProperty } from '../../constants';
+import Link from 'next/link';
+
+import { Logo } from '../../assets';
 import {
   FacebookIcon,
-  InstagramIcon,
   GithubIcon,
+  InstagramIcon,
   TwitterIcon,
 } from '../../assets/svg-icons/social-svgs';
-import { Logo } from '../../assets';
+import { AppProperty } from '../../constants';
 import useWindowSize from '../../hooks/ui/useWindowSize';
-import Link from 'next/link';
 
 // Footer links do not have real links at the moment.
 // Main purpose is to avoid duplicated styles.

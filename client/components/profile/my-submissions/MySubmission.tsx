@@ -1,6 +1,6 @@
 'use client';
-import { motion } from 'framer-motion';
 import React, { useMemo, useState } from 'react';
+import { motion } from 'framer-motion';
 
 import { SearchKey } from '../../../models/enums';
 import { useUserContext } from '../../../store/context/UserContext';
@@ -17,9 +17,7 @@ const MySubmission: React.FC = () => {
   const [searchText, setSearchText] = useState('');
 
   const searchedSubmissions = useMemo(() => {
-    return (submissions ?? []).filter((sub) =>
-      searchIncludes(sub.exercise.name, searchText),
-    );
+    return (submissions ?? []).filter((sub) => searchIncludes(sub.exercise.name, searchText));
   }, [submissions, searchText]);
 
   // Sort the submissions by date (recent to oldest)

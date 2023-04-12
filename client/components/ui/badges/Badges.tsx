@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 
 import usePagination from '../../../hooks/utils/usePagination';
 import { BadgeSortingKey, SortingDirection } from '../../../models/enums';
@@ -8,12 +9,13 @@ import { upwardStaggeringAnimations } from '../../../utils/animations.util';
 import { BadgeImageMap } from '../../../utils/badge.util';
 import { getDateFormat } from '../../../utils/datetime.util';
 import { sortBadges } from '../../../utils/sorting-utils/badge.sorting';
-import BadgeDetail from './badge-detail/BadgeDetail';
 import PageNavigation from '../PageNavigation';
 import BadgeSorter from '../sorting/BadgeSorter';
+
+import BadgeDetail from './badge-detail/BadgeDetail';
 import BadgesInfo from './badges-info/BadgesInfo';
+
 import styles from './Badges.module.scss';
-import Image from 'next/image';
 
 interface Props {
   badges: IBadge[];
@@ -24,12 +26,7 @@ interface Props {
 
 const BADGE_PER_PAGE = 8;
 
-const Badges: React.FC<Props> = ({
-  heading,
-  badges,
-  badgePerPage = BADGE_PER_PAGE,
-  className,
-}) => {
+const Badges: React.FC<Props> = ({ heading, badges, badgePerPage = BADGE_PER_PAGE, className }) => {
   const [selectedBadgeId, setSelectedBadgeId] = useState<string | null>(null);
   const selectedBadge = badges.find((badge) => badge._id === selectedBadgeId);
 
@@ -84,10 +81,7 @@ const Badges: React.FC<Props> = ({
               delay: idx * 0.1,
             }}
           >
-            <BadgeCard
-              badge={badge}
-              className={idx % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}
-            />
+            <BadgeCard badge={badge} className={idx % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'} />
           </motion.div>
         ))}
       </div>
@@ -147,9 +141,7 @@ const BadgeCard: React.FC<{ badge: IBadge; onClick?: () => void; className: stri
         src={BadgeImageMap[badge.rarity]}
         alt={`Badge ${badge.name}`}
       />
-      <h5 className="font-semibold text-lg text-main-400 whitespace-nowrap">
-        {badge.name}
-      </h5>
+      <h5 className="font-semibold text-lg text-main-400 whitespace-nowrap">{badge.name}</h5>
       <time className="font-semibold">{getDateFormat(badge.awardedAt)}</time>
       <button className="text-4xl text-main-500">{badge.rarity}</button>
     </div>

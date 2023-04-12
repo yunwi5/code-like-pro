@@ -1,6 +1,7 @@
-import Link from 'next/link';
 import React from 'react';
 import { MdDoubleArrow } from 'react-icons/md';
+import Link from 'next/link';
+
 import styles from './ArrowLink.module.scss';
 
 interface Props {

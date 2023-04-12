@@ -1,16 +1,17 @@
 import React, { useMemo, useState } from 'react';
 
-import { useUserContext } from '../../../store/context/UserContext';
-import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
+import useExerciseCommentsMutation from '../../../hooks/comment/exercise-comments/useExerciseCommentsMutation';
+import { SortingDirection, VotingItemSortingKey } from '../../../models/enums';
 import { IComment } from '../../../models/interfaces';
 import { useShowcase } from '../../../store/context/ShowcaseContext';
+import { useUserContext } from '../../../store/context/UserContext';
 import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import CommentForm from '../../ui/comments/CommentForm';
 import CommentList from '../../ui/lists/CommentList';
-import CommentSelectOptions from './CommentSelectOptions';
 import CommentSorter from '../../ui/sorting/VotingItemSorter';
 import ShowcaseLoader from '../ShowcaseLoader';
-import useExerciseCommentsMutation from '../../../hooks/comment/exercise-comments/useExerciseCommentsMutation';
+
+import CommentSelectOptions from './CommentSelectOptions';
 
 const ShowcaseDiscussions: React.FC = () => {
   const { userDetail } = useUserContext();
@@ -71,9 +72,7 @@ const ShowcaseDiscussions: React.FC = () => {
           setShowOnlyMyComments={setShowOnlyMyComments}
         />
         {/* Displays number of comments available in the discussion forum. */}
-        <h5 className="text-gray-500 font-bold text-base sm:text-lg">
-          {comments.length} Comments
-        </h5>
+        <h5 className="text-gray-500 font-bold text-base sm:text-lg">{comments.length} Comments</h5>
       </div>
 
       {commentsLoading ? (

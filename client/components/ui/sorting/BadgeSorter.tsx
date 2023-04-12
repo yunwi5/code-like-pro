@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { BadgeSortingKey, SortingDirection } from '../../../models/enums';
 
 type BadgeSortingState = { key: BadgeSortingKey; direction: SortingDirection };
@@ -61,7 +62,6 @@ const BadgeSorter: React.FC<Props> = ({ sortingState, setSortingState }) => {
   );
 };
 
-const btnClass =
-  'px-2 py-1 rounded-sm hover:bg-gray-100 hover:text-main-500 transition-all';
+const btnClass = 'px-2 py-1 rounded-sm hover:bg-gray-100 hover:text-main-500 transition-all';
 
 export default BadgeSorter;

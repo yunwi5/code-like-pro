@@ -9,10 +9,10 @@ interface Props {
 }
 
 function createAdjacentPageList(currentPage: number, totalPages: number) {
-  let pages = [];
+  const pages = [];
   if (currentPage + 4 < totalPages) {
-    let startPage = currentPage < 2 ? 0 : currentPage - 2;
-    let endPage = currentPage < 2 ? 4 : currentPage + 2;
+    const startPage = currentPage < 2 ? 0 : currentPage - 2;
+    const endPage = currentPage < 2 ? 4 : currentPage + 2;
     for (let p = startPage; p <= endPage; p++) {
       pages.push(p);
     }
@@ -45,9 +45,7 @@ const PageNavigation: React.FC<Props> = ({
       {/* Navigate to previous page */}
       <div
         onClick={() => currentPage !== 0 && onChangePage(currentPage - 1)}
-        className={`${navBtnClass} ${
-          currentPage === 0 ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
+        className={`${navBtnClass} ${currentPage === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
         <BsChevronLeft />
       </div>

@@ -45,10 +45,7 @@ export function isSameTestCase(testA: ITestCase, testB: ITestCase, language: Lan
 }
 
 // Analyse and validate test cases result
-export function analyzeTestCasesResult(
-  testCases: ITestCase[],
-  testCasesResult: ITestOutput[],
-) {
+export function analyzeTestCasesResult(testCases: ITestCase[], testCasesResult: ITestOutput[]) {
   const nonEmptyTests = testCases.filter((test) => !testCaseEmpty(test));
   const haveEnoughTests = nonEmptyTests.length >= 3;
   if (!haveEnoughTests) {
@@ -60,10 +57,8 @@ export function analyzeTestCasesResult(
 
   const noHiddenTests = testCases.every((test) => !test.hidden);
   const noOpenTests = testCases.every((test) => test.hidden);
-  if (noHiddenTests)
-    return { status: 'error', message: 'Please have at least 1 hidden test(s)!' };
-  if (noOpenTests)
-    return { status: 'error', message: 'Please have at least 1 open test(s)!' };
+  if (noHiddenTests) return { status: 'error', message: 'Please have at least 1 hidden test(s)!' };
+  if (noOpenTests) return { status: 'error', message: 'Please have at least 1 open test(s)!' };
 
   const everythingCorrect = testCasesResult.every((testCase) => testCase.correct);
   if (!everythingCorrect) return { status: 'error', message: 'You failed some tests...' };
@@ -95,7 +90,6 @@ export function checkTestCaseMergeable(
   const duplicatedTest = existingTests.find((test) =>
     isSameTestCase(newTestWithOutput, test, language),
   );
-  if (duplicatedTest != null)
-    return { mergeable: false, message: 'The test already exists!' };
+  if (duplicatedTest != null) return { mergeable: false, message: 'The test already exists!' };
   return { mergeable: true, message: 'This test is mergeable!' };
 }

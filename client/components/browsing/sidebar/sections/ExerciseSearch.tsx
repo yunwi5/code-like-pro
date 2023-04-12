@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
+
 import { SearchKeyList } from '../../../../models/enums';
-import {
-  exerciseBrowsingActions,
-  ISearchingState,
-} from '../../../../store/redux/browsing-slice';
+import { exerciseBrowsingActions, ISearchingState } from '../../../../store/redux/browsing-slice';
 import { useAppDispatch, useAppSelector } from '../../../../store/redux/store';
 import Searchbar from '../../../ui/inputs/Searchbar';
 

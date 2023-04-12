@@ -30,9 +30,7 @@ export function getMostRecentSubmission(
 }
 
 // Calculate statistics for correct count and correct rate of user submissions list.
-export function getSubmissionStats(
-  submissions: IUserSubmission[] | IUserSubmissionPopulated[],
-) {
+export function getSubmissionStats(submissions: IUserSubmission[] | IUserSubmissionPopulated[]) {
   const total = submissions.length;
   let correctCount = 0;
   submissions.forEach((submission) => {

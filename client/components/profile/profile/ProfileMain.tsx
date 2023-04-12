@@ -1,9 +1,9 @@
 'use client';
 import React, { useMemo } from 'react';
 import { ClipLoader } from 'react-spinners';
+
 import useBadgeQuery from '../../../hooks/badges/useBadgeQuery';
 import useRanking from '../../../hooks/ranking/useRanking';
-
 import {
   ProfileEditContextProvider,
   useProfileEditContext,
@@ -12,9 +12,10 @@ import { useUserContext } from '../../../store/context/UserContext';
 import { getDateFormat } from '../../../utils/datetime.util';
 import { getUsedLanguagesByUser } from '../../../utils/language.util';
 import { numberSuffix } from '../../../utils/number.util';
-import Button from '../../ui/buttons/Button';
 import Badges from '../../ui/badges/Badges';
+import Button from '../../ui/buttons/Button';
 import ProfileLoader from '../ProfileLoader';
+
 import ProfileAvatar from './avatars/ProfileAvatar';
 import ProfileInfoItem from './sections/ProfileInfoItem';
 import ProfileInput from './sections/ProfileInput';
@@ -36,14 +37,8 @@ const ProfileMainBody = () => {
   const { getUserRank, rankingOrder } = useRanking();
   const { badges } = useBadgeQuery(userDetail?._id);
 
-  const {
-    profileName,
-    setProfileName,
-    description,
-    isEditing,
-    setDescription,
-    onSubmitProfile,
-  } = useProfileEditContext();
+  const { profileName, setProfileName, description, isEditing, setDescription, onSubmitProfile } =
+    useProfileEditContext();
 
   // Current user ranking data
   const userRankData = useMemo(() => {
@@ -101,10 +96,7 @@ const ProfileMainBody = () => {
           )}
 
           <ProfileInfoItem label="Email" value={userDetail.email} />
-          <ProfileInfoItem
-            label="Member Since"
-            value={getDateFormat(userDetail.createdAt)}
-          />
+          <ProfileInfoItem label="Member Since" value={getDateFormat(userDetail.createdAt)} />
 
           <ProfileInfoItem label="Languages" value={usedLanguages.join(', ')} />
 
@@ -112,9 +104,9 @@ const ProfileMainBody = () => {
           {userRankData ? (
             <ProfileInfoItem
               label="Ranking Points"
-              value={`${
-                userRankData.creationPoints + userRankData.solvingPoints
-              } (${numberSuffix(userRankData.order)})`}
+              value={`${userRankData.creationPoints + userRankData.solvingPoints} (${numberSuffix(
+                userRankData.order,
+              )})`}
             />
           ) : (
             <ClipLoader color="#5552e4" size={35} />
@@ -127,10 +119,7 @@ const ProfileMainBody = () => {
         {/* Profile badges */}
         {showBadges && (
           <div id="badges" className="flex flex-col mt-10 mb-3">
-            <Badges
-              heading={<h2 className="text-2xl">My Badges</h2>}
-              badges={badges || []}
-            />
+            <Badges heading={<h2 className="text-2xl">My Badges</h2>} badges={badges || []} />
           </div>
         )}
       </div>

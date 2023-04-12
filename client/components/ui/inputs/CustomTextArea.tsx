@@ -8,13 +8,7 @@ interface Props {
   error?: string | null;
 }
 
-const CustomTextArea: React.FC<Props> = ({
-  labelText,
-  value,
-  onChange,
-  rows = 3,
-  error = '',
-}) => {
+const CustomTextArea: React.FC<Props> = ({ labelText, value, onChange, rows = 3, error = '' }) => {
   const id = useId();
 
   return (

@@ -81,10 +81,7 @@ const CommentCard: FC<Props> = ({ comment, onReply, onUpdate, onDelete }) => {
           <VoteButtons votes={votes} onVote={handleUserVote} />
 
           {onReply && (
-            <div
-              onClick={onReply}
-              className="flex-start gap-1 cursor-pointer hover:text-main-500"
-            >
+            <div onClick={onReply} className="flex-start gap-1 cursor-pointer hover:text-main-500">
               <BsFillReplyFill className="text-xl cursor-pointer" />
               <span className="text-sm">Reply</span>
             </div>

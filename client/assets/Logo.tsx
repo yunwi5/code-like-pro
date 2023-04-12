@@ -72,15 +72,8 @@ const Logo: React.FC<Props> = ({ size = 80 }) => {
           <feOffset dy="4" />
           <feGaussianBlur stdDeviation="2" />
           <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow_265_245"
-          />
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_265_245" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -107,15 +100,8 @@ const Logo: React.FC<Props> = ({ size = 80 }) => {
           <feOffset dy="4" />
           <feGaussianBlur stdDeviation="2" />
           <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow_265_245"
-          />
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_265_245" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -142,15 +128,8 @@ const Logo: React.FC<Props> = ({ size = 80 }) => {
           <feOffset dx="2" dy="5" />
           <feGaussianBlur stdDeviation="2.5" />
           <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow_265_245"
-          />
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_265_245" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -177,15 +156,8 @@ const Logo: React.FC<Props> = ({ size = 80 }) => {
           <feOffset dy="4" />
           <feGaussianBlur stdDeviation="2" />
           <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow_265_245"
-          />
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_265_245" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -212,15 +184,8 @@ const Logo: React.FC<Props> = ({ size = 80 }) => {
           <feOffset dy="4" />
           <feGaussianBlur stdDeviation="2" />
           <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow_265_245"
-          />
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_265_245" />
           <feBlend
             mode="normal"
             in="SourceGraphic"

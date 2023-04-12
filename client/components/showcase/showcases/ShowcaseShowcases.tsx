@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { VotingItemSortingKey, SortingDirection } from '../../../models/enums';
-import VotingItemSorter from '../../ui/sorting/VotingItemSorter';
-import { useShowcase } from '../../../store/context/ShowcaseContext';
-import ShowcaseList from '../../ui/lists/ShowcaseList';
-import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
-import { IShowCase } from '../../../models/interfaces';
-import ShowcaseLoader from '../ShowcaseLoader';
+
 import useBadgeQualification from '../../../hooks/badges/useBadgeQualification';
+import { SortingDirection, VotingItemSortingKey } from '../../../models/enums';
+import { IShowCase } from '../../../models/interfaces';
+import { useShowcase } from '../../../store/context/ShowcaseContext';
 import { useUserContext } from '../../../store/context/UserContext';
+import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
+import ShowcaseList from '../../ui/lists/ShowcaseList';
+import VotingItemSorter from '../../ui/sorting/VotingItemSorter';
+import ShowcaseLoader from '../ShowcaseLoader';
 
 const ShowcaseShowcases: React.FC = () => {
   const { userDetail } = useUserContext();

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
 import PuffLoader from 'react-spinners/PuffLoader';
+import { motion } from 'framer-motion';
 
 import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 import usePagination from '../../../../hooks/utils/usePagination';

@@ -1,11 +1,8 @@
-import Link from 'next/link';
 import { RiEmotionSadLine } from 'react-icons/ri';
+import Link from 'next/link';
 
 import { IExerciseWithId } from '../../../models/interfaces';
-import {
-  getBrowsingPageLink,
-  getExerciseCreationPageLink,
-} from '../../../utils/links.util';
+import { getBrowsingPageLink, getExerciseCreationPageLink } from '../../../utils/links.util';
 
 interface MessageProps {
   exercises: IExerciseWithId[];
@@ -19,13 +16,10 @@ const ShowCaseInviteMessage: React.FC<MessageProps> = ({ exercises, inviteMode }
     <div className="mt-7 py-5 flex-center flex-col gap-3">
       <h2 className="flex-center gap-2 text-xl">
         <RiEmotionSadLine className="text-main-500 text-3xl" />
-        You have no {inviteMode === 'created' ? 'created' : 'solved'} works to be
-        showcased.
+        You have no {inviteMode === 'created' ? 'created' : 'solved'} works to be showcased.
       </h2>
       <Link
-        href={
-          inviteMode === 'created' ? getExerciseCreationPageLink() : getBrowsingPageLink()
-        }
+        href={inviteMode === 'created' ? getExerciseCreationPageLink() : getBrowsingPageLink()}
         className="btn btn-empty"
       >
         {inviteMode === 'created' ? 'Create' : 'Solve'} One!

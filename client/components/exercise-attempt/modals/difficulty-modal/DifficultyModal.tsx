@@ -4,15 +4,13 @@ import { BsBarChartFill } from 'react-icons/bs';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { useUserContext } from '../../../../store/context/UserContext';
 import { DifficultyTextColorMap } from '../../../../utils/colors.util';
-import {
-  getOverallDifficulty,
-  MAX_DIFFICULTY_VALUE,
-} from '../../../../utils/difficulty.util';
+import { getOverallDifficulty, MAX_DIFFICULTY_VALUE } from '../../../../utils/difficulty.util';
 import AnimationModal from '../../../ui/modals/AnimationModal';
+
+import DifficultyAdjustmentInfo from './DifficultyAdjustmentInfo';
 import DifficultyRatingForm from './DifficultyRatingForm';
 import DifficultyVoteChart from './DifficultyVoteChart';
 import RateAgain from './RateAgain';
-import DifficultyAdjustmentInfo from './DifficultyAdjustmentInfo';
 
 interface Props {
   open: boolean;
@@ -33,7 +31,7 @@ const DifficultyModal: FC<Props> = ({ open, onClose }) => {
   const difficultyVotes = exercise?.difficultyVotes || [];
 
   useEffect(() => {
-    if (!!userDifficultyVote?.type) setShowForm(false);
+    if (userDifficultyVote?.type) setShowForm(false);
   }, [open, userDifficultyVote?.type]);
 
   if (exercise == null) return null;
@@ -73,8 +71,8 @@ const DifficultyModal: FC<Props> = ({ open, onClose }) => {
           </div>
 
           <p>
-            Our users can rate the difficulty of the challenges, so that we can derive
-            more accurate measurements of difficulties for each challenge.
+            Our users can rate the difficulty of the challenges, so that we can derive more accurate
+            measurements of difficulties for each challenge.
           </p>
 
           <DifficultyVoteChart difficultyVotes={difficultyVotes} />

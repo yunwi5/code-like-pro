@@ -1,11 +1,12 @@
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+import { useRouter } from 'next/navigation';
+
 import { createOrGetGoogleUser } from '../../apis/auth.api';
+import { GoogleIcon } from '../../assets/svg-icons/social-svgs';
+import { AppProperty } from '../../constants';
 import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification.util';
-import { AppProperty } from '../../constants';
-import { GoogleIcon } from '../../assets/svg-icons/social-svgs';
 import Button from '../ui/buttons/Button';
-import { useRouter } from 'next/navigation';
 
 const GoogleOAuth = () => {
   const router = useRouter();

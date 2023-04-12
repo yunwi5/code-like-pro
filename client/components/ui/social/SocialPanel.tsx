@@ -3,9 +3,9 @@ import ClickAwayListener from 'react-click-away-listener';
 import {
   FacebookIcon,
   FacebookShareButton,
+  LinkedinIcon,
   TwitterIcon,
   TwitterShareButton,
-  LinkedinIcon,
 } from 'react-share';
 import LinkedinShareButton from 'react-share/lib/LinkedinShareButton';
 
@@ -40,22 +40,11 @@ const SocialPanel: React.FC<Props> = (props) => {
       <div
         className={`absolute z-100 flex-center gap-2 px-2 py-1 bg-white border-2 border-slate-200 shadow hover:shadow-md transition-all rounded ${className}`}
       >
-        <FacebookShareButton
-          url={url}
-          quote={title}
-          hashtag={tagsString}
-          className={btnClass}
-        >
+        <FacebookShareButton url={url} quote={title} hashtag={tagsString} className={btnClass}>
           <FacebookIcon size={35} round /> <span className="text-[0.8em]">Facebook</span>
         </FacebookShareButton>
 
-        <TwitterShareButton
-          url={url}
-          via={via}
-          title={'test'}
-          hashtags={tags}
-          className={btnClass}
-        >
+        <TwitterShareButton url={url} via={via} title={'test'} hashtags={tags} className={btnClass}>
           <TwitterIcon size={35} round />
           <span className="text-[0.8em]">Twitter</span>
         </TwitterShareButton>

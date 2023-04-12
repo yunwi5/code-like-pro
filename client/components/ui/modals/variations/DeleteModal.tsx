@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { ClipLoader } from 'react-spinners';
+
 import AnimationModal from '../AnimationModal';
 
 interface Props {
@@ -16,13 +17,7 @@ interface Props {
 }
 
 // Modal for handling delete action and request
-const DeleteModal: React.FC<Props> = ({
-  open,
-  onClose,
-  deleteFunction,
-  onDelete,
-  item,
-}) => {
+const DeleteModal: React.FC<Props> = ({ open, onClose, deleteFunction, onDelete, item }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = async () => {
@@ -51,8 +46,7 @@ const DeleteModal: React.FC<Props> = ({
       {/* Issue report body */}
       <div className="flex flex-col gap-3 px-7 pt-8 pb-5 bg-slate-200/90">
         <p className="-mt-2 font-semibold text-slate-600">
-          You are about to delete{' '}
-          <strong className="text-semibold text-rose-500">{item}</strong>.
+          You are about to delete <strong className="text-semibold text-rose-500">{item}</strong>.
         </p>
         <p>Your action will not be cancelled, so please be careful before delete.</p>
 

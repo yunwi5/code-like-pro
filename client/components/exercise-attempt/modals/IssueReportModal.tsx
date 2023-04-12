@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { FaBug } from 'react-icons/fa';
 
 import useExerciseReportsMutation from '../../../hooks/exercise/exercise-reports/useExerciseReportsMutation';
+import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import CustomSelect from '../../ui/inputs/CustomSelect';
 import CustomTextArea from '../../ui/inputs/CustomTextArea';
-import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
 import FormModal from '../../ui/modals/variations/FormModal';
 
 const IssueCategories = [

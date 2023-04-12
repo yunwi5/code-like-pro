@@ -20,11 +20,7 @@ function useBadgeQuery(userId: string | undefined) {
   const processedBadges = useMemo(() => {
     const noDuplicates: IBadge[] = [];
     for (const badge of badges) {
-      if (
-        !noDuplicates.find(
-          (b) => b.rarity === badge.rarity && b.category === badge.category,
-        )
-      ) {
+      if (!noDuplicates.find((b) => b.rarity === badge.rarity && b.category === badge.category)) {
         noDuplicates.push(badge);
       }
     }
@@ -32,10 +28,7 @@ function useBadgeQuery(userId: string | undefined) {
   }, [badges]);
 
   // Refetch data of the query key
-  const refetch = useCallback(
-    () => queryClient.refetchQueries(['badges', userId]),
-    [queryClient],
-  );
+  const refetch = useCallback(() => queryClient.refetchQueries(['badges', userId]), [queryClient]);
 
   if (error) console.log(error);
 

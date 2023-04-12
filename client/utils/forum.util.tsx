@@ -7,12 +7,7 @@ import { BsQuestionCircle } from 'react-icons/bs';
 import { RiSlideshow3Line } from 'react-icons/ri';
 import { AiOutlineNotification } from 'react-icons/ai';
 
-import {
-  ForumCategory,
-  ForumPostType,
-  LanguageList,
-  ProgrammingTopicList,
-} from '../models/enums';
+import { ForumCategory, ForumPostType, LanguageList, ProgrammingTopicList } from '../models/enums';
 import { prettierLanguageName } from './language.util';
 
 export const ForumIcons = {
@@ -29,12 +24,10 @@ export const ForumDescriptions = {
   [ForumCategory.GENERAL]: 'Where you discuss general queries and posts about anything.',
   [ForumCategory.ALGORITHMS]: 'Discuss algorithm knowledges in depth!',
   [ForumCategory.INTERVIEWS]: 'Discuss how to master the notorious technical interviews',
-  [ForumCategory.CAREERS]:
-    'Discuss future career path as programmers or software engineers!',
+  [ForumCategory.CAREERS]: 'Discuss future career path as programmers or software engineers!',
   [ForumCategory.TECHNOLOGIES]:
     'Trendy technologies React, Vue, Svelte, Flutter, Kotlin, Swift, ...',
-  [ForumCategory.UNIVERSITY]:
-    'Discuss university courses or degress like CS or SE degree',
+  [ForumCategory.UNIVERSITY]: 'Discuss university courses or degress like CS or SE degree',
   [ForumCategory.FEEDBACK]:
     'Discuss any feedback to our application that we are always welcomed to hear!',
 };

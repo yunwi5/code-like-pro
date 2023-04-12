@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+
 import { IChartData } from '../../../../models/interfaces';
 import { useAnalysisContext } from '../../../../store/context/AnalysisContext';
 import { useUserContext } from '../../../../store/context/UserContext';
@@ -43,16 +44,12 @@ interface AnalyticsProps {
   className?: string;
 }
 
-const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({
-  dataArray,
-  className = '',
-}) => {
+const LanguageAnalyticMessages: React.FC<AnalyticsProps> = ({ dataArray, className = '' }) => {
   const { userDetail } = useUserContext();
   const mostRecentSubmission = getMostRecentSubmission(userDetail?.submissions || []);
 
   const mostUsed = dataArray.reduce(
-    (accMaxData, currData) =>
-      currData.value > (accMaxData?.value ?? 0) ? currData : accMaxData,
+    (accMaxData, currData) => (currData.value > (accMaxData?.value ?? 0) ? currData : accMaxData),
     dataArray.length > 0 ? dataArray[0] : null,
   );
 

@@ -1,11 +1,13 @@
 import { FiLogOut } from 'react-icons/fi';
+import Link from 'next/link';
 
 import { ProfileSectionList } from '../../../../models/enums';
 import { useUserContext } from '../../../../store/context/UserContext';
 import { getProfileSectionIcon, ProfileLinkMap } from '../../../../utils/profile.util';
+
 import ProfileMenuHeader from './ProfileMenuHeader';
+
 import styles from './ProfileDropdownMenu.module.scss';
-import Link from 'next/link';
 
 // Profile dropdown menu that displays user profile info and profile links.
 // This component is used in UserProfileNav.tsx to display its dropdown menu.

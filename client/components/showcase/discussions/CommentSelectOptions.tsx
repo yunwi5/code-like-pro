@@ -1,4 +1,5 @@
 import React from 'react';
+
 import RoundButton from '../../ui/buttons/RoundButton';
 
 // Select between 'All comments' and 'My comments' to provide simple filtering option to the user.

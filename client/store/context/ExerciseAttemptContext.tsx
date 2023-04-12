@@ -4,12 +4,7 @@ import { runTestCases } from '../../apis/submission.api';
 import useBadgeQualification from '../../hooks/badges/useBadgeQualification';
 import useLocalStorage from '../../hooks/utils/useLocalStorage';
 import useExerciseSubmissionsMutation from '../../hooks/exercise/exercise-submissions.tsx/useExerciseSubmissionsMutation';
-import {
-  IExerciseWithId,
-  ITestCase,
-  ITestOutput,
-  IUserSubmission,
-} from '../../models/interfaces';
+import { IExerciseWithId, ITestCase, ITestOutput, IUserSubmission } from '../../models/interfaces';
 import { getCorrectTestCaseCount } from '../../utils/exercise-utils/testcase';
 import AttemptSuccessModal from '../../components/exercise-attempt/modals/AttemptSuccessModal';
 import { toastNotify } from '../../utils/notification.util';
@@ -130,10 +125,7 @@ export const ExerciseAttemptCtxProvider: React.FC<Props> = ({
   return (
     <ExerciseAttemptContext.Provider value={value}>
       {children}
-      <AttemptSuccessModal
-        open={showSuccessModal}
-        onClose={() => setShowSuccessModal(false)}
-      />
+      <AttemptSuccessModal open={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
     </ExerciseAttemptContext.Provider>
   );
 };

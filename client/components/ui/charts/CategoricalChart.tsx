@@ -1,18 +1,19 @@
 import React from 'react';
+import { Bar, Doughnut, Pie } from 'react-chartjs-2';
+import { AiFillRobot } from 'react-icons/ai';
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  RadialLinearScale,
   ArcElement,
-  Tooltip,
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
   Legend,
+  LinearScale,
+  RadialLinearScale,
+  Tooltip,
 } from 'chart.js';
-import { Pie, Doughnut, Bar } from 'react-chartjs-2';
+
 import { IChartData } from '../../../models/interfaces';
 import { generateChartDataset } from '../../../utils/analysis-utils';
-import { AiFillRobot } from 'react-icons/ai';
 
 ChartJS.register(
   CategoryScale,
@@ -46,8 +47,7 @@ const CategoricalChart: React.FC<Props> = (props) => {
     axesLabelColors,
     style,
   } = props;
-  const { labels, data, backgroundColors, borderColors } =
-    generateChartDataset(dataArray);
+  const { labels, data, backgroundColors, borderColors } = generateChartDataset(dataArray);
 
   const options = {
     responsive: true,
@@ -87,7 +87,7 @@ const CategoricalChart: React.FC<Props> = (props) => {
     },
   };
 
-  let dataset = {
+  const dataset = {
     labels,
     datasets: [
       {
@@ -124,9 +124,7 @@ const CategoricalChart: React.FC<Props> = (props) => {
               data={dataset}
             />
           )}
-          {chartType === 'doughnut' && (
-            <Doughnut style={style} options={options} data={dataset} />
-          )}
+          {chartType === 'doughnut' && <Doughnut style={style} options={options} data={dataset} />}
           {chartType === 'bar' && (
             <Bar
               style={style}

@@ -3,6 +3,4 @@ export enum ForumCategorySection {
   MAINCONTENT = 'Main Content',
 }
 
-export const ForumCategorySectionList = Object.freeze(
-  Object.values(ForumCategorySection),
-);
+export const ForumCategorySectionList = Object.freeze(Object.values(ForumCategorySection));

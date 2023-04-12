@@ -2,6 +2,7 @@ import React from 'react';
 import { BsQuestionSquare, BsTrophy } from 'react-icons/bs';
 import { MdOutlineCollectionsBookmark } from 'react-icons/md';
 import { motion } from 'framer-motion';
+
 import BadgeLink from './BadgeLink';
 
 const AboutBadges: React.FC<{ className?: string }> = ({ className = '' }) => {

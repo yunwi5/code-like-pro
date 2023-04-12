@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { getExercisesData } from '@/apis/exercise.api';
-import { AppProperty } from '@/constants';
 import BrowsingMain from '@/components/browsing/BrowsingMain';
+import { AppProperty } from '@/constants';
 
 export const metadata = {
   title: `Browsing Challenge | ${AppProperty.APP_NAME}`,

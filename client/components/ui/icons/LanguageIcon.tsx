@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Language } from '../../../models/enums';
 import { getLanguageIcon, prettierLanguageName } from '../../../utils/language.util';
 import HoveringLabel from '../tooltip/HoveringLabel';

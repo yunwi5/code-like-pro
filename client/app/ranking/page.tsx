@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { getRankingData } from '@/apis/ranking.api';
 import RankingMain from '@/components/ranking/RankingMain';
 import { AppProperty } from '@/constants';

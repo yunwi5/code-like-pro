@@ -1,11 +1,13 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
-import HoveringLabel from '../../ui/tooltip/HoveringLabel';
+
+import { useTopicParam } from '@/hooks/utils/useTopicParam';
+
 import Backdrop from '../../ui/modals/Backdrop';
+import HoveringLabel from '../../ui/tooltip/HoveringLabel';
 import RankingSideBar from '../RankingSideBar';
 import RankingHeader from '../sections/RankingHeader';
-import { useTopicParam } from '@/hooks/utils/useTopicParam';
 
 const RankingMobileHeader: React.FC = () => {
   const topic = useTopicParam();

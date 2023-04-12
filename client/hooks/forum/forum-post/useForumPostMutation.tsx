@@ -24,24 +24,21 @@ function useForumPostMutation({ _id: postId, category }: IForumPostPopulated) {
     );
 
     // Update category posts
-    queryClient.setQueryData(
-      [forumPostsQueryKey],
-      (oldPostList: IForumPost[] | undefined) => {
-        if (!oldPostList) return oldPostList;
+    queryClient.setQueryData([forumPostsQueryKey], (oldPostList: IForumPost[] | undefined) => {
+      if (!oldPostList) return oldPostList;
 
-        const newPostList = [...oldPostList];
-        const postIndex = newPostList.findIndex((p) => p._id === postId);
-        if (postIndex < 0) return oldPostList;
+      const newPostList = [...oldPostList];
+      const postIndex = newPostList.findIndex((p) => p._id === postId);
+      if (postIndex < 0) return oldPostList;
 
-        const newPost: IForumPost = {
-          ...newPostList[postIndex],
-          votes: newVotes,
-        };
+      const newPost: IForumPost = {
+        ...newPostList[postIndex],
+        votes: newVotes,
+      };
 
-        newPostList[postIndex] = newPost;
-        return newPostList;
-      },
-    );
+      newPostList[postIndex] = newPost;
+      return newPostList;
+    });
 
     refetchPost();
     refetchCategoryPosts();

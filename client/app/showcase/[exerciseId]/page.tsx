@@ -1,5 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
+
 import { getExerciseByIdData, getExercisesData } from '@/apis/exercise.api';
 import ShowcaseMainContainer from '@/components/showcase/ShowcaseMainContainer';
 import { AppProperty } from '@/constants';

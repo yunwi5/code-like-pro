@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+
 import { IChartData } from '../../../../models/interfaces';
 import { useAnalysisContext } from '../../../../store/context/AnalysisContext';
 import { getMostFrequentChartData } from '../../../../utils/analysis-utils';
@@ -29,10 +30,7 @@ const TopicAnalysis: React.FC = () => {
 
 const TopicAnalysisMessages: React.FC<{ dataArray: IChartData[] }> = ({ dataArray }) => {
   // Most frequent topics 1 or more.
-  const mostFrequentTopics = useMemo(
-    () => getMostFrequentChartData(dataArray),
-    [dataArray],
-  );
+  const mostFrequentTopics = useMemo(() => getMostFrequentChartData(dataArray), [dataArray]);
 
   // If the user has not made attempts to any of the topics, return null.
   if (mostFrequentTopics.length === 0 || mostFrequentTopics[0].value === 0) return null;

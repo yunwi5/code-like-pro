@@ -15,11 +15,7 @@ const RoundButton: React.FC<Props> = (props) => {
   const themeClass = theme === 'dark' ? 'btn-dark' : 'btn-light';
 
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={`btn rounded-full ${themeClass} ${className}`}
-    >
+    <button type={type} onClick={onClick} className={`btn rounded-full ${themeClass} ${className}`}>
       {children}
     </button>
   );

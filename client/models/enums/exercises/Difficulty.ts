@@ -5,6 +5,4 @@ export enum Difficulty {
   EXPERT = 'Expert',
 }
 
-export const DifficultyList: readonly Difficulty[] = Object.freeze(
-  Object.values(Difficulty),
-);
+export const DifficultyList: readonly Difficulty[] = Object.freeze(Object.values(Difficulty));

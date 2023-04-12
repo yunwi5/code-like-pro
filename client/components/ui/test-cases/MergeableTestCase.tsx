@@ -1,12 +1,9 @@
 import { FC, useMemo } from 'react';
 
-import {
-  IExerciseWithId,
-  ITestCaseProps,
-  ITestCaseWithOutput,
-} from '../../../models/interfaces';
-import useCustomTests from '../../exercise-attempt/hooks/useCustomTests';
+import { IExerciseWithId, ITestCaseProps, ITestCaseWithOutput } from '../../../models/interfaces';
 import { checkTestCaseMergeable } from '../../../utils/exercise-utils/testcase';
+import useCustomTests from '../../exercise-attempt/hooks/useCustomTests';
+
 import TestCase from './TestCase';
 
 const MergeableTestCaseStyle = {
@@ -28,15 +25,11 @@ const MergeableTestCase: FC<{
   const label = useMemo(
     () =>
       mergeable ? (
-        <label
-          className={`${MergeableTestCaseStyle.labelBtn} bg-emerald-500 hover:bg-emerald-600`}
-        >
+        <label className={`${MergeableTestCaseStyle.labelBtn} bg-emerald-500 hover:bg-emerald-600`}>
           Mergeable
         </label>
       ) : (
-        <label
-          className={`${MergeableTestCaseStyle.labelBtn} bg-pink-500 hover:bg-pink-600`}
-        >
+        <label className={`${MergeableTestCaseStyle.labelBtn} bg-pink-500 hover:bg-pink-600`}>
           Not Mergeable
         </label>
       ),
@@ -44,11 +37,7 @@ const MergeableTestCase: FC<{
   );
 
   const mergeableMessage = useMemo(
-    () => (
-      <p className={`mt-2 ${mergeable ? 'text-emerald-500' : 'text-rose-500'}`}>
-        {message}
-      </p>
-    ),
+    () => <p className={`mt-2 ${mergeable ? 'text-emerald-500' : 'text-rose-500'}`}>{message}</p>,
     [mergeable, message],
   );
 

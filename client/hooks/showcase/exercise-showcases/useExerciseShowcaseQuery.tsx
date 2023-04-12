@@ -1,4 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+
 import { getExerciseShowcases } from '../../../apis/exercise.api';
 import { getExerciseShowcasesKey } from '../keys';
 

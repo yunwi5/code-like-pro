@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { SortingDirection, SortingDirectionList } from '../../../models/enums';
+
 import CustomSelect from './CustomSelect';
 
 interface Props {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+
 import { IRanking } from '../../../models/interfaces';
 import ProfileView from '../../ui/user/profile-view/ProfileView';
 

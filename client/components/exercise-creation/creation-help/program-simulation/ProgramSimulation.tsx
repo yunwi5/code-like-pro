@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import { MdOutlineArrowDropDown, MdOutlineArrowRight } from 'react-icons/md';
 import { ClipLoader } from 'react-spinners';
+
 import { Language } from '../../../../models/enums';
 import { ITestCase, ITestOutput } from '../../../../models/interfaces';
 import { prettierLanguageName } from '../../../../utils/language.util';
@@ -40,7 +41,7 @@ const ProgramSimulation: React.FC<Props> = (props) => {
     setIsLoading(false);
     setOutput(result);
 
-    if (!!result) {
+    if (result) {
       // If there is new output, show the output
       setShowOutput(true);
 
@@ -60,9 +61,7 @@ const ProgramSimulation: React.FC<Props> = (props) => {
   };
 
   // success or error icons
-  const outputIcon = (
-    <span className="text-[1.2em]">{getOutputIcon(output?.correct)}</span>
-  );
+  const outputIcon = <span className="text-[1.2em]">{getOutputIcon(output?.correct)}</span>;
 
   return (
     <div className="flex flex-col gap-2 mb-4 bg-gray-50 rounded overflow-hidden shadow">
@@ -72,11 +71,7 @@ const ProgramSimulation: React.FC<Props> = (props) => {
           {isLoading ? (
             <ClipLoader color="#5552e4" size={30} />
           ) : (
-            <Button
-              onClick={handleCodeRun}
-              size="small"
-              className="min-w-[4rem] !py-1 !rounded-md"
-            >
+            <Button onClick={handleCodeRun} size="small" className="min-w-[4rem] !py-1 !rounded-md">
               Run
             </Button>
           )}

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ForumNav from '@/components/forum/nav/ForumNav';
 
 function Layout({ children }: { children: React.ReactNode }) {

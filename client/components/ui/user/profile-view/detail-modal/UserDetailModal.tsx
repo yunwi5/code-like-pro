@@ -3,8 +3,9 @@ import { BsTrophy } from 'react-icons/bs';
 
 import useBadgeQuery from '../../../../../hooks/badges/useBadgeQuery';
 import { IRankingOrder, IUserInfo } from '../../../../../models/interfaces';
-import AnimationModal from '../../../modals/AnimationModal';
 import Badges from '../../../badges/Badges';
+import AnimationModal from '../../../modals/AnimationModal';
+
 import UserDetailHeader from './sections/UserDetailHeader';
 import UserProfileInfo from './sections/UserProfileInfo';
 
@@ -32,11 +33,7 @@ const UserDetailModal: React.FC<Props> = ({ open, userInfo, rankInfo, onClose })
         <div className="flex flex-col gap-2 pb-4 text-slate-700 bg-slate-200/90">
           <div className="max-h-[25rem] max-w-[100%] px-4 lg:px-7 py-6 overflow-y-scroll">
             {/* User profile information such as languages and ranking info */}
-            <UserProfileInfo
-              userInfo={userInfo}
-              rankInfo={rankInfo}
-              numBadges={badges.length}
-            />
+            <UserProfileInfo userInfo={userInfo} rankInfo={rankInfo} numBadges={badges.length} />
 
             {/* Show the badge section only if the user has some badges */}
             {badges.length > 0 && (

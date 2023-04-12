@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
-import { memo, FC } from 'react';
+import { FC, memo } from 'react';
 import { BiEditAlt } from 'react-icons/bi';
+
 import { IDifficultyVote } from '../../../../models/interfaces';
 import { DifficultyTextColorMap } from '../../../../utils/colors.util';
 import Button from '../../../ui/buttons/Button';

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { TbBulb } from 'react-icons/tb';
+
 import { Difficulty } from '../../../../models/enums';
 import { IExerciseWithId } from '../../../../models/interfaces';
 import { DifficultyColorMap } from '../../../../utils/colors.util';
@@ -14,8 +15,7 @@ import InfoTooltip from '../../../ui/tooltip/InfoTooltip';
 type Props = { exercise: IExerciseWithId };
 
 const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
-  const { averageDifficulty, averageRatingRounded } =
-    getAverageDifficultyByRatings(exercise);
+  const { averageDifficulty, averageRatingRounded } = getAverageDifficultyByRatings(exercise);
   const { overallDifficulty, overallRatingRounded } = getOverallDifficulty(exercise);
 
   const creatorDifficulty = exercise.difficulty;
@@ -29,8 +29,8 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
       </h3>
 
       <p>
-        We consider creator&apos;s difficulty <strong>(25%)</strong> and users&apos;
-        average difficulty ratings <strong>(75%)</strong>
+        We consider creator&apos;s difficulty <strong>(25%)</strong> and users&apos; average
+        difficulty ratings <strong>(75%)</strong>
       </p>
 
       <div>
@@ -65,12 +65,8 @@ const DifficultyAdjustmentInfo: FC<Props> = ({ exercise }) => {
       </div>
 
       <div>
-        Overall Difficulty = {creatorDifficultyValue} x 0.25 + {averageRatingRounded} x
-        0.75 ={' '}
-        <span
-          className="font-semibold"
-          style={{ color: DifficultyColorMap[overallDifficulty] }}
-        >
+        Overall Difficulty = {creatorDifficultyValue} x 0.25 + {averageRatingRounded} x 0.75 ={' '}
+        <span className="font-semibold" style={{ color: DifficultyColorMap[overallDifficulty] }}>
           {overallDifficulty} ({overallRatingRounded} / {MAX_DIFFICULTY_VALUE})
         </span>
       </div>

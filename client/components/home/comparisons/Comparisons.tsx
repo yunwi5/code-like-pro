@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
 import { MdOutlineCheck } from 'react-icons/md';
+import { motion } from 'framer-motion';
 
-import useWindowSize from '../../../hooks/ui/useWindowSize';
 import { Logo } from '../../../assets';
+import useWindowSize from '../../../hooks/ui/useWindowSize';
 
 const variants = {
   initial: {
@@ -26,9 +26,7 @@ const Comparisons: React.FC = () => {
 
   return (
     <section className="flex flex-col gap-8 items-center py-8 md:px-10">
-      <h2
-        className={`px-2 sm:px-10 text-center text-3xl text-gray-500 font-semibold capitalize`}
-      >
+      <h2 className={`px-2 sm:px-10 text-center text-3xl text-gray-500 font-semibold capitalize`}>
         Nothing more than existing platform?&nbsp; No, better.
       </h2>
 

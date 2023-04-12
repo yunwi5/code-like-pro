@@ -1,9 +1,12 @@
 'use client';
-import { useTopicParam } from '@/hooks/utils/useTopicParam';
 import Link from 'next/link';
+
+import { useTopicParam } from '@/hooks/utils/useTopicParam';
+
 import { ProgrammingTopicList } from '../../models/enums';
 import { getGlobalRankigLink, getTopicRankingLink } from '../../utils/links.util';
 import ActiveLink from '../ui/links/ActiveLink';
+
 import RankingHeader from './sections/RankingHeader';
 
 interface Props {

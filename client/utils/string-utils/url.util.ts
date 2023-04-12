@@ -6,7 +6,5 @@ export function slugify(str: string): string {
 }
 
 export function deslugify(str: string): string {
-  return str
-    .replace(/-/g, ' ')
-    .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase());
+  return str.replace(/-/g, ' ').replace(/(?:^|\s)\S/g, (a) => a.toUpperCase());
 }

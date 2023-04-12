@@ -1,7 +1,8 @@
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { IoMdCreate } from 'react-icons/io';
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+
 import {
   ForumPostSortingKey,
   SearchKey,
@@ -51,8 +52,7 @@ const ForumPostsControl: React.FC = () => {
     sorting.direction === SortingDirection.DESCENDING;
 
   const isSortedByLikes =
-    sorting.key === ForumPostSortingKey.LIKES &&
-    sorting.direction === SortingDirection.DESCENDING;
+    sorting.key === ForumPostSortingKey.LIKES && sorting.direction === SortingDirection.DESCENDING;
 
   return (
     <div className="flex flex-col gap-3 px-2 py-2 pb-4 border-b-2 border-gray-300">

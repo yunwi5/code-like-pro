@@ -1,8 +1,9 @@
 'use client';
 import React, { useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { useUserContext } from '../../store/context/UserContext';
 import { registerRequest } from '../../apis/auth.api';
+import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification.util';
 import {
   invalidateEmail,
@@ -10,8 +11,8 @@ import {
   invalidatePasswordConfirm,
   invalidateUsername,
 } from '../../utils/string-utils/validation.util';
+
 import AuthCard from './AuthCard';
-import { useRouter } from 'next/navigation';
 
 type IRegisterState = {
   email: string;
@@ -49,10 +50,7 @@ const RegisterForm = () => {
     if (key === 'password' || key === 'all')
       errorState.password = invalidatePassword(state.password);
     if (key === 'passwordConfirm' || key === 'all')
-      errorState.passwordConfirm = invalidatePasswordConfirm(
-        state.password,
-        state.passwordConfirm,
-      );
+      errorState.passwordConfirm = invalidatePasswordConfirm(state.password, state.passwordConfirm);
 
     setErrorState({ ...errorState, overall: '' });
     return errorState;

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import useRanking from '../../hooks/ranking/useRanking';
 import RankingPodium from '../ranking/sections/RankingPodium';
 import ArrowLink from '../ui/links/ArrowLink';
@@ -20,8 +21,7 @@ const TopUsers: React.FC = () => {
           <div className="flex flex-col justify-start">
             <h1 className="my-2 text-gray-600 text-4xl">Top Users</h1>
             <h2 className="lg:w-[70%] my-2 leading-7">
-              Top ranked users who are essentially the most talented programmers in our
-              platform.
+              Top ranked users who are essentially the most talented programmers in our platform.
             </h2>
             <ArrowLink to="/ranking">Ranking</ArrowLink>
           </div>

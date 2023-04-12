@@ -4,6 +4,4 @@ export enum VotingItemSortingKey {
   VOTES = 'Votes', // Sorting by upvotes - downvotes value
 }
 
-export const VotingItemSortingKeyList = Object.freeze(
-  Object.values(VotingItemSortingKey),
-);
+export const VotingItemSortingKeyList = Object.freeze(Object.values(VotingItemSortingKey));

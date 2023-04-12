@@ -1,10 +1,11 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Language } from '../../../models/enums';
-import CodeEditor from '../editor/CodeEditor';
-import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
-import { ImBin2 } from 'react-icons/im';
-import { ITestCase, ITestCaseProps, ITestOutput } from '../../../models/interfaces';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
+import { ImBin2 } from 'react-icons/im';
+
+import { Language } from '../../../models/enums';
+import { ITestCase, ITestCaseProps, ITestOutput } from '../../../models/interfaces';
+import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
+import CodeEditor from '../editor/CodeEditor';
 
 interface Props {
   className?: string;
@@ -220,12 +221,7 @@ const TestCaseControl: FC<ControlProps> = ({ onHidden, hidden, disabled, onDelet
   return (
     <div className="-mt-1 flex-between">
       <p className="flex">
-        <input
-          type="checkbox"
-          disabled={disabled}
-          onChange={onHidden}
-          checked={hidden ?? false}
-        />
+        <input type="checkbox" disabled={disabled} onChange={onHidden} checked={hidden ?? false} />
         &ensp;Hidden&nbsp;
         <span className="hidden md:inline">Test</span>
       </p>

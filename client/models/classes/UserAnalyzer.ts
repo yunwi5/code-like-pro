@@ -43,10 +43,7 @@ export class UserAnalyzer {
     return getTopicChartDataArray(this.submissions);
   }
 
-  getExerciseCreationTrend(
-    trendMode: TrendPeriodMode,
-    numPeriods: number = 5,
-  ): IChartData[] {
+  getExerciseCreationTrend(trendMode: TrendPeriodMode, numPeriods: number = 5): IChartData[] {
     // There are four trend analysis modes: Day, Week, Month and Year.
     switch (trendMode) {
       case TrendPeriodMode.DAY:

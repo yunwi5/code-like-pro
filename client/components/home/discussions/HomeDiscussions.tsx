@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 import { ForumCategoryList } from '../../../models/enums';
 import Button from '../../ui/buttons/Button';
+
 import ForumCard from './ForumCard';
+
 import styles from './HomeDiscussions.module.scss';
-import Link from 'next/link';
 
 const HomeDiscussions: React.FC = () => {
   return (
@@ -14,8 +16,8 @@ const HomeDiscussions: React.FC = () => {
         Global discussion space across 7 categories
       </h2>
       <p className="text-gray-600 max-w-[80%] md:max-w-[50%] text-center">
-        We provide free discussion space where users can make posts about programming &
-        tech related topics, and other users can like or add comments.
+        We provide free discussion space where users can make posts about programming & tech related
+        topics, and other users can like or add comments.
       </p>
       <div className={styles.grid}>
         {ForumCategoryList.map((forum, idx) => (

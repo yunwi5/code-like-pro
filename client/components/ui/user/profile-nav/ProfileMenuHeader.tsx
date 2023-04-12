@@ -1,6 +1,7 @@
 import React from 'react';
-import ProfilePicture from '../ProfilePicture';
+
 import { useUserContext } from '../../../../store/context/UserContext';
+import ProfilePicture from '../ProfilePicture';
 
 // Profile info section that displays brief user information in the user profile dropdown menu.
 const ProfileMenuHeader: React.FC<{ className?: string }> = ({ className = '' }) => {

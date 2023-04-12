@@ -1,11 +1,11 @@
 import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import Image from 'next/image';
 
 import { IBadge } from '../../../../models/interfaces';
 import { BadgeImageMap } from '../../../../utils/badge.util';
 import { getDateFormat } from '../../../../utils/datetime.util';
 import HoveringLabel from '../../tooltip/HoveringLabel';
-import Image from 'next/image';
 
 interface Props {
   badge: IBadge;
@@ -22,9 +22,7 @@ const BadgeDetail: React.FC<Props> = ({ badge, open, onClose }) => {
         </div>
         <div className="col-span-2 row-span-3 flex-center border-r-[3px] border-main-300">
           <HoveringLabel label={'Ultimate Rare!'}>
-            <strong className="text-main-500 text-[4.5rem] leading-[4rem]">
-              {badge.rarity}
-            </strong>
+            <strong className="text-main-500 text-[4.5rem] leading-[4rem]">{badge.rarity}</strong>
           </HoveringLabel>
         </div>
         <div className="col-span-5 px-2 py-[0.35rem] flex-center text-xl text-main-500 font-semibold border-b-[3px] border-main-300">
@@ -36,8 +34,7 @@ const BadgeDetail: React.FC<Props> = ({ badge, open, onClose }) => {
             {badge.description}
           </p>
           <time className="mt-auto self-end font-semibold">
-            Awarded At:{' '}
-            <span className="font-bold">{getDateFormat(badge.awardedAt)}</span>
+            Awarded At: <span className="font-bold">{getDateFormat(badge.awardedAt)}</span>
           </time>
         </div>
 

@@ -1,9 +1,12 @@
 import React from 'react';
+
 import { ForumCategoryList } from '../../../models/enums';
 import { ForumIcons } from '../../../utils/forum.util';
 import { getForumCategoryLink } from '../../../utils/links.util';
 import ActiveLink from '../../ui/links/ActiveLink';
+
 import MobileForumNavDropdown from './MobileForumNavDropdown';
+
 import './ForumNav.scss';
 
 /* Mobile breakpoint is sm - 640px */

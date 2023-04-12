@@ -7,10 +7,11 @@ import { postTestCasesMerge } from '../../../../apis/exercise.api';
 import { ITestCaseWithOutput } from '../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { toastNotify } from '../../../../utils/notification.util';
-import useCustomTests from '../../hooks/useCustomTests';
-import useTestCasesWithOutputs from '../../hooks/useTestCasesWithOutputs';
 import Button from '../../../ui/buttons/Button';
 import AnimationModal from '../../../ui/modals/AnimationModal';
+import useCustomTests from '../../hooks/useCustomTests';
+import useTestCasesWithOutputs from '../../hooks/useTestCasesWithOutputs';
+
 import MergeableTestCasesList from './MergeableTestCasesList';
 
 interface Props {
@@ -47,10 +48,7 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
   const { addCustomTest } = useCustomTests();
   const [requestLoading, setRequestLoading] = useState(false);
 
-  const renamedTests = useMemo(
-    () => renameTestCases(testCasesWithOutputs),
-    [testCasesWithOutputs],
-  );
+  const renamedTests = useMemo(() => renameTestCases(testCasesWithOutputs), [testCasesWithOutputs]);
 
   if (exercise == null) return null;
 
@@ -98,15 +96,13 @@ const TestCasesMergeModal: FC<Props> = ({ open, onClose }) => {
         <div className="flex flex-col gap-2 pt-2 pb-4 text-slate-700 bg-slate-100">
           <div className="max-h-[30rem] max-w-[100%] flex flex-col gap-3 px-7 py-2 overflow-y-scroll">
             <p>
-              You can add your custom tests to the existing challenge to enhance our
-              tests! But, the maximum number of tests that the challenge can have are{' '}
+              You can add your custom tests to the existing challenge to enhance our tests! But, the
+              maximum number of tests that the challenge can have are{' '}
               <span className="mark">30</span> for now.
             </p>
 
             <div className="flex-between">
-              <p className="text-lg font-semibold">
-                Total {testCasesWithOutputs.length} Tests
-              </p>
+              <p className="text-lg font-semibold">Total {testCasesWithOutputs.length} Tests</p>
 
               <Button
                 onClick={addCustomTest}

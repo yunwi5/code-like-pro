@@ -1,7 +1,8 @@
+import React from 'react';
+import { NextPage } from 'next';
+
 import RegisterForm from '@/components/auth/RegisterForm';
 import { AppProperty } from '@/constants';
-import { NextPage } from 'next';
-import React from 'react';
 
 export const metadata = {
   title: `Register | ${AppProperty.APP_NAME}`,

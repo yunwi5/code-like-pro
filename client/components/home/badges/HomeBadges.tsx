@@ -1,6 +1,8 @@
 import React from 'react';
-import AboutBadges from './AboutBadges';
+
 import BadgeSpecs from '../../ui/badges/badge-specs/BadgeSpecs';
+
+import AboutBadges from './AboutBadges';
 
 // Badge introduction and badge rarity explanations
 const HomeBadges: React.FC = () => {

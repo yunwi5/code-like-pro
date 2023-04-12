@@ -26,9 +26,7 @@ export function sortExercises(exercises: IExerciseCard[], sortingState: ISorting
 
   // Sort by number of issue reports
   if (sortingState.key === ExerciseSortingKey.ISSUE_REPORTS) {
-    return exercises.sort((a, b) =>
-      isAsc ? a.reports - b.reports : b.reports - a.reports,
-    );
+    return exercises.sort((a, b) => (isAsc ? a.reports - b.reports : b.reports - a.reports));
   }
 
   // Sort by difficulty

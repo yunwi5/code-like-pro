@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { CreationSectionList } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import ChallengeActions from '../sections/CreationActions';
@@ -22,10 +23,7 @@ const CreationSidebar: React.FC = () => {
                 key={section}
                 className={`py-1 pl-2 border-l-[4px] border-l-gray-400/70 cursor-pointer text-lg ${activeClass}`}
               >
-                <a
-                  className={`hover:text-main-600 link-underline-effect`}
-                  href={`#${section}`}
-                >
+                <a className={`hover:text-main-600 link-underline-effect`} href={`#${section}`}>
                   {section}
                 </a>
               </li>

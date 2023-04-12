@@ -28,11 +28,7 @@ function useBrowsing(exercises: IExerciseCard[]) {
     // Filter exercises by selected language, difficulty and tags.
     let filtered = filterExercises(searchedExercises, filtering);
     // Filter exercises further by user submission status (result).
-    return filterExercisesBySubmissionStatus(
-      filtered,
-      submissionMap,
-      filtering.submissionStatus,
-    );
+    return filterExercisesBySubmissionStatus(filtered, submissionMap, filtering.submissionStatus);
   }, [searchedExercises, filtering]);
 
   // Do sorting last as it is the most expensive operation.

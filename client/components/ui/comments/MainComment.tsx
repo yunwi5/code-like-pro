@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
+import useReplyCommentsMutation from '../../../hooks/comment/reply-comments/useReplyCommentsMutation';
+import useReplyCommentsQuery from '../../../hooks/comment/reply-comments/useReplyCommentsQuery';
 import { IComment } from '../../../models/interfaces';
 import CommentCard from '../cards/CommentCard';
+
 import CommentForm from './CommentForm';
-import useReplyCommentsQuery from '../../../hooks/comment/reply-comments/useReplyCommentsQuery';
-import useReplyCommentsMutation from '../../../hooks/comment/reply-comments/useReplyCommentsMutation';
 
 interface Props {
   comment: IComment;
@@ -17,8 +18,9 @@ const MainComment: React.FC<Props> = ({ comment, onUpdate, onDelete }) => {
   const [showReplyComments, setShowReplyComments] = useState(false);
 
   const { replyComments } = useReplyCommentsQuery(comment._id);
-  const { postReplyComment, updateReplyComment, deleteReplyComment } =
-    useReplyCommentsMutation(comment._id);
+  const { postReplyComment, updateReplyComment, deleteReplyComment } = useReplyCommentsMutation(
+    comment._id,
+  );
 
   const handleSubmitReply = async (text: string) => postReplyComment({ text });
 

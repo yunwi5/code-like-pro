@@ -1,11 +1,12 @@
 import Image from 'next/image';
+
 import { AvatarImageSrcList } from '../../../../assets/avatars';
 import { useProfileEditContext } from '../../../../store/context/ProfileEditContext';
 
 const ProfileAvatarOptions: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const { currentPicture, setPicture } = useProfileEditContext();
 
-  let pictureOptions = currentPicture
+  const pictureOptions = currentPicture
     ? [currentPicture, ...AvatarImageSrcList]
     : AvatarImageSrcList;
 

@@ -5,6 +5,7 @@ import useForumBrowsing from '../../../../hooks/useForumBrowsing';
 import usePagination from '../../../../hooks/utils/usePagination';
 import { useAppSelector } from '../../../../store/redux/store';
 import PageNavigation from '../../../ui/PageNavigation';
+
 import ForumPostListItem from './ForumPostListItem';
 
 const POST_PER_PAGE = 8;
@@ -32,9 +33,7 @@ const ForumPostsList: React.FC = () => {
       )}
       <div>
         {!isLoading &&
-          currentPagePosts.map((post) => (
-            <ForumPostListItem key={post._id} post={post} />
-          ))}
+          currentPagePosts.map((post) => <ForumPostListItem key={post._id} post={post} />)}
       </div>
       <PageNavigation
         currentPage={page}

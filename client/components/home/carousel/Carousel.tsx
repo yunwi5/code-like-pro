@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { AnimatePresence, motion } from 'framer-motion';
 import { wrap } from 'popmotion';
 
-import { mod } from '../../../utils/number.util';
 import { AppImages } from '../../../assets/app-images';
 import { AppProperty } from '../../../constants';
+import { mod } from '../../../utils/number.util';
+
 import './Carousel.scss';
 
 const variants = {
@@ -61,7 +62,7 @@ export const Carousel: React.FC = () => {
   // Every 4s, transition to other pages automatically
   // For automatic animation effects
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       // Automatically move by current direction
       paginate(direction);
     }, 4000);
@@ -128,9 +129,7 @@ export const Carousel: React.FC = () => {
             key={idx}
             onClick={() => paginate(idx - page)}
             className={`${paginateBtnClass} ${
-              page === idx
-                ? 'bg-main-300 hover:bg-main-400'
-                : 'bg-gray-200/80 hover:bg-gray-200'
+              page === idx ? 'bg-main-300 hover:bg-main-400' : 'bg-gray-200/80 hover:bg-gray-200'
             }`}
           ></span>
         ))}

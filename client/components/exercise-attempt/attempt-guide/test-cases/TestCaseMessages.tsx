@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+
 import { ITestCase, ITestCaseWithOutput } from '../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 
@@ -14,8 +15,7 @@ function getOpenAndHiddenTestCounts(testCases: ITestCase[]) {
 function generateOutputMessages(testCases: ITestCaseWithOutput[]) {
   if (testCases.length < 1) return ['', ''];
 
-  const [openTestCasesCount, hiddenTestCasesCount] =
-    getOpenAndHiddenTestCounts(testCases);
+  const [openTestCasesCount, hiddenTestCasesCount] = getOpenAndHiddenTestCounts(testCases);
 
   let openTestCorrectCount = 0,
     hiddenTestCorrectCount = 0;
@@ -35,8 +35,8 @@ function generateOutputMessages(testCases: ITestCaseWithOutput[]) {
       key={'tests-correct'}
       className={`${allOpenTestsCorrect ? 'text-emerald-500' : 'text-rose-500'}`}
     >
-      Open Test{openTestCorrectCount !== 1 && 's'} {openTestCorrectCount}/
-      {openTestCasesCount} Correct
+      Open Test{openTestCorrectCount !== 1 && 's'} {openTestCorrectCount}/{openTestCasesCount}{' '}
+      Correct
     </p>,
     <p
       key={'tests-incorrect'}

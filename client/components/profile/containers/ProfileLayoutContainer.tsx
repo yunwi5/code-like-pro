@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
+
 import { ProfileSection } from '@/models/enums';
+
 import ProfileNav from '../nav/ProfileNav';
 
 type ProfileLayoutContainerProps = {
@@ -7,10 +9,7 @@ type ProfileLayoutContainerProps = {
   children: React.ReactNode;
 };
 
-const ProfileLayoutContainer: FC<ProfileLayoutContainerProps> = ({
-  activeSection,
-  children,
-}) => {
+const ProfileLayoutContainer: FC<ProfileLayoutContainerProps> = ({ activeSection, children }) => {
   return (
     <>
       <h1 className="hidden sm:block mb-3 pl-2 sm:pl-0 text-gray-600 text-3xl self-start">

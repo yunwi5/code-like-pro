@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write '**/*.{ts,tsx,scss}'",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}'",
     "test:e2e": "npx cypress open"
   },
   "dependencies": {
@@ -51,6 +52,7 @@
     "eslint-config-next": "13.2.4",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "postcss": "^8.4.16",
     "prettier": "^2.8.7",
     "prettier-quick": "^0.0.5",

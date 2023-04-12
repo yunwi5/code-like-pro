@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiOutlineWarning } from 'react-icons/ai';
+
 import { CodeMonitor } from '../../../assets';
 
 // Header of the showcases invite page.
@@ -14,8 +15,7 @@ const ShowCaseInviteHeader: React.FC = () => {
         </h1>
         <div className="mt-5 flex flex-col gap-y-2 sm:gap-y-[2px] text-center md:text-left text-base lg:text-[1.075rem] text-gray-500">
           <p>
-            We encourage you to join our challenge showcase forums and showcase your
-            amazing work!
+            We encourage you to join our challenge showcase forums and showcase your amazing work!
           </p>
           <p className="gap-1 text-stone-500 text-base">
             <AiOutlineWarning className="inline text-stone-500 -translate-y-[2px]" />

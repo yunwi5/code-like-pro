@@ -30,8 +30,9 @@ function useForumPostCommentsMutation(postId: string) {
   };
 
   const getCurrentPostData = (): IForumPostPopulated | undefined => {
-    const oldPostData: { data: IForumPostPopulated } | undefined =
-      queryClient.getQueryData([postQueryKey]);
+    const oldPostData: { data: IForumPostPopulated } | undefined = queryClient.getQueryData([
+      postQueryKey,
+    ]);
 
     return oldPostData?.data;
   };
@@ -39,11 +40,7 @@ function useForumPostCommentsMutation(postId: string) {
   const postComment = async (commentProp: CommentProp) => {
     if (!postId) return;
 
-    const {
-      ok,
-      message,
-      data: newComment,
-    } = await postForumPostComment(postId, commentProp);
+    const { ok, message, data: newComment } = await postForumPostComment(postId, commentProp);
 
     if (ok && newComment) {
       const oldPost = getCurrentPostData();

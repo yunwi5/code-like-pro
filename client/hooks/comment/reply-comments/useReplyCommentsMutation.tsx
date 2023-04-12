@@ -31,10 +31,7 @@ function useReplyCommentsMutation(commentId: string) {
   };
 
   const updateReplyComment = async (replyCommentId: string, updateProp: CommentProp) => {
-    const { ok, data: updatedComment } = await CommentAPI.patchComment(
-      replyCommentId,
-      updateProp,
-    );
+    const { ok, data: updatedComment } = await CommentAPI.patchComment(replyCommentId, updateProp);
 
     if (ok && updatedComment) {
       updateItemInCache(updatedComment);

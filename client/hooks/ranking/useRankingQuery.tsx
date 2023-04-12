@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+
 import { getRanking, getTopicRanking } from '../../apis/ranking.api';
 import { ProgrammingTopic } from '../../models/enums';
 

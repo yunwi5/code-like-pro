@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
-import { CreationSection } from '../../../models/enums';
+
 import useScrollEffect from '../../../hooks/ui/useScrollEffect';
+import { CreationSection } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 
 interface Props {
@@ -12,13 +13,7 @@ interface Props {
 }
 
 // Wrapper component for each section of exercise creation.
-const CreationSectionContainer: React.FC<Props> = ({
-  id,
-  testId,
-  title,
-  className,
-  children,
-}) => {
+const CreationSectionContainer: React.FC<Props> = ({ id, testId, title, className, children }) => {
   const { setActiveSection, activeSection } = useExerciseCreationContext();
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -31,11 +26,7 @@ const CreationSectionContainer: React.FC<Props> = ({
   });
 
   return (
-    <section
-      className={`flex flex-col gap-3 ${className ?? ''}`}
-      id={id}
-      ref={sectionRef}
-    >
+    <section className={`flex flex-col gap-3 ${className ?? ''}`} id={id} ref={sectionRef}>
       <h2 className="font-semibold text-xl">{title}</h2>
       {children}
     </section>

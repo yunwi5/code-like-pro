@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
 import { AiFillCheckCircle, AiFillStar } from 'react-icons/ai';
+import { BsClock, BsFillTagsFill } from 'react-icons/bs';
 import { FaUser } from 'react-icons/fa';
 import { MdReportProblem } from 'react-icons/md';
-import { BsClock, BsFillTagsFill } from 'react-icons/bs';
-
-import { IExerciseCard } from '../../../models/interfaces';
-import { getDifficultyBtnClass } from '../../../utils/difficulty.util';
-import {
-  getExerciseAttemptPageLink,
-  getExerciseEditLink,
-} from '../../../utils/links.util';
-import { deleteExercise } from '../../../apis/exercise.api';
-import { useUserContext } from '../../../store/context/UserContext';
-import HoveringLabel from '../tooltip/HoveringLabel';
-import DeleteModal from '../modals/variations/DeleteModal';
-import LanguageLabel from '../icons/LanguageIcon';
-import EditButton from '../buttons/icon-buttons/EditButton';
-import DeleteButton from '../buttons/icon-buttons/DeleteButton';
-import useExerciseSubmissionsQuery from '../../../hooks/exercise/exercise-submissions.tsx/useExerciseSubmissionsQuery';
-import { getSubmissionStats } from '../../../utils/user-submission.util';
-import { getDateFormat } from '../../../utils/datetime.util';
 import { useRouter } from 'next/navigation';
+
+import { deleteExercise } from '../../../apis/exercise.api';
+import useExerciseSubmissionsQuery from '../../../hooks/exercise/exercise-submissions.tsx/useExerciseSubmissionsQuery';
+import { IExerciseCard } from '../../../models/interfaces';
+import { useUserContext } from '../../../store/context/UserContext';
+import { getDateFormat } from '../../../utils/datetime.util';
+import { getDifficultyBtnClass } from '../../../utils/difficulty.util';
+import { getExerciseAttemptPageLink, getExerciseEditLink } from '../../../utils/links.util';
+import { getSubmissionStats } from '../../../utils/user-submission.util';
+import DeleteButton from '../buttons/icon-buttons/DeleteButton';
+import EditButton from '../buttons/icon-buttons/EditButton';
+import LanguageLabel from '../icons/LanguageIcon';
+import DeleteModal from '../modals/variations/DeleteModal';
+import HoveringLabel from '../tooltip/HoveringLabel';
 
 interface Props {
   exercise: IExerciseCard;
@@ -78,8 +75,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
         {/* Exercise Info */}
         <ul className="flex-start flex-wrap gap-2 text-[0.82rem] sm:text-sm">
           <li className="flex-start gap-1">
-            <FaUser className="text-gray-600 text-base" />{' '}
-            {exercise.author?.name || 'Anonymous'}
+            <FaUser className="text-gray-600 text-base" /> {exercise.author?.name || 'Anonymous'}
           </li>
           <li className="flex-start gap-1">
             <AiFillStar className="text-yellow-500/80 text-base" /> {exercise.stars}
@@ -89,12 +85,10 @@ const ExerciseCard: React.FC<Props> = ({ exercise, className = '' }) => {
             {correctRate}%
           </li>
           <li className="flex-start gap-1">
-            <BsClock className="text-blue-500/80 text-base" />{' '}
-            {getDateFormat(exercise.createdAt)}
+            <BsClock className="text-blue-500/80 text-base" /> {getDateFormat(exercise.createdAt)}
           </li>
           <li className="hidden sm:flex justify-start items-center gap-1">
-            <MdReportProblem className="text-stone-500/80 text-base" /> {exercise.reports}{' '}
-            Reports
+            <MdReportProblem className="text-stone-500/80 text-base" /> {exercise.reports} Reports
           </li>
 
           {/* If the user is authorized (either creator or admin), give edit and delete accesses */}

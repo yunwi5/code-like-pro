@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+
 import useExerciseReportsQuery from '../../../hooks/exercise/exercise-reports/useExerciseReportsQuery';
 import { useExerciseAttemptCtx } from '../../../store/context/ExerciseAttemptContext';
-import ExerciseInfoNav from './layout/ExerciseInfoNav';
-import ExercisePrompt from './prompt/ExercisePrompt';
+
 import ExerciseIssueReports from './issue-reports/ExerciseIssueReports';
+import ExerciseInfoNav from './layout/ExerciseInfoNav';
 import PreviousSubmission from './previous-submission/PreviousSubmission';
+import ExercisePrompt from './prompt/ExercisePrompt';
 import TestCasesDisplay from './test-cases/AttemptTestCases';
 
 export enum SubSection {

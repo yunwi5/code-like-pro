@@ -10,4 +10,4 @@ export const ProfileSectionList = Object.freeze(Object.values(ProfileSection));
 
 export const getProfileSection = (section: string) => {
   return ProfileSectionList.find((s) => s.toLowerCase() === section.toLowerCase());
-}
+};

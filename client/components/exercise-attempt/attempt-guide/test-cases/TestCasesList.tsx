@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+
+import usePagination from '../../../../hooks/utils/usePagination';
 import { ITestCaseProps, ITestCaseWithOutput } from '../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
 import { listItemAnimations } from '../../../../utils/animations.util';
-import TestCase from '../../../ui/test-cases/TestCase';
-import usePagination from '../../../../hooks/utils/usePagination';
 import PageNavigation from '../../../ui/PageNavigation';
+import TestCase from '../../../ui/test-cases/TestCase';
 
 interface Props {
   testCasesWithOutputs: ITestCaseWithOutput[];

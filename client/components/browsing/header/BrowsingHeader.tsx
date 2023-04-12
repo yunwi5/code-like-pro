@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsFillFilterCircleFill } from 'react-icons/bs';
+
 import { IExerciseCard } from '../../../models/interfaces';
 
 interface Props {

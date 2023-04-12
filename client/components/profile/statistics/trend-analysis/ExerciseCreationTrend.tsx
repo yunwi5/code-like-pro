@@ -1,16 +1,15 @@
 import React, { useMemo, useState } from 'react';
+
 import { TrendPeriodMode } from '../../../../models/enums';
 import { IChartData, ITrendDataset } from '../../../../models/interfaces';
 import { useAnalysisContext } from '../../../../store/context/AnalysisContext';
 import { ExerciseCreationColor } from '../../../../utils/colors.util';
-import CustomSelect from '../../../ui/inputs/CustomSelect';
 import TrendChart from '../../../ui/charts/TrendChart';
+import CustomSelect from '../../../ui/inputs/CustomSelect';
 
 const numberOfPeriods = [5, 10, 15, 20, 25];
 
-const ExerciseCreationTrend: React.FC<{ trendMode: TrendPeriodMode }> = ({
-  trendMode,
-}) => {
+const ExerciseCreationTrend: React.FC<{ trendMode: TrendPeriodMode }> = ({ trendMode }) => {
   const { analyzer } = useAnalysisContext();
   // Number of periods to visualize on the chart. i.e. 5, 10, 15, or 20 recent days.
   const [numPeriods, setNumPeriods] = useState(5);

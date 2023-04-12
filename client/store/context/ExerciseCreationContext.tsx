@@ -20,9 +20,7 @@ import {
 } from '../../utils/exercise-utils/testcase';
 import { toastNotify } from '../../utils/notification.util';
 
-export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>(
-  null!,
-);
+export const ExerciseCreationContext = React.createContext<IExerciseCreationContext>(null!);
 
 export const useExerciseCreationContext = () => useContext(ExerciseCreationContext);
 
@@ -42,16 +40,11 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
   const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${
     existingExercise ? `-${existingExercise._id}` : ''
   }`;
-  const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExerciseDraft | ''>(
-    draftKey,
-    '',
-  );
+  const [exerciseDraft, setExerciseDraft] = useLocalStorage<IExerciseDraft | ''>(draftKey, '');
 
   const [name, setName] = useState(existingExercise?.name || '');
   const [prompt, setPrompt] = useState(existingExercise?.prompt || '');
-  const [language, setLanguage] = useState<Language>(
-    existingExercise?.language || Language.PYTHON,
-  );
+  const [language, setLanguage] = useState<Language>(existingExercise?.language || Language.PYTHON);
   const [difficulty, setDifficulty] = useState<Difficulty>(
     existingExercise?.difficulty || Difficulty.EASY,
   );
@@ -221,8 +214,6 @@ export const ExerciseCreationContextProvider: React.FC<Props> = ({
   };
 
   return (
-    <ExerciseCreationContext.Provider value={value}>
-      {children}
-    </ExerciseCreationContext.Provider>
+    <ExerciseCreationContext.Provider value={value}>{children}</ExerciseCreationContext.Provider>
   );
 };

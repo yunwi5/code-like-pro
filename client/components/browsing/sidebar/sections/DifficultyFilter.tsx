@@ -1,12 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+
 import { Difficulty, DifficultyList } from '../../../../models/enums';
 import { exerciseBrowsingActions } from '../../../../store/redux/browsing-slice';
 import { useAppSelector } from '../../../../store/redux/store';
-import {
-  getDifficultyActiveClass,
-  getDifficultyBtnClass,
-} from '../../../../utils/difficulty.util';
+import { getDifficultyActiveClass, getDifficultyBtnClass } from '../../../../utils/difficulty.util';
 
 const DifficultyFilter: React.FC = () => {
   const { difficulties } = useAppSelector((state) => state.browsing.filtering);
@@ -22,9 +20,7 @@ const DifficultyFilter: React.FC = () => {
       <ul className="flex gap-2">
         {DifficultyList.map((diff) => {
           const colorClass = getDifficultyBtnClass(diff);
-          const activeClass = difficulties.includes(diff)
-            ? getDifficultyActiveClass(diff)
-            : '';
+          const activeClass = difficulties.includes(diff) ? getDifficultyActiveClass(diff) : '';
 
           return (
             <li

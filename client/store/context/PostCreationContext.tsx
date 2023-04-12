@@ -4,11 +4,7 @@ import useDefaultCategory from '@/hooks/utils/useDefaultCategory';
 import { patchForumPost, postForumPost } from '../../apis/forum.api';
 import useLocalStorage from '../../hooks/utils/useLocalStorage';
 import { ForumCategory, ForumPostType } from '../../models/enums';
-import {
-  IForumPostProps,
-  IForumPost,
-  IForumPostPopulated,
-} from '../../models/interfaces';
+import { IForumPostProps, IForumPost, IForumPostPopulated } from '../../models/interfaces';
 import { toastNotify } from '../../utils/notification.util';
 import useAuth from '@/hooks/utils/useAuth';
 
@@ -55,10 +51,7 @@ interface Props {
 
 const DRAFT_LOCAL_STORATE_KEY = 'post_creation_draft';
 
-export const PostCreationContextProvider: React.FC<Props> = ({
-  children,
-  post: initialPost,
-}) => {
+export const PostCreationContextProvider: React.FC<Props> = ({ children, post: initialPost }) => {
   useAuth();
   const [name, setName] = useState(initialPost?.name ?? '');
   const [postType, setPostType] = useState<ForumPostType>(
@@ -70,9 +63,7 @@ export const PostCreationContextProvider: React.FC<Props> = ({
     initialPost?.category ?? defaultCategory ?? ForumCategory.GENERAL,
   );
 
-  const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${
-    initialPost ? `-${initialPost._id}` : ''
-  }`;
+  const draftKey = `${DRAFT_LOCAL_STORATE_KEY}${initialPost ? `-${initialPost._id}` : ''}`;
   const [postDraft, setPostDraft] = useLocalStorage<IForumPostProps | ''>(draftKey, '');
   const [content, setContent] = useState(initialPost?.content ?? '');
   const [tags, setTags] = useState<string[]>(initialPost?.tags || []);
@@ -146,7 +137,5 @@ export const PostCreationContextProvider: React.FC<Props> = ({
     createdPost,
   };
 
-  return (
-    <PostCreationContext.Provider value={value}>{children}</PostCreationContext.Provider>
-  );
+  return <PostCreationContext.Provider value={value}>{children}</PostCreationContext.Provider>;
 };

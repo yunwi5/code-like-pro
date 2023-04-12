@@ -1,14 +1,16 @@
 import React, { useRef, useState } from 'react';
-import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { AiOutlineUsergroupAdd } from 'react-icons/ai';
+import { AiOutlineClose } from 'react-icons/ai';
 import { FaLaptopCode, FaRegChartBar, FaRegEdit } from 'react-icons/fa';
 import { IoPodiumOutline } from 'react-icons/io5';
 import { SiVisualstudiocode } from 'react-icons/si';
-import { AiOutlineClose } from 'react-icons/ai';
+import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
 import { AppProperty } from '../../../constants';
-import StrengthCard from './StrengthCard';
 import Backdrop from '../../ui/modals/Backdrop';
+
+import StrengthCard from './StrengthCard';
+
 import styles from './Strengths.module.scss';
 
 const variants = {

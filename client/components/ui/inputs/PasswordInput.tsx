@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BiHide, BiShow } from 'react-icons/bi';
+
 import AuthInput from './AuthInput';
 
 type PasswordInputProps = {
