@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { getExercises } from '../../apis/exercise.api';
 
 function useExerciseListQuery() {
@@ -10,7 +11,7 @@ function useExerciseListQuery() {
 
   if (error) console.log(error);
 
-  return { isLoading, exercises: exercises || [], error };
+  return { isLoading, exercises, error };
 }
 
 export default useExerciseListQuery;
