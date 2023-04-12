@@ -1,0 +1,23 @@
+@keyframes loading-turn-on {
+  from {
+    opacity: 0.25;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+}
+
+.arrows-wrapper {
+  .arrow {
+    opacity: 0.25;
+    animation: loading-turn-on 200ms ease-out forwards;
+
+    @for $i from 1 through 50 {
+      &:nth-child(#{$i}) {
+        animation-delay: 200ms * $i;
+      }
+    }
+  }
+}
