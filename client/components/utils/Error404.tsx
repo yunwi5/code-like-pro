@@ -22,7 +22,7 @@ const Error404: FC<Error404Props> = ({ message = 'Page Not Found', additionalLin
   return (
     <div className="flex flex-col items-center justify-center min-h-[85vh] min-w-[50vw] text-center">
       <div className="flex-center flex-col gap-4">
-        <TbError404 className="text-main-500 text-[25rem]" />
+        <TbError404 className="text-main-500 text-[17.5rem] md:text-[25rem]" />
         <div className="-mt-[3rem] flex-center gap-2 text-3xl font-bold text-gray-600">
           {message}
         </div>
