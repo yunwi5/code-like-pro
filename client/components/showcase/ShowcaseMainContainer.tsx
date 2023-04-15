@@ -12,22 +12,20 @@ import { toastNotify } from '@/utils/notification.util';
 import ShowcaseMain from './ShowcaseMain';
 
 type ShowcaseMainContainerProps = {
-  exerciseId: string;
   exercise: IExerciseWithId;
 };
 
 const ShowcaseMainContainer: FC<ShowcaseMainContainerProps> = ({
-  exerciseId,
   exercise: initialExerciseData,
 }) => {
   const router = useRouter();
   const { isLoading, submissionMap, user } = useUserContext();
+  const exerciseId = initialExerciseData._id;
   const { exercise = initialExerciseData, error } = useExerciseQuery(exerciseId);
   if (error) throw new Error(error);
 
   const userSubmission: IUserSubmissionPopulated | undefined = submissionMap[exerciseId || ''];
 
-  // prevent user from accessing showcase page if they have not solved the exercise yet.
   useEffect(() => {
     if (isLoading) return;
 

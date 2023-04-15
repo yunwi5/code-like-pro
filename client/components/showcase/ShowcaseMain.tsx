@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 import { getShowCaseSection, ShowCaseSection } from '../../models/enums';
 import { deslugify, slugify } from '../../utils/string-utils/url.util';

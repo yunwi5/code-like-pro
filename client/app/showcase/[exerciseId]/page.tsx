@@ -33,7 +33,7 @@ async function ShowcasePage({ params: { exerciseId } }: ShowcasePageProps) {
 
   return (
     <div className="flex-center min-h-[83vh] my-5 sm:my-10">
-      <ShowcaseMainContainer exercise={exercise} exerciseId={exerciseId} />
+      <ShowcaseMainContainer exercise={exercise} />
     </div>
   );
 }
