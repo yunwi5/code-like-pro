@@ -1,5 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { getTopicRankingData } from '@/apis/ranking.api';
 import RankingMain from '@/components/ranking/RankingMain';
@@ -31,7 +32,7 @@ export async function generateStaticParams() {
 async function TopicRanking({ params: { topic: topicQueryString } }: TopicRankingProps) {
   const topic = deslugify(topicQueryString) as ProgrammingTopic;
   if (topic == null || ProgrammingTopicList.includes(topic) === false) {
-    throw new Error('Non existing topic');
+    notFound();
   }
 
   const topicRankingData = await getTopicRankingData(topic, {

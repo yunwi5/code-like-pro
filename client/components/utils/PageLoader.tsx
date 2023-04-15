@@ -1,3 +1,4 @@
+'use client';
 import React, { FC } from 'react';
 import { BsPlayCircle } from 'react-icons/bs';
 import { ClockLoader } from 'react-spinners';
