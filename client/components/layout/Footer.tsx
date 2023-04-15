@@ -37,6 +37,7 @@ const socialIcons = [
 // Will need to include the logo in front, as soon as we design an app logo.
 const Footer: React.FC = () => {
   const { width } = useWindowSize();
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative z-[30] flex-between flex-col lg:flex-row gap-y-3 lg:px-[4.5%] xl:px-[6.5%] py-3 border-t-2 border-gray-200 ">
@@ -46,9 +47,7 @@ const Footer: React.FC = () => {
         {AppProperty.APP_NAME}
       </h2>
       <div className="flex flex-col sm:flex-row items-center gap-x-5 lg:ml-5 lg:mr-auto">
-        <p className="whitespace-nowrap text-gray-600/90">
-          Copyright &copy; 2022 CS 399 {AppProperty.APP_NAME}
-        </p>
+        <p className="whitespace-nowrap text-gray-600/90">Copyright &copy; {currentYear} Yunwi5</p>
         <div className="flex gap-4 text-gray-700">
           {footerLinks.map((link, idx) => (
             <Link key={idx} href={link.href} className="link-underline-effect">

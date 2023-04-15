@@ -114,13 +114,22 @@ code {
     @apply px-2 py-2 min-h-[2.5rem] border-2 border-gray-300 bg-gray-50 rounded-sm shadow-md focus:shadow-lg focus:outline focus:outline-2 focus:border-transparent;
   }
   .btn {
-    @apply px-3 py-2 text-lg transition-all rounded-sm shadow hover:shadow-md cursor-pointer;
+    @apply px-3 py-2 text-lg transition-all rounded shadow hover:shadow-md cursor-pointer;
   }
   .btn-fill {
     @apply text-gray-50 bg-main-400 hover:bg-main-500 border-2 border-main-400 hover:border-main-500;
   }
   .btn-empty {
     @apply text-main-600 border-2 border-main-400 bg-main-50/20 hover:bg-main-500 hover:text-main-50;
+  }
+  .btn-empty.indigo {
+    @apply text-indigo-600 border-indigo-500 bg-indigo-50/30 hover:bg-indigo-600/90 hover:text-indigo-50;
+  }
+  .btn-empty.purple {
+    @apply text-purple-600 border-purple-500 bg-purple-50/30 hover:bg-purple-600/90 hover:text-purple-50;
+  }
+  .btn-empty.pink {
+    @apply text-pink-600 border-pink-500 bg-pink-50/30 hover:bg-pink-600/90 hover:text-pink-50;
   }
   .btn-small {
     @apply px-2 py-[0.3rem] text-base;
