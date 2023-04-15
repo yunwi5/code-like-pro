@@ -114,7 +114,7 @@ code {
     @apply px-2 py-2 min-h-[2.5rem] border-2 border-gray-300 bg-gray-50 rounded-sm shadow-md focus:shadow-lg focus:outline focus:outline-2 focus:border-transparent;
   }
   .btn {
-    @apply px-3 py-2 text-lg transition-all rounded shadow hover:shadow-md cursor-pointer;
+    @apply px-3 py-2 text-lg whitespace-nowrap transition-all rounded shadow hover:shadow-md cursor-pointer;
   }
   .btn-fill {
     @apply text-gray-50 bg-main-400 hover:bg-main-500 border-2 border-main-400 hover:border-main-500;

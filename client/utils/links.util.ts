@@ -6,8 +6,9 @@ import {
   ShowCaseSection,
 } from '../models/enums';
 import { IForumPost, IForumPostPopulated } from '../models/interfaces';
-import { ProfileLinkMap } from './profile.util';
+
 import { slugify } from './string-utils/url.util';
+import { ProfileLinkMap } from './profile.util';
 
 export function getBrowsingPageLink() {
   return '/browse';
