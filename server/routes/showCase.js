@@ -34,7 +34,6 @@ router.patch('/:id', ensureAuthenticated, catchAsync(showCaseController.updateSh
 // Get comments
 router.get(
     '/:id/comment',
-    ensureAuthenticated,
     catchAsync(showCaseController.getComments),
 );
 

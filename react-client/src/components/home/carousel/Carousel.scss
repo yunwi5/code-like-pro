@@ -1,0 +1,13 @@
+.carousel {
+    .carousel-nav {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    &:hover {
+        .carousel-nav {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}

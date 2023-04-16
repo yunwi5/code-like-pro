@@ -1,0 +1,39 @@
+.badge-link {
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 0;
+        height: 100%;
+        background-color: rgba(#221fc7, 0.9);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .link-content {
+        position: inherit;
+        z-index: 1;
+    }
+
+    .link-content,
+    .link-icon {
+        transition: color 0.3 ease-in-out;
+        transition-delay: 250ms;
+    }
+
+    &:hover {
+        .link-content {
+            color: #fff;
+        }
+        .link-icon {
+            color: #bebdf5;
+        }
+    }
+
+    &:hover::after {
+        width: 100%;
+    }
+}

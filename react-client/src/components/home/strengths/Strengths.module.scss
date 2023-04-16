@@ -1,0 +1,36 @@
+.grid {
+    margin: 3.5rem auto;
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    justify-items: center;
+    padding-bottom: 3rem;
+    max-width: Min(95vw, 75rem);
+
+    // overall heading - Why UseSchedule
+    .heading {
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+
+    .strength {
+        transition: all 0.35s ease-in-out;
+
+        &:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+
+            .icon {
+                // font-size: 4.5rem;
+                transform: scale(120%);
+            }
+        }
+
+        @media only screen and (min-width: 800px) {
+            max-width: 25rem;
+        }
+    }
+
+    .icon {
+        transition: all 0.35s ease-in-out;
+    }
+}
