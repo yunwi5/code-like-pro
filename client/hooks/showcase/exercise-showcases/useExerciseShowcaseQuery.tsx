@@ -19,7 +19,7 @@ function useExerciseShowcaseQuery(exerciseId: string, refetchInterval: number = 
 
   const refetch = () => queryClient.refetchQueries([showcaseQueryKey]);
 
-  return { showcases: showcases || [], error, isLoading, refetch };
+  return { showcases: showcases, error, isLoading, refetch };
 }
 
 export default useExerciseShowcaseQuery;

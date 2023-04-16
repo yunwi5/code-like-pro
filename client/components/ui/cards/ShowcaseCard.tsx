@@ -8,7 +8,7 @@ import useShowcaseCommentQuery from '../../../hooks/showcase/showcase-comments/u
 import useShowcaseCommentsMutation from '../../../hooks/showcase/showcase-comments/useShowcaseCommentsMutation';
 import { SortingDirection, VotingItemSortingKey } from '../../../models/enums';
 import { IComment, IExercise, IShowCase, IVote } from '../../../models/interfaces';
-import { useShowcase } from '../../../store/context/ShowcaseContext';
+import { useShowcaseContext } from '../../../store/context/ShowcaseContext';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getDateTimeFormat } from '../../../utils/datetime.util';
 import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
@@ -26,7 +26,7 @@ interface Props {
 
 const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
   const { userDetail } = useUserContext();
-  const { userSubmission } = useShowcase();
+  const { userSubmission } = useShowcaseContext();
 
   const userId = userDetail?._id;
   const [votes, setVotes] = useState<IVote[]>(showcase.votes);
@@ -225,7 +225,7 @@ const btnClass =
 // Button to share the showcase in SNS
 const SocialShareButton: React.FC = () => {
   const [showPanel, setShowPanel] = useState<boolean>(false);
-  const { exercise, userSubmission } = useShowcase();
+  const { exercise, userSubmission } = useShowcaseContext();
 
   return (
     <div className="flex-center relative">

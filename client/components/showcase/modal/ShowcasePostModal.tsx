@@ -3,7 +3,7 @@ import { FaLaptopCode } from 'react-icons/fa';
 
 import useBadgeQualification from '../../../hooks/badges/useBadgeQualification';
 import useExerciseShowcasesMutation from '../../../hooks/showcase/exercise-showcases/useExerciseShowcasesMutation';
-import { useShowcase } from '../../../store/context/ShowcaseContext';
+import { useShowcaseContext } from '../../../store/context/ShowcaseContext';
 import CodeEditor from '../../ui/editor/CodeEditor';
 import CustomInput from '../../ui/inputs/CustomInput';
 import FormModal from '../../ui/modals/variations/FormModal';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const ShowcasePostModal: React.FC<Props> = ({ visible, onClose }) => {
-  const { userSubmission, exercise } = useShowcase();
+  const { userSubmission, exercise } = useShowcaseContext();
 
   const { postShowcase } = useExerciseShowcasesMutation(exercise?._id || '');
   const { qualifyShowcaseBadges } = useBadgeQualification();

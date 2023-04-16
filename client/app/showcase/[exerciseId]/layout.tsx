@@ -2,16 +2,22 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 
 import { getExerciseByIdData, getExercisesData } from '@/apis/exercise.api';
-import ShowcaseMainContainer from '@/components/showcase/ShowcaseMainContainer';
+import ShowcaseMain from '@/components/showcase/ShowcaseMain';
 import { AppProperty } from '@/constants';
+import { ShowcaseContextProvider } from '@/store/context/ShowcaseContext';
+
+type ShowcaseLayoutProps = {
+  children: React.ReactNode;
+  params: { exerciseId: string };
+};
+
+export const revalidate = 60;
 
 export const metadata = {
   title: `Showcase | ${AppProperty.APP_NAME}`,
   description:
     "Showcase page of a programming exercise where users can showcase their code, view other users' coding solutions and discuss the efficiency.",
 };
-
-export const revalidate = 60;
 
 export async function generateStaticParams() {
   const exercises = await getExercisesData({ authDisabled: true });
@@ -20,11 +26,7 @@ export async function generateStaticParams() {
   return exercises.map((exercise) => ({ exerciseId: exercise._id }));
 }
 
-type ShowcasePageProps = {
-  params: { exerciseId: string };
-};
-
-async function ShowcasePage({ params: { exerciseId } }: ShowcasePageProps) {
+async function ShowcaseLayout({ children, params: { exerciseId } }: ShowcaseLayoutProps) {
   const exercise = await getExerciseByIdData(exerciseId, {
     catchErrors: false,
     authDisabled: true,
@@ -33,9 +35,11 @@ async function ShowcasePage({ params: { exerciseId } }: ShowcasePageProps) {
 
   return (
     <div className="flex-center min-h-[83vh] my-5 sm:my-10">
-      <ShowcaseMainContainer exercise={exercise} exerciseId={exerciseId} />
+      <ShowcaseContextProvider exercise={exercise}>
+        <ShowcaseMain>{children}</ShowcaseMain>
+      </ShowcaseContextProvider>
     </div>
   );
 }
 
-export default ShowcasePage;
+export default ShowcaseLayout;
