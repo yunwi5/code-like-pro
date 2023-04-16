@@ -4,26 +4,20 @@
 # 3. Run 'docker-compose up' to start the services within the network 'codelikepro-network'.
 # 4. Run 'docker-compose stop' to stop services.
 
-version: "3"
+version: "3.8"
 services:
 
   client:
     build:
-      context: ./client
+      context: ./next-client
       dockerfile: Dockerfile
     ports:
       - 3000:3000
     container_name: codelikepro-client
     networks:
       - codelikepro-network
-    volumes:
-      - ./client/src:/usr/app/src
-      - ./client/public:/usr/app/public
     depends_on:
       - server
-    # docker-compose file to start in an interactive mode
-    stdin_open: true
-    tty: true
 
   server:
     build:
@@ -31,14 +25,24 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8080:8080
+    environment:
+      MONGO_URI: mongodb://database:27017/codelikepro
     container_name: codelikepro-server
     networks:
       - codelikepro-network
+
+  database:
+    image: mongo:4.4
+    ports:
+      - '27017:27017'
     volumes:
-      - ./server/src:/usr/app/src
+      - mongodb_data:/data/db
+    networks:
+      - codelikepro-network
 
 networks:
   codelikepro-network:
     driver: bridge
 
-# Volumnes for DB are on the cloud database.
+volumes:
+  mongodb_data:
