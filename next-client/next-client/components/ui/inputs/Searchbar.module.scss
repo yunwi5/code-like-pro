@@ -1,0 +1,14 @@
+.search {
+    .clear {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &:hover,
+    &:focus-within {
+        .clear {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}

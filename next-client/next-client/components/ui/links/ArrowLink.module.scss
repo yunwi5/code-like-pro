@@ -1,0 +1,30 @@
+// Custom animation for moving left and right.
+@keyframes move-parallel {
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(6px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+// Homepage button link styling
+.arrow-btn {
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-0.5rem);
+
+    .icon {
+        transition: all 0.35s ease-in-out;
+    }
+
+    &:hover {
+        transform: translateX(0rem);
+
+        .icon {
+            animation: move-parallel 0.95s linear infinite;
+        }
+    }
+}
