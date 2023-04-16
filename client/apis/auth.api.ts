@@ -1,6 +1,8 @@
 import { CredentialResponse } from '@react-oauth/google';
-import { getRequest, postRequest } from './common-requests';
+
 import { IUser } from '../models/interfaces/user/IUser';
+
+import { getRequest, postRequest } from './common-requests';
 
 const API_DOMAIN = '/auth';
 

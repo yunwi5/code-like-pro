@@ -1,4 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+
 import { getExerciseComments } from '../../../apis/exercise.api';
 import { getExerciseCommentsKey } from '../keys';
 
@@ -18,7 +19,7 @@ function useExerciseCommentsQuery(exerciseId: string, refetchInterval: number = 
 
   const refetch = () => queryClient.refetchQueries([commentQueryKey]);
 
-  return { comments: comments || [], error, isLoading, refetch };
+  return { comments, error, isLoading, refetch };
 }
 
 export default useExerciseCommentsQuery;

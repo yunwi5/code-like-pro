@@ -35,10 +35,8 @@ export function getShowcasePageLink(
   exerciseId: string,
   section: ShowCaseSection = ShowCaseSection.MODEL_ANSWER,
 ) {
-  // If the initial section is 'Showcase' or 'Discussions' users will direclty see that section
-  // without having to go through the model answer.
   const sectionQueryString = slugify(section);
-  return `/showcase/${exerciseId}?section=${sectionQueryString}`;
+  return `/showcase/${exerciseId}/${sectionQueryString}`;
 }
 
 export function getShowcaseInvitesPageLink() {

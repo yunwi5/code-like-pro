@@ -1,18 +1,26 @@
-import React, { useEffect, useMemo, useState } from 'react';
+'use client';
+import React, { FC, useEffect, useMemo, useState } from 'react';
+
+import useExerciseShowcaseQuery from '@/hooks/showcase/exercise-showcases/useExerciseShowcaseQuery';
 
 import useBadgeQualification from '../../../hooks/badges/useBadgeQualification';
 import { SortingDirection, VotingItemSortingKey } from '../../../models/enums';
 import { IShowCase } from '../../../models/interfaces';
-import { useShowcase } from '../../../store/context/ShowcaseContext';
+import { useShowcaseContext } from '../../../store/context/ShowcaseContext';
 import { useUserContext } from '../../../store/context/UserContext';
 import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import ShowcaseList from '../../ui/lists/ShowcaseList';
 import VotingItemSorter from '../../ui/sorting/VotingItemSorter';
-import ShowcaseLoader from '../ShowcaseLoader';
 
-const ShowcaseShowcases: React.FC = () => {
+type ShowcaseShowcasesProps = {
+  showcases: IShowCase[];
+};
+
+const ShowcaseShowcases: FC<ShowcaseShowcasesProps> = ({ showcases: initialShowcasesData }) => {
   const { userDetail } = useUserContext();
-  const { exercise, showcases, showcasesLoading } = useShowcase();
+  const { exercise } = useShowcaseContext();
+  const { showcases = initialShowcasesData } = useExerciseShowcaseQuery(exercise?._id ?? '');
+
   const { qualifyShowcaseBadges } = useBadgeQualification();
 
   const [sortingState, setSortingState] = useState({
@@ -20,7 +28,6 @@ const ShowcaseShowcases: React.FC = () => {
     direction: SortingDirection.DESCENDING,
   });
 
-  // Whenver sorting state changes, sort the showcases again.
   const sortedShowcases = useMemo(() => {
     return sortVotingItems(
       showcases,
@@ -43,11 +50,7 @@ const ShowcaseShowcases: React.FC = () => {
         <VotingItemSorter sortingState={sortingState} setSortingState={setSortingState} />
         <h5 className="text-gray-500 font-bold text-lg">{showcases.length} Showcases</h5>
       </div>
-      {showcasesLoading ? (
-        <ShowcaseLoader />
-      ) : (
-        <ShowcaseList showcases={sortedShowcases} exercise={exercise} />
-      )}
+      <ShowcaseList showcases={sortedShowcases} exercise={exercise} />
     </div>
   );
 };

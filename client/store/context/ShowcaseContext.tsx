@@ -1,57 +1,54 @@
-import React, { useContext } from 'react';
+'use client';
+import React, { useContext, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-import useExerciseCommentsQuery from '../../hooks/comment/exercise-comments/useExerciseCommentsQuery';
-import useExerciseShowcaseQuery from '../../hooks/showcase/exercise-showcases/useExerciseShowcaseQuery';
-import {
-  IComment,
-  IExerciseWithId,
-  IShowCase,
-  IUserSubmissionPopulated,
-} from '../../models/interfaces';
+import useExerciseQuery from '@/hooks/exercise/exercise/useExerciseQuery';
+import { getExerciseAttemptPageLink } from '@/utils/links.util';
+import { toastNotify } from '@/utils/notification.util';
+
+import { IExerciseWithId, IUserSubmissionPopulated } from '../../models/interfaces';
+
+import { useUserContext } from './UserContext';
 
 interface IShowcaseContext {
   exercise: IExerciseWithId | null;
-  userSubmission: IUserSubmissionPopulated | null;
-  comments: IComment[];
-  showcases: IShowCase[];
-  commentsLoading: boolean;
-  showcasesLoading: boolean;
+  userSubmission?: IUserSubmissionPopulated | null;
 }
 
-const ShowcaseContext = React.createContext<IShowcaseContext>({
-  exercise: null,
-  userSubmission: null,
-  comments: [],
-  showcases: [],
-  commentsLoading: false,
-  showcasesLoading: false,
-});
+const ShowcaseContext = React.createContext<IShowcaseContext>(null!);
 
-// Custom hook to access shwocase context data dirctly.
-export const useShowcase = () => useContext(ShowcaseContext);
+export const useShowcaseContext = () => useContext(ShowcaseContext);
 
 interface Props {
   exercise: IExerciseWithId;
-  userSubmission: IUserSubmissionPopulated | undefined;
   children: React.ReactNode;
 }
 
 export const ShowcaseContextProvider: React.FC<Props> = ({
-  exercise,
-  userSubmission = null,
+  exercise: initialExerciseData,
   children,
 }) => {
-  const { comments, isLoading: commentsLoading } = useExerciseCommentsQuery(exercise._id, 800);
+  const router = useRouter();
+  const { isLoading, submissionMap, user } = useUserContext();
+  const exerciseId = initialExerciseData._id;
+  const { exercise = initialExerciseData, error } = useExerciseQuery(exerciseId);
+  if (error) throw new Error(error);
 
-  const { showcases, isLoading: showcasesLoading } = useExerciseShowcaseQuery(exercise._id);
+  const userSubmission: IUserSubmissionPopulated | undefined = submissionMap[exerciseId || ''];
+
+  // Authorization
+  useEffect(() => {
+    if (isLoading) return;
+    const notAuthorAndNotSolved = user?._id !== exercise.author._id && !userSubmission?.correct;
+    if (notAuthorAndNotSolved) {
+      toastNotify('You have not solved this exercise yet!', 'error');
+      router.push(getExerciseAttemptPageLink(exerciseId));
+    }
+  }, [isLoading, user?._id, exercise.author._id, userSubmission, exerciseId, router]);
 
   const value = {
     exercise,
     userSubmission,
-    comments,
-    showcases,
-    commentsLoading,
-    showcasesLoading,
   };
 
   return <ShowcaseContext.Provider value={value}>{children}</ShowcaseContext.Provider>;

@@ -1,7 +1,8 @@
+'use client';
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import { useShowcase } from '../../../store/context/ShowcaseContext';
+import { useShowcaseContext } from '../../../store/context/ShowcaseContext';
 import CodeEditor from '../../ui/editor/CodeEditor';
 import TagList from '../../ui/lists/TagList';
 
@@ -11,7 +12,7 @@ const TextEditor = dynamic(() => import('@/components/ui/editor/text-editor/Text
 
 // One of showcase sections that displays exercise prompt and model solution from the creator.
 const ShowcaseModelAnswer: React.FC = () => {
-  const { exercise } = useShowcase();
+  const { exercise } = useShowcaseContext();
 
   if (!exercise) return null;
 

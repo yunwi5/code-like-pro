@@ -2,7 +2,7 @@ import { FaListUl } from 'react-icons/fa';
 import { GrRotateLeft } from 'react-icons/gr';
 import { useRouter } from 'next/navigation';
 
-import { useShowcase } from '../../store/context/ShowcaseContext';
+import { useShowcaseContext } from '../../store/context/ShowcaseContext';
 import { getDifficultyBtnClass } from '../../utils/difficulty.util';
 import { getBrowsingPageLink, getExerciseAttemptPageLink } from '../../utils/links.util';
 import Button from '../ui/buttons/Button';
@@ -12,7 +12,7 @@ import ExerciseSpec from '../ui/spec/ExerciseSpec';
 /* Header layout breakpoint is lg - 1024px  */
 const ShowcaseHeader = () => {
   const router = useRouter();
-  const { exercise } = useShowcase();
+  const { exercise } = useShowcaseContext();
 
   if (!exercise) return null;
 

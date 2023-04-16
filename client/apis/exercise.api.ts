@@ -10,6 +10,7 @@ import {
   IUserSubmission,
   IVote,
 } from '../models/interfaces';
+
 import { deleteRequest, getRequest, postRequest, putRequest, ReqOptions } from './common-requests';
 
 const EXERCISE_API_DOMAIN = '/exercise';
@@ -102,14 +103,23 @@ export async function postExerciseShowCase(id: string, showcaseProps: ShowcasePr
   });
 }
 
-export async function getExerciseShowcases(id: string) {
+export async function getExerciseShowcases(id: string, options?: ReqOptions) {
   return await getRequest<IShowCase[]>({
+    options,
     url: `${EXERCISE_API_DOMAIN}/${id}/showcase`,
   });
 }
 
-export async function getExerciseComments(id: string) {
-  return await getRequest<IComment[]>({ url: `${EXERCISE_API_DOMAIN}/${id}/comment` });
+export async function getExerciseShowcasesData(id: string, options?: ReqOptions) {
+  return getExerciseShowcases(id, options).then((res) => res.data);
+}
+
+export async function getExerciseComments(id: string, options?: ReqOptions) {
+  return await getRequest<IComment[]>({ options, url: `${EXERCISE_API_DOMAIN}/${id}/comment` });
+}
+
+export async function getExerciseCommentsData(id: string, options: ReqOptions) {
+  return getExerciseComments(id, options).then((res) => res.data);
 }
 
 export async function postExerciseComment(id: string, comment: { text: string }) {
