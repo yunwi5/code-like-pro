@@ -8,7 +8,7 @@ function useForumPostMutation({ _id: postId, category }: IForumPostPopulated) {
     const postQueryKey = getForumPostKey(postId);
     const postCategoryQueryKey = getForumPostCategoryKey(category);
 
-    const updateCommentVotes = async (newVotes: IVote[]) => {
+    const updatePostVotes = async (newVotes: IVote[]) => {
         // Update individual post
         queryClient.setQueryData(
             [postQueryKey],
@@ -50,13 +50,13 @@ function useForumPostMutation({ _id: postId, category }: IForumPostPopulated) {
     const postVote = async (type: 'up' | 'down') => {
         const { data: updatedPost } = await postForumPostVote(postId, { type });
         if (!updatedPost) return;
-        updateCommentVotes(updatedPost.votes);
+        updatePostVotes(updatedPost.votes);
     };
 
     const deleteVote = async () => {
         const { data: updatedPost } = await deleteForumPostVote(postId);
         if (!updatedPost) return;
-        updateCommentVotes(updatedPost.votes);
+        updatePostVotes(updatedPost.votes);
     };
 
     const refetchPost = () => queryClient.refetchQueries([postQueryKey]);
