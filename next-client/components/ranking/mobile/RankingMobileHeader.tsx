@@ -23,7 +23,7 @@ const RankingMobileHeader: React.FC = () => {
       <HoveringLabel
         label="Categories"
         className="h-fit text-[0.8rem]"
-        onClick={(ps) => setShowSidebar((ps) => !ps)}
+        onClick={() => setShowSidebar((ps) => !ps)}
       >
         <AiOutlineUnorderedList className="mt-6 text-2xl hover:text-main-500 cursor-pointer" />
       </HoveringLabel>

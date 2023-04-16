@@ -2,8 +2,6 @@
 import { motion } from 'framer-motion';
 import Image, { StaticImageData } from 'next/image';
 
-import useWindowSize from '../../../hooks/ui/useWindowSize';
-
 const imageClass =
   'relative lg:absolute overflow-hidden rounded-sm border-[1.5px] border-gray-300 shadow hover:!opacity-100 hover:z-20';
 
@@ -16,7 +14,6 @@ interface ImageProps {
   delay?: number;
 }
 
-// Custom image component for home page image animation
 export const ImageBlock = ({ onClick, className, variants, delay, src, alt }: ImageProps) => {
   return (
     <motion.div

@@ -7,7 +7,6 @@ import { SiVisualstudiocode } from 'react-icons/si';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
 import { AppProperty } from '../../../constants';
-import Backdrop from '../../ui/modals/Backdrop';
 
 import StrengthCard from './StrengthCard';
 
@@ -98,9 +97,14 @@ const Strengths: React.FC = () => {
               </div>
             </motion.div>
           )}
-          {selectedId && <Backdrop key="backdrop" onClose={() => setSelectedId(null)} />}
         </AnimatePresence>
       </AnimateSharedLayout>
+
+      <div
+        className={`fixed top-0 left-0 h-screen w-screen ${
+          selectedId ? 'bg-black/40 z-[100]' : '-z-10'
+        }`}
+      />
     </section>
   );
 };
