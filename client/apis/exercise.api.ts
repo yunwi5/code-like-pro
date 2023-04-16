@@ -118,7 +118,7 @@ export async function getExerciseComments(id: string, options?: ReqOptions) {
   return await getRequest<IComment[]>({ options, url: `${EXERCISE_API_DOMAIN}/${id}/comment` });
 }
 
-export async function getExerciseCommentsData(id: string, options: ReqOptions) {
+export async function getExerciseCommentsData(id: string, options?: ReqOptions) {
   return getExerciseComments(id, options).then((res) => res.data);
 }
 
