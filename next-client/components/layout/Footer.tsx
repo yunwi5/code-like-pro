@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-[30] flex-between flex-col lg:flex-row gap-y-3 lg:px-[4.5%] xl:px-[6.5%] py-3 border-t-2 border-gray-200 ">
+    <footer className="relative z-[20] flex-between flex-col lg:flex-row gap-y-3 lg:px-[4.5%] xl:px-[6.5%] py-3 border-t-2 border-gray-200 ">
       <h2 className="logo flex-start flex-col lg:flex-row gap-1 text-2xl !text-main-400">
         {/* Display large logo for smaller screen (since the layout is a column layout), display small logo for large screen */}
         <Logo size={width < 1024 ? 42 : 25} />
@@ -88,7 +88,6 @@ const SocialIcon: React.FC<SocialIconProps> = ({ icon, label, href }) => {
       className="transition-all hover:scale-110 hover:brightness-125 relative"
     >
       {icon}
-      <span className="absolute text-white">{label}</span>
     </div>
   );
 };

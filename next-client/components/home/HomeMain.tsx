@@ -45,7 +45,7 @@ const HomeMain = () => {
           whileInView="animate"
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="relative z-20"
+          className="relative z-30"
         >
           <Strengths />
         </motion.div>
