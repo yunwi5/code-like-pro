@@ -21,8 +21,12 @@ const ProfileFavorites = () => {
     setSearchText,
   } = useExerciseSearch(exerciseCards);
 
-  // It means loading state, so show the loading spinner.
   if (!userDetail?.liked) return <ProfileLoader />;
+
+  const handleSearch = (searchKey: string, text: string) => {
+    setSearchKey(searchKey as SearchKey);
+    setSearchText(text);
+  };
 
   return (
     <ProfileSectionContainer>
@@ -32,12 +36,10 @@ const ProfileFavorites = () => {
         className="flex flex-col sm:flex-row justify-between sm:items-end gap-y-4 mb-6"
       >
         <Searchbar
-          onKeyChange={(newKey) => setSearchKey(newKey as SearchKey)}
-          onTextChange={(text) => setSearchText(text)}
-          keyValue={searchState.key}
-          textValue={searchState.text}
+          defaultSearchKey={searchState.key}
           searchKeys={SearchKeyList}
           label={null}
+          onSearch={handleSearch}
         />
         <h2 className="text-gray-500 font-semibold text-xl">
           {searchedExercises.length} Exercises

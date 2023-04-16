@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useTransition } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
 
@@ -10,37 +10,49 @@ import styles from './Searchbar.module.scss';
 
 interface Props {
   searchKeys: string[] | readonly string[];
+  onSearch: (searchKey: string, text: string) => void;
+  defaultSearchKey?: string;
   label?: string | null;
-  onKeyChange?: (newKey: string) => void;
-  keyValue?: string;
-  onTextChange?: (text: string) => void;
-  textValue?: string;
-  onSearch?: () => void;
   className?: string;
 }
 
 const Searchbar: React.FC<Props> = ({
+  defaultSearchKey,
   searchKeys,
-  onKeyChange,
-  onTextChange = () => {},
-  keyValue,
-  textValue,
   label,
   onSearch = () => {},
   className = '',
 }) => {
-  // Handle only the event from the input
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value;
-    handleTextChange(text);
+  const [searchKey, setSearchKey] = useState(defaultSearchKey ?? searchKeys[0]);
+  const [text, setText] = useState('');
+  const [_, startTransition] = useTransition();
+
+  const handleKeyChange = (newKey: string) => {
+    setSearchKey(newKey);
+    startTransition(() => {
+      onSearch(newKey, text);
+    });
   };
 
-  // Handle all text change including clearing text
-  const handleTextChange = (text: string) => onTextChange(text);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newText = e.target.value;
+    setText(newText);
+    startTransition(() => {
+      onSearch(searchKey, newText);
+    });
+  };
 
+  const clearInput = () => {
+    setText('');
+    startTransition(() => {
+      onSearch(searchKey, '');
+    });
+  };
+
+  // This is for to refresh
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch();
+    onSearch(searchKey, text);
   };
 
   return (
@@ -54,8 +66,8 @@ const Searchbar: React.FC<Props> = ({
         <CustomSelect
           options={searchKeys}
           id="search-option-select"
-          value={keyValue}
-          onChange={onKeyChange}
+          value={searchKey}
+          onChange={handleKeyChange}
           className="h-[2.55rem]"
           selectClassName="flex-1"
         />
@@ -65,12 +77,11 @@ const Searchbar: React.FC<Props> = ({
               type="text"
               placeholder="Search your words"
               className="input w-full h-full"
-              value={textValue}
+              value={text}
               onChange={handleInputChange}
             />
-            {/* Search clear button */}
             <div
-              onClick={() => handleTextChange('')}
+              onClick={() => clearInput()}
               className={`${styles.clear} absolute top-[50%] right-2 -translate-y-[54%] flex-center w-[2.1rem] h-[2.1rem] hover:bg-gray-200 hover:shadow-md transition-all rounded-full cursor-pointer`}
             >
               <MdClose className="text-gray-600/90 text-2xl" />

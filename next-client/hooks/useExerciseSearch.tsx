@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+
 import { SearchKey } from '../models/enums';
 import { IExerciseCard } from '../models/interfaces';
 import { ISearchingState } from '../store/redux/browsing-slice';

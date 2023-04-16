@@ -20,7 +20,6 @@ const MySubmission: React.FC = () => {
     return (submissions ?? []).filter((sub) => searchIncludes(sub.exercise.name, searchText));
   }, [submissions, searchText]);
 
-  // Sort the submissions by date (recent to oldest)
   const sortedSubmissions = useMemo(() => {
     return searchedSubmissions
       .sort((subA, subB) => compareByDateTime(subB.postedAt, subA.postedAt))
@@ -28,6 +27,10 @@ const MySubmission: React.FC = () => {
   }, [searchedSubmissions]);
 
   if (!submissions) return <ProfileLoader />;
+
+  const handleSearch = (searchKey: string, text: string) => {
+    setSearchText(text);
+  };
 
   return (
     <ProfileSectionContainer>
@@ -37,12 +40,10 @@ const MySubmission: React.FC = () => {
         className="flex flex-col sm:flex-row justify-between sm:items-end gap-y-4 mb-6"
       >
         <Searchbar
-          onKeyChange={() => {}}
-          onTextChange={(text) => setSearchText(text)}
-          keyValue={SearchKey.TITLE}
-          textValue={searchText}
+          defaultSearchKey={SearchKey.TITLE}
           searchKeys={[SearchKey.TITLE]}
           label={null}
+          onSearch={handleSearch}
         />
         <h2 className="text-gray-500 font-semibold text-xl">
           {sortedSubmissions.length} Submissions
