@@ -29,13 +29,10 @@ const variants = {
   },
 };
 
-// List of strengths
 const Strengths: React.FC = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  // Modal drag constraint (only draggable within the current section)
   const constraintRef = useRef<HTMLDivElement | null>(null);
 
-  // Selected strength to be displayed in the layout modal.
   const selectedItem = strengthsList.find((strength) => strength.id === selectedId);
 
   return (
@@ -47,7 +44,6 @@ const Strengths: React.FC = () => {
         Why would you consider using {AppProperty.APP_NAME}
       </h2>
 
-      {/* For animating the sharing layout, use AnimateSharedLayout */}
       <AnimateSharedLayout>
         {strengthsList.map((strength, idx) => (
           <motion.div
@@ -73,7 +69,6 @@ const Strengths: React.FC = () => {
           </motion.div>
         ))}
 
-        {/* Animated modal for a selected strength by the user */}
         <AnimatePresence>
           {selectedItem && (
             <motion.div
@@ -100,6 +95,7 @@ const Strengths: React.FC = () => {
         </AnimatePresence>
       </AnimateSharedLayout>
 
+      {/* Backdrop */}
       <div
         className={`fixed top-0 left-0 h-screen w-screen ${
           selectedId ? 'bg-black/40 z-[100]' : '-z-10'
