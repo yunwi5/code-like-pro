@@ -95,13 +95,9 @@ const Badges: React.FC<Props> = ({ heading, badges, badgePerPage = BADGE_PER_PAG
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="!z-[200] fixed w-[min(26rem,95vw)] h-[min(90vh,28rem)] top-[calc(50%-(min(90vh,28rem)/2))] left-[calc(50%-(min(26rem,95vw)/2))] bg-gray-50 rounded-md"
+            className="!z-[200] fixed w-[min(26rem,95vw)] h-[min(90vh,30rem)] top-[calc(50%-(min(90vh,30rem)/2))] left-[calc(50%-(min(26rem,95vw)/2))] bg-gray-50 rounded-md"
           >
-            <BadgeDetail
-              badge={selectedBadge}
-              open={!!selectedBadge}
-              onClose={() => setSelectedBadgeId(null)}
-            />
+            <BadgeDetail badge={selectedBadge} onClose={() => setSelectedBadgeId(null)} />
           </motion.div>
         )}
       </AnimatePresence>
