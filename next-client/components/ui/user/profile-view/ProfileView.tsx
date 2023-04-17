@@ -16,20 +16,16 @@ interface Props {
   hoverModalClassName?: string; // override hover modal styles, optional
 }
 
-// Viewing other user's profile (including the user itself)
 const ProfileView: React.FC<Props> = ({ user, size, className = '', hoverModalClassName }) => {
   const { user: userInfo } = useUserInfoQuery(user._id);
   const { getUserRank } = useRanking();
 
-  // Ranking information
   const rankInfo = useMemo(() => {
     return getUserRank(userInfo?._id || '');
   }, [getUserRank, userInfo?._id]);
 
-  // User detail modal
   const [showModal, setShowModal] = useState(false);
 
-  // currying function to handle the user modal state
   const handleModal = (show: boolean) => () => setShowModal(show);
 
   if (!user) return <div>User not found</div>;

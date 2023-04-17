@@ -46,7 +46,8 @@ const RankingTable: React.FC<Props> = ({ rankingOrder, rankingCategory }) => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25, delay: idx * 0.07 }}
-              className="flex even:bg-gray-50/80 odd:bg-gray-100/80 text-gray-500 transition-all hover:bg-slate-200/70 border-b-[1.5px] border-gray-200/90"
+              style={{ zIndex: currentPageRanking.length - idx }}
+              className="relative flex even:bg-gray-50/80 odd:bg-gray-100/80 text-gray-500 transition-all hover:bg-slate-200/70 border-b-[1.5px] border-gray-200/90"
             >
               <td className="basis-1/6 flex-start px-3 py-3 font-bold whitespace-nowrap">
                 No. {currentPage * numOfUsersPerPage + idx + 1}
