@@ -1,6 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+
 import { useUserContext } from '../../store/context/UserContext';
 
 function useAuth() {
