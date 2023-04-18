@@ -2,6 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { BsClock, BsFileCode, BsFillChatLeftFill, BsFillPersonFill, BsShare } from 'react-icons/bs';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
+import { BestFeatured } from '@/utils/best-featured.util';
+
 import { deleteShowcaseVote, postVoteRequest } from '../../../apis/exercise.api';
 import { AppProperty } from '../../../constants';
 import useShowcaseCommentQuery from '../../../hooks/showcase/showcase-comments/useShowcaseCommentQuery';
@@ -19,7 +21,7 @@ import SocialPanel from '../social/SocialPanel';
 import CommentCard from './CommentCard';
 
 interface Props {
-  showcase: IShowCase;
+  showcase: BestFeatured<IShowCase>;
   exercise: IExercise;
   className?: string;
 }
@@ -102,6 +104,11 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
         {isAuthor && (
           <span className="inline-block px-2 py-1 text-base bg-main-500 text-white rounded-full">
             Yours
+          </span>
+        )}
+        {showcase.best && (
+          <span className="inline-block px-2 py-1 text-base bg-pink-500 text-white rounded-full">
+            Best
           </span>
         )}
       </header>

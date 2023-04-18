@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
+
+import { featureBestItems } from '@/utils/best-featured.util';
 
 import usePagination from '../../../hooks/utils/usePagination';
 import { IExercise, IShowCase } from '../../../models/interfaces';
@@ -22,13 +24,15 @@ const ShowcaseList: React.FC<Props> = ({
   showcasesPerPage = SHOWCASE_PER_PAGE,
   exercise,
 }) => {
+  const bestFeaturedShowcases = useMemo(() => featureBestItems(showcases, 3), [showcases]);
+
   const {
     array: currentPageShowcases,
     page,
     setPage,
     maxPage,
-  } = usePagination<IShowCase>({
-    array: showcases,
+  } = usePagination({
+    array: bestFeaturedShowcases,
     itemPerPage: showcasesPerPage,
   });
 
@@ -58,7 +62,6 @@ const ShowcaseList: React.FC<Props> = ({
         {showcases.length === 0 && <EmptyMessage message="No showcases yet" />}
       </div>
 
-      {/* Show page navigatio only if there are more than 1 page amount of showcases. */}
       {showcases.length >= showcasesPerPage && (
         <PageNavigation currentPage={page} totalPages={maxPage} onChangePage={handlePage} />
       )}
