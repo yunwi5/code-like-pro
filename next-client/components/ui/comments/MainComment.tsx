@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
+import { BestFeatured } from '@/utils/best-featured.util';
+
 import useReplyCommentsMutation from '../../../hooks/comment/reply-comments/useReplyCommentsMutation';
 import useReplyCommentsQuery from '../../../hooks/comment/reply-comments/useReplyCommentsQuery';
 import { IComment } from '../../../models/interfaces';
@@ -9,7 +11,7 @@ import CommentCard from '../cards/CommentCard';
 import CommentForm from './CommentForm';
 
 interface Props {
-  comment: IComment;
+  comment: BestFeatured<IComment>;
   onUpdate: (id: string, updateProp: { text: string }) => void;
   onDelete: (id: string) => void;
 }

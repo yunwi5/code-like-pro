@@ -1,5 +1,7 @@
 import { IVote } from '@/models/interfaces';
 
+import { hasOverallPositiveVotes } from './votes.util';
+
 export interface IVotable {
   _id: string;
   votes: IVote[];
@@ -44,12 +46,14 @@ export function featureBestItems<T extends IVotable>(
     score: itemScore(item, now),
   }));
 
-  const bestFeaturedItems = scoredItems.sort().map((item, index) => {
-    if (index <= validLimit) {
-      return { ...item, best: true };
-    }
-    return { ...item, best: false };
-  });
+  const bestFeaturedItems = scoredItems
+    .sort((a, b) => b.score - a.score)
+    .map((item, index) => {
+      if (index <= validLimit && hasOverallPositiveVotes(item.votes)) {
+        return { ...item, best: true };
+      }
+      return { ...item, best: false };
+    });
 
   return bestFeaturedItems;
 }

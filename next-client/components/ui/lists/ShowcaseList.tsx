@@ -24,7 +24,7 @@ const ShowcaseList: React.FC<Props> = ({
   showcasesPerPage = SHOWCASE_PER_PAGE,
   exercise,
 }) => {
-  const bestFeaturedShowcases = useMemo(() => featureBestItems(showcases, 3), [showcases]);
+  const bestFeaturedShowcases = useMemo(() => featureBestItems(showcases), [showcases]);
 
   const {
     array: currentPageShowcases,

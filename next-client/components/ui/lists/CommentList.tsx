@@ -1,5 +1,7 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+
+import { featureBestItems } from '@/utils/best-featured.util';
 
 import usePagination from '../../../hooks/utils/usePagination';
 import { IComment } from '../../../models/interfaces';
@@ -25,13 +27,15 @@ const CommentList: FC<Props> = ({
   commentPerPage = DEFAULT_PER_PAGE,
   className = '',
 }) => {
+  const bestFeaturedComments = useMemo(() => featureBestItems(comments, 3), [comments]);
+
   const {
     array: currentPageComments,
     page,
     setPage,
     maxPage,
-  } = usePagination<IComment>({
-    array: comments,
+  } = usePagination({
+    array: bestFeaturedComments,
     itemPerPage: commentPerPage,
   });
 

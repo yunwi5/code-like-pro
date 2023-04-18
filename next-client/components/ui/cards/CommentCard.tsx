@@ -13,7 +13,7 @@ import DeleteModal from '../modals/variations/DeleteModal';
 import ProfilePicture from '../user/ProfilePicture';
 
 interface Props {
-  comment: IComment;
+  comment: IComment & { best?: boolean };
   onUpdate: (id: string, updateProp: { text: string }) => void;
   onDelete: (id: string) => Promise<void> | void;
   onReply?: () => void;
@@ -72,6 +72,9 @@ const CommentCard: FC<Props> = ({ comment, onReply, onUpdate, onDelete }) => {
           <time className="text-sm text-gray-500 font-semibold">
             {getDateTimeFormat(comment.postedAt)}
           </time>
+
+          {/* FIX THIS */}
+          {comment.best && <span className="text-sm text-pink-500 font-semibold">Best Answer</span>}
         </header>
         {/* Comment body text */}
         <p className="text-gray-600 mt-1 whitespace-pre">{comment.text}</p>
