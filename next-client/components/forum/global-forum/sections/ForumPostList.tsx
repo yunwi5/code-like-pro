@@ -17,7 +17,6 @@ const ForumPostList: React.FC = () => {
   const isLoading = useAppSelector((state) => state.forum.isLoading);
   const { posts } = useForumBrowsing();
 
-  // custom hook for paging
   const {
     array: currentPagePosts,
     page,

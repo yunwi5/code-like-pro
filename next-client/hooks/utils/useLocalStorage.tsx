@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { getFromLocalStorage, saveToLocalStorage } from '../../utils/localStorage.util';
 
 // Custom react hook to store the JSON object in localStorage.

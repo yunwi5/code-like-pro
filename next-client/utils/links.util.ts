@@ -10,6 +10,14 @@ import { IForumPost, IForumPostPopulated } from '../models/interfaces';
 import { slugify } from './string-utils/url.util';
 import { ProfileLinkMap } from './profile.util';
 
+export function getRegisterLink() {
+  return '/register';
+}
+
+export function getLoginLink() {
+  return '/login';
+}
+
 export function getBrowsingPageLink() {
   return '/browse';
 }

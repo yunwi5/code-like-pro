@@ -1,6 +1,7 @@
 'use client';
 import React, { useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+
+import usePostLoginRedirect from '@/hooks/user/usePostLoginRedirect';
 
 import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification.util';
@@ -10,7 +11,7 @@ import AuthCard from './AuthCard';
 
 type LoginState = { email: string; password: string };
 const LoginForm = () => {
-  const router = useRouter();
+  const { redirectToPostLoginRedirectRoute } = usePostLoginRedirect();
   const { login, isLoading } = useUserContext();
   const [loginState, setLoginState] = useState({ email: '', password: '' });
   const [errorState, setErrorState] = useState({ email: '', password: '', overall: '' });
@@ -44,13 +45,11 @@ const LoginForm = () => {
     initialSubmitRef.current = true;
     const error = doValidation(loginState, 'all');
 
-    // If any errorState is on, do not send the register request.
     if (Object.values(error).join('').trim()) return;
     const { ok, message, data } = await login(loginState);
 
-    // If the login is success, redirect to the home page.
     if (ok && data) {
-      router.replace('/');
+      redirectToPostLoginRedirectRoute();
       toastNotify('Login Successful!', 'success');
     } else {
       setErrorState((prev) => ({

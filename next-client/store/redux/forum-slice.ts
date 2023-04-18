@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { ForumPostSortingKey, SearchKey, SortingDirection } from '../../models/enums';
 import { IForumPost } from '../../models/interfaces';
 
@@ -35,9 +36,6 @@ const forumSlice = createSlice({
   name: 'forum-browsing',
   initialState,
   reducers: {
-    setLoading(state, action: PayloadAction<boolean>) {
-      state.isLoading = action.payload;
-    },
     setPosts(state, action: PayloadAction<IForumPost[]>) {
       state.posts = action.payload;
       state.isLoading = false;
