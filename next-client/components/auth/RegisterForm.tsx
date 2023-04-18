@@ -2,6 +2,8 @@
 import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { getLoginLink } from '@/utils/links.util';
+
 import { registerRequest } from '../../apis/auth.api';
 import { useUserContext } from '../../store/context/UserContext';
 import { toastNotify } from '../../utils/notification.util';
@@ -88,7 +90,7 @@ const RegisterForm = () => {
         storeJwtData(data.access_token, data.user);
         router.replace('/');
       } else {
-        router.push('/login');
+        router.push(getLoginLink());
       }
     } else {
       setErrorState({

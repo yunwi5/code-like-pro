@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import {
   Difficulty,
+  ExerciseSortingKey,
   Language,
   SearchKey,
   SortingDirection,
-  ExerciseSortingKey,
   SubmissionStatus,
 } from '../../models/enums';
 

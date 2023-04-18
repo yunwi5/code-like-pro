@@ -97,8 +97,8 @@ const Strengths: React.FC = () => {
 
       {/* Backdrop */}
       <div
-        className={`fixed top-0 left-0 h-screen w-screen ${
-          selectedId ? 'bg-black/40 z-[100]' : '-z-10'
+        className={`fixed top-0 left-0 z-[100] h-screen w-screen ${
+          selectedId ? 'bg-black/40' : 'hidden'
         }`}
       />
     </section>

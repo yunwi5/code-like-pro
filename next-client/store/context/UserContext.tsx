@@ -1,15 +1,17 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import useUserQuery from '../../hooks/user/user-detail/useUserDetailQuery';
+import { getLoginLink } from '@/utils/links.util';
+
 import { getLoginSuccess, loginRequest } from '../../apis/auth.api';
+import useUserQuery from '../../hooks/user/user-detail/useUserDetailQuery';
 import { IUser, IUserContext } from '../../models/interfaces';
-import { createSubmissionMap } from '../../utils/user-submission.util';
 import {
   clearJwtUserLocally,
   getJwtUserLocally,
   saveJwtUserLocally,
 } from '../../utils/localStorage.util';
+import { createSubmissionMap } from '../../utils/user-submission.util';
 
 type LoginState = { email: string; password: string };
 
@@ -62,7 +64,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
   const logout = useCallback(async () => {
     setUser(null);
     clearJwtUserLocally();
-    router.push('/login');
+    router.push(getLoginLink());
   }, [router]);
 
   useEffect(() => {

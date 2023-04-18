@@ -1,20 +1,18 @@
 'use client';
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 import { useUserContext } from '../../store/context/UserContext';
+import usePostLoginRedirect from '../user/usePostLoginRedirect';
 
 function useAuth() {
-  const router = useRouter();
+  const { redirectToLoginRoute } = usePostLoginRedirect();
   const { user, isLoading } = useUserContext();
   const isLoggedIn = !!user;
 
   useEffect(() => {
     if (isLoading || isLoggedIn) return;
-    router.push('/login');
-  }, [isLoggedIn, isLoading, router]);
-
-  return { user };
+    redirectToLoginRoute();
+  }, [isLoggedIn, isLoading, redirectToLoginRoute]);
 }
 
 export default useAuth;

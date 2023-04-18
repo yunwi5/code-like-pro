@@ -1,5 +1,5 @@
 import { AuthResponseData } from '../../../apis/auth.api';
-import { IUser, IUserSubmissionPopulated, IUserDetail } from '..';
+import { IUser, IUserDetail, IUserSubmissionPopulated } from '..';
 
 type LoginState = { email: string; password: string };
 type ResponseType = {

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineComment } from 'react-icons/ai';
 import { ClipLoader } from 'react-spinners';
-import { useRouter } from 'next/navigation';
+
+import usePostLoginRedirect from '@/hooks/user/usePostLoginRedirect';
 
 import { IComment } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
@@ -20,18 +21,16 @@ interface Props {
 const CommentForm: React.FC<Props> = (props) => {
   const { onSubmit, inputType = 'input', className = '', defaultComment, onCancel } = props;
 
-  const router = useRouter();
+  const { redirectToLoginRoute } = usePostLoginRedirect();
   const { userDetail } = useUserContext();
   const [text, setText] = useState(defaultComment?.text || '');
-  // Check whether the comment form is valid. If it is false, do not allow users to submit.
-  // Form is valid only if the comment text is not an empty string.
   const [formValid, setFormValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formValid) return;
-    if (!userDetail?._id) return router.push('/login');
+    if (!userDetail?._id) return redirectToLoginRoute();
 
     setIsLoading(true);
     await onSubmit(text);

@@ -1,5 +1,6 @@
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
+
 import exerciseBrowsingSlice from './browsing-slice';
 import forumBrowsingSlice from './forum-slice';
 

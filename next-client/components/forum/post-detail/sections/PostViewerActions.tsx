@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
-import { useRouter } from 'next/navigation';
+
+import usePostLoginRedirect from '@/hooks/user/usePostLoginRedirect';
 
 import useForumPostMutation from '../../../../hooks/forum/forum-post/useForumPostMutation';
 import { IForumPostPopulated, IVote } from '../../../../models/interfaces';
@@ -9,7 +10,7 @@ import { useUserContext } from '../../../../store/context/UserContext';
 import PostShare from './PostShare';
 
 const PostViewerActions: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
-  const router = useRouter();
+  const { redirectToLoginRoute } = usePostLoginRedirect();
   const { userDetail } = useUserContext();
   const userId = userDetail?._id;
 
@@ -17,7 +18,10 @@ const PostViewerActions: React.FC<{ post: IForumPostPopulated }> = ({ post }) =>
   const [votes, setVotes] = useState<IVote[]>(post?.votes || []);
 
   const handleUserVote = async (type: 'up' | 'down') => {
-    if (!userId) return router.push('/login');
+    if (!userId) {
+      redirectToLoginRoute();
+      return;
+    }
     const userVoteIndex = votes.findIndex((vote) => vote.user === userId);
 
     if (userVoteIndex < 0) {

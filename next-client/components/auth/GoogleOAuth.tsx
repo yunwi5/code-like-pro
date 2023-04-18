@@ -1,5 +1,6 @@
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
-import { useRouter } from 'next/navigation';
+
+import usePostLoginRedirect from '@/hooks/user/usePostLoginRedirect';
 
 import { createOrGetGoogleUser } from '../../apis/auth.api';
 import { GoogleIcon } from '../../assets/svg-icons/social-svgs';
@@ -9,7 +10,7 @@ import { toastNotify } from '../../utils/notification.util';
 import Button from '../ui/buttons/Button';
 
 const GoogleOAuth = () => {
-  const router = useRouter();
+  const { redirectToPostLoginRedirectRoute } = usePostLoginRedirect();
 
   const { storeJwtData } = useUserContext();
 
@@ -18,7 +19,7 @@ const GoogleOAuth = () => {
     if (ok && data) {
       toastNotify(`Welcome to ${AppProperty.APP_NAME}, ${data.user.name}!`, 'success');
       storeJwtData(data.access_token, data.user);
-      router.push('/');
+      redirectToPostLoginRedirectRoute();
     } else {
       toastNotify(`Oops, ${message}`, 'error');
     }
@@ -26,7 +27,6 @@ const GoogleOAuth = () => {
 
   return (
     <div className="relative mt-10">
-      {/* Transparent button that only handles google auth functionality */}
       <div className="absolute top-0 left-0 w-full h-[50px] opacity-0">
         <GoogleLogin
           onSuccess={handleLoginSuccess}
@@ -36,7 +36,6 @@ const GoogleOAuth = () => {
         />
       </div>
 
-      {/* Custom UI button that is visible to the user. */}
       <Button type="button" className="btn-social w-full">
         <div className="flex align-center justify-between">
           <div className="w-[25px]"></div>
