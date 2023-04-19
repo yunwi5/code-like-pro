@@ -10,10 +10,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-// Wrapper for hovering element that needs pop up labels.
-// For example, when hovering the Facebook icon, the text label 'Facebook' appears below the icon.
-// This component is purely for advanced hovering effects.
-// See the example of this component inside the Footer.tsx.
 const HoveringLabel: React.FC<Props> = ({
   children,
   label,

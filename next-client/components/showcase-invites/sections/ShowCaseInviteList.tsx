@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import { isEven } from '@/utils/number.util';
+
 import usePagination from '../../../hooks/utils/usePagination';
 import { IExerciseWithId } from '../../../models/interfaces';
 import { listItemAnimations } from '../../../utils/animations.util';
@@ -12,8 +14,6 @@ interface Props {
   inviteMode: 'created' | 'solved';
 }
 
-// List component that renders the list of showcases
-// either exercisese created by the user, or the exercises solved by the user.
 const ShowCaseInviteList: React.FC<Props> = ({ exercises, inviteMode }) => {
   const {
     array: currentPageInvites,
@@ -34,7 +34,12 @@ const ShowCaseInviteList: React.FC<Props> = ({ exercises, inviteMode }) => {
             exit="exit"
             transition={{ duration: 0.3, delay: idx * 0.1 }}
           >
-            <ShowCaseInviteCard key={sc._id} exercise={sc} inviteMode={inviteMode} />
+            <ShowCaseInviteCard
+              key={sc._id}
+              exercise={sc}
+              inviteMode={inviteMode}
+              className={isEven(idx) ? 'bg-slate-100' : 'bg-slate-200'}
+            />
           </motion.div>
         ))}
       </div>

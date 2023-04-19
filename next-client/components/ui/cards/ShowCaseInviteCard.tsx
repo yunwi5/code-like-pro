@@ -16,22 +16,21 @@ import HoveringLabel from '../tooltip/HoveringLabel';
 interface Props {
   exercise: IExerciseWithId;
   inviteMode: 'created' | 'solved';
+  className?: string;
 }
 
-const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
+const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode, className = '' }) => {
   const { submissionMap, userDetail } = useUserContext();
 
-  // If the user has created the exercise, show the solution code written by this user.
-  // If the user has solved the exercise, show the correct submission code written by this user.
   const userCode =
     inviteMode === 'created' ? exercise.solutionCode : submissionMap[exercise._id].code;
 
-  // Author of th exercise.
   const author = inviteMode === 'created' ? userDetail?.name : exercise.author?.name;
 
   return (
-    <article className="flex flex-col gap-3 px-2 lg:px-4 py-2 transition-all odd:bg-slate-100 even:bg-slate-200/90 shadow hover:shadow-md rounded">
-      {/* Card header that displays exercise title, language and author */}
+    <article
+      className={`flex flex-col gap-3 px-2 lg:px-4 py-2 transition-all border-2 border-slate-300/90 shadow hover:shadow-md rounded ${className}`}
+    >
       <header className="flex flex-wrap items-center gap-2">
         <h3 className="text-gray-600 text-lg sm:text-xl hover:text-main-500 cursor-pointer">
           <Link href={getShowcasePageLink(exercise._id)}>{exercise.name}</Link>
@@ -44,7 +43,6 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
         </HoveringLabel>
       </header>
 
-      {/* Card body that shows the user solution for this exercise that can be showcased. */}
       <div className="flex flex-col gap-2">
         <p className="flex items-center gap-1">
           <BsCodeSlash className="text-lg" /> Your Solution
@@ -59,7 +57,6 @@ const ShowCaseInviteCard: React.FC<Props> = ({ exercise, inviteMode }) => {
         />
       </div>
 
-      {/* Listing showcase page links with its associated sections as query strings. */}
       <footer className="flex flex-col md:flex-row gap-2">
         <Link
           href={getShowcasePageLink(exercise._id, ShowCaseSection.MODEL_ANSWER)}
