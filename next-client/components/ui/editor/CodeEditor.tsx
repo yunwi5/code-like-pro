@@ -2,8 +2,11 @@ import React, { useRef, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import monaco from 'monaco-editor';
 
+import { copyToClipboard } from '@/utils/clipboard.util';
+
 import { Language } from '../../../models/enums';
 import { prettierLanguageName } from '../../../utils/language.util';
+import CopyClipboardButton from '../buttons/CopyClipboardButton';
 import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
 
 import styles from './CodeEditor.module.scss';
@@ -20,6 +23,7 @@ interface Props {
   height?: string;
   validation?: boolean;
   readOnly?: boolean;
+  clipboardEnabled?: boolean;
   className?: string;
   editorClassName?: string;
 }
@@ -32,6 +36,7 @@ const CodeEditor: React.FC<Props> = ({
   height,
   value,
   readOnly = false,
+  clipboardEnabled = true,
   className = '',
   editorClassName = '',
 }) => {
@@ -43,9 +48,11 @@ const CodeEditor: React.FC<Props> = ({
   };
 
   const handleEditorWillMount = (monaco: Monaco) => {
-    // here is the monaco instance
-    // do some configuration before editor is mounted
     monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
+  };
+
+  const handleCopyClipboard = async () => {
+    await copyToClipboard(value || '');
   };
 
   // const updateEditorTabSize = (tabSize: number) => {
@@ -76,6 +83,8 @@ const CodeEditor: React.FC<Props> = ({
             options={{ readOnly: readOnly }}
           />
 
+          {clipboardEnabled && <CopyClipboardButton onCopy={handleCopyClipboard} />}
+
           {/* Clear user code button */}
           {!readOnly && (
             <button
@@ -91,7 +100,7 @@ const CodeEditor: React.FC<Props> = ({
   );
 };
 
-// Map our app language names to Monaco languagee names
+// Map app language names to Monaco languagee names
 // For example, we use the name C++ which should be mapped to cpp for monaco language config.
 function getMonacoLanguageName(lang: Language | undefined) {
   switch (lang) {

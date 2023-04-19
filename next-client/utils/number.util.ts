@@ -1,3 +1,7 @@
+export function isEven(n: number) {
+  return n % 2 === 0;
+}
+
 export function mod(n: number, total: number) {
   return ((n % total) + total) % total;
 }
