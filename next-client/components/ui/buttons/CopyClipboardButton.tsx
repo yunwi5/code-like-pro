@@ -9,7 +9,7 @@ type CopyClipboardButtonProps = {
 const COPY_EFFECT_DURATION = 1500;
 
 const CopyClipboardButton: FC<CopyClipboardButtonProps> = ({ onCopy }) => {
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showCopiedEffect, setShowCopiedEffect] = useState(false);
 
   const handleCopyAction = () => {
