@@ -1,6 +1,10 @@
 import React, { useMemo, useState } from 'react';
+import { AiTwotoneCrown } from 'react-icons/ai';
 import { BsClock, BsFileCode, BsFillChatLeftFill, BsFillPersonFill, BsShare } from 'react-icons/bs';
+import { FaUserEdit } from 'react-icons/fa';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+
+import { BestFeatured } from '@/utils/best-featured.util';
 
 import { deleteShowcaseVote, postVoteRequest } from '../../../apis/exercise.api';
 import { AppProperty } from '../../../constants';
@@ -14,12 +18,13 @@ import { getDateTimeFormat } from '../../../utils/datetime.util';
 import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import CommentForm from '../comments/CommentForm';
 import CodeEditor from '../editor/CodeEditor';
+import Banner from '../labels/Banner';
 import SocialPanel from '../social/SocialPanel';
 
 import CommentCard from './CommentCard';
 
 interface Props {
-  showcase: IShowCase;
+  showcase: BestFeatured<IShowCase>;
   exercise: IExercise;
   className?: string;
 }
@@ -41,23 +46,18 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
     const userVoteIndex = votes.findIndex((vote) => vote.user === userId);
 
     if (userVoteIndex < 0) {
-      // If the user has no votes so far, add a new vote.
       const newVote = { type, user: userId };
       setVotes([...votes, newVote]);
 
-      // Send request to post the comment vote by this user.
       await postVoteRequest(showcase._id, { type });
     } else {
       const userVote = votes[userVoteIndex];
 
       if (userVote.type === type) {
-        // Cancel voting.
         setVotes(votes.filter((vote) => vote.user !== userId));
 
-        // Send DELETE request to cancel the vote on this comment.
         await deleteShowcaseVote(showcase._id);
       } else {
-        // If the user already has vote on this comment, modify the vote and create a new array.
         votes[userVoteIndex].type = type;
         setVotes([...votes]);
         await postVoteRequest(showcase._id, { type });
@@ -66,7 +66,6 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
   };
 
   const handleSubmitComment = async (text: string) => {
-    // Send Http POST request to send the user comment to the server.
     const commentProp = { text }; // Comment only requires 'text' prop when sending it to the server.
     if (!showcase) return;
 
@@ -95,15 +94,14 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
 
   return (
     <article
-      className={`flex flex-col gap-3 px-3 sm:px-6 py-3 bg-gray-50 border-2 border-gray-200/90 rounded-sm transition-all shadow-md${className}`}
+      className={`flex flex-col gap-1 px-3 sm:px-6 py-3 bg-gray-50 border-2 border-gray-200/90 rounded-sm transition-all shadow-md${className}`}
     >
-      <header className="flex-start gap-2">
+      <header className="flex items-start flex-col gap-[8px]">
+        <div className="flex-start gap-2">
+          {showcase.best && <Banner icon={AiTwotoneCrown} text="Best" className="bg-yellow-500" />}
+          {isAuthor && <Banner icon={FaUserEdit} text="Yours" className="bg-sky-500" />}
+        </div>
         <h2 className="text-gray-500 font-bold text-lg sm:text-xl">{showcase.description} </h2>
-        {isAuthor && (
-          <span className="inline-block px-2 py-1 text-base bg-main-500 text-white rounded-full">
-            Yours
-          </span>
-        )}
       </header>
       <div className="flex flex-row m-0">
         <div className="flex content-center mr-5">
@@ -112,7 +110,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
         </div>
         <div className="flex content-center">
           <BsClock className="m-1" />
-          <h5>{getDateTimeFormat(showcase.postedAt, false)}</h5>
+          <h5>{getDateTimeFormat(showcase.postedAt, true)}</h5>
         </div>
       </div>
       <div className="grid grid-cols-8 gap-3 items-center">
@@ -120,7 +118,9 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
           {compare ? (
             <div className="grid gap-2 md:grid-cols-1 lg:grid-cols-2">
               <div className="col-span-1 border-2 border-gray-200 rounded">
-                <h5 className="bg-gray-200 px-2 py-1 font-semibold">Their Solution</h5>
+                <h5 className="bg-gray-200 px-2 py-1 font-semibold">
+                  {showcase.user.name}&apos;s solution
+                </h5>
                 <CodeEditor
                   className="flex-1 border-transparent focus-within:border-main-300 shadow-none"
                   showHeader={false}
@@ -130,7 +130,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
                 />
               </div>
               <div className="col-span-1 border-2 border-gray-200">
-                <h5 className="bg-gray-200 px-2 py-1 font-semibold">Your Solution</h5>
+                <h5 className="bg-gray-200 px-2 py-1 font-semibold">Your solution</h5>
                 <CodeEditor
                   className="flex-1 border-transparent focus-within:border-main-300 shadow-none"
                   showHeader={false}
@@ -176,7 +176,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
       <div className="flex flex-col sm:flex-row gap-2">
         <div className="self-stretch flex content-center">
           <button
-            className={`${btnClass} ${
+            className={`${styles.btn} ${
               showComment ? 'text-main-500 font-semibold' : ''
             } hover:bg-main-400`}
             onClick={() => setShowComment(!showComment)}
@@ -190,7 +190,7 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
         </div>
         <div className="flex content-center">
           <div
-            className={`${btnClass} ${
+            className={`${styles.btn} ${
               compare ? 'text-violet-700 font-semibold' : ''
             } hover:bg-violet-600`}
             onClick={() => setCompare(!compare)}
@@ -218,11 +218,6 @@ const ShowcaseCard: React.FC<Props> = ({ showcase, className, exercise }) => {
   );
 };
 
-// Cummon btn class for showing comments and showing comparison
-const btnClass =
-  'flex w-full sm:w-fit px-3 py-[0.3rem] rounded-full hover:text-white transition-all cursor-pointer';
-
-// Button to share the showcase in SNS
 const SocialShareButton: React.FC = () => {
   const [showPanel, setShowPanel] = useState<boolean>(false);
   const { exercise, userSubmission } = useShowcaseContext();
@@ -230,7 +225,7 @@ const SocialShareButton: React.FC = () => {
   return (
     <div className="flex-center relative">
       <div
-        className={`${btnClass} ${
+        className={`${styles.btn} ${
           showPanel ? 'text-pink-700 font-semibold' : ''
         } hover:bg-pink-600`}
         onClick={() => setShowPanel((ps) => !ps)}
@@ -250,6 +245,10 @@ const SocialShareButton: React.FC = () => {
       )}
     </div>
   );
+};
+
+const styles = {
+  btn: 'flex w-full sm:w-fit px-3 py-[0.3rem] rounded-full hover:text-white transition-all cursor-pointer',
 };
 
 export default ShowcaseCard;

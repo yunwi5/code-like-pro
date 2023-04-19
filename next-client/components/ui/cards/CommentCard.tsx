@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { AiTwotoneCrown } from 'react-icons/ai';
 import { BsFillReplyFill } from 'react-icons/bs';
 
 import { deleteCommentVote, postCommentVote } from '../../../apis/comment.api';
@@ -9,11 +10,12 @@ import DeleteButton from '../buttons/icon-buttons/DeleteButton';
 import EditButton from '../buttons/icon-buttons/EditButton';
 import VoteButtons from '../buttons/VoteButtons';
 import CommentEditModal from '../comments/CommentEditModal';
+import Banner from '../labels/Banner';
 import DeleteModal from '../modals/variations/DeleteModal';
 import ProfilePicture from '../user/ProfilePicture';
 
 interface Props {
-  comment: IComment;
+  comment: IComment & { best?: boolean };
   onUpdate: (id: string, updateProp: { text: string }) => void;
   onDelete: (id: string) => Promise<void> | void;
   onReply?: () => void;
@@ -69,14 +71,15 @@ const CommentCard: FC<Props> = ({ comment, onReply, onUpdate, onDelete }) => {
       <div className="flex-1">
         <header className="flex gap-3 items-center">
           <h3>{comment.user.name}</h3>
-          <time className="text-sm text-gray-500 font-semibold">
+          {comment.best && (
+            <Banner icon={AiTwotoneCrown} text="Best" className="bg-yellow-500 text-[0.7rem]" />
+          )}
+          <time className="ml-auto text-xs text-gray-500/90 font-semibold">
             {getDateTimeFormat(comment.postedAt)}
           </time>
         </header>
-        {/* Comment body text */}
         <p className="text-gray-600 mt-1 whitespace-pre">{comment.text}</p>
 
-        {/* Comment votes & replies */}
         <footer className="w-full flex gap-1 lg:gap-3 mt-2">
           <VoteButtons votes={votes} onVote={handleUserVote} />
 

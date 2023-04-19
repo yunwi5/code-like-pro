@@ -8,3 +8,8 @@ export function getVoteCounts(votes: IVote[]) {
   const downVoteCount = votes.length - upVoteCount;
   return { upVoteCount, downVoteCount };
 }
+
+export function hasOverallPositiveVotes(votes: IVote[]) {
+  const { upVoteCount, downVoteCount } = getVoteCounts(votes);
+  return upVoteCount > downVoteCount;
+}

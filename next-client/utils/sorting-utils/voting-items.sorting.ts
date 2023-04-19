@@ -1,6 +1,7 @@
-import { compareByDateTime, compareByVotes } from '.';
-import { VotingItemSortingKey, SortingDirection } from '../../models/enums';
+import { SortingDirection, VotingItemSortingKey } from '../../models/enums';
 import { IVote } from '../../models/interfaces';
+
+import { compareByDateTime, compareByVotes } from '.';
 
 interface IVotingItem {
   votes: IVote[];
