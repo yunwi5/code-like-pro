@@ -8,8 +8,6 @@ export interface IVotable {
   postedAt: string;
 }
 
-type WithScore<T> = T & { score: number };
-
 export type BestFeatured<T> = T & { best: boolean };
 
 function getWilsonScore(upvotes: number, downvotes: number): number {
@@ -41,7 +39,7 @@ export function featureBestItems<T extends IVotable>(
   const validLimit = Math.min(limit, Math.floor(items.length / 3));
 
   const now = Date.now();
-  const scoredItems: WithScore<T>[] = items.map((item) => ({
+  const scoredItems = items.map((item) => ({
     ...item,
     score: itemScore(item, now),
   }));
