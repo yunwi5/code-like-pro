@@ -10,8 +10,7 @@ import ShowcaseCard from '../cards/ShowcaseCard';
 import EmptyMessage from '../labels/EmptyMessage';
 import PageNavigation from '../PageNavigation';
 
-// Default value of exercisePerPage which is applied when the prop was not given.
-const SHOWCASE_PER_PAGE = 10;
+const SHOWCASE_PER_PAGE = 7;
 
 interface Props {
   showcases: IShowCase[];

@@ -36,7 +36,7 @@ function itemScore<T extends IVotable>(item: T, now: number): number {
 
 export function featureBestItems<T extends IVotable>(
   items: T[],
-  limit: number = 5,
+  limit: number = 3,
 ): BestFeatured<T>[] {
   const validLimit = Math.min(limit, Math.floor(items.length / 3));
 
@@ -46,14 +46,18 @@ export function featureBestItems<T extends IVotable>(
     score: itemScore(item, now),
   }));
 
-  const bestFeaturedItems = scoredItems
-    .sort((a, b) => b.score - a.score)
-    .map((item, index) => {
-      if (index <= validLimit && hasOverallPositiveVotes(item.votes)) {
-        return { ...item, best: true };
-      }
-      return { ...item, best: false };
-    });
+  const bestItemIds = new Set(
+    [...scoredItems]
+      .sort((a, b) => b.score - a.score)
+      .slice(0, validLimit + 1)
+      .filter((item) => hasOverallPositiveVotes(item.votes))
+      .map((item) => item._id),
+  );
+
+  const bestFeaturedItems = scoredItems.map((item) => {
+    const best = bestItemIds.has(item._id);
+    return { ...item, best };
+  });
 
   return bestFeaturedItems;
 }
