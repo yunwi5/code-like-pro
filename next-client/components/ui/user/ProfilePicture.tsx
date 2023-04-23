@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import Image from 'next/image';
 
@@ -17,24 +17,33 @@ const ProfilePicture: React.FC<Props> = ({
   className = '',
   onClick,
 }) => {
-  const imageRef = useRef<HTMLImageElement>(null);
   const [imageValid, setImageValid] = useState(true);
+
+  useEffect(() => {
+    if (!picture?.trim()) setImageValid(false);
+  }, [picture]);
 
   return (
     <div
       onClick={onClick}
-      className={`relative flex-center shrink-0 overflow-hidden rounded-full shadow bg-gray-200 ${className}`}
+      className={`relative flex-center shrink-0 overflow-hidden rounded-full bg-gray-200 ${className}`}
       style={{ width: size, height: size }}
     >
-      <FaUser className="text-gray-600 scale-90 translate-y-1" size={size} />
-      {picture && imageValid && (
+      <FaUser
+        style={{ display: imageValid ? 'none' : 'inline-block' }}
+        className="text-gray-600 scale-90 translate-y-1"
+        size={size}
+      />
+      {picture && (
         <Image
-          ref={imageRef}
           fill
           src={picture}
           alt={alt ?? 'User profile picture'}
           className={'object-cover'}
+          style={{ display: imageValid ? 'inline-block' : 'none' }}
           onError={() => setImageValid(false)}
+          onWaiting={() => setImageValid(false)}
+          onLoad={() => setImageValid(true)}
         />
       )}
     </div>

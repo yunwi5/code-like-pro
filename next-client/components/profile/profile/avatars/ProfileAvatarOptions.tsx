@@ -1,14 +1,12 @@
-import Image from 'next/image';
+import ProfilePicture from '@/components/ui/user/ProfilePicture';
 
-import { AvatarImageSrcList } from '../../../../assets/avatars';
+import { AvatarImagesList } from '../../../../assets/avatars';
 import { useProfileEditContext } from '../../../../store/context/ProfileEditContext';
 
 const ProfileAvatarOptions: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const { currentPicture, setPicture } = useProfileEditContext();
 
-  const pictureOptions = currentPicture
-    ? [currentPicture, ...AvatarImageSrcList]
-    : AvatarImageSrcList;
+  const pictureOptions = currentPicture ? [currentPicture, ...AvatarImagesList] : AvatarImagesList;
 
   const handleAvatarSelect = (option: string) => {
     setPicture(option);
@@ -23,10 +21,10 @@ const ProfileAvatarOptions: React.FC<{ onClose: () => void }> = ({ onClose }) =>
           onClick={() => handleAvatarSelect(pictureOption)}
           className="px-1 py-1 w-[6rem] hover:bg-gray-100"
         >
-          <Image
-            alt="User avatar option"
-            src={pictureOption}
-            className="object-cover w-[5rem] h-[5rem]"
+          <ProfilePicture
+            className="!rounded-none bg-transparent"
+            size="5rem"
+            picture={pictureOption}
           />
         </div>
       ))}
