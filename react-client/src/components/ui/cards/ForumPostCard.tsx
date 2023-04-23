@@ -11,7 +11,7 @@ const ForumPostCard: React.FC<{ post: IForumPost }> = ({ post }) => {
     return (
         <article className="card flex items-center gap-3 lg:gap-5 xl:gap-8 px-3 lg:px-5 xl:px-8 py-2 odd:bg-gray-100 even:bg-gray-200/80">
             <ProfilePicture
-                picture={post.author.pictureUrl}
+                picture={post.author.picture}
                 alt={post.author.name}
                 size={'3rem'}
             />

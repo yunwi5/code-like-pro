@@ -18,7 +18,7 @@ const UserProfileNav: React.FC = () => {
             >
                 {/* User profile picture shown on the header. */}
                 <ProfilePicture
-                    picture={userDetail?.pictureUrl}
+                    picture={userDetail?.picture}
                     alt={userDetail?.name || 'User'}
                 />
 

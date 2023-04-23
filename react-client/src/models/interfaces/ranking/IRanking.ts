@@ -1,7 +1,7 @@
 export interface IRanking {
     _id: string;
     name: string;
-    pictureUrl?: string;
+    picture?: string;
     creationPoints: number;
     solvingPoints: number;
 }

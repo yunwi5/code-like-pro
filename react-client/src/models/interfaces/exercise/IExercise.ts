@@ -14,7 +14,7 @@ export interface IExerciseDraft {
 
 export interface IExercise extends IExerciseDraft {
     _id?: string;
-    author: { _id: string; name: string; pictureUrl?: string };
+    author: { _id: string; name: string; picture?: string };
     createdAt: string; // ISO date for exercise creation
     liked: string[]; // list of user ids who liked the exercise unpopulated
     reports: string[]; // list of report ids unpopulated

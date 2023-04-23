@@ -12,13 +12,13 @@ import ProfileView from '../user/profile-view/ProfileView';
 
 interface Props {
     post: IForumPost | IForumPostPopulated;
-    pictureUrl?: string; // Picture url of the post author. If it is undefined, default user icon is displayed.
+    picture?: string; // Picture url of the post author. If it is undefined, default user icon is displayed.
     className?: string;
 }
 
 const spectItemClass = 'flex items-center gap-1 md:gap-2';
 
-const ForumPostSpec: React.FC<Props> = ({ post, pictureUrl, className }) => {
+const ForumPostSpec: React.FC<Props> = ({ post, picture, className }) => {
     const { upVoteCount, downVoteCount } = getVoteCounts(post.votes || []);
 
     return (
@@ -26,7 +26,7 @@ const ForumPostSpec: React.FC<Props> = ({ post, pictureUrl, className }) => {
             className={`flex flex-wrap gap-x-2 md:gap-x-4 gap-y-2 text-sm md:text-base ${className}`}
         >
             <li className={spectItemClass}>
-                {pictureUrl ? (
+                {picture ? (
                     <ProfileView user={post.author} size={'1.65rem'} />
                 ) : (
                     <>
