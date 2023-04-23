@@ -25,7 +25,6 @@ const ProfilePicture: React.FC<Props> = ({
     if (!picture?.trim()) setImageValid(false);
   }, [picture]);
 
-  console.log('picture:', picture);
   const pictureUrl = useMemo(() => getUserPictureUrl(picture), [picture]);
 
   return (

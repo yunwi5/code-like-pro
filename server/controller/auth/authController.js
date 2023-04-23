@@ -36,7 +36,7 @@ const postGoogleAuth = async (req, res) => {
     } else {
         // sign up
         // password should be optional perhaps
-        const newUser = new User({ email, name, picture: picture, password: sub });
+        const newUser = new User({ email, name, picture, password: sub });
         console.log('New google user:', newUser);
         await newUser.save();
 
