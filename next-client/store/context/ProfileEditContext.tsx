@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 
-import useUserDetailMutation from '../../hooks/user/user-detail/useUserDetailMutation';
 import { deleteImageByUrl, postUserImage } from '../../apis/image.api';
+import useUserDetailMutation from '../../hooks/user/user-detail/useUserDetailMutation';
 import { isAvatarImage } from '../../utils/image.util';
 import { toastNotify } from '../../utils/notification.util';
+
 import { useUserContext } from './UserContext';
 
 interface IProfileEditContext {
