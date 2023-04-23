@@ -12,7 +12,7 @@ const ProfileMenuHeader: React.FC<{ className?: string }> = ({ className = '' })
       <ProfilePicture
         size={'2.5rem'}
         alt={userDetail?.name || 'User'}
-        picture={userDetail?.pictureUrl}
+        picture={userDetail?.picture}
       />
       <div>
         <h3 className="text-lg leading-6 mb-1">{userDetail?.name}</h3>

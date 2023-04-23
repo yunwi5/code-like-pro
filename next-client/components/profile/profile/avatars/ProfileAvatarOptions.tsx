@@ -1,12 +1,14 @@
 import ProfilePicture from '@/components/ui/user/ProfilePicture';
 
-import { AvatarImagesList } from '../../../../assets/avatars';
+import { AvatarImageIdList } from '../../../../assets/avatars';
 import { useProfileEditContext } from '../../../../store/context/ProfileEditContext';
 
 const ProfileAvatarOptions: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const { currentPicture, setPicture } = useProfileEditContext();
 
-  const pictureOptions = currentPicture ? [currentPicture, ...AvatarImagesList] : AvatarImagesList;
+  const pictureOptions = currentPicture
+    ? [currentPicture, ...AvatarImageIdList]
+    : AvatarImageIdList;
 
   const handleAvatarSelect = (option: string) => {
     setPicture(option);

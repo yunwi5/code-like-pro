@@ -56,7 +56,7 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
   const [profileName, setProfileName] = useState(userDetail?.name || '');
   const [description, setDescription] = useState(userDetail?.description || '-');
 
-  const [picture, setPicture] = useState(userDetail?.pictureUrl || '');
+  const [picture, setPicture] = useState(userDetail?.picture || '');
   // Preview source of a picture that the user uploaded (not null only if they uploaded)
   const [previewSource, setPreviewSource] = useState<string | null>(null);
 
@@ -78,8 +78,8 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
       setPicture(imageToUpload);
       setPreviewSource(null);
     } else {
-      if (!isAvatarImage(userDetail?.pictureUrl || '')) {
-        deleteImageByUrl(userDetail?.pictureUrl || '');
+      if (!isAvatarImage(userDetail?.picture || '')) {
+        deleteImageByUrl(userDetail?.picture || '');
       }
       imageToUpload = picture;
     }
@@ -87,7 +87,7 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
     // Send some HTTP Request to edit the profile.
     await updateUserDetail({
       name: profileName,
-      pictureUrl: imageToUpload,
+      picture: imageToUpload,
       description,
     });
     setIsLoading(false);
@@ -100,7 +100,7 @@ export const ProfileEditContextProvider: React.FC<{ children: React.ReactNode }>
     setProfileName(userDetail.name);
     setDescription(userDetail.description);
 
-    if (userDetail.pictureUrl) setPicture(userDetail.pictureUrl);
+    if (userDetail.picture) setPicture(userDetail.picture);
     setPreviewSource(null);
   };
 

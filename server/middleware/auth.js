@@ -13,7 +13,7 @@ const ensureAuthenticated = (req, res, next) => {
                 _id: decodedData._id,
                 name: decodedData.name,
                 email: decodedData.email,
-                pictureUrl: decodedData.pictureUrl,
+                picture: decodedData.picture,
             };
             req.user = user;
         } else {

@@ -1,7 +1,6 @@
-export interface IRanking {
-  _id: string;
-  name: string;
-  pictureUrl?: string;
+import { IUser } from '..';
+
+export interface IRanking extends IUser {
   creationPoints: number;
   solvingPoints: number;
 }

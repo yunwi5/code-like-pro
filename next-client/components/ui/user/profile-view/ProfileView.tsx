@@ -10,7 +10,7 @@ import ProfileHoverModal from './hover-modal/ProfileHoverModal';
 import styles from './ProfileView.module.scss';
 
 interface Props {
-  user: { _id: string; name: string; pictureUrl?: string };
+  user: { _id: string; name: string; picture?: string };
   size?: string;
   className?: string;
   hoverModalClassName?: string; // override hover modal styles, optional
@@ -37,7 +37,7 @@ const ProfileView: React.FC<Props> = ({ user, size, className = '', hoverModalCl
       >
         <ProfilePicture
           onClick={handleModal(true)}
-          picture={user.pictureUrl ?? userInfo?.pictureUrl}
+          picture={user.picture ?? userInfo?.picture}
           alt={`${user.name} profile`}
           size={size ?? '2.5rem'}
         />

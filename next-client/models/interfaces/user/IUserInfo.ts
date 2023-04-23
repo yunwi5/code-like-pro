@@ -1,11 +1,10 @@
-import { IUser } from '..';
 import { Language } from '../../enums';
+import { IUser } from '..';
 
 // IUser with more information like list of languages the user used.
 export interface IUserInfo extends IUser {
   description: string;
   languages: Language[]; // list of languages the user has used for solving exercises.
-  pictureUrl?: string; // user profile picture
   createdAt: string; // ISO datetime format
 
   solvedExercises: number;

@@ -11,7 +11,7 @@ const constructUserRankingDataMap = (users) => {
         const userRankingData = {
             _id: user._id,
             name: user.name,
-            pictureUrl: user.pictureUrl,
+            picture: user.picture,
             creationPoints: 0,
             solvingPoints: 0,
         };
@@ -84,7 +84,7 @@ function addSolvingPoints(userRankingDataMap, submissions) {
 /* Actual API route contollers */
 
 // GET: Global ranking data of the user as an array
-// Response body: Array<{_id: string, name: string, pictureUrl: string, creationPoints: number, solvingPoints: number}>
+// Response body: Array<{_id: string, name: string, picture: string, creationPoints: number, solvingPoints: number}>
 const getUserRankings = async (req, res) => {
     const usersPromise = User.find({});
     const exercisesPromise = Exercise.find({});

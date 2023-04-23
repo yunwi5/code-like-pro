@@ -11,7 +11,7 @@ const signJwtToken = (user) => {
             _id: user._id,
             email: user.email,
             name: user.name,
-            pictureUrl: user.pictureUrl || '',
+            picture: user.picture || '',
         },
         keys.JwtSecret,
         { expiresIn: '1d' },
@@ -36,7 +36,7 @@ const postGoogleAuth = async (req, res) => {
     } else {
         // sign up
         // password should be optional perhaps
-        const newUser = new User({ email, name, pictureUrl: picture, password: sub });
+        const newUser = new User({ email, name, picture, password: sub });
         console.log('New google user:', newUser);
         await newUser.save();
 

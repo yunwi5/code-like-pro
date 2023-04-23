@@ -29,4 +29,5 @@ export const AvatarImageById: { [key: string]: StaticImageData } = {
   Avatar12,
 };
 
+export const AvatarImageIdList = Object.keys(AvatarImageById);
 export const AvatarImagesList = Object.values(AvatarImageById).map((image) => image.src);

@@ -13,7 +13,7 @@ const getReplyComments = async (req, res) => {
 
         const replyComments = await Comment.find({ replyTo: comment }).populate({
             path: 'user',
-            select: ['email', 'name', 'pictureUrl'],
+            select: ['email', 'name', 'picture'],
         });
         return res.status(200).json(replyComments);
     } catch (err) {
@@ -58,7 +58,7 @@ const patchComment = async (req, res) => {
     try {
         const comment = await Comment.findById(commentId).populate({
             path: 'user',
-            select: ['name', 'pictureUrl'],
+            select: ['name', 'picture'],
         });
         if (comment == null)
             return res.status(404).json({ message: 'Comment not found' });

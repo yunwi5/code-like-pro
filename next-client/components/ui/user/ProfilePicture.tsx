@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import Image from 'next/image';
 
+import { getUserPictureUrl } from '@/utils/image.util';
+
 interface Props {
-  picture: string | undefined;
+  picture: string | undefined; // either external picture URL or avatar ID
   alt?: string;
   size?: string;
   className?: string;
@@ -23,6 +25,8 @@ const ProfilePicture: React.FC<Props> = ({
     if (!picture?.trim()) setImageValid(false);
   }, [picture]);
 
+  const pictureUrl = useMemo(() => getUserPictureUrl(picture), [picture]);
+
   return (
     <div
       onClick={onClick}
@@ -34,10 +38,10 @@ const ProfilePicture: React.FC<Props> = ({
         className="text-gray-600 scale-90 translate-y-1"
         size={size}
       />
-      {picture && (
+      {pictureUrl && (
         <Image
           fill
-          src={picture}
+          src={pictureUrl}
           alt={alt ?? 'User profile picture'}
           className={'object-cover'}
           style={{ display: imageValid ? 'inline-block' : 'none' }}

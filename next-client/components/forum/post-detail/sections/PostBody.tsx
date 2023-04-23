@@ -23,7 +23,7 @@ const PostBody: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
           <PostControl post={post} className="md:ml-auto" />
         </div>
 
-        <ForumPostSpec post={post} pictureUrl={post.author?.pictureUrl} className="mt-4" />
+        <ForumPostSpec post={post} picture={post.author?.picture} className="mt-4" />
       </header>
       {/* Post main body content */}
       <TextEditor className="text-gray-600" value={post.content || ''} readOnly={true} />
