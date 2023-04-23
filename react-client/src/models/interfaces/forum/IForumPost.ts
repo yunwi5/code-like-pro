@@ -17,7 +17,7 @@ export interface IForumPostProps {
 export interface IForumPost extends IForumPostProps {
     _id: string;
     createdAt: string; // ISO
-    author: { _id: string; name: string; pictureUrl: string };
+    author: { _id: string; name: string; picture: string };
     comments: string[] | IComment[]; // type does not matter here
     votes: IVote[];
 }

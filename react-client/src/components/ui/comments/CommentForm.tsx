@@ -72,7 +72,7 @@ const CommentForm: React.FC<Props> = (props) => {
     return (
         <form className={`flex gap-3 ${className}`} onSubmit={handleSubmit}>
             <ProfilePicture
-                picture={userDetail?.pictureUrl}
+                picture={userDetail?.picture}
                 alt={userDetail?.name || 'User profile'}
             />
             <div className="flex-1 flex flex-col gap-2">

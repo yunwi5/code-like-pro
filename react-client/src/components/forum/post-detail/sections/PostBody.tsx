@@ -22,7 +22,7 @@ const PostBody: React.FC<{ post: IForumPostPopulated }> = ({ post }) => {
 
                 <ForumPostSpec
                     post={post}
-                    pictureUrl={post.author?.pictureUrl}
+                    picture={post.author?.picture}
                     className="mt-4"
                 />
             </header>

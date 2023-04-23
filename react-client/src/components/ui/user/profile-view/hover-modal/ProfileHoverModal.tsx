@@ -34,7 +34,7 @@ const ProfileHoverModal: React.FC<Props> = ({
             <div className="flex items-center gap-5 px-3 pt-3 pb-2 border-b-2 border-b-gray-200">
                 <ProfilePicture
                     alt={userInfo.name}
-                    picture={userInfo.pictureUrl}
+                    picture={userInfo.picture}
                     size={'3rem'}
                 />
                 <div>

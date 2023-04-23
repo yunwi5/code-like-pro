@@ -7,7 +7,7 @@ export interface IUserDetail {
     email: string;
     description: string;
     createdAt: string; // ISO datetime format
-    pictureUrl?: string;
+    picture?: string;
     liked: IExerciseWithId[]; // list of liked exercises by the user
     exercises: IExerciseWithId[]; // list of exercises created by the user
     submissions: IUserSubmissionPopulated[];

@@ -5,7 +5,7 @@ import { Language } from '../../enums';
 export interface IUserInfo extends IUser {
     description: string;
     languages: Language[]; // list of languages the user has used for solving exercises.
-    pictureUrl?: string; // user profile picture
+    picture?: string; // user profile picture
     createdAt: string; // ISO datetime format
 
     solvedExercises: number;
