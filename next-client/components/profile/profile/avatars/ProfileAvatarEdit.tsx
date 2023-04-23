@@ -38,7 +38,7 @@ const ProfileAvatarEdit: React.FC = () => {
       <MdAddAPhoto className="cursor-pointer" onClick={() => setShowOptions((ps) => !ps)} />
       {showOptions && (
         <ClickAwayListener onClickAway={() => setShowOptions(false)}>
-          <div className="z-10 flex flex-col items-center gap-3 w-max absolute top-0 left-0 md:-left-[24rem] md:-translate-x-10 pb-3 px-2 rounded-md bg-white shadow-lg cursor-pointer">
+          <div className="z-10 flex flex-col items-center gap-3 w-max absolute top-0 left-0 md:-left-[24rem] md:-translate-x-10 pb-4 px-2 rounded-md bg-white shadow-lg cursor-pointer">
             {!isLoading && <ProfileAvatarOptions onClose={() => setShowOptions(false)} />}
             {isLoading && (
               <div className="flex-center w-[24rem] h-[15rem]">
