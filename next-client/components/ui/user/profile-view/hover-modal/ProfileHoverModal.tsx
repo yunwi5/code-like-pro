@@ -33,7 +33,7 @@ const ProfileHoverModal: React.FC<Props> = ({
     >
       <div className={styles.triangle}></div>
       <div className="flex items-center gap-5 px-3 pt-3 pb-2 border-b-2 border-b-gray-200">
-        <ProfilePicture alt={userInfo.name} picture={userInfo.pictureUrl} size={'3rem'} />
+        <ProfilePicture alt={userInfo.name} picture={userInfo.picture} size={'3rem'} />
         <div>
           <h3 className="text-xl text-gray-500 font-semibold">{userInfo.name}</h3>
           <p className="text-gray-400">{userInfo.description?.slice(0, 40) || '-'}</p>

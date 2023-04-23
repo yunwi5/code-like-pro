@@ -11,7 +11,7 @@ import ProfilePicture from '../user/ProfilePicture';
 const ForumPostCard: React.FC<{ post: IForumPost }> = ({ post }) => {
   return (
     <article className="card flex items-center gap-3 lg:gap-5 xl:gap-8 px-3 lg:px-5 xl:px-8 py-2 odd:bg-gray-100 even:bg-gray-200/80">
-      <ProfilePicture picture={post.author.pictureUrl} alt={post.author.name} size={'3rem'} />
+      <ProfilePicture picture={post.author.picture} alt={post.author.name} size={'3rem'} />
       <div className="flex flex-col gap-2">
         <h3 className="w-fit text-gray-600/90">
           <HoveringLabel label="Read It" className="hover:text-main-500 text-base">

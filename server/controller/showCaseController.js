@@ -78,7 +78,7 @@ const getComments = async (req, res) => {
     try {
         showCase = await ShowCase.findById(req.params.id).populate({
             path: 'comments',
-            populate: { path: 'user', select: ['name', 'pictureUrl'] },
+            populate: { path: 'user', select: ['name', 'picture'] },
         });
     } catch (err) {
         console.log(err.message);

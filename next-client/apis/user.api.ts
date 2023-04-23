@@ -13,7 +13,7 @@ export function getUserInfo(userId: string) {
   return getRequest<IUserInfo>({ url: `${API_DOMAIN}/${userId}` });
 }
 
-export type UserDetailProps = { name: string; pictureUrl: string; description: string };
+export type UserDetailProps = { name: string; picture: string; description: string };
 export async function patchUserDetail(body: UserDetailProps) {
   return await patchRequest<IUser>({ url: API_DOMAIN, body });
 }

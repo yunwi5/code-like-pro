@@ -13,7 +13,7 @@ const createForumPost = async (req, res) => {
 
 const getForumPosts = async (req, res) => {
     try {
-        const forumPosts = await ForumPost.find({}).populate('author', 'name pictureUrl');
+        const forumPosts = await ForumPost.find({}).populate('author', 'name picture');
         res.status(200).json(forumPosts);
     } catch (err) {
         console.log(err.message);
@@ -25,7 +25,7 @@ const getForumPostByCategory = async (req, res) => {
     try {
         const forumPosts = await ForumPost.find({
             category: req.params.category,
-        }).populate('author', 'name pictureUrl');
+        }).populate('author', 'name picture');
         res.status(200).json(forumPosts);
     } catch (err) {
         console.log(err.message);
@@ -40,11 +40,11 @@ const getForumPostById = async (req, res) => {
         const forumPost = await ForumPost.findById(forumId)
             .populate({
                 path: 'author',
-                select: ['name', 'pictureUrl'],
+                select: ['name', 'picture'],
             })
             .populate({
                 path: 'comments',
-                populate: { path: 'user', select: ['name', 'pictureUrl'] },
+                populate: { path: 'user', select: ['name', 'picture'] },
             });
 
         res.status(200).json(forumPost);

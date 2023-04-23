@@ -292,7 +292,7 @@ const exerciseController = {
         try {
             const exercisePromise = Exercise.findById(exerciseId).populate({
                 path: 'author',
-                select: ['name', 'pictureUrl'],
+                select: ['name', 'picture'],
             });
             const userPromise = User.findById(userId);
             const [exercise, user] = await Promise.all([exercisePromise, userPromise]);
@@ -327,7 +327,7 @@ const exerciseController = {
             // Find the exercise and populate the showcases of that exercise including its user.
             const exercise = await Exercise.findById(exerciseId).populate({
                 path: 'showCases',
-                populate: { path: 'user', select: ['name', 'pictureUrl'] },
+                populate: { path: 'user', select: ['name', 'picture'] },
             });
             const showCases = exercise.showCases;
             // Return the list of showcases as JSON
@@ -390,7 +390,7 @@ const exerciseController = {
         try {
             const exercise = await Exercise.findById(exerciseId).populate({
                 path: 'comments',
-                populate: { path: 'user', select: ['email', 'name', 'pictureUrl'] },
+                populate: { path: 'user', select: ['email', 'name', 'picture'] },
             });
             const comments = exercise.comments;
 

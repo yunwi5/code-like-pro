@@ -10,7 +10,7 @@ const UserDetailHeader: React.FC<{ userInfo: IUserInfo }> = ({ userInfo }) => {
       <ProfilePicture
         className=""
         size="3.5rem"
-        picture={userInfo.pictureUrl}
+        picture={userInfo.picture}
         alt={userInfo.name}
       />
       <h2 className="flex-start gap-2 mr-auto text-xl sm:text-3xl">{userInfo.name}</h2>

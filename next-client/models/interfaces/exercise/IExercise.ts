@@ -1,5 +1,5 @@
-import { IComment, IDifficultyVote, ITestCase } from '..';
 import { Difficulty, Language } from '../../enums';
+import { IComment, IDifficultyVote, ITestCase, IUser } from '..';
 
 export interface IExerciseDraft {
   name: string;
@@ -14,7 +14,7 @@ export interface IExerciseDraft {
 
 export interface IExercise extends IExerciseDraft {
   _id?: string;
-  author: { _id: string; name: string; pictureUrl?: string };
+  author: IUser;
   createdAt: string; // ISO date for exercise creation
   liked: string[]; // list of user ids who liked the exercise unpopulated
   reports: string[]; // list of report ids unpopulated

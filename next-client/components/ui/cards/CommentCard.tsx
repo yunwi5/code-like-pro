@@ -67,7 +67,7 @@ const CommentCard: FC<Props> = ({ comment, onReply, onUpdate, onDelete }) => {
 
   return (
     <article className="flex-1 flex gap-4 text-gray-799">
-      <ProfilePicture picture={comment.user.pictureUrl} alt={comment.user.name} />
+      <ProfilePicture picture={comment.user.picture} alt={comment.user.name} />
       <div className="flex-1">
         <header className="flex gap-3 items-center">
           <h3>{comment.user.name}</h3>

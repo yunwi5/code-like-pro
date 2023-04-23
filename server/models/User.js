@@ -26,7 +26,7 @@ const UserSchema = new Schema({
         immutable: true,
     },
     // Link to the user profile picture. Either link to google profile picture or internal link to the avatar image of the app.
-    pictureUrl: { type: String },
+    picture: { type: String },
     liked: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
     badges: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Badge' }],
 });
