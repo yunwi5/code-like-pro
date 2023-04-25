@@ -61,7 +61,7 @@ const CodeEditor: React.FC<Props> = ({
 
   return (
     <div
-      className={`${styles['editor-wrapper']} relative flex flex-col border-2 bg-white border-gray-300 shadow-md focus-within:shadow-lg focus-within:outline focus-within:outline-2 focus-within:outline-gray-200 rounded-sm overflow-hidden ${className}`}
+      className={`${styles['editor-wrapper']} flex flex-col border-2 bg-white border-gray-300 shadow-md focus-within:shadow-lg focus-within:outline focus-within:outline-2 focus-within:outline-gray-200 rounded-sm overflow-hidden ${className}`}
     >
       {showHeader && (
         <div className="flex-between px-3 py-2 text-gray-700 bg-gray-300/90 capitalize text-lg">
@@ -69,33 +69,39 @@ const CodeEditor: React.FC<Props> = ({
           <ExpandShrinkToggler isShrinked={isShrinked} setIsShrinked={setIsShrinked} />
         </div>
       )}
-      {!isShrinked && (
-        <>
-          <Editor
-            className={`min-h-[7.5rem] pt-3 max-w-[90vw] lg:max-w-[80vw] max-h-[100vh] overflow-hidden ${editorClassName}`}
-            language={getMonacoLanguageName(language) ?? 'python'}
-            value={value}
-            onChange={(value: string | undefined) => onChange(value || '')}
-            beforeMount={handleEditorWillMount}
-            onMount={handleMount}
-            width={width}
-            height={height}
-            options={{ readOnly: readOnly }}
-          />
+      <div className="relative flex flex-col grow">
+        {!isShrinked && (
+          <>
+            <Editor
+              className={`min-h-[7.5rem] pt-3 max-w-[100w] sm:max-w-[90vw] xl:max-w-[80vw] max-h-[100vh] overflow-hidden ${editorClassName}`}
+              language={getMonacoLanguageName(language) ?? 'python'}
+              value={value}
+              onChange={(value: string | undefined) => onChange(value || '')}
+              beforeMount={handleEditorWillMount}
+              onMount={handleMount}
+              width={width}
+              height={height}
+              options={{ readOnly: readOnly }}
+            />
 
-          {clipboardEnabled && <CopyClipboardButton onCopy={handleCopyClipboard} />}
+            {clipboardEnabled && (
+              <CopyClipboardButton
+                onCopy={handleCopyClipboard}
+                className={`${styles.btn} ${!value ? '!opacity-0 cursor-none' : ''}`}
+              />
+            )}
 
-          {/* Clear user code button */}
-          {!readOnly && (
-            <button
-              onClick={() => onChange('')}
-              className={`${styles['clear-btn']} absolute bottom-3 right-3 px-3 py-1 bg-gray-600/90 hover:bg-gray-700 text-white transition-all rounded shadow`}
-            >
-              Clear
-            </button>
-          )}
-        </>
-      )}
+            {!readOnly && (
+              <button
+                onClick={() => onChange('')}
+                className={`${styles.btn} absolute bottom-3 right-3 px-3 py-1 bg-gray-600/90 hover:bg-gray-700 text-white transition-all rounded shadow`}
+              >
+                Clear
+              </button>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

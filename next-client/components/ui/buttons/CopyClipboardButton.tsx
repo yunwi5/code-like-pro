@@ -4,11 +4,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 type CopyClipboardButtonProps = {
   onCopy: () => void;
+  className?: string;
 };
 
 const COPY_EFFECT_DURATION = 1500;
 
-const CopyClipboardButton: FC<CopyClipboardButtonProps> = ({ onCopy }) => {
+const CopyClipboardButton: FC<CopyClipboardButtonProps> = ({ onCopy, className }) => {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showCopiedEffect, setShowCopiedEffect] = useState(false);
 
@@ -32,7 +33,9 @@ const CopyClipboardButton: FC<CopyClipboardButtonProps> = ({ onCopy }) => {
   }, [showCopiedEffect]);
 
   return (
-    <div className="absolute top-3 right-3 w-[50px] flex items-center flex-col gap-2">
+    <div
+      className={`absolute top-3 right-3 w-[50px] flex items-center flex-col gap-2 ${className}`}
+    >
       <div
         onClick={handleCopyAction}
         className="flex-center p-2 text-xl bg-gray-200 hover:bg-gray-300 text-gray-600 shadow rounded cursor-pointer"
