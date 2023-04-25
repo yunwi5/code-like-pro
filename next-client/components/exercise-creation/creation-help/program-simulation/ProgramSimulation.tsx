@@ -7,7 +7,7 @@ import { Language } from '../../../../models/enums';
 import { ITestCase, ITestOutput } from '../../../../models/interfaces';
 import { prettierLanguageName } from '../../../../utils/language.util';
 import Button from '../../../ui/buttons/Button';
-import CodeEditor from '../../../ui/editor/CodeEditor';
+import CodeEditor from '../../../ui/editor/code-editor/CodeEditor';
 
 interface Props {
   code: string;

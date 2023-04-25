@@ -17,7 +17,7 @@ import { useUserContext } from '../../../store/context/UserContext';
 import { getDateTimeFormat } from '../../../utils/datetime.util';
 import { sortVotingItems } from '../../../utils/sorting-utils/voting-items.sorting';
 import CommentForm from '../comments/CommentForm';
-import CodeEditor from '../editor/CodeEditor';
+import CodeEditor from '../editor/code-editor/CodeEditor';
 import Banner from '../labels/Banner';
 import SocialPanel from '../social/SocialPanel';
 

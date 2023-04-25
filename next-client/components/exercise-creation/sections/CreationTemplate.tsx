@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CreationSection } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
-import CodeEditor from '../../ui/editor/CodeEditor';
+import CodeEditor from '../../ui/editor/code-editor/CodeEditor';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 
 const CreationTemplate: React.FC = () => {

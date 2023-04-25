@@ -13,7 +13,7 @@ const EditorActions = () => {
   const userGotCorrect = !!userSubmission?.correct;
 
   return (
-    <div className="py-3 px-2 flex xs:items-center justify-between flex-col xs:flex-row gap-y-3">
+    <div className="pr-2 py-2 flex xs:items-center justify-between flex-col xs:flex-row gap-y-3">
       <div className="flex flex-col xs:flex-row gap-2">
         <Link
           href="/browse"

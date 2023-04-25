@@ -9,7 +9,7 @@ import { ShowCaseSection } from '../../../models/enums';
 import { IExerciseWithId } from '../../../models/interfaces';
 import { useUserContext } from '../../../store/context/UserContext';
 import { getShowcasePageLink } from '../../../utils/links.util';
-import CodeEditor from '../editor/CodeEditor';
+import CodeEditor from '../editor/code-editor/CodeEditor';
 import LanguageLabel from '../icons/LanguageIcon';
 import HoveringLabel from '../tooltip/HoveringLabel';
 

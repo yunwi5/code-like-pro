@@ -5,7 +5,7 @@ import { ImBin2 } from 'react-icons/im';
 import { Language } from '../../../models/enums';
 import { ITestCase, ITestCaseProps, ITestOutput } from '../../../models/interfaces';
 import ExpandShrinkToggler from '../buttons/icon-buttons/ExpandShrinkToggler';
-import CodeEditor from '../editor/CodeEditor';
+import CodeEditor from '../editor/code-editor/CodeEditor';
 
 interface Props {
   className?: string;

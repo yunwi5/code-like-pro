@@ -38,7 +38,7 @@ const ExerciseAttemptMain: FC<ExerciseAttemptContainerProps> = ({
       exercise={exercise}
       userSubmission={userSubmission}
     >
-      <main className="flex flex-col lg:flex-row gap-x-5 lg:min-h-[max(92.5vh,35rem)] lg:max-h-[93vh] bg-gray-200/70 border-t-2 border-gray-300/90">
+      <main className="flex flex-col lg:flex-row gap-x-5 lg:min-h-[max(95vh,35rem)] lg:max-h-[93vh] bg-gray-200/70 border-t-2 border-gray-300/90">
         <AttemptGuideSection />
         <AttemptActionsSection />
       </main>

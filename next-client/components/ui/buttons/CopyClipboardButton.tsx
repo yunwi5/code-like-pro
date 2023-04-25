@@ -49,7 +49,7 @@ const CopyClipboardButton: FC<CopyClipboardButtonProps> = ({ onCopy, className }
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="px-2 py-1 text-sm bg-gray-500 text-white shadow rounded"
+            className="px-2 py-1 text-sm bg-gray-700 text-white shadow rounded"
           >
             Copied
           </motion.div>
