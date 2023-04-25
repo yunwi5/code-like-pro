@@ -1,7 +1,8 @@
 'use client';
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import { Provider as BalancerProvider } from 'react-wrap-balancer';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -13,14 +14,16 @@ const queryClient = new QueryClient();
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <GoogleOAuthProvider clientId={AppProperty.GOOGLE_CLIENT_ID}>
         <QueryClientProvider client={queryClient}>
-          <UserContextProvider>{children}</UserContextProvider>
+          <BalancerProvider>
+            <UserContextProvider>{children}</UserContextProvider>
+          </BalancerProvider>
         </QueryClientProvider>
       </GoogleOAuthProvider>
       <ToastContainer />
-    </Provider>
+    </ReduxProvider>
   );
 };
 
