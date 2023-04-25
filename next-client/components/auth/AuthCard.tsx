@@ -4,6 +4,8 @@ import { MdEmail } from 'react-icons/md';
 import ClipLoader from 'react-spinners/ClipLoader';
 import Link from 'next/link';
 
+import { AppProperty } from '@/constants';
+
 import Button from '../ui/buttons/Button';
 import AuthInput from '../ui/inputs/AuthInput';
 import PasswordInput from '../ui/inputs/PasswordInput';
@@ -46,7 +48,7 @@ const AuthCard = (props: AuthCardProps) => {
   return (
     <div className="absolute flex justify-center px-2 sm:px-6 pt-6 pb-12 min-w-[min(28rem,92vw)] xl:w-1/4 bg-grey-300 after:hidden sm:after:block after:absolute after:top-[0.55rem] after:left-2 after:z-[-1] after:w-full after:h-full after:bg-main-400 after:shadow-[7px_8px_1px_rgba(0,0,0,0.3)]">
       <div className="text-center w-full">
-        <h1 className="logo text-2xl font-light">CodeLikePro</h1>
+        <h1 className="logo text-2xl font-light">${AppProperty.APP_NAME}</h1>
 
         <div>
           <h2 className="text-xl mt-3">{isLogin ? 'Login' : 'Register'}</h2>
