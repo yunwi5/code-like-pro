@@ -38,6 +38,8 @@ const PageNavigation: React.FC<Props> = ({
 
   const currentPageCloseToEnd = currentPage + 4 >= totalPages;
 
+  if (totalPages <= 1) return null;
+
   const dots = <span>...</span>;
 
   return (
