@@ -3,7 +3,7 @@ import Header from '@/components/layout/Header';
 import Providers from '@/components/Providers';
 import ScrollToTop from '@/components/utils/ScrollToTop';
 
-import { redHatDisplay, redHatMono } from './fonts';
+import { redHatDisplay } from './fonts';
 
 import '@/styles/global.scss';
 
@@ -17,7 +17,7 @@ export const metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en" className={`${redHatDisplay.variable} ${redHatMono.variable}`}>
+    <html lang="en" className={`${redHatDisplay.className}`}>
       <body>
         <Providers>
           <Header />
