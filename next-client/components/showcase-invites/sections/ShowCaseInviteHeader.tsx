@@ -27,7 +27,7 @@ const ShowCaseInviteHeader: React.FC = () => {
           </p>
         </div>
       </div>
-      <CodeMonitor size={'13.5rem'} />
+      <CodeMonitor size="13.5rem" />
     </header>
   );
 };
