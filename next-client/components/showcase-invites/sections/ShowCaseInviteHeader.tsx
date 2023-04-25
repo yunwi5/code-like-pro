@@ -13,7 +13,7 @@ const ShowCaseInviteHeader: React.FC = () => {
         <h1 className="text-center md:text-left text-2xl sm:text-3xl lg:text-4xl bg-gradient-to-r from-main-500/90 to-fuchsia-600 bg-clip-text text-transparent capitalize">
           Please join our showcase forums!
         </h1>
-        <div className="mt-5 flex flex-col gap-y-2 sm:gap-y-[2px] text-center md:text-left text-base lg:text-[1.075rem] text-gray-500">
+        <div className="mt-5 px-3 xs:px-10 md:pl-0 flex flex-col gap-y-2 sm:gap-y-[2px] text-center md:text-left text-base lg:text-[1.075rem] text-gray-500">
           <p>
             We encourage you to join our challenge showcase forums and showcase your amazing work!
           </p>
