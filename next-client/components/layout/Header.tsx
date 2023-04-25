@@ -5,13 +5,13 @@ import { FiLogIn } from 'react-icons/fi';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { Logo } from '../../assets';
 import { ForumCategoryList, ProfileSectionList } from '../../models/enums';
 import { useUserContext } from '../../store/context/UserContext';
 import { ForumIcons } from '../../utils/forum.util';
 import { getForumCategoryLink } from '../../utils/links.util';
 import { ProfileLinkMap } from '../../utils/profile.util';
 import HamburgerMenu from '../ui/buttons/icon-buttons/HamburgerMenu';
+import AppLogo from '../ui/labels/AppLogo';
 import ActiveLink from '../ui/links/ActiveLink';
 import ProfileMenuHeader from '../ui/user/profile-nav/ProfileMenuHeader';
 import UserProfileNav from '../ui/user/profile-nav/UserProfileNav';
@@ -30,16 +30,13 @@ function getHeaderPaddingClass(pathname: string) {
   return 'px-4 md:px-8 lg:px-[3.5%] xl:px-[5%] 2xl:px-[6%] 3xl:px-[7%]';
 }
 
-// Mobile header breakpoint is lg - 1024px.
-// Under 1024 px mobile header is displayed. Above 1024px desktop header is displayed.
+// Mobile header breakpoint: lg - 1024px.
 const Header = () => {
   const { user } = useUserContext();
   const isLoggedIn = !!user;
   const pathname = usePathname();
-  // State to manage visibility of the modbile dropdown menu.
   const [showMobileDropdownMenu, setShowMobileDropdownMenu] = useState(false);
 
-  // Get different styles for header by different pages.
   const className = `${getHeaderPositionClass(pathname)} ${getHeaderPaddingClass(pathname)}`;
 
   return (
@@ -48,16 +45,8 @@ const Header = () => {
       className={`z-[90] relative flex items-center justify-between py-3 m-0 bg-white shadow ${className}`}
     >
       <div className="logo flex items-center flex-shrink-0 text-main-400">
-        {/* Hamburger menu icon that toggles the mobile dropdown menu visibility. Only shown on the mobile screen size */}
         <HamburgerMenu visible={showMobileDropdownMenu} setVisible={setShowMobileDropdownMenu} />
-        <Link
-          href="/"
-          onClick={() => setShowMobileDropdownMenu(false)}
-          className="flex-start gap-1 sm:gap-2 text-xl tracking-tight hover:cursor-pointer"
-        >
-          <Logo size={25} />
-          CodeLikePro
-        </Link>
+        <AppLogo onClick={() => setShowMobileDropdownMenu(false)} className="text-lg xs:text-xl" />
       </div>
 
       {/* Navigation list: Browse, Ranking & Create shown only for a large (> 1024px) screens. */}

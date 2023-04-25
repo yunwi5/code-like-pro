@@ -2,15 +2,14 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Logo } from '../../assets';
 import {
   FacebookIcon,
   GithubIcon,
   InstagramIcon,
   TwitterIcon,
 } from '../../assets/svg-icons/social-svgs';
-import { AppProperty } from '../../constants';
 import useWindowSize from '../../hooks/ui/useWindowSize';
+import AppLogo from '../ui/labels/AppLogo';
 
 // Footer links do not have real links at the moment.
 // Main purpose is to avoid duplicated styles.
@@ -41,11 +40,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="relative z-[20] flex-between flex-col lg:flex-row gap-y-3 lg:px-[4.5%] xl:px-[6.5%] py-3 border-t-2 border-gray-200 ">
-      <h2 className="logo flex-start flex-col lg:flex-row gap-1 text-2xl !text-main-400">
-        {/* Display large logo for smaller screen (since the layout is a column layout), display small logo for large screen */}
-        <Logo size={width < 1024 ? 42 : 25} />
-        {AppProperty.APP_NAME}
-      </h2>
+      <AppLogo logoSize={width < 1024 ? 42 : 25} className="flex flex-col lg:flex-row text-2xl" />
       <div className="flex flex-col sm:flex-row items-center gap-x-5 lg:ml-5 lg:mr-auto">
         <p className="whitespace-nowrap text-gray-600/90">Copyright &copy; {currentYear} Yunwi5</p>
         <div className="flex gap-4 text-gray-700">
