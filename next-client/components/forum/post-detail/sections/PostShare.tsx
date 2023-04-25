@@ -40,7 +40,7 @@ const PostShare: React.FC<Props> = ({ post, className = '' }) => {
               onClose={() => setShowPanel(false)}
               url={shareUrl}
               className="bottom-[120%]"
-              title={`${post.name} - CodeLikePro`}
+              title={`${post.name} - ${AppProperty.APP_NAME}`}
               tags={[...(post.tags || []), 'Showcase']}
               source={post.content}
               via={AppProperty.APP_NAME}

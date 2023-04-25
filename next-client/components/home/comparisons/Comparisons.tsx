@@ -3,6 +3,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { MdOutlineCheck } from 'react-icons/md';
 import { motion } from 'framer-motion';
 
+import { AppProperty } from '@/constants';
+
 import { Logo } from '../../../assets';
 import useWindowSize from '../../../hooks/ui/useWindowSize';
 
@@ -40,7 +42,7 @@ const Comparisons: React.FC = () => {
                 key={platform}
                 className="col-span-2 flex-center gap-2 text-gray-500 text-2xl font-semibold"
               >
-                {platform === Platform.CODE_LIKE_PRO && <Logo size={23} />}
+                {platform === Platform.OUR_PLATFORM && <Logo size={23} />}
                 {platform}
               </div>
             ))}
@@ -98,11 +100,11 @@ const Comparisons: React.FC = () => {
   );
 };
 
-enum Platform {
-  LEETCODE = 'LeetCode',
-  CODEWARS = 'CodeWars',
-  CODE_LIKE_PRO = 'CodeLikePro',
-}
+const Platform = {
+  LEETCODE: 'LeetCode',
+  CODEWARS: 'CodeWars',
+  OUR_PLATFORM: AppProperty.APP_NAME,
+} as const;
 
 const PlatformList = Object.values(Platform);
 
@@ -112,7 +114,7 @@ const features = [
     platforms: {
       [Platform.LEETCODE]: true,
       [Platform.CODEWARS]: true,
-      [Platform.CODE_LIKE_PRO]: true,
+      [Platform.OUR_PLATFORM]: true,
     },
   },
   {
@@ -120,7 +122,7 @@ const features = [
     platforms: {
       [Platform.LEETCODE]: false,
       [Platform.CODEWARS]: false,
-      [Platform.CODE_LIKE_PRO]: true,
+      [Platform.OUR_PLATFORM]: true,
     },
   },
   {
@@ -128,7 +130,7 @@ const features = [
     platforms: {
       [Platform.LEETCODE]: false,
       [Platform.CODEWARS]: false,
-      [Platform.CODE_LIKE_PRO]: true,
+      [Platform.OUR_PLATFORM]: true,
     },
   },
   {
@@ -136,7 +138,7 @@ const features = [
     platforms: {
       [Platform.LEETCODE]: false,
       [Platform.CODEWARS]: true,
-      [Platform.CODE_LIKE_PRO]: true,
+      [Platform.OUR_PLATFORM]: true,
     },
   },
   {
@@ -144,7 +146,7 @@ const features = [
     platforms: {
       [Platform.LEETCODE]: false,
       [Platform.CODEWARS]: true,
-      [Platform.CODE_LIKE_PRO]: true,
+      [Platform.OUR_PLATFORM]: true,
     },
   },
   {
@@ -152,7 +154,7 @@ const features = [
     platforms: {
       [Platform.LEETCODE]: true,
       [Platform.CODEWARS]: true,
-      [Platform.CODE_LIKE_PRO]: true,
+      [Platform.OUR_PLATFORM]: true,
     },
   },
   {
@@ -160,7 +162,7 @@ const features = [
     platforms: {
       [Platform.LEETCODE]: true,
       [Platform.CODEWARS]: false,
-      [Platform.CODE_LIKE_PRO]: true,
+      [Platform.OUR_PLATFORM]: true,
     },
   },
   {
@@ -168,7 +170,7 @@ const features = [
     platforms: {
       [Platform.LEETCODE]: false,
       [Platform.CODEWARS]: true,
-      [Platform.CODE_LIKE_PRO]: true,
+      [Platform.OUR_PLATFORM]: true,
     },
   },
   {
@@ -176,7 +178,7 @@ const features = [
     platforms: {
       [Platform.LEETCODE]: false,
       [Platform.CODEWARS]: true,
-      [Platform.CODE_LIKE_PRO]: true,
+      [Platform.OUR_PLATFORM]: true,
     },
   },
 ];
