@@ -13,11 +13,11 @@ const EditorActions = () => {
   const userGotCorrect = !!userSubmission?.correct;
 
   return (
-    <div className="py-3 px-2 flex xs:items-center justify-between flex-col xs:flex-row gap-y-3">
-      <div className="flex flex-col xs:flex-row gap-2">
+    <div className="px-2 lg:px-0 lg:pr-2 py-3 flex sm:items-center justify-between flex-col sm:flex-row gap-y-3">
+      <div className="flex flex-col sm:flex-row gap-2">
         <Link
           href="/browse"
-          className="btn-small py-[0.3rem] flex-center gap-1 text-[1.08rem] text-gray-700 rounded-sm shadow-md bg-gray-300 hover:bg-gray-600/90 hover:text-gray-50"
+          className="hidden sm:flex flex-center gap-1 btn-small py-[0.3rem] text-[1.08rem] text-gray-700 rounded-sm shadow-md bg-gray-300 hover:bg-gray-600/90 hover:text-gray-50"
         >
           <BsListUl /> List
         </Link>
@@ -32,7 +32,7 @@ const EditorActions = () => {
         )}
       </div>
       {!isLoading && (
-        <div className="xs:ml-auto flex flex-col xs:flex-row gap-2">
+        <div className="sm:ml-auto flex flex-col sm:flex-row gap-2">
           <Button onClick={runCode} size="small" mode="empty">
             Run Code
           </Button>
