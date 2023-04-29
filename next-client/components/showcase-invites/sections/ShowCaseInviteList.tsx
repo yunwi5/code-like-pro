@@ -45,7 +45,7 @@ const ShowCaseInviteList: React.FC<Props> = ({ exercises, inviteMode }) => {
       </div>
       <PageNavigation
         currentPage={page}
-        totalPages={maxPage}
+        maxPage={maxPage}
         onChangePage={(newPage: number) => setPage(newPage)}
       />
     </section>

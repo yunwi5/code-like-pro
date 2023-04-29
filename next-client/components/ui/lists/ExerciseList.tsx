@@ -49,7 +49,7 @@ const ExerciseList: React.FC<Props> = ({ exercises, exercisePerPage = EXERCISE_P
       </div>
 
       {exercises.length > exercisePerPage && (
-        <PageNavigation currentPage={page} totalPages={maxPage} onChangePage={handlePage} />
+        <PageNavigation currentPage={page} maxPage={maxPage} onChangePage={handlePage} />
       )}
     </section>
   );

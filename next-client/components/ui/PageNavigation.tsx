@@ -3,14 +3,14 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 interface Props {
   currentPage: number;
-  totalPages: number;
+  maxPage: number;
   onChangePage: (newPage: number) => void;
   className?: string;
 }
 
-function createAdjacentPageList(currentPage: number, totalPages: number) {
+function createAdjacentPageList(currentPage: number, maxPage: number) {
   const pages = [];
-  if (currentPage + 4 < totalPages) {
+  if (currentPage + 4 < maxPage) {
     const startPage = currentPage < 2 ? 0 : currentPage - 2;
     const endPage = currentPage < 2 ? 4 : currentPage + 2;
     for (let p = startPage; p <= endPage; p++) {
@@ -18,7 +18,7 @@ function createAdjacentPageList(currentPage: number, totalPages: number) {
     }
     return pages;
   } else {
-    for (let p = totalPages - 4; p <= totalPages; p++) {
+    for (let p = maxPage - 4; p <= maxPage; p++) {
       pages.push(p);
     }
     return pages;
@@ -29,16 +29,16 @@ const navBtnClass =
   'flex-center w-[2rem] h-[2rem] rounded-sm text-2xl hover:bg-gray-200/90 cursor-pointer';
 
 const PageNavigation: React.FC<Props> = ({
-  currentPage,
-  totalPages,
+  currentPage, // index based
+  maxPage, // index based
   onChangePage,
   className = '',
 }) => {
-  const pageList = createAdjacentPageList(currentPage, totalPages);
+  const pageList = createAdjacentPageList(currentPage, maxPage);
 
-  const currentPageCloseToEnd = currentPage + 4 >= totalPages;
+  const currentPageCloseToEnd = currentPage + 4 >= maxPage;
 
-  if (totalPages <= 1) return null;
+  if (maxPage <= 0) return null;
 
   const dots = <span>...</span>;
 
@@ -53,9 +53,9 @@ const PageNavigation: React.FC<Props> = ({
       </div>
 
       {/* First Page displayed only if the currrent page is close to the last page. */}
-      {currentPageCloseToEnd && totalPages >= 5 && (
+      {currentPageCloseToEnd && maxPage >= 5 && (
         <>
-          <PageLabel page={0} onClick={() => onChangePage(0)} currentPage={totalPages} />
+          <PageLabel page={0} onClick={() => onChangePage(0)} currentPage={maxPage} />
           {dots}
         </>
       )}
@@ -74,18 +74,18 @@ const PageNavigation: React.FC<Props> = ({
         <>
           {dots}
           <PageLabel
-            page={totalPages}
+            page={maxPage}
             currentPage={currentPage}
-            onClick={() => onChangePage(totalPages)}
+            onClick={() => onChangePage(maxPage)}
           />
         </>
       )}
 
       {/* Navigate to next page */}
       <div
-        onClick={() => currentPage !== totalPages && onChangePage(currentPage + 1)}
+        onClick={() => currentPage !== maxPage && onChangePage(currentPage + 1)}
         className={`${navBtnClass} ${
-          currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
+          currentPage === maxPage ? 'opacity-50 cursor-not-allowed' : ''
         }`}
       >
         <BsChevronRight />
