@@ -62,7 +62,7 @@ const ShowcaseList: React.FC<Props> = ({
       </div>
 
       {showcases.length >= showcasesPerPage && (
-        <PageNavigation currentPage={page} totalPages={maxPage} onChangePage={handlePage} />
+        <PageNavigation currentPage={page} maxPage={maxPage} onChangePage={handlePage} />
       )}
     </section>
   );

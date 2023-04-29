@@ -53,7 +53,7 @@ const ForumPostList: React.FC = () => {
       <PageNavigation
         className="mt-6"
         currentPage={page}
-        totalPages={maxPage}
+        maxPage={maxPage}
         onChangePage={handlePage}
       />
     </section>

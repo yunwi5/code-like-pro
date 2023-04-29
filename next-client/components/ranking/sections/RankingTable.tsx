@@ -66,7 +66,7 @@ const RankingTable: React.FC<Props> = ({ rankingOrder, rankingCategory }) => {
       <PageNavigation
         className="mt-10"
         currentPage={currentPage}
-        totalPages={maxPage}
+        maxPage={maxPage}
         onChangePage={(newPage: number) => setPage(newPage)}
       />
     </div>
