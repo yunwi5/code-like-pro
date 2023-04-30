@@ -8,7 +8,7 @@ import { editorSettingsActions } from '@/store/redux/editor-settings-slice';
 import CustomSelect from '../../inputs/CustomSelect';
 import CustomSwitch from '../../inputs/CustomSwitch';
 
-import { themesList } from './code-editor.util';
+import { themes } from './code-editor.util';
 
 type Props = {
   onClose: () => void;
@@ -72,7 +72,7 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
               id="theme-select"
               className="!gap-1"
               labelText="Theme"
-              options={themesList}
+              options={themes}
               onChange={(newTheme) => setTheme(newTheme)}
             />
           </section>
