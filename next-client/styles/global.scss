@@ -80,6 +80,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+mark {
+  padding: 0rem 0.25rem;
+  color: $color-main-400;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+  border-radius: 0.25rem;
+}
+
 @layer components {
   .flex-center {
     @apply flex justify-center items-center;
@@ -100,7 +107,7 @@ code {
     @apply focus:outline focus:outline-2 focus:outline-main-300;
   }
   .input {
-    @apply px-2 py-2 min-h-[2.5rem] border-2 border-gray-300 bg-gray-50 rounded-sm shadow-md focus:shadow-lg focus:outline focus:outline-2 focus:border-transparent;
+    @apply px-2 py-2 min-h-[2.5rem] border-2 border-gray-300 bg-gray-50 rounded-sm shadow-sm focus:shadow focus:outline focus:outline-2 focus:border-transparent;
   }
   .btn {
     @apply px-3 py-2 text-lg whitespace-nowrap transition-all rounded shadow hover:shadow-md cursor-pointer;

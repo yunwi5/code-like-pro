@@ -1,11 +1,12 @@
 'use client';
 import React, { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Editor from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
 
+import { selectTheme } from '@/store/redux/editor-settings.selectors';
 import { copyToClipboard } from '@/utils/clipboard.util';
 
-import monokai from '../../../../assets/themes/Monokai.json';
 import { Language } from '../../../../models/enums';
 import { prettierLanguageName } from '../../../../utils/language.util';
 import CopyClipboardButton from '../../buttons/CopyClipboardButton';
@@ -44,6 +45,7 @@ const CodeEditor: React.FC<Props> = ({
   className = '',
   editorClassName = '',
 }) => {
+  const theme = useSelector(selectTheme);
   const editorRef = useRef<MonacoCodeEditor>(null);
   const [isShrinked, setIsShrinked] = useState(false);
 
@@ -88,7 +90,7 @@ const CodeEditor: React.FC<Props> = ({
               width={width}
               height={height}
               options={{ readOnly: readOnly }}
-              theme="monokai"
+              theme={theme}
             />
 
             {clipboardEnabled && (

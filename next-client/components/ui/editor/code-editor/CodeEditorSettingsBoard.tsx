@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
+
+import { selectKeyboardBinding } from '@/store/redux/editor-settings.selectors';
+import { editorSettingsActions } from '@/store/redux/editor-settings-slice';
+
+import CustomSelect from '../../inputs/CustomSelect';
+import CustomSwitch from '../../inputs/CustomSwitch';
+
+import { themesList } from './code-editor.util';
 
 type Props = {
   onClose: () => void;
@@ -7,24 +16,38 @@ type Props = {
 };
 
 const styles = {
-  sectionHeading: '',
+  section: 'border-b-2 border-gray-200 pb-3 mb-2',
+  sectionHeading: 'text-gray-600 font-semibold text-lg mb-2',
+  sectionRow: 'flex justify-between items-center mb-2',
 };
 
-const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
-  const [theme, setTheme] = useState('default');
-  const [vimEnabled, setVimEnabled] = useState(false);
-  const [emacsEnabled, setEmacsEnabled] = useState(false);
+export enum KeyboardBinding {
+  DEFAULT = 'default',
+  VIM = 'vim',
+  EMACS = 'emacs',
+}
 
-  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTheme(e.target.value);
+const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
+  const dispatch = useDispatch();
+  const keyboardBinding = useSelector(selectKeyboardBinding);
+
+  const setTheme = (newTheme: string) => {
+    dispatch(editorSettingsActions.setTheme(newTheme));
   };
 
+  const setKeyboardBinding = (newKeyboardBinding: string) => {
+    dispatch(editorSettingsActions.setKeyboardBinding(newKeyboardBinding));
+  };
   const handleVimToggle = () => {
-    setVimEnabled(!vimEnabled);
+    const newKeyboardBinding =
+      keyboardBinding === KeyboardBinding.VIM ? KeyboardBinding.DEFAULT : KeyboardBinding.VIM;
+    setKeyboardBinding(newKeyboardBinding);
   };
 
   const handleEmacsToggle = () => {
-    setEmacsEnabled(!emacsEnabled);
+    const newKeyboardBinding =
+      keyboardBinding === KeyboardBinding.EMACS ? KeyboardBinding.DEFAULT : KeyboardBinding.EMACS;
+    setKeyboardBinding(newKeyboardBinding);
   };
 
   return (
@@ -35,57 +58,56 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
           animate={{ opacity: 1, translateX: 0 }}
           exit={{ opacity: 0, translateX: 135 }}
           transition={{ duration: 0.35 }}
-          className="absolute top-[5.6rem] right-[3px] z-[100] flex flex-col gap-4 px-4 py-3 bg-white border rounded-md shadow-xl"
+          style={{
+            boxShadow:
+              'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
+          }}
+          className="absolute top-[5.6rem] right-[3px] z-[100] flex flex-col gap-4 px-4 py-3 bg-white text-gray-500 border rounded-md"
         >
-          <h3 className="text-xl font-semibold">Editor Preferences</h3>
+          <h2 className="text-xl text-gray-600 font-semibold">Editor Preferences</h2>
 
-          <div className="mb-4">
-            <h4 className={`${styles.sectionHeading}`}>Theme</h4>
-            <select
+          <section className={`${styles.section}`}>
+            <h3 className={`${styles.sectionHeading}`}>Styling</h3>
+            <CustomSelect
               id="theme-select"
-              value={theme}
-              onChange={handleThemeChange}
-              className="block w-full bg-white border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            >
-              <option value="default">Default</option>
-              <option value="dark">Dark</option>
-              <option value="light">Light</option>
-            </select>
-          </div>
+              className="!gap-1"
+              labelText="Theme"
+              options={themesList}
+              onChange={(newTheme) => setTheme(newTheme)}
+            />
+          </section>
 
-          <div className="mb-4">
-            <label className="block mb-2">Keyboard Bindings</label>
-            <div>
-              <label htmlFor="vim-toggle" className="flex items-center cursor-pointer">
-                <div className="mr-3">Vim</div>
-                <input
-                  id="vim-toggle"
-                  type="checkbox"
-                  checked={vimEnabled}
-                  onChange={handleVimToggle}
-                  className="form-checkbox rounded-full"
-                />
-              </label>
+          <section className={`${styles.section}`}>
+            <h3 className={`${styles.sectionHeading}`}>Keyboard Bindings</h3>
+            <div className={`${styles.sectionRow}`}>
+              <p className="mr-3">Vim</p>
+              <CustomSwitch
+                id="vim-switch"
+                onToggle={handleVimToggle}
+                isOn={keyboardBinding === KeyboardBinding.VIM}
+              />
             </div>
-            <div>
-              <label htmlFor="emacs-toggle" className="flex items-center cursor-pointer">
-                <div className="mr-3">Emacs</div>
-                <input
-                  id="emacs-toggle"
-                  type="checkbox"
-                  checked={emacsEnabled}
-                  onChange={handleEmacsToggle}
-                  className="form-checkbox rounded-full"
-                />
-              </label>
+            <div className={`${styles.sectionRow}`}>
+              <p className="mr-3">Emacs</p>
+              <CustomSwitch
+                id="emacs-switch"
+                onToggle={handleEmacsToggle}
+                isOn={keyboardBinding === KeyboardBinding.EMACS}
+              />
             </div>
-          </div>
+          </section>
 
-          <div className="mb-4">
-            <label className="block mb-2">Keyboard Shortcuts</label>
-            <div>Run code: CMD + `</div>
-            <div>Submit code: CMD + Shift + `</div>
-          </div>
+          <section className={`${styles.section}`}>
+            <h3 className={`${styles.sectionHeading}`}>Keyboard Shortcuts</h3>
+            <div className={`${styles.sectionRow}`}>
+              <p>Run code:</p>
+              <mark className="text-sm"> CMD + `</mark>
+            </div>
+            <div className={`${styles.sectionRow}`}>
+              <p>Submit code:</p>
+              <mark className="ml-2 text-sm">CMD + Shift + `</mark>
+            </div>
+          </section>
 
           <button
             onClick={onClose}
