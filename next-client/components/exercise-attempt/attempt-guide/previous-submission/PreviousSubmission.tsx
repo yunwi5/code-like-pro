@@ -9,7 +9,7 @@ import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttempt
 import { listItemAnimations } from '../../../../utils/animations.util';
 import { getDateTimeFormat } from '../../../../utils/datetime.util';
 import { getLanguageIcon, prettierLanguageName } from '../../../../utils/language.util';
-import CodeEditor from '../../../ui/editor/CodeEditor';
+import CodeEditor from '../../../ui/editor/code-editor/CodeEditor';
 import StatusLabel from '../../../ui/labels/StatusLabel';
 
 // Component for showing user's previous submission for the currently attempted exercise.

@@ -4,7 +4,7 @@ import { runTestCases } from '../../../../apis/submission.api';
 import { Language } from '../../../../models/enums';
 import { ITestCase } from '../../../../models/interfaces';
 import { indentEachLine } from '../../../../utils/string-utils/string-manipulation.util';
-import CodeEditor from '../../../ui/editor/CodeEditor';
+import CodeEditor from '../../../ui/editor/code-editor/CodeEditor';
 import TestCase from '../../../ui/test-cases/TestCase';
 import ProgramSimulation from '../program-simulation/ProgramSimulation';
 

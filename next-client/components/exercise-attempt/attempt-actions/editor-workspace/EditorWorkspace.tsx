@@ -4,7 +4,7 @@ import useLocalStorage from '../../../../hooks/utils/useLocalStorage';
 import { Language } from '../../../../models/enums';
 import { IExerciseWithId } from '../../../../models/interfaces';
 import { useExerciseAttemptCtx } from '../../../../store/context/ExerciseAttemptContext';
-import CodeEditor from '../../../ui/editor/CodeEditor';
+import CodeEditor from '../../../ui/editor/code-editor/CodeEditor';
 
 function getIndexedStartingTemplate(exercise: IExerciseWithId | null, solutionIndex: number) {
   let solution = `${exercise?.language === Language.PYTHON ? '#' : '//'} Solution ${

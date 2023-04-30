@@ -3,7 +3,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 import { useShowcaseContext } from '../../../store/context/ShowcaseContext';
-import CodeEditor from '../../ui/editor/CodeEditor';
+import CodeEditor from '../../ui/editor/code-editor/CodeEditor';
 import TagList from '../../ui/lists/TagList';
 
 const TextEditor = dynamic(() => import('@/components/ui/editor/text-editor/TextEditor'), {

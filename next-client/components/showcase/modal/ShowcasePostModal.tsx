@@ -4,7 +4,7 @@ import { FaLaptopCode } from 'react-icons/fa';
 import useBadgeQualification from '../../../hooks/badges/useBadgeQualification';
 import useExerciseShowcasesMutation from '../../../hooks/showcase/exercise-showcases/useExerciseShowcasesMutation';
 import { useShowcaseContext } from '../../../store/context/ShowcaseContext';
-import CodeEditor from '../../ui/editor/CodeEditor';
+import CodeEditor from '../../ui/editor/code-editor/CodeEditor';
 import CustomInput from '../../ui/inputs/CustomInput';
 import FormModal from '../../ui/modals/variations/FormModal';
 

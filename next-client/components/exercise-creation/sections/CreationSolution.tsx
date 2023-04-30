@@ -4,7 +4,7 @@ import { CreationSection, Language } from '../../../models/enums';
 import { useExerciseCreationContext } from '../../../store/context/ExerciseCreationContext';
 import { LanguageStartingTemplate } from '../../../utils/language.util';
 import { removeAllSpaces } from '../../../utils/string-utils/string-manipulation.util';
-import CodeEditor from '../../ui/editor/CodeEditor';
+import CodeEditor from '../../ui/editor/code-editor/CodeEditor';
 import CreationSectionContainer from '../containers/CreationSectionContainer';
 import CreationHelp from '../creation-help/CreationHelp';
 

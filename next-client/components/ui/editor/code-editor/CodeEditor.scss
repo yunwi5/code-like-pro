@@ -1,20 +1,26 @@
 .editor-wrapper {
-    .btn {
+    .editor-btn {
         opacity: 0;
-        visibility: hidden;
+        z-index: -1;
         transition: all .3s ease-out;
+    }
+
+    .monaco-editor {
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
     }
 
     &:hover,
     &:focus-within {
-        .btn {
+        .editor-btn {
             opacity: 1;
-            visibility: visible;
+            z-index: 10;
         }
     }
 
     // overwrite default editor styling from monaco
-    & > section {
+    section {
+        flex-grow: 1;
         min-height: 100% !important;
     }
 }
