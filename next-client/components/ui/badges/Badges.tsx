@@ -2,6 +2,9 @@ import React, { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 
+import { BreakPoints } from '@/constants/break-points';
+import useWindowSize from '@/hooks/ui/useWindowSize';
+
 import usePagination from '../../../hooks/utils/usePagination';
 import { BadgeSortingKey, SortingDirection } from '../../../models/enums';
 import { IBadge } from '../../../models/interfaces';
@@ -21,12 +24,13 @@ interface Props {
   badges: IBadge[];
   heading?: string | JSX.Element; // heading title
   className?: string;
-  badgePerPage?: number;
 }
 
-const BADGE_PER_PAGE = 8;
+const BADGE_PER_PAGE = 6;
+const MOBILE_BADGE_PER_PAGE = 4;
 
-const Badges: React.FC<Props> = ({ heading, badges, badgePerPage = BADGE_PER_PAGE, className }) => {
+const Badges: React.FC<Props> = ({ heading, badges, className }) => {
+  const { width: windowWidth } = useWindowSize();
   const [selectedBadgeId, setSelectedBadgeId] = useState<string | null>(null);
   const selectedBadge = badges.find((badge) => badge._id === selectedBadgeId);
 
@@ -35,12 +39,15 @@ const Badges: React.FC<Props> = ({ heading, badges, badgePerPage = BADGE_PER_PAG
     direction: SortingDirection.DESCENDING,
   });
 
-  // Sort the badges whenever the sorting state changes
   const sortedBadges = useMemo(() => {
     return sortBadges(badges, sortingState).slice();
   }, [badges, sortingState]);
 
-  // Apply pagination after sorting
+  const badgePerPage = useMemo(
+    () => (windowWidth < BreakPoints.MOBILE ? MOBILE_BADGE_PER_PAGE : BADGE_PER_PAGE),
+    [windowWidth],
+  );
+
   const {
     array: currentPageBadges,
     maxPage,
@@ -52,12 +59,6 @@ const Badges: React.FC<Props> = ({ heading, badges, badgePerPage = BADGE_PER_PAG
     scrollEnabled: false,
   });
 
-  // Show pagination only if there are more than 1 page amount of badges
-  const showPagination = badges.length > badgePerPage;
-
-  // Grid layout if there are 3 or more badges, flex laout if there are two or less badges.
-  const layoutStyle = badges.length >= 3 ? styles.grid : styles.flex;
-
   return (
     <section className={className}>
       <div className="mb-2 flex flex-col sm:flex-row gap-y-2 justify-between items-start sm:items-center">
@@ -67,7 +68,7 @@ const Badges: React.FC<Props> = ({ heading, badges, badgePerPage = BADGE_PER_PAG
         </div>
         <BadgeSorter sortingState={sortingState} setSortingState={setSortingState} />
       </div>
-      <div className={`${layoutStyle} mt-4`}>
+      <div className={`${styles.grid} mt-4`}>
         {currentPageBadges.map((badge, idx) => (
           <motion.div
             key={badge._id}
@@ -102,17 +103,13 @@ const Badges: React.FC<Props> = ({ heading, badges, badgePerPage = BADGE_PER_PAG
         )}
       </AnimatePresence>
 
-      {/* Badge pages navigation */}
-      {showPagination && (
-        <PageNavigation
-          className="mt-4"
-          currentPage={page}
-          totalPages={maxPage}
-          onChangePage={setPage}
-        />
-      )}
+      <PageNavigation
+        className="mt-4 md:hidden 2xl:hidden"
+        currentPage={page}
+        maxPage={maxPage}
+        onChangePage={setPage}
+      />
 
-      {/* Modal backdrop */}
       <div
         className={`fixed top-0 left-0 h-[100vh] w-[100vw] z-[95] bg-black/50 ${
           selectedBadgeId ? 'block' : 'hidden'

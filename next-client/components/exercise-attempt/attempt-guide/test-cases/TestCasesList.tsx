@@ -73,7 +73,7 @@ const TestCasesList: React.FC<Props> = ({
         className="mt-4"
         currentPage={page}
         onChangePage={setPage}
-        totalPages={maxPage}
+        maxPage={maxPage}
       />
     </div>
   );

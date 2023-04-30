@@ -52,7 +52,7 @@ const IssueReportList: React.FC<Props> = ({ reports, reportsPerPage }) => {
 
       <PageNavigation
         currentPage={page}
-        totalPages={maxPage}
+        maxPage={maxPage}
         onChangePage={handlePage}
         className="mt-auto"
       />

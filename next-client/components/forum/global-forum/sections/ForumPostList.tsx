@@ -27,14 +27,11 @@ const ForumPostList: React.FC = () => {
   const handlePage = (newPage: number) => setPage(newPage);
 
   return (
-    <section className="my-4">
-      <div className="mb-5">
-        <h2 className="text-gray-500 font-semibold text-base sm:text-lg">
-          {posts.length} Post{posts.length > 0 && 's'}
-        </h2>
-      </div>
-      <div className="flex flex-col gap-5 mb-8">
-        {/* Loading spinner while posts are loading */}
+    <section className="mt-4 mb-2">
+      <h3 className="hidden sm:block mb-5 text-gray-500 font-semibold text-lg">
+        {posts.length} Post{posts.length > 0 && 's'}
+      </h3>
+      <div className="flex flex-col gap-5">
         {isLoading && (
           <div className="h-[50vh] flex-center">
             <PuffLoader size={200} color="#5552e4" />
@@ -53,7 +50,12 @@ const ForumPostList: React.FC = () => {
           </motion.div>
         ))}
       </div>
-      <PageNavigation currentPage={page} totalPages={maxPage} onChangePage={handlePage} />
+      <PageNavigation
+        className="mt-6"
+        currentPage={page}
+        maxPage={maxPage}
+        onChangePage={handlePage}
+      />
     </section>
   );
 };

@@ -19,7 +19,7 @@ const MobileForumNavDropdown: React.FC = () => {
   const [mobileDropdownVisible, setMobileDropdownVisible] = useState(false);
 
   return (
-    <div className="sm:hidden grid grid-cols-3 gap-y-2 justify-items-between items-center py-2 -mt-4 mb-5 capitalize hover:bg-gray-50">
+    <div className="sm:hidden grid grid-cols-3 gap-y-2 justify-items-between items-center py-3 -mt-4 capitalize hover:bg-gray-50">
       <h3 className="text-xl pl-1 col-span-2">
         <span className="text-main-400 text-[1.2em] mr-2">{category && ForumIcons[category]}</span>
         {category || 'Forums'}

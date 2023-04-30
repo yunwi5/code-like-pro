@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 type Props<T> = { array: T[]; itemPerPage: number; scrollEnabled?: boolean };
 
@@ -14,7 +14,7 @@ function usePagination<T>({ array, itemPerPage, scrollEnabled = true }: Props<T>
     setPage(newPage);
 
     // When the page changes, scroll to the top of the page.
-    let timer = setTimeout(() => {
+    const timer = setTimeout(() => {
       if (scrollEnabled) window.scroll({ top: 50, behavior: 'instant' as any });
       clearTimeout(timer);
     }, 2);

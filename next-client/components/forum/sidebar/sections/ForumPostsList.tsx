@@ -37,7 +37,7 @@ const ForumPostsList: React.FC = () => {
       </div>
       <PageNavigation
         currentPage={page}
-        totalPages={maxPage}
+        maxPage={maxPage}
         onChangePage={setPage}
         className={`mt-auto ${posts.length <= POST_PER_PAGE ? '!hidden' : ''}`}
       />

@@ -14,7 +14,7 @@ const ProfileNav: React.FC<{ activeSection: ProfileSection }> = ({ activeSection
       <MobileProfileNavDropdown activeSection={activeSection} />
 
       {/* Tablet and desktop nav (displayed >= 640px) */}
-      <nav className="sticky top-[3.75rem] hidden sm:block lg:border-r-[3px] border-gray-300 text-lg">
+      <nav className="sticky top-[3.5rem] z-[110] hidden sm:block bg-inherit lg:border-r-[3px] border-gray-300 text-lg">
         <div className="sticky top-[3.75rem] flex flex-row lg:flex-col rounded-tl-md rounded-tr-md lg:rounded-tr-none overflow-hidden">
           {ProfileSectionList.map((section) => (
             <ActiveLink

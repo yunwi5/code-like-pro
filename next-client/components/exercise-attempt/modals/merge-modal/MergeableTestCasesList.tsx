@@ -47,7 +47,7 @@ const MergeableTestCasesList: React.FC<Props> = ({ testCases, exercise }) => {
         className="mt-4"
         currentPage={page}
         onChangePage={setPage}
-        totalPages={maxPage}
+        maxPage={maxPage}
       />
     </div>
   );

@@ -51,7 +51,7 @@ const SubmissionList: React.FC<Props> = ({ submissions }) => {
         {submissions.length === 0 && <EmptyMessage message="No submissions yet" />}
       </div>
 
-      <PageNavigation currentPage={page} totalPages={maxPage} onChangePage={handlePage} />
+      <PageNavigation currentPage={page} maxPage={maxPage} onChangePage={handlePage} />
     </section>
   );
 };

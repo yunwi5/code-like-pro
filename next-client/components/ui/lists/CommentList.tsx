@@ -66,7 +66,7 @@ const CommentList: FC<Props> = ({
       <PageNavigation
         className={`mt-auto`}
         currentPage={page}
-        totalPages={maxPage}
+        maxPage={maxPage}
         onChangePage={handlePage}
       />
     </section>

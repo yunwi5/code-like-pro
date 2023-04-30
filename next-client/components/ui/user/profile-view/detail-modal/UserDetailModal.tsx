@@ -45,7 +45,6 @@ const UserDetailModal: React.FC<Props> = ({ open, userInfo, rankInfo, onClose })
                 }
                 badges={badges}
                 className="mt-8 ml-1"
-                badgePerPage={6}
               />
             )}
           </div>
