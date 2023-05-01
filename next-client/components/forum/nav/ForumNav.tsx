@@ -16,7 +16,7 @@ const ForumNav: React.FC = () => {
       {/* Mobile dropdown menu (only displayed < 640px) */}
       <MobileForumNavDropdown />
 
-      <div className="hidden sm:flex flex-wrap gap-3 mb-8">
+      <div className="hidden sm:flex flex-wrap gap-3 mb-4 lg:mb-7">
         {ForumCategoryList.map((forum) => (
           <ActiveLink
             href={getForumCategoryLink(forum)}
