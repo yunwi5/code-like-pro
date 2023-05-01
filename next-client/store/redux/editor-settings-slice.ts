@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   theme: 'light',
-  keyboardBinding: 'default',
+  editorType: 'default',
   fontSize: '14px',
   tabSize: 4,
 };
@@ -14,8 +14,8 @@ const editorSettingsSlice = createSlice({
     setTheme: (state, action) => {
       state.theme = action.payload;
     },
-    setKeyboardBinding: (state, action) => {
-      state.keyboardBinding = action.payload;
+    setEditorType: (state, action) => {
+      state.editorType = action.payload;
     },
     setFontSize: (state, action) => {
       state.fontSize = action.payload;

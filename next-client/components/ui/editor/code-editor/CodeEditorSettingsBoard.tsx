@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { selectKeyboardBinding } from '@/store/redux/editor-settings.selectors';
 import { editorSettingsActions } from '@/store/redux/editor-settings-slice';
+import { selectEditorType } from '@/store/redux/selectors/editor-settings.selectors';
 
 import CustomSelect from '../../inputs/CustomSelect';
 import CustomSwitch from '../../inputs/CustomSwitch';
@@ -21,7 +21,7 @@ const styles = {
   sectionRow: 'flex justify-between items-center mb-2',
 };
 
-export enum KeyboardBinding {
+export enum EditorType {
   DEFAULT = 'default',
   VIM = 'vim',
   EMACS = 'emacs',
@@ -29,25 +29,23 @@ export enum KeyboardBinding {
 
 const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
   const dispatch = useDispatch();
-  const keyboardBinding = useSelector(selectKeyboardBinding);
+  const editorType = useSelector(selectEditorType);
 
   const setTheme = (newTheme: string) => {
     dispatch(editorSettingsActions.setTheme(newTheme));
   };
 
-  const setKeyboardBinding = (newKeyboardBinding: string) => {
-    dispatch(editorSettingsActions.setKeyboardBinding(newKeyboardBinding));
+  const setEditorType = (newEditorType: string) => {
+    dispatch(editorSettingsActions.setEditorType(newEditorType));
   };
   const handleVimToggle = () => {
-    const newKeyboardBinding =
-      keyboardBinding === KeyboardBinding.VIM ? KeyboardBinding.DEFAULT : KeyboardBinding.VIM;
-    setKeyboardBinding(newKeyboardBinding);
+    const newEditorType = editorType === EditorType.VIM ? EditorType.DEFAULT : EditorType.VIM;
+    setEditorType(newEditorType);
   };
 
   const handleEmacsToggle = () => {
-    const newKeyboardBinding =
-      keyboardBinding === KeyboardBinding.EMACS ? KeyboardBinding.DEFAULT : KeyboardBinding.EMACS;
-    setKeyboardBinding(newKeyboardBinding);
+    const newEditorType = editorType === EditorType.EMACS ? EditorType.DEFAULT : EditorType.EMACS;
+    setEditorType(newEditorType);
   };
 
   return (
@@ -78,13 +76,13 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
           </section>
 
           <section className={`${styles.section}`}>
-            <h3 className={`${styles.sectionHeading}`}>Keyboard Bindings</h3>
+            <h3 className={`${styles.sectionHeading}`}>Editor Type</h3>
             <div className={`${styles.sectionRow}`}>
               <p className="mr-3">Vim</p>
               <CustomSwitch
                 id="vim-switch"
                 onToggle={handleVimToggle}
-                isOn={keyboardBinding === KeyboardBinding.VIM}
+                isOn={editorType === EditorType.VIM}
               />
             </div>
             <div className={`${styles.sectionRow}`}>
@@ -92,7 +90,7 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
               <CustomSwitch
                 id="emacs-switch"
                 onToggle={handleEmacsToggle}
-                isOn={keyboardBinding === KeyboardBinding.EMACS}
+                isOn={editorType === EditorType.EMACS}
               />
             </div>
           </section>
