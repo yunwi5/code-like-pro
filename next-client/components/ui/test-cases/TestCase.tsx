@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useId, useState } from 'react';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import { ImBin2 } from 'react-icons/im';
 
@@ -172,10 +172,14 @@ export const ExpectedOutput: FC<ExpectedOutputProps> = ({
   className = '',
   readOnly,
 }) => {
+  const id = useId();
   return (
     <div className="flex-1 flex flex-col">
-      <p className="px-2 py-1 bg-gray-300">Expected Output</p>
+      <label htmlFor={id} className="px-2 py-1 bg-gray-300">
+        Expected Output
+      </label>
       <textarea
+        id={id}
         onChange={onOutputChange}
         value={expectedOutput}
         rows={3}
@@ -218,12 +222,21 @@ interface ControlProps {
 }
 // Controlling hidden test and remove test functionalities
 const TestCaseControl: FC<ControlProps> = ({ onHidden, hidden, disabled, onDelete }) => {
+  const id = useId();
   return (
     <div className="-mt-1 flex-between">
       <p className="flex">
-        <input type="checkbox" disabled={disabled} onChange={onHidden} checked={hidden ?? false} />
-        &ensp;Hidden&nbsp;
-        <span className="hidden md:inline">Test</span>
+        <input
+          id={id}
+          type="checkbox"
+          disabled={disabled}
+          onChange={onHidden}
+          checked={hidden ?? false}
+        />
+        <label htmlFor={id}>
+          s &ensp;Hidden&nbsp;
+          <span className="hidden md:inline">Test</span>
+        </label>
       </p>
       {onDelete && (
         <button
