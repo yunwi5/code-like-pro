@@ -118,45 +118,15 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
 };
 
 function getRunCodeShortCutForPlatform() {
-  const platform = getOS();
-  if (platform === 'Mac OS' || platform === 'iOS') {
-    return (
-      <>
-        <BsCommand />
-        <span className="flex items-center">
-          (<MdKeyboardControlKey />)
-        </span>{' '}
-        {` + `} `
-      </>
-    );
-  }
-
-  return (
-    <>
-      <MdKeyboardControlKey />
-      {` + `} `
-    </>
-  );
+  // ctrl + backtick
+  return <>ctrl {' + `'}</>;
 }
 
 function getSubmitCodeShortCutForPlatform() {
-  const platform = getOS();
-  if (platform === 'Mac OS' || platform === 'iOS') {
-    return (
-      <>
-        <BsCommand />
-        <span className="flex items-cente">
-          (<MdKeyboardControlKey />)
-        </span>
-        {' + '} <BsFillShiftFill /> {` + `} `
-      </>
-    );
-  }
-
+  // ctrl + shift + backtick
   return (
     <>
-      <MdKeyboardControlKey />
-      {' + '} <BsFillShiftFill /> {` + `} `
+      ctrl {' + '} <BsFillShiftFill /> {' + `'}
     </>
   );
 }
