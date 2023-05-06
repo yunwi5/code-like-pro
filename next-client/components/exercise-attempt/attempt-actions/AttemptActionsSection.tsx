@@ -17,6 +17,7 @@ const AttemptActionsSection: React.FC = () => {
 
       <div className="flex-1 flex flex-col">
         <div className="flex gap-3 px-3 py-1 text-gray-600 bg-gray-50 border-b-[1.5px] border-b-slate-200">
+          {/* Solutions */}
           {[0, 1, 2].map((index) => (
             <span
               key={index}
@@ -29,6 +30,7 @@ const AttemptActionsSection: React.FC = () => {
             </span>
           ))}
 
+          {/* Editor Settings */}
           <button
             onClick={() => setShowEditorSettings((ps) => !ps)}
             className="ml-auto px-2 py-1 bg-slate-200 hover:bg-slate-300 shadow rounded-md transition-all cursor-pointer"

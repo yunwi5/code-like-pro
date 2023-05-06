@@ -4,17 +4,16 @@ import { useSelector } from 'react-redux';
 import Editor from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
 
-// import { initVimMode } from 'monaco-vim';
+import { EditorType } from '@/store/redux/editor-settings-slice';
 import { selectEditorType, selectTheme } from '@/store/redux/selectors/editor-settings.selectors';
 import { copyToClipboard } from '@/utils/clipboard.util';
 
 import { Language } from '../../../../models/enums';
 import { prettierLanguageName } from '../../../../utils/language.util';
-import Button from '../../buttons/Button';
 import CopyClipboardButton from '../../buttons/CopyClipboardButton';
 import ExpandShrinkToggler from '../../buttons/icon-buttons/ExpandShrinkToggler';
 
-import { loadCustomMonacoThemes } from './code-editor.util';
+import { loadCustomMonacoThemes, loadMonacoEmacs, loadMonacoVim } from './code-editor.util';
 
 import './CodeEditor.scss';
 
@@ -33,6 +32,8 @@ interface Props {
   clipboardEnabled?: boolean;
   className?: string;
   editorClassName?: string;
+  runCode?: () => void;
+  submitCode?: () => void;
 }
 
 const CodeEditor: React.FC<Props> = ({
@@ -46,38 +47,18 @@ const CodeEditor: React.FC<Props> = ({
   clipboardEnabled = true,
   className = '',
   editorClassName = '',
+  runCode,
+  submitCode,
 }) => {
   const theme = useSelector(selectTheme);
   const editorType = useSelector(selectEditorType);
   const [isShrinked, setIsShrinked] = useState(false);
   const editorRef = useRef<MonacoCodeEditor>(null);
   const [vimMode, setVimMode] = useState<any | null>(null);
+  const [emacsMode, setEmacsMode] = useState<any | null>(null);
 
   const handleMount = async (editor: MonacoCodeEditor) => {
     (editorRef as any).current = editor;
-
-    editor.addAction({
-      // an unique identifier of the contributed action
-      id: 'some-unique-id',
-      // a label of the action that will be presented to the user
-      label: 'Some label!',
-      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
-
-      // the method that will be executed when the action is triggered.
-      run: function (editor) {
-        alert('we wanna save something => ' + editor.getValue());
-      },
-    });
-
-    // setup monaco-vim
-    const { vimMode, VimMode } = await loadMonacoVim(editor);
-    console.log({ vimMode, VimMode });
-    setVimMode(vimMode);
-
-    VimMode.Vim.map('<A-c>', '<Esc>', 'normal');
-    VimMode.Vim.map('<A-c>', '<Esc>', 'insert');
-    VimMode.Vim.map('<A-c>', '<Esc>', 'visual');
-    VimMode.Vim.map('<A-c>', '<Esc>', 'operator-pending');
   };
 
   const handleEditorWillMount = (monaco: Monaco) => {
@@ -89,16 +70,64 @@ const CodeEditor: React.FC<Props> = ({
     await copyToClipboard(value || '');
   };
 
-  const handleUnloadVim = () => {
-    if (vimMode) {
-      vimMode.dispose();
-    }
-  };
+  useEffect(() => {
+    const setUpVim = async () => {
+      if (editorRef.current == null) return;
+
+      // setup monaco-vim
+      const { vimMode, VimMode } = await loadMonacoVim(editorRef.current);
+      setVimMode(vimMode);
+
+      VimMode.Vim.map('<A-c>', '<Esc>', 'normal');
+      VimMode.Vim.map('<A-c>', '<Esc>', 'insert');
+      VimMode.Vim.map('<A-c>', '<Esc>', 'visual');
+      VimMode.Vim.map('<A-c>', '<Esc>', 'operator-pending');
+    };
+
+    const setUpEmacs = async () => {
+      if (editorRef.current == null) return;
+
+      // setup monaco-emacs
+      const { emacsMode } = await loadMonacoEmacs(editorRef.current);
+      setEmacsMode(emacsMode);
+    };
+
+    if (editorType === EditorType.VIM) setUpVim();
+    else if (editorType === EditorType.EMACS) setUpEmacs();
+
+    return () => {
+      if (vimMode) vimMode.dispose();
+      if (emacsMode) emacsMode.dispose();
+    };
+  }, [editorRef.current, editorType]);
 
   // Not used for now
   // const updateEditorTabSize = (tabSize: number) => {
   // editorRef.current?.updateOptions({ tabSize });
   // };
+
+  useEffect(() => {
+    const addKeybindings = (event: KeyboardEvent) => {
+      if (
+        ((event.metaKey && event.code === 'Backquote') ||
+          (event.ctrlKey && event.code === 'Backquote')) && // Cmd/Ctrl + Backtick
+        event.shiftKey // Shift
+      ) {
+        submitCode && submitCode();
+        console.log('Submit Code!');
+      } else if (
+        (event.metaKey && event.code === 'Backquote') ||
+        (event.ctrlKey && event.code === 'Backquote')
+      ) {
+        console.log('Run Code!');
+        runCode && runCode();
+      }
+    };
+
+    document.addEventListener('keydown', addKeybindings);
+
+    return () => document.removeEventListener('keydown', addKeybindings);
+  }, [runCode, submitCode]);
 
   return (
     <div
@@ -132,60 +161,25 @@ const CodeEditor: React.FC<Props> = ({
                 className={`editor-btn ${!value ? '!opacity-0 cursor-none' : ''}`}
               />
             )}
-            <Button onClick={handleUnloadVim} className="absolute bottom-2 right-2">
-              Unload vim
-            </Button>
           </>
         )}
+
+        {editorType === EditorType.VIM && (
+          <div
+            className="absolute bottom-0 left-0 px-2 py-1 text-xs text-gray-400 brightness-90 rounded-tr"
+            id="vim-statusbar"
+          />
+        )}
+        {editorType === EditorType.EMACS && <div id="emacs-statusbar"></div>}
       </div>
-      <div id="vim-statusbar"></div>
     </div>
   );
 };
 
-function loadMonacoVim(
-  editor: monaco.editor.IStandaloneCodeEditor,
-): Promise<{ vimMode: any; VimMode: any }> {
-  return new Promise((resolve) => {
-    (window as any).require.config({
-      paths: {
-        'monaco-vim': 'https://unpkg.com/monaco-vim/dist/monaco-vim',
-      },
-    });
-
-    (window as any).require(['monaco-vim'], function (MonacoVim: any) {
-      const statusNode = document.getElementById('vim-statusbar');
-      const vimMode = MonacoVim.initVimMode(editor, statusNode);
-      resolve({ vimMode, VimMode: MonacoVim.VimMode });
-    });
-  });
-}
-
-function loadMonacoEmacs(editor: monaco.editor.IStandaloneCodeEditor) {
-  return new Promise((resolve) => {
-    (window as any).require.config({
-      paths: {
-        'monaco-emacs': 'https://unpkg.com/monaco-emacs/dist/monaco-emacs',
-      },
-    });
-    (window as any).equire(['monaco-emacs'], function (MonacoEmacs: any) {
-      const statusNode = document.getElementById('emacs-statusbar');
-      const emacsMode = new MonacoEmacs.EmacsExtension(editor);
-      emacsMode.onDidMarkChange(function (ev: string) {
-        if (statusNode) statusNode.textContent = ev ? 'Mark Set!' : 'Mark Unset';
-      });
-      emacsMode.onDidChangeKey(function (str: string) {
-        if (statusNode) statusNode.textContent = str;
-      });
-      emacsMode.start();
-
-      resolve(emacsMode);
-    });
-  });
-}
-
-// Map app language names to Monaco languagee names
-// For example, we use the name C++ which should be mapped to cpp for monaco language config.
+/**
+ * @param App language name
+ * @returns Monaco language name
+ */
 function getMonacoLanguageName(lang: Language | undefined) {
   switch (lang) {
     case Language.JAVASCRIPT:

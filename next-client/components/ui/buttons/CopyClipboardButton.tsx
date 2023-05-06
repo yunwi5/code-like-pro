@@ -52,7 +52,7 @@ const CopyClipboardButton: FC<CopyClipboardButtonProps> = ({ onCopy, className }
         className="flex-center p-2 text-xl bg-gray-200 hover:bg-gray-300 text-gray-600 shadow rounded cursor-pointer"
       >
         {showCopiedEffect ? (
-          <BsFillClipboard2CheckFill className="text-main-500" />
+          <BsFillClipboard2CheckFill className="text-main-400" />
         ) : (
           <BsFillClipboard2Fill />
         )}

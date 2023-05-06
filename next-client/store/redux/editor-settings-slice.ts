@@ -1,8 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+export enum EditorType {
+  DEFAULT = 'default',
+  VIM = 'vim',
+  EMACS = 'emacs',
+}
+
+interface EditorSettingsState {
+  theme: string;
+  editorType: EditorType;
+  fontSize: string;
+  tabSize: 2 | 4 | 6;
+}
+
+const initialState: EditorSettingsState = {
   theme: 'light',
-  editorType: 'default',
+  editorType: EditorType.DEFAULT,
   fontSize: '14px',
   tabSize: 4,
 };

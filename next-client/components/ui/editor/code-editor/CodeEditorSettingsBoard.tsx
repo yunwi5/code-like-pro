@@ -1,9 +1,12 @@
 import React from 'react';
+import { BsCommand, BsFillShiftFill } from 'react-icons/bs';
+import { MdKeyboardControlKey } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { editorSettingsActions } from '@/store/redux/editor-settings-slice';
+import { editorSettingsActions, EditorType } from '@/store/redux/editor-settings-slice';
 import { selectEditorType } from '@/store/redux/selectors/editor-settings.selectors';
+import { getOS } from '@/utils/platform.util';
 
 import CustomSelect from '../../inputs/CustomSelect';
 import CustomSwitch from '../../inputs/CustomSwitch';
@@ -18,14 +21,9 @@ type Props = {
 const styles = {
   section: 'border-b-2 border-gray-200 pb-3 mb-2',
   sectionHeading: 'text-gray-600 font-semibold text-lg mb-2',
-  sectionRow: 'flex justify-between items-center mb-2',
+  sectionRow: 'flex justify-between items-center gap-3 mb-2',
+  keyBindingWrapper: 'flex items-center gap-x-1 text-sm',
 };
-
-export enum EditorType {
-  DEFAULT = 'default',
-  VIM = 'vim',
-  EMACS = 'emacs',
-}
 
 const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
   const dispatch = useDispatch();
@@ -99,11 +97,11 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
             <h3 className={`${styles.sectionHeading}`}>Keyboard Shortcuts</h3>
             <div className={`${styles.sectionRow}`}>
               <p>Run code:</p>
-              <mark className="text-sm"> CMD + `</mark>
+              <mark className={styles.keyBindingWrapper}>{getRunCodeShortCutForPlatform()}</mark>
             </div>
             <div className={`${styles.sectionRow}`}>
               <p>Submit code:</p>
-              <mark className="ml-2 text-sm">CMD + Shift + `</mark>
+              <mark className={styles.keyBindingWrapper}>{getSubmitCodeShortCutForPlatform()}</mark>
             </div>
           </section>
 
@@ -118,5 +116,49 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
     </AnimatePresence>
   );
 };
+
+function getRunCodeShortCutForPlatform() {
+  const platform = getOS();
+  if (platform === 'Mac OS' || platform === 'iOS') {
+    return (
+      <>
+        <BsCommand />
+        <span className="flex items-center">
+          (<MdKeyboardControlKey />)
+        </span>{' '}
+        {` + `} `
+      </>
+    );
+  }
+
+  return (
+    <>
+      <MdKeyboardControlKey />
+      {` + `} `
+    </>
+  );
+}
+
+function getSubmitCodeShortCutForPlatform() {
+  const platform = getOS();
+  if (platform === 'Mac OS' || platform === 'iOS') {
+    return (
+      <>
+        <BsCommand />
+        <span className="flex items-cente">
+          (<MdKeyboardControlKey />)
+        </span>
+        {' + '} <BsFillShiftFill /> {` + `} `
+      </>
+    );
+  }
+
+  return (
+    <>
+      <MdKeyboardControlKey />
+      {' + '} <BsFillShiftFill /> {` + `} `
+    </>
+  );
+}
 
 export default CodeEditorSettingsBoard;

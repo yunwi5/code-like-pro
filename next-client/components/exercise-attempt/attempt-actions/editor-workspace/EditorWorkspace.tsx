@@ -16,7 +16,7 @@ function getIndexedStartingTemplate(exercise: IExerciseWithId | null, solutionIn
 
 // Code editor workspace where users can write coding solution
 const EditorWorkspace: React.FC<{ index: number }> = ({ index }) => {
-  const { exercise, setUserSolution } = useExerciseAttemptCtx();
+  const { exercise, setUserSolution, runCode, submitCode } = useExerciseAttemptCtx();
 
   // Store current user's code in the localStorate, so that it is not lost when the user refreshes the page.
   // There are total 3 versions of solutions, so add solution index as part of its key.
@@ -52,6 +52,8 @@ const EditorWorkspace: React.FC<{ index: number }> = ({ index }) => {
       className="flex-1 !border-none lg:!max-w-[50vw] shadow-none"
       editorClassName="!max-w-[100vw]"
       showHeader={false}
+      runCode={runCode}
+      submitCode={submitCode}
     />
   );
 };
