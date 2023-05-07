@@ -4,7 +4,7 @@
 A practice website for programming students where they create their own exercises, solve exercises from other programmers, 
 and showcase their solutions. <br />
 
-We built a full stack web application with Next.js on the frontend and Express.js on the backend.
+We built a full stack web application with `Next.js` on the frontend and `Express.js` on the backend.
 
 Deployed on Vercel [https://code-like-pro-next.vercel.app/](https://code-like-pro-next.vercel.app/)
 
