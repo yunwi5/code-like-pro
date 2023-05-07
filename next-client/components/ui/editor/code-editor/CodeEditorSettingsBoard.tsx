@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useTransition } from 'react';
 import { BsFillShiftFill } from 'react-icons/bs';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { ICreateUserEditorSettings } from '@/models/interfaces';
 import { editorSettingsActions } from '@/store/redux/editor-settings-slice';
-import { selectEditorType } from '@/store/redux/selectors/editor-settings.selectors';
+import { selectEditorSettings } from '@/store/redux/selectors/editor-settings.selectors';
+import { useAppDispatch } from '@/store/redux/store';
+import { updateUserEditorSettings } from '@/store/redux/thunks/editor-settings-thunks';
 
 import CustomSelect from '../../inputs/CustomSelect';
 import CustomSwitch from '../../inputs/CustomSwitch';
 
-import { EditorType, FontSizeList, TabSizeList, themes } from './code-editor.util';
+import {
+  EditorType,
+  FontSize,
+  FontSizeList,
+  TabSize,
+  TabSizeList,
+  themes,
+} from './code-editor.util';
 
 type Props = {
   onClose: () => void;
@@ -24,23 +34,28 @@ const styles = {
 };
 
 const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
-  const dispatch = useDispatch();
-  const editorType = useSelector(selectEditorType);
+  const dispatch = useAppDispatch();
+  const { editorType, theme, fontSize, tabSize } = useSelector(selectEditorSettings);
+  const [isPending, startTransition] = useTransition();
 
   const setTheme = (newTheme: string) => {
     dispatch(editorSettingsActions.setTheme(newTheme));
+    saveEditorSettings({ theme: newTheme });
   };
 
-  const setTabSize = (newTabSize: number) => {
+  const setTabSize = (newTabSize: TabSize) => {
     dispatch(editorSettingsActions.setTabSize(newTabSize));
+    saveEditorSettings({ tabSize: newTabSize });
   };
 
-  const setFontSize = (newFontSize: number) => {
+  const setFontSize = (newFontSize: FontSize) => {
     dispatch(editorSettingsActions.setFontSize(newFontSize));
+    saveEditorSettings({ fontSize: newFontSize });
   };
 
-  const setEditorType = (newEditorType: string) => {
+  const setEditorType = (newEditorType: EditorType) => {
     dispatch(editorSettingsActions.setEditorType(newEditorType));
+    saveEditorSettings({ editorType: newEditorType });
   };
   const handleVimToggle = () => {
     const newEditorType = editorType === EditorType.VIM ? EditorType.DEFAULT : EditorType.VIM;
@@ -52,7 +67,21 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
     setEditorType(newEditorType);
   };
 
+  const saveEditorSettings = async (updatedProperties: Partial<ICreateUserEditorSettings>) => {
+    startTransition(() => {
+      const editorSettings: ICreateUserEditorSettings = {
+        editorType,
+        theme,
+        fontSize,
+        tabSize,
+        ...updatedProperties,
+      };
+      dispatch(updateUserEditorSettings(editorSettings));
+    });
+  };
+
   return (
+    // <ClickAwayListener onClickAway={onClose}>
     <AnimatePresence>
       {open && (
         <motion.div
@@ -75,6 +104,7 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
               className="!gap-1 mb-2"
               labelText="Theme"
               options={themes}
+              value={theme}
               onChange={(newTheme) => setTheme(newTheme)}
             />
             <div className="flex gap-3">
@@ -83,6 +113,7 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
                 className="flex-1 !gap-1"
                 labelText="Tab Size"
                 options={TabSizeList}
+                value={tabSize}
                 onChange={(newTabSize) => setTabSize(newTabSize)}
               />
               <CustomSelect
@@ -90,6 +121,7 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
                 className="flex-1 !gap-1"
                 labelText="Font Size"
                 options={FontSizeList}
+                value={fontSize}
                 onChange={(newFontSize) => setFontSize(newFontSize)}
               />
             </div>
@@ -129,19 +161,20 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
 
           <button
             onClick={onClose}
-            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full -mt-2 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Close
           </button>
         </motion.div>
       )}
     </AnimatePresence>
+    // </ClickAwayListener>
   );
 };
 
 function getRunCodeShortCutForPlatform() {
   // ctrl + backtick
-  return <>ctrl {' + `'}</>;
+  return 'ctrl + `';
 }
 
 function getSubmitCodeShortCutForPlatform() {

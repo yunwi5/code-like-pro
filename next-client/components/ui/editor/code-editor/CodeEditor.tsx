@@ -5,6 +5,8 @@ import Editor from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
 
 import { selectEditorSettings } from '@/store/redux/selectors/editor-settings.selectors';
+import { useAppDispatch } from '@/store/redux/store';
+import { getUserEditorSettings } from '@/store/redux/thunks/editor-settings-thunks';
 import { copyToClipboard } from '@/utils/clipboard.util';
 
 import { Language } from '../../../../models/enums';
@@ -54,6 +56,7 @@ const CodeEditor: React.FC<Props> = ({
   runCode,
   submitCode,
 }) => {
+  const dispatch = useAppDispatch();
   const { editorType, theme, fontSize, tabSize } = useSelector(selectEditorSettings);
   const editorRef = useRef<MonacoCodeEditor>(null);
 
@@ -129,6 +132,10 @@ const CodeEditor: React.FC<Props> = ({
 
     return () => document.removeEventListener('keydown', addKeybindings);
   }, [runCode, submitCode]);
+
+  useEffect(() => {
+    dispatch(getUserEditorSettings());
+  }, [dispatch]);
 
   return (
     <div

@@ -6,6 +6,7 @@ const router = require('../routes/index');
 const authRouter = require('../routes/auth/auth');
 const exerciseRouter = require('../routes/exercise/exercise');
 const userSubmissionRouter = require('../routes/user/userSubmission');
+const userEditorSettingsRouter = require('../routes/user/userEditorSettings');
 const commentRouter = require('../routes/comment');
 const userRouter = require('../routes/user/user');
 const showCaseRouter = require('../routes/showCase');
@@ -42,6 +43,7 @@ const registerRoutes = (app) => {
 
     app.use('/api/exercise', exerciseRouter);
     app.use('/api/submission', userSubmissionRouter);
+    app.use('/api/editorSettings', userEditorSettingsRouter);
     app.use('/api/user', userRouter);
     app.use('/api/showcase', showCaseRouter);
     app.use('/api/comment', commentRouter);
