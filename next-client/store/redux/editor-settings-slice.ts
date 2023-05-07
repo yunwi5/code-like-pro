@@ -38,7 +38,6 @@ const editorSettingsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getUserEditorSettings.fulfilled, (state, action) => {
-        console.log('getUserEditorSettings.fulfilled', action.payload);
         const existingSettings = action.payload;
 
         state.theme = existingSettings.theme ?? 'light';
@@ -47,7 +46,6 @@ const editorSettingsSlice = createSlice({
         state.tabSize = existingSettings.tabSize ?? 4;
       })
       .addCase(updateUserEditorSettings.fulfilled, (state, action) => {
-        console.log('updateUserEditorSettings.fulfilled', action.payload);
         const existingSettings = action.payload;
 
         state.theme = existingSettings.theme;
