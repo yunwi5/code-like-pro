@@ -51,7 +51,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 #### Client Environment Variables Requirements
 We have two environment variables required for Next.js frontend application. <br /> 
-Please save following two variables in the frontend directory <code>./client/.env.local<code /> file.
+Please save following two variables in the frontend directory <code>./client/.env.local</code> file.
 
 * NEXT_PUBLIC_GOOGLE_CLIENT_ID - Google OAuth client ID (One you can create from [Google Developer Console](https://console.cloud.google.com))
 * NEXT_PUBLIC_SERVER_DOMAIN (optional) - Backend server domain (e.g. http://localhost:8080). The default value is `http://localhost:8080` assuming you run the backend server locally.
@@ -232,13 +232,6 @@ We used <strong>[Vercel](https://vercel.com/)</strong> for production deployment
 <img src="https://user-images.githubusercontent.com/86972879/197367698-61940313-1ed3-428b-92db-22dc846d90cb.png" height="150px" />
 
 We used <strong>[Railway](https://railway.app/)</strong> for production deployment of our backend Node Js application.
-
-
-<br />
-
-### Production Application URL
-Our application has been deployed to the following URL: <br />
-[https://code-like-pro.vercel.app/](https://code-like-pro.vercel.app/)
 
 <br />
 
