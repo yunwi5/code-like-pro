@@ -4,7 +4,9 @@
 A practice website for programming students where they create their own exercises, solve exercises from other programmers, 
 and showcase their solutions. <br />
 
-Deployed on Vercel [https://code-like-pro.vercel.app](https://code-like-pro.vercel.app)
+We built a full stack web application with `Next.js` on the frontend and `Express.js` on the backend.
+
+Deployed on Vercel [https://code-like-pro-next.vercel.app/](https://code-like-pro-next.vercel.app/)
 
 <br />
 
@@ -24,8 +26,8 @@ For the development mode on the backend server,
 # From the project root directory, go to server directory
 $ cd server
 # Install the dependencies on /server/package.json
-$ npm install
-$ npm run dev
+$ yarn install
+$ yarn dev
 ```
 
 Server runs on [http://localhost:8080](http://localhost:8080) on your computer by default.
@@ -38,22 +40,33 @@ For the development mode on the client,
 # From the project root directory, go to client directory
 $ cd client
 # Install the dependencies on /client/package.json
-$ npm install
-$ npm run dev
+$ yarn install
+$ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the client application.
 
+<br />
 
-### Server Environment Variables Set Up
+### Environment Variables Set Up
 
-We have several environment variables to be set up on the backend directory in order to use full backend services such as Google authentication with google oauth2. <br />
-Please make the .env file inside the `/server` directory (if it does not exist already), and insert the following environment variables for successful server set up. 
+#### Client Environment Variables Requirements
+We have two environment variables required for Next.js frontend application. <br /> 
+Please save following two variables in the frontend directory <code>./client/.env.local</code> file.
 
-* MongoDB Atlas - Connection to cloud database requires MONGO_USERNAME and MONGO_PASSWORD environment variables set up in <code>/server/.env</code> file for a successful connection.
-* Google OAuth - For google authentication, Google cloud requires client credentials GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables in <code>/server/.env</code> file.
-* Cloudinary - For image uploading, place cloudinary credentials CLOUDINARY_CLOUD_NAME, CLOUDINARY_KEY and CLOUDINARY_SECRET in <code>/server/.env</code> file for cloudinary image uploading set up. The backend application still runs without these variables but cannot use image uploading functionality in that case.
-* Jwt Authentication - For Jwt auth, you need the variable JWT_SECRET in <code>/server/.env</code> file.
+* NEXT_PUBLIC_GOOGLE_CLIENT_ID - Google OAuth client ID (One you can create from [Google Developer Console](https://console.cloud.google.com))
+* NEXT_PUBLIC_SERVER_DOMAIN (optional) - Backend server domain (e.g. http://localhost:8080). The default value is `http://localhost:8080` assuming you run the backend server locally.
+
+#### Server Environment Variables Requirements
+We have several environment variables for Express.js backend application. <br />
+Please save following environment variables in <code>./server/.env</code> file for successful server set up.
+
+* MongoDB Atlas - Connection to cloud database requires MONGO_USERNAME and MONGO_PASSWORD environment variables for a successful DB connection.
+* Google OAuth - For google authentication, Google cloud requires client credentials GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.
+* Cloudinary - For image uploading, place cloudinary credentials CLOUDINARY_CLOUD_NAME, CLOUDINARY_KEY and CLOUDINARY_SECRET for cloudinary image uploading set up. The backend application still runs without these variables but cannot use image uploading functionality in that case.
+* Jwt Authentication - For Jwt auth, you need the variable JWT_SECRET.
+
+<br />
 
 ### Testing
 
@@ -77,39 +90,41 @@ We used `Jest` and `Supertest` for backend unit and e2e testing.
 ### Exercise Creation
 <img src="https://user-images.githubusercontent.com/86972879/197369846-83ccc9e1-68fe-4d3a-8258-e3b40e490d09.jpg" height="350px" />
 
-Users can create their own programming exercise with the above UI. User can specify exercise name, difficulty, language, prompt, solution code and test cases. 
-User can run the test cases to check the output of their code before publishing it. <br />
+* Users can create their own programming exercise with the above UI. User can specify exercise name, difficulty, language, prompt, solution code and test cases. 
+* User can run the test cases to check the output of their code before publishing it. <br />
 
-User should write at least three test cases including at least one hidden tests before the publish. The solution code has to pass all test cases as well.
-If these requirements are not met, the server will not allow this exercise to be published.
+* User should write at least three test cases including at least one hidden tests before the publish. The solution code has to pass all test cases as well* .
+*( If these requirements are not met, the server will not allow this exercise to be published.
 
 
 ### Exercise Browsing
 <img src="https://user-images.githubusercontent.com/86972879/197370183-7505fff5-49ef-43a4-921c-73bcbb9c9708.jpg" height="350px" />
 
-Users can browse the exercise with various search, sorting and filtering functionalities. 
-When the user clicks one of the exercisees, they can start solving that particular exercise.
+* Users can browse the exercise with various search, sorting and filtering functionalities. 
+* When the user clicks one of the exercisees, they can start solving that particular exercise.
 
 
 ### Exercise Attempt & Code Editor Workspace
-<img src="https://user-images.githubusercontent.com/86972879/197370085-bf9b59e5-cc9e-4607-b5fd-31c0743f21fa.jpg" height="350px" />
+<img alt="image" src="https://user-images.githubusercontent.com/86972879/236676997-8dee6638-c85b-4e83-a188-c915b31ba50a.png" width="700px" />
+<img src="https://user-images.githubusercontent.com/86972879/236676798-77fd3369-c33d-4aba-83d2-65202eae3c05.png" width="700px" />
 
-Users can solve the exercise by clicking the exercise they want to attempt. They can view the prompt, test cases, issue reports regarding the exercise, and submission history.
-Users can write the solution code in the coding workspace. They can run the code to run the test cases, and submit the code that would make an official submission history. 
+* Users can solve the exercise by clicking the exercise they want to attempt. They can view the prompt, test cases, issue reports regarding the exercise, and submission history.
+* Users can write the solution code in the coding workspace. They can run the code to run the test cases, and submit the code that would make an official submission history. 
+* Users can customize their code editor settings. They can set custom settings such as editor theme, editor type etc.
 
 
 ### User Solution Showcasing
 <img src="https://user-images.githubusercontent.com/86972879/197370247-71da0d86-87d2-4dfe-a1e4-1b545fa6fff2.png" height="350px" />
 
-Once the user solves the exercise, they can move on to the exercise showcase page. Users can showcase their solution so that other users can view.
-Users can upvote or downvote the existing showcase, and make comments to the showcase as well if there is anything to discuss further.
+* Once the user solves the exercise, they can move on to the exercise showcase page. Users can showcase their solution so that other users can view.
+* Users can upvote or downvote the existing showcase, and make comments to the showcase as well if there is anything to discuss further.
 
 ### Global Forum Discussions
 <img src="https://user-images.githubusercontent.com/86972879/197370350-cfe246e2-f6c0-4f41-8b9c-52320aeab4b0.png" height="350px" />
 
-Users can view the forum posts across 7 different categories such as algorithms, technologies, and interviews which are all related to computer science and software engineering. 
+* Users can view the forum posts across 7 different categories such as algorithms, technologies, and interviews which are all related to computer science and software engineering. 
 
-Users can view the post such as "Why use NextJs", they can like or dislike the post, and can make comments. Users can create their own software engineering related posts as well by clicking the <strong>New Post</strong> button.
+* Users can view the post such as "Why use NextJs", they can like or dislike the post, and can make comments. Users can create their own software engineering related posts as well by clicking the <strong>New Post</strong> button.
 
 ### User Profile
 <div style="display: flex; gap: 30px;">
@@ -117,8 +132,8 @@ Users can view the post such as "Why use NextJs", they can like or dislike the p
 <img src="https://user-images.githubusercontent.com/86972879/197370543-93803efa-445f-4d87-a463-f8ae8793591b.png" width="450px" />
 </div>
 
-Users can view their profile information and edit username, description and profile picture. <br />
-They can also view the badges they obtained through their activities. As the user creates and solve more exercises and showcase more solutions, they gain more badges of higher prestige.
+* Users can view their profile information and edit username, description and profile picture. <br />
+* They can also view the badges they obtained through their activities. As the user creates and solve more exercises and showcase more solutions, they gain more badges of higher prestige.
 
 
 <br />
@@ -158,6 +173,9 @@ For each dependency, we list human readable package name, followed by official `
 
 #### Programming Language
 1. TypeScript - typescript 4.6.3
+
+#### Framework
+1. Next.js - next 13.4.0
 
 #### Libraries
 1. React JS - react 18.0.0
@@ -220,42 +238,7 @@ We used <strong>[Vercel](https://vercel.com/)</strong> for production deployment
 
 We used <strong>[Railway](https://railway.app/)</strong> for production deployment of our backend Node Js application.
 
-
 <br />
-
-### Production Application URL
-Our application has been deployed to the following URL: <br />
-[https://code-like-pro.vercel.app/](https://code-like-pro.vercel.app/)
-
-<br />
-
-## Future Plan & Improvements
-
-Our app currently offers various features to help students improve their programming skills, 
-but there are several extensions ideas for future releases based on the feedback from our users.
-
-### User Adding Their Own Test Cases - In Progress
-This extension would let users add more test cases while attempting the exercise. 
-Currently, only the author of the exercise can create test cases. 
-A new feature allows users to add their own test cases while attempting the exercise, and possibly add them to the existing exercise if they pass all the existing tests. 
-This will improve the testing aspect of our programming exercises.
-
-### Programming Competitions  
-This extension is to have programming competitions where participants attempt to solve multiple sets of programming problems. 
-Awards are given as special badges and are decided by the fastest time for completion. 
-This will improve the gamification aspect that would make our platform more enjoyable.
-
-
-### Exercise Difficulty Judged By The User
-Third improvement would be to let users decide the difficulty of the exercise by rating the difficulty. 
-Currently, only the author of the exercise decides the difficulty, but it can be subjective. 
-In order to derive accurate difficulty and make it as useful information, we are planning to let users rate the difficulty for each exercise and we take the average of those ratings for difficulty adjustments.
-
-We are delightened to implement new features to suit futher needs from our users. 
-These extensions will be implemented one by one in the future releases!
-
-<br />
-
 
 ## Acknowledgements
 
