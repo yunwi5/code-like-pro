@@ -4,7 +4,7 @@ interface Props<T> {
   id: string;
   labelText?: string | JSX.Element;
   // option values
-  options: T[];
+  options: T[] | readonly T[];
   // option labels that represent human readable format of the options (optional)
   optionLabels?: string[] | JSX.Element[];
   onChange?: (value: T) => void;
