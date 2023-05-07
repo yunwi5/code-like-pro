@@ -1,11 +1,10 @@
 export * from './exercise/ITestCase';
 // Exercise related interfaces
+export * from './exercise/IDifficultyVote';
 export * from './exercise/IExercise';
 export * from './exercise/IExerciseCard';
-export * from './exercise/ITestOutput';
 export * from './exercise/IIssueReport';
-export * from './exercise/IDifficultyVote';
-
+export * from './exercise/ITestOutput';
 export * from './user/IUserSubmission';
 
 // Forum related interfaces
@@ -14,6 +13,7 @@ export * from './forum/IForumPost';
 // User related interfaces
 export * from './user/IUser';
 export * from './user/IUserDetail';
+export * from './user/IUserEditorSettings';
 export * from './user/IUserInfo';
 
 // Auth interfaces
@@ -21,9 +21,9 @@ export * from './auth/IGoogleCredential';
 export * from './auth/IJwtData';
 
 // Showcae related interfaces
-export * from './showcase/IVote';
-export * from './showcase/IShowCase';
 export * from './showcase/IComment';
+export * from './showcase/IShowCase';
+export * from './showcase/IVote';
 
 // Ranking related interfaces
 export * from './ranking/IRanking';

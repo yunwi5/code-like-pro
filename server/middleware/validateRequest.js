@@ -10,6 +10,7 @@ const { voteBodySchema } = require('../schemas/voteSchema');
 const { forumpostBodySchema } = require('../schemas/forumpostSchema');
 const { commentBodySchema } = require('../schemas/commentSchema');
 const { runCodeBodySchema, submissionSchema } = require('../schemas/submissionSchemas');
+const { editorSettingsSchema } = require('../schemas/editorSettingsSchema');
 
 const validateBody = async (req, res, next, schema) => {
     const body = req.body;
@@ -54,6 +55,11 @@ const validateUserSubmissionBody = async (req, res, next) => {
     return await validateBody(req, res, next, submissionSchema);
 };
 
+// Validate user editor settings
+const validateUserEditorSettingsBody = async (req, res, next) => {
+    return await validateBody(req, res, next, editorSettingsSchema)
+};
+
 // Validate showcase body props before posting
 const validateShowcaseBody = async (req, res, next) => {
     return await validateBody(req, res, next, showcaseBodySchema);
@@ -80,6 +86,7 @@ module.exports = {
     validateTestCasesBody,
     validateRunCodeBody,
     validateUserSubmissionBody,
+    validateUserEditorSettingsBody,
     validateShowcaseBody,
     validateCommentBody,
     validateVoteBody,

@@ -1,5 +1,6 @@
-import { postRequest } from './common-requests';
 import { ITestCase, ITestOutput, IUserSubmission } from '../models/interfaces';
+
+import { postRequest } from './common-requests';
 
 const API_DOMAIN = `/submission`;
 

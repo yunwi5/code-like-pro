@@ -1,4 +1,5 @@
 import { IUser, IUserDetail, IUserInfo } from '../models/interfaces';
+
 import { getRequest, patchRequest } from './common-requests';
 
 const API_DOMAIN = '/user';

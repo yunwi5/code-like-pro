@@ -1,18 +1,18 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { RootState } from './store';
+import { RootState } from '../store';
 
 // Selectors
-const selectEditorSettings = (state: RootState) => state.editorSettings;
+export const selectEditorSettings = (state: RootState) => state.editorSettings;
 
 export const selectTheme = createSelector(
   selectEditorSettings,
   (editorSettings) => editorSettings.theme,
 );
 
-export const selectKeyboardBinding = createSelector(
+export const selectEditorType = createSelector(
   selectEditorSettings,
-  (editorSettings) => editorSettings.keyboardBinding,
+  (editorSettings) => editorSettings.editorType,
 );
 
 export const selectFontSize = createSelector(

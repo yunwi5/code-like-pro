@@ -33,28 +33,30 @@ const CopyClipboardButton: FC<CopyClipboardButtonProps> = ({ onCopy, className }
   }, [showCopiedEffect]);
 
   return (
-    <div
-      className={`absolute top-3 right-3 w-[50px] flex items-center flex-col gap-2 ${className}`}
-    >
+    <div className={`absolute top-3 right-3 flex items-center gap-2 ${className}`}>
+      <AnimatePresence>
+        {showCopiedEffect && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-3 py-2 text-sm bg-gray-700 text-white shadow rounded"
+          >
+            Copied!
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div
         onClick={handleCopyAction}
         className="flex-center p-2 text-xl bg-gray-200 hover:bg-gray-300 text-gray-600 shadow rounded cursor-pointer"
       >
-        {showCopiedEffect ? <BsFillClipboard2CheckFill /> : <BsFillClipboard2Fill />}
-      </div>
-      <AnimatePresence>
-        {showCopiedEffect && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="px-2 py-1 text-sm bg-gray-700 text-white shadow rounded"
-          >
-            Copied
-          </motion.div>
+        {showCopiedEffect ? (
+          <BsFillClipboard2CheckFill className="text-main-400" />
+        ) : (
+          <BsFillClipboard2Fill />
         )}
-      </AnimatePresence>
+      </div>
     </div>
   );
 };
