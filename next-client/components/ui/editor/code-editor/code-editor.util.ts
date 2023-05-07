@@ -79,9 +79,9 @@ export type TabSize = 2 | 4;
 
 export const TabSizeList: TabSize[] = [2, 4];
 
-export type FontSize = 12 | 14 | 16 | 18 | 20;
+export type FontSize = 10 | 12 | 14 | 16 | 18 | 20;
 
-export const FontSizeList: FontSize[] = [12, 14, 16, 18, 20];
+export const FontSizeList: FontSize[] = [10, 12, 14, 16, 18, 20];
 
 export enum EditorType {
   DEFAULT = 'default',
