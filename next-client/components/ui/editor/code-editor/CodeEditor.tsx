@@ -84,13 +84,13 @@ const CodeEditor: React.FC<Props> = ({
       if (editorRef.current == null) return;
 
       // setup monaco-vim
-      const { vimMode, VimMode } = await loadMonacoVim(editorRef.current);
+      const { vimMode, vimModeSettings } = await loadMonacoVim(editorRef.current);
       setVimMode(vimMode);
 
-      VimMode.Vim.map('<A-c>', '<Esc>', 'normal');
-      VimMode.Vim.map('<A-c>', '<Esc>', 'insert');
-      VimMode.Vim.map('<A-c>', '<Esc>', 'visual');
-      VimMode.Vim.map('<A-c>', '<Esc>', 'operator-pending');
+      vimModeSettings.Vim.map('<A-c>', '<Esc>', 'normal');
+      vimModeSettings.Vim.map('<A-c>', '<Esc>', 'insert');
+      vimModeSettings.Vim.map('<A-c>', '<Esc>', 'visual');
+      vimModeSettings.Vim.map('<A-c>', '<Esc>', 'operator-pending');
     };
 
     const setUpEmacs = async () => {

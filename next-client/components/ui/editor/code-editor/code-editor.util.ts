@@ -91,7 +91,7 @@ export enum EditorType {
 
 export function loadMonacoVim(
   editor: monaco.editor.IStandaloneCodeEditor,
-): Promise<{ vimMode: any; VimMode: any }> {
+): Promise<{ vimMode: any; vimModeSettings: any }> {
   return new Promise((resolve) => {
     (window as any).require.config({
       paths: {
@@ -102,14 +102,14 @@ export function loadMonacoVim(
     (window as any).require(['monaco-vim'], function (MonacoVim: any) {
       const statusNode = document.getElementById('vim-statusbar');
       const vimMode = MonacoVim.initVimMode(editor, statusNode);
-      resolve({ vimMode, VimMode: MonacoVim.VimMode });
+      resolve({ vimMode, vimModeSettings: MonacoVim.VimMode });
     });
   });
 }
 
 export function loadMonacoEmacs(
   editor: monaco.editor.IStandaloneCodeEditor,
-): Promise<{ emacsMode: any; EmacsMode: any }> {
+): Promise<{ emacsMode: any; emacsModeSettings: any }> {
   return new Promise((resolve) => {
     (window as any).require.config({
       paths: {
@@ -127,7 +127,7 @@ export function loadMonacoEmacs(
       });
       emacsMode.start();
 
-      resolve({ emacsMode, EmacsMode: MonacoEmacs.EmacsMode });
+      resolve({ emacsMode, emacsModeSettings: MonacoEmacs.EmacsMode });
     });
   });
 }
