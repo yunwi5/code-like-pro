@@ -116,7 +116,7 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
                     labelText="Tab Size"
                     options={TabSizeList}
                     value={tabSize}
-                    onChange={(newTabSize) => setTabSize(newTabSize)}
+                    onChange={(newTabSize) => setTabSize(parseInt(newTabSize) as TabSize)}
                   />
                   <CustomSelect
                     id="font-size-select"
@@ -124,7 +124,7 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
                     labelText="Font Size"
                     options={FontSizeList}
                     value={fontSize}
-                    onChange={(newFontSize) => setFontSize(newFontSize)}
+                    onChange={(newFontSize) => setFontSize(parseInt(newFontSize) as FontSize)}
                   />
                 </div>
               </section>

@@ -7,7 +7,7 @@ interface Props<T> {
   options: T[] | readonly T[];
   // option labels that represent human readable format of the options (optional)
   optionLabels?: string[] | JSX.Element[];
-  onChange?: (value: T) => void;
+  onChange?: (value: string) => void;
   value?: number | string | string[] | undefined;
   className?: string;
   selectClassName?: string;
@@ -28,7 +28,7 @@ const CustomSelect = <T,>(props: Props<T>): React.ReactElement => {
   } = props;
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange && onChange(e.target.value as unknown as T);
+    onChange && onChange(e.target.value);
   };
 
   return (
@@ -36,8 +36,8 @@ const CustomSelect = <T,>(props: Props<T>): React.ReactElement => {
       {labelText && <label htmlFor={id}>{labelText}</label>}
       <select id={id} value={value} onChange={handleChange} className={`input ${selectClassName}`}>
         {options.map((option, idx) => (
-          <option key={idx} value={option as unknown as string}>
-            {optionLabels[idx] ?? (option as unknown as string)}
+          <option key={idx} value={String(option)}>
+            {optionLabels[idx] ?? String(option)}
           </option>
         ))}
       </select>
