@@ -61,6 +61,7 @@ const CodeEditor: React.FC<Props> = ({
   const editorRef = useRef<MonacoCodeEditor>(null);
 
   const [isShrinked, setIsShrinked] = useState(false);
+  const [themeLoaded, setThemeLoaded] = useState(false); // TODO: remove this
   const [vimMode, setVimMode] = useState<any | null>(null);
   const [emacsMode, setEmacsMode] = useState<any | null>(null);
 
@@ -68,9 +69,10 @@ const CodeEditor: React.FC<Props> = ({
     (editorRef as any).current = editor;
   };
 
-  const handleEditorWillMount = (monaco: Monaco) => {
+  const handleEditorWillMount = async (monaco: Monaco) => {
     monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
-    loadCustomMonacoThemes(monaco);
+    await loadCustomMonacoThemes(monaco);
+    setThemeLoaded(true);
   };
 
   const handleCopyClipboard = async () => {
@@ -109,10 +111,6 @@ const CodeEditor: React.FC<Props> = ({
   }, [editorRef.current, editorType]);
 
   useEffect(() => {
-    editorRef.current?.updateOptions({ fontSize, tabSize });
-  }, [tabSize, fontSize]);
-
-  useEffect(() => {
     const addKeybindings = (event: KeyboardEvent) => {
       if (
         ((event.metaKey && event.code === 'Backquote') ||
@@ -132,6 +130,10 @@ const CodeEditor: React.FC<Props> = ({
 
     return () => document.removeEventListener('keydown', addKeybindings);
   }, [runCode, submitCode]);
+
+  useEffect(() => {
+    editorRef.current?.updateOptions({ fontSize, tabSize, theme });
+  }, [tabSize, fontSize, theme, themeLoaded]);
 
   useEffect(() => {
     dispatch(getUserEditorSettings());
