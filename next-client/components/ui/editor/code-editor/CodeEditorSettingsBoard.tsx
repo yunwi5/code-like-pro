@@ -1,4 +1,5 @@
 import React, { useTransition } from 'react';
+import ClickAwayListener from 'react-click-away-listener';
 import { BsFillShiftFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -36,7 +37,7 @@ const styles = {
 const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
   const dispatch = useAppDispatch();
   const { editorType, theme, fontSize, tabSize } = useSelector(selectEditorSettings);
-  const [isPending, startTransition] = useTransition();
+  const [_, startTransition] = useTransition();
 
   const setTheme = (newTheme: string) => {
     dispatch(editorSettingsActions.setTheme(newTheme));
@@ -81,94 +82,100 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
   };
 
   return (
-    // <ClickAwayListener onClickAway={onClose}>
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          initial={{ opacity: 0, translateX: 135 }}
-          animate={{ opacity: 1, translateX: 0 }}
-          exit={{ opacity: 0, translateX: 135 }}
-          transition={{ duration: 0.35 }}
-          style={{
-            boxShadow:
-              'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
-          }}
-          className="absolute top-[5.6rem] right-[3px] z-[100] flex flex-col gap-4 px-4 py-3 bg-white text-gray-500 border rounded-md"
-        >
-          <h2 className="text-xl text-gray-600 font-semibold">Editor Preferences</h2>
+    <ClickAwayListener onClickAway={onClose}>
+      <div>
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, translateX: 135 }}
+              animate={{ opacity: 1, translateX: 0 }}
+              exit={{ opacity: 0, translateX: 135 }}
+              transition={{ duration: 0.35 }}
+              style={{
+                boxShadow:
+                  'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
+              }}
+              className="absolute top-[5.6rem] right-[3px] z-[100] flex flex-col gap-4 px-4 py-3 bg-white text-gray-500 border rounded-md"
+            >
+              <h2 className="text-xl text-gray-600 font-semibold">Editor Preferences</h2>
 
-          <section className={`${styles.section}`}>
-            <h3 className={`${styles.sectionHeading}`}>Styling</h3>
-            <CustomSelect
-              id="theme-select"
-              className="!gap-1 mb-2"
-              labelText="Theme"
-              options={themes}
-              value={theme}
-              onChange={(newTheme) => setTheme(newTheme)}
-            />
-            <div className="flex gap-3">
-              <CustomSelect
-                id="tab-size-select"
-                className="flex-1 !gap-1"
-                labelText="Tab Size"
-                options={TabSizeList}
-                value={tabSize}
-                onChange={(newTabSize) => setTabSize(newTabSize)}
-              />
-              <CustomSelect
-                id="font-size-select"
-                className="flex-1 !gap-1"
-                labelText="Font Size"
-                options={FontSizeList}
-                value={fontSize}
-                onChange={(newFontSize) => setFontSize(newFontSize)}
-              />
-            </div>
-          </section>
+              <section className={`${styles.section}`}>
+                <h3 className={`${styles.sectionHeading}`}>Styling</h3>
+                <CustomSelect
+                  id="theme-select"
+                  className="!gap-1 mb-2"
+                  labelText="Theme"
+                  options={themes}
+                  value={theme}
+                  onChange={(newTheme) => setTheme(newTheme)}
+                />
+                <div className="flex gap-3">
+                  <CustomSelect
+                    id="tab-size-select"
+                    className="flex-1 !gap-1"
+                    labelText="Tab Size"
+                    options={TabSizeList}
+                    value={tabSize}
+                    onChange={(newTabSize) => setTabSize(newTabSize)}
+                  />
+                  <CustomSelect
+                    id="font-size-select"
+                    className="flex-1 !gap-1"
+                    labelText="Font Size"
+                    options={FontSizeList}
+                    value={fontSize}
+                    onChange={(newFontSize) => setFontSize(newFontSize)}
+                  />
+                </div>
+              </section>
 
-          <section className={`${styles.section}`}>
-            <h3 className={`${styles.sectionHeading}`}>Editor Type</h3>
-            <div className={`${styles.sectionRow}`}>
-              <p className="mr-3">Vim</p>
-              <CustomSwitch
-                id="vim-switch"
-                onToggle={handleVimToggle}
-                isOn={editorType === EditorType.VIM}
-              />
-            </div>
-            <div className={`${styles.sectionRow}`}>
-              <p className="mr-3">Emacs</p>
-              <CustomSwitch
-                id="emacs-switch"
-                onToggle={handleEmacsToggle}
-                isOn={editorType === EditorType.EMACS}
-              />
-            </div>
-          </section>
+              <section className={`${styles.section}`}>
+                <h3 className={`${styles.sectionHeading}`}>Editor Type</h3>
+                <div className={`${styles.sectionRow}`}>
+                  <p className="mr-3">Vim</p>
+                  <CustomSwitch
+                    id="vim-switch"
+                    onToggle={handleVimToggle}
+                    isOn={editorType === EditorType.VIM}
+                  />
+                </div>
+                <div className={`${styles.sectionRow}`}>
+                  <p className="mr-3">Emacs</p>
+                  <CustomSwitch
+                    id="emacs-switch"
+                    onToggle={handleEmacsToggle}
+                    isOn={editorType === EditorType.EMACS}
+                  />
+                </div>
+              </section>
 
-          <section className={`${styles.section}`}>
-            <h3 className={`${styles.sectionHeading}`}>Keyboard Shortcuts</h3>
-            <div className={`${styles.sectionRow}`}>
-              <p>Run code:</p>
-              <mark className={styles.keyBindingWrapper}>{getRunCodeShortCutForPlatform()}</mark>
-            </div>
-            <div className={`${styles.sectionRow}`}>
-              <p>Submit code:</p>
-              <mark className={styles.keyBindingWrapper}>{getSubmitCodeShortCutForPlatform()}</mark>
-            </div>
-          </section>
+              <section className={`${styles.section}`}>
+                <h3 className={`${styles.sectionHeading}`}>Keyboard Shortcuts</h3>
+                <div className={`${styles.sectionRow}`}>
+                  <p>Run code:</p>
+                  <mark className={styles.keyBindingWrapper}>
+                    {getRunCodeShortCutForPlatform()}
+                  </mark>
+                </div>
+                <div className={`${styles.sectionRow}`}>
+                  <p>Submit code:</p>
+                  <mark className={styles.keyBindingWrapper}>
+                    {getSubmitCodeShortCutForPlatform()}
+                  </mark>
+                </div>
+              </section>
 
-          <button
-            onClick={onClose}
-            className="w-full -mt-2 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Close
-          </button>
-        </motion.div>
-      )}
-    </AnimatePresence>
-    // </ClickAwayListener>
+              <button
+                onClick={onClose}
+                className="w-full -mt-2 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Close
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </ClickAwayListener>
   );
 };
 
