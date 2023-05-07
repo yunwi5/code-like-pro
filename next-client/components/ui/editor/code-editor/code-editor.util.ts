@@ -75,6 +75,20 @@ const customThemes = [
 
 export const themes = ['light', 'vs-dark', ...customThemes];
 
+export type TabSize = 2 | 4;
+
+export const TabSizeList: TabSize[] = [2, 4];
+
+export type FontSize = 12 | 14 | 16 | 18 | 20;
+
+export const FontSizeList: FontSize[] = [12, 14, 16, 18, 20];
+
+export enum EditorType {
+  DEFAULT = 'default',
+  VIM = 'vim',
+  EMACS = 'emacs',
+}
+
 export function loadMonacoVim(
   editor: monaco.editor.IStandaloneCodeEditor,
 ): Promise<{ vimMode: any; VimMode: any }> {

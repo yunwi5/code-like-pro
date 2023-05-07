@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 import Editor from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
 
-import { EditorType } from '@/store/redux/editor-settings-slice';
-import { selectEditorType, selectTheme } from '@/store/redux/selectors/editor-settings.selectors';
+import { selectEditorSettings } from '@/store/redux/selectors/editor-settings.selectors';
 import { copyToClipboard } from '@/utils/clipboard.util';
 
 import { Language } from '../../../../models/enums';
@@ -13,7 +12,12 @@ import { prettierLanguageName } from '../../../../utils/language.util';
 import CopyClipboardButton from '../../buttons/CopyClipboardButton';
 import ExpandShrinkToggler from '../../buttons/icon-buttons/ExpandShrinkToggler';
 
-import { loadCustomMonacoThemes, loadMonacoEmacs, loadMonacoVim } from './code-editor.util';
+import {
+  EditorType,
+  loadCustomMonacoThemes,
+  loadMonacoEmacs,
+  loadMonacoVim,
+} from './code-editor.util';
 
 import './CodeEditor.scss';
 
@@ -50,10 +54,10 @@ const CodeEditor: React.FC<Props> = ({
   runCode,
   submitCode,
 }) => {
-  const theme = useSelector(selectTheme);
-  const editorType = useSelector(selectEditorType);
-  const [isShrinked, setIsShrinked] = useState(false);
+  const { editorType, theme, fontSize, tabSize } = useSelector(selectEditorSettings);
   const editorRef = useRef<MonacoCodeEditor>(null);
+
+  const [isShrinked, setIsShrinked] = useState(false);
   const [vimMode, setVimMode] = useState<any | null>(null);
   const [emacsMode, setEmacsMode] = useState<any | null>(null);
 
@@ -101,25 +105,22 @@ const CodeEditor: React.FC<Props> = ({
     };
   }, [editorRef.current, editorType]);
 
-  // Not used for now
-  // const updateEditorTabSize = (tabSize: number) => {
-  // editorRef.current?.updateOptions({ tabSize });
-  // };
+  useEffect(() => {
+    editorRef.current?.updateOptions({ fontSize, tabSize });
+  }, [tabSize, fontSize]);
 
   useEffect(() => {
     const addKeybindings = (event: KeyboardEvent) => {
       if (
         ((event.metaKey && event.code === 'Backquote') ||
-          (event.ctrlKey && event.code === 'Backquote')) && // Cmd/Ctrl + Backtick
-        event.shiftKey // Shift
+          (event.ctrlKey && event.code === 'Backquote')) &&
+        event.shiftKey
       ) {
         submitCode && submitCode();
-        console.log('Submit Code!');
       } else if (
         (event.metaKey && event.code === 'Backquote') ||
         (event.ctrlKey && event.code === 'Backquote')
       ) {
-        console.log('Run Code!');
         runCode && runCode();
       }
     };

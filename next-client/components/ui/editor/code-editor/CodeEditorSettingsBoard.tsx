@@ -1,17 +1,15 @@
 import React from 'react';
-import { BsCommand, BsFillShiftFill } from 'react-icons/bs';
-import { MdKeyboardControlKey } from 'react-icons/md';
+import { BsFillShiftFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { editorSettingsActions, EditorType } from '@/store/redux/editor-settings-slice';
+import { editorSettingsActions } from '@/store/redux/editor-settings-slice';
 import { selectEditorType } from '@/store/redux/selectors/editor-settings.selectors';
-import { getOS } from '@/utils/platform.util';
 
 import CustomSelect from '../../inputs/CustomSelect';
 import CustomSwitch from '../../inputs/CustomSwitch';
 
-import { themes } from './code-editor.util';
+import { EditorType, FontSizeList, TabSizeList, themes } from './code-editor.util';
 
 type Props = {
   onClose: () => void;
@@ -31,6 +29,14 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
 
   const setTheme = (newTheme: string) => {
     dispatch(editorSettingsActions.setTheme(newTheme));
+  };
+
+  const setTabSize = (newTabSize: number) => {
+    dispatch(editorSettingsActions.setTabSize(newTabSize));
+  };
+
+  const setFontSize = (newFontSize: number) => {
+    dispatch(editorSettingsActions.setFontSize(newFontSize));
   };
 
   const setEditorType = (newEditorType: string) => {
@@ -66,11 +72,27 @@ const CodeEditorSettingsBoard: React.FC<Props> = ({ open, onClose }) => {
             <h3 className={`${styles.sectionHeading}`}>Styling</h3>
             <CustomSelect
               id="theme-select"
-              className="!gap-1"
+              className="!gap-1 mb-2"
               labelText="Theme"
               options={themes}
               onChange={(newTheme) => setTheme(newTheme)}
             />
+            <div className="flex gap-3">
+              <CustomSelect
+                id="tab-size-select"
+                className="flex-1 !gap-1"
+                labelText="Tab Size"
+                options={TabSizeList}
+                onChange={(newTabSize) => setTabSize(newTabSize)}
+              />
+              <CustomSelect
+                id="font-size-select"
+                className="flex-1 !gap-1"
+                labelText="Font Size"
+                options={FontSizeList}
+                onChange={(newFontSize) => setFontSize(newFontSize)}
+              />
+            </div>
           </section>
 
           <section className={`${styles.section}`}>

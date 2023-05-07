@@ -3,7 +3,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 // Selectors
-const selectEditorSettings = (state: RootState) => state.editorSettings;
+export const selectEditorSettings = (state: RootState) => state.editorSettings;
 
 export const selectTheme = createSelector(
   selectEditorSettings,
