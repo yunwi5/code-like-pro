@@ -2,7 +2,8 @@
 
 ## About
 A practice website for programming students where they create their own exercises, solve exercises from other programmers, 
-and showcase their solutions. <br />
+and showcase their solutions. 
+<br />
 
 We built a full stack web application with `Next.js` on the frontend and `Express.js` on the backend.
 
